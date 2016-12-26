@@ -21,25 +21,25 @@ logs, and code as it's very hard to read otherwise.)
 
 ### Output of checks
 
-(If you are reporting a bug on GitLab.com, write: This bug happens on GitLab.com)
+(If you are reporting a bug on DoggoHub.com, write: This bug happens on DoggoHub.com)
 
-#### Results of GitLab application Check
+#### Results of DoggoHub application Check
 
-(For installations with omnibus-gitlab package run and paste the output of:
-`sudo gitlab-rake gitlab:check SANITIZE=true`)
+(For installations with omnibus-doggohub package run and paste the output of:
+`sudo doggohub-rake doggohub:check SANITIZE=true`)
 
 (For installations from source run and paste the output of:
-`sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production SANITIZE=true`)
+`sudo -u git -H bundle exec rake doggohub:check RAILS_ENV=production SANITIZE=true`)
 
 (we will only investigate if the tests are passing)
 
-#### Results of GitLab environment info
+#### Results of DoggoHub environment info
 
-(For installations with omnibus-gitlab package run and paste the output of:
-`sudo gitlab-rake gitlab:env:info`)
+(For installations with omnibus-doggohub package run and paste the output of:
+`sudo doggohub-rake doggohub:env:info`)
 
 (For installations from source run and paste the output of:
-`sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production`)
+`sudo -u git -H bundle exec rake doggohub:env:info RAILS_ENV=production`)
 
 ### Possible fixes
 

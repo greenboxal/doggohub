@@ -15,14 +15,14 @@ class BaseMailer < ActionMailer::Base
   private
 
   def default_sender_address
-    address = Mail::Address.new(Gitlab.config.gitlab.email_from)
-    address.display_name = Gitlab.config.gitlab.email_display_name
+    address = Mail::Address.new(Gitlab.config.doggohub.email_from)
+    address.display_name = Gitlab.config.doggohub.email_display_name
     address
   end
 
   def default_reply_to_address
-    address = Mail::Address.new(Gitlab.config.gitlab.email_reply_to)
-    address.display_name = Gitlab.config.gitlab.email_display_name
+    address = Mail::Address.new(Gitlab.config.doggohub.email_reply_to)
+    address.display_name = Gitlab.config.doggohub.email_display_name
     address
   end
 end

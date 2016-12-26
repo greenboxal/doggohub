@@ -27,8 +27,8 @@ describe API::Templates, api: true  do
     end
   end
 
-  shared_examples_for 'requesting gitlab-ci-ymls' do |path|
-    it 'returns a list of available gitlab_ci_ymls' do
+  shared_examples_for 'requesting doggohub-ci-ymls' do |path|
+    it 'returns a list of available doggohub_ci_ymls' do
       get api(path)
 
       expect(response).to have_http_status(200)
@@ -37,7 +37,7 @@ describe API::Templates, api: true  do
     end
   end
 
-  shared_examples_for 'requesting gitlab-ci-yml for Ruby' do |path|
+  shared_examples_for 'requesting doggohub-ci-yml for Ruby' do |path|
     it 'adds a disclaimer on the top' do
       get api(path)
 
@@ -183,8 +183,8 @@ describe API::Templates, api: true  do
     it_behaves_like 'the Template Entity', '/templates/gitignores/Ruby'
     it_behaves_like 'the TemplateList Entity', '/templates/gitignores'
     it_behaves_like 'requesting gitignores', '/templates/gitignores'
-    it_behaves_like 'requesting gitlab-ci-ymls', '/templates/gitlab_ci_ymls'
-    it_behaves_like 'requesting gitlab-ci-yml for Ruby', '/templates/gitlab_ci_ymls/Ruby'
+    it_behaves_like 'requesting doggohub-ci-ymls', '/templates/doggohub_ci_ymls'
+    it_behaves_like 'requesting doggohub-ci-yml for Ruby', '/templates/doggohub_ci_ymls/Ruby'
     it_behaves_like 'the License Template Entity', '/templates/licenses/mit'
     it_behaves_like 'GET licenses', '/templates/licenses'
     it_behaves_like 'GET licenses/:name', '/templates/licenses'
@@ -194,8 +194,8 @@ describe API::Templates, api: true  do
     it_behaves_like 'the Template Entity', '/gitignores/Ruby'
     it_behaves_like 'the TemplateList Entity', '/gitignores'
     it_behaves_like 'requesting gitignores', '/gitignores'
-    it_behaves_like 'requesting gitlab-ci-ymls', '/gitlab_ci_ymls'
-    it_behaves_like 'requesting gitlab-ci-yml for Ruby', '/gitlab_ci_ymls/Ruby'
+    it_behaves_like 'requesting doggohub-ci-ymls', '/doggohub_ci_ymls'
+    it_behaves_like 'requesting doggohub-ci-yml for Ruby', '/doggohub_ci_ymls/Ruby'
     it_behaves_like 'the License Template Entity', '/licenses/mit'
     it_behaves_like 'GET licenses', '/licenses'
     it_behaves_like 'GET licenses/:name', '/licenses'

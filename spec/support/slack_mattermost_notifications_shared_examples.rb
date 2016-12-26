@@ -2,7 +2,7 @@ Dir[Rails.root.join("app/models/project_services/chat_message/*.rb")].each { |f|
 
 RSpec.shared_examples 'slack or mattermost notifications' do
   let(:chat_service) { described_class.new }
-  let(:webhook_url) { 'https://example.gitlab.com/' }
+  let(:webhook_url) { 'https://example.doggohub.com/' }
 
   describe "Associations" do
     it { is_expected.to belong_to :project }

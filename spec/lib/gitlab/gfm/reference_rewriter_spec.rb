@@ -39,7 +39,7 @@ describe Gitlab::Gfm::ReferenceRewriter do
 
       context 'description ambigous elements' do
         context 'url' do
-          let(:url) { 'http://gitlab.com/#1' }
+          let(:url) { 'http://doggohub.com/#1' }
           let(:text) { "This references #1, but not #{url}" }
 
           it { is_expected.to include url }

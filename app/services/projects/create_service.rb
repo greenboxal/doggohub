@@ -5,7 +5,7 @@ module Projects
     end
 
     def execute
-      forked_from_project_id = params.delete(:forked_from_project_id)
+      borked_from_project_id = params.delete(:borked_from_project_id)
       import_data = params.delete(:import_data)
       @skip_wiki = params.delete(:skip_wiki)
 
@@ -17,8 +17,8 @@ module Projects
         return @project
       end
 
-      unless allowed_fork?(forked_from_project_id)
-        @project.errors.add(:forked_from_project_id, 'is forbidden')
+      unless allowed_bork?(borked_from_project_id)
+        @project.errors.add(:borked_from_project_id, 'is forbidden')
         return @project
       end
 
@@ -52,8 +52,8 @@ module Projects
 
       @project.creator = current_user
 
-      if forked_from_project_id
-        @project.build_forked_project_link(forked_from_project_id: forked_from_project_id)
+      if borked_from_project_id
+        @project.build_borked_project_link(borked_from_project_id: borked_from_project_id)
       end
 
       save_project_and_import_data(import_data)
@@ -78,11 +78,11 @@ module Projects
       @project.errors.add(:namespace, "is not valid")
     end
 
-    def allowed_fork?(source_project_id)
+    def allowed_bork?(source_project_id)
       return true if source_project_id.nil?
 
       source_project = Project.find_by(id: source_project_id)
-      current_user.can?(:fork_project, source_project)
+      current_user.can?(:bork_project, source_project)
     end
 
     def allowed_namespace?(user, namespace_id)
@@ -93,7 +93,7 @@ module Projects
     def after_create_actions
       log_info("#{@project.owner.name} created a new project \"#{@project.name_with_namespace}\"")
 
-      unless @project.gitlab_project_import?
+      unless @project.doggohub_project_import?
         @project.create_wiki unless skip_wiki?
         create_services_from_active_templates(@project)
 
@@ -103,7 +103,7 @@ module Projects
       event_service.create_project(@project, current_user)
       system_hook_service.execute_hooks_for(@project, :create)
 
-      unless @project.group || @project.gitlab_project_import?
+      unless @project.group || @project.doggohub_project_import?
         @project.team << [current_user, :master, current_user]
       end
 

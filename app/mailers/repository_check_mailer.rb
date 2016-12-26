@@ -8,7 +8,7 @@ class RepositoryCheckMailer < BaseMailer
 
     mail(
       to: User.admins.pluck(:email),
-      subject: "GitLab Admin | #{@message}"
+      subject: "DoggoHub Admin | #{@message}"
     )
   end
 end

@@ -44,7 +44,7 @@ Feature: Project Commits
 
   Scenario: I browse commit with ci from list
     Given commit has ci status
-    And repository contains ".gitlab-ci.yml" file
+    And repository contains ".doggohub-ci.yml" file
     When I click on commit link
     Then I see commit ci info
 

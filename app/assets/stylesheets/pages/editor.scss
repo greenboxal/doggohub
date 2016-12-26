@@ -75,7 +75,7 @@
   .soft-wrap-toggle,
   .license-selector,
   .gitignore-selector,
-  .gitlab-ci-yml-selector,
+  .doggohub-ci-yml-selector,
   .dockerfile-selector {
     display: inline-block;
     vertical-align: top;
@@ -106,7 +106,7 @@
 
   .gitignore-selector,
   .license-selector,
-  .gitlab-ci-yml-selector,
+  .doggohub-ci-yml-selector,
   .dockerfile-selector {
     .dropdown {
       line-height: 21px;
@@ -118,7 +118,7 @@
     }
   }
 
-  .gitlab-ci-yml-selector {
+  .doggohub-ci-yml-selector {
     .dropdown-menu-toggle {
       width: 250px;
     }
@@ -152,7 +152,7 @@
       .encoding-selector,
       .license-selector,
       .gitignore-selector,
-      .gitlab-ci-yml-selector {
+      .doggohub-ci-yml-selector {
         display: block;
         margin: 3px 0;
 

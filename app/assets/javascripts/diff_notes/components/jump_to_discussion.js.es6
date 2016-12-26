@@ -183,7 +183,7 @@
         }
 
         $.scrollTo($target, {
-          offset: -($('.navbar-gitlab').outerHeight() + $('.layout-nav').outerHeight())
+          offset: -($('.navbar-doggohub').outerHeight() + $('.layout-nav').outerHeight())
         });
       }
     }

@@ -31,7 +31,7 @@ module Ci
 
       unless pipeline.config_processor
         unless pipeline.ci_yaml_file
-          return error('Missing .gitlab-ci.yml file')
+          return error('Missing .doggohub-ci.yml file')
         end
         return error(pipeline.yaml_errors, save: save_on_errors)
       end

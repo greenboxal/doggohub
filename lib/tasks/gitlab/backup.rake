@@ -1,20 +1,20 @@
 require 'active_record/fixtures'
 
-namespace :gitlab do
+namespace :doggohub do
   namespace :backup do
-    # Create backup of GitLab system
-    desc "GitLab | Create a backup of the GitLab system"
+    # Create backup of DoggoHub system
+    desc "DoggoHub | Create a backup of the DoggoHub system"
     task create: :environment do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       configure_cron_mode
 
-      Rake::Task["gitlab:backup:db:create"].invoke
-      Rake::Task["gitlab:backup:repo:create"].invoke
-      Rake::Task["gitlab:backup:uploads:create"].invoke
-      Rake::Task["gitlab:backup:builds:create"].invoke
-      Rake::Task["gitlab:backup:artifacts:create"].invoke
-      Rake::Task["gitlab:backup:lfs:create"].invoke
-      Rake::Task["gitlab:backup:registry:create"].invoke
+      Rake::Task["doggohub:backup:db:create"].invoke
+      Rake::Task["doggohub:backup:repo:create"].invoke
+      Rake::Task["doggohub:backup:uploads:create"].invoke
+      Rake::Task["doggohub:backup:builds:create"].invoke
+      Rake::Task["doggohub:backup:artifacts:create"].invoke
+      Rake::Task["doggohub:backup:lfs:create"].invoke
+      Rake::Task["doggohub:backup:registry:create"].invoke
 
       backup = Backup::Manager.new
       backup.pack
@@ -22,10 +22,10 @@ namespace :gitlab do
       backup.remove_old
     end
 
-    # Restore backup of GitLab system
-    desc 'GitLab | Restore a previously created backup'
+    # Restore backup of DoggoHub system
+    desc 'DoggoHub | Restore a previously created backup'
     task restore: :environment do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       configure_cron_mode
 
       backup = Backup::Manager.new
@@ -36,7 +36,7 @@ namespace :gitlab do
           warning = <<-MSG.strip_heredoc
             Before restoring the database we recommend removing all existing
             tables to avoid future upgrade problems. Be aware that if you have
-            custom tables in the GitLab database these tables and all data will be
+            custom tables in the DoggoHub database these tables and all data will be
             removed.
           MSG
           puts warning.color(:red)
@@ -47,18 +47,18 @@ namespace :gitlab do
         # Drop all tables Load the schema to ensure we don't have any newer tables
         # hanging out from a failed upgrade
         $progress.puts 'Cleaning the database ... '.color(:blue)
-        Rake::Task['gitlab:db:drop_tables'].invoke
+        Rake::Task['doggohub:db:drop_tables'].invoke
         $progress.puts 'done'.color(:green)
-        Rake::Task['gitlab:backup:db:restore'].invoke
+        Rake::Task['doggohub:backup:db:restore'].invoke
       end
 
-      Rake::Task['gitlab:backup:repo:restore'].invoke unless backup.skipped?('repositories')
-      Rake::Task['gitlab:backup:uploads:restore'].invoke unless backup.skipped?('uploads')
-      Rake::Task['gitlab:backup:builds:restore'].invoke unless backup.skipped?('builds')
-      Rake::Task['gitlab:backup:artifacts:restore'].invoke unless backup.skipped?('artifacts')
-      Rake::Task['gitlab:backup:lfs:restore'].invoke unless backup.skipped?('lfs')
-      Rake::Task['gitlab:backup:registry:restore'].invoke unless backup.skipped?('registry')
-      Rake::Task['gitlab:shell:setup'].invoke
+      Rake::Task['doggohub:backup:repo:restore'].invoke unless backup.skipped?('repositories')
+      Rake::Task['doggohub:backup:uploads:restore'].invoke unless backup.skipped?('uploads')
+      Rake::Task['doggohub:backup:builds:restore'].invoke unless backup.skipped?('builds')
+      Rake::Task['doggohub:backup:artifacts:restore'].invoke unless backup.skipped?('artifacts')
+      Rake::Task['doggohub:backup:lfs:restore'].invoke unless backup.skipped?('lfs')
+      Rake::Task['doggohub:backup:registry:restore'].invoke unless backup.skipped?('registry')
+      Rake::Task['doggohub:shell:setup'].invoke
       Rake::Task['cache:clear'].invoke
 
       backup.cleanup
@@ -216,4 +216,4 @@ namespace :gitlab do
       end
     end
   end # namespace end: backup
-end # namespace end: gitlab
+end # namespace end: doggohub

@@ -3,23 +3,23 @@ require 'spec_helper'
 
 describe Gitlab::Regex, lib: true do
   describe 'project path regex' do
-    it { expect('gitlab-ce').to match(Gitlab::Regex.project_path_regex) }
-    it { expect('gitlab_git').to match(Gitlab::Regex.project_path_regex) }
+    it { expect('doggohub-ce').to match(Gitlab::Regex.project_path_regex) }
+    it { expect('doggohub_git').to match(Gitlab::Regex.project_path_regex) }
     it { expect('_underscore.js').to match(Gitlab::Regex.project_path_regex) }
     it { expect('100px.com').to match(Gitlab::Regex.project_path_regex) }
-    it { expect('?gitlab').not_to match(Gitlab::Regex.project_path_regex) }
+    it { expect('?doggohub').not_to match(Gitlab::Regex.project_path_regex) }
     it { expect('git lab').not_to match(Gitlab::Regex.project_path_regex) }
-    it { expect('gitlab.git').not_to match(Gitlab::Regex.project_path_regex) }
+    it { expect('doggohub.git').not_to match(Gitlab::Regex.project_path_regex) }
   end
 
   describe 'project name regex' do
-    it { expect('gitlab-ce').to match(Gitlab::Regex.project_name_regex) }
-    it { expect('GitLab CE').to match(Gitlab::Regex.project_name_regex) }
+    it { expect('doggohub-ce').to match(Gitlab::Regex.project_name_regex) }
+    it { expect('DoggoHub CE').to match(Gitlab::Regex.project_name_regex) }
     it { expect('100 lines').to match(Gitlab::Regex.project_name_regex) }
-    it { expect('gitlab.git').to match(Gitlab::Regex.project_name_regex) }
+    it { expect('doggohub.git').to match(Gitlab::Regex.project_name_regex) }
     it { expect('Český název').to match(Gitlab::Regex.project_name_regex) }
     it { expect('Dash – is this').to match(Gitlab::Regex.project_name_regex) }
-    it { expect('?gitlab').not_to match(Gitlab::Regex.project_name_regex) }
+    it { expect('?doggohub').not_to match(Gitlab::Regex.project_name_regex) }
   end
 
   describe 'file name regex' do

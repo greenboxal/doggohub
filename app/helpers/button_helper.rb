@@ -30,7 +30,7 @@ module ButtonHelper
     klass = 'http-selector'
     klass << ' has-tooltip' if current_user.try(:require_password?)
 
-    protocol = gitlab_config.protocol.upcase
+    protocol = doggohub_config.protocol.upcase
 
     content_tag (append_link ? :a : :span), protocol,
       class: klass,

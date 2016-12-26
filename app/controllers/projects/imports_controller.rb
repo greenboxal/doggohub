@@ -48,8 +48,8 @@ class Projects::ImportsController < Projects::ApplicationController
   private
 
   def finished_notice
-    if @project.forked?
-      'The project was successfully forked.'
+    if @project.borked?
+      'The project was successfully borked.'
     else
       'The project was successfully imported.'
     end

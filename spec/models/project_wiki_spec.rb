@@ -4,7 +4,7 @@ describe ProjectWiki, models: true do
   let(:project) { create(:empty_project) }
   let(:repository) { project.repository }
   let(:user) { project.owner }
-  let(:gitlab_shell) { Gitlab::Shell.new }
+  let(:doggohub_shell) { Gitlab::Shell.new }
   let(:project_wiki) { ProjectWiki.new(project, user) }
 
   subject { project_wiki }
@@ -18,13 +18,13 @@ describe ProjectWiki, models: true do
 
   describe '#web_url' do
     it 'returns the full web URL to the wiki' do
-      expect(subject.web_url).to eq("#{Gitlab.config.gitlab.url}/#{project.path_with_namespace}/wikis/home")
+      expect(subject.web_url).to eq("#{Gitlab.config.doggohub.url}/#{project.path_with_namespace}/wikis/home")
     end
   end
 
   describe "#url_to_repo" do
     it "returns the correct ssh url to the repo" do
-      expect(subject.url_to_repo).to eq(gitlab_shell.url_to_repo(subject.path_with_namespace))
+      expect(subject.url_to_repo).to eq(doggohub_shell.url_to_repo(subject.path_with_namespace))
     end
   end
 
@@ -36,15 +36,15 @@ describe ProjectWiki, models: true do
 
   describe "#http_url_to_repo" do
     it "provides the full http url to the repo" do
-      gitlab_url = Gitlab.config.gitlab.url
-      repo_http_url = "#{gitlab_url}/#{subject.path_with_namespace}.git"
+      doggohub_url = Gitlab.config.doggohub.url
+      repo_http_url = "#{doggohub_url}/#{subject.path_with_namespace}.git"
       expect(subject.http_url_to_repo).to eq(repo_http_url)
     end
   end
 
   describe "#wiki_base_path" do
     it "returns the wiki base path" do
-      wiki_base_path = "#{Gitlab.config.gitlab.relative_url_root}/#{project.path_with_namespace}/wikis"
+      wiki_base_path = "#{Gitlab.config.doggohub.relative_url_root}/#{project.path_with_namespace}/wikis"
 
       expect(subject.wiki_base_path).to eq(wiki_base_path)
     end

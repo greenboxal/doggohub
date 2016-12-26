@@ -74,7 +74,7 @@ module API
         end
 
         desc 'Enable a deploy key for a project' do
-          detail 'This feature was added in GitLab 8.11'
+          detail 'This feature was added in DoggoHub 8.11'
           success Entities::SSHKey
         end
         params do
@@ -92,7 +92,7 @@ module API
         end
 
         desc 'Disable a deploy key for a project' do
-          detail 'This feature was added in GitLab 8.11'
+          detail 'This feature was added in DoggoHub 8.11'
           success Entities::SSHKey
         end
         params do

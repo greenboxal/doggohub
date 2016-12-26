@@ -1,6 +1,6 @@
-# Guidelines for shell commands in the GitLab codebase
+# Guidelines for shell commands in the DoggoHub codebase
 
-This document contains guidelines for working with processes and files in the GitLab codebase.
+This document contains guidelines for working with processes and files in the DoggoHub codebase.
 These guidelines are meant to make your code more reliable _and_ secure.
 
 ## References
@@ -51,9 +51,9 @@ When we pass shell commands as a single string to Ruby, Ruby will let `/bin/sh` 
 
 ```ruby
 # Wrong
-system "cd /home/git/gitlab && bundle exec rake db:#{something} RAILS_ENV=production"
+system "cd /home/git/doggohub && bundle exec rake db:#{something} RAILS_ENV=production"
 # Correct
-system({'RAILS_ENV' => 'production'}, *%W(bundle exec rake db:#{something}), chdir: '/home/git/gitlab')
+system({'RAILS_ENV' => 'production'}, *%W(bundle exec rake db:#{something}), chdir: '/home/git/doggohub')
 
 # Wrong
 system "touch #{myfile}"
@@ -87,7 +87,7 @@ $ cat -- -l
 hello
 ```
 
-In the GitLab codebase, we avoid the option/argument ambiguity by _always_ using `--`.
+In the DoggoHub codebase, we avoid the option/argument ambiguity by _always_ using `--`.
 
 ```ruby
 # Wrong
@@ -100,7 +100,7 @@ This coding style could have prevented CVE-2013-4582.
 
 ## Do not use the backticks
 
-Capturing the output of shell commands with backticks reads nicely, but you are forced to pass the command as one string to the shell. We explained above that this is unsafe. In the main GitLab codebase, the solution is to use `Gitlab::Popen.popen` instead.
+Capturing the output of shell commands with backticks reads nicely, but you are forced to pass the command as one string to the shell. We explained above that this is unsafe. In the main DoggoHub codebase, the solution is to use `Gitlab::Popen.popen` instead.
 
 ```ruby
 # Wrong
@@ -114,7 +114,7 @@ user = `whoami`
 user, exit_status = Gitlab::Popen.popen(%W(whoami))
 ```
 
-In other repositories, such as gitlab-shell you can also use `IO.popen`.
+In other repositories, such as doggohub-shell you can also use `IO.popen`.
 
 ```ruby
 # Safe IO.popen example
@@ -156,7 +156,7 @@ starting with `-` (see the discussion about using `--` above).
 
 ## Guard against path traversal
 
-Path traversal is a security where the program (GitLab) tries to restrict user
+Path traversal is a security where the program (DoggoHub) tries to restrict user
 access to a certain directory on disk, but the user manages to open a file
 outside that directory by taking advantage of the `../` path notation.
 
@@ -194,7 +194,7 @@ When using regular expressions to validate user input that is passed as an argum
 
 If you don't, an attacker could use this to execute commands with potentially harmful effect.
 
-For example, when a project's `import_url` is validated like below, the user could trick GitLab into cloning from a Git repository on the local filesystem.
+For example, when a project's `import_url` is validated like below, the user could trick DoggoHub into cloning from a Git repository on the local filesystem.
 
 ```ruby
 validates :import_url, format: { with: URI.regexp(%w(ssh git http https)) }
@@ -209,7 +209,7 @@ file://git:/tmp/lol
 
 Since there are no anchors in the used regular expression, the `git:/tmp/lol` in the value would match, and the validation would pass.
 
-When importing, GitLab would execute the following command, passing the `import_url` as an argument:
+When importing, DoggoHub would execute the following command, passing the `import_url` as an argument:
 
 
 ```sh

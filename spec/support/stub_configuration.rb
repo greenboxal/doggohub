@@ -10,7 +10,7 @@ module StubConfiguration
   end
 
   def stub_config_setting(messages)
-    allow(Gitlab.config.gitlab).to receive_messages(messages)
+    allow(Gitlab.config.doggohub).to receive_messages(messages)
   end
 
   def stub_gravatar_setting(messages)

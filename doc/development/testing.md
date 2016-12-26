@@ -1,6 +1,6 @@
 # Testing Standards and Style Guidelines
 
-This guide outlines standards and best practices for automated testing of GitLab
+This guide outlines standards and best practices for automated testing of DoggoHub
 CE and EE.
 
 It is meant to be an _extension_ of the [thoughtbot testing
@@ -11,7 +11,7 @@ importance.
 
 ## Factories
 
-GitLab uses [factory_girl] as a test fixture replacement.
+DoggoHub uses [factory_girl] as a test fixture replacement.
 
 - Factory definitions live in `spec/factories/`, named using the pluralization
   of their corresponding model (`User` factories are defined in `users.rb`).
@@ -24,14 +24,14 @@ GitLab uses [factory_girl] as a test fixture replacement.
 - When instantiating from a factory, don't supply attributes that aren't
   required by the test.
 - Factories don't have to be limited to `ActiveRecord` objects.
-  [See example](https://gitlab.com/gitlab-org/gitlab-ce/commit/0b8cefd3b2385a21cfed779bd659978c0402766d).
+  [See example](https://doggohub.com/doggohub-org/doggohub-ce/commit/0b8cefd3b2385a21cfed779bd659978c0402766d).
 
 [factory_girl]: https://github.com/thoughtbot/factory_girl
 [traits]: http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md#Traits
 
 ## JavaScript
 
-GitLab uses [Teaspoon] to run its [Jasmine] JavaScript specs. They can be run on
+DoggoHub uses [Teaspoon] to run its [Jasmine] JavaScript specs. They can be run on
 the command line via `bundle exec teaspoon`, or via a web browser at
 `http://localhost:3000/teaspoon` when the Rails server is running.
 
@@ -72,13 +72,13 @@ the command line via `bundle exec teaspoon`, or via a web browser at
 - Try to match the ordering of tests to the ordering within the class.
 - Try to follow the [Four-Phase Test][four-phase-test] pattern, using newlines
   to separate phases.
-- Try to use `Gitlab.config.gitlab.host` rather than hard coding `'localhost'`
+- Try to use `Gitlab.config.doggohub.host` rather than hard coding `'localhost'`
 
 [four-phase-test]: https://robots.thoughtbot.com/four-phase-test
 
 ### `let` variables
 
-GitLab's RSpec suite has made extensive use of `let` variables to reduce
+DoggoHub's RSpec suite has made extensive use of `let` variables to reduce
 duplication. However, this sometimes [comes at the cost of clarity][lets-not],
 so we need to set some guidelines for their use going forward:
 
@@ -98,7 +98,7 @@ so we need to set some guidelines for their use going forward:
 
 ### Test speed
 
-GitLab has a massive test suite that, without parallelization, can take more
+DoggoHub has a massive test suite that, without parallelization, can take more
 than an hour to run. It's important that we make an effort to write tests that
 are accurate and effective _as well as_ fast.
 
@@ -125,11 +125,11 @@ Here are some things to keep in mind regarding test performance:
 
 ## Spinach (feature) tests
 
-GitLab [moved from Cucumber to Spinach](https://github.com/gitlabhq/gitlabhq/pull/1426)
+DoggoHub [moved from Cucumber to Spinach](https://github.com/doggohubhq/doggohubhq/pull/1426)
 for its feature/integration tests in September 2012.
 
 As of March 2016, we are [trying to avoid adding new Spinach
-tests](https://gitlab.com/gitlab-org/gitlab-ce/issues/14121) going forward,
+tests](https://doggohub.com/doggohub-org/doggohub-ce/issues/14121) going forward,
 opting for [RSpec feature](#features-integration) specs.
 
 Adding new Spinach scenarios is acceptable _only if_ the new scenario requires
@@ -155,18 +155,18 @@ Example:
 ```ruby
 require 'rake_helper'
 
-describe 'gitlab:shell rake tasks' do
+describe 'doggohub:shell rake tasks' do
   before do
-    Rake.application.rake_require 'tasks/gitlab/shell'
+    Rake.application.rake_require 'tasks/doggohub/shell'
 
-    stub_warn_user_is_not_gitlab
+    stub_warn_user_is_not_doggohub
   end
 
  describe 'install task' do
     it 'invokes create_hooks task' do
-      expect(Rake::Task['gitlab:shell:create_hooks']).to receive(:invoke)
+      expect(Rake::Task['doggohub:shell:create_hooks']).to receive(:invoke)
 
-      run_rake_task('gitlab:shell:install')
+      run_rake_task('doggohub:shell:install')
     end
   end
 end

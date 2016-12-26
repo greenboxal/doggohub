@@ -18,9 +18,9 @@ module Gitlab
           description: repo["description"],
           namespace_id: namespace.id,
           visibility_level: repo["visibility_level"],
-          import_type: "gitlab",
+          import_type: "doggohub",
           import_source: repo["path_with_namespace"],
-          import_url: repo["http_url_to_repo"].sub("://", "://oauth2:#{@session_data[:gitlab_access_token]}@")
+          import_url: repo["http_url_to_repo"].sub("://", "://oauth2:#{@session_data[:doggohub_access_token]}@")
         ).execute
       end
     end

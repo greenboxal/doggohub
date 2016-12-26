@@ -1,7 +1,7 @@
 # reCAPTCHA
 
-GitLab leverages [Google's reCAPTCHA](https://www.google.com/recaptcha/intro/index.html)
-to protect against spam and abuse. GitLab displays the CAPTCHA form on the sign-up page
+DoggoHub leverages [Google's reCAPTCHA](https://www.google.com/recaptcha/intro/index.html)
+to protect against spam and abuse. DoggoHub displays the CAPTCHA form on the sign-up page
 to confirm that a real user, not a bot, is attempting to create an account.
 
 ## Configuration
@@ -12,7 +12,7 @@ To use reCAPTCHA, first you must create a site and private key.
 
 2. Fill out the form necessary to obtain reCAPTCHA keys.
 
-3. Login to your GitLab server, with administrator credentials.
+3. Login to your DoggoHub server, with administrator credentials.
 
 4. Go to Applications Settings on Admin Area (`admin/application_settings`)
 

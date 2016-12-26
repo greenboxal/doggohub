@@ -1,6 +1,6 @@
 # Protected Branches
 
-[Permissions](../permissions.md) in GitLab are fundamentally defined around the
+[Permissions](../permissions.md) in DoggoHub are fundamentally defined around the
 idea of having read or write permission to the repository and branches. To
 prevent people from messing with history or pushing code without review, we've
 created protected branches.
@@ -18,7 +18,7 @@ By default, a protected branch does four simple things:
 See the [Changelog](#changelog) section for changes over time.
 
 >
->Additional functionality for GitLab Enterprise Edition:
+>Additional functionality for DoggoHub Enterprise Edition:
 >
 >- Restrict push and merge access to [certain users][ee-restrict]
 
@@ -43,9 +43,9 @@ that the `master` branch is protected by default.
 
 ## Using the Allowed to merge and Allowed to push settings
 
-> [Introduced][ce-5081] in GitLab 8.11.
+> [Introduced][ce-5081] in DoggoHub 8.11.
 
-Since GitLab 8.11, we added another layer of branch protection which provides
+Since DoggoHub 8.11, we added another layer of branch protection which provides
 more granular management of protected branches. The "Developers can push"
 option was replaced by an "Allowed to push" setting which can be set to
 allow/prohibit Masters and/or Developers to push to a protected branch.
@@ -55,7 +55,7 @@ the actions that different roles can perform with the protected branch.
 For example, you could set "Allowed to push" to "No one", and "Allowed to merge"
 to "Developers + Masters", to require _everyone_ to submit a merge request for
 changes going into the protected branch. This is compatible with workflows like
-the [GitLab workflow](../../workflow/gitlab_flow.md).
+the [DoggoHub workflow](../../workflow/doggohub_flow.md).
 
 However, there are workflows where that is not needed, and only protecting from
 force pushes and branch removal is useful. For those workflows, you can allow
@@ -73,7 +73,7 @@ they are set to "Masters" by default.
 
 ## Wildcard protected branches
 
-> [Introduced][ce-4665] in GitLab 8.10.
+> [Introduced][ce-4665] in DoggoHub 8.10.
 
 You can specify a wildcard protected branch, which will protect all branches
 matching the wildcard. For example:
@@ -82,7 +82,7 @@ matching the wildcard. For example:
 |---------------------------+--------------------------------------------------------|
 | `*-stable`                | `production-stable`, `staging-stable`                  |
 | `production/*`            | `production/app-server`, `production/load-balancer`    |
-| `*gitlab*`                | `gitlab`, `gitlab/staging`, `master/gitlab/production` |
+| `*doggohub*`                | `doggohub`, `doggohub/staging`, `master/doggohub/production` |
 
 Protected branch settings (like "Developers can push") apply to all matching
 branches.
@@ -101,16 +101,16 @@ all matching branches:
 
 **8.11**
 
-- Allow creating protected branches that can't be pushed to [gitlab-org/gitlab-ce!5081][ce-5081]
+- Allow creating protected branches that can't be pushed to [doggohub-org/doggohub-ce!5081][ce-5081]
 
 **8.10**
 
-- Allow developers to merge into a protected branch without having push access [gitlab-org/gitlab-ce!4892][ce-4892]
-- Allow specifying protected branches using wildcards [gitlab-org/gitlab-ce!4665][ce-4665]
+- Allow developers to merge into a protected branch without having push access [doggohub-org/doggohub-ce!4892][ce-4892]
+- Allow specifying protected branches using wildcards [doggohub-org/doggohub-ce!4665][ce-4665]
 
 ---
 
-[ce-4665]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/4665 "Allow specifying protected branches using wildcards"
-[ce-4892]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/4892 "Allow developers to merge into a protected branch without having push access"
-[ce-5081]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5081 "Allow creating protected branches that can't be pushed to"
-[ee-restrict]: http://docs.gitlab.com/ee/user/project/protected_branches.html#restricting-push-and-merge-access-to-certain-users
+[ce-4665]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/4665 "Allow specifying protected branches using wildcards"
+[ce-4892]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/4892 "Allow developers to merge into a protected branch without having push access"
+[ce-5081]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5081 "Allow creating protected branches that can't be pushed to"
+[ee-restrict]: http://docs.doggohub.com/ee/user/project/protected_branches.html#restricting-push-and-merge-access-to-certain-users

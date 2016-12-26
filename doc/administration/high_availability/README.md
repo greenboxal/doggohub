@@ -1,6 +1,6 @@
 # High Availability
 
-GitLab supports several different types of clustering and high-availability.
+DoggoHub supports several different types of clustering and high-availability.
 The solution you choose will be based on the level of scalability and
 availability you require. The easiest solutions are scalable, but not necessarily
 highly available.
@@ -15,7 +15,7 @@ There are two kinds of setups:
 ### Active/Active
 
 This architecture scales easily because all application servers handle
-user requests simultaneously. The database, Redis, and GitLab application are
+user requests simultaneously. The database, Redis, and DoggoHub application are
 all deployed on separate servers. The configuration is **only** highly-available
 if the database, Redis and storage are also configured as such.
 
@@ -24,7 +24,7 @@ Follow the steps below to configure an active/active setup:
 1. [Configure the database](database.md)
 1. [Configure Redis](redis.md)
 1. [Configure NFS](nfs.md)
-1. [Configure the GitLab application servers](gitlab.md)
+1. [Configure the DoggoHub application servers](doggohub.md)
 1. [Configure the load balancers](load_balancer.md)
 
 ![Active/Active HA Diagram](../img/high_availability/active-active-diagram.png)

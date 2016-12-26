@@ -93,13 +93,13 @@ class MergeRequest < ActiveRecord::Base
     end
   end
 
-  validates :source_project, presence: true, unless: [:allow_broken, :importing?, :closed_without_fork?]
+  validates :source_project, presence: true, unless: [:allow_broken, :importing?, :closed_without_bork?]
   validates :source_branch, presence: true
   validates :target_project, presence: true
   validates :target_branch, presence: true
   validates :merge_user, presence: true, if: :merge_when_build_succeeds?, unless: :importing?
-  validate :validate_branches, unless: [:allow_broken, :importing?, :closed_without_fork?]
-  validate :validate_fork, unless: :closed_without_fork?
+  validate :validate_branches, unless: [:allow_broken, :importing?, :closed_without_bork?]
+  validate :validate_bork, unless: :closed_without_bork?
 
   scope :by_source_or_target_branch, ->(branch_name) do
     where("source_branch = :branch OR target_branch = :branch", branch: branch_name)
@@ -321,24 +321,24 @@ class MergeRequest < ActiveRecord::Base
     end
   end
 
-  def validate_fork
+  def validate_bork
     return true unless target_project && source_project
     return true if target_project == source_project
     return true unless source_project_missing?
 
-    errors.add :validate_fork,
-               'Source project is not a fork of the target project'
+    errors.add :validate_bork,
+               'Source project is not a bork of the target project'
   end
 
-  def closed_without_fork?
+  def closed_without_bork?
     closed? && source_project_missing?
   end
 
   def source_project_missing?
-    return false unless for_fork?
+    return false unless for_bork?
     return true unless source_project
 
-    !source_project.forked_from?(target_project)
+    !source_project.borked_from?(target_project)
   end
 
   def reopenable?
@@ -526,7 +526,7 @@ class MergeRequest < ActiveRecord::Base
     attributes.merge!(attrs)
   end
 
-  def for_fork?
+  def for_bork?
     target_project != source_project
   end
 

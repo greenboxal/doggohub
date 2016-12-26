@@ -3,7 +3,7 @@ module Gitlab
     ISSUE_CLOSING_REGEX = begin
       link_pattern = URI.regexp(%w(http https))
 
-      pattern = Gitlab.config.gitlab.issue_closing_pattern
+      pattern = Gitlab.config.doggohub.issue_closing_pattern
       pattern = pattern.sub('%{issue_ref}', "(?:(?:#{link_pattern})|(?:#{Issue.reference_pattern}))")
       Regexp.new(pattern).freeze
     end
@@ -23,7 +23,7 @@ module Gitlab
       @extractor.analyze(closing_statements.join(" "))
 
       @extractor.issues.reject do |issue|
-        @extractor.project.forked_from?(issue.project) # Don't extract issues on original project
+        @extractor.project.borked_from?(issue.project) # Don't extract issues on original project
       end
     end
   end

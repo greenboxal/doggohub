@@ -14,15 +14,15 @@ describe Gitlab::MarkupHelper, lib: true do
     end
   end
 
-  describe '#gitlab_markdown?' do
+  describe '#doggohub_markdown?' do
     %w(mdown mkd mkdn md markdown).each do |type|
       it "returns true for #{type} files" do
-        expect(Gitlab::MarkupHelper.gitlab_markdown?("README.#{type}")).to be_truthy
+        expect(Gitlab::MarkupHelper.doggohub_markdown?("README.#{type}")).to be_truthy
       end
     end
 
     it 'returns false when given a non-markdown filename' do
-      expect(Gitlab::MarkupHelper.gitlab_markdown?('README.rb')).not_to be_truthy
+      expect(Gitlab::MarkupHelper.doggohub_markdown?('README.rb')).not_to be_truthy
     end
   end
 

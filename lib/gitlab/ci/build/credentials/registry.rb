@@ -6,7 +6,7 @@ module Gitlab
           attr_reader :username, :password
 
           def initialize(build)
-            @username = 'gitlab-ci-token'
+            @username = 'doggohub-ci-token'
             @password = build.token
           end
 

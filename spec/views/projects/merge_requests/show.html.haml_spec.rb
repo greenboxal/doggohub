@@ -5,12 +5,12 @@ describe 'projects/merge_requests/show.html.haml' do
 
   let(:user) { create(:user) }
   let(:project) { create(:project) }
-  let(:fork_project) { create(:project, forked_from_project: project) }
-  let(:unlink_project) { Projects::UnlinkForkService.new(fork_project, user) }
+  let(:bork_project) { create(:project, borked_from_project: project) }
+  let(:unlink_project) { Projects::UnlinkBorkService.new(bork_project, user) }
 
   let(:closed_merge_request) do
     create(:closed_merge_request,
-      source_project: fork_project,
+      source_project: bork_project,
       target_project: project,
       author: user)
   end
@@ -45,7 +45,7 @@ describe 'projects/merge_requests/show.html.haml' do
   context 'when the merge request is open' do
     it 'closes the merge request if the source project does not exist' do
       closed_merge_request.update_attributes(state: 'open')
-      fork_project.destroy
+      bork_project.destroy
 
       render
 

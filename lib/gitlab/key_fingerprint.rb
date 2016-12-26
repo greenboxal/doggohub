@@ -12,7 +12,7 @@ module Gitlab
       cmd_status = 0
       cmd_output = ''
 
-      Tempfile.open('gitlab_key_file') do |file|
+      Tempfile.open('doggohub_key_file') do |file|
         file.puts key
         file.rewind
 

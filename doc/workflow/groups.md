@@ -1,13 +1,13 @@
-# GitLab Groups
+# DoggoHub Groups
 
-GitLab groups allow you to group projects into directories and give users to several projects at once.
+DoggoHub groups allow you to group projects into directories and give users to several projects at once.
 
-When you create a new project in GitLab, the default namespace for the project is the personal namespace associated with your GitLab user.
+When you create a new project in DoggoHub, the default namespace for the project is the personal namespace associated with your DoggoHub user.
 In this document we will see how to create groups, put projects in groups and manage who can access the projects in a group.
 
 ## Creating groups
 
-You can create a group by going to the 'Groups' tab of the GitLab dashboard and clicking the 'New group' button.
+You can create a group by going to the 'Groups' tab of the DoggoHub dashboard and clicking the 'New group' button.
 
 ![Click the 'New group' button in the 'Groups' tab](groups/new_group_button.png)
 
@@ -29,7 +29,7 @@ Now you can pick any of the groups you manage as the new namespace for the group
 
 ![Transfer a project to a new namespace](groups/transfer_project.png)
 
-GitLab administrators can use the admin interface to move any project to any namespace if needed.
+DoggoHub administrators can use the admin interface to move any project to any namespace if needed.
 
 ## Adding users to a group
 
@@ -45,11 +45,11 @@ On the 'Group Members' page we can now add a new user Barry to the group.
 
 Now because Barry is a 'Developer' member of the 'Open Source' group, he automatically gets 'Developer' access to all projects in the 'Open Source' group.
 
-![Barry has 'Developer' access to GitLab CI](groups/project_members_via_group.png)
+![Barry has 'Developer' access to DoggoHub CI](groups/project_members_via_group.png)
 
 If necessary, you can increase the access level of an individual user for a specific project, by adding them as a Member to the project.
 
-![Barry effectively has 'Master' access to GitLab CI now](groups/override_access_level.png)
+![Barry effectively has 'Master' access to DoggoHub CI now](groups/override_access_level.png)
 
 ## Requesting access to a group
 
@@ -78,19 +78,19 @@ If you change your mind before your request is approved, just click the
 
 ## Managing group memberships via LDAP
 
-In GitLab Enterprise Edition it is possible to manage GitLab group memberships using LDAP groups.
-See [the GitLab Enterprise Edition documentation](http://docs.gitlab.com/ee/integration/ldap.html) for more information.
+In DoggoHub Enterprise Edition it is possible to manage DoggoHub group memberships using LDAP groups.
+See [the DoggoHub Enterprise Edition documentation](http://docs.doggohub.com/ee/integration/ldap.html) for more information.
 
 ## Allowing only admins to create groups
 
-By default, any GitLab user can create new groups.
+By default, any DoggoHub user can create new groups.
 This ability can be disabled for individual users from the admin panel.
-It is also possible to configure GitLab so that new users default to not being able to create groups:
+It is also possible to configure DoggoHub so that new users default to not being able to create groups:
 
 ```
-# For omnibus-gitlab, put the following in /etc/gitlab/gitlab.rb
-gitlab_rails['gitlab_default_can_create_group'] = false
+# For omnibus-doggohub, put the following in /etc/doggohub/doggohub.rb
+doggohub_rails['doggohub_default_can_create_group'] = false
 
 # For installations from source, uncomment the 'default_can_create_group'
-# line in /home/git/gitlab/config/gitlab.yml
+# line in /home/git/doggohub/config/doggohub.yml
 ```

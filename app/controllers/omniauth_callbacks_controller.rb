@@ -121,10 +121,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def handle_signup_error
     label = Gitlab::OAuth::Provider.label_for(oauth['provider'])
-    message = "Signing in using your #{label} account without a pre-existing GitLab account is not allowed."
+    message = "Signing in using your #{label} account without a pre-existing DoggoHub account is not allowed."
 
     if current_application_settings.signup_enabled?
-      message << " Create a GitLab account first, and then connect it to your #{label} account."
+      message << " Create a DoggoHub account first, and then connect it to your #{label} account."
     end
 
     flash[:notice] = message

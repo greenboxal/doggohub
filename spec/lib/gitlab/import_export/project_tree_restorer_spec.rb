@@ -11,7 +11,7 @@ describe Gitlab::ImportExport::ProjectTreeRestorer, services: true do
     let(:restored_project_json) { project_tree_restorer.restore }
 
     before do
-      allow(shared).to receive(:export_path).and_return('spec/lib/gitlab/import_export/')
+      allow(shared).to receive(:export_path).and_return('spec/lib/doggohub/import_export/')
     end
 
     context 'JSON' do

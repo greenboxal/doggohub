@@ -6,7 +6,7 @@ class SlackSlashCommandsService < ChatSlashCommandsService
   end
 
   def description
-    "Perform common operations on GitLab in Slack"
+    "Perform common operations on DoggoHub in Slack"
   end
 
   def to_param

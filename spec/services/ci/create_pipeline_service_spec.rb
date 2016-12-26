@@ -50,7 +50,7 @@ describe Ci::CreatePipelineService, services: true do
       end
     end
 
-    it 'skips creating pipeline for refs without .gitlab-ci.yml' do
+    it 'skips creating pipeline for refs without .doggohub-ci.yml' do
       stub_ci_pipeline_yaml_file(nil)
       result = execute(ref: 'refs/heads/master',
                        before: '00000000',

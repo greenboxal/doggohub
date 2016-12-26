@@ -1,7 +1,7 @@
 # Gotchas
 
 The purpose of this guide is to document potential "gotchas" that contributors
-might encounter or should avoid during development of GitLab CE and EE.
+might encounter or should avoid during development of DoggoHub CE and EE.
 
 ## Don't `describe` symbols
 
@@ -126,7 +126,7 @@ end
 See ["Why is it bad style to `rescue Exception => e` in Ruby?"][Exception].
 
 _**Note:** This rule is [enforced automatically by
-Rubocop](https://gitlab.com/gitlab-org/gitlab-ce/blob/8-4-stable/.rubocop.yml#L911-914)._
+Rubocop](https://doggohub.com/doggohub-org/doggohub-ce/blob/8-4-stable/.rubocop.yml#L911-914)._
 
 [Exception]: http://stackoverflow.com/q/10048173/223897
 
@@ -135,7 +135,7 @@ Rubocop](https://gitlab.com/gitlab-org/gitlab-ce/blob/8-4-stable/.rubocop.yml#L9
 Using the inline `:javascript` Haml filters comes with a
 performance overhead. Using inline JavaScript is not a good way to structure your code and should be avoided.
 
-_**Note:** We've [removed these two filters](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/initializers/hamlit.rb)
+_**Note:** We've [removed these two filters](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/config/initializers/hamlit.rb)
 in an initializer._
 
 ### Further reading

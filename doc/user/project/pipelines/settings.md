@@ -13,7 +13,7 @@ The following settings can be configured per project.
 ## Git strategy
 
 With Git strategy, you can choose the default way your repository is fetched
-from GitLab in a job.
+from DoggoHub in a job.
 
 There are two options:
 
@@ -23,7 +23,7 @@ There are two options:
   back to clone if it doesn't exist).
 
 The default Git strategy can be overridden by the [GIT_STRATEGY variable][var]
-in `.gitlab-ci.yml`.
+in `.doggohub-ci.yml`.
 
 ## Timeout
 
@@ -34,7 +34,7 @@ if the job surpasses the threshold, it is marked as failed.
 
 ## Test coverage parsing
 
-If you use test coverage in your code, GitLab can capture its output in the
+If you use test coverage in your code, DoggoHub can capture its output in the
 build log using a regular expression. In the pipelines settings, search for the
 "Test coverage parsing" section.
 
@@ -85,19 +85,19 @@ Depending on the status of your build, a badge can have the following values:
 You can access a build status badge image using the following link:
 
 ```
-https://example.gitlab.com/<namespace>/<project>/badges/<branch>/build.svg
+https://example.doggohub.com/<namespace>/<project>/badges/<branch>/build.svg
 ```
 
 ### Test coverage report badge
 
-GitLab makes it possible to define the regular expression for [coverage report],
+DoggoHub makes it possible to define the regular expression for [coverage report],
 that each build log will be matched against. This means that each build in the
 pipeline can have the test coverage percentage value defined.
 
 The test coverage badge can be accessed using following link:
 
 ```
-https://example.gitlab.com/<namespace>/<project>/badges/<branch>/coverage.svg
+https://example.doggohub.com/<namespace>/<project>/badges/<branch>/coverage.svg
 ```
 
 If you would like to get the coverage report from a specific job, you can add
@@ -106,7 +106,7 @@ Markdown code will embed the test coverage report badge of the `coverage` job
 into your `README.md`:
 
 ```markdown
-![coverage](https://gitlab.com/gitlab-org/gitlab-ce/badges/master/coverage.svg?job=coverage)
+![coverage](https://doggohub.com/doggohub-org/doggohub-ce/badges/master/coverage.svg?job=coverage)
 ```
 
 [var]: ../../../ci/yaml/README.md#git-strategy

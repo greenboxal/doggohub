@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Mattermost::Session, type: :request do
   let(:user) { create(:user) }
 
-  let(:gitlab_url) { "http://gitlab.com" }
+  let(:doggohub_url) { "http://doggohub.com" }
   let(:mattermost_url) { "http://mattermost.com" }
 
   subject { described_class.new(user) }
@@ -21,7 +21,7 @@ describe Mattermost::Session, type: :request do
   describe '#with session' do
     let(:location) { 'http://location.tld' }
     let!(:stub) do
-      WebMock.stub_request(:get, "#{mattermost_url}/api/v3/oauth/gitlab/login").
+      WebMock.stub_request(:get, "#{mattermost_url}/api/v3/oauth/doggohub/login").
         to_return(headers: { 'location' => location }, status: 307)
     end
 
@@ -34,8 +34,8 @@ describe Mattermost::Session, type: :request do
     context 'with oauth_uri' do
       let!(:doorkeeper) do
         Doorkeeper::Application.create(
-          name: "GitLab Mattermost",
-          redirect_uri: "#{mattermost_url}/signup/gitlab/complete\n#{mattermost_url}/login/gitlab/complete",
+          name: "DoggoHub Mattermost",
+          redirect_uri: "#{mattermost_url}/signup/doggohub/complete\n#{mattermost_url}/login/doggohub/complete",
           scopes: "")
       end
 
@@ -52,15 +52,15 @@ describe Mattermost::Session, type: :request do
         let(:params) do
           { response_type: "code",
             client_id: doorkeeper.uid,
-            redirect_uri: "#{mattermost_url}/signup/gitlab/complete",
+            redirect_uri: "#{mattermost_url}/signup/doggohub/complete",
             state: state }
         end
         let(:location) do
-          "#{gitlab_url}/oauth/authorize?#{URI.encode_www_form(params)}"
+          "#{doggohub_url}/oauth/authorize?#{URI.encode_www_form(params)}"
         end
 
         before do
-          WebMock.stub_request(:get, "#{mattermost_url}/signup/gitlab/complete").
+          WebMock.stub_request(:get, "#{mattermost_url}/signup/doggohub/complete").
             with(query: hash_including({ 'state' => state })).
             to_return do |request|
               post "/oauth/token",

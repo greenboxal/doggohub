@@ -35,7 +35,7 @@ module API
         requires :tag_name,            type: String, desc: 'The name of the tag'
         requires :ref,                 type: String, desc: 'The commit sha or branch name'
         optional :message,             type: String, desc: 'Specifying a message creates an annotated tag'
-        optional :release_description, type: String, desc: 'Specifying release notes stored in the GitLab database'
+        optional :release_description, type: String, desc: 'Specifying release notes stored in the DoggoHub database'
       end
       post ':id/repository/tags' do
         authorize_push_project

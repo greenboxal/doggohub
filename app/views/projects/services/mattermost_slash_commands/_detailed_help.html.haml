@@ -17,7 +17,7 @@ To setup this service:
   .form-group
     = label_tag :display_name, 'Display name', class: 'col-sm-2 col-xs-12 control-label'
     .col-sm-10.col-xs-12.input-group
-      = text_field_tag :display_name, "GitLab / #{@project.name_with_namespace}", class: 'form-control input-sm', readonly: 'readonly'
+      = text_field_tag :display_name, "DoggoHub / #{@project.name_with_namespace}", class: 'form-control input-sm', readonly: 'readonly'
       .input-group-btn
         = clipboard_button(clipboard_target: '#display_name')
 
@@ -34,7 +34,7 @@ To setup this service:
       %p Fill in the word that works best for your team.
       %p
         Suggestions:
-        %code= 'gitlab'
+        %code= 'doggohub'
         %code= @project.path # Path contains no spaces, but dashes
         %code= @project.path_with_namespace
 
@@ -52,14 +52,14 @@ To setup this service:
   .form-group
     = label_tag :response_username, 'Response username', class: 'col-sm-2 col-xs-12 control-label'
     .col-sm-10.col-xs-12.input-group
-      = text_field_tag :response_username, 'GitLab', class: 'form-control input-sm', readonly: 'readonly'
+      = text_field_tag :response_username, 'DoggoHub', class: 'form-control input-sm', readonly: 'readonly'
       .input-group-btn
         = clipboard_button(clipboard_target: '#response_username')
 
   .form-group
     = label_tag :response_icon, 'Response icon', class: 'col-sm-2 col-xs-12 control-label'
     .col-sm-10.col-xs-12.input-group
-      = text_field_tag :response_icon, asset_url('gitlab_logo.png'), class: 'form-control input-sm', readonly: 'readonly'
+      = text_field_tag :response_icon, asset_url('doggohub_logo.png'), class: 'form-control input-sm', readonly: 'readonly'
       .input-group-btn
         = clipboard_button(clipboard_target: '#response_icon')
 

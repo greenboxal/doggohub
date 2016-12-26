@@ -1,6 +1,6 @@
 # Instrumenting Ruby Code
 
-GitLab Performance Monitoring allows instrumenting of both methods and custom
+DoggoHub Performance Monitoring allows instrumenting of both methods and custom
 blocks of Ruby code. Method instrumentation is the primary form of
 instrumentation with block-based instrumentation only being used when we want to
 drill down to specific regions of code within a method.
@@ -74,7 +74,7 @@ method = Rugged::TagCollection.instance_method(:[])
 method.source_location
 ```
 
-If the source location points to `lib/gitlab/metrics/instrumentation.rb` you
+If the source location points to `lib/doggohub/metrics/instrumentation.rb` you
 know the method has been instrumented.
 
 If you're using Pry you can use the `$` command to display the source code of a
@@ -88,7 +88,7 @@ $ Rugged::TagCollection#[]
 This will print out something along the lines of:
 
 ```
-From: /path/to/your/gitlab/lib/gitlab/metrics/instrumentation.rb @ line 148:
+From: /path/to/your/doggohub/lib/doggohub/metrics/instrumentation.rb @ line 148:
 Owner: #<Module:0x0055f0865c6d50>
 Visibility: public
 Number of lines: 21
@@ -140,7 +140,7 @@ Here the final value of `sleep_real_time` will be `3`, _not_ `1`.
 
 ## Tracking Custom Events
 
-Besides instrumenting code GitLab Performance Monitoring also supports tracking
+Besides instrumenting code DoggoHub Performance Monitoring also supports tracking
 of custom events. This is primarily intended to be used for tracking business
 metrics such as the number of Git pushes, repository imports, and so on.
 

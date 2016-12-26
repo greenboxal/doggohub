@@ -1,5 +1,5 @@
-# Lifted from: https://about.gitlab.com/2016/03/10/setting-up-gitlab-ci-for-ios-projects/
-# This file assumes an own GitLab CI runner, setup on an OS X system.
+# Lifted from: https://about.doggohub.com/2016/03/10/setting-up-doggohub-ci-for-ios-projects/
+# This file assumes an own DoggoHub CI runner, setup on an OS X system.
 stages:
   - build
   - archive

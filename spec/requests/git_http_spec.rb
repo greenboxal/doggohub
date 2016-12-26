@@ -89,7 +89,7 @@ describe 'Git HTTP requests', lib: true do
 
           context 'but git-receive-pack is disabled' do
             it "responds with status 404" do
-              allow(Gitlab.config.gitlab_shell).to receive(:receive_pack).and_return(false)
+              allow(Gitlab.config.doggohub_shell).to receive(:receive_pack).and_return(false)
 
               upload(path, env) do |response|
                 expect(response).to have_http_status(403)
@@ -100,7 +100,7 @@ describe 'Git HTTP requests', lib: true do
 
         context 'but git-upload-pack is disabled' do
           it "responds with status 404" do
-            allow(Gitlab.config.gitlab_shell).to receive(:upload_pack).and_return(false)
+            allow(Gitlab.config.doggohub_shell).to receive(:upload_pack).and_return(false)
 
             download(path, {}) do |response|
               expect(response).to have_http_status(404)
@@ -108,7 +108,7 @@ describe 'Git HTTP requests', lib: true do
           end
         end
 
-        context 'when the request is not from gitlab-workhorse' do
+        context 'when the request is not from doggohub-workhorse' do
           it 'raises an exception' do
             expect do
               get("/#{project.path_with_namespace}.git/info/refs?service=git-upload-pack")
@@ -333,7 +333,7 @@ describe 'Git HTTP requests', lib: true do
           end
         end
 
-        context "when a gitlab ci token is provided" do
+        context "when a doggohub ci token is provided" do
           let(:build) { create(:ci_build, :running) }
           let(:project) { build.project }
           let(:other_project) { create(:empty_project) }
@@ -344,20 +344,20 @@ describe 'Git HTTP requests', lib: true do
 
           context 'when build created by system is authenticated' do
             it "downloads get status 200" do
-              clone_get "#{project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+              clone_get "#{project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
               expect(response).to have_http_status(200)
               expect(response.content_type.to_s).to eq(Gitlab::Workhorse::INTERNAL_API_CONTENT_TYPE)
             end
 
             it "uploads get status 401 (no project existence information leak)" do
-              push_get "#{project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+              push_get "#{project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
               expect(response).to have_http_status(401)
             end
 
             it "downloads from other project get status 404" do
-              clone_get "#{other_project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+              clone_get "#{other_project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
               expect(response).to have_http_status(404)
             end
@@ -371,14 +371,14 @@ describe 'Git HTTP requests', lib: true do
 
             shared_examples 'can download code only' do
               it 'downloads get status 200' do
-                clone_get "#{project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+                clone_get "#{project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
                 expect(response).to have_http_status(200)
                 expect(response.content_type.to_s).to eq(Gitlab::Workhorse::INTERNAL_API_CONTENT_TYPE)
               end
 
               it 'uploads get status 403' do
-                push_get "#{project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+                push_get "#{project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
                 expect(response).to have_http_status(401)
               end
@@ -390,7 +390,7 @@ describe 'Git HTTP requests', lib: true do
               it_behaves_like 'can download code only'
 
               it 'downloads from other project get status 403' do
-                clone_get "#{other_project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+                clone_get "#{other_project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
                 expect(response).to have_http_status(403)
               end
@@ -402,7 +402,7 @@ describe 'Git HTTP requests', lib: true do
               it_behaves_like 'can download code only'
 
               it 'downloads from other project get status 404' do
-                clone_get "#{other_project.path_with_namespace}.git", user: 'gitlab-ci-token', password: build.token
+                clone_get "#{other_project.path_with_namespace}.git", user: 'doggohub-ci-token', password: build.token
 
                 expect(response).to have_http_status(404)
               end

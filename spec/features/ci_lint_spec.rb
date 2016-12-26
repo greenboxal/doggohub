@@ -14,7 +14,7 @@ describe 'CI Lint' do
 
     context 'YAML is correct' do
       let(:yaml_content) do
-        File.read(Rails.root.join('spec/support/gitlab_stubs/gitlab_ci.yml'))
+        File.read(Rails.root.join('spec/support/doggohub_stubs/doggohub_ci.yml'))
       end
 
       it 'parses Yaml' do
@@ -32,7 +32,7 @@ describe 'CI Lint' do
 
       it 'displays information about an error' do
         expect(page).to have_content('Status: syntax is incorrect')
-        expect(page).to have_content('Error: Please provide content of .gitlab-ci.yml')
+        expect(page).to have_content('Error: Please provide content of .doggohub-ci.yml')
       end
     end
 

@@ -158,7 +158,7 @@ class Spinach::Features::ProjectCommits < Spinach::FeatureSteps
     create :ci_build, pipeline: pipeline
   end
 
-  step 'repository contains ".gitlab-ci.yml" file' do
+  step 'repository contains ".doggohub-ci.yml" file' do
     allow_any_instance_of(Ci::Pipeline).to receive(:ci_yaml_file).and_return(String.new)
   end
 

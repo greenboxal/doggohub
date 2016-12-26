@@ -86,7 +86,7 @@
     var checkInitialSidebarSize;
     var fitSidebarForSize;
 
-    // Set the default path for all cookies to GitLab's root directory
+    // Set the default path for all cookies to DoggoHub's root directory
     Cookies.defaults.path = gon.relative_url_root || '/';
 
     // prevent default action for disabled buttons

@@ -36,11 +36,11 @@ When you are ready press the **Create label** button to create the new label.
 
 It's possible to populate the labels for your project from a set of predefined labels.
 
-### Generate GitLab's predefined label set
+### Generate DoggoHub's predefined label set
 
 ![Generate new labels](img/labels_generate.png)
 
-Click the link to 'Generate a default set of labels' and GitLab will
+Click the link to 'Generate a default set of labels' and DoggoHub will
 generate a set of predefined labels for you. There are 8 default generated labels
 in total and you can see them in the screenshot below.
 
@@ -59,10 +59,10 @@ issues and merge requests assigned to each label.
 
 >**Notes:**
 >
-> - Introduced in GitLab 8.9.
+> - Introduced in DoggoHub 8.9.
 > - Priority sorting is based on the highest priority label only. This might
 >   change in the future, follow the discussion in
->   https://gitlab.com/gitlab-org/gitlab-ce/issues/18554.
+>   https://doggohub.com/doggohub-org/doggohub-ce/issues/18554.
 
 Prioritized labels are like any other label, but sorted by priority. This allows
 you to sort issues and merge requests by priority.
@@ -100,7 +100,7 @@ important.
 
 ## Create a new label right from the issue tracker
 
-> Introduced in GitLab 8.6.
+> Introduced in DoggoHub 8.6.
 
 There are times when you are already in the issue tracker searching for a
 label, only to realize it doesn't exist. Instead of going to the **Labels**

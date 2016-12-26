@@ -10,7 +10,7 @@ For users and groups supported API calls see the [users](users.md) and
 ## List namespaces
 
 Get a list of the namespaces of the authenticated user. If the user is an
-administrator, a list of all namespaces in the GitLab instance is shown.
+administrator, a list of all namespaces in the DoggoHub instance is shown.
 
 ```
 GET /namespaces
@@ -19,7 +19,7 @@ GET /namespaces
 Example request:
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/namespaces
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/namespaces
 ```
 
 Example response:
@@ -54,7 +54,7 @@ GET /namespaces?search=foobar
 Example request:
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/namespaces?search=twitter
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/namespaces?search=twitter
 ```
 
 Example response:

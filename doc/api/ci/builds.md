@@ -35,7 +35,7 @@ POST /ci/api/v1/builds/register
 
 
 ```
-curl --request POST "https://gitlab.example.com/ci/api/v1/builds/register" --form "token=t0k3n"
+curl --request POST "https://doggohub.example.com/ci/api/v1/builds/register" --form "token=t0k3n"
 ```
 
 **Responses:**
@@ -43,9 +43,9 @@ curl --request POST "https://gitlab.example.com/ci/api/v1/builds/register" --for
 | Status | Data |Description                                                                |
 |--------|------|---------------------------------------------------------------------------|
 | `201`  | yes  | When a build is scheduled for a runner                                    |
-| `204`  | no   | When no builds are scheduled for a runner (for GitLab Runner >= `v1.3.0`) |
+| `204`  | no   | When no builds are scheduled for a runner (for DoggoHub Runner >= `v1.3.0`) |
 | `403`  | no   | When invalid token is used or no token is sent                            |
-| `404`  | no   | When no builds are scheduled for a runner (for GitLab Runner < `v1.3.0`) **or** when the runner is set to `paused` in GitLab runner's configuration page |
+| `404`  | no   | When no builds are scheduled for a runner (for DoggoHub Runner < `v1.3.0`) **or** when the runner is set to `paused` in DoggoHub runner's configuration page |
 
 ### Update details of an existing build
 
@@ -61,14 +61,14 @@ PUT /ci/api/v1/builds/:id
 | `trace`   | string  | no       | The trace of a build |
 
 ```
-curl --request PUT "https://gitlab.example.com/ci/api/v1/builds/1234" --form "token=t0k3n" --form "state=running" --form "trace=Running git clone...\n"
+curl --request PUT "https://doggohub.example.com/ci/api/v1/builds/1234" --form "token=t0k3n" --form "state=running" --form "trace=Running git clone...\n"
 ```
 
 ### Incremental build trace update
 
 Using this method you need to send trace content as a request body. You also need to provide the `Content-Range` header
 with a range of sent trace part. Note that you need to send parts in the proper order, so the begining of the part
-must start just after the end of the previous part. If you provide the wrong part, then GitLab CI API will return `416
+must start just after the end of the previous part. If you provide the wrong part, then DoggoHub CI API will return `416
 Range Not Satisfiable` response with a header `Range: 0-X`, where `X` is the current trace length.
 
 For example, if you receive `Range: 0-11` in the response, then your next part must contain a `Content-Range: 11-...`
@@ -96,7 +96,7 @@ Headers:
 | `Content-Range` | string  | yes      | Bytes range of trace that is sent |
 
 ```
-curl --request PATCH "https://gitlab.example.com/ci/api/v1/builds/1234/trace.txt" --header "BUILD-TOKEN=build_t0k3n" --header "Content-Range=0-21" --data "Running git clone...\n"
+curl --request PATCH "https://doggohub.example.com/ci/api/v1/builds/1234/trace.txt" --header "BUILD-TOKEN=build_t0k3n" --header "Content-Range=0-21" --data "Running git clone...\n"
 ```
 
 
@@ -113,7 +113,7 @@ POST /ci/api/v1/builds/:id/artifacts
 | `file`    | mixed   | yes      | Artifacts file                |
 
 ```
-curl --request POST "https://gitlab.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n" --form "file=@/path/to/file"
+curl --request POST "https://doggohub.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n" --form "file=@/path/to/file"
 ```
 
 ### Download the artifacts file from build
@@ -128,7 +128,7 @@ GET /ci/api/v1/builds/:id/artifacts
 | `token`   | string  | yes      | The build authorization token |
 
 ```
-curl "https://gitlab.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n"
+curl "https://doggohub.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n"
 ```
 
 ### Remove the artifacts file from build
@@ -143,5 +143,5 @@ DELETE /ci/api/v1/builds/:id/artifacts
 | `token`   | string  | yes      | The build authorization token |
 
 ```
-curl --request DELETE "https://gitlab.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n"
+curl --request DELETE "https://doggohub.example.com/ci/api/v1/builds/1234/artifacts" --form "token=build_t0k3n"
 ```

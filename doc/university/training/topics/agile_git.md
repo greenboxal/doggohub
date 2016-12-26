@@ -28,6 +28,6 @@ After its tested merge into master and remove the branch.
 
 ----------
 
-## What about GitLab
-Tools like GitLab enhance collaboration by adding dialog around code mainly
+## What about DoggoHub
+Tools like DoggoHub enhance collaboration by adding dialog around code mainly
 through issues and merge requests.

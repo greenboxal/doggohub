@@ -3,7 +3,7 @@ module Ci
     # Build Trigger API
     class Triggers < Grape::API
       resource :projects do
-        # Trigger a GitLab CI project build
+        # Trigger a DoggoHub CI project build
         #
         # Parameters:
         #   id (required) - The ID of a CI project

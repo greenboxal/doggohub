@@ -1,6 +1,6 @@
 # NamespaceValidator
 #
-# Custom validator for GitLab namespace values.
+# Custom validator for DoggoHub namespace values.
 #
 # Values are checked for formatting and exclusion from a list of reserved path
 # names.

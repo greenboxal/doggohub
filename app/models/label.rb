@@ -146,8 +146,8 @@ class Label < ActiveRecord::Base
   #
   #   Label.first.to_reference                                     # => "~1"
   #   Label.first.to_reference(format: :name)                      # => "~\"bug\""
-  #   Label.first.to_reference(project, same_namespace_project)    # => "gitlab-ce~1"
-  #   Label.first.to_reference(project, another_namespace_project) # => "gitlab-org/gitlab-ce~1"
+  #   Label.first.to_reference(project, same_namespace_project)    # => "doggohub-ce~1"
+  #   Label.first.to_reference(project, another_namespace_project) # => "doggohub-org/doggohub-ce~1"
   #
   # Returns a String
   #

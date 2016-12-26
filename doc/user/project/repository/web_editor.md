@@ -1,6 +1,6 @@
-# GitLab Web Editor
+# DoggoHub Web Editor
 
-Sometimes it's easier to make quick changes directly from the GitLab interface
+Sometimes it's easier to make quick changes directly from the DoggoHub interface
 than to clone the project and use the Git command line tool. In this feature
 highlight we look at how you can create a new file, directory, branch or
 tag from the file browser. All of these actions are available from a single
@@ -28,7 +28,7 @@ When you are satisfied with your new file, click **Commit Changes** at the botto
 ### Template dropdowns
 
 When starting a new project, there are some common files which the new project
-might need too. Therefore a message will be displayed by GitLab to make this
+might need too. Therefore a message will be displayed by DoggoHub to make this
 easy for you.
 
 ![First file for your project](img/web_editor_template_dropdown_first_file.png)
@@ -38,7 +38,7 @@ to provide you with a template which might be suitable for your project.
 
 ![MIT license selected](img/web_editor_template_dropdown_mit_license.png)
 
-The license, changelog, contribution guide, or `.gitlab-ci.yml` file could also
+The license, changelog, contribution guide, or `.doggohub-ci.yml` file could also
 be added through a button on the project page. In the example below the license
 has already been created, which creates a link to the license itself.
 
@@ -89,11 +89,11 @@ the target branch. Click **Create directory** to finish.
 
 ## Create a new branch
 
-There are multiple ways to create a branch from GitLab's web interface.
+There are multiple ways to create a branch from DoggoHub's web interface.
 
 ### Create a new branch from an issue
 
-> [Introduced][ce-2808] in GitLab 8.6.
+> [Introduced][ce-2808] in DoggoHub 8.6.
 
 In case your development workflow dictates to have an issue for every merge
 request, you can quickly create a branch right on the issue page which will be
@@ -171,5 +171,5 @@ you commit the changes you will be taken to a new merge request form.
 ![Start a new merge request with these changes](img/web_editor_start_new_merge_request.png)
 
 ![New file button](basicsimages/file_button.png)
-[ce-2808]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/2808
+[ce-2808]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/2808
 [issue closing pattern]: ../user/project/issues/automatic_issue_closing.md

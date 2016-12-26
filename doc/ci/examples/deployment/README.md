@@ -1,5 +1,5 @@
 ## Using Dpl as deployment tool
-Dpl (dee-pee-ell) is a deploy tool made for continuous deployment that's developed and used by Travis CI, but can also be used with GitLab CI. 
+Dpl (dee-pee-ell) is a deploy tool made for continuous deployment that's developed and used by Travis CI, but can also be used with DoggoHub CI. 
 
 **We recommend to use Dpl, if you're deploying to any of these of these services: https://github.com/travis-ci/dpl#supported-providers**.
 
@@ -38,8 +38,8 @@ In the above example we use Dpl to deploy `my-app-staging` to Heroku server with
 To use different provider take a look at long list of [Supported Providers](https://github.com/travis-ci/dpl#supported-providers).
 
 ### Using Dpl with Docker
-When you use GitLab Runner you most likely configured it to use your server's shell commands.
-This means that all commands are run in context of local user (ie. gitlab_runner or gitlab_ci_multi_runner).
+When you use DoggoHub Runner you most likely configured it to use your server's shell commands.
+This means that all commands are run in context of local user (ie. doggohub_runner or doggohub_ci_multi_runner).
 It also means that most probably in your Docker container you don't have the Ruby runtime installed.
 You will have to install it:
 ```
@@ -59,7 +59,7 @@ The above example is valid for all Debian-compatible systems.
 ### Usage in staging and production
 It's pretty common in developer workflow to have staging (development) and production environment.
 If we consider above example: we would like to deploy `master` branch to `staging` and `all tags` to `production` environment.
-The final `.gitlab-ci.yml` for that setup would look like this:
+The final `.doggohub-ci.yml` for that setup would look like this:
 
 ```
 staging:
@@ -86,11 +86,11 @@ We also use two secure variables:
 2. `HEROKU_PRODUCTION_API_KEY` - Heroku API key used to deploy production app.
 
 ### Storing API keys
-In GitLab CI 7.12 a new feature was introduced: Secure Variables.
+In DoggoHub CI 7.12 a new feature was introduced: Secure Variables.
 Secure Variables can added by going to `Project > Variables > Add Variable`. 
-**This feature requires `gitlab-runner` with version equal or greater than 0.4.0.**
+**This feature requires `doggohub-runner` with version equal or greater than 0.4.0.**
 The variables that are defined in the project settings are sent along with the build script to the runner.
-The secure variables are stored out of the repository. Never store secrets in your projects' .gitlab-ci.yml.
+The secure variables are stored out of the repository. Never store secrets in your projects' .doggohub-ci.yml.
 It is also important that secret's value is hidden in the build log.
 
 You access added variable by prefixing it's name with `$` (on non-Windows runners) or `%` (for Windows Batch runners):

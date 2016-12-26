@@ -38,8 +38,8 @@
           = link_to "(?)", help_page_path("integration/github")
           , Bitbucket
           = link_to "(?)", help_page_path("integration/bitbucket")
-          and GitLab.com
-          = link_to "(?)", help_page_path("integration/gitlab")
+          and DoggoHub.com
+          = link_to "(?)", help_page_path("integration/doggohub")
     .form-group
       %label.control-label.col-sm-2 Enabled Git access protocols
       .col-sm-10
@@ -67,14 +67,14 @@
       = f.label :session_expire_delay, 'Session duration (minutes)', class: 'control-label col-sm-2'
       .col-sm-10
         = f.number_field :session_expire_delay, class: 'form-control'
-        %span.help-block#session_expire_delay_help_block GitLab restart is required to apply changes
+        %span.help-block#session_expire_delay_help_block DoggoHub restart is required to apply changes
     .form-group
       = f.label :user_oauth_applications, 'User OAuth applications', class: 'control-label col-sm-2'
       .col-sm-10
         .checkbox
           = f.label :user_oauth_applications do
             = f.check_box :user_oauth_applications
-            Allow users to register any application to use GitLab as an OAuth provider
+            Allow users to register any application to use DoggoHub as an OAuth provider
     .form-group
       = f.label :user_default_external, 'New users set to external', class: 'control-label col-sm-2'
       .col-sm-10
@@ -220,7 +220,7 @@
     %p
       Setup InfluxDB to measure a wide variety of statistics like the time spent
       in running SQL queries. These settings require a
-      = link_to 'restart', help_page_path('administration/restart_gitlab')
+      = link_to 'restart', help_page_path('administration/restart_doggohub')
       to take effect.
       = link_to icon('question-circle'), help_page_path('administration/monitoring/performance/introduction')
     .form-group
@@ -364,7 +364,7 @@
             = f.check_box :sentry_enabled
             Enable Sentry
           .help-block
-            Sentry is an error reporting and logging tool which is currently not shipped with GitLab, get it here:
+            Sentry is an error reporting and logging tool which is currently not shipped with DoggoHub, get it here:
             %a{ href: 'https://getsentry.com', target: '_blank' } https://getsentry.com
 
     .form-group
@@ -392,7 +392,7 @@
             = f.check_box :repository_checks_enabled
             Enable Repository Checks
           .help-block
-            GitLab will periodically run
+            DoggoHub will periodically run
             %a{ href: 'https://www.kernel.org/pub/software/scm/git/docs/git-fsck.html', target: 'blank' } 'git fsck'
             in all project and wiki repositories to look for silent disk corruption issues.
     .form-group
@@ -412,10 +412,10 @@
     .form-group
       = f.label :koding_url, 'Koding URL', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :koding_url, class: 'form-control', placeholder: 'http://gitlab.your-koding-instance.com:8090'
+        = f.text_field :koding_url, class: 'form-control', placeholder: 'http://doggohub.your-koding-instance.com:8090'
         .help-block
           Koding has integration enabled out of the box for the
-          %strong gitlab
+          %strong doggohub
           team, and you need to provide that team's URL here. Learn more in the
           = succeed "." do
             = link_to "Koding administration documentation", help_page_path("administration/integration/koding")
@@ -429,7 +429,7 @@
             = f.check_box :version_check_enabled
             Version check enabled
           .help-block
-            Let GitLab inform you when an update is available.
+            Let DoggoHub inform you when an update is available.
 
   %fieldset
     %legend Email
@@ -450,7 +450,7 @@
             = f.check_box :html_emails_enabled
             Enable HTML emails
           .help-block
-            By default GitLab sends emails in HTML and plain text formats so mail
+            By default DoggoHub sends emails in HTML and plain text formats so mail
             clients can choose what format to use. Disable this option if you only
             want to send emails in plain text format.
   %fieldset
@@ -463,7 +463,7 @@
             Enable automatic repository housekeeping (git repack, git gc)
           .help-block
             If you keep automatic housekeeping disabled for a long time Git
-            repository access on your GitLab server will become slower and your
+            repository access on your DoggoHub server will become slower and your
             repositories will use more disk space. We recommend to always leave
             this enabled.
         .checkbox

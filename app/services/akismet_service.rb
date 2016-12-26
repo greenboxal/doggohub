@@ -40,7 +40,7 @@ class AkismetService
 
   def akismet_client
     @akismet_client ||= ::Akismet::Client.new(current_application_settings.akismet_api_key,
-                                              Gitlab.config.gitlab.url)
+                                              Gitlab.config.doggohub.url)
   end
 
   def akismet_enabled?

@@ -25,7 +25,7 @@ gem 'omniauth-azure-oauth2',  '~> 0.0.6'
 gem 'omniauth-cas3',          '~> 1.1.2'
 gem 'omniauth-facebook',      '~> 4.0.0'
 gem 'omniauth-github',        '~> 1.1.1'
-gem 'omniauth-gitlab',        '~> 1.0.2'
+gem 'omniauth-doggohub',        '~> 1.0.2'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'omniauth-kerberos',      '~> 0.3.0', group: :kerberos
 gem 'omniauth-saml',          '~> 1.7.0'
@@ -51,12 +51,12 @@ gem 'browser', '~> 2.2'
 
 # Extracting information from a git repository
 # Provide access to Gitlab::Git library
-gem 'gitlab_git', '~> 10.7.0'
+gem 'doggohub_git', '~> 10.7.0'
 
 # LDAP Auth
-# GitLab fork with several improvements to original library. For full list of changes
-# see https://github.com/intridea/omniauth-ldap/compare/master...gitlabhq:master
-gem 'gitlab_omniauth-ldap', '~> 1.2.1', require: 'omniauth-ldap'
+# DoggoHub bork with several improvements to original library. For full list of changes
+# see https://github.com/intridea/omniauth-ldap/compare/master...doggohubhq:master
+gem 'doggohub_omniauth-ldap', '~> 1.2.1', require: 'omniauth-ldap'
 
 # Git Wiki
 # Required manually in config/initializers/gollum.rb to control load order
@@ -99,7 +99,7 @@ gem 'seed-fu', '~> 2.3.5'
 # Markdown and HTML processing
 gem 'html-pipeline',      '~> 1.11.0'
 gem 'deckar01-task_list', '1.0.6', require: 'task_list/railtie'
-gem 'gitlab-markup',      '~> 1.5.0'
+gem 'doggohub-markup',      '~> 1.5.0'
 gem 'redcarpet',          '~> 3.3.3'
 gem 'RedCloth',           '~> 4.3.2'
 gem 'rdoc',               '~> 4.2'
@@ -143,7 +143,7 @@ gem 'httparty', '~> 0.13.3'
 # Colored output to console
 gem 'rainbow', '~> 2.1.0'
 
-# GitLab settings
+# DoggoHub settings
 gem 'settingslogic', '~> 2.0.9'
 
 # Misc
@@ -164,10 +164,10 @@ gem 'hipchat', '~> 1.5.0'
 gem 'jira-ruby', '~> 1.1.2'
 
 # Flowdock integration
-gem 'gitlab-flowdock-git-hook', '~> 1.0.1'
+gem 'doggohub-flowdock-git-hook', '~> 1.0.1'
 
 # Gemnasium integration
-gem 'gemnasium-gitlab-service', '~> 0.2'
+gem 'gemnasium-doggohub-service', '~> 0.2'
 
 # Slack integration
 gem 'slack-notifier', '~> 1.5.1'

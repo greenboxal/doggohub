@@ -12,7 +12,7 @@ class MattermostSlashCommandsService < ChatSlashCommandsService
   end
 
   def description
-    "Perform common operations on GitLab in Mattermost"
+    "Perform common operations on DoggoHub in Mattermost"
   end
 
   def to_param
@@ -44,8 +44,8 @@ class MattermostSlashCommandsService < ChatSlashCommandsService
       auto_complete_desc: "Perform common operations on: #{pretty_project_name}",
       auto_complete_hint: '[help]',
       description: "Perform common operations on: #{pretty_project_name}",
-      display_name: "GitLab / #{pretty_project_name}",
+      display_name: "DoggoHub / #{pretty_project_name}",
       method: 'P',
-      username: 'GitLab')
+      username: 'DoggoHub')
   end
 end

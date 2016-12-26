@@ -1,8 +1,8 @@
 test:
   incoming_email:
     enabled: true
-    address: "gitlab-incoming+%{key}@gmail.com"
-    user: "gitlab-incoming@gmail.com"
+    address: "doggohub-incoming+%{key}@gmail.com"
+    user: "doggohub-incoming@gmail.com"
     password: "[REDACTED]"
     host: "imap.gmail.com"
     port: 993

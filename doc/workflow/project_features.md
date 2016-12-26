@@ -10,7 +10,7 @@ Issues is a really powerful, but lightweight issue tracking system.
 
 You can make tickets, assign them to people, file them under milestones, order them with labels and have discussion in them.
 
-They integrate deeply into GitLab and are easily referenced from anywhere by using `#` and the issue number.
+They integrate deeply into DoggoHub and are easily referenced from anywhere by using `#` and the issue number.
 
 ## Merge Requests
 
@@ -22,9 +22,9 @@ We see it as an integral part of working together on code and couldn't work with
 
 ## Wiki
 
-This is a separate system for documentation, built right into GitLab.
+This is a separate system for documentation, built right into DoggoHub.
 
-It is source controlled and is very convenient if you don't want to keep you documentation in your source code, but you do want to keep it in your GitLab project.
+It is source controlled and is very convenient if you don't want to keep you documentation in your source code, but you do want to keep it in your DoggoHub project.
 
 ## Snippets
 

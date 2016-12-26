@@ -43,7 +43,7 @@ describe 'Git LFS API and storage' do
 
     it 'responds with 501' do
       expect(response).to have_http_status(501)
-      expect(json_response).to include('message' => 'Git LFS is not enabled on this GitLab server, contact your admin.')
+      expect(json_response).to include('message' => 'Git LFS is not enabled on this DoggoHub server, contact your admin.')
     end
   end
 
@@ -82,7 +82,7 @@ describe 'Git LFS API and storage' do
         end
 
         it 'responds with a 501 message on download' do
-          get "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}", nil, headers
+          get "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}", nil, headers
 
           expect(response).to have_http_status(501)
         end
@@ -100,7 +100,7 @@ describe 'Git LFS API and storage' do
         end
 
         it 'responds with a 501 message on download' do
-          get "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}", nil, headers
+          get "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}", nil, headers
 
           expect(response).to have_http_status(501)
         end
@@ -126,7 +126,7 @@ describe 'Git LFS API and storage' do
         end
 
         it 'responds with a 403 message on download' do
-          get "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}", nil, headers
+          get "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}", nil, headers
 
           expect(response).to have_http_status(403)
           expect(json_response).to include('message' => 'Access forbidden. Check your access level.')
@@ -146,7 +146,7 @@ describe 'Git LFS API and storage' do
         end
 
         it 'responds with a 200 message on download' do
-          get "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}", nil, headers
+          get "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}", nil, headers
 
           expect(response).to have_http_status(200)
         end
@@ -198,10 +198,10 @@ describe 'Git LFS API and storage' do
     before do
       enable_lfs
       update_permissions
-      get "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}", nil, headers
+      get "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}", nil, headers
     end
 
-    context 'and request comes from gitlab-workhorse' do
+    context 'and request comes from doggohub-workhorse' do
       context 'without user being authorized' do
         it 'responds with status 401' do
           expect(response).to have_http_status(401)
@@ -398,7 +398,7 @@ describe 'Git LFS API and storage' do
                 'size' => sample_size,
                 'actions' => {
                   'download' => {
-                    'href' => "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}",
+                    'href' => "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}",
                     'header' => { 'Authorization' => authorization }
                   }
                 }
@@ -489,7 +489,7 @@ describe 'Git LFS API and storage' do
                 'size' => sample_size,
                 'actions' => {
                   'download' => {
-                    'href' => "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}",
+                    'href' => "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}",
                     'header' => { 'Authorization' => authorization }
                   }
                 }
@@ -602,7 +602,7 @@ describe 'Git LFS API and storage' do
                 'size' => sample_size,
                 'actions' => {
                   'download' => {
-                    'href' => "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}",
+                    'href' => "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}",
                     'header' => {}
                   }
                 }
@@ -657,7 +657,7 @@ describe 'Git LFS API and storage' do
               expect(json_response['objects'].first['size']).to eq(sample_size)
               expect(lfs_object.projects.pluck(:id)).not_to include(project.id)
               expect(lfs_object.projects.pluck(:id)).to include(other_project.id)
-              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}/#{sample_size}")
+              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}/#{sample_size}")
               expect(json_response['objects'].first['actions']['upload']['header']).to eq('Authorization' => authorization)
             end
           end
@@ -680,7 +680,7 @@ describe 'Git LFS API and storage' do
               expect(json_response['objects']).to be_kind_of(Array)
               expect(json_response['objects'].first['oid']).to eq("91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897")
               expect(json_response['objects'].first['size']).to eq(1575078)
-              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{Gitlab.config.gitlab.url}/#{project.path_with_namespace}.git/gitlab-lfs/objects/91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897/1575078")
+              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{Gitlab.config.doggohub.url}/#{project.path_with_namespace}.git/doggohub-lfs/objects/91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897/1575078")
               expect(json_response['objects'].first['actions']['upload']['header']).to eq('Authorization' => authorization)
             end
           end
@@ -712,7 +712,7 @@ describe 'Git LFS API and storage' do
 
               expect(json_response['objects'].first['oid']).to eq("91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897")
               expect(json_response['objects'].first['size']).to eq(1575078)
-              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{project.http_url_to_repo}/gitlab-lfs/objects/91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897/1575078")
+              expect(json_response['objects'].first['actions']['upload']['href']).to eq("#{project.http_url_to_repo}/doggohub-lfs/objects/91eff75a492a3ed0dfcb544d7f31326bc4014c8551849c192fd1e48d4dd2c897/1575078")
               expect(json_response['objects'].first['actions']['upload']['header']).to eq("Authorization" => authorization)
 
               expect(json_response['objects'].last['oid']).to eq(sample_oid)
@@ -808,7 +808,7 @@ describe 'Git LFS API and storage' do
     end
 
     shared_examples 'unauthorized' do
-      context 'and request is sent by gitlab-workhorse to authorize the request' do
+      context 'and request is sent by doggohub-workhorse to authorize the request' do
         before do
           put_authorize
         end
@@ -818,7 +818,7 @@ describe 'Git LFS API and storage' do
         end
       end
 
-      context 'and request is sent by gitlab-workhorse to finalize the upload' do
+      context 'and request is sent by doggohub-workhorse to finalize the upload' do
         before do
           put_finalize
         end
@@ -840,7 +840,7 @@ describe 'Git LFS API and storage' do
     end
 
     shared_examples 'forbidden' do
-      context 'and request is sent by gitlab-workhorse to authorize the request' do
+      context 'and request is sent by doggohub-workhorse to authorize the request' do
         before do
           put_authorize
         end
@@ -850,7 +850,7 @@ describe 'Git LFS API and storage' do
         end
       end
 
-      context 'and request is sent by gitlab-workhorse to finalize the upload' do
+      context 'and request is sent by doggohub-workhorse to finalize the upload' do
         before do
           put_finalize
         end
@@ -888,7 +888,7 @@ describe 'Git LFS API and storage' do
             end
           end
 
-          context 'and request is sent by gitlab-workhorse to authorize the request' do
+          context 'and request is sent by doggohub-workhorse to authorize the request' do
             before do
               put_authorize
             end
@@ -897,7 +897,7 @@ describe 'Git LFS API and storage' do
               expect(response).to have_http_status(200)
             end
 
-            it 'uses the gitlab-workhorse content type' do
+            it 'uses the doggohub-workhorse content type' do
               expect(response.content_type.to_s).to eq(Gitlab::Workhorse::INTERNAL_API_CONTENT_TYPE)
             end
 
@@ -908,7 +908,7 @@ describe 'Git LFS API and storage' do
             end
           end
 
-          context 'and request is sent by gitlab-workhorse to finalize the upload' do
+          context 'and request is sent by doggohub-workhorse to finalize the upload' do
             before do
               put_finalize
             end
@@ -996,10 +996,10 @@ describe 'Git LFS API and storage' do
       end
     end
 
-    describe 'to a forked project' do
+    describe 'to a borked project' do
       let(:upstream_project) { create(:project, :public) }
       let(:project_owner) { create(:user) }
-      let(:project) { fork_project(upstream_project, project_owner) }
+      let(:project) { bork_project(upstream_project, project_owner) }
 
       describe 'when user is authenticated' do
         let(:authorization) { authorize_user }
@@ -1009,7 +1009,7 @@ describe 'Git LFS API and storage' do
             project.team << [user, :developer]
           end
 
-          context 'and request is sent by gitlab-workhorse to authorize the request' do
+          context 'and request is sent by doggohub-workhorse to authorize the request' do
             before do
               put_authorize
             end
@@ -1025,7 +1025,7 @@ describe 'Git LFS API and storage' do
             end
           end
 
-          context 'and request is sent by gitlab-workhorse to finalize the upload' do
+          context 'and request is sent by doggohub-workhorse to finalize the upload' do
             before do
               put_finalize
             end
@@ -1087,7 +1087,7 @@ describe 'Git LFS API and storage' do
         it_behaves_like 'unauthorized'
       end
 
-      describe 'and second project not related to fork or a source project' do
+      describe 'and second project not related to bork or a source project' do
         let(:second_project) { create(:empty_project) }
         let(:authorization) { authorize_user }
 
@@ -1098,7 +1098,7 @@ describe 'Git LFS API and storage' do
 
         context 'when pushing the same lfs object to the second project' do
           before do
-            put "#{second_project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}/#{sample_size}", nil,
+            put "#{second_project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}/#{sample_size}", nil,
                 headers.merge('X-Gitlab-Lfs-Tmp' => lfs_tmp_file).compact
           end
 
@@ -1117,11 +1117,11 @@ describe 'Git LFS API and storage' do
       authorize_headers = headers
       authorize_headers.merge!(workhorse_internal_api_request_header) if verified
 
-      put "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}/#{sample_size}/authorize", nil, authorize_headers
+      put "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}/#{sample_size}/authorize", nil, authorize_headers
     end
 
     def put_finalize(lfs_tmp = lfs_tmp_file)
-      put "#{project.http_url_to_repo}/gitlab-lfs/objects/#{sample_oid}/#{sample_size}", nil,
+      put "#{project.http_url_to_repo}/doggohub-lfs/objects/#{sample_oid}/#{sample_size}", nil,
           headers.merge('X-Gitlab-Lfs-Tmp' => lfs_tmp).compact
     end
 
@@ -1135,7 +1135,7 @@ describe 'Git LFS API and storage' do
   end
 
   def authorize_ci_project
-    ActionController::HttpAuthentication::Basic.encode_credentials('gitlab-ci-token', build.token)
+    ActionController::HttpAuthentication::Basic.encode_credentials('doggohub-ci-token', build.token)
   end
 
   def authorize_user
@@ -1150,9 +1150,9 @@ describe 'Git LFS API and storage' do
     ActionController::HttpAuthentication::Basic.encode_credentials(user.username, Gitlab::LfsToken.new(user).token)
   end
 
-  def fork_project(project, user, object = nil)
-    allow(RepositoryForkWorker).to receive(:perform_async).and_return(true)
-    Projects::ForkService.new(project, user, {}).execute
+  def bork_project(project, user, object = nil)
+    allow(RepositoryBorkWorker).to receive(:perform_async).and_return(true)
+    Projects::BorkService.new(project, user, {}).execute
   end
 
   def post_lfs_json(url, body = nil, headers = nil)

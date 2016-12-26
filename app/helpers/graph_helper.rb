@@ -2,7 +2,7 @@ module GraphHelper
   def get_refs(repo, commit)
     refs = ""
     # Commit::ref_names already strips the refs/XXX from important refs (e.g. refs/heads/XXX)
-    # so anything leftover is internally used by GitLab
+    # so anything leftover is internally used by DoggoHub
     commit_refs = commit.ref_names(repo).reject{ |name| name.starts_with?('refs/') }
     refs << commit_refs.join(' ')
 

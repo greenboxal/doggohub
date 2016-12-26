@@ -29,7 +29,7 @@ module MarkdownMatchers
       expect(actual).to have_selector('img.emoji', count: 10)
 
       image = actual.at_css('img.emoji')
-      expect(image['src'].to_s).to start_with(Gitlab.config.gitlab.url + '/assets')
+      expect(image['src'].to_s).to start_with(Gitlab.config.doggohub.url + '/assets')
     end
   end
 
@@ -38,7 +38,7 @@ module MarkdownMatchers
     set_default_markdown_messages
 
     match do |actual|
-      expect(actual).to have_selector('h1 a#user-content-gitlab-markdown')
+      expect(actual).to have_selector('h1 a#user-content-doggohub-markdown')
       expect(actual).to have_selector('h2 a#user-content-markdown')
       expect(actual).to have_selector('h3 a#user-content-autolinkfilter')
     end
@@ -53,7 +53,7 @@ module MarkdownMatchers
     set_default_markdown_messages
 
     match do |actual|
-      expect(actual).to have_autolink('http://about.gitlab.com/')
+      expect(actual).to have_autolink('http://about.doggohub.com/')
       expect(actual).to have_autolink('https://google.com/')
       expect(actual).to have_autolink('ftp://ftp.us.debian.org/debian/')
       expect(actual).to have_autolink('smb://foo/bar/baz')
@@ -72,7 +72,7 @@ module MarkdownMatchers
       have_css("img[src$='#{src}']")
     end
 
-    prefix = '/namespace1/gitlabhq/wikis'
+    prefix = '/namespace1/doggohubhq/wikis'
     set_default_markdown_messages
 
     match do |actual|
@@ -186,7 +186,7 @@ module MarkdownMatchers
     match do |actual|
       video = actual.at_css('video')
 
-      expect(video['src']).to end_with('/assets/videos/gitlab-demo.mp4')
+      expect(video['src']).to end_with('/assets/videos/doggohub-demo.mp4')
     end
   end
 end

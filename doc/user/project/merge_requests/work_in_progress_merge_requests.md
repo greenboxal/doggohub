@@ -1,7 +1,7 @@
 # "Work In Progress" Merge Requests
 
 To prevent merge requests from accidentally being accepted before they're
-completely ready, GitLab blocks the "Accept" button for merge requests that
+completely ready, DoggoHub blocks the "Accept" button for merge requests that
 have been marked a **Work In Progress**.
 
 ![Blocked Accept Button](img/wip_blocked_accept_button.png)

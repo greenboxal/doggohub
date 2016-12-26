@@ -3,12 +3,12 @@
 This document will take you through the steps of setting up a basic Postfix mail
 server with IMAP authentication on Ubuntu, to be used with [Reply by email].
 
-The instructions make the assumption that you will be using the email address `incoming@gitlab.example.com`, that is, username `incoming` on host `gitlab.example.com`. Don't forget to change it to your actual host when executing the example code snippets.
+The instructions make the assumption that you will be using the email address `incoming@doggohub.example.com`, that is, username `incoming` on host `doggohub.example.com`. Don't forget to change it to your actual host when executing the example code snippets.
 
 ## Configure your server firewall
 
 1. Open up port 25 on your server so that people can send email into the server over SMTP.
-2. If the mail server is different from the server running GitLab, open up port 143 on your server so that GitLab can read email from the server over IMAP.
+2. If the mail server is different from the server running DoggoHub, open up port 143 on your server so that DoggoHub can read email from the server over IMAP.
 
 ## Install packages
 
@@ -18,7 +18,7 @@ The instructions make the assumption that you will be using the email address `i
     sudo apt-get install postfix
     ```
 
-    When asked about the environment, select 'Internet Site'. When asked to confirm the hostname, make sure it matches `gitlab.example.com`.
+    When asked about the environment, select 'Internet Site'. When asked to confirm the hostname, make sure it matches `doggohub.example.com`.
 
 1. Install the `mailutils` package.
 
@@ -56,7 +56,7 @@ The instructions make the assumption that you will be using the email address `i
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
-    220 gitlab.example.com ESMTP Postfix (Ubuntu)
+    220 doggohub.example.com ESMTP Postfix (Ubuntu)
     ```
 
     If you get a `Connection refused` error instead, verify that `postfix` is running:
@@ -183,7 +183,7 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
 1. Let Postfix know about the domains that it should consider local:
 
     ```sh
-    sudo postconf -e "mydestination = gitlab.example.com, localhost.localdomain, localhost"
+    sudo postconf -e "mydestination = doggohub.example.com, localhost.localdomain, localhost"
     ```
 
 1. Let Postfix know about the IPs that it should consider part of the LAN:
@@ -219,16 +219,16 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
     1. Connect to the SMTP server:
 
         ```sh
-        telnet gitlab.example.com 25
+        telnet doggohub.example.com 25
         ```
 
         You should see a prompt like this:
 
         ```sh
         Trying 123.123.123.123...
-        Connected to gitlab.example.com.
+        Connected to doggohub.example.com.
         Escape character is '^]'.
-        220 gitlab.example.com ESMTP Postfix (Ubuntu)
+        220 doggohub.example.com ESMTP Postfix (Ubuntu)
         ```
 
         If you get a `Connection refused` error instead, make sure your firewall is setup to allow inbound traffic on port 25.
@@ -236,9 +236,9 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
     1. Send the `incoming` user a dummy email to test SMTP, by entering the following into the SMTP prompt:
 
         ```
-        ehlo gitlab.example.com
-        mail from: root@gitlab.example.com
-        rcpt to: incoming@gitlab.example.com
+        ehlo doggohub.example.com
+        mail from: root@doggohub.example.com
+        rcpt to: incoming@doggohub.example.com
         data
         Subject: Re: Some issue
 
@@ -261,7 +261,7 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
 
         ```
         "/home/incoming/Maildir": 1 message 1 unread
-        >U   1 root@gitlab.example.com                           59/2842  Re: Some issue
+        >U   1 root@doggohub.example.com                           59/2842  Re: Some issue
         ```
 
         Quit the mail app:
@@ -281,14 +281,14 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
     1. Connect to the IMAP server:
 
         ```sh
-        telnet gitlab.example.com 143
+        telnet doggohub.example.com 143
         ```
 
         You should see a prompt like this:
 
         ```sh
         Trying 123.123.123.123...
-        Connected to mail.example.gitlab.com.
+        Connected to mail.example.doggohub.com.
         Escape character is '^]'.
         - OK [CAPABILITY IMAP4rev1 UIDPLUS CHILDREN NAMESPACE THREAD=ORDEREDSUBJECT THREAD=REFERENCES SORT QUOTA IDLE ACL ACL2=UNION] Courier-IMAP ready. Copyright 1998-2011 Double Precision, Inc.  See COPYING for distribution information.
         ```
@@ -315,7 +315,7 @@ Courier, which we will install later to add IMAP authentication, requires mailbo
 
 ## Done!
 
-If all the tests were successful, Postfix is all set up and ready to receive email! Continue with the [Reply by email](./README.md) guide to configure GitLab.
+If all the tests were successful, Postfix is all set up and ready to receive email! Continue with the [Reply by email](./README.md) guide to configure DoggoHub.
 
 ---
 

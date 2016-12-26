@@ -1,16 +1,16 @@
 
 ## What is the Glossary
 
-This contains a simplified list and definitions of some of the terms that you will encounter in your day to day activities when working with GitLab.
+This contains a simplified list and definitions of some of the terms that you will encounter in your day to day activities when working with DoggoHub.
 Please add any terms that you discover that you think would be useful for others.
 
 ### 2FA
 
-User authentication by combination of 2 different steps during login. This allows for [more security](https://about.gitlab.com/handbook/security/).
+User authentication by combination of 2 different steps during login. This allows for [more security](https://about.doggohub.com/handbook/security/).
 
 ### Access Levels
 
-Process of selective restriction to create, view, modify or delete a resource based on a set of assigned permissions. See [GitLab's Permission Guidelines](../../permissions/permissions.md
+Process of selective restriction to create, view, modify or delete a resource based on a set of assigned permissions. See [DoggoHub's Permission Guidelines](../../permissions/permissions.md
 
 ### Active Directory (AD)
 
@@ -22,7 +22,7 @@ Building and [delivering software](http://agilemethodology.org/) in phases/parts
 
 ### Application Lifecycle Management (ALM)
 
-The entire product lifecycle management process for an application, from requirements management, development, and testing until deployment. GitLab has [advantages](https://docs.google.com/presentation/d/1vCU-NbZWz8NTNK8Vu3y4zGMAHb5DpC8PE5mHtw1PWfI/edit#slide=id.g72f2e4906_2_288) over both legacy and modern ALM tools.
+The entire product lifecycle management process for an application, from requirements management, development, and testing until deployment. DoggoHub has [advantages](https://docs.google.com/presentation/d/1vCU-NbZWz8NTNK8Vu3y4zGMAHb5DpC8PE5mHtw1PWfI/edit#slide=id.g72f2e4906_2_288) over both legacy and modern ALM tools.
 
 ### Artifactory
 
@@ -47,15 +47,15 @@ In most of the cases these groups are auto defined in terms of access, rules of 
 
 ### Bamboo
 
-Atlassian's CI tool similar to GitLab CI and Jenkins.
+Atlassian's CI tool similar to DoggoHub CI and Jenkins.
 
 ### Basic Subscription
 
-Entry level [subscription](https://about.gitlab.com/pricing/) for GitLab EE currently available in packs of 10.
+Entry level [subscription](https://about.doggohub.com/pricing/) for DoggoHub EE currently available in packs of 10.
 
 ### Bitbucket
 
-Atlassian's web hosting service for Git and Mercurial Projects. Read about [migrating](https://docs.gitlab.com/ce/workflow/importing/import_projects_from_bitbucket.html) from BitBucket to a GitLab instance. 
+Atlassian's web hosting service for Git and Mercurial Projects. Read about [migrating](https://docs.doggohub.com/ce/workflow/importing/import_projects_from_bitbucket.html) from BitBucket to a DoggoHub instance. 
 
 ### Branch
 
@@ -63,10 +63,10 @@ A branch is a parallel version of a repository. This allows you to work on the r
 
 ### Branded Login
 
-Having your own logo on [your GitLab instance login page](https://docs.gitlab.com/ee/customization/branded_login_page.html) instead of the GitLab logo.
+Having your own logo on [your DoggoHub instance login page](https://docs.doggohub.com/ee/customization/branded_login_page.html) instead of the DoggoHub logo.
 
 ### Build triggers
-These protect your code base against breaks, for instance when a team is working on the same project. Learn about [setting up](https://docs.gitlab.com/ce/ci/triggers/README.html) build triggers.
+These protect your code base against breaks, for instance when a team is working on the same project. Learn about [setting up](https://docs.doggohub.com/ce/ci/triggers/README.html) build triggers.
 
 ### CEPH
 
@@ -74,7 +74,7 @@ These protect your code base against breaks, for instance when a team is working
 
 ### ChatOps
 
-The ability to [initiate an action](https://gitlab.com/gitlab-org/omnibus-gitlab/issues/1412) from chat. ChatBots run in your chat application and give you the ability to do "anything" from chat. 
+The ability to [initiate an action](https://doggohub.com/doggohub-org/omnibus-doggohub/issues/1412) from chat. ChatBots run in your chat application and give you the ability to do "anything" from chat. 
 
 ### Clone
 
@@ -82,7 +82,7 @@ A [copy](https://git-scm.com/docs/git-clone) of a repository stored on your mach
 
 ### Code Review
 
-Examination of a progam's code. The main aim is to maintain high quality standards of code that is being shipped. Merge requests [serve as a code review tool](https://about.gitlab.com/2014/09/29/gitlab-flow/) in GitLab. 
+Examination of a progam's code. The main aim is to maintain high quality standards of code that is being shipped. Merge requests [serve as a code review tool](https://about.doggohub.com/2014/09/29/doggohub-flow/) in DoggoHub. 
 
 ### Code Snippet
 
@@ -98,7 +98,7 @@ A [change](https://git-scm.com/docs/git-commit) (revision) to a file that also c
 
 ### Community
 
-[Everyone](https://about.gitlab.com/community/) who uses GitLab.
+[Everyone](https://about.doggohub.com/community/) who uses DoggoHub.
 
 ### Confluence
 
@@ -106,15 +106,15 @@ Atlassian's product for collaboration on documents and projects.
 
 ### Continuous Delivery
 
-A [software engineering approach](https://about.gitlab.com/2016/08/05/continuous-integration-delivery-and-deployment-with-gitlab/) in which continuous integration, automated testing, and automated deployment capabilities allow software to be developed and deployed rapidly, reliably and repeatedly with minimal human intervention. Still, the deployment to production is defined strategically and triggered manually.
+A [software engineering approach](https://about.doggohub.com/2016/08/05/continuous-integration-delivery-and-deployment-with-doggohub/) in which continuous integration, automated testing, and automated deployment capabilities allow software to be developed and deployed rapidly, reliably and repeatedly with minimal human intervention. Still, the deployment to production is defined strategically and triggered manually.
 
 ### Continuous Deployment
 
-A [software development practice](https://about.gitlab.com/2016/08/05/continuous-integration-delivery-and-deployment-with-gitlab/) in which every code change goes through the entire pipeline and is put into production automatically, resulting in many production deployments every day. It does everything that Continuous Delivery does, but the process is fully automated, there's no human intervention at all.
+A [software development practice](https://about.doggohub.com/2016/08/05/continuous-integration-delivery-and-deployment-with-doggohub/) in which every code change goes through the entire pipeline and is put into production automatically, resulting in many production deployments every day. It does everything that Continuous Delivery does, but the process is fully automated, there's no human intervention at all.
 
 ### Continuous Integration
 
-A [software development practice](https://about.gitlab.com/2016/08/05/continuous-integration-delivery-and-deployment-with-gitlab/) in which you build and test software every time a developer pushes code to the application, and it happens several times a day.
+A [software development practice](https://about.doggohub.com/2016/08/05/continuous-integration-delivery-and-deployment-with-doggohub/) in which you build and test software every time a developer pushes code to the application, and it happens several times a day.
 
 ### Contributor
 
@@ -122,11 +122,11 @@ Term used for a person contributing to an open source project.
 
 ### Conversational Development (ConvDev)
 
-A [natural evolution](https://about.gitlab.com/2016/09/14/gitlab-live-event-recap/) of software development that carries a conversation across functional groups throughout the development process, enabling developers to track the full path of development in a cohesive and intuitive way. ConvDev accelerates the development lifecycle by fostering collaboration and knowledge sharing from idea to production.
+A [natural evolution](https://about.doggohub.com/2016/09/14/doggohub-live-event-recap/) of software development that carries a conversation across functional groups throughout the development process, enabling developers to track the full path of development in a cohesive and intuitive way. ConvDev accelerates the development lifecycle by fostering collaboration and knowledge sharing from idea to production.
 
 ### Cycle Time
 
-The time it takes to move from [idea to production](https://about.gitlab.com/2016/08/05/continuous-integration-delivery-and-deployment-with-gitlab/#from-idea-to-production-with-gitlab).
+The time it takes to move from [idea to production](https://about.doggohub.com/2016/08/05/continuous-integration-delivery-and-deployment-with-doggohub/#from-idea-to-production-with-doggohub).
 
 ### Data Centre
 
@@ -134,11 +134,11 @@ Atlassian product for High Availability.
 
 ### Deploy Keys
 
-A [SSH key](https://docs.gitlab.com/ce/gitlab-basics/create-your-ssh-keys.html)stored on your server that grants access to a single GitLab repository. This is used by a GitLab runner to clone a project's code so that tests can be run against the checked out code.
+A [SSH key](https://docs.doggohub.com/ce/doggohub-basics/create-your-ssh-keys.html)stored on your server that grants access to a single DoggoHub repository. This is used by a DoggoHub runner to clone a project's code so that tests can be run against the checked out code.
 
 ### Developer
 
-For us at GitLab, this means a software developer, or someone who makes software. It is also one of the levels of access in our multi-level approval system.
+For us at DoggoHub, this means a software developer, or someone who makes software. It is also one of the levels of access in our multi-level approval system.
 
 ### DevOps 
 
@@ -154,19 +154,19 @@ A folder used for storing multiple files.
 
 ### Docker Container Registry
 
-A [feature](https://docs.gitlab.com/ce/user/project/container_registry.html) of GitLab projects. Containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server. This guarantees that it will always run the same, regardless of the environment it is running in.
+A [feature](https://docs.doggohub.com/ce/user/project/container_registry.html) of DoggoHub projects. Containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server. This guarantees that it will always run the same, regardless of the environment it is running in.
 
 ### Dynamic Environment
 
 ### ElasticSearch
 
-Elasticsearch is a flexible, scalable and powerful search service. When [enabled](https://gitlab.com/help/integration/elasticsearch.md), it helps keep GitLab's search fast when dealing with a huge amount of data. 
+Elasticsearch is a flexible, scalable and powerful search service. When [enabled](https://doggohub.com/help/integration/elasticsearch.md), it helps keep DoggoHub's search fast when dealing with a huge amount of data. 
 
 ### Emacs
 
-### Fork
+### Bork
 
-Your [own copy](https://docs.gitlab.com/ce/workflow/forking_workflow.html) of a repository that allows you to make changes to the repository without affecting the original.
+Your [own copy](https://docs.doggohub.com/ce/workflow/borking_workflow.html) of a repository that allows you to make changes to the repository without affecting the original.
 
 ### Gerrit
 
@@ -182,34 +182,34 @@ A [git attributes file](https://git-scm.com/docs/gitattributes) is a simple text
 
 ### GitHost.io
 
-A single-tenant solution that provides GitLab CE or EE as a managed service. GitLab Inc. is responsible for installing, updating, hosting, and backing up customers' own private and secure GitLab instance.
+A single-tenant solution that provides DoggoHub CE or EE as a managed service. DoggoHub Inc. is responsible for installing, updating, hosting, and backing up customers' own private and secure DoggoHub instance.
 
 ### GitHub
 
-A web-based Git repository hosting service with an enterprise offering. Its main features are: issue tracking, pull request with code review, abundancy of integrations and wiki. It offers free public repos, private repos and enterprise services are paid. Read about [importing a project](https://docs.gitlab.com/ce/workflow/importing/import_projects_from_github.html) from GitHub to GitLab.
+A web-based Git repository hosting service with an enterprise offering. Its main features are: issue tracking, pull request with code review, abundancy of integrations and wiki. It offers free public repos, private repos and enterprise services are paid. Read about [importing a project](https://docs.doggohub.com/ce/workflow/importing/import_projects_from_github.html) from GitHub to DoggoHub.
 
-### GitLab CE
+### DoggoHub CE
 
 Our free on Premise solution with >100,000 users
 
-### GitLab CI
+### DoggoHub CI
 
-Our own Continuos Integration [feature](https://about.gitlab.com/gitlab-ci/) that is shipped with each instance
+Our own Continuos Integration [feature](https://about.doggohub.com/doggohub-ci/) that is shipped with each instance
 
-### GitLab EE
+### DoggoHub EE
 
-Our premium on premise [solution](https://about.gitlab.com/features/#enterprise) that currently has Basic, Standard and Plus subscription packages with additional features and support.
+Our premium on premise [solution](https://about.doggohub.com/features/#enterprise) that currently has Basic, Standard and Plus subscription packages with additional features and support.
 
-### GitLab.com
+### DoggoHub.com
 
 Our free SaaS for public and private repositories.
 
-### GitLab Geo
+### DoggoHub Geo
 
-Allows you to replicate your GitLab instance to other geographical locations as a read-only fully operational version. It [can be used](https://docs.gitlab.com/ee/gitlab-geo/README.html) for cloning and fetching projects, in addition to reading any data. This will make working with large repositories over large distances much faster.
+Allows you to replicate your DoggoHub instance to other geographical locations as a read-only fully operational version. It [can be used](https://docs.doggohub.com/ee/doggohub-geo/README.html) for cloning and fetching projects, in addition to reading any data. This will make working with large repositories over large distances much faster.
 
-### GitLab Pages
-These allow you to [create websites](https://gitlab.com/help/pages/README.md) for your GitLab projects, groups, or user account. 
+### DoggoHub Pages
+These allow you to [create websites](https://doggohub.com/help/pages/README.md) for your DoggoHub projects, groups, or user account. 
 
 ### Gitolite
 
@@ -217,7 +217,7 @@ An [access layer](https://git-scm.com/book/en/v1/Git-on-the-Server-Gitolite) tha
 
 ### Gitorious
 
-A web-based hosting service for projects using Git. It was acquired by GitLab and we discontinued the service. Read the[Gitorious Acquisition Blog Post](https://about.gitlab.com/2015/03/03/gitlab-acquires-gitorious/).
+A web-based hosting service for projects using Git. It was acquired by DoggoHub and we discontinued the service. Read the[Gitorious Acquisition Blog Post](https://about.doggohub.com/2015/03/03/doggohub-acquires-gitorious/).
 
 ### Go
 
@@ -237,11 +237,11 @@ Atlassian's real time chat application for teams, Hip Chat is a competitor to Sl
 
 ### High Availability
 
-Refers to a [system or component](https://about.gitlab.com/high-availability/) that is continuously operational for a desirably long length of time. Availability can be measured relative to "100% operational" or "never failing."
+Refers to a [system or component](https://about.doggohub.com/high-availability/) that is continuously operational for a desirably long length of time. Availability can be measured relative to "100% operational" or "never failing."
 
 ### Inner-sourcing
 
-The [use of](https://about.gitlab.com/2014/09/05/innersourcing-using-the-open-source-workflow-to-improve-collaboration-within-an-organization/) open source development techniques within the corporation.
+The [use of](https://about.doggohub.com/2014/09/05/innersourcing-using-the-open-source-workflow-to-improve-collaboration-within-an-organization/) open source development techniques within the corporation.
 
 ### Internet Relay Chat (IRC)
 
@@ -249,15 +249,15 @@ An [application layer protocol](http://www.irchelp.org/) that facilitates commun
 
 ### Issue Tracker
 
-A [tool](https://docs.gitlab.com/ee/integration/external-issue-tracker.html) used to manage, organize, and maintain a list of issues, making it easier for an organization to manage.
+A [tool](https://docs.doggohub.com/ee/integration/external-issue-tracker.html) used to manage, organize, and maintain a list of issues, making it easier for an organization to manage.
 
 ### Jenkins
 
-An Open Source CI tool written using the Java programming language. [Jenkins](https://jenkins-ci.org/) does the same job as GitLab CI, Bamboo, and Travis CI. It is extremely popular. 
+An Open Source CI tool written using the Java programming language. [Jenkins](https://jenkins-ci.org/) does the same job as DoggoHub CI, Bamboo, and Travis CI. It is extremely popular. 
 
 ### Jira
 
-Atlassian's [project management software](https://www.atlassian.com/software/jira), i.e. a complex issue tracker. GitLab [can be configured](https://docs.gitlab.com/ee/project_services/jira.html) to interact with JIRA Core either using an on-premise instance or the SaaS solution that Atlassian offers.
+Atlassian's [project management software](https://www.atlassian.com/software/jira), i.e. a complex issue tracker. DoggoHub [can be configured](https://docs.doggohub.com/ee/project_services/jira.html) to interact with JIRA Core either using an on-premise instance or the SaaS solution that Atlassian offers.
 
 ### JUnit
 
@@ -273,7 +273,7 @@ An open source container cluster manager originally designed by Google. It's bas
 
 ### Labels
 
-An [identifier](https://docs.gitlab.com/ce/user/project/labels.html) to describe a group of one or more specific file revisions.
+An [identifier](https://docs.doggohub.com/ce/user/project/labels.html) to describe a group of one or more specific file revisions.
 
 ### Lightweight Directory Access Protocol (LDAP)
 
@@ -281,11 +281,11 @@ An [identifier](https://docs.gitlab.com/ce/user/project/labels.html) to describe
 
 ### LDAP User Authentication
 
-GitLab [integrates](https://docs.gitlab.com/ce/administration/auth/ldap.html) with LDAP to support user authentication. This enables GitLab to sign in people from an LDAP server (i.e., allowing people whose names are on the electronic user directory server to be able to use their LDAP accounts to login.)
+DoggoHub [integrates](https://docs.doggohub.com/ce/administration/auth/ldap.html) with LDAP to support user authentication. This enables DoggoHub to sign in people from an LDAP server (i.e., allowing people whose names are on the electronic user directory server to be able to use their LDAP accounts to login.)
 
 ### LDAP Group Sync
 
-Allows you to synchronize the members of a GitLab group with one or more LDAP groups.
+Allows you to synchronize the members of a DoggoHub group with one or more LDAP groups.
 
 ### Load Balancer
 
@@ -293,7 +293,7 @@ A [device](https://en.wikipedia.org/wiki/Load_balancing_(computing)) that distri
 
 ### Git Large File Storage (LFS)
 
-A way [to enable](https://about.gitlab.com/2015/11/23/announcing-git-lfs-support-in-gitlab/) git to handle large binary files by using reference pointers within small text files to point to the large files. Large files such as high resolution images and videos, audio files, and assets can be called from a remote server.
+A way [to enable](https://about.doggohub.com/2015/11/23/announcing-git-lfs-support-in-doggohub/) git to handle large binary files by using reference pointers within small text files to point to the large files. Large files such as high resolution images and videos, audio files, and assets can be called from a remote server.
 
 ### Linux
 
@@ -301,11 +301,11 @@ An operating system like Windows or OS X. It is mostly used by software develope
 
 ### Markdown
 
-A lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats using a tool by the same name. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor. Checkout GitLab's [Markdown guide](https://gitlab.com/help/user/markdown.md). 
+A lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats using a tool by the same name. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor. Checkout DoggoHub's [Markdown guide](https://doggohub.com/help/user/markdown.md). 
 
 ### Maria DB
 
-A community developed fork/variation of MySQL. MySQL is owned by Oracle.
+A community developed bork/variation of MySQL. MySQL is owned by Oracle.
 
 ### Master
 
@@ -313,7 +313,7 @@ Name of the [default branch](https://git-scm.com/book/en/v1/Git-Branching-What-a
 
 ### Mattermost
 
-An open source, self-hosted messaging alternative to Slack. View GitLab's Mattermost [feature](https://gitlab.com/gitlab-org/gitlab-mattermost). 
+An open source, self-hosted messaging alternative to Slack. View DoggoHub's Mattermost [feature](https://doggohub.com/doggohub-org/doggohub-mattermost). 
 
 ### Mercurial
 
@@ -325,7 +325,7 @@ Takes changes from one branch, and [applies them](https://git-scm.com/docs/git-m
 
 ### Merge Conflict
 
-[Arises](https://about.gitlab.com/2016/09/06/resolving-merge-conflicts-from-the-gitlab-ui/) when a merge can't be performed cleanly between two versions of the same file. 
+[Arises](https://about.doggohub.com/2016/09/06/resolving-merge-conflicts-from-the-doggohub-ui/) when a merge can't be performed cleanly between two versions of the same file. 
 
 ### Meteor
 
@@ -333,15 +333,15 @@ A [platform](https://www.meteor.com) for building javascript apps.
 
 ### Milestones
 
-Allow you to [organize issues](https://docs.gitlab.com/ce/workflow/milestones.html) and merge requests in GitLab into a cohesive group, optionally setting a due date. A common use is keeping track of an upcoming software version. Milestones are created per-project.
+Allow you to [organize issues](https://docs.doggohub.com/ce/workflow/milestones.html) and merge requests in DoggoHub into a cohesive group, optionally setting a due date. A common use is keeping track of an upcoming software version. Milestones are created per-project.
 
 ### Mirror Repositories
 
-A project that is setup to automatically have its branches, tags, and commits [updated from an upstream repository](https://docs.gitlab.com/ee/workflow/repository_mirroring.html). This is useful when a repository you're interested in is located on a different server, and you want to be able to browse its content and activity using the familiar GitLab interface.
+A project that is setup to automatically have its branches, tags, and commits [updated from an upstream repository](https://docs.doggohub.com/ee/workflow/repository_mirroring.html). This is useful when a repository you're interested in is located on a different server, and you want to be able to browse its content and activity using the familiar DoggoHub interface.
 
 ### MIT License
 
-A type of software license. It lets people do anything with your code with proper attribution and without warranty. It is the most common license for open source applications written in Ruby on Rails. GitLab CE is issued under this [license](https://docs.gitlab.com/ce/development/licensing.html). This means you can download the code, modify it as you want, and even build a new commercial product using the underlying code and it's not illegal. The only condition is that there is no form of warranty provided by GitLab so whatever happens when you use the code is your own problem.
+A type of software license. It lets people do anything with your code with proper attribution and without warranty. It is the most common license for open source applications written in Ruby on Rails. DoggoHub CE is issued under this [license](https://docs.doggohub.com/ce/development/licensing.html). This means you can download the code, modify it as you want, and even build a new commercial product using the underlying code and it's not illegal. The only condition is that there is no form of warranty provided by DoggoHub so whatever happens when you use the code is your own problem.
 
 ### Mondo Rescue
 
@@ -361,27 +361,27 @@ A web [server](https://www.nginx.com/resources/wiki/) (pronounced "engine x"). I
 
 ### OAuth
 
-An open standard for authorization, commonly used as a way for internet users to log into third party websites using their Microsoft, Google, Facebook or Twitter accounts without exposing their password. GitLab [is](https://docs.gitlab.com/ce/integration/oauth_provider.html) an OAuth2 authentication service provider. 
+An open standard for authorization, commonly used as a way for internet users to log into third party websites using their Microsoft, Google, Facebook or Twitter accounts without exposing their password. DoggoHub [is](https://docs.doggohub.com/ce/integration/oauth_provider.html) an OAuth2 authentication service provider. 
 
 ### Omnibus Packages
 
-A way to [package different services and tools](https://docs.gitlab.com/omnibus/) required to run GitLab, so that most developers can install it without laborious configuration.
+A way to [package different services and tools](https://docs.doggohub.com/omnibus/) required to run DoggoHub, so that most developers can install it without laborious configuration.
 
 ### On Premise
 
-On your own server. In GitLab, this [refers](https://about.gitlab.com/2015/02/12/why-ship-on-premises-in-the-saas-era/) to the ability to download GitLab EE/GitLab CE and host it on your own server rather than using GitLab.com, which is hosted by GitLab Inc's servers.
+On your own server. In DoggoHub, this [refers](https://about.doggohub.com/2015/02/12/why-ship-on-premises-in-the-saas-era/) to the ability to download DoggoHub EE/DoggoHub CE and host it on your own server rather than using DoggoHub.com, which is hosted by DoggoHub Inc's servers.
 
 ### Open Core 
 
-GitLab's [business model](https://about.gitlab.com/2016/07/20/gitlab-is-open-core-github-is-closed-source/). Coined by Andrew Lampitt in 2008, the [open core model](https://en.wikipedia.org/wiki/Open_core) primarily involves offering a "core" or feature-limited version of a software product as free and open-source software, while offering "commercial" versions or add-ons as proprietary software.
+DoggoHub's [business model](https://about.doggohub.com/2016/07/20/doggohub-is-open-core-github-is-closed-source/). Coined by Andrew Lampitt in 2008, the [open core model](https://en.wikipedia.org/wiki/Open_core) primarily involves offering a "core" or feature-limited version of a software product as free and open-source software, while offering "commercial" versions or add-ons as proprietary software.
 
 ### Open Source Software
 
-Software for which the original source code is freely [available](https://opensource.org/docs/osd) and may be redistributed and modified. GitLab prioritizes open source [stewardship](https://about.gitlab.com/2016/01/11/being-a-good-open-source-steward/). 
+Software for which the original source code is freely [available](https://opensource.org/docs/osd) and may be redistributed and modified. DoggoHub prioritizes open source [stewardship](https://about.doggohub.com/2016/01/11/being-a-good-open-source-steward/). 
 
 ### Owner
 
-The most powerful person on a GitLab project. They have the permissions of all the other users plus the additional permission of being able to destroy (i.e. delete) the project.
+The most powerful person on a DoggoHub project. They have the permissions of all the other users plus the additional permission of being able to destroy (i.e. delete) the project.
 
 ### Platform as a Service (PaaS)
 
@@ -389,7 +389,7 @@ Typically referred to in regards to application development, PaaS is a model in 
 
 ### Perforce
 
-The company that produces Helix.  A commercial, proprietary, centralised VCS well known for its ability to version files of any size and type.  They OEM a re-branded version of GitLab called "GitSwarm" that is tightly integrated with their "GitFusion" product, which in turn represents a portion of a Helix repository (called a depot) as a git repo.
+The company that produces Helix.  A commercial, proprietary, centralised VCS well known for its ability to version files of any size and type.  They OEM a re-branded version of DoggoHub called "GitSwarm" that is tightly integrated with their "GitFusion" product, which in turn represents a portion of a Helix repository (called a depot) as a git repo.
 
 ### Phabricator
 
@@ -401,15 +401,15 @@ An open source analytics software to help you analyze web traffic. It is similar
 
 ### Plus Subscription
 
-GitLab Premium EE [subscription](https://about.gitlab.com/pricing/) that includes training and dedicated Account Management and Service Engineer and complete support package.
+DoggoHub Premium EE [subscription](https://about.doggohub.com/pricing/) that includes training and dedicated Account Management and Service Engineer and complete support package.
 
 ### PostgreSQL
 
-An [object-relational](https://en.wikipedia.org/wiki/PostgreSQL) database. Touted as the most advanced open source database, it is one of two database management systems [supported by](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/database.md) GitLab, the other being MySQL. 
+An [object-relational](https://en.wikipedia.org/wiki/PostgreSQL) database. Touted as the most advanced open source database, it is one of two database management systems [supported by](https://doggohub.com/doggohub-org/omnibus-doggohub/blob/master/doc/settings/database.md) DoggoHub, the other being MySQL. 
 
 ### Protected Branches
 
-A [feature](https://docs.gitlab.com/ce/user/project/protected_branches.html) that protects branches from unauthorized pushes, force pushing or deletion.
+A [feature](https://docs.doggohub.com/ce/user/project/protected_branches.html) that protects branches from unauthorized pushes, force pushing or deletion.
 
 ### Pull
 
@@ -421,7 +421,7 @@ A popular DevOps [automation tool](https://puppet.com/product/how-puppet-works).
 
 ### Push
 
-Git [command](https://git-scm.com/docs/git-push) to send commits from the local repository to the remote repository. Read about [advanced push rules](https://gitlab.com/help/pages/README.md) in GitLab. 
+Git [command](https://git-scm.com/docs/git-push) to send commits from the local repository to the remote repository. Read about [advanced push rules](https://doggohub.com/help/pages/README.md) in DoggoHub. 
 
 ### RE Read Only
 
@@ -433,7 +433,7 @@ In addition to the merge, the [rebase](https://git-scm.com/book/en/v2/Git-Branch
 
 ### (Git) Repository
 
-A directory where Git [has been initiatlized](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) to start version controlling your files. The history of your work is stored here. A remote repository is not on your machine, but usually online (like on GitLab.com, for instance). The main remote repository is usually called "Origin."
+A directory where Git [has been initiatlized](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) to start version controlling your files. The history of your work is stored here. A remote repository is not on your machine, but usually online (like on DoggoHub.com, for instance). The main remote repository is usually called "Origin."
 
 ### Requirements management
 
@@ -453,15 +453,15 @@ A route table contains rules (called routes) that determine where network traffi
 
 ### Runners
 
-Actual build machines/containers that [run and execute tests](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner) you have specified to be run on GitLab CI.
+Actual build machines/containers that [run and execute tests](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner) you have specified to be run on DoggoHub CI.
 
 ### Sidekiq
 
-The background job processor GitLab [uses](https://docs.gitlab.com/ce/administration/troubleshooting/sidekiq.html) to asynchronously run tasks.
+The background job processor DoggoHub [uses](https://docs.doggohub.com/ce/administration/troubleshooting/sidekiq.html) to asynchronously run tasks.
 
 ### Software as a service (SaaS)
 
-Software that is hosted centrally and accessed on-demand (i.e. whenever you want to). This applies to GitLab.com.
+Software that is hosted centrally and accessed on-demand (i.e. whenever you want to). This applies to DoggoHub.com.
 
 ### Software Configuration Management (SCM)
 
@@ -477,15 +477,15 @@ The board used to track the status and progress of each of the sprint backlog it
 
 ### Shell
 
-Terminal on Mac OSX, GitBash on Windows, or Linux Terminal on Linux. You [use git]() and make changes to GitLab projects in your shell. You [use git](https://docs.gitlab.com/ce/gitlab-basics/start-using-git.html) and make changes to GitLab projects in your shell. 
+Terminal on Mac OSX, GitBash on Windows, or Linux Terminal on Linux. You [use git]() and make changes to DoggoHub projects in your shell. You [use git](https://docs.doggohub.com/ce/doggohub-basics/start-using-git.html) and make changes to DoggoHub projects in your shell. 
 
 ### Single-tenant
 
-The tenant purchases their own copy of the software and the software can be customized to meet the specific and needs of that customer. [GitHost.io](https://about.gitlab.com/handbook/positioning-faq/) is our provider of single-tenant 'managed cloud' GitLab instances. 
+The tenant purchases their own copy of the software and the software can be customized to meet the specific and needs of that customer. [GitHost.io](https://about.doggohub.com/handbook/positioning-faq/) is our provider of single-tenant 'managed cloud' DoggoHub instances. 
 
 ### Slack
 
-Real time messaging app for teams that is used internally by  GitLab team members. GitLab users can enable [Slack integration](https://docs.gitlab.com/ce/project_services/slack.html) to trigger push, issue, and merge request events among others. 
+Real time messaging app for teams that is used internally by  DoggoHub team members. DoggoHub users can enable [Slack integration](https://docs.doggohub.com/ce/project_services/slack.html) to trigger push, issue, and merge request events among others. 
 
 ### Slave Servers
 
@@ -497,7 +497,7 @@ Program code as typed by a computer programmer (i.e. it has not yet been compile
 
 ### SSH Key
 
-A unique identifier of a computer. It is used to identify computers without the need for a password (e.g., On GitLab I have [added the ssh key](https://docs.gitlab.com/ce/gitlab-basics/create-your-ssh-keys.html) of all my work machines so that the GitLab instance knows that it can accept code pushes and pulls from this trusted machines whose keys are I have added.)
+A unique identifier of a computer. It is used to identify computers without the need for a password (e.g., On DoggoHub I have [added the ssh key](https://docs.doggohub.com/ce/doggohub-basics/create-your-ssh-keys.html) of all my work machines so that the DoggoHub instance knows that it can accept code pushes and pulls from this trusted machines whose keys are I have added.)
 
 ### Single Sign On (SSO)
 
@@ -509,11 +509,11 @@ An authentication process that allows you enter one username and password to acc
 
 ### Standard Subscription
 
-Our mid range EE subscription that includes 24/7 support and support for High Availability [Standard Subscription](https://about.gitlab.com/pricing/).
+Our mid range EE subscription that includes 24/7 support and support for High Availability [Standard Subscription](https://about.doggohub.com/pricing/).
 
 ### Stash
 
-Atlassian's Git on-premise solution. Think of it as Atlassian's GitLab EE, now known as BitBucket Server.
+Atlassian's Git on-premise solution. Think of it as Atlassian's DoggoHub EE, now known as BitBucket Server.
 
 ### Static Site Generators (SSGs)
 
@@ -529,11 +529,11 @@ A program that allows you to perform superuser/administrator actions on Unix Ope
 
 ### Subversion (SVN)
 
-An open source version control system. Read about [migrating from SVN](https://docs.gitlab.com/ce/workflow/importing/migrating_from_svn.html) to GitLab using SubGit. 
+An open source version control system. Read about [migrating from SVN](https://docs.doggohub.com/ce/workflow/importing/migrating_from_svn.html) to DoggoHub using SubGit. 
 
 ### Tag
 
-[Represents](https://docs.gitlab.com/ce/api/tags.html) a version of a particular branch at a moment in time.
+[Represents](https://docs.doggohub.com/ce/api/tags.html) a version of a particular branch at a moment in time.
 
 ### Tool Stack
 
@@ -557,7 +557,7 @@ Version control is a system that records changes to a file or set of files over 
 
 ### Virtual Private Cloud (VPC)
 
-An on demand configurable pool of shared computing resources allocated within a public cloud environment, providing some isolation between the different users using the resources. GitLab users need to create a new Amazon VPC in order to [setup High Availability](https://docs.gitlab.com/ce/university/high-availability/aws/). 
+An on demand configurable pool of shared computing resources allocated within a public cloud environment, providing some isolation between the different users using the resources. DoggoHub users need to create a new Amazon VPC in order to [setup High Availability](https://docs.doggohub.com/ce/university/high-availability/aws/). 
 
 ### Virtual private server (VPS)
 
@@ -573,7 +573,7 @@ A [model](http://www.umsl.edu/~hugheyd/is6840/waterfall.html) of building softwa
 
 ### Webhooks
 
-A way for for an app to [provide](https://docs.gitlab.com/ce/web_hooks/web_hooks.html) other applications with real-time information (e.g., send a message to a slack channel when a commit is pushed.) Read about setting up [custom git hooks](https://gitlab.com/help/administration/custom_hooks.md) for when webhooks are insufficient. 
+A way for for an app to [provide](https://docs.doggohub.com/ce/web_hooks/web_hooks.html) other applications with real-time information (e.g., send a message to a slack channel when a commit is pushed.) Read about setting up [custom git hooks](https://doggohub.com/help/administration/custom_hooks.md) for when webhooks are insufficient. 
 
 ### Wiki
 

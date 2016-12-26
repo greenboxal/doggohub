@@ -29,16 +29,16 @@
  */
 
 /*
- Here is how to build a version of KaTeX that works with gitlab.
+ Here is how to build a version of KaTeX that works with doggohub.
 
  The problem is that the standard procedure for changing font location doesn't work for the empty string.
 
  1. Clone KaTeX. Anything later than 4fb9445a9 (is merged into master) will do.
  2. make (requires node)
  3. sed -e 's,fonts/,,' -e 's/url\(([^)]*)\)/url(font-path\1)/g' build/katex.css > build/katex.scss
- 4. Copy build/katex.js to gitlab/vendor/assets/javascripts/katex.js,
-    build/katex.scss to gitlab/vendor/assets/stylesheets/katex.scss and
-    fonts/* to gitlab/vendor/assets/fonts/.
+ 4. Copy build/katex.js to doggohub/vendor/assets/javascripts/katex.js,
+    build/katex.scss to doggohub/vendor/assets/stylesheets/katex.scss and
+    fonts/* to doggohub/vendor/assets/fonts/.
 */
 
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.katex = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -8223,7 +8223,7 @@ defineSymbol(math, ams, rel, "\u22a9", "\\Vdash");
 defineSymbol(math, ams, rel, "\u2223", "\\shortmid");
 defineSymbol(math, ams, rel, "\u2225", "\\shortparallel");
 defineSymbol(math, ams, rel, "\u226c", "\\between");
-defineSymbol(math, ams, rel, "\u22d4", "\\pitchfork");
+defineSymbol(math, ams, rel, "\u22d4", "\\pitchbork");
 defineSymbol(math, ams, rel, "\u221d", "\\varpropto");
 defineSymbol(math, ams, rel, "\u25c0", "\\blacktriangleleft");
 defineSymbol(math, ams, rel, "\u2234", "\\therefore");

@@ -283,8 +283,8 @@ module SharedPaths
     visit activity_namespace_project_path(project.namespace, project)
   end
 
-  step 'I visit project "Forked Shop" merge requests page' do
-    visit namespace_project_merge_requests_path(@forked_project.namespace, @forked_project)
+  step 'I visit project "Borked Shop" merge requests page' do
+    visit namespace_project_merge_requests_path(@borked_project.namespace, @borked_project)
   end
 
   step 'I visit edit project "Shop" page' do
@@ -404,7 +404,7 @@ module SharedPaths
     visit namespace_project_merge_requests_path(project.namespace, project)
   end
 
-  step 'I visit forked project "Shop" merge requests page' do
+  step 'I visit borked project "Shop" merge requests page' do
     visit namespace_project_merge_requests_path(project.namespace, project)
   end
 

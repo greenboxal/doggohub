@@ -8,11 +8,11 @@ module Mattermost
   class ConnectionError < Mattermost::Error; end
 
   # This class' prime objective is to obtain a session token on a Mattermost
-  # instance with SSO configured where this GitLab instance is the provider.
+  # instance with SSO configured where this DoggoHub instance is the provider.
   #
   # The process depends on OAuth, but skips a step in the authentication cycle.
-  # For example, usually a user would click the 'login in GitLab' button on
-  # Mattermost, which would yield a 302 status code and redirects you to GitLab
+  # For example, usually a user would click the 'login in DoggoHub' button on
+  # Mattermost, which would yield a 302 status code and redirects you to DoggoHub
   # to approve the use of your account on Mattermost. Which would trigger a
   # callback so Mattermost knows this request is approved and gets the required
   # data to create the user account etc.
@@ -105,7 +105,7 @@ module Mattermost
 
       @oauth_uri = nil
 
-      response = get("/api/v3/oauth/gitlab/login", follow_redirects: false)
+      response = get("/api/v3/oauth/doggohub/login", follow_redirects: false)
       return unless 300 <= response.code && response.code < 400
 
       redirect_uri = response.headers['location']

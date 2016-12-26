@@ -1,7 +1,7 @@
 # What requires downtime?
 
 When working with a database certain operations can be performed without taking
-GitLab offline, others do require a downtime period. This guide describes
+DoggoHub offline, others do require a downtime period. This guide describes
 various operations and their impact.
 
 ## Adding Columns
@@ -59,8 +59,8 @@ class MyMigration < ActiveRecord::Migration
 end
 ```
 
-Now imagine that the GitLab instance is running and actively uses the `dummy`
-column. If we were to run the migration this would result in the GitLab instance
+Now imagine that the DoggoHub instance is running and actively uses the `dummy`
+column. If we were to run the migration this would result in the DoggoHub instance
 producing errors whenever it tries to use the `dummy` column.
 
 As a result of the above downtime _is_ required when removing a column, even
@@ -68,7 +68,7 @@ when using PostgreSQL.
 
 ## Renaming Columns
 
-Renaming columns requires downtime as running GitLab instances will continue
+Renaming columns requires downtime as running DoggoHub instances will continue
 using the old column name until a new version is deployed. This can result
 in the instance producing errors, which in turn can impact the user experience.
 

@@ -16,17 +16,17 @@ module Gitlab
     # 'Hello, this issue is related to #123 and
     #  other issues labeled with ~"label"', will be converted to:
     #
-    # 'Hello, this issue is related to gitlab-org/gitlab-ce#123 and
-    #  other issue labeled with gitlab-org/gitlab-ce~"label"'.
+    # 'Hello, this issue is related to doggohub-org/doggohub-ce#123 and
+    #  other issue labeled with doggohub-org/doggohub-ce~"label"'.
     #
     # It does respect markdown lexical rules, so text in code block will not be
     # replaced, see another example:
     #
     # 'Merge request for issue #1234, see also link:
-    #  http://gitlab.com/some/link/#1234, and code `puts #1234`' =>
+    #  http://doggohub.com/some/link/#1234, and code `puts #1234`' =>
     #
-    # 'Merge request for issue gitlab-org/gitlab-ce#1234, se also link:
-    #  http://gitlab.com/some/link/#1234, and code `puts #1234`'
+    # 'Merge request for issue doggohub-org/doggohub-ce#1234, se also link:
+    #  http://doggohub.com/some/link/#1234, and code `puts #1234`'
     #
     class ReferenceRewriter
       def initialize(text, source_project, current_user)

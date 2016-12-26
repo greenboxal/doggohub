@@ -8,7 +8,7 @@ create an account, you can do so at the same link.
 
 1. Select "New App/API".
 
-1. Provide the Application Name ('GitLab' works fine).
+1. Provide the Application Name ('DoggoHub' works fine).
 
 1. Once created, you should see the Quick Start options. Disregard them and
 select 'Settings' above the Quick Start options.
@@ -21,26 +21,26 @@ configuration file. For example:
     - Client Secret: `KbveM3nqfjwCbrhaUy_gDu2dss8TIlHIdzlyf33pB7dEK5u_NyQdp65O_o02hXs2`
 
 1. Fill in the Allowed Callback URLs:
-    - http://`YOUR_GITLAB_URL`/users/auth/auth0/callback (or)
-    - https://`YOUR_GITLAB_URL`/users/auth/auth0/callback
+    - http://`YOUR_DOGGOHUB_URL`/users/auth/auth0/callback (or)
+    - https://`YOUR_DOGGOHUB_URL`/users/auth/auth0/callback
 
 1. Fill in the Allowed Origins (CORS):
-    - http://`YOUR_GITLAB_URL` (or)
-    - https://`YOUR_GITLAB_URL`
+    - http://`YOUR_DOGGOHUB_URL` (or)
+    - https://`YOUR_DOGGOHUB_URL`
 
-1. On your GitLab server, open the configuration file.
+1. On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
-      sudo -u git -H editor config/gitlab.yml
+      cd /home/git/doggohub
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1. See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration)
@@ -51,7 +51,7 @@ for initial settings.
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "auth0",
           "args" => { client_id: 'YOUR_AUTH0_CLIENT_ID'',
@@ -80,10 +80,10 @@ from step 5.
 1. Change `YOUR_AUTH0_CLIENT_SECRET` to the client secret from the Auth0 Console
 page from step 5.
 
-1. Save the file and [reconfigure GitLab](../administration/restart_gitlab.md)
+1. Save the file and [reconfigure DoggoHub](../administration/restart_doggohub.md)
 for the changes to take effect.
 
 On the sign in page there should now be an Auth0 icon below the regular sign in
 form. Click the icon to begin the authentication process. Auth0 will ask the
-user to sign in and authorize the GitLab application. If everything goes well
-the user will be returned to GitLab and will be signed in.
+user to sign in and authorize the DoggoHub application. If everything goes well
+the user will be returned to DoggoHub and will be signed in.

@@ -16,7 +16,7 @@ class WebHook < ActiveRecord::Base
   scope :tag_push_hooks, -> { where(tag_push_events: true) }
 
   # HTTParty timeout
-  default_timeout Gitlab.config.gitlab.webhook_timeout
+  default_timeout Gitlab.config.doggohub.webhook_timeout
 
   validates :url, presence: true, url: true
 

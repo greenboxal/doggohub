@@ -4,7 +4,7 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    Settings.gitlab_ci['builds_path'] = builds_path
+    Settings.doggohub_ci['builds_path'] = builds_path
   end
 
   config.before(:all) do

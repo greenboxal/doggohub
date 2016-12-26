@@ -1,8 +1,8 @@
 module Projects
-  class ForkService < BaseService
+  class BorkService < BaseService
     def execute
       new_params = {
-        forked_from_project_id: @project.id,
+        borked_from_project_id: @project.id,
         visibility_level:       allowed_visibility_level,
         description:            @project.description,
         name:                   @project.name,

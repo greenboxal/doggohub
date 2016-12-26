@@ -2,7 +2,7 @@
 
 [Grafana](http://grafana.org/) is a tool that allows you to visualize time
 series metrics through graphs and dashboards. It supports several backend
-data stores, including InfluxDB. GitLab writes performance data to InfluxDB
+data stores, including InfluxDB. DoggoHub writes performance data to InfluxDB
 and Grafana will allow you to query InfluxDB to display useful graphs.
 
 For the easiest installation and configuration, install Grafana on the same
@@ -36,7 +36,7 @@ Test Connection to ensure the configuration is correct.
 - **Url**: https://localhost:8086 (Or the remote URL if you've installed InfluxDB
 on a separate server)
 - **Access**: proxy
-- **Database**: gitlab
+- **Database**: doggohub
 - **User**: admin (Or the username configured when setting up InfluxDB)
 - **Password**: The password configured when you set up InfluxDB
 
@@ -44,15 +44,15 @@ on a separate server)
 
 ## Apply retention policies and create continuous queries
 
-If you intend to import the GitLab provided Grafana dashboards, you will need to
+If you intend to import the DoggoHub provided Grafana dashboards, you will need to
 set up the right retention policies and continuous queries. The easiest way of
-doing this is by using the [influxdb-management](https://gitlab.com/gitlab-org/influxdb-management)
+doing this is by using the [influxdb-management](https://doggohub.com/doggohub-org/influxdb-management)
 repository.
 
 To use this repository you must first clone it:
 
 ```
-git clone https://gitlab.com/gitlab-org/influxdb-management.git
+git clone https://doggohub.com/doggohub-org/influxdb-management.git
 cd influxdb-management
 ```
 
@@ -68,12 +68,12 @@ and then editing the `.env` file to contain the correct InfluxDB settings. Once
 configured you can simply run `bundle exec rake` and the InfluxDB database will
 be configured for you.
 
-For more information see the [influxdb-management README](https://gitlab.com/gitlab-org/influxdb-management/blob/master/README.md).
+For more information see the [influxdb-management README](https://doggohub.com/doggohub-org/influxdb-management/blob/master/README.md).
 
 ## Import Dashboards
 
 You can now import a set of default dashboards that will give you a good
-start on displaying useful information. GitLab has published a set of default
+start on displaying useful information. DoggoHub has published a set of default
 [Grafana dashboards][grafana-dashboards] to get you started. Clone the
 repository or download a zip/tarball, then follow these steps to import each
 JSON file.
@@ -99,13 +99,13 @@ Alternatively you can automatically import all the dashboards into your Grafana
 instance. See the README of the [Grafana dashboards][grafana-dashboards]
 repository for more information on this process.
 
-[grafana-dashboards]: https://gitlab.com/gitlab-org/grafana-dashboards
+[grafana-dashboards]: https://doggohub.com/doggohub-org/grafana-dashboards
 
 ---
 
 Read more on:
 
-- [Introduction to GitLab Performance Monitoring](introduction.md)
-- [GitLab Configuration](gitlab_configuration.md)
+- [Introduction to DoggoHub Performance Monitoring](introduction.md)
+- [DoggoHub Configuration](doggohub_configuration.md)
 - [InfluxDB Installation/Configuration](influxdb_configuration.md)
 - [InfluxDB Schema](influxdb_schema.md)

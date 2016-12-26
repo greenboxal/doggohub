@@ -9,7 +9,7 @@ module API
     end
     resource :projects do
       desc 'Get all Pipelines of the project' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Pipeline
       end
       params do
@@ -25,7 +25,7 @@ module API
       end
       
       desc 'Create a new pipeline' do
-        detail 'This feature was introduced in GitLab 8.14'
+        detail 'This feature was introduced in DoggoHub 8.14'
         success Entities::Pipeline
       end
       params do
@@ -46,7 +46,7 @@ module API
       end
 
       desc 'Gets a specific pipeline for the project' do
-        detail 'This feature was introduced in GitLab 8.11'
+        detail 'This feature was introduced in DoggoHub 8.11'
         success Entities::Pipeline
       end
       params do
@@ -59,7 +59,7 @@ module API
       end
 
       desc 'Retry failed builds in the pipeline' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Pipeline
       end
       params do
@@ -74,7 +74,7 @@ module API
       end
 
       desc 'Cancel all builds in the pipeline' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Pipeline
       end
       params do

@@ -1,15 +1,15 @@
 user_args = {
-  email:    ENV['GITLAB_ROOT_EMAIL'].presence || 'admin@example.com',
+  email:    ENV['DOGGOHUB_ROOT_EMAIL'].presence || 'admin@example.com',
   name:     'Administrator',
   username: 'root',
   admin:    true
 }
 
-if ENV['GITLAB_ROOT_PASSWORD'].blank?
+if ENV['DOGGOHUB_ROOT_PASSWORD'].blank?
   user_args[:password_automatically_set] = true
   user_args[:force_random_password] = true
 else
-  user_args[:password] = ENV['GITLAB_ROOT_PASSWORD']
+  user_args[:password] = ENV['DOGGOHUB_ROOT_PASSWORD']
 end
 
 user = User.new(user_args)

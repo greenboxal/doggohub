@@ -9,12 +9,12 @@ describe Banzai::Filter::ExternalLinkFilter, lib: true do
   end
 
   it 'ignores non-HTTP(S) links' do
-    exp = act = %q(<a href="irc://irc.freenode.net/gitlab">IRC</a>)
+    exp = act = %q(<a href="irc://irc.freenode.net/doggohub">IRC</a>)
     expect(filter(act).to_html).to eq exp
   end
 
   it 'skips internal links' do
-    internal = Gitlab.config.gitlab.url
+    internal = Gitlab.config.doggohub.url
     exp = act = %Q(<a href="#{internal}/sign_in">Login</a>)
     expect(filter(act).to_html).to eq exp
   end
@@ -68,7 +68,7 @@ describe Banzai::Filter::ExternalLinkFilter, lib: true do
     end
 
     it 'skips internal links' do
-      internal_link = Gitlab.config.gitlab.url + "/sign_in"
+      internal_link = Gitlab.config.doggohub.url + "/sign_in"
       url = internal_link.gsub(/\Ahttp/, 'HtTp')
       act = %Q(<a href="#{url}">Login</a>)
       exp = %Q(<a href="#{internal_link}">Login</a>)

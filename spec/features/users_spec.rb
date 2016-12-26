@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'Users', feature: true, js: true do
-  let(:user) { create(:user, username: 'user1', name: 'User 1', email: 'user1@gitlab.com') }
+  let(:user) { create(:user, username: 'user1', name: 'User 1', email: 'user1@doggohub.com') }
 
   scenario 'GET /users/sign_in creates a new user account' do
     visit new_user_session_path

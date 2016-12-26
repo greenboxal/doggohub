@@ -48,14 +48,14 @@ eos
       id: "e56497bb5f03a90a51293fc6d516788730953899",
       parent_id: '4cd80ccab63c82b4bad16faa5193fbd2aa06df40',
       author_full_name: "Sytse Sijbrandij",
-      author_email: "sytse@gitlab.com",
+      author_email: "sytse@doggohub.com",
       files_changed_count: 1,
       message: <<eos
 Add directory structure for tree_helper spec
 
 This directory structure is needed for a testing the method flatten_tree(tree) in the TreeHelper module
 
-See [merge request #275](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/275#note_732774)
+See [merge request #275](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/275#note_732774)
 
 See merge request !2
 eos

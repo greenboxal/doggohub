@@ -1,16 +1,16 @@
 # Reverting changes
 
-> [Introduced][ce-1990] in GitLab 8.5.
+> [Introduced][ce-1990] in DoggoHub 8.5.
 
 ---
 
-GitLab implements Git's powerful feature to [revert any commit][git-revert]
+DoggoHub implements Git's powerful feature to [revert any commit][git-revert]
 with introducing a **Revert** button in Merge Requests and commit details.
 
 ## Reverting a Merge Request
 
 _**Note:** The **Revert** button will only be available for Merge Requests
-created since GitLab 8.5. However, you can still revert a Merge Request
+created since DoggoHub 8.5. However, you can still revert a Merge Request
 by reverting the merge commit from the list of Commits page._
 
 After the Merge Request has been merged, a **Revert** button will be available
@@ -60,5 +60,5 @@ mainline:
 git revert -m 2 7a39eb0
 ```
 
-[ce-1990]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/1990 "Revert button Merge Request"
+[ce-1990]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/1990 "Revert button Merge Request"
 [git-revert]: https://git-scm.com/docs/git-revert "Git revert documentation"

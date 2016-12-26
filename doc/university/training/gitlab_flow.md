@@ -1,4 +1,4 @@
-# GitLab Flow
+# DoggoHub Flow
 
 - A simplified branching strategy
 - All features and fixes first go to master
@@ -12,7 +12,7 @@
 - Create a feature/bugfix branch to do all work
 - Use merge requests to merge to master
 
-![inline](gitlab_flow/feature_branches.png)
+![inline](doggohub_flow/feature_branches.png)
 
 ---
 
@@ -26,7 +26,7 @@
 
 # Production branch
 
-![inline](gitlab_flow/production_branch.png)
+![inline](doggohub_flow/production_branch.png)
 
 ---
 
@@ -43,11 +43,11 @@
 
 # Release branch
 
-![inline](gitlab_flow/release_branches.png)
+![inline](doggohub_flow/release_branches.png)
 
 ---
 
 # More details
 
-Blog post on 'GitLab Flow' at
-[http://doc.gitlab.com/ee/workflow/gitlab_flow.html](http://doc.gitlab.com/ee/workflow/gitlab_flow.html)
+Blog post on 'DoggoHub Flow' at
+[http://doc.doggohub.com/ee/workflow/doggohub_flow.html](http://doc.doggohub.com/ee/workflow/doggohub_flow.html)

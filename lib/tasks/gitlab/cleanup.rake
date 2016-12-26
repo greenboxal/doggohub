@@ -1,8 +1,8 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :cleanup do
-    desc "GitLab | Cleanup | Clean namespaces"
+    desc "DoggoHub | Cleanup | Clean namespaces"
     task dirs: :environment  do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       remove_flag = ENV['REMOVE']
 
       namespaces = Namespace.pluck(:path)
@@ -43,9 +43,9 @@ namespace :gitlab do
       end
     end
 
-    desc "GitLab | Cleanup | Clean repositories"
+    desc "DoggoHub | Cleanup | Clean repositories"
     task repos: :environment  do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
 
       move_suffix = "+orphaned+#{Time.now.to_i}"
       Gitlab.config.repositories.storages.each do |name, repo_root|
@@ -67,9 +67,9 @@ namespace :gitlab do
       end
     end
 
-    desc "GitLab | Cleanup | Block users that have been removed in LDAP"
+    desc "DoggoHub | Cleanup | Block users that have been removed in LDAP"
     task block_removed_ldap_users: :environment  do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       block_flag = ENV['BLOCK']
 
       User.find_each do |user|
@@ -94,9 +94,9 @@ namespace :gitlab do
 
     # This is a rake task which removes faulty refs. These refs where only
     # created in the 8.13.RC cycle, and fixed in the stable builds which were
-    # released. So likely this should only be run once on gitlab.com
+    # released. So likely this should only be run once on doggohub.com
     # Faulty refs are moved so they are kept around, else some features break.
-    desc 'GitLab | Cleanup | Remove faulty deployment refs'
+    desc 'DoggoHub | Cleanup | Remove faulty deployment refs'
     task move_faulty_deployment_refs: :environment do
       projects = Project.where(id: Deployment.select(:project_id).distinct)
 

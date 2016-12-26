@@ -14,8 +14,8 @@ scope(path: '*namespace_id/:project_id', constraints: { format: nil }) do
       get '/*oid', action: :deprecated
     end
 
-    # GitLab LFS object storage
-    scope(path: 'gitlab-lfs/objects/*oid', controller: :lfs_storage, constraints: { oid: /[a-f0-9]{64}/ }) do
+    # DoggoHub LFS object storage
+    scope(path: 'doggohub-lfs/objects/*oid', controller: :lfs_storage, constraints: { oid: /[a-f0-9]{64}/ }) do
       get '/', action: :download
 
       scope constraints: { size: /[0-9]+/ } do

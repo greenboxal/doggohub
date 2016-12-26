@@ -7,8 +7,8 @@ class LfsObject < ActiveRecord::Base
   mount_uploader :file, LfsObjectUploader
 
   def storage_project(project)
-    if project && project.forked?
-      storage_project(project.forked_from_project)
+    if project && project.borked?
+      storage_project(project.borked_from_project)
     else
       project
     end

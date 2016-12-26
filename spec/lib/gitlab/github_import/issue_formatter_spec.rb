@@ -71,11 +71,11 @@ describe Gitlab::GithubImport::IssueFormatter, lib: true do
     context 'when it is assigned to someone' do
       let(:raw_data) { double(base_data.merge(assignee: octocat)) }
 
-      it 'returns nil as assignee_id when is not a GitLab user' do
+      it 'returns nil as assignee_id when is not a DoggoHub user' do
         expect(issue.attributes.fetch(:assignee_id)).to be_nil
       end
 
-      it 'returns GitLab user id as assignee_id when is a GitLab user' do
+      it 'returns DoggoHub user id as assignee_id when is a DoggoHub user' do
         gl_user = create(:omniauth_user, extern_uid: octocat.id, provider: 'github')
 
         expect(issue.attributes.fetch(:assignee_id)).to eq gl_user.id
@@ -97,14 +97,14 @@ describe Gitlab::GithubImport::IssueFormatter, lib: true do
       end
     end
 
-    context 'when author is a GitLab user' do
+    context 'when author is a DoggoHub user' do
       let(:raw_data) { double(base_data.merge(user: octocat)) }
 
-      it 'returns project#creator_id as author_id when is not a GitLab user' do
+      it 'returns project#creator_id as author_id when is not a DoggoHub user' do
         expect(issue.attributes.fetch(:author_id)).to eq project.creator_id
       end
 
-      it 'returns GitLab user id as author_id when is a GitLab user' do
+      it 'returns DoggoHub user id as author_id when is a DoggoHub user' do
         gl_user = create(:omniauth_user, extern_uid: octocat.id, provider: 'github')
 
         expect(issue.attributes.fetch(:author_id)).to eq gl_user.id

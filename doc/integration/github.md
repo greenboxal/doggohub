@@ -1,6 +1,6 @@
 # Integrate your server with GitHub
 
-Import projects from GitHub and login to your GitLab instance with your GitHub account.
+Import projects from GitHub and login to your DoggoHub instance with your GitHub account.
 
 To enable the GitHub OmniAuth provider you must register your application with GitHub. 
 GitHub will generate an application ID and secret key for you to use.
@@ -16,8 +16,8 @@ GitHub will generate an application ID and secret key for you to use.
 1.  Select "Register new application".
 
 1.  Provide the required details.
-    - Application name: This can be anything. Consider something like `<Organization>'s GitLab` or `<Your Name>'s GitLab` or something else descriptive.
-    - Homepage URL: The URL to your GitLab installation. 'https://gitlab.company.com'
+    - Application name: This can be anything. Consider something like `<Organization>'s DoggoHub` or `<Your Name>'s DoggoHub` or something else descriptive.
+    - Homepage URL: The URL to your DoggoHub installation. 'https://doggohub.company.com'
     - Application description: Fill this in if you wish.
     - Authorization callback URL is 'http(s)://${YOUR_DOMAIN}'
 1.  Select "Register application".
@@ -26,20 +26,20 @@ GitHub will generate an application ID and secret key for you to use.
     Keep this page open as you continue configuration.
     ![GitHub app](img/github_app.png)
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
+      cd /home/git/doggohub
 
-      sudo -u git -H editor config/gitlab.yml
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration) for initial settings.
@@ -51,7 +51,7 @@ GitHub will generate an application ID and secret key for you to use.
     For GitHub.com:
     
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "github",
           "app_id" => "YOUR_APP_ID",
@@ -64,7 +64,7 @@ GitHub will generate an application ID and secret key for you to use.
     For GitHub Enterprise:
     
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "github",
           "app_id" => "YOUR_APP_ID",
@@ -101,10 +101,10 @@ GitHub will generate an application ID and secret key for you to use.
 
 1.  Change 'YOUR_APP_SECRET' to the client secret from the GitHub application page  from step 7.
 
-1.  Save the configuration file and run `sudo gitlab-ctl reconfigure`.
+1.  Save the configuration file and run `sudo doggohub-ctl reconfigure`.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
 On the sign in page there should now be a GitHub icon below the regular sign in form. 
-Click the icon to begin the authentication process. GitHub will ask the user to sign in and authorize the GitLab application. 
-If everything goes well the user will be returned to GitLab and will be signed in.
+Click the icon to begin the authentication process. GitHub will ask the user to sign in and authorize the DoggoHub application. 
+If everything goes well the user will be returned to DoggoHub and will be signed in.

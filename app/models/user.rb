@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
 
   default_value_for :admin, false
   default_value_for(:external) { current_application_settings.user_default_external }
-  default_value_for :can_create_group, gitlab_config.default_can_create_group
+  default_value_for :can_create_group, doggohub_config.default_can_create_group
   default_value_for :can_create_team, false
   default_value_for :hide_no_ssh_key, false
   default_value_for :hide_no_password, false
-  default_value_for :theme_id, gitlab_config.default_theme
+  default_value_for :theme_id, doggohub_config.default_theme
 
   attr_encrypted :otp_secret,
     key:       Gitlab::Application.secrets.otp_key_base,
@@ -508,7 +508,7 @@ class User < ActiveRecord::Base
   end
 
   def can_change_username?
-    gitlab_config.username_changing_enabled
+    doggohub_config.username_changing_enabled
   end
 
   def can_create_project?
@@ -579,15 +579,15 @@ class User < ActiveRecord::Base
     "#{name} (#{username})"
   end
 
-  def already_forked?(project)
-    !!fork_of(project)
+  def already_borked?(project)
+    !!bork_of(project)
   end
 
-  def fork_of(project)
-    links = ForkedProjectLink.where(forked_from_project_id: project, forked_to_project_id: personal_projects)
+  def bork_of(project)
+    links = BorkedProjectLink.where(borked_from_project_id: project, borked_to_project_id: personal_projects)
 
     if links.any?
-      links.first.forked_to_project
+      links.first.borked_to_project
     else
       nil
     end
@@ -710,7 +710,7 @@ class User < ActiveRecord::Base
 
   def avatar_url(size = nil, scale = 2)
     if self[:avatar].present?
-      [gitlab_config.url, avatar.url].join
+      [doggohub_config.url, avatar.url].join
     else
       GravatarService.new.execute(email, size, scale)
     end
@@ -803,7 +803,7 @@ class User < ActiveRecord::Base
   #     some_user.contributed_projects.visible_to_user(other_user)
   #
   # If this method were to use a JOIN the resulting query would take roughly 200
-  # ms on a database with a similar size to GitLab.com's database. On the other
+  # ms on a database with a similar size to DoggoHub.com's database. On the other
   # hand, using a subquery means we can get the exact same data in about 40 ms.
   def contributed_projects
     events = Event.select(:project_id).

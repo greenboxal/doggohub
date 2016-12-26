@@ -1,6 +1,6 @@
 # Sidekiq Metrics
 
->**Note:** This endpoint is only available on GitLab 8.9 and above.
+>**Note:** This endpoint is only available on DoggoHub 8.9 and above.
 
 This API endpoint allows you to retrieve some information about the current state
 of Sidekiq, its jobs, queues, and processes.
@@ -15,7 +15,7 @@ GET /sidekiq/queue_metrics
 ```
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/sidekiq/queue_metrics
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/sidekiq/queue_metrics
 ```
 
 Example response:
@@ -40,7 +40,7 @@ GET /sidekiq/process_metrics
 ```
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/sidekiq/process_metrics
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/sidekiq/process_metrics
 ```
 
 Example response:
@@ -49,9 +49,9 @@ Example response:
 {
   "processes": [
     {
-      "hostname": "gitlab.example.com",
+      "hostname": "doggohub.example.com",
       "pid": 5649,
-      "tag": "gitlab",
+      "tag": "doggohub",
       "started_at": "2016-06-14T10:45:07.159-05:00",
       "queues": [
         "post_receive",
@@ -59,7 +59,7 @@ Example response:
         "archive_repo",
         "system_hook",
         "project_web_hook",
-        "gitlab_shell",
+        "doggohub_shell",
         "incoming_email",
         "runner",
         "common",
@@ -82,7 +82,7 @@ GET /sidekiq/job_stats
 ```
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/sidekiq/job_stats
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/sidekiq/job_stats
 ```
 
 Example response:
@@ -106,7 +106,7 @@ GET /sidekiq/compound_metrics
 ```
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/sidekiq/compound_metrics
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/sidekiq/compound_metrics
 ```
 
 Example response:
@@ -121,9 +121,9 @@ Example response:
   },
   "processes": [
     {
-      "hostname": "gitlab.example.com",
+      "hostname": "doggohub.example.com",
       "pid": 5649,
-      "tag": "gitlab",
+      "tag": "doggohub",
       "started_at": "2016-06-14T10:45:07.159-05:00",
       "queues": [
         "post_receive",
@@ -131,7 +131,7 @@ Example response:
         "archive_repo",
         "system_hook",
         "project_web_hook",
-        "gitlab_shell",
+        "doggohub_shell",
         "incoming_email",
         "runner",
         "common",

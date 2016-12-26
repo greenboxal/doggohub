@@ -2,14 +2,14 @@
 class FixIdentities < ActiveRecord::Migration
   def up
     # Up until now, legacy 'ldap' references in the database were charitably
-    # interpreted to point to the first LDAP server specified in the GitLab
+    # interpreted to point to the first LDAP server specified in the DoggoHub
     # configuration. So if the database said 'provider: ldap' but the first
     # LDAP server was called 'ldapmain', then we would try to interpret
     # 'provider: ldap' as if it said 'provider: ldapmain'. This migration (and
-    # accompanying changes in the GitLab LDAP code) get rid of this complicated
+    # accompanying changes in the DoggoHub LDAP code) get rid of this complicated
     # behavior. Any database references to 'provider: ldap' get rewritten to
     # whatever the code would have interpreted it as, i.e. as a reference to
-    # the first LDAP server specified in gitlab.yml / gitlab.rb.
+    # the first LDAP server specified in doggohub.yml / doggohub.rb.
     new_provider = if Gitlab.config.ldap.enabled
                      first_ldap_server = Gitlab.config.ldap.servers.values.first
                      first_ldap_server['provider_name']

@@ -1,6 +1,6 @@
 # NamespaceNameValidator
 #
-# Custom validator for GitLab namespace name strings.
+# Custom validator for DoggoHub namespace name strings.
 class NamespaceNameValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     unless value =~ Gitlab::Regex.namespace_name_regex

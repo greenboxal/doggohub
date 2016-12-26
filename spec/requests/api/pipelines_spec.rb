@@ -43,7 +43,7 @@ describe API::Pipelines, api: true do
 
   describe 'POST /projects/:id/pipeline ' do
     context 'authorized user' do
-      context 'with gitlab-ci.yml' do
+      context 'with doggohub-ci.yml' do
         before { stub_ci_pipeline_to_return_yaml_file }
 
         it 'creates and returns a new pipeline' do
@@ -65,12 +65,12 @@ describe API::Pipelines, api: true do
         end
       end
 
-      context 'without gitlab-ci.yml' do
+      context 'without doggohub-ci.yml' do
         it 'fails to create pipeline' do
           post api("/projects/#{project.id}/pipeline", user), ref: project.default_branch
 
           expect(response).to have_http_status(400)
-          expect(json_response['message']['base'].first).to eq 'Missing .gitlab-ci.yml file'
+          expect(json_response['message']['base'].first).to eq 'Missing .doggohub-ci.yml file'
           expect(json_response).not_to be_an Array
         end
       end

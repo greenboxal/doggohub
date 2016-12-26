@@ -51,7 +51,7 @@ describe API::Environments, api: true  do
       end
 
       it 'requires name to be passed' do
-        post api("/projects/#{project.id}/environments", user), external_url: 'test.gitlab.com'
+        post api("/projects/#{project.id}/environments", user), external_url: 'test.doggohub.com'
 
         expect(response).to have_http_status(400)
       end
@@ -72,7 +72,7 @@ describe API::Environments, api: true  do
 
     context 'a non member' do
       it 'rejects the request' do
-        post api("/projects/#{project.id}/environments", non_member), name: 'gitlab.com'
+        post api("/projects/#{project.id}/environments", non_member), name: 'doggohub.com'
 
         expect(response).to have_http_status(404)
       end

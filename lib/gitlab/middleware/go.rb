@@ -30,7 +30,7 @@ module Gitlab
       end
 
       def go_body(request)
-        base_url = Gitlab.config.gitlab.url
+        base_url = Gitlab.config.doggohub.url
         # Go subpackages may be in the form of namespace/project/path1/path2/../pathN
         # We can just ignore the paths and leave the namespace/project
         path_info = request.env["PATH_INFO"]

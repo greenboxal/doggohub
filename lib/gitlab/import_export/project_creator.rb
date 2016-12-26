@@ -14,7 +14,7 @@ module Gitlab
           name: @project_path,
           path: @project_path,
           namespace_id: @namespace_id,
-          import_type: "gitlab_project",
+          import_type: "doggohub_project",
           import_source: @file
         ).execute
       end

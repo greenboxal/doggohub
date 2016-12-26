@@ -1,10 +1,10 @@
 # New CI build permissions model
 
-> Introduced in GitLab 8.12.
+> Introduced in DoggoHub 8.12.
 
-GitLab 8.12 has a completely redesigned [build permissions] system. You can find
+DoggoHub 8.12 has a completely redesigned [build permissions] system. You can find
 all discussion and all our concerns when choosing the current approach in issue
-[#18994](https://gitlab.com/gitlab-org/gitlab-ce/issues/18994).
+[#18994](https://doggohub.com/doggohub-org/doggohub-ce/issues/18994).
 
 ---
 
@@ -43,7 +43,7 @@ running. The access is revoked after the build is finished.**
 It is important to note that we have a few types of users:
 
 - **Administrators**: CI builds created by Administrators will not have access
-  to all GitLab projects, but only to projects and container images of projects
+  to all DoggoHub projects, but only to projects and container images of projects
   that the administrator is a member of.That means that if a project is either
   public or internal users have access anyway, but if a project is private, the
   Administrator will have to be a member of it in order to have access to it
@@ -62,7 +62,7 @@ Let's consider the following scenario:
 
 2. You invite a new [external user][ext]. CI builds created by that user do not
    have access to internal repositories, because the user also doesn't have the
-   access from within GitLab. You as an employee have to grant explicit access
+   access from within DoggoHub. You as an employee have to grant explicit access
    for this user. This allows us to prevent from accidental data leakage.
 
 ## Build token
@@ -84,7 +84,7 @@ your Runners in the most possible secure way, by avoiding the following:
 1. Any usage of Docker's `privileged` mode is risky if the machines are re-used.
 1. Using the `shell` executor since builds run on the same machine.
 
-By using an insecure GitLab Runner configuration, you allow the rogue developers
+By using an insecure DoggoHub Runner configuration, you allow the rogue developers
 to steal the tokens of other builds.
 
 ## Build triggers
@@ -94,9 +94,9 @@ They continue to use the old authentication mechanism where the CI build
 can access only its own sources. We plan to remove that limitation in one of
 the upcoming releases.
 
-## Before GitLab 8.12
+## Before DoggoHub 8.12
 
-In versions before GitLab 8.12, all CI builds would use the CI Runner's token
+In versions before DoggoHub 8.12, all CI builds would use the CI Runner's token
 to checkout project sources.
 
 The project's Runner's token was a token that you could find under the
@@ -104,22 +104,22 @@ project's **Settings > CI/CD Pipelines** and was limited to access only that
 project.
 It could be used for registering new specific Runners assigned to the project
 and to checkout project sources.
-It could also be used with the GitLab Container Registry for that project,
+It could also be used with the DoggoHub Container Registry for that project,
 allowing pulling and pushing Docker images from within the CI build.
 
 ---
 
-GitLab would create a special checkout URL like:
+DoggoHub would create a special checkout URL like:
 
 ```
-https://gitlab-ci-token:<project-runners-token>/gitlab.com/gitlab-org/gitlab-ce.git
+https://doggohub-ci-token:<project-runners-token>/doggohub.com/doggohub-org/doggohub-ce.git
 ```
 
 And then the users could also use it in their CI builds all Docker related
-commands to interact with GitLab Container Registry. For example:
+commands to interact with DoggoHub Container Registry. For example:
 
 ```
-docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+docker login -u doggohub-ci-token -p $CI_BUILD_TOKEN registry.doggohub.com
 ```
 
 Using single token had multiple security implications:
@@ -134,7 +134,7 @@ Using single token had multiple security implications:
   registry with read-write permissions.
 
 All the above led to a new permission model for builds that was introduced
-with GitLab 8.12.
+with DoggoHub 8.12.
 
 ## Making use of the new CI build permissions model
 
@@ -160,15 +160,15 @@ In short here's what you need to do should you encounter any issues.
 
 As an administrator:
 
-- **500 errors**: You will need to update [GitLab Workhorse][workhorse] to at
+- **500 errors**: You will need to update [DoggoHub Workhorse][workhorse] to at
   least 0.8.2. This is done automatically for Omnibus installations, you need to
   [check manually][update-docs] for installations from source.
 - **500 errors**: Check if you have another web proxy sitting in front of NGINX (HAProxy,
-  Apache, etc.). It might be a good idea to let GitLab use the internal NGINX
+  Apache, etc.). It might be a good idea to let DoggoHub use the internal NGINX
   web server and not disable it completely. See [this comment][comment] for an
   example.
 - **403 errors**: You need to make sure that your installation has [HTTP(S)
-  cloning enabled][https]. HTTP(S) support is now a **requirement** by GitLab CI
+  cloning enabled][https]. HTTP(S) support is now a **requirement** by DoggoHub CI
   to clone all sources.
 
 As a user:
@@ -179,7 +179,7 @@ As a user:
 
 ### Git submodules
 
-To properly configure submodules with GitLab CI, read the
+To properly configure submodules with DoggoHub CI, read the
 [Git submodules documentation][gitsub].
 
 ### Container Registry
@@ -188,16 +188,16 @@ With the update permission model we also extended the support for accessing
 Container Registries for private projects.
 
 > **Notes:**
-- GitLab Runner versions prior to 1.8 don't incorporate the introduced changes
+- DoggoHub Runner versions prior to 1.8 don't incorporate the introduced changes
   for permissions. This makes the `image:` directive to not work with private
   projects automatically and it needs to be configured manually on Runner's host
   with a predefined account (for example administrator's personal account with
   access token created explicitly for this purpose). This issue is resolved with
-  latest changes in GitLab Runner 1.8 which receives GitLab credentials with
+  latest changes in DoggoHub Runner 1.8 which receives DoggoHub credentials with
   build data.
-- Starting with GitLab 8.12, if you have 2FA enabled in your account, you need
+- Starting with DoggoHub 8.12, if you have 2FA enabled in your account, you need
   to pass a personal access token instead of your password in order to login to
-  GitLab's Container Registry.
+  DoggoHub's Container Registry.
 
 Your builds can access all container images that you would normally have access
 to. The only implication is that you can push to the Container Registry of the
@@ -208,16 +208,16 @@ This is how an example usage can look like:
 ```
 test:
   script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login -u doggohub-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker pull $CI_REGISTRY/group/other-project:latest
     - docker run $CI_REGISTRY/group/other-project:latest
 ```
 
 [build permissions]: ../permissions.md#builds-permissions
-[comment]: https://gitlab.com/gitlab-org/gitlab-ce/issues/22484#note_16648302
+[comment]: https://doggohub.com/doggohub-org/doggohub-ce/issues/22484#note_16648302
 [ext]: ../permissions.md#external-users
 [gitsub]: ../../ci/git_submodules.md
 [https]: ../admin_area/settings/visibility_and_access_controls.md#enabled-git-access-protocols
 [triggers]: ../../ci/triggers/README.md
-[update-docs]: https://gitlab.com/gitlab-org/gitlab-ce/tree/master/doc/update
-[workhorse]: https://gitlab.com/gitlab-org/gitlab-workhorse
+[update-docs]: https://doggohub.com/doggohub-org/doggohub-ce/tree/master/doc/update
+[workhorse]: https://doggohub.com/doggohub-org/doggohub-workhorse

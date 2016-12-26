@@ -184,8 +184,8 @@ describe WikiPage, models: true do
     end
 
     it "replaces a hyphen to a space" do
-      @page.title = "Import-existing-repositories-into-GitLab"
-      expect(@page.title).to eq("Import existing repositories into GitLab")
+      @page.title = "Import-existing-repositories-into-DoggoHub"
+      expect(@page.title).to eq("Import existing repositories into DoggoHub")
     end
   end
 

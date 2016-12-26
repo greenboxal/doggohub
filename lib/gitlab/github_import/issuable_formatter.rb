@@ -25,7 +25,7 @@ module Gitlab
 
       def assignee_id
         if assigned?
-          gitlab_user_id(raw_data.assignee.id)
+          doggohub_user_id(raw_data.assignee.id)
         end
       end
 
@@ -34,7 +34,7 @@ module Gitlab
       end
 
       def author_id
-        gitlab_author_id || project.creator_id
+        doggohub_author_id || project.creator_id
       end
 
       def body
@@ -42,7 +42,7 @@ module Gitlab
       end
 
       def description
-        if gitlab_author_id
+        if doggohub_author_id
           body
         else
           formatter.author_line(author) + body

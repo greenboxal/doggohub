@@ -39,7 +39,7 @@ module Gitlab
         }.to_json)
       end
 
-      def gitlab_user_id(project, username)
+      def doggohub_user_id(project, username)
         find_user_id(username) || project.creator_id
       end
 
@@ -63,7 +63,7 @@ module Gitlab
 
         path_with_namespace = "#{project.path_with_namespace}.wiki"
         import_url = project.import_url.sub(/\.git\z/, ".git/wiki")
-        gitlab_shell.import_repository(project.repository_storage_path, path_with_namespace, import_url)
+        doggohub_shell.import_repository(project.repository_storage_path, path_with_namespace, import_url)
       rescue StandardError => e
         errors << { type: :wiki, errors: e.message }
       end
@@ -82,27 +82,27 @@ module Gitlab
             label_name = issue.kind
             milestone = issue.milestone ? project.milestones.find_or_create_by(title: issue.milestone) : nil
 
-            gitlab_issue = project.issues.create!(
+            doggohub_issue = project.issues.create!(
               iid: issue.iid,
               title: issue.title,
               description: description,
               state: issue.state,
-              author_id: gitlab_user_id(project, issue.author),
+              author_id: doggohub_user_id(project, issue.author),
               milestone: milestone,
               created_at: issue.created_at,
               updated_at: issue.updated_at
             )
 
-            gitlab_issue.labels << @labels[label_name]
+            doggohub_issue.labels << @labels[label_name]
 
-            import_issue_comments(issue, gitlab_issue) if gitlab_issue.persisted?
+            import_issue_comments(issue, doggohub_issue) if doggohub_issue.persisted?
           rescue StandardError => e
             errors << { type: :issue, iid: issue.iid, errors: e.message }
           end
         end
       end
 
-      def import_issue_comments(issue, gitlab_issue)
+      def import_issue_comments(issue, doggohub_issue)
         client.issue_comments(repo, issue.iid).each do |comment|
           # The note can be blank for issue service messages like "Changed title: ..."
           # We would like to import those comments as well but there is no any
@@ -116,10 +116,10 @@ module Gitlab
           note += comment.note
 
           begin
-            gitlab_issue.notes.create!(
+            doggohub_issue.notes.create!(
               project: project,
               note: note,
-              author_id: gitlab_user_id(project, comment.author),
+              author_id: doggohub_user_id(project, comment.author),
               created_at: comment.created_at,
               updated_at: comment.updated_at
             )
@@ -155,7 +155,7 @@ module Gitlab
               target_branch: pull_request.target_branch_name,
               target_branch_sha: pull_request.target_branch_sha,
               state: pull_request.state,
-              author_id: gitlab_user_id(project, pull_request.author),
+              author_id: doggohub_user_id(project, pull_request.author),
               assignee_id: nil,
               created_at: pull_request.created_at,
               updated_at: pull_request.updated_at
@@ -238,7 +238,7 @@ module Gitlab
         {
           project: project,
           note: comment.note,
-          author_id: gitlab_user_id(project, comment.author),
+          author_id: doggohub_user_id(project, comment.author),
           created_at: comment.created_at,
           updated_at: comment.updated_at
         }

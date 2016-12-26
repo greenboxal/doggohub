@@ -171,7 +171,7 @@
               title = title.replace('{{status}}', status);
               message = message.replace('{{sha}}', data.sha);
               message = message.replace('{{title}}', data.title);
-              notify(title, message, _this.opts.gitlab_icon, function() {
+              notify(title, message, _this.opts.doggohub_icon, function() {
                 this.close();
               });
             }

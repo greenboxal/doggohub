@@ -4,7 +4,7 @@ class AddMissingUniqueIndices < ActiveRecord::Migration
   def self.up
     add_index :tags, :name, unique: true
 
-    # pre-GitLab v6.7.0 may not have these indices since there were no
+    # pre-DoggoHub v6.7.0 may not have these indices since there were no
     # migrations for them
     if index_exists?(:taggings, :tag_id)
       remove_index :taggings, :tag_id

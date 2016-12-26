@@ -27,7 +27,7 @@ module Projects
       # Git data (e.g. a list of branch names).
       flush_caches(project, wiki_path)
 
-      Projects::UnlinkForkService.new(project, current_user).execute
+      Projects::UnlinkBorkService.new(project, current_user).execute
 
       Project.transaction do
         project.destroy!
@@ -57,11 +57,11 @@ module Projects
       return true if params[:skip_repo] == true
 
       # There is a possibility project does not have repository or wiki
-      return true unless gitlab_shell.exists?(project.repository_storage_path, path + '.git')
+      return true unless doggohub_shell.exists?(project.repository_storage_path, path + '.git')
 
       new_path = removal_path(path)
 
-      if gitlab_shell.mv_repository(project.repository_storage_path, path, new_path)
+      if doggohub_shell.mv_repository(project.repository_storage_path, path, new_path)
         log_info("Repository \"#{path}\" moved to \"#{new_path}\"")
         GitlabShellWorker.perform_in(5.minutes, :remove_repository, project.repository_storage_path, new_path)
       else
@@ -80,10 +80,10 @@ module Projects
     end
 
     # Build a path for removing repositories
-    # We use `+` because its not allowed by GitLab so user can not create
+    # We use `+` because its not allowed by DoggoHub so user can not create
     # project with name cookies+119+deleted and capture someone stalled repository
     #
-    # gitlab/cookies.git -> gitlab/cookies+119+deleted.git
+    # doggohub/cookies.git -> doggohub/cookies+119+deleted.git
     #
     def removal_path(path)
       "#{path}+#{project.id}#{DELETED_FLAG}"

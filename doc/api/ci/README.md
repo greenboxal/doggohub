@@ -1,9 +1,9 @@
-# GitLab CI API
+# DoggoHub CI API
 
 ## Purpose
 
-The main purpose of GitLab CI API is to provide the necessary data and context
-for GitLab CI Runners.
+The main purpose of DoggoHub CI API is to provide the necessary data and context
+for DoggoHub CI Runners.
 
 All relevant information about the consumer API can be found in a
 [separate document](../../api/README.md).

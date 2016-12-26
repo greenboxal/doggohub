@@ -88,11 +88,11 @@ class Spinach::Features::ProjectTeamManagement < Spinach::FeatureSteps
     expect(page).not_to have_content(user.username)
   end
 
-  step 'gitlab user "Mike"' do
+  step 'doggohub user "Mike"' do
     create(:user, name: "Mike")
   end
 
-  step 'gitlab user "Dmitriy"' do
+  step 'doggohub user "Dmitriy"' do
     create(:user, name: "Dmitriy")
   end
 

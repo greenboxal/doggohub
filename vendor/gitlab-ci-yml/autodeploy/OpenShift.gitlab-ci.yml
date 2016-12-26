@@ -1,4 +1,4 @@
-image: registry.gitlab.com/gitlab-examples/openshift-deploy
+image: registry.doggohub.com/doggohub-examples/openshift-deploy
 
 variables:
   # Application deployment domain

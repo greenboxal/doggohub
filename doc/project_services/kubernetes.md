@@ -1,6 +1,6 @@
-# GitLab Kubernetes / OpenShift integration
+# DoggoHub Kubernetes / OpenShift integration
 
-GitLab can be configured to interact with Kubernetes, or other systems using the
+DoggoHub can be configured to interact with Kubernetes, or other systems using the
 Kubernetes API (such as OpenShift).
 
 Each project can be configured to connect to a different Kubernetes cluster, see
@@ -21,11 +21,11 @@ The Kubernetes service takes the following arguments:
 1. Service token
 1. Custom CA bundle
 
-The API URL is the URL that GitLab uses to access the Kubernetes API. Kubernetes
+The API URL is the URL that DoggoHub uses to access the Kubernetes API. Kubernetes
 exposes several APIs - we want the "base" URL that is common to all of them,
 e.g., `https://kubernetes.example.com` rather than `https://kubernetes.example.com/api/v1`.
 
-GitLab authenticates against Kubernetes using service tokens, which are
+DoggoHub authenticates against Kubernetes using service tokens, which are
 scoped to a particular `namespace`. If you don't have a service token yet,
 you can follow the
 [Kubernetes documentation](http://kubernetes.io/docs/user-guide/service-accounts/)
@@ -41,7 +41,7 @@ the `ca.crt` contents as the `Custom CA bundle`.
 
 The Kubernetes service exposes following
 [deployment variables](../ci/variables/README.md#deployment-variables) in the
-GitLab CI build environment:
+DoggoHub CI build environment:
 
 - `KUBE_URL` - equal to the API URL
 - `KUBE_TOKEN`
@@ -51,7 +51,7 @@ GitLab CI build environment:
 ## Web terminals
 
 >**NOTE:**
-Added in GitLab 8.15. You must be the project owner or have `master` permissions
+Added in DoggoHub 8.15. You must be the project owner or have `master` permissions
 to use terminals. Support is currently limited to the first container in the
 first pod of your environment.
 
@@ -60,4 +60,4 @@ support to your environments. This is based on the `exec` functionality found in
 Docker and Kubernetes, so you get a new shell session within your existing
 containers. To use this integration, you should deploy to Kubernetes using
 the deployment variables above, ensuring any pods you create are labelled with
-`app=$CI_ENVIRONMENT_SLUG`. GitLab will do the rest!
+`app=$CI_ENVIRONMENT_SLUG`. DoggoHub will do the rest!

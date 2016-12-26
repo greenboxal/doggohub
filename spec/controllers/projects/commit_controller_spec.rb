@@ -120,13 +120,13 @@ describe Projects::CommitController do
     context 'commit that removes a submodule' do
       render_views
 
-      let(:fork_project) { create(:forked_project_with_submodules, visibility_level: 20) }
-      let(:commit) { fork_project.commit('remove-submodule') }
+      let(:bork_project) { create(:borked_project_with_submodules, visibility_level: 20) }
+      let(:commit) { bork_project.commit('remove-submodule') }
 
       it 'renders it' do
         get(:show,
-            namespace_id: fork_project.namespace.to_param,
-            project_id: fork_project.to_param,
+            namespace_id: bork_project.namespace.to_param,
+            project_id: bork_project.to_param,
             id: commit.id)
 
         expect(response).to be_success

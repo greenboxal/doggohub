@@ -1,38 +1,38 @@
 require 'spec_helper'
 
-describe RepositoryForkWorker do
+describe RepositoryBorkWorker do
   let(:project) { create(:project) }
-  let(:fork_project) { create(:project, forked_from_project: project) }
+  let(:bork_project) { create(:project, borked_from_project: project) }
   let(:shell) { Gitlab::Shell.new }
 
-  subject { RepositoryForkWorker.new }
+  subject { RepositoryBorkWorker.new }
 
   before do
-    allow(subject).to receive(:gitlab_shell).and_return(shell)
+    allow(subject).to receive(:doggohub_shell).and_return(shell)
   end
 
   describe "#perform" do
-    it "creates a new repository from a fork" do
-      expect(shell).to receive(:fork_repository).with(
+    it "creates a new repository from a bork" do
+      expect(shell).to receive(:bork_repository).with(
         '/test/path',
         project.path_with_namespace,
         project.repository_storage_path,
-        fork_project.namespace.path
+        bork_project.namespace.path
       ).and_return(true)
 
       subject.perform(
         project.id,
         '/test/path',
         project.path_with_namespace,
-        fork_project.namespace.path)
+        bork_project.namespace.path)
     end
 
     it 'flushes various caches' do
-      expect(shell).to receive(:fork_repository).with(
+      expect(shell).to receive(:bork_repository).with(
         '/test/path',
         project.path_with_namespace,
         project.repository_storage_path,
-        fork_project.namespace.path
+        bork_project.namespace.path
       ).and_return(true)
 
       expect_any_instance_of(Repository).to receive(:expire_emptiness_caches).
@@ -42,11 +42,11 @@ describe RepositoryForkWorker do
         and_call_original
 
       subject.perform(project.id, '/test/path', project.path_with_namespace,
-                      fork_project.namespace.path)
+                      bork_project.namespace.path)
     end
 
-    it "handles bad fork" do
-      expect(shell).to receive(:fork_repository).and_return(false)
+    it "handles bad bork" do
+      expect(shell).to receive(:bork_repository).and_return(false)
 
       expect(subject.logger).to receive(:error)
 
@@ -54,7 +54,7 @@ describe RepositoryForkWorker do
         project.id,
         '/test/path',
         project.path_with_namespace,
-        fork_project.namespace.path)
+        bork_project.namespace.path)
     end
   end
 end

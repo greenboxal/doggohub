@@ -1,11 +1,11 @@
-namespace :gitlab do
-  desc "GitLab | Setup production application"
+namespace :doggohub do
+  desc "DoggoHub | Setup production application"
   task setup: :environment do
     setup_db
   end
 
   def setup_db
-    warn_user_is_not_gitlab
+    warn_user_is_not_doggohub
 
     unless ENV['force'] == 'yes'
       puts "This will create the necessary database tables and seed the database."

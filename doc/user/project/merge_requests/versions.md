@@ -1,6 +1,6 @@
 # Merge requests versions
 
-> Will be [introduced][ce-5467] in GitLab 8.12.
+> Will be [introduced][ce-5467] in DoggoHub 8.12.
 
 Every time you push to a branch that is tied to a merge request, a new version
 of merge request diff is created. When you visit a merge request that contains
@@ -39,4 +39,4 @@ changes appears as a system note.
   commits in a single push, it will be a single option in the dropdown. If you
   pushed 5 times, that will count for 5 options.
 
-[ce-5467]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5467
+[ce-5467]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5467

@@ -1,11 +1,11 @@
-# Import your project from FogBugz to GitLab
+# Import your project from FogBugz to DoggoHub
 
 It only takes a few simple steps to import your project from FogBugz.
 The importer will import all of your cases and comments with original case
 numbers and timestamps. You will also have the opportunity to map FogBugz
-users to GitLab users.
+users to DoggoHub users.
 
-* From your GitLab dashboard click 'New project'
+* From your DoggoHub dashboard click 'New project'
 
 * Click on the 'FogBugz' button
 
@@ -15,7 +15,7 @@ users to GitLab users.
 
 ![Login](fogbugz_importer/fogbugz_import_login.png)
 
-* Create mapping from FogBugz users to GitLab users.
+* Create mapping from FogBugz users to DoggoHub users.
 
 ![User Map](fogbugz_importer/fogbugz_import_user_map.png)
 

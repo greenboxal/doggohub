@@ -7,7 +7,7 @@ describe Gitlab::GitlabImport::Client, lib: true do
   let(:client) { Gitlab::GitlabImport::Client.new(token) }
 
   before do
-    stub_omniauth_provider('gitlab')
+    stub_omniauth_provider('doggohub')
   end
 
   it 'all OAuth2 client options are symbols' do

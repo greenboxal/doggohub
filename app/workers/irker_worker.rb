@@ -67,7 +67,7 @@ class IrkerWorker
 
   def send_new_branch(project, repo_name, committer, branch)
     repo_path = project.path_with_namespace
-    newbranch = "#{Gitlab.config.gitlab.url}/#{repo_path}/branches"
+    newbranch = "#{Gitlab.config.doggohub.url}/#{repo_path}/branches"
     newbranch = "\x0302\x1f#{newbranch}\x0f" if @colors
 
     privmsg = "[#{repo_name}] #{committer} has created a new branch "
@@ -122,7 +122,7 @@ class IrkerWorker
   def compare_url(data, repo_path)
     sha1 = Commit::truncate_sha(data['before'])
     sha2 = Commit::truncate_sha(data['after'])
-    compare_url = "#{Gitlab.config.gitlab.url}/#{repo_path}/compare"
+    compare_url = "#{Gitlab.config.doggohub.url}/#{repo_path}/compare"
     compare_url += "/#{sha1}...#{sha2}"
     colorize_url compare_url
   end

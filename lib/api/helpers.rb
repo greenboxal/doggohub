@@ -99,7 +99,7 @@ module API
       authenticate! unless %w[GET HEAD].include?(route.route_method)
     end
 
-    def authenticate_by_gitlab_shell_token!
+    def authenticate_by_doggohub_shell_token!
       input = params['secret_token'].try(:chomp)
       unless Devise.secure_compare(secret_token, input)
         unauthorized!
@@ -123,9 +123,9 @@ module API
       authorize! :admin_project, user_project
     end
 
-    def require_gitlab_workhorse!
-      unless env['HTTP_GITLAB_WORKHORSE'].present?
-        forbidden!('Request should be executed via GitLab Workhorse')
+    def require_doggohub_workhorse!
+      unless env['HTTP_DOGGOHUB_WORKHORSE'].present?
+        forbidden!('Request should be executed via DoggoHub Workhorse')
       end
     end
 

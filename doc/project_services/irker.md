@@ -1,29 +1,29 @@
 # Irker IRC Gateway
 
-GitLab provides a way to push update messages to an Irker server. When
+DoggoHub provides a way to push update messages to an Irker server. When
 configured, pushes to a project will trigger the service to send data directly
 to the Irker server.
 
-See the project homepage for further info: https://gitlab.com/esr/irker
+See the project homepage for further info: https://doggohub.com/esr/irker
 
 ## Needed setup
 
 You will first need an Irker daemon. You can download the Irker code from its
-repository on https://gitlab.com/esr/irker:
+repository on https://doggohub.com/esr/irker:
 
 ```
-git clone https://gitlab.com/esr/irker.git
+git clone https://doggohub.com/esr/irker.git
 ```
 
 Once you have downloaded the code, you can run the python script named `irkerd`.
 This script is the gateway script, it acts both as an IRC client, for sending
 messages to an IRC server obviously, and as a TCP server, for receiving messages
-from the GitLab service.
+from the DoggoHub service.
 
 If the Irker server runs on the same machine, you are done. If not, you will
 need to follow the firsts steps of the next section.
 
-## Complete these steps in GitLab:
+## Complete these steps in DoggoHub:
 
 1. Navigate to the project you want to configure for notifications.
 1. Select "Settings" in the top navigation.

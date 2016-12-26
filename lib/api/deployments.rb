@@ -10,7 +10,7 @@ module API
     end
     resource :projects do
       desc 'Get all deployments of the project' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Deployment
       end
       params do
@@ -23,7 +23,7 @@ module API
       end
 
       desc 'Gets a specific deployment' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Deployment
       end
       params do

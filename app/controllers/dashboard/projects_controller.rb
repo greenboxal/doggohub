@@ -30,7 +30,7 @@ class Dashboard::ProjectsController < Dashboard::ApplicationController
   def starred
     @projects = current_user.viewable_starred_projects.sorted_by_activity
     @projects = filter_projects(@projects)
-    @projects = @projects.includes(:namespace, :forked_from_project, :tags)
+    @projects = @projects.includes(:namespace, :borked_from_project, :tags)
     @projects = @projects.sort(@sort = params[:sort])
     @projects = @projects.page(params[:page])
 

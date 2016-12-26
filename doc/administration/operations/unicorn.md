@@ -2,17 +2,17 @@
 
 ## Unicorn
 
-GitLab uses [Unicorn](http://unicorn.bogomips.org/), a pre-forking Ruby web
+DoggoHub uses [Unicorn](http://unicorn.bogomips.org/), a pre-borking Ruby web
 server, to handle web requests (web browsers and Git HTTP clients). Unicorn is
 a daemon written in Ruby and C that can load and run a Ruby on Rails
-application; in our case the Rails application is GitLab Community Edition or
-GitLab Enterprise Edition.
+application; in our case the Rails application is DoggoHub Community Edition or
+DoggoHub Enterprise Edition.
 
 Unicorn has a multi-process architecture to make better use of available CPU
 cores (processes can run on different cores) and to have stronger fault
 tolerance (most failures stay isolated in only one process and cannot take down
-GitLab entirely). On startup, the Unicorn 'master' process loads a clean Ruby
-environment with the GitLab application code, and then spawns 'workers' which
+DoggoHub entirely). On startup, the Unicorn 'master' process loads a clean Ruby
+environment with the DoggoHub application code, and then spawns 'workers' which
 inherit this clean initial environment. The 'master' never handles any
 requests, that is left to the workers. The operating system network stack
 queues incoming requests and distributes them among the workers.
@@ -40,17 +40,17 @@ master process has PID 56227 below.
 
 The main tunables for Unicorn are the number of worker processes and the
 request timeout after which the Unicorn master terminates a worker process.
-See the [omnibus-gitlab Unicorn settings
-documentation](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/unicorn.md)
+See the [omnibus-doggohub Unicorn settings
+documentation](https://doggohub.com/doggohub-org/omnibus-doggohub/blob/master/doc/settings/unicorn.md)
 if you want to adjust these settings.
 
 ## unicorn-worker-killer
 
-GitLab has memory leaks. These memory leaks manifest themselves in long-running
+DoggoHub has memory leaks. These memory leaks manifest themselves in long-running
 processes, such as Unicorn workers. (The Unicorn master process is not known to
 leak memory, probably because it does not handle user requests.)
 
-To make these memory leaks manageable, GitLab comes with the
+To make these memory leaks manageable, DoggoHub comes with the
 [unicorn-worker-killer gem](https://github.com/kzk/unicorn-worker-killer). This
 gem [monkey-patches](https://en.wikipedia.org/wiki/Monkey_patch) the Unicorn
 workers to do a memory self-check after every 16 requests. If the memory of the
@@ -64,7 +64,7 @@ between requests_, so no user requests are affected.
 
 This is what a Unicorn worker memory restart looks like in unicorn_stderr.log.
 You see that worker 4 (PID 125918) is inspecting itself and decides to exit.
-The threshold memory value was 254802235 bytes, about 250MB. With GitLab this
+The threshold memory value was 254802235 bytes, about 250MB. With DoggoHub this
 threshold is a random value between 200 and 250 MB.  The master process (PID
 117565) then reaps the worker process and spawns a new 'worker 4' with PID
 127549.
@@ -78,9 +78,9 @@ threshold is a random value between 200 and 250 MB.  The master process (PID
 ```
 
 One other thing that stands out in the log snippet above, taken from
-GitLab.com, is that 'worker 4' was serving requests for only 23 seconds. This
-is a normal value for our current GitLab.com setup and traffic.
+DoggoHub.com, is that 'worker 4' was serving requests for only 23 seconds. This
+is a normal value for our current DoggoHub.com setup and traffic.
 
-The high frequency of Unicorn memory restarts on some GitLab sites can be a
+The high frequency of Unicorn memory restarts on some DoggoHub sites can be a
 source of confusion for administrators. Usually they are a [red
 herring](https://en.wikipedia.org/wiki/Red_herring).

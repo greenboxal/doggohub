@@ -11,7 +11,7 @@ module API
     end
     resource :projects do
       desc 'Get all environments of the project' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Environment
       end
       params do
@@ -24,7 +24,7 @@ module API
       end
 
       desc 'Creates a new environment' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Environment
       end
       params do
@@ -45,7 +45,7 @@ module API
       end
 
       desc 'Updates an existing environment' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Environment
       end
       params do
@@ -68,7 +68,7 @@ module API
       end
 
       desc 'Deletes an existing environment' do
-        detail 'This feature was introduced in GitLab 8.11.'
+        detail 'This feature was introduced in DoggoHub 8.11.'
         success Entities::Environment
       end
       params do

@@ -2,12 +2,12 @@
 
 This example demonstrates the integration of Gitlab CI with Scala
 applications using SBT. Checkout the example
-[project](https://gitlab.com/gitlab-examples/scala-sbt) and
-[build status](https://gitlab.com/gitlab-examples/scala-sbt/builds).
+[project](https://doggohub.com/doggohub-examples/scala-sbt) and
+[build status](https://doggohub.com/doggohub-examples/scala-sbt/builds).
 
-## Add `.gitlab-ci.yml` file to project
+## Add `.doggohub-ci.yml` file to project
 
-The following `.gitlab-ci.yml` should be added in the root of your
+The following `.doggohub-ci.yml` should be added in the root of your
 repository to trigger CI:
 
 ``` yaml
@@ -38,7 +38,7 @@ deploy:
     - apt-get update -yq
     - apt-get install rubygems ruby-dev -y
     - gem install dpl
-    - dpl --provider=heroku --app=gitlab-play-sample-app --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=doggohub-play-sample-app --api-key=$HEROKU_API_KEY
 ```
 
 The `before_script` installs [SBT](http://www.scala-sbt.org/) and
@@ -63,8 +63,8 @@ displayed with your builds.
 ## Heroku application
 
 A Heroku application is required. You can create one through the
-[Dashboard](https://dashboard.heroku.com/). Substitute `gitlab-play-sample-app`
-in the `.gitlab-ci.yml` file with your application's name.
+[Dashboard](https://dashboard.heroku.com/). Substitute `doggohub-play-sample-app`
+in the `.doggohub-ci.yml` file with your application's name.
 
 ## Heroku API key
 

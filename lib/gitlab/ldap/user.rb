@@ -1,4 +1,4 @@
-require 'gitlab/o_auth/user'
+require 'doggohub/o_auth/user'
 
 # LDAP extension for User model
 #

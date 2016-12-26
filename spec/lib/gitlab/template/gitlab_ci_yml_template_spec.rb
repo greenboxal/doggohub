@@ -4,8 +4,8 @@ describe Gitlab::Template::GitlabCiYmlTemplate do
   subject { described_class }
 
   describe '.all' do
-    it 'strips the gitlab-ci suffix' do
-      expect(subject.all.first.name).not_to end_with('.gitlab-ci.yml')
+    it 'strips the doggohub-ci suffix' do
+      expect(subject.all.first.name).not_to end_with('.doggohub-ci.yml')
     end
 
     it 'combines the globals and rest' do
@@ -32,7 +32,7 @@ describe Gitlab::Template::GitlabCiYmlTemplate do
 
   describe '#content' do
     it 'loads the full file' do
-      gitignore = subject.new(Rails.root.join('vendor/gitlab-ci-yml/Ruby.gitlab-ci.yml'))
+      gitignore = subject.new(Rails.root.join('vendor/doggohub-ci-yml/Ruby.doggohub-ci.yml'))
 
       expect(gitignore.name).to eq 'Ruby'
       expect(gitignore.content).to start_with('#')

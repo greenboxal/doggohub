@@ -1,8 +1,8 @@
 # Runners API
 
-> [Introduced][ce-2640] in GitLab 8.5
+> [Introduced][ce-2640] in DoggoHub 8.5
 
-[ce-2640]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/2640
+[ce-2640]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/2640
 
 ## List owned runners
 
@@ -18,7 +18,7 @@ GET /runners?scope=active
 | `scope`   | string  | no       | The scope of specific runners to show, one of: `active`, `paused`, `online`; showing all runners if none provided |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/runners"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/runners"
 ```
 
 Example response:
@@ -44,7 +44,7 @@ Example response:
 
 ## List all runners
 
-Get a list of all runners in the GitLab instance (specific and shared). Access
+Get a list of all runners in the DoggoHub instance (specific and shared). Access
 is restricted to users with `admin` privileges.
 
 ```
@@ -57,7 +57,7 @@ GET /runners/all?scope=online
 | `scope`   | string  | no       | The scope of runners to show, one of: `specific`, `shared`, `active`, `paused`, `online`; showing all runners if none provided |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/runners/all"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/runners/all"
 ```
 
 Example response:
@@ -108,7 +108,7 @@ GET /runners/:id
 | `id`      | integer | yes      | The ID of a runner  |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/runners/6"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/runners/6"
 ```
 
 Example response:
@@ -126,10 +126,10 @@ Example response:
     "projects": [
         {
             "id": 1,
-            "name": "GitLab Community Edition",
-            "name_with_namespace": "GitLab.org / GitLab Community Edition",
-            "path": "gitlab-ce",
-            "path_with_namespace": "gitlab-org/gitlab-ce"
+            "name": "DoggoHub Community Edition",
+            "name_with_namespace": "DoggoHub.org / DoggoHub Community Edition",
+            "path": "doggohub-ce",
+            "path_with_namespace": "doggohub-org/doggohub-ce"
         }
     ],
     "token": "205086a8e3b9a2b818ffac9b89d102",
@@ -158,7 +158,7 @@ PUT /runners/:id
 | `tag_list`    | array   | no       | The list of tags for a runner; put array of tags, that should be finally assigned to a runner |
 
 ```
-curl --request PUT --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/runners/6" --form "description=test-1-20150125-test" --form "tag_list=ruby,mysql,tag1,tag2"
+curl --request PUT --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/runners/6" --form "description=test-1-20150125-test" --form "tag_list=ruby,mysql,tag1,tag2"
 ```
 
 Example response:
@@ -176,10 +176,10 @@ Example response:
     "projects": [
         {
             "id": 1,
-            "name": "GitLab Community Edition",
-            "name_with_namespace": "GitLab.org / GitLab Community Edition",
-            "path": "gitlab-ce",
-            "path_with_namespace": "gitlab-org/gitlab-ce"
+            "name": "DoggoHub Community Edition",
+            "name_with_namespace": "DoggoHub.org / DoggoHub Community Edition",
+            "path": "doggohub-ce",
+            "path_with_namespace": "doggohub-org/doggohub-ce"
         }
     ],
     "token": "205086a8e3b9a2b818ffac9b89d102",
@@ -207,7 +207,7 @@ DELETE /runners/:id
 | `id`      | integer | yes      | The ID of a runner  |
 
 ```
-curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/runners/6"
+curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/runners/6"
 ```
 
 Example response:
@@ -237,7 +237,7 @@ GET /projects/:id/runners
 | `id`      | integer | yes      | The ID of a project |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/9/runners"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/9/runners"
 ```
 
 Example response:
@@ -275,7 +275,7 @@ POST /projects/:id/runners
 | `runner_id` | integer | yes      | The ID of a runner  |
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/9/runners" --form "runner_id=9"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/9/runners" --form "runner_id=9"
 ```
 
 Example response:
@@ -306,7 +306,7 @@ DELETE /projects/:id/runners/:runner_id
 | `runner_id` | integer | yes      | The ID of a runner  |
 
 ```
-curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/9/runners/9"
+curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/9/runners/9"
 ```
 
 Example response:

@@ -2,7 +2,7 @@ module API
   class MergeRequests < Grape::API
     include PaginationParams
 
-    DEPRECATION_MESSAGE = 'This endpoint is deprecated and will be removed in GitLab 9.0.'.freeze
+    DEPRECATION_MESSAGE = 'This endpoint is deprecated and will be removed in DoggoHub 9.0.'.freeze
 
     before { authenticate! }
 
@@ -16,8 +16,8 @@ module API
             error!(errors[:project_access], 422)
           elsif errors[:branch_conflict].any?
             error!(errors[:branch_conflict], 422)
-          elsif errors[:validate_fork].any?
-            error!(errors[:validate_fork], 422)
+          elsif errors[:validate_bork].any?
+            error!(errors[:validate_bork], 422)
           elsif errors[:validate_branches].any?
             conflict!(errors[:validate_branches])
           end

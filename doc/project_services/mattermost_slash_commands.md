@@ -1,6 +1,6 @@
 # Mattermost slash commands
 
-> Introduced in GitLab 8.14
+> Introduced in DoggoHub 8.14
 
 Mattermost commands give users an extra interface to perform common operations
 from the chat environment. This allows one to, for example, create an issue as
@@ -10,21 +10,21 @@ soon as the idea was discussed in Mattermost.
 
 Mattermost 3.4 and up is required.
 
-If you have the Omnibus GitLab package installed, Mattermost is already bundled
+If you have the Omnibus DoggoHub package installed, Mattermost is already bundled
 in it. All you have to do is configure it. Read more in the
-[Omnibus GitLab Mattermost documentation][omnimmdocs].
+[Omnibus DoggoHub Mattermost documentation][omnimmdocs].
 
 ## Automated Configuration
 
-If Mattermost is installed on the same server as GitLab, the configuration process can be
-done for you by GitLab. 
+If Mattermost is installed on the same server as DoggoHub, the configuration process can be
+done for you by DoggoHub. 
 
 Go to the Mattermost Slash Command service on your project and click the 'Add to Mattermost' button.
 
 ## Manual Configuration
 
 The configuration consists of two parts. First you need to enable the slash
-commands in Mattermost and then enable the service in GitLab.
+commands in Mattermost and then enable the service in DoggoHub.
 
 ### Step 1. Enable custom slash commands in Mattermost
 
@@ -51,14 +51,14 @@ the administrator console.
 
 1. Click **Save** at the bottom to save the changes.
 
-### Step 2. Open the Mattermost slash commands service in GitLab
+### Step 2. Open the Mattermost slash commands service in DoggoHub
 
-1. Open a new tab for GitLab and go to your project's settings
+1. Open a new tab for DoggoHub and go to your project's settings
    **Services ➔ Mattermost command**. A screen will appear with all the values you
    need to copy in Mattermost as described in the next step. Leave the window open.
 
     >**Note:**
-    GitLab will propose some values for the Mattermost settings. The only one
+    DoggoHub will propose some values for the Mattermost settings. The only one
     required to copy-paste as-is is the **Request URL**, all the others are just
     suggestions.
 
@@ -72,7 +72,7 @@ the administrator console.
 ### Step 3. Create a new custom slash command in Mattermost
 
 Now that you have enabled custom slash commands in Mattermost and opened
-the Mattermost slash commands service in GitLab, it's time to copy these values
+the Mattermost slash commands service in DoggoHub, it's time to copy these values
 in a new slash command.
 
 1. Back to Mattermost, under your team page settings, you should see the
@@ -90,12 +90,12 @@ in a new slash command.
     ---
 
 1. Fill in the options for the custom command as described in
-   [step 2](#step-2-open-the-mattermost-slash-commands-service-in-gitlab).
+   [step 2](#step-2-open-the-mattermost-slash-commands-service-in-doggohub).
 
     >**Note:**
     If you plan on connecting multiple projects, pick a slash command trigger
-    word that relates to your projects such as `/gitlab-project-name` or even
-    just `/project-name`. Only use `/gitlab` if you will only connect a single
+    word that relates to your projects such as `/doggohub-project-name` or even
+    just `/project-name`. Only use `/doggohub` if you will only connect a single
     project to your Mattermost team.
 
     ![Mattermost add command configuration](img/mattermost_slash_command_configuration.png)
@@ -107,30 +107,30 @@ in a new slash command.
 
 ### Step 4. Copy the Mattermost token into the Mattermost slash command service
 
-1. In GitLab, paste the Mattermost token you copied in the previous step and
+1. In DoggoHub, paste the Mattermost token you copied in the previous step and
    check the **Active** checkbox.
 
-    ![Mattermost copy token to GitLab](img/mattermost_gitlab_token.png)
+    ![Mattermost copy token to DoggoHub](img/mattermost_doggohub_token.png)
 
 1. Click **Save changes** for the changes to take effect.
 
 ---
 
 You are now set to start using slash commands in Mattermost that talk to the
-GitLab project you configured.
+DoggoHub project you configured.
 
-## Authorizing Mattermost to interact with GitLab
+## Authorizing Mattermost to interact with DoggoHub
 
 The first time a user will interact with the newly created slash commands,
 Mattermost will trigger an authorization process.
 
 ![Mattermost bot authorize](img/mattermost_bot_auth.png)
 
-This will connect your Mattermost user with your GitLab user. You can
+This will connect your Mattermost user with your DoggoHub user. You can
 see all authorized chat accounts in your profile's page under **Chat**.
 
 When the authorization process is complete, you can start interacting with
-GitLab using the Mattermost commands.
+DoggoHub using the Mattermost commands.
 
 ## Available slash commands
 
@@ -138,12 +138,12 @@ The available slash commands are:
 
 | Command | Description | Example |
 | ------- | ----------- | ------- |
-| <kbd>/&lt;trigger&gt; issue new &lt;title&gt; <kbd>⇧ Shift</kbd>+<kbd>↵ Enter</kbd> &lt;description&gt;</kbd> | Create a new issue in the project that `<trigger>` is tied to. `<description>` is optional. | <samp>/gitlab issue new We need to change the homepage</samp> |
-| <kbd>/&lt;trigger&gt; issue show &lt;issue-number&gt;</kbd> | Show the issue with ID `<issue-number>` from the project that `<trigger>` is tied to. | <samp>/gitlab issue show 42</samp> |
-| <kbd>/&lt;trigger&gt; deploy &lt;environment&gt; to &lt;environment&gt;</kbd> | Start the CI job that deploys from one environment to another, for example `staging` to `production`. CI/CD must be [properly configured][ciyaml]. | <samp>/gitlab deploy staging to production</samp> |
+| <kbd>/&lt;trigger&gt; issue new &lt;title&gt; <kbd>⇧ Shift</kbd>+<kbd>↵ Enter</kbd> &lt;description&gt;</kbd> | Create a new issue in the project that `<trigger>` is tied to. `<description>` is optional. | <samp>/doggohub issue new We need to change the homepage</samp> |
+| <kbd>/&lt;trigger&gt; issue show &lt;issue-number&gt;</kbd> | Show the issue with ID `<issue-number>` from the project that `<trigger>` is tied to. | <samp>/doggohub issue show 42</samp> |
+| <kbd>/&lt;trigger&gt; deploy &lt;environment&gt; to &lt;environment&gt;</kbd> | Start the CI job that deploys from one environment to another, for example `staging` to `production`. CI/CD must be [properly configured][ciyaml]. | <samp>/doggohub deploy staging to production</samp> |
 
-To see a list of available commands to interact with GitLab, type the
-trigger word followed by <kbd>help</kbd>. Example: <samp>/gitlab help</samp>
+To see a list of available commands to interact with DoggoHub, type the
+trigger word followed by <kbd>help</kbd>. Example: <samp>/doggohub help</samp>
 
 ![Mattermost bot available commands](img/mattermost_bot_available_commands.png)
 
@@ -155,9 +155,9 @@ the [permissions you have on the project](../user/permissions.md#project).
 ## Further reading
 
 - [Mattermost slash commands documentation][mmslashdocs]
-- [Omnibus GitLab Mattermost][omnimmdocs]
+- [Omnibus DoggoHub Mattermost][omnimmdocs]
 
 
-[omnimmdocs]: https://docs.gitlab.com/omnibus/gitlab-mattermost/
+[omnimmdocs]: https://docs.doggohub.com/omnibus/doggohub-mattermost/
 [mmslashdocs]: https://docs.mattermost.com/developer/slash-commands.html
 [ciyaml]: ../ci/yaml/README.md

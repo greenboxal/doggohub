@@ -27,7 +27,7 @@ describe ExternalWikiService, models: true do
 
     context 'when it is active' do
       before do
-        properties = { 'external_wiki_url' => 'https://gitlab.com' }
+        properties = { 'external_wiki_url' => 'https://doggohub.com' }
         @service = project.create_external_wiki_service(active: true, properties: properties)
       end
 
@@ -37,7 +37,7 @@ describe ExternalWikiService, models: true do
 
       it 'replaces the wiki url' do
         wiki_path = get_project_wiki_path(project)
-        expect(wiki_path).to match('https://gitlab.com')
+        expect(wiki_path).to match('https://doggohub.com')
       end
     end
   end

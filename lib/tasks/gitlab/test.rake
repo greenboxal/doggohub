@@ -1,5 +1,5 @@
-namespace :gitlab do
-  desc "GitLab | Run all tests"
+namespace :doggohub do
+  desc "DoggoHub | Run all tests"
   task :test do
     cmds = [
       %W(rake brakeman),

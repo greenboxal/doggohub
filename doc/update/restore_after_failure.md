@@ -22,7 +22,7 @@ attempts. This is because some tables may have been added during the failed
 upgrade. If these tables are still present after you restore from the
 older backup it can lead to migration failures on future upgrades.
 
-Starting in GitLab 8.6 we drop all tables prior to importing the backup to
+Starting in DoggoHub 8.6 we drop all tables prior to importing the backup to
 prevent this problem. If you've restored a backup to a version prior to 8.6 you
 may need to manually correct the problem next time you upgrade.
 
@@ -43,31 +43,31 @@ Copy the version from the error. In this case the version number is
 >**WARNING:** Use the following steps only if you are certain this is what you
 need to do.
 
-### GitLab 8.6+
+### DoggoHub 8.6+
 
 Pass the version to a database rake task to manually mark the migration as
 complete.
 
 ```
 # Source install
-sudo -u git -H bundle exec rake gitlab:db:mark_migration_complete[20151103134857] RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:db:mark_migration_complete[20151103134857] RAILS_ENV=production
 
 # Omnibus install
-sudo gitlab-rake gitlab:db:mark_migration_complete[20151103134857]
+sudo doggohub-rake doggohub:db:mark_migration_complete[20151103134857]
 ```
 
 Once the migration is successfully marked, run the rake `db:migrate` task again.
 You will likely have to repeat this process several times until all failed
 migrations are marked complete.
 
-### GitLab < 8.6
+### DoggoHub < 8.6
 
 ```
 # Source install
 sudo -u git -H bundle exec rails console production
 
 # Omnibus install
-sudo gitlab-rails console
+sudo doggohub-rails console
 ```
 
 At the Rails console, type the following commands:

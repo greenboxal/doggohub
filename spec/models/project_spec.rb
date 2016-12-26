@@ -20,7 +20,7 @@ describe Project, models: true do
     it { is_expected.to have_many(:deploy_keys) }
     it { is_expected.to have_many(:hooks).dependent(:destroy) }
     it { is_expected.to have_many(:protected_branches).dependent(:destroy) }
-    it { is_expected.to have_one(:forked_project_link).dependent(:destroy) }
+    it { is_expected.to have_one(:borked_project_link).dependent(:destroy) }
     it { is_expected.to have_one(:slack_service).dependent(:destroy) }
     it { is_expected.to have_one(:mattermost_service).dependent(:destroy) }
     it { is_expected.to have_one(:pushover_service).dependent(:destroy) }
@@ -46,12 +46,12 @@ describe Project, models: true do
     it { is_expected.to have_one(:redmine_service).dependent(:destroy) }
     it { is_expected.to have_one(:custom_issue_tracker_service).dependent(:destroy) }
     it { is_expected.to have_one(:bugzilla_service).dependent(:destroy) }
-    it { is_expected.to have_one(:gitlab_issue_tracker_service).dependent(:destroy) }
+    it { is_expected.to have_one(:doggohub_issue_tracker_service).dependent(:destroy) }
     it { is_expected.to have_one(:external_wiki_service).dependent(:destroy) }
     it { is_expected.to have_one(:project_feature).dependent(:destroy) }
     it { is_expected.to have_one(:import_data).class_name('ProjectImportData').dependent(:destroy) }
     it { is_expected.to have_one(:last_event).class_name('Event') }
-    it { is_expected.to have_one(:forked_from_project).through(:forked_project_link) }
+    it { is_expected.to have_one(:borked_from_project).through(:borked_project_link) }
     it { is_expected.to have_many(:commit_statuses) }
     it { is_expected.to have_many(:pipelines) }
     it { is_expected.to have_many(:builds) }
@@ -68,7 +68,7 @@ describe Project, models: true do
     it { is_expected.to have_many(:lfs_objects_projects).dependent(:destroy) }
     it { is_expected.to have_many(:project_group_links).dependent(:destroy) }
     it { is_expected.to have_many(:notification_settings).dependent(:destroy) }
-    it { is_expected.to have_many(:forks).through(:forked_project_links) }
+    it { is_expected.to have_many(:borks).through(:borked_project_links) }
 
     context 'after initialized' do
       it "has a project_feature" do
@@ -195,7 +195,7 @@ describe Project, models: true do
     end
 
     it 'does allow a valid URI as import_url' do
-      project2 = build(:project, import_url: 'ssh://test@gitlab.com/project.git')
+      project2 = build(:project, import_url: 'ssh://test@doggohub.com/project.git')
 
       expect(project2).to be_valid
     end
@@ -350,14 +350,14 @@ describe Project, models: true do
 
   it 'returns valid url to repo' do
     project = Project.new(path: 'somewhere')
-    expect(project.url_to_repo).to eq(Gitlab.config.gitlab_shell.ssh_path_prefix + 'somewhere.git')
+    expect(project.url_to_repo).to eq(Gitlab.config.doggohub_shell.ssh_path_prefix + 'somewhere.git')
   end
 
   describe "#web_url" do
     let(:project) { create(:empty_project, path: "somewhere") }
 
     it 'returns the full web URL for this repo' do
-      expect(project.web_url).to eq("#{Gitlab.config.gitlab.url}/#{project.namespace.path}/somewhere")
+      expect(project.web_url).to eq("#{Gitlab.config.doggohub.url}/#{project.namespace.path}/somewhere")
     end
   end
 
@@ -365,7 +365,7 @@ describe Project, models: true do
     let(:project) { create(:empty_project, path: "somewhere") }
 
     it 'returns the web URL without the protocol for this repo' do
-      expect(project.web_url_without_protocol).to eq("#{Gitlab.config.gitlab.url.split('://')[1]}/#{project.namespace.path}/somewhere")
+      expect(project.web_url_without_protocol).to eq("#{Gitlab.config.doggohub.url.split('://')[1]}/#{project.namespace.path}/somewhere")
     end
   end
 
@@ -482,24 +482,24 @@ describe Project, models: true do
   describe '#to_param' do
     context 'with namespace' do
       before do
-        @group = create :group, name: 'gitlab'
-        @project = create(:project, name: 'gitlabhq', namespace: @group)
+        @group = create :group, name: 'doggohub'
+        @project = create(:project, name: 'doggohubhq', namespace: @group)
       end
 
-      it { expect(@project.to_param).to eq('gitlabhq') }
+      it { expect(@project.to_param).to eq('doggohubhq') }
     end
 
     context 'with invalid path' do
       it 'returns previous path to keep project suitable for use in URLs when persisted' do
-        project = create(:empty_project, path: 'gitlab')
+        project = create(:empty_project, path: 'doggohub')
         project.path = 'foo&bar'
 
         expect(project).not_to be_valid
-        expect(project.to_param).to eq 'gitlab'
+        expect(project.to_param).to eq 'doggohub'
       end
 
       it 'returns current path when new record' do
-        project = build(:empty_project, path: 'gitlab')
+        project = build(:empty_project, path: 'doggohub')
         project.path = 'foo&bar'
 
         expect(project).not_to be_valid
@@ -755,7 +755,7 @@ describe Project, models: true do
         "/uploads/project/avatar/#{project.id}/uploads/avatar.png"
       end
 
-      it { should eq "http://#{Gitlab.config.gitlab.host}#{avatar_path}" }
+      it { should eq "http://#{Gitlab.config.doggohub.host}#{avatar_path}" }
     end
 
     context 'When avatar file in git' do
@@ -767,7 +767,7 @@ describe Project, models: true do
         "/#{project.namespace.name}/#{project.path}/avatar"
       end
 
-      it { should eq "http://#{Gitlab.config.gitlab.host}#{avatar_path}" }
+      it { should eq "http://#{Gitlab.config.doggohub.host}#{avatar_path}" }
     end
 
     context 'when git repo is empty' do
@@ -964,19 +964,19 @@ describe Project, models: true do
   describe '#visibility_level_allowed?' do
     let(:project) { create(:project, :internal) }
 
-    context 'when checking on non-forked project' do
+    context 'when checking on non-borked project' do
       it { expect(project.visibility_level_allowed?(Gitlab::VisibilityLevel::PRIVATE)).to be_truthy }
       it { expect(project.visibility_level_allowed?(Gitlab::VisibilityLevel::INTERNAL)).to be_truthy }
       it { expect(project.visibility_level_allowed?(Gitlab::VisibilityLevel::PUBLIC)).to be_truthy }
     end
 
-    context 'when checking on forked project' do
+    context 'when checking on borked project' do
       let(:project)        { create(:project, :internal) }
-      let(:forked_project) { create(:project, forked_from_project: project) }
+      let(:borked_project) { create(:project, borked_from_project: project) }
 
-      it { expect(forked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::PRIVATE)).to be_truthy }
-      it { expect(forked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::INTERNAL)).to be_truthy }
-      it { expect(forked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::PUBLIC)).to be_falsey }
+      it { expect(borked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::PRIVATE)).to be_truthy }
+      it { expect(borked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::INTERNAL)).to be_truthy }
+      it { expect(borked_project.visibility_level_allowed?(Gitlab::VisibilityLevel::PUBLIC)).to be_falsey }
     end
   end
 
@@ -1040,12 +1040,12 @@ describe Project, models: true do
 
   describe '#rename_repo' do
     let(:project) { create(:project) }
-    let(:gitlab_shell) { Gitlab::Shell.new }
+    let(:doggohub_shell) { Gitlab::Shell.new }
 
     before do
-      # Project#gitlab_shell returns a new instance of Gitlab::Shell on every
+      # Project#doggohub_shell returns a new instance of Gitlab::Shell on every
       # call. This makes testing a bit easier.
-      allow(project).to receive(:gitlab_shell).and_return(gitlab_shell)
+      allow(project).to receive(:doggohub_shell).and_return(doggohub_shell)
 
       allow(project).to receive(:previous_changes).and_return('path' => ['foo'])
     end
@@ -1053,12 +1053,12 @@ describe Project, models: true do
     it 'renames a repository' do
       ns = project.namespace_dir
 
-      expect(gitlab_shell).to receive(:mv_repository).
+      expect(doggohub_shell).to receive(:mv_repository).
         ordered.
         with(project.repository_storage_path, "#{ns}/foo", "#{ns}/#{project.path}").
         and_return(true)
 
-      expect(gitlab_shell).to receive(:mv_repository).
+      expect(doggohub_shell).to receive(:mv_repository).
         ordered.
         with(project.repository_storage_path, "#{ns}/foo.wiki", "#{ns}/#{project.path}.wiki").
         and_return(true)
@@ -1146,7 +1146,7 @@ describe Project, models: true do
     let(:shell) { Gitlab::Shell.new }
 
     before do
-      allow(project).to receive(:gitlab_shell).and_return(shell)
+      allow(project).to receive(:doggohub_shell).and_return(shell)
     end
 
     context 'using a regular repository' do
@@ -1172,9 +1172,9 @@ describe Project, models: true do
       end
     end
 
-    context 'using a forked repository' do
+    context 'using a borked repository' do
       it 'does nothing' do
-        expect(project).to receive(:forked?).and_return(true)
+        expect(project).to receive(:borked?).and_return(true)
         expect(shell).not_to receive(:add_repository)
 
         project.create_repository
@@ -1433,21 +1433,21 @@ describe Project, models: true do
   end
 
   describe '#add_import_job' do
-    context 'forked' do
-      let(:forked_project_link) { create(:forked_project_link) }
-      let(:forked_from_project) { forked_project_link.forked_from_project }
-      let(:project) { forked_project_link.forked_to_project }
+    context 'borked' do
+      let(:borked_project_link) { create(:borked_project_link) }
+      let(:borked_from_project) { borked_project_link.borked_from_project }
+      let(:project) { borked_project_link.borked_to_project }
 
-      it 'schedules a RepositoryForkWorker job' do
-        expect(RepositoryForkWorker).to receive(:perform_async).
-          with(project.id, forked_from_project.repository_storage_path,
-              forked_from_project.path_with_namespace, project.namespace.path)
+      it 'schedules a RepositoryBorkWorker job' do
+        expect(RepositoryBorkWorker).to receive(:perform_async).
+          with(project.id, borked_from_project.repository_storage_path,
+              borked_from_project.path_with_namespace, project.namespace.path)
 
         project.add_import_job
       end
     end
 
-    context 'not forked' do
+    context 'not borked' do
       let(:project) { create(:project) }
 
       it 'schedules a RepositoryImportWorker job' do
@@ -1458,10 +1458,10 @@ describe Project, models: true do
     end
   end
 
-  describe '#gitlab_project_import?' do
-    subject(:project) { build(:project, import_type: 'gitlab_project') }
+  describe '#doggohub_project_import?' do
+    subject(:project) { build(:project, import_type: 'doggohub_project') }
 
-    it { expect(project.gitlab_project_import?).to be true }
+    it { expect(project.doggohub_project_import?).to be true }
   end
 
   describe '#gitea_import?' do

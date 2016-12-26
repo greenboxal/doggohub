@@ -22,7 +22,7 @@ class Projects::LfsApiController < Projects::GitHttpClientController
     render(
       json: {
         message: 'Server supports batch API only, please update your Git LFS client to version 1.0.1 and up.',
-        documentation_url: "#{Gitlab.config.gitlab.url}/help",
+        documentation_url: "#{Gitlab.config.doggohub.url}/help",
       },
       status: 501
     )
@@ -68,7 +68,7 @@ class Projects::LfsApiController < Projects::GitHttpClientController
   def download_actions(object)
     {
       download: {
-        href: "#{project.http_url_to_repo}/gitlab-lfs/objects/#{object[:oid]}",
+        href: "#{project.http_url_to_repo}/doggohub-lfs/objects/#{object[:oid]}",
         header: {
           Authorization: request.headers['Authorization']
         }.compact
@@ -79,7 +79,7 @@ class Projects::LfsApiController < Projects::GitHttpClientController
   def upload_actions(object)
     {
       upload: {
-        href: "#{project.http_url_to_repo}/gitlab-lfs/objects/#{object[:oid]}/#{object[:size]}",
+        href: "#{project.http_url_to_repo}/doggohub-lfs/objects/#{object[:oid]}/#{object[:size]}",
         header: {
           Authorization: request.headers['Authorization']
         }.compact

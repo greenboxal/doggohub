@@ -27,7 +27,7 @@
     %thead
       %tr
         %th From Bitbucket
-        %th To GitLab
+        %th To DoggoHub
         %th Status
     %tbody
       - @already_added_projects.each do |project|
@@ -77,7 +77,7 @@
 
 - if @incompatible_repos.any?
   %p
-    One or more of your Bitbucket projects cannot be imported into GitLab
+    One or more of your Bitbucket projects cannot be imported into DoggoHub
     directly because they use Subversion or Mercurial for version control,
     rather than Git. Please convert
     = link_to 'them to Git,', 'https://www.atlassian.com/git/tutorials/migrating-overview'

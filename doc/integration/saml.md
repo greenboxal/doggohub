@@ -1,29 +1,29 @@
 # SAML OmniAuth Provider
 
-GitLab can be configured to act as a SAML 2.0 Service Provider (SP). This allows
-GitLab to consume assertions from a SAML 2.0 Identity Provider (IdP) such as
+DoggoHub can be configured to act as a SAML 2.0 Service Provider (SP). This allows
+DoggoHub to consume assertions from a SAML 2.0 Identity Provider (IdP) such as
 Microsoft ADFS to authenticate users.
 
-First configure SAML 2.0 support in GitLab, then register the GitLab application
+First configure SAML 2.0 support in DoggoHub, then register the DoggoHub application
 in your SAML IdP:
 
-1.  Make sure GitLab is configured with HTTPS.
+1.  Make sure DoggoHub is configured with HTTPS.
     See [Using HTTPS](../install/installation.md#using-https) for instructions.
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
+      cd /home/git/doggohub
 
-      sudo -u git -H editor config/gitlab.yml
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration)
@@ -35,8 +35,8 @@ in your SAML IdP:
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_allow_single_sign_on'] = ['saml']
-      gitlab_rails['omniauth_block_auto_created_users'] = false
+      doggohub_rails['omniauth_allow_single_sign_on'] = ['saml']
+      doggohub_rails['omniauth_block_auto_created_users'] = false
     ```
 
     For installations from source:
@@ -46,13 +46,13 @@ in your SAML IdP:
       block_auto_created_users: false
     ```
 
-1.  You can also automatically link SAML users with existing GitLab users if their
+1.  You can also automatically link SAML users with existing DoggoHub users if their
     email addresses match by adding the following setting:
 
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_auto_link_saml_user'] = true
+      doggohub_rails['omniauth_auto_link_saml_user'] = true
     ```
 
     For installations from source:
@@ -66,14 +66,14 @@ in your SAML IdP:
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           name: 'saml',
           args: {
-                   assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+                   assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
                    idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
                    idp_sso_target_url: 'https://login.example.com/idp',
-                   issuer: 'https://gitlab.example.com',
+                   issuer: 'https://doggohub.example.com',
                    name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
                  },
           label: 'Company Login' # optional label for SAML login button, defaults to "Saml"
@@ -87,10 +87,10 @@ in your SAML IdP:
       - {
           name: 'saml',
           args: {
-                 assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+                 assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
                  idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
                  idp_sso_target_url: 'https://login.example.com/idp',
-                 issuer: 'https://gitlab.example.com',
+                 issuer: 'https://doggohub.example.com',
                  name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
                },
           label: 'Company Login' # optional label for SAML login button, defaults to "Saml"
@@ -98,7 +98,7 @@ in your SAML IdP:
     ```
 
 1.  Change the value for `assertion_consumer_service_url` to match the HTTPS endpoint
-    of GitLab (append `users/auth/saml/callback` to the HTTPS URL of your GitLab
+    of DoggoHub (append `users/auth/saml/callback` to the HTTPS URL of your DoggoHub
     installation to generate the correct value).
 
 1.  Change the values of `idp_cert_fingerprint`, `idp_sso_target_url`,
@@ -109,32 +109,32 @@ in your SAML IdP:
 1.  Change the value of `issuer` to a unique name, which will identify the application
     to the IdP.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
-1.  Register the GitLab SP in your SAML 2.0 IdP, using the application name specified
+1.  Register the DoggoHub SP in your SAML 2.0 IdP, using the application name specified
     in `issuer`.
 
 To ease configuration, most IdP accept a metadata URL for the application to provide
-configuration information to the IdP. To build the metadata URL for GitLab, append
-`users/auth/saml/metadata` to the HTTPS URL of your GitLab installation, for instance:
+configuration information to the IdP. To build the metadata URL for DoggoHub, append
+`users/auth/saml/metadata` to the HTTPS URL of your DoggoHub installation, for instance:
    ```
-   https://gitlab.example.com/users/auth/saml/metadata
+   https://doggohub.example.com/users/auth/saml/metadata
    ```
 
 At a minimum the IdP *must* provide a claim containing the user's email address, using
-claim name `email` or `mail`. The email will be used to automatically generate the GitLab
-username. GitLab will also use claims with name `name`, `first_name`, `last_name`
+claim name `email` or `mail`. The email will be used to automatically generate the DoggoHub
+username. DoggoHub will also use claims with name `name`, `first_name`, `last_name`
 (see [the omniauth-saml gem](https://github.com/omniauth/omniauth-saml/blob/master/lib/omniauth/strategies/saml.rb)
 for supported claims).
 
 On the sign in page there should now be a SAML button below the regular sign in form.
 Click the icon to begin the authentication process. If everything goes well the user
-will be returned to GitLab and will be signed in.
+will be returned to DoggoHub and will be signed in.
 
 ## External Groups
 
 >**Note:**
-This setting is only available on GitLab 8.7 and above.
+This setting is only available on DoggoHub 8.7 and above.
 
 SAML login includes support for external groups. You can define in the SAML
 settings which groups, to which your users belong in your IdP, you wish to be
@@ -142,7 +142,7 @@ marked as [external](../user/permissions.md).
 
 ### Requirements
 
-First you need to tell GitLab where to look for group information. For this you
+First you need to tell DoggoHub where to look for group information. For this you
 need to make sure that your IdP server sends a specific `AttributeStament` along
 with the regular SAML response. Here is an example:
 
@@ -157,9 +157,9 @@ with the regular SAML response. Here is an example:
 ```
 
 The name of the attribute can be anything you like, but it must contain the groups
-to which a user belongs. In order to tell GitLab where to find these groups, you need
+to which a user belongs. In order to tell DoggoHub where to find these groups, you need
 to add a `groups_attribute:` element to your SAML settings. You will also need to
-tell GitLab which groups are external via the `external_groups:` element:
+tell DoggoHub which groups are external via the `external_groups:` element:
 
 ```yaml
 { name: 'saml',
@@ -167,10 +167,10 @@ tell GitLab which groups are external via the `external_groups:` element:
   groups_attribute: 'Groups',
   external_groups: ['Freelancers', 'Interns'],
   args: {
-          assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+          assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
           idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
           idp_sso_target_url: 'https://login.example.com/idp',
-          issuer: 'https://gitlab.example.com',
+          issuer: 'https://doggohub.example.com',
           name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
         } }
 ```
@@ -179,14 +179,14 @@ tell GitLab which groups are external via the `external_groups:` element:
 
 ### `auto_sign_in_with_provider`
 
-You can add this setting to your GitLab configuration to automatically redirect you
+You can add this setting to your DoggoHub configuration to automatically redirect you
 to your SAML server for authentication, thus removing the need to click a button
 before actually signing in.
 
 For omnibus package:
 
 ```ruby
-gitlab_rails['omniauth_auto_sign_in_with_provider'] = 'saml'
+doggohub_rails['omniauth_auto_sign_in_with_provider'] = 'saml'
 ```
 
 For installations from source:
@@ -203,7 +203,7 @@ of the SAML users has admin permissions.
 ### `attribute_statements`
 
 >**Note:**
-This setting is only available on GitLab 8.6 and above.
+This setting is only available on DoggoHub 8.6 and above.
 This setting should only be used to map attributes that are part of the
 OmniAuth info hash schema.
 
@@ -215,17 +215,17 @@ specify `{ email: ['EmailAddress'] }` to map the Attribute to the
 corresponding key in the info hash.  URI-named Attributes are also supported, e.g.
 `{ email: ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'] }`.
 
-This setting allows you tell GitLab where to look for certain attributes required
+This setting allows you tell DoggoHub where to look for certain attributes required
 to create an account. Like mentioned above, if your IdP sends the user's email
-address as `EmailAddress` instead of `email`, let GitLab know by setting it on
+address as `EmailAddress` instead of `email`, let DoggoHub know by setting it on
 your configuration:
 
 ```yaml
 args: {
-        assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+        assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
         idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
         idp_sso_target_url: 'https://login.example.com/idp',
-        issuer: 'https://gitlab.example.com',
+        issuer: 'https://doggohub.example.com',
         name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
         attribute_statements: { email: ['EmailAddress'] }
 }
@@ -240,10 +240,10 @@ The value given is added to the current time at which the response is validated.
 
 ```yaml
 args: {
-        assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+        assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
         idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
         idp_sso_target_url: 'https://login.example.com/idp',
-        issuer: 'https://gitlab.example.com',
+        issuer: 'https://doggohub.example.com',
         name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
         attribute_statements: { email: ['EmailAddress'] },
         allowed_clock_drift: 1 # for one second clock drift
@@ -254,8 +254,8 @@ args: {
 
 ### 500 error after login
 
-If you see a "500 error" in GitLab when you are redirected back from the SAML sign in page,
-this likely indicates that GitLab could not get the email address for the SAML user.
+If you see a "500 error" in DoggoHub when you are redirected back from the SAML sign in page,
+this likely indicates that DoggoHub could not get the email address for the SAML user.
 
 Make sure the IdP provides a claim containing the user's email address, using claim name
 `email` or `mail`.
@@ -265,18 +265,18 @@ Make sure the IdP provides a claim containing the user's email address, using cl
 If after signing in into your SAML server you are redirected back to the sign in page and
 no error is displayed, check your `production.log` file. It will most likely contain the
 message `Can't verify CSRF token authenticity`. This means that there is an error during
-the SAML request, but this error never reaches GitLab due to the CSRF check.
+the SAML request, but this error never reaches DoggoHub due to the CSRF check.
 
 To bypass this you can add `skip_before_action :verify_authenticity_token` to the
 `omniauth_callbacks_controller.rb` file immediately after the `class` line and
 comment out the `protect_from_forgery` line using a `#` then restart Unicorn. This
-will allow the error to hit GitLab, where it can then be seen in the usual logs,
+will allow the error to hit DoggoHub, where it can then be seen in the usual logs,
 or as a flash message on the login screen.
 
-That file is located in `/opt/gitlab/embedded/service/gitlab-rails/app/controllers`
-for Omnibus installations and by default in `/home/git/gitlab/app/controllers` for
-installations from source. Restart Unicorn using the `sudo gitlab-ctl restart unicorn`
-command on Omnibus installations and `sudo service gitlab restart` on installations
+That file is located in `/opt/doggohub/embedded/service/doggohub-rails/app/controllers`
+for Omnibus installations and by default in `/home/git/doggohub/app/controllers` for
+installations from source. Restart Unicorn using the `sudo doggohub-ctl restart unicorn`
+command on Omnibus installations and `sudo service doggohub restart` on installations
 from source.
 
 You may also find the [SSO Tracer](https://addons.mozilla.org/en-US/firefox/addon/sso-tracer)
@@ -285,13 +285,13 @@ You may also find the [SSO Tracer](https://addons.mozilla.org/en-US/firefox/addo
 
 ### Invalid audience
 
-This error means that the IdP doesn't recognize GitLab as a valid sender and
-receiver of SAML requests. Make sure to add the GitLab callback URL to the approved
+This error means that the IdP doesn't recognize DoggoHub as a valid sender and
+receiver of SAML requests. Make sure to add the DoggoHub callback URL to the approved
 audiences of the IdP server.
 
 ### Missing claims
 
-The IdP server needs to pass certain information in order for GitLab to either
+The IdP server needs to pass certain information in order for DoggoHub to either
 create an account, or match the login information to an existing account. `email`
 is the minimum amount of information that needs to be passed. If the IdP server
 is not providing this information, all SAML requests will fail.

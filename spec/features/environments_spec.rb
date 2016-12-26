@@ -118,7 +118,7 @@ feature 'Environments page', :feature, :js do
         end
 
         context 'with external_url' do
-          given(:environment) { create(:environment, project: project, external_url: 'https://git.gitlab.com') }
+          given(:environment) { create(:environment, project: project, external_url: 'https://git.doggohub.com') }
           given(:build) { create(:ci_build, pipeline: pipeline) }
           given(:deployment) { create(:deployment, environment: environment, deployable: build) }
 

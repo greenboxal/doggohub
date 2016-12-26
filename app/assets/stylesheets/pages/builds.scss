@@ -78,15 +78,15 @@
     display: block;
     margin-bottom: 10px;
 
-    &.scroll-top .gitlab-icon-scroll-up-hover,
-    &.scroll-top:hover .gitlab-icon-scroll-up,
-    &.scroll-bottom .gitlab-icon-scroll-down-hover,
-    &.scroll-bottom:hover .gitlab-icon-scroll-down {
+    &.scroll-top .doggohub-icon-scroll-up-hover,
+    &.scroll-top:hover .doggohub-icon-scroll-up,
+    &.scroll-bottom .doggohub-icon-scroll-down-hover,
+    &.scroll-bottom:hover .doggohub-icon-scroll-down {
       display: none;
     }
 
-    &.scroll-top:hover .gitlab-icon-scroll-up-hover,
-    &.scroll-bottom:hover .gitlab-icon-scroll-down-hover {
+    &.scroll-top:hover .doggohub-icon-scroll-up-hover,
+    &.scroll-bottom:hover .doggohub-icon-scroll-down-hover {
       display: inline-block;
     }
 

@@ -8,7 +8,7 @@ describe PipelinesEmailService do
   end
 
   let(:project) { create(:project) }
-  let(:recipient) { 'test@gitlab.com' }
+  let(:recipient) { 'test@doggohub.com' }
 
   let(:data) do
     Gitlab::DataBuilder::Pipeline.build(pipeline)

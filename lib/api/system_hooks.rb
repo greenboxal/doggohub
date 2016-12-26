@@ -48,7 +48,7 @@ module API
           path: "ruby",
           project_id: 1,
           owner_name: "Someone",
-          owner_email: "example@gitlabhq.com"
+          owner_email: "example@doggohubhq.com"
         }
         hook.execute(data, 'system_hooks')
         data

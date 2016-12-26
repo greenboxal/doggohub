@@ -26,7 +26,7 @@
   %td.branch-commit
     - if pipeline.ref && show_branch
       .icon-container
-        = pipeline.tag? ? icon('tag') : icon('code-fork')
+        = pipeline.tag? ? icon('tag') : icon('code-bork')
       = link_to pipeline.ref, namespace_project_commits_path(pipeline.project.namespace, pipeline.project, pipeline.ref), class: "monospace branch-name"
     - if show_commit
       .icon-container.commit-icon

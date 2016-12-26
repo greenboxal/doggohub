@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-feature 'Merge request created from fork' do
+feature 'Merge request created from bork' do
   given(:user) { create(:user) }
   given(:project) { create(:project, :public) }
-  given(:fork_project) { create(:project, :public) }
+  given(:bork_project) { create(:project, :public) }
 
   given!(:merge_request) do
-    create(:forked_project_link, forked_to_project: fork_project,
-                                 forked_from_project: project)
+    create(:borked_project_link, borked_to_project: bork_project,
+                                 borked_from_project: project)
 
-    create(:merge_request_with_diffs, source_project: fork_project,
+    create(:merge_request_with_diffs, source_project: bork_project,
                                       target_project: project,
                                       description: 'Test merge request')
   end
 
   background do
-    fork_project.team << [user, :master]
+    bork_project.team << [user, :master]
     login_as user
   end
 
@@ -28,7 +28,7 @@ feature 'Merge request created from fork' do
   context 'source project is deleted' do
     background do
       MergeRequests::MergeService.new(project, user).execute(merge_request)
-      fork_project.destroy!
+      bork_project.destroy!
     end
 
     scenario 'user can access merge request' do
@@ -42,7 +42,7 @@ feature 'Merge request created from fork' do
   context 'pipeline present in source project' do
     given(:pipeline) do
       create(:ci_pipeline,
-             project: fork_project,
+             project: bork_project,
              sha: merge_request.diff_head_sha,
              ref: merge_request.source_branch)
     end
@@ -62,7 +62,7 @@ feature 'Merge request created from fork' do
       end
 
       expect(page.find('a.btn-remove')[:href])
-        .to include fork_project.path_with_namespace
+        .to include bork_project.path_with_namespace
     end
   end
 

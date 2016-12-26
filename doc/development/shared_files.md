@@ -1,16 +1,16 @@
 # Shared files
 
-Historically, GitLab has been storing shared files in many different
+Historically, DoggoHub has been storing shared files in many different
 directories: `public/uploads`, `builds`, `tmp/repositories`, `tmp/rebase` (EE),
-etc. Having so many shared directories makes it difficult to deploy GitLab on
-shared storage (e.g. NFS). Working towards GitLab 9.0 we are consolidating
+etc. Having so many shared directories makes it difficult to deploy DoggoHub on
+shared storage (e.g. NFS). Working towards DoggoHub 9.0 we are consolidating
 these different directories under the `shared` directory.
 
-This means that if GitLab will start storing puppies in some future version
+This means that if DoggoHub will start storing puppies in some future version
 then we should put them in `shared/puppies`. Temporary puppy files should be
 stored in `shared/tmp`.
 
-In the GitLab application code you can get the full path to the `shared`
+In the DoggoHub application code you can get the full path to the `shared`
 directory with `Gitlab.config.shared.path`.
 
 ## What is not a 'shared file'

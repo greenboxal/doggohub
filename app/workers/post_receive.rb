@@ -6,7 +6,7 @@ class PostReceive
     if path = Gitlab.config.repositories.storages.find { |p| repo_path.start_with?(p[1].to_s) }
       repo_path.gsub!(path[1].to_s, "")
     else
-      log("Check gitlab.yml config for correct repositories.storages values. No repository storage path matches \"#{repo_path}\"")
+      log("Check doggohub.yml config for correct repositories.storages values. No repository storage path matches \"#{repo_path}\"")
     end
 
     changes = Base64.decode64(changes) unless changes.include?(' ')

@@ -1,7 +1,7 @@
-# GitLab slash commands
+# DoggoHub slash commands
 
 Slash commands are textual shortcuts for common actions on issues or merge
-requests that are usually done by clicking buttons or dropdowns in GitLab's UI.
+requests that are usually done by clicking buttons or dropdowns in DoggoHub's UI.
 You can enter these commands while creating a new issue or merge request, and
 in comments. Each command should be on a separate line in order to be properly
 detected and executed. The commands are removed from the issue, merge request or

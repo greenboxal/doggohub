@@ -28,7 +28,7 @@ describe '6_validations', lib: true do
     end
 
     it 'throws an error' do
-      expect { validate_storages }.to raise_error('"name with spaces" is not a valid storage name. Please fix this in your gitlab.yml before starting GitLab.')
+      expect { validate_storages }.to raise_error('"name with spaces" is not a valid storage name. Please fix this in your doggohub.yml before starting DoggoHub.')
     end
   end
 
@@ -38,7 +38,7 @@ describe '6_validations', lib: true do
     end
 
     it 'throws an error' do
-      expect { validate_storages }.to raise_error('bar is a nested path of foo. Nested paths are not supported for repository storages. Please fix this in your gitlab.yml before starting GitLab.')
+      expect { validate_storages }.to raise_error('bar is a nested path of foo. Nested paths are not supported for repository storages. Please fix this in your doggohub.yml before starting DoggoHub.')
     end
   end
 

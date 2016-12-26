@@ -2,20 +2,20 @@
 
 To enable the Crowd OmniAuth provider you must register your application with Crowd. To configure Crowd integration you need an application name and password.  
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
+      cd /home/git/doggohub
 
-      sudo -u git -H editor config/gitlab.yml
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration) for initial settings.
@@ -25,7 +25,7 @@ To enable the Crowd OmniAuth provider you must register your application with Cr
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "crowd",
           "args" => { 
@@ -53,6 +53,6 @@ To enable the Crowd OmniAuth provider you must register your application with Cr
 
 1.  Save the configuration file.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
 On the sign in page there should now be a Crowd tab in the sign in form.

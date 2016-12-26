@@ -1,6 +1,6 @@
 # Chat Commands
 
-Chat commands allow user to perform common operations on GitLab right from there chat client.
+Chat commands allow user to perform common operations on DoggoHub right from there chat client.
 Right now both Mattermost and Slack are supported.
 
 ## Available commands

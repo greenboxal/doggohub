@@ -1,5 +1,5 @@
 
-require 'gitlab/email/handler/base_handler'
+require 'doggohub/email/handler/base_handler'
 
 module Gitlab
   module Email

@@ -7,7 +7,7 @@ describe 'projects/merge_requests/show/_commits.html.haml' do
   let(:target_project) { create(:project) }
 
   let(:source_project) do
-    create(:project, forked_from_project: target_project)
+    create(:project, borked_from_project: target_project)
   end
 
   let(:merge_request) do

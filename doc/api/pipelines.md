@@ -2,7 +2,7 @@
 
 ## List project pipelines
 
-> [Introduced][ce-5837] in GitLab 8.11
+> [Introduced][ce-5837] in DoggoHub 8.11
 
 ```
 GET /projects/:id/pipelines
@@ -13,7 +13,7 @@ GET /projects/:id/pipelines
 | `id`      | integer | yes      | The ID of a project |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/pipelines"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/pipelines"
 ```
 
 Example of response
@@ -73,7 +73,7 @@ Example of response
 
 ## Get a single pipeline
 
-> [Introduced][ce-5837] in GitLab 8.11
+> [Introduced][ce-5837] in DoggoHub 8.11
 
 ```
 GET /projects/:id/pipelines/:pipeline_id
@@ -85,7 +85,7 @@ GET /projects/:id/pipelines/:pipeline_id
 | `pipeline_id` | integer | yes      | The ID of a pipeline   |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/pipeline/46"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/pipeline/46"
 ```
 
 Example of response
@@ -119,7 +119,7 @@ Example of response
 
 ## Create a new pipeline
 
-> [Introduced][ce-7209] in GitLab 8.14
+> [Introduced][ce-7209] in DoggoHub 8.14
 
 ```
 POST /projects/:id/pipeline
@@ -131,7 +131,7 @@ POST /projects/:id/pipeline
 | `ref`       | string | yes      | Reference to commit |
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/pipeline?ref=master"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/pipeline?ref=master"
 ```
 
 Example of response
@@ -165,7 +165,7 @@ Example of response
 
 ## Retry failed builds in a pipeline
 
-> [Introduced][ce-5837] in GitLab 8.11
+> [Introduced][ce-5837] in DoggoHub 8.11
 
 ```
 POST /projects/:id/pipelines/:pipeline_id/retry
@@ -177,7 +177,7 @@ POST /projects/:id/pipelines/:pipeline_id/retry
 | `pipeline_id` | integer | yes   | The ID of a pipeline |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/pipelines/46/retry"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/pipelines/46/retry"
 ```
 
 Response:
@@ -211,7 +211,7 @@ Response:
 
 ## Cancel a pipelines builds
 
-> [Introduced][ce-5837] in GitLab 8.11
+> [Introduced][ce-5837] in DoggoHub 8.11
 
 ```
 POST /projects/:id/pipelines/:pipeline_id/cancel
@@ -223,7 +223,7 @@ POST /projects/:id/pipelines/:pipeline_id/cancel
 | `pipeline_id` | integer | yes   | The ID of a pipeline |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/pipelines/46/cancel"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/pipelines/46/cancel"
 ```
 
 Response:
@@ -255,5 +255,5 @@ Response:
 }
 ```
 
-[ce-5837]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5837
-[ce-7209]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7209
+[ce-5837]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5837
+[ce-7209]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7209

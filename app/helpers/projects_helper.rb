@@ -77,8 +77,8 @@ module ProjectsHelper
     "You are going to transfer #{project.name_with_namespace} to another owner. Are you ABSOLUTELY sure?"
   end
 
-  def remove_fork_project_message(project)
-    "You are going to remove the fork relationship to source project #{@project.forked_from_project.name_with_namespace}.  Are you ABSOLUTELY sure?"
+  def remove_bork_project_message(project)
+    "You are going to remove the bork relationship to source project #{@project.borked_from_project.name_with_namespace}.  Are you ABSOLUTELY sure?"
   end
 
   def project_nav_tabs
@@ -100,8 +100,8 @@ module ProjectsHelper
   def can_change_visibility_level?(project, current_user)
     return false unless can?(current_user, :change_visibility_level, project)
 
-    if project.forked?
-      project.forked_from_project.visibility_level > Gitlab::VisibilityLevel::PRIVATE
+    if project.borked?
+      project.borked_from_project.visibility_level > Gitlab::VisibilityLevel::PRIVATE
     else
       true
     end
@@ -119,8 +119,8 @@ module ProjectsHelper
     return unless current_user
 
     project_ids = [@project.id]
-    if fork = current_user.fork_of(@project)
-      project_ids << fork.id
+    if bork = current_user.bork_of(@project)
+      project_ids << bork.id
     end
 
     current_user.recent_push(project_ids)
@@ -164,7 +164,7 @@ module ProjectsHelper
     nav_tabs = [:home]
 
     if !project.empty_repo? && can?(current_user, :download_code, project)
-      nav_tabs << [:files, :commits, :network, :graphs, :forks]
+      nav_tabs << [:files, :commits, :network, :graphs, :borks]
     end
 
     if project.repo_exists? && can?(current_user, :read_merge_request, project)
@@ -265,7 +265,7 @@ module ProjectsHelper
       enabled_protocol
     else
       if !current_user || current_user.require_ssh_key?
-        gitlab_config.protocol
+        doggohub_config.protocol
       else
         'ssh'
       end
@@ -310,7 +310,7 @@ module ProjectsHelper
               instance_type: t2.nano
               user_data: |-
 
-                # Created by GitLab UI for :>
+                # Created by DoggoHub UI for :>
 
                 echo _KD_NOTIFY_@Installing Base packages...@
 
@@ -374,7 +374,7 @@ module ProjectsHelper
   end
 
   def ci_configuration_path(project)
-    filename_path(project, :gitlab_ci_yml)
+    filename_path(project, :doggohub_ci_yml)
   end
 
   def project_wiki_path_with_version(proj, page, version, is_newest)

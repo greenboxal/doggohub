@@ -1,4 +1,4 @@
-# Migrating from SVN to GitLab
+# Migrating from SVN to DoggoHub
 
 Subversion (SVN) is a central version control system (VCS) while
 Git is a distributed version control system. There are some major differences
@@ -9,7 +9,7 @@ between the two, for more information consult your favorite search engine.
 There are two approaches to SVN to Git migration:
 
 1. [Git/SVN Mirror](#smooth-migration-with-a-gitsvn-mirror-using-subgit) which:
-    - Makes the GitLab repository to mirror the SVN project.
+    - Makes the DoggoHub repository to mirror the SVN project.
     - Git and SVN repositories are kept in sync; you can use either one.
     - Smoothens the migration process and allows to manage migration risks.
 
@@ -22,7 +22,7 @@ There are two approaches to SVN to Git migration:
 [SubGit](https://subgit.com) is a tool for a smooth, stress-free SVN to Git
 migration. It creates a writable Git mirror of a local or remote Subversion
 repository and that way you can use both Subversion and Git as long as you like.
-It requires access to your GitLab server as it talks with the Git repositories
+It requires access to your DoggoHub server as it talks with the Git repositories
 directly in a filesystem level.
 
 ### SubGit prerequisites
@@ -35,16 +35,16 @@ directly in a filesystem level.
 
 ### SubGit configuration
 
-The first step to mirror you SVN repository in GitLab is to create a new empty
+The first step to mirror you SVN repository in DoggoHub is to create a new empty
 project which will be used as a mirror. For Omnibus installations the path to
 the repository will be located at
-`/var/opt/gitlab/git-data/repositories/USER/REPO.git` by default. For
+`/var/opt/doggohub/git-data/repositories/USER/REPO.git` by default. For
 installations from source, the default repository directory will be
 `/home/git/repositories/USER/REPO.git`. For convenience, assign this path to a
 variable:
 
 ```
-GIT_REPO_PATH=/var/opt/gitlab/git-data/repositories/USER/REPOS.git
+GIT_REPO_PATH=/var/opt/doggohub/git-data/repositories/USER/REPOS.git
 ```
 
 SubGit will keep this repository in sync with a remote SVN project. For
@@ -56,7 +56,7 @@ SVN_PROJECT_URL=http://svn.company.com/repos/project
 
 Next you need to run SubGit to set up a Git/SVN mirror. Make sure the following
 `subgit` command is ran on behalf of the same user that keeps ownership of
-GitLab Git repositories (by default `git`):
+DoggoHub Git repositories (by default `git`):
 
 ```
 subgit configure --layout auto $SVN_PROJECT_URL $GIT_REPO_PATH
@@ -100,19 +100,19 @@ Running SubGit in a mirror mode requires a
 [registration](https://subgit.com/pricing.html). Registration is free for open
 source, academic and startup projects.
 
-We're currently working on deeper GitLab/SubGit integration. You may track our
-progress at [this issue](https://gitlab.com/gitlab-org/gitlab-ee/issues/990).
+We're currently working on deeper DoggoHub/SubGit integration. You may track our
+progress at [this issue](https://doggohub.com/doggohub-org/doggohub-ee/issues/990).
 
 ### SubGit support
 
-For any questions related to SVN to GitLab migration with SubGit, you can
+For any questions related to SVN to DoggoHub migration with SubGit, you can
 contact the SubGit team directly at [support@subgit.com](mailto:support@subgit.com).
 
 ## Cut over migration with svn2git
 
 If you are currently using an SVN repository, you can migrate the repository
-to Git and GitLab. We recommend a hard cut over - run the migration command once
-and then have all developers start using the new GitLab repository immediately.
+to Git and DoggoHub. We recommend a hard cut over - run the migration command once
+and then have all developers start using the new DoggoHub repository immediately.
 Otherwise, it's hard to keep changing in sync in both directions. The conversion
 process should be run on a local workstation.
 
@@ -131,7 +131,7 @@ sudo apt-get install git-core git-svn ruby
 
 Optionally, prepare an authors file so `svn2git` can map SVN authors to Git authors.
 If you choose not to create the authors file then commits will not be attributed
-to the correct GitLab user. Some users may not consider this a big issue while
+to the correct DoggoHub user. Some users may not consider this a big issue while
 others will want to ensure they complete this step. If you choose to map authors
 you will be required to map every author that is present on changes in the SVN
 repository. If you don't, the conversion will fail and you will have to update
@@ -167,13 +167,13 @@ If your SVN repository requires a username and password add the
 [svn2git documentation](https://github.com/nirvdrum/svn2git) or run
 `svn2git --help` for full documentation on all of the available options.
 
-Create a new GitLab project, where you will eventually push your converted code.
-Copy the SSH or HTTP(S) repository URL from the project page. Add the GitLab
+Create a new DoggoHub project, where you will eventually push your converted code.
+Copy the SSH or HTTP(S) repository URL from the project page. Add the DoggoHub
 repository as a Git remote and push all the changes. This will push all commits,
 branches and tags.
 
 ```bash
-git remote add origin git@gitlab.com:<group>/<project>.git
+git remote add origin git@doggohub.com:<group>/<project>.git
 git push --all origin
 git push --tags origin
 ```

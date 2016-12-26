@@ -1,6 +1,6 @@
 # Merge Request discussion resolution
 
-> [Introduced][ce-5022] in GitLab 8.11.
+> [Introduced][ce-5022] in DoggoHub 8.11.
 
 Discussion resolution helps keep track of progress during code review.
 Resolving comments prevents you from forgetting to address feedback and lets you
@@ -35,7 +35,7 @@ resolved discussions tracker.
 
 ## Only allow merge requests to be merged if all discussions are resolved
 
-> [Introduced][ce-7125] in GitLab 8.14.
+> [Introduced][ce-7125] in DoggoHub 8.14.
 
 You can prevent merge requests from being merged until all discussions are
 resolved.
@@ -53,7 +53,7 @@ are resolved.
 
 ## Move all unresolved discussions in a merge request to an issue
 
-> [Introduced][ce-7180] in GitLab 8.15.
+> [Introduced][ce-7180] in DoggoHub 8.15.
 
 To delegate unresolved discussions to a new issue you can click the link **open
 an issue to resolve them later**.
@@ -72,9 +72,9 @@ add a note referring to the newly created issue.
 
 You can now proceed to merge the merge request from the UI.
 
-[ce-5022]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5022
-[ce-7125]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7125
-[ce-7180]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7180
+[ce-5022]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5022
+[ce-7125]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7125
+[ce-7180]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7180
 [resolve-discussion-button]: img/resolve_discussion_button.png
 [resolve-comment-button]: img/resolve_comment_button.png
 [discussion-view]: img/discussion_view.png

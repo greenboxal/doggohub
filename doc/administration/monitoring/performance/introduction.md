@@ -1,20 +1,20 @@
-# GitLab Performance Monitoring
+# DoggoHub Performance Monitoring
 
-GitLab comes with its own application performance measuring system as of GitLab
-8.4, simply called "GitLab Performance Monitoring". GitLab Performance Monitoring is available in both the
+DoggoHub comes with its own application performance measuring system as of DoggoHub
+8.4, simply called "DoggoHub Performance Monitoring". DoggoHub Performance Monitoring is available in both the
 Community and Enterprise editions.
 
 Apart from this introduction, you are advised to read through the following
-documents in order to understand and properly configure GitLab Performance Monitoring:
+documents in order to understand and properly configure DoggoHub Performance Monitoring:
 
-- [GitLab Configuration](gitlab_configuration.md)
+- [DoggoHub Configuration](doggohub_configuration.md)
 - [InfluxDB Install/Configuration](influxdb_configuration.md)
 - [InfluxDB Schema](influxdb_schema.md)
 - [Grafana Install/Configuration](grafana_configuration.md)
 
-## Introduction to GitLab Performance Monitoring
+## Introduction to DoggoHub Performance Monitoring
 
-GitLab Performance Monitoring makes it possible to measure a wide variety of statistics
+DoggoHub Performance Monitoring makes it possible to measure a wide variety of statistics
 including (but not limited to):
 
 - The time it took to complete a transaction (a web request or Sidekiq job).

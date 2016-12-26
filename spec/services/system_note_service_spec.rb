@@ -97,9 +97,9 @@ describe SystemNoteService, services: true do
             end
           end
 
-          context 'on a fork' do
+          context 'on a bork' do
             before do
-              expect(noteable).to receive(:for_fork?).and_return(true)
+              expect(noteable).to receive(:for_bork?).and_return(true)
             end
 
             it 'includes the project namespace' do
@@ -482,16 +482,16 @@ describe SystemNoteService, services: true do
       end
     end
 
-    context 'commit with cross-reference from fork' do
+    context 'commit with cross-reference from bork' do
       let(:author2) { create(:project_member, :reporter, user: create(:user), project: project).user }
-      let(:forked_project) { Projects::ForkService.new(project, author2).execute }
-      let(:commit2) { forked_project.commit }
+      let(:borked_project) { Projects::BorkService.new(project, author2).execute }
+      let(:commit2) { borked_project.commit }
 
       before do
         described_class.cross_reference(noteable, commit0, author2)
       end
 
-      it 'is true when a fork mentions an external issue' do
+      it 'is true when a bork mentions an external issue' do
         expect(described_class.cross_reference_exists?(noteable, commit2)).
             to be true
       end
@@ -502,7 +502,7 @@ describe SystemNoteService, services: true do
           system_note.update(note: system_note.note.capitalize)
         end
 
-        it 'is true when a fork mentions an external issue' do
+        it 'is true when a bork mentions an external issue' do
           expect(described_class.cross_reference_exists?(noteable, commit2)).
               to be true
         end
@@ -627,11 +627,11 @@ describe SystemNoteService, services: true do
 
           expect(WebMock).to have_requested(:post, jira_api_remote_link_url(jira_issue)).with(
             body: hash_including(
-              GlobalID: "GitLab",
+              GlobalID: "DoggoHub",
               object: {
                 url: namespace_project_commit_url(project.namespace, project, commit),
-                title: "GitLab: Mentioned on commit - #{commit.title}",
-                icon: { title: "GitLab", url16x16: "https://gitlab.com/favicon.ico" },
+                title: "DoggoHub: Mentioned on commit - #{commit.title}",
+                icon: { title: "DoggoHub", url16x16: "https://doggohub.com/favicon.ico" },
                 status: { resolved: false }
               }
             )
@@ -653,11 +653,11 @@ describe SystemNoteService, services: true do
 
           expect(WebMock).to have_requested(:post, jira_api_remote_link_url(jira_issue)).with(
             body: hash_including(
-              GlobalID: "GitLab",
+              GlobalID: "DoggoHub",
               object: {
                 url: namespace_project_issue_url(project.namespace, project, issue),
-                title: "GitLab: Mentioned on issue - #{issue.title}",
-                icon: { title: "GitLab", url16x16: "https://gitlab.com/favicon.ico" },
+                title: "DoggoHub: Mentioned on issue - #{issue.title}",
+                icon: { title: "DoggoHub", url16x16: "https://doggohub.com/favicon.ico" },
                 status: { resolved: false }
               }
             )
@@ -679,11 +679,11 @@ describe SystemNoteService, services: true do
 
           expect(WebMock).to have_requested(:post, jira_api_remote_link_url(jira_issue)).with(
             body: hash_including(
-              GlobalID: "GitLab",
+              GlobalID: "DoggoHub",
               object: {
                 url: namespace_project_snippet_url(project.namespace, project, snippet),
-                title: "GitLab: Mentioned on snippet - #{snippet.title}",
-                icon: { title: "GitLab", url16x16: "https://gitlab.com/favicon.ico" },
+                title: "DoggoHub: Mentioned on snippet - #{snippet.title}",
+                icon: { title: "DoggoHub", url16x16: "https://doggohub.com/favicon.ico" },
                 status: { resolved: false }
               }
             )

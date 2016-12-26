@@ -52,7 +52,7 @@
     - if merge_request.target_project.default_branch != merge_request.target_branch
       &nbsp;
       = link_to namespace_project_commits_path(merge_request.project.namespace, merge_request.project, merge_request.target_branch) do
-        = icon('code-fork')
+        = icon('code-bork')
         = merge_request.target_branch
 
     - if merge_request.milestone

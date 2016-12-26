@@ -133,7 +133,7 @@ module Ci
         it "does not return builds if only has different repository path" do
           config = YAML.dump({
                                before_script: ["pwd"],
-                               rspec: { script: "rspec", type: type, only: ["branches@fork"] }
+                               rspec: { script: "rspec", type: type, only: ["branches@bork"] }
                              })
 
           config_processor = GitlabCiYamlProcessor.new(config, path)
@@ -149,7 +149,7 @@ module Ci
                                production: { script: "deploy", type: "deploy", only: ["master@path", "deploy"] },
                              })
 
-          config_processor = GitlabCiYamlProcessor.new(config, 'fork')
+          config_processor = GitlabCiYamlProcessor.new(config, 'bork')
 
           expect(config_processor.builds_for_stage_and_ref("deploy", "deploy").size).to eq(2)
           expect(config_processor.builds_for_stage_and_ref("test", "deploy").size).to eq(1)
@@ -289,7 +289,7 @@ module Ci
         it "returns builds if except has different repository path" do
           config = YAML.dump({
                                before_script: ["pwd"],
-                               rspec: { script: "rspec", type: type, except: ["branches@fork"] }
+                               rspec: { script: "rspec", type: type, except: ["branches@bork"] }
                              })
 
           config_processor = GitlabCiYamlProcessor.new(config, path)
@@ -300,12 +300,12 @@ module Ci
         it "returns build except specified type" do
           config = YAML.dump({
                                before_script: ["pwd"],
-                               rspec: { script: "rspec", type: "test", except: ["master", "deploy", "test@fork"] },
+                               rspec: { script: "rspec", type: "test", except: ["master", "deploy", "test@bork"] },
                                staging: { script: "deploy", type: "deploy", except: ["master"] },
-                               production: { script: "deploy", type: "deploy", except: ["master@fork"] },
+                               production: { script: "deploy", type: "deploy", except: ["master@bork"] },
                              })
 
-          config_processor = GitlabCiYamlProcessor.new(config, 'fork')
+          config_processor = GitlabCiYamlProcessor.new(config, 'bork')
 
           expect(config_processor.builds_for_stage_and_ref("deploy", "deploy").size).to eq(2)
           expect(config_processor.builds_for_stage_and_ref("test", "test").size).to eq(0)
@@ -761,7 +761,7 @@ module Ci
       context 'when hash is specified' do
         let(:environment) do
           { name: 'production',
-            url: 'http://production.gitlab.com' }
+            url: 'http://production.doggohub.com' }
         end
 
         it 'does return production and URL' do
@@ -1301,7 +1301,7 @@ EOT
     end
 
     describe "Validate configuration templates" do
-      templates = Dir.glob("#{Rails.root.join('vendor/gitlab-ci-yml')}/**/*.gitlab-ci.yml")
+      templates = Dir.glob("#{Rails.root.join('vendor/doggohub-ci-yml')}/**/*.doggohub-ci.yml")
 
       templates.each do |file|
         it "does not return errors for #{file}" do
@@ -1334,13 +1334,13 @@ EOT
       context "when YAML content is empty" do
         it "returns an error about missing content" do
           expect(GitlabCiYamlProcessor.validation_message(''))
-            .to eq "Please provide content of .gitlab-ci.yml"
+            .to eq "Please provide content of .doggohub-ci.yml"
         end
       end
 
       context "when the YAML is valid" do
         it "does not return any errors" do
-          content = File.read(Rails.root.join('spec/support/gitlab_stubs/gitlab_ci.yml'))
+          content = File.read(Rails.root.join('spec/support/doggohub_stubs/doggohub_ci.yml'))
 
           expect(GitlabCiYamlProcessor.validation_message(content)).to be_nil
         end

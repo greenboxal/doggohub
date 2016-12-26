@@ -21,7 +21,7 @@
 /* global GroupAvatar */
 /* global LineHighlighter */
 /* global ShortcutsBlob */
-/* global ProjectFork */
+/* global ProjectBork */
 /* global BuildArtifacts */
 /* global GroupsSelect */
 /* global Search */
@@ -244,8 +244,8 @@
           // already created, where the network graph is created.
           shortcut_handler = true;
           break;
-        case 'projects:forks:new':
-          new ProjectFork();
+        case 'projects:borks:new':
+          new ProjectBork();
           break;
         case 'projects:artifacts:browse':
           new BuildArtifacts();
@@ -330,7 +330,7 @@
             case 'graphs':
             case 'compare':
             case 'pipelines':
-            case 'forks':
+            case 'borks':
             case 'milestones':
             case 'project_members':
             case 'deploy_keys':

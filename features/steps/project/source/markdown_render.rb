@@ -19,17 +19,17 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
   end
 
   step 'I should see rendered README which contains correct links' do
-    expect(page).to have_content "Welcome to GitLab GitLab is a free project and repository management application"
-    expect(page).to have_link "GitLab API doc"
-    expect(page).to have_link "GitLab API website"
+    expect(page).to have_content "Welcome to DoggoHub DoggoHub is a free project and repository management application"
+    expect(page).to have_link "DoggoHub API doc"
+    expect(page).to have_link "DoggoHub API website"
     expect(page).to have_link "Rake tasks"
     expect(page).to have_link "backup and restore procedure"
-    expect(page).to have_link "GitLab API doc directory"
+    expect(page).to have_link "DoggoHub API doc directory"
     expect(page).to have_link "Maintenance"
   end
 
   step 'I click on Gitlab API in README' do
-    click_link "GitLab API doc"
+    click_link "DoggoHub API doc"
   end
 
   step 'I should see correct document rendered' do
@@ -47,8 +47,8 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
     expect(page).to have_content "maintenance.md"
   end
 
-  step 'I click on GitLab API doc directory in README' do
-    click_link "GitLab API doc directory"
+  step 'I click on DoggoHub API doc directory in README' do
+    click_link "DoggoHub API doc directory"
   end
 
   step 'I should see correct doc/api directory rendered' do
@@ -63,7 +63,7 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
 
   step 'I should see correct maintenance file rendered' do
     expect(current_path).to eq namespace_project_blob_path(@project.namespace, @project, "markdown/doc/raketasks/maintenance.md")
-    expect(page).to have_content "bundle exec rake gitlab:env:info RAILS_ENV=production"
+    expect(page).to have_content "bundle exec rake doggohub:env:info RAILS_ENV=production"
   end
 
   step 'I click on link "empty" in the README' do
@@ -212,14 +212,14 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
   end
 
   step 'I add various links to the wiki page' do
-    fill_in "wiki[content]", with: "[test](test)\n[GitLab API doc](api)\n[Rake tasks](raketasks)\n"
+    fill_in "wiki[content]", with: "[test](test)\n[DoggoHub API doc](api)\n[Rake tasks](raketasks)\n"
     fill_in "wiki[message]", with: "Adding links to wiki"
     click_button "Create page"
   end
 
   step 'Wiki page should have added links' do
     expect(current_path).to eq namespace_project_wiki_path(@project.namespace, @project, "home")
-    expect(page).to have_content "test GitLab API doc Rake tasks"
+    expect(page).to have_content "test DoggoHub API doc Rake tasks"
   end
 
   step 'I add a header to the wiki page' do
@@ -250,8 +250,8 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
     expect(current_path).to eq namespace_project_wiki_path(@project.namespace, @project, "home")
   end
 
-  step 'I click on GitLab API doc link' do
-    click_link "GitLab API"
+  step 'I click on DoggoHub API doc link' do
+    click_link "DoggoHub API"
   end
 
   step 'I see Gitlab API document' do
@@ -294,7 +294,7 @@ class Spinach::Features::ProjectSourceMarkdownRender < Spinach::FeatureSteps
     header_should_have_correct_id_and_link(2, 'Application details', 'application-details')
   end
 
-  step 'Header "GitLab API" should have correct id and link' do
-    header_should_have_correct_id_and_link(1, 'GitLab API', 'gitlab-api')
+  step 'Header "DoggoHub API" should have correct id and link' do
+    header_should_have_correct_id_and_link(1, 'DoggoHub API', 'doggohub-api')
   end
 end

@@ -36,7 +36,7 @@ module Gitlab
         # enough to distinguish most timestamps but small enough to not alter
         # the timestamp significantly.
         #
-        # See https://gitlab.com/gitlab-com/operations/issues/175 for more
+        # See https://doggohub.com/doggohub-com/operations/issues/175 for more
         # information.
         time = System.real_time(:nanosecond) + rand(JITTER_RANGE)
 

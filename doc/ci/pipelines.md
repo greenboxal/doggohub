@@ -1,7 +1,7 @@
 # Introduction to pipelines and builds
 
 >**Note:**
-Introduced in GitLab 8.8.
+Introduced in DoggoHub 8.8.
 
 ## Pipelines
 
@@ -20,7 +20,7 @@ Builds are individual runs of [jobs]. Not to be confused with a `build` job or
 
 ## Defining pipelines
 
-Pipelines are defined in `.gitlab-ci.yml` by specifying [jobs] that run in
+Pipelines are defined in `.doggohub-ci.yml` by specifying [jobs] that run in
 [stages].
 
 See full [documentation](yaml/README.md#jobs).

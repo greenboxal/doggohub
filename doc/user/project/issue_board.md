@@ -1,26 +1,26 @@
 # Issue board
 
-> [Introduced][ce-5554] in GitLab 8.11.
+> [Introduced][ce-5554] in DoggoHub 8.11.
 
-The GitLab Issue Board is a software project management tool used to plan,
+The DoggoHub Issue Board is a software project management tool used to plan,
 organize, and visualize a workflow for a feature or product release.
 It can be seen like a light version of a [Kanban] or a [Scrum] board.
 
 Other interesting links:
 
-- [GitLab Issue Board landing page on about.gitlab.com][landing]
+- [DoggoHub Issue Board landing page on about.doggohub.com][landing]
 - [YouTube video introduction to Issue Boards][youtube]
 
 ## Overview
 
-The Issue Board builds on GitLab's existing issue tracking functionality and
+The Issue Board builds on DoggoHub's existing issue tracking functionality and
 leverages the power of [labels] by utilizing them as lists of the scrum board.
 
 With the Issue Board you can have a different view of your issues while also
 maintaining the same filtering and sorting abilities you see across the
 issue tracker.
 
-Below is a table of the definitions used for GitLab's Issue Board.
+Below is a table of the definitions used for DoggoHub's Issue Board.
 
 | What we call it  | What it means |
 | --------------  | ------------- |
@@ -36,7 +36,7 @@ two default:
 Label list: a list based on a label. It shows all issues with that label.
 - Label list: a list based on a label. It shows all opened issues with that label.
 
-![GitLab Issue Board](img/issue_board.png)
+![DoggoHub Issue Board](img/issue_board.png)
 
 ---
 
@@ -178,11 +178,11 @@ A few things to remember:
   by default. If you have more than 20 issues start scrolling down and the next
   20 will appear.
 
-[ce-5554]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5554
+[ce-5554]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5554
 [labels]: ./labels.md
 [scrum]: https://en.wikipedia.org/wiki/Scrum_(software_development)
 [kanban]: https://en.wikipedia.org/wiki/Kanban_(development)
 [create-labels]: ./labels.md#create-new-labels
 [label-priority]: ./labels.md#prioritize-labels
-[landing]: https://about.gitlab.com/solutions/issueboard
+[landing]: https://about.doggohub.com/solutions/issueboard
 [youtube]: https://www.youtube.com/watch?v=UWsJ8tkHAa8

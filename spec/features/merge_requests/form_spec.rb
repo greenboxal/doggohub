@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'New/edit merge request', feature: true, js: true do
   let!(:project)   { create(:project, visibility_level: Gitlab::VisibilityLevel::PUBLIC) }
-  let(:fork_project) { create(:project, forked_from_project: project) }
+  let(:bork_project) { create(:project, borked_from_project: project) }
   let!(:user)      { create(:user)}
   let!(:milestone) { create(:milestone, project: project) }
   let!(:label)     { create(:label, project: project) }
@@ -141,19 +141,19 @@ describe 'New/edit merge request', feature: true, js: true do
     end
   end
 
-  context 'forked project' do
+  context 'borked project' do
     before do
-      fork_project.team << [user, :master]
+      bork_project.team << [user, :master]
       login_as(user)
     end
 
     context 'new merge request' do
       before do
         visit new_namespace_project_merge_request_path(
-          fork_project.namespace,
-          fork_project,
+          bork_project.namespace,
+          bork_project,
           merge_request: {
-            source_project_id: fork_project.id,
+            source_project_id: bork_project.id,
             target_project_id: project.id,
             source_branch: 'fix',
             target_branch: 'master'
@@ -212,7 +212,7 @@ describe 'New/edit merge request', feature: true, js: true do
     context 'edit merge request' do
       before do
         merge_request = create(:merge_request,
-                                 source_project: fork_project,
+                                 source_project: bork_project,
                                  target_project: project,
                                  source_branch: 'fix',
                                  target_branch: 'master'

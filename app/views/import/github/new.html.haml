@@ -6,7 +6,7 @@
 
 - if github_import_configured?
   %p
-    To import a GitHub project, you first need to authorize GitLab to access
+    To import a GitHub project, you first need to authorize DoggoHub to access
     the list of your GitHub repositories:
 
   = link_to 'List Your GitHub Repositories', status_import_github_path, class: 'btn btn-success'
@@ -37,7 +37,7 @@
     - if current_user.admin?
       As an administrator you may like to configure
     - else
-      Consider asking your GitLab administrator to configure
+      Consider asking your DoggoHub administrator to configure
     = link_to 'GitHub integration', help_page_path("integration/github")
     which will allow login via GitHub and allow importing projects without
     generating a Personal Access Token.

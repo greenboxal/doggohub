@@ -1,6 +1,6 @@
 # Start using Git on the command line
 
-If you want to start using Git and GitLab, make sure that you have created and/or signed into an account on GitLab.
+If you want to start using Git and DoggoHub, make sure that you have created and/or signed into an account on DoggoHub.
 
 ## Open a shell
 
@@ -98,7 +98,7 @@ git add CHANGES IN RED
 git commit -m "DESCRIBE THE INTENTION OF THE COMMIT"
 ```
 
-### Send changes to gitlab.com
+### Send changes to doggohub.com
 ```
 git push REMOTE NAME-OF-BRANCH
 ```

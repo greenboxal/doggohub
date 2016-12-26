@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'erb'
 
 # This feature spec is intended to be a comprehensive exercising of all of
-# GitLab's non-standard Markdown parsing and the integration thereof.
+# DoggoHub's non-standard Markdown parsing and the integration thereof.
 #
 # These tests should be very high-level. Anything low-level belongs in the specs
 # for the corresponding HTML::Pipeline filter or helper method.
@@ -24,7 +24,7 @@ require 'erb'
 #
 # See the MarkdownFeature class for setup details.
 
-describe 'GitLab Markdown', feature: true do
+describe 'DoggoHub Markdown', feature: true do
   include Capybara::Node::Matchers
   include GitlabMarkdownHelper
   include MarkdownMatchers
@@ -182,7 +182,7 @@ describe 'GitLab Markdown', feature: true do
       end
 
       it 'ignores internal link' do
-        link = doc.at_css('a:contains("GitLab Root")')
+        link = doc.at_css('a:contains("DoggoHub Root")')
 
         expect(link.attr('rel')).not_to match 'nofollow'
         expect(link.attr('target')).not_to match '_blank'
@@ -254,7 +254,7 @@ describe 'GitLab Markdown', feature: true do
       file = Gollum::File.new(@project_wiki.wiki)
       expect(file).to receive(:path).and_return('images/example.jpg')
       expect(@project_wiki).to receive(:find_file).with('images/example.jpg').and_return(file)
-      allow(@project_wiki).to receive(:wiki_base_path) { '/namespace1/gitlabhq/wikis' }
+      allow(@project_wiki).to receive(:wiki_base_path) { '/namespace1/doggohubhq/wikis' }
 
       @html = markdown(@feat.raw_markdown, { pipeline: :wiki, project_wiki: @project_wiki, page_slug: @project_wiki_page.slug })
     end

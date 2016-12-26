@@ -1,6 +1,6 @@
-# Import your project from Gitea to GitLab
+# Import your project from Gitea to DoggoHub
 
-Import your projects from Gitea to GitLab with minimal effort.
+Import your projects from Gitea to DoggoHub with minimal effort.
 
 ## Overview
 
@@ -9,19 +9,19 @@ As of Gitea `v1.0.0`, issue & pull-request comments cannot be imported! This is
 a [known issue][issue-401] that should be fixed in a near-future.
 
 - At its current state, Gitea importer can import:
-  - the repository description (GitLab 8.15+)
-  - the Git repository data (GitLab 8.15+)
-  - the issues (GitLab 8.15+)
-  - the pull requests (GitLab 8.15+)
-  - the milestones (GitLab 8.15+)
-  - the labels (GitLab 8.15+)
+  - the repository description (DoggoHub 8.15+)
+  - the Git repository data (DoggoHub 8.15+)
+  - the issues (DoggoHub 8.15+)
+  - the pull requests (DoggoHub 8.15+)
+  - the milestones (DoggoHub 8.15+)
+  - the labels (DoggoHub 8.15+)
 - Repository public access is retained. If a repository is private in Gitea
-  it will be created as private in GitLab as well.
+  it will be created as private in DoggoHub as well.
 
 ## How it works
 
 Since Gitea is currently not an OAuth provider, author/assignee cannot be mapped
-to users in your GitLab's instance. This means that the project creator (most of
+to users in your DoggoHub's instance. This means that the project creator (most of
 the times the current user that started the import process) is set as the author,
 but a reference on the issue about the original Gitea author is kept.
 
@@ -33,7 +33,7 @@ namespace that started the import process.
 
 The importer page is visible when you create a new project.
 
-![New project page on GitLab](img/import_projects_from_new_project_page.png)
+![New project page on DoggoHub](img/import_projects_from_new_project_page.png)
 
 Click on the **Gitea** link and the import authorization process will start.
 
@@ -42,7 +42,7 @@ Click on the **Gitea** link and the import authorization process will start.
 ### Authorize access to your repositories using a personal access token
 
 With this method, you will perform a one-off authorization with Gitea to grant
-GitLab access your repositories:
+DoggoHub access your repositories:
 
 1. Go to <https://you-gitea-instance/user/settings/applications> (replace
    `you-gitea-instance` with the host of your Gitea instance).
@@ -50,8 +50,8 @@ GitLab access your repositories:
 1. Enter a token description.
 1. Click **Generate Token**.
 1. Copy the token hash.
-1. Go back to GitLab and provide the token to the Gitea importer.
-1. Hit the **List Your Gitea Repositories** button and wait while GitLab reads
+1. Go back to DoggoHub and provide the token to the Gitea importer.
+1. Hit the **List Your Gitea Repositories** button and wait while DoggoHub reads
    your repositories' information. Once done, you'll be taken to the importer
    page to select the repositories to import.
 

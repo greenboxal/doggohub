@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GroupUrlConstrainer, lib: true do
-  let!(:group) { create(:group, path: 'gitlab') }
+  let!(:group) { create(:group, path: 'doggohub') }
 
   describe '#matches?' do
     context 'valid request' do
@@ -12,7 +12,7 @@ describe GroupUrlConstrainer, lib: true do
 
     context 'valid request for nested group' do
       let!(:nested_group) { create(:group, path: 'nested', parent: group) }
-      let!(:request) { build_request('gitlab/nested') }
+      let!(:request) { build_request('doggohub/nested') }
 
       it { expect(subject.matches?(request)).to be_truthy }
     end

@@ -24,15 +24,15 @@ module BlobHelper
       button_tag "Edit", class: "btn disabled has-tooltip btn-file-option", title: "You can only edit files when you are on a branch", data: { container: 'body' }
     elsif can_edit_blob?(blob, project, ref)
       link_to "Edit", edit_path, class: 'btn btn-sm'
-    elsif can?(current_user, :fork_project, project)
+    elsif can?(current_user, :bork_project, project)
       continue_params = {
         to:     edit_path,
-        notice: edit_in_new_fork_notice,
-        notice_now: edit_in_new_fork_notice_now
+        notice: edit_in_new_bork_notice,
+        notice_now: edit_in_new_bork_notice_now
       }
-      fork_path = namespace_project_forks_path(project.namespace, project, namespace_key: current_user.namespace.id, continue: continue_params)
+      bork_path = namespace_project_borks_path(project.namespace, project, namespace_key: current_user.namespace.id, continue: continue_params)
 
-      link_to "Edit", fork_path, class: 'btn btn-file-option', method: :post
+      link_to "Edit", bork_path, class: 'btn btn-file-option', method: :post
     end
   end
 
@@ -49,15 +49,15 @@ module BlobHelper
       button_tag label, class: "btn btn-#{btn_class} disabled has-tooltip", title: "It is not possible to #{action} files that are stored in LFS using the web interface", data: { container: 'body' }
     elsif can_edit_blob?(blob, project, ref)
       button_tag label, class: "btn btn-#{btn_class}", 'data-target' => "#modal-#{modal_type}-blob", 'data-toggle' => 'modal'
-    elsif can?(current_user, :fork_project, project)
+    elsif can?(current_user, :bork_project, project)
       continue_params = {
         to:     request.fullpath,
-        notice: edit_in_new_fork_notice + " Try to #{action} this file again.",
-        notice_now: edit_in_new_fork_notice_now
+        notice: edit_in_new_bork_notice + " Try to #{action} this file again.",
+        notice_now: edit_in_new_bork_notice_now
       }
-      fork_path = namespace_project_forks_path(project.namespace, project, namespace_key: current_user.namespace.id, continue: continue_params)
+      bork_path = namespace_project_borks_path(project.namespace, project, namespace_key: current_user.namespace.id, continue: continue_params)
 
-      link_to label, fork_path, class: "btn btn-#{btn_class}", method: :post
+      link_to label, bork_path, class: "btn btn-#{btn_class}", method: :post
     end
   end
 
@@ -187,8 +187,8 @@ module BlobHelper
     @gitignore_names ||= Gitlab::Template::GitignoreTemplate.dropdown_names
   end
 
-  def gitlab_ci_ymls
-    @gitlab_ci_ymls ||= Gitlab::Template::GitlabCiYmlTemplate.dropdown_names(params[:context])
+  def doggohub_ci_ymls
+    @doggohub_ci_ymls ||= Gitlab::Template::GitlabCiYmlTemplate.dropdown_names(params[:context])
   end
 
   def dockerfile_names

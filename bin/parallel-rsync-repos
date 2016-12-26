@@ -3,12 +3,12 @@
 # own intermediate directories created by rsync.
 #
 # Example invocation:
-# find /var/opt/gitlab/git-data/repositories -maxdepth 2 | \
-#   parallel-rsync-repos transfer-success.log /var/opt/gitlab/git-data/repositories /mnt/gitlab/repositories
+# find /var/opt/doggohub/git-data/repositories -maxdepth 2 | \
+#   parallel-rsync-repos transfer-success.log /var/opt/doggohub/git-data/repositories /mnt/doggohub/repositories
 #
 # You can also rsync to a remote destination.
 #
-# parallel-rsync-repos transfer-success.log /var/opt/gitlab/git-data/repositories user@host:/mnt/gitlab/repositories
+# parallel-rsync-repos transfer-success.log /var/opt/doggohub/git-data/repositories user@host:/mnt/doggohub/repositories
 #
 # If you need to pass extra options to rsync, set the RSYNC variable
 #

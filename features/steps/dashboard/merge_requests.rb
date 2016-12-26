@@ -5,17 +5,17 @@ class Spinach::Features::DashboardMergeRequests < Spinach::FeatureSteps
 
   step 'I should see merge requests assigned to me' do
     should_see(assigned_merge_request)
-    should_see(assigned_merge_request_from_fork)
+    should_see(assigned_merge_request_from_bork)
     should_not_see(authored_merge_request)
-    should_not_see(authored_merge_request_from_fork)
+    should_not_see(authored_merge_request_from_bork)
     should_not_see(other_merge_request)
   end
 
   step 'I should see merge requests authored by me' do
     should_see(authored_merge_request)
-    should_see(authored_merge_request_from_fork)
+    should_see(authored_merge_request_from_bork)
     should_not_see(assigned_merge_request)
-    should_not_see(assigned_merge_request_from_fork)
+    should_not_see(assigned_merge_request_from_bork)
     should_not_see(other_merge_request)
   end
 
@@ -27,12 +27,12 @@ class Spinach::Features::DashboardMergeRequests < Spinach::FeatureSteps
 
   step 'I have authored merge requests' do
     authored_merge_request
-    authored_merge_request_from_fork
+    authored_merge_request_from_bork
   end
 
   step 'I have assigned merge requests' do
     assigned_merge_request
-    assigned_merge_request_from_fork
+    assigned_merge_request_from_bork
   end
 
   step 'I have other merge requests' do
@@ -87,20 +87,20 @@ class Spinach::Features::DashboardMergeRequests < Spinach::FeatureSteps
                               source_project: project
   end
 
-  def authored_merge_request_from_fork
-    @authored_merge_request_from_fork ||= create :merge_request,
+  def authored_merge_request_from_bork
+    @authored_merge_request_from_bork ||= create :merge_request,
                                             source_branch: 'feature_conflict',
                                             author: current_user,
                                             target_project: public_project,
-                                            source_project: forked_project
+                                            source_project: borked_project
   end
 
-  def assigned_merge_request_from_fork
-    @assigned_merge_request_from_fork ||= create :merge_request,
+  def assigned_merge_request_from_bork
+    @assigned_merge_request_from_bork ||= create :merge_request,
                                             source_branch: 'markdown',
                                             assignee: current_user,
                                             target_project: public_project,
-                                            source_project: forked_project
+                                            source_project: borked_project
   end
 
   def project
@@ -115,7 +115,7 @@ class Spinach::Features::DashboardMergeRequests < Spinach::FeatureSteps
     @public_project ||= create :project, :public
   end
 
-  def forked_project
-    @forked_project ||= Projects::ForkService.new(public_project, current_user).execute
+  def borked_project
+    @borked_project ||= Projects::BorkService.new(public_project, current_user).execute
   end
 end

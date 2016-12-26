@@ -14,7 +14,7 @@
     - if @labels.present?
       %ul.content-list.manage-labels-list.js-other-labels
         = render partial: 'shared/label', subject: @group, collection: @labels, as: :label
-        = paginate @labels, theme: 'gitlab'
+        = paginate @labels, theme: 'doggohub'
     - else
       .nothing-here-block
         No labels created yet.

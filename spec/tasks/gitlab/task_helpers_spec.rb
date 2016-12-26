@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'tasks/gitlab/task_helpers'
+require 'tasks/doggohub/task_helpers'
 
 class TestHelpersTest
   include Gitlab::TaskHelpers
@@ -8,7 +8,7 @@ end
 describe Gitlab::TaskHelpers do
   subject { TestHelpersTest.new }
 
-  let(:repo) { 'https://gitlab.com/gitlab-org/gitlab-test.git' }
+  let(:repo) { 'https://doggohub.com/doggohub-org/doggohub-test.git' }
   let(:clone_path) { Rails.root.join('tmp/tests/task_helpers_tests').to_s }
   let(:tag) { 'v1.1.0' }
 

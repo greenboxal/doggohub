@@ -1,7 +1,7 @@
 # Introduction to environments and deployments
 
 >**Note:**
-Introduced in GitLab 8.9.
+Introduced in DoggoHub 8.9.
 
 During the development of software, there can be many stages until it's ready
 for public consumption. You sure want to first test your code and then deploy it
@@ -9,7 +9,7 @@ in a testing or staging environment before you release it to the public. That
 way you can prevent bugs not only in your software, but in the deployment
 process as well.
 
-GitLab CI is capable of not only testing or building your projects, but also
+DoggoHub CI is capable of not only testing or building your projects, but also
 deploying them in your infrastructure, with the added benefit of giving you a
 way to track your deployments. In other words, you can always know what is
 currently being deployed or has been deployed on your servers.
@@ -17,20 +17,20 @@ currently being deployed or has been deployed on your servers.
 ## Overview
 
 With environments, you can control the Continuous Deployment of your software
-all within GitLab. All you need to do is define them in your project's
-[`.gitlab-ci.yml`][yaml] as we will explore below. GitLab provides a full
+all within DoggoHub. All you need to do is define them in your project's
+[`.doggohub-ci.yml`][yaml] as we will explore below. DoggoHub provides a full
 history of your deployments per every environment.
 
 Environments are like tags for your CI jobs, describing where code gets deployed.
 Deployments are created when [jobs] deploy versions of code to environments,
-so every environment can have one or more deployments. GitLab keeps track of
+so every environment can have one or more deployments. DoggoHub keeps track of
 your deployments, so you always know what is currently being deployed on your
 servers. If you have a deployment service such as [Kubernetes][kubernetes-service]
 enabled for your project, you can use it to assist with your deployments, and
-can even access a web terminal for your environment from within GitLab!
+can even access a web terminal for your environment from within DoggoHub!
 
 To better understand how environments and deployments work, let's consider an
-example. We assume that you have already created a project in GitLab and set up
+example. We assume that you have already created a project in DoggoHub and set up
 a Runner. The example will cover the following:
 
 - We are developing an application
@@ -42,7 +42,7 @@ Let's see how it all ties together.
 
 ## Defining environments
 
-Let's consider the following `.gitlab-ci.yml` example:
+Let's consider the following `.doggohub-ci.yml` example:
 
 ```yaml
 stages:
@@ -82,20 +82,20 @@ lastly the `deploy_staging`. With this, we ensure that first the tests pass,
 then our app is able to be built successfully, and lastly we deploy to the
 staging server.
 
-The `environment` keyword is just a hint for GitLab that this job actually
+The `environment` keyword is just a hint for DoggoHub that this job actually
 deploys to this environment's `name`. It can also have a `url` which, as we
-will later see, is exposed in various places within GitLab. Each time a job that
+will later see, is exposed in various places within DoggoHub. Each time a job that
 has an environment specified and succeeds, a deployment is recorded, remembering
 the Git SHA and environment name.
 
 >**Note:**
-Starting with GitLab 8.15, the environment name is exposed to the Runner in
+Starting with DoggoHub 8.15, the environment name is exposed to the Runner in
 two forms: `$CI_ENVIRONMENT_NAME`, and `$CI_ENVIRONMENT_SLUG`. The first is
-the name given in `.gitlab-ci.yml` (with any variables expanded), while the
+the name given in `.doggohub-ci.yml` (with any variables expanded), while the
 second is a "cleaned-up" version of the name, suitable for use in URLs, DNS,
 etc.
 
-To sum up, with the above `.gitlab-ci.yml` we have achieved that:
+To sum up, with the above `.doggohub-ci.yml` we have achieved that:
 
 - All branches will run the `test` and `build` jobs.
 - The `deploy_staging` job will run [only](yaml/README.md#only) on the `master`
@@ -105,7 +105,7 @@ To sum up, with the above `.gitlab-ci.yml` we have achieved that:
   in particular will deploy our code to a staging server while the deployment
   will be recorded in an environment named `staging`.
 
-Let's now see how that information is exposed within GitLab.
+Let's now see how that information is exposed within DoggoHub.
 
 ## Viewing the current status of an environment
 
@@ -125,17 +125,17 @@ There's a bunch of information there, specifically you can see:
   branch and the Git SHA of the commit
 - The exact time the last deployment was performed
 - A button that takes you to the URL that you have defined under the
-  `environment` keyword in `.gitlab-ci.yml`
+  `environment` keyword in `.doggohub-ci.yml`
 - A button that re-deploys the latest deployment, meaning it runs the job
   defined by the environment name for that specific commit
 
 >**Notes:**
 - While you can create environments manually in the web interface, we recommend
-  that you define your environments in `.gitlab-ci.yml` first. They will
+  that you define your environments in `.doggohub-ci.yml` first. They will
   be automatically created for you after the first deploy.
 - The environments page can only be viewed by Reporters and above. For more
   information on the permissions, see the [permissions documentation][permissions].
-- Only deploys that happen after your `.gitlab-ci.yml` is properly configured
+- Only deploys that happen after your `.doggohub-ci.yml` is properly configured
   will show up in the "Environment" and "Last deployment" lists.
 
 The information shown in the Environments page is limited to the latest
@@ -144,7 +144,7 @@ deployments.
 
 ## Viewing the deployment history of an environment
 
-GitLab keeps track of your deployments, so you always know what is currently
+DoggoHub keeps track of your deployments, so you always know what is currently
 being deployed on your servers. That way you can have the full history of your
 deployments per every environment right in your browser. Clicking on an
 environment will show the history of its deployments. Assuming you have deployed
@@ -160,7 +160,7 @@ that works.
 ## Rolling back changes
 
 You can't control everything, so sometimes things go wrong. When that unfortunate
-time comes GitLab has you covered. Simply by clicking the **Rollback** button
+time comes DoggoHub has you covered. Simply by clicking the **Rollback** button
 that can be found in the deployments page
 (**Pipelines ➔ Environments ➔ `environment name`**) you can relaunch the
 job with the commit associated with it.
@@ -168,7 +168,7 @@ job with the commit associated with it.
 >**Note:**
 Bear in mind that your mileage will vary and it's entirely up to how you define
 the deployment process in the job's `script` whether the rollback succeeds or not.
-GitLab CI is just following orders.
+DoggoHub CI is just following orders.
 
 Thankfully that was the staging server that we had to rollback, and since we
 learn from our mistakes, we decided to not make the same again when we deploy
@@ -179,7 +179,7 @@ to the production server. Enter manual actions for deployments.
 Turning a job from running automatically to a manual action is as simple as
 adding `when: manual` to it. To expand on our previous example, let's add
 another job that this time deploys our app to a production server and is
-tracked by a `production` environment. The `.gitlab-ci.yml` looks like this
+tracked by a `production` environment. The `.doggohub-ci.yml` looks like this
 so far:
 
 ```yaml
@@ -218,7 +218,7 @@ deploy_prod:
   - master
 ```
 
-The `when: manual` action exposes a play button in GitLab's UI and the
+The `when: manual` action exposes a play button in DoggoHub's UI and the
 `deploy_prod` job will only be triggered if and when we click that play button.
 You can find it in the pipeline, build, environment, and deployment views.
 
@@ -238,11 +238,11 @@ Double the benefit!
 ## Web terminals
 
 >**Note:**
-Web terminals were added in GitLab 8.15 and are only available to project
+Web terminals were added in DoggoHub 8.15 and are only available to project
 masters and owners.
 
 If you deploy to your environments with the help of a deployment service (e.g.,
-the [Kubernetes](../project_services/kubernetes.md) service), GitLab can open
+the [Kubernetes](../project_services/kubernetes.md) service), DoggoHub can open
 a terminal session to your environment! This is a very powerful feature that
 allows you to debug issues without leaving the comfort of your web browser. To
 enable it, just follow the instructions given in the service documentation.
@@ -283,10 +283,10 @@ will help us achieve that.
 ## Dynamic environments
 
 As the name suggests, it is possible to create environments on the fly by just
-declaring their names dynamically in `.gitlab-ci.yml`. Dynamic environments is
+declaring their names dynamically in `.doggohub-ci.yml`. Dynamic environments is
 the basis of [Review apps](review_apps/index.md).
 
-GitLab Runner exposes various [environment variables][variables] when a job runs,
+DoggoHub Runner exposes various [environment variables][variables] when a job runs,
 and as such, you can use them as environment names. Let's add another job in
 our example which will deploy to all branches except `master`:
 
@@ -324,7 +324,7 @@ the web server to serve these requests is based on your setup.
 You could also use `$CI_BUILD_REF_SLUG` in `environment:url`, e.g.:
 `https://$CI_BUILD_REF_SLUG.review.example.com`. We use `$CI_ENVIRONMENT_SLUG`
 here because it is guaranteed to be unique, but if you're using a workflow like
-[GitLab Flow][gitlab-flow], collisions are very unlikely, and you may prefer
+[DoggoHub Flow][doggohub-flow], collisions are very unlikely, and you may prefer
 environment names to be more closely based on the branch name - the example
 above would give you an URL like `https://100-do-the-thing.review.example.com`
 
@@ -336,7 +336,7 @@ You are not bound to use the same prefix or only slashes in the dynamic
 environments' names (`/`), but as we will see later, this will enable the
 [grouping similar environments](#grouping-similar-environments) feature.
 
-The whole `.gitlab-ci.yml` looks like this so far:
+The whole `.doggohub-ci.yml` looks like this so far:
 
 ```yaml
 stages:
@@ -400,7 +400,7 @@ review_app:
     url: https://$CI_BUILD_REF_SLUG.example.com
 ```
 
-It is assumed that the user has already setup NGINX and GitLab Runner in the
+It is assumed that the user has already setup NGINX and DoggoHub Runner in the
 server this job will run on.
 
 >**Note:**
@@ -412,12 +412,12 @@ cases regarding naming of your branches and Review Apps.
 The development workflow would now be:
 
 - Developer creates a branch locally
-- Developer makes changes, commits and pushes the branch to GitLab
+- Developer makes changes, commits and pushes the branch to DoggoHub
 - Developer creates a merge request
 
 Behind the scenes:
 
-- GitLab Runner picks up the changes and starts running the jobs
+- DoggoHub Runner picks up the changes and starts running the jobs
 - The jobs run sequentially as defined in `stages`
   - First, the tests pass
   - Then, the build begins and successfully also passes
@@ -431,7 +431,7 @@ Let's briefly see where URL that's defined in the environments is exposed.
 
 ## Making use of the environment URL
 
-The environment URL is exposed in a few places within GitLab.
+The environment URL is exposed in a few places within DoggoHub.
 
 | In a merge request widget as a link | In the Environments view as a button | In the Deployments view as a button |
 | -------------------- | ------------ | ----------- |
@@ -496,22 +496,22 @@ stop_review:
 ```
 
 Setting the [`GIT_STRATEGY`][git-strategy] to `none` is necessary on the
-`stop_review` job so that the [GitLab Runner] won't try to checkout the code
+`stop_review` job so that the [DoggoHub Runner] won't try to checkout the code
 after the branch is deleted.
 
 >**Note:**
-Starting with GitLab 8.14, dynamic environments will be stopped automatically
+Starting with DoggoHub 8.14, dynamic environments will be stopped automatically
 when their associated branch is deleted.
 
 When you have an environment that has a stop action defined (typically when
-the environment describes a review app), GitLab will automatically trigger a
+the environment describes a review app), DoggoHub will automatically trigger a
 stop action when the associated branch is deleted.
 
-You can read more in the [`.gitlab-ci.yml` reference][onstop].
+You can read more in the [`.doggohub-ci.yml` reference][onstop].
 
 ## Grouping similar environments
 
-> [Introduced][ce-7015] in GitLab 8.14.
+> [Introduced][ce-7015] in DoggoHub 8.14.
 
 As we've seen in the [dynamic environments](#dynamic-environments), you can
 prepend their name with a word, then followed by a `/` and finally the branch
@@ -559,8 +559,8 @@ fetch = +refs/environments/*:refs/remotes/origin/environments/*
 
 Below are some links you may find interesting:
 
-- [The `.gitlab-ci.yml` definition of environments](yaml/README.md#environment)
-- [A blog post on Deployments & Environments](https://about.gitlab.com/2016/08/26/ci-deployment-and-environments/)
+- [The `.doggohub-ci.yml` definition of environments](yaml/README.md#environment)
+- [A blog post on Deployments & Environments](https://about.doggohub.com/2016/08/26/ci-deployment-and-environments/)
 - [Review Apps - Use dynamic environments to deploy your code for every branch](review_apps/index.md)
 
 [Pipelines]: pipelines.md
@@ -574,7 +574,7 @@ Below are some links you may find interesting:
 [env-name]: yaml/README.md#environment-name
 [only]: yaml/README.md#only-and-except
 [onstop]: yaml/README.md#environment-on_stop
-[ce-7015]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7015
-[gitlab-flow]: ../workflow/gitlab_flow.md
-[gitlab runner]: https://docs.gitlab.com/runner/
+[ce-7015]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7015
+[doggohub-flow]: ../workflow/doggohub_flow.md
+[doggohub runner]: https://docs.doggohub.com/runner/
 [git-strategy]: yaml/README.md#git-strategy

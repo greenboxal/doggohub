@@ -1,17 +1,17 @@
 # Markdown
 
-## GitLab Flavored Markdown (GFM)
+## DoggoHub Flavored Markdown (GFM)
 
 > **Note:**
-Not all of the GitLab-specific extensions to Markdown that are described in
+Not all of the DoggoHub-specific extensions to Markdown that are described in
 this document currently work on our documentation website.
 >
 For the best result, we encourage you to check this document out as rendered
-by GitLab: [markdown.md]
+by DoggoHub: [markdown.md]
 
-_GitLab uses the [Redcarpet Ruby library][redcarpet] for Markdown processing._
+_DoggoHub uses the [Redcarpet Ruby library][redcarpet] for Markdown processing._
 
-GitLab uses "GitLab Flavored Markdown" (GFM). It extends the standard Markdown in a few significant ways to add some useful functionality. It was inspired by [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
+DoggoHub uses "DoggoHub Flavored Markdown" (GFM). It extends the standard Markdown in a few significant ways to add some useful functionality. It was inspired by [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
 
 You can use GFM in the following areas:
 
@@ -23,13 +23,13 @@ You can use GFM in the following areas:
 - wiki pages
 - markdown documents inside the repository
 
-You can also use other rich text files in GitLab. You might have to install a
-dependency to do so. Please see the [github-markup gem readme](https://github.com/gitlabhq/markup#markups) for more information.
+You can also use other rich text files in DoggoHub. You might have to install a
+dependency to do so. Please see the [github-markup gem readme](https://github.com/doggohubhq/markup#markups) for more information.
 
 ### Newlines
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#newlines
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#newlines
 
 GFM honors the markdown specification in how [paragraphs and line breaks are handled](https://daringfireball.net/projects/markdown/syntax#p).
 
@@ -49,7 +49,7 @@ Sugar is sweet
 ### Multiple underscores in words
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#multiple-underscores-in-words
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#multiple-underscores-in-words
 
 It is not reasonable to italicize just _part_ of a word, especially when you're dealing with code and names that often appear with multiple underscores. Therefore, GFM ignores multiple underscores in words:
 
@@ -64,7 +64,7 @@ do_this_and_do_that_and_another_thing
 ### URL auto-linking
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#url-auto-linking
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#url-auto-linking
 
 GFM will autolink almost any URL you copy and paste into your text:
 
@@ -72,20 +72,20 @@ GFM will autolink almost any URL you copy and paste into your text:
     * https://google.com/
     * ftp://ftp.us.debian.org/debian/
     * smb://foo/bar/baz
-    * irc://irc.freenode.net/gitlab
+    * irc://irc.freenode.net/doggohub
     * http://localhost:3000
 
 * https://www.google.com
 * https://google.com/
 * ftp://ftp.us.debian.org/debian/
 * smb://foo/bar/baz
-* irc://irc.freenode.net/gitlab
+* irc://irc.freenode.net/doggohub
 * http://localhost:3000
 
 ### Multiline Blockquote
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#multiline-blockquote
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#multiline-blockquote
 
 On top of standard Markdown [blockquotes](#blockquotes), which require prepending `>` to quoted lines,
 GFM supports multiline blockquotes fenced by <code>>>></code>:
@@ -119,9 +119,9 @@ you can quote that without having to manually prepend `>` to every line!
 ### Code and Syntax Highlighting
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#code-and-syntax-highlighting
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#code-and-syntax-highlighting
 
-_GitLab uses the [Rouge Ruby library][rouge] for syntax highlighting. For a
+_DoggoHub uses the [Rouge Ruby library][rouge] for syntax highlighting. For a
 list of supported languages visit the Rouge website._
 
 Blocks of code are either fenced by lines with three back-ticks <code>```</code>,
@@ -189,7 +189,7 @@ But let's throw in a <b>tag</b>.
 ### Inline Diff
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#inline-diff
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#inline-diff
 
 With inline diffs tags you can display {+ additions +} or [- deletions -].
 
@@ -205,7 +205,7 @@ However the wrapping tags cannot be mixed as such:
 ### Emoji
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#emoji
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#emoji
 
 	Sometimes you want to :monkey: around a bit and add some :star2: to your :speech_balloon:. Well we have a gift for you:
 
@@ -227,7 +227,7 @@ If you are new to this, don't be :fearful:. You can easily join the emoji :famil
 
 Consult the [Emoji Cheat Sheet](http://emoji.codes) for a list of all supported emoji codes. :thumbsup:
 
-### Special GitLab References
+### Special DoggoHub References
 
 GFM recognizes special references.
 
@@ -282,7 +282,7 @@ It also has a shorthand version to reference other projects from the same namesp
 ### Task Lists
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#task-lists
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#task-lists
 
 You can add task lists to issues, merge requests and comments. To create a task list, add a specially-formatted Markdown list, like so:
 
@@ -305,7 +305,7 @@ Task lists can only be created in descriptions, not in titles. Task item state c
 ### Videos
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#videos
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#videos
 
 Image tags with a video extension are automatically converted to a video player.
 
@@ -322,7 +322,7 @@ Here's a sample video:
 ### Math
 
 > If this is not rendered correctly, see
-https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md#math
+https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md#math
 
 It is possible to have math written with the LaTeX syntax rendered using [KaTeX][katex].
 
@@ -531,7 +531,7 @@ Some text to show that the reference links can follow later.
 
 **Note**
 
-Relative links do not allow referencing project files in a wiki page or wiki page in a project file. The reason for this is that, in GitLab, wiki is always a separate git repository. For example:
+Relative links do not allow referencing project files in a wiki page or wiki page in a project file. The reason for this is that, in DoggoHub, wiki is always a separate git repository. For example:
 
 `[I'm a reference-style link](style)`
 
@@ -584,7 +584,7 @@ Quote break.
 
 You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
 
-See the documentation for HTML::Pipeline's [SanitizationFilter](http://www.rubydoc.info/gems/html-pipeline/1.11.0/HTML/Pipeline/SanitizationFilter#WHITELIST-constant) class for the list of allowed HTML tags and attributes.  In addition to the default `SanitizationFilter` whitelist, GitLab allows `span` elements.
+See the documentation for HTML::Pipeline's [SanitizationFilter](http://www.rubydoc.info/gems/html-pipeline/1.11.0/HTML/Pipeline/SanitizationFilter#WHITELIST-constant) class for the list of allowed HTML tags and attributes.  In addition to the default `SanitizationFilter` whitelist, DoggoHub allows `span` elements.
 
 ```no-highlight
 <dl>
@@ -792,10 +792,10 @@ A link starting with a `/` is relative to the wiki root.
 - The [Markdown Syntax Guide](https://daringfireball.net/projects/markdown/syntax) at Daring Fireball is an excellent resource for a detailed explanation of standard markdown.
 - [Dillinger.io](http://dillinger.io) is a handy tool for testing standard markdown.
 
-[^1]: This link will be broken if you see this document from the Help page or docs.gitlab.com
+[^1]: This link will be broken if you see this document from the Help page or docs.doggohub.com
 [^2]: This is my awesome footnote.
 
-[markdown.md]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/user/markdown.md
+[markdown.md]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/user/markdown.md
 [rouge]: http://rouge.jneen.net/ "Rouge website"
 [redcarpet]: https://github.com/vmg/redcarpet "Redcarpet website"
 [katex]: https://github.com/Khan/KaTeX "KaTeX website"

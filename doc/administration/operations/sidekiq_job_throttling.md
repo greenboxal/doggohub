@@ -1,8 +1,8 @@
 # Sidekiq Job throttling
 
-> Note: Introduced with GitLab 8.14
+> Note: Introduced with DoggoHub 8.14
 
-When your GitLab installation needs to handle tens of thousands of background
+When your DoggoHub installation needs to handle tens of thousands of background
 jobs, it can be convenient to throttle queues that do not need to be executed
 immediately, e.g. long running jobs like Pipelines, thus allowing jobs that do
 need to be executed immediately to have access to more resources.
@@ -13,7 +13,7 @@ Throttling. Depending on your infrastructure, you might have different slow
 running queues, which is why you can choose which queues you want to throttle 
 and by how much you want to throttle them.
 
-These settings are available in the Application Settings of your GitLab
+These settings are available in the Application Settings of your DoggoHub
 installation.
 
 ![Sidekiq Job Throttling](img/sidekiq_job_throttling.png)
@@ -29,5 +29,5 @@ So, for example, you set the `:concurrency` to 25 and the `Throttling factor` to
 queue_limit = (factor * Sidekiq.options[:concurrency]).ceil
 ```
 
-After enabling the job throttling, you will need to restart your GitLab
+After enabling the job throttling, you will need to restart your DoggoHub
 instance, in order for the changes to take effect.

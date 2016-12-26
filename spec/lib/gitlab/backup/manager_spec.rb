@@ -6,12 +6,12 @@ describe Backup::Manager, lib: true do
 
     let(:files) do
       [
-        '1451606400_2016_01_01_gitlab_backup.tar',
-        '1451520000_2015_12_31_gitlab_backup.tar',
-        '1450742400_2015_12_22_gitlab_backup.tar',
-        '1449878400_gitlab_backup.tar',
-        '1449014400_gitlab_backup.tar',
-        'manual_gitlab_backup.tar'
+        '1451606400_2016_01_01_doggohub_backup.tar',
+        '1451520000_2015_12_31_doggohub_backup.tar',
+        '1450742400_2015_12_22_doggohub_backup.tar',
+        '1449878400_doggohub_backup.tar',
+        '1449014400_doggohub_backup.tar',
+        'manual_doggohub_backup.tar'
       ]
     end
 

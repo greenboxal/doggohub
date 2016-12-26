@@ -4,19 +4,19 @@
 
 The LDAP check Rake task will test the `bind_dn` and `password` credentials
 (if configured) and will list a sample of LDAP users. This task is also
-executed as part of the `gitlab:check` task, but can run independently
+executed as part of the `doggohub:check` task, but can run independently
 using the command below.
 
 **Omnibus Installation**
 
 ```
-sudo gitlab-rake gitlab:ldap:check
+sudo doggohub-rake doggohub:ldap:check
 ```
 
 **Source Installation**
 
 ```bash
-sudo -u git -H bundle exec rake gitlab:ldap:check RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:ldap:check RAILS_ENV=production
 ```
 
 ------
@@ -25,19 +25,19 @@ By default, the task will return a sample of 100 LDAP users. Change this
 limit by passing a number to the check task:
 
 ```bash
-rake gitlab:ldap:check[50]
+rake doggohub:ldap:check[50]
 ```
 
 ## Rename a provider
 
-If you change the LDAP server ID in `gitlab.yml` or `gitlab.rb` you will need
+If you change the LDAP server ID in `doggohub.yml` or `doggohub.rb` you will need
 to update all user identities or users will be unable to sign in. Input the
 old and new provider and this task will update all matching identities in the
 database.
 
 `old_provider` and `new_provider` are derived from the prefix `ldap` plus the
-LDAP server ID from the configuration file. For example, in `gitlab.yml` or
-`gitlab.rb` you may see LDAP configuration like this:
+LDAP server ID from the configuration file. For example, in `doggohub.yml` or
+`doggohub.rb` you may see LDAP configuration like this:
 
 ```yaml
 main:
@@ -57,13 +57,13 @@ as the `old_provider` and the correct provider as the `new_provider`.
 **Omnibus Installation**
 
 ```bash
-sudo gitlab-rake gitlab:ldap:rename_provider[old_provider,new_provider]
+sudo doggohub-rake doggohub:ldap:rename_provider[old_provider,new_provider]
 ```
 
 **Source Installation**
 
 ```bash
-bundle exec rake gitlab:ldap:rename_provider[old_provider,new_provider] RAILS_ENV=production
+bundle exec rake doggohub:ldap:rename_provider[old_provider,new_provider] RAILS_ENV=production
 ```
 
 ### Example
@@ -73,7 +73,7 @@ If we change `main` to `mycompany`, the `new_provider` is `ldapmycompany`.
 To rename all user identities run the following command:
 
 ```bash
-sudo gitlab-rake gitlab:ldap:rename_provider[ldapmain,ldapmycompany]
+sudo doggohub-rake doggohub:ldap:rename_provider[ldapmain,ldapmycompany]
 ```
 
 Example output:
@@ -94,13 +94,13 @@ for them:
 **Omnibus Installation**
 
 ```bash
-sudo gitlab-rake gitlab:ldap:rename_provider
+sudo doggohub-rake doggohub:ldap:rename_provider
 ```
 
 **Source Installation**
 
 ```bash
-bundle exec rake gitlab:ldap:rename_provider RAILS_ENV=production
+bundle exec rake doggohub:ldap:rename_provider RAILS_ENV=production
 ```
 
 **Example output:**
@@ -116,5 +116,5 @@ This tasks also accepts the `force` environment variable which will skip the
 confirmation dialog:
 
 ```bash
-sudo gitlab-rake gitlab:ldap:rename_provider[old_provider,new_provider] force=yes
+sudo doggohub-rake doggohub:ldap:rename_provider[old_provider,new_provider] force=yes
 ```

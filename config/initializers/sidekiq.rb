@@ -14,7 +14,7 @@ Sidekiq.configure_server do |config|
     chain.add Gitlab::SidekiqMiddleware::RequestStoreMiddleware unless ENV['SIDEKIQ_REQUEST_STORE'] == '0'
   end
 
-  # Sidekiq-cron: load recurring jobs from gitlab.yml
+  # Sidekiq-cron: load recurring jobs from doggohub.yml
   # UGLY Hack to get nested hash from settingslogic
   cron_jobs = JSON.parse(Gitlab.config.cron_jobs.to_json)
   # UGLY hack: Settingslogic doesn't allow 'class' key
@@ -24,7 +24,7 @@ Sidekiq.configure_server do |config|
       cron_jobs[k]['class'] = cron_jobs[k].delete('job_class')
     else
       cron_jobs.delete(k)
-      Rails.logger.error("Invalid cron_jobs config key: '#{k}'. Check your gitlab config file.")
+      Rails.logger.error("Invalid cron_jobs config key: '#{k}'. Check your doggohub config file.")
     end
   end
   Sidekiq::Cron::Job.load_from_hash! cron_jobs
@@ -49,7 +49,7 @@ Sidekiq.configure_client do |config|
 end
 
 # The Sidekiq client API always adds the queue to the Sidekiq queue
-# list, but mail_room and gitlab-shell do not. This is only necessary
+# list, but mail_room and doggohub-shell do not. This is only necessary
 # for monitoring.
 config = YAML.load_file(Rails.root.join('config', 'sidekiq_queues.yml').to_s)
 

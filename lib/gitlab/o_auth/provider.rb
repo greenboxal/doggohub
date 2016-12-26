@@ -3,7 +3,7 @@ module Gitlab
     class Provider
       LABELS = {
         "github"         => "GitHub",
-        "gitlab"         => "GitLab.com",
+        "doggohub"         => "DoggoHub.com",
         "google_oauth2"  => "Google"
       }.freeze
 

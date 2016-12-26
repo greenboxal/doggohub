@@ -92,7 +92,7 @@ module API
           required: true,
           name: :token,
           type: String,
-          desc: 'Buildkite project GitLab token'
+          desc: 'Buildkite project DoggoHub token'
         },
         {
           required: true,
@@ -324,7 +324,7 @@ module API
           required: true,
           name: :url,
           type: String,
-          desc: 'The URL to the JIRA project which is being linked to this GitLab project, e.g., https://jira.example.com'
+          desc: 'The URL to the JIRA project which is being linked to this DoggoHub project, e.g., https://jira.example.com'
         },
         {
           required: true,
@@ -336,13 +336,13 @@ module API
           required: false,
           name: :username,
           type: String,
-          desc: 'The username of the user created to be used with GitLab/JIRA'
+          desc: 'The username of the user created to be used with DoggoHub/JIRA'
         },
         {
           required: false,
           name: :password,
           type: String,
-          desc: 'The password of the user created to be used with GitLab/JIRA'
+          desc: 'The password of the user created to be used with DoggoHub/JIRA'
         },
         {
           required: false,
@@ -617,7 +617,7 @@ module API
       end
       resource :projects do
         desc "Trigger a slash command for #{service_slug}" do
-          detail 'Added in GitLab 8.13'
+          detail 'Added in DoggoHub 8.13'
         end
         params do
           settings.each do |setting|

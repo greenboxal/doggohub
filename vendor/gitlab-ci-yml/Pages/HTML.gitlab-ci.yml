@@ -1,4 +1,4 @@
-# Full project: https://gitlab.com/pages/plain-html
+# Full project: https://doggohub.com/pages/plain-html
 pages:
   stage: deploy
   script:

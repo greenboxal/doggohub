@@ -8,7 +8,7 @@ To enable the Facebook OmniAuth provider you must register your application with
 
 1. Select the type "Website"
 
-1. Enter a name for your app. This can be anything. Consider something like "&lt;Organization&gt;'s GitLab" or "&lt;Your Name&gt;'s GitLab" or
+1. Enter a name for your app. This can be anything. Consider something like "&lt;Organization&gt;'s DoggoHub" or "&lt;Your Name&gt;'s DoggoHub" or
 something else descriptive.
 
 1. Choose "Create New Facebook App ID"
@@ -17,7 +17,7 @@ something else descriptive.
 
 1. Choose "Create App ID"
 
-1. Enter the address of your GitLab installation at the bottom of the package
+1. Enter the address of your DoggoHub installation at the bottom of the package
 
     ![Facebook Website URL](img/facebook_website_url.png)
 
@@ -47,20 +47,20 @@ something else descriptive.
 
     ![Facebook API Keys](img/facebook_api_keys.png)
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-    sudo editor /etc/gitlab/gitlab.rb
+    sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-    cd /home/git/gitlab
+    cd /home/git/doggohub
 
-    sudo -u git -H editor config/gitlab.yml
+    sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration) for initial settings.
@@ -70,7 +70,7 @@ something else descriptive.
     For omnibus package:
 
     ```ruby
-    gitlab_rails['omniauth_providers'] = [
+    doggohub_rails['omniauth_providers'] = [
       {
         "name" => "facebook",
         "app_id" => "YOUR_APP_ID",
@@ -92,6 +92,6 @@ something else descriptive.
 
 1.  Save the configuration file.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
-On the sign in page there should now be a Facebook icon below the regular sign in form. Click the icon to begin the authentication process. Facebook will ask the user to sign in and authorize the GitLab application. If everything goes well the user will be returned to GitLab and will be signed in.
+On the sign in page there should now be a Facebook icon below the regular sign in form. Click the icon to begin the authentication process. Facebook will ask the user to sign in and authorize the DoggoHub application. If everything goes well the user will be returned to DoggoHub and will be signed in.

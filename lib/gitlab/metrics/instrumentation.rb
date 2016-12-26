@@ -9,7 +9,7 @@ module Gitlab
     #
     #     Gitlab::Metrics::Instrumentation.instrument_method(User, :by_login)
     module Instrumentation
-      PROXY_IVAR = :@__gitlab_instrumentation_proxy
+      PROXY_IVAR = :@__doggohub_instrumentation_proxy
 
       def self.configure
         yield self

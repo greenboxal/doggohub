@@ -1,11 +1,11 @@
-# GitLab Git Workshop
+# DoggoHub Git Workshop
 
 ---
 
 # Agenda
 
 1. Brief history of Git
-1. GitLab walkthrough
+1. DoggoHub walkthrough
 1. Configure your environment
 1. Workshop
 
@@ -34,7 +34,7 @@ Use the tools at your disposal when you get stuck.
 
 ---
 
-# GitLab Walkthrough
+# DoggoHub Walkthrough
 
 ![fit](logo.png)
 
@@ -98,7 +98,7 @@ The key fingerprint is:
 39:fc:ce:94:f4:09:13:95:64:9a:65:c1:de:05:4d:01 you@computer-name
 ```
 
-Copy your public key and add it to your GitLab profile
+Copy your public key and add it to your DoggoHub profile
 
 ```bash
 cat ~/.ssh/id_rsa.pub
@@ -114,7 +114,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQEL17Ufacg8cDhlQMS5NhV8z3GHZdhCrZbl4gz you@example.
 
 - Create a project in your user namespace
   - Choose to import from 'Any Repo by URL' and use
-    https://gitlab.com/gitlab-org/training-examples.git
+    https://doggohub.com/doggohub-org/training-examples.git
 - Create a '`development`' or '`workspace`' directory in your home directory.
 - Clone the '`training-examples`' project
 
@@ -131,7 +131,7 @@ cd ~/development
 mkdir ~/workspace
 cd ~/workspace
 
-git clone git@gitlab.example.com:<username>/training-examples.git
+git clone git@doggohub.example.com:<username>/training-examples.git
 cd training-examples
 ```
 
@@ -251,12 +251,12 @@ git push origin squash_some_bugs
 Review the Thoughtbot code-review guide for suggestions to follow when reviewing merge requests:
 [https://github.com/thoughtbot/guides/tree/master/code-review](https://github.com/thoughtbot/guides/tree/master/code-review)
 
-See GitLab merge requests for examples:
-[https://gitlab.com/gitlab-org/gitlab-ce/merge_requests](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests)
+See DoggoHub merge requests for examples:
+[https://doggohub.com/doggohub-org/doggohub-ce/merge_requests](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests)
 
 ---
 
-# Explore GitLab projects
+# Explore DoggoHub projects
 
 ![fit](logo.png)
 
@@ -384,9 +384,9 @@ Thank you for your hard work!
 
 **Additional Resources**
 
-GitLab Documentation [http://docs.gitlab.com](http://docs.gitlab.com/)
+DoggoHub Documentation [http://docs.doggohub.com](http://docs.doggohub.com/)
 GUI Clients [http://git-scm.com/downloads/guis](http://git-scm.com/downloads/guis)
 Pro git book [http://git-scm.com/book](http://git-scm.com/book)
-Platzi Course [https://courses.platzi.com/courses/git-gitlab/](https://courses.platzi.com/courses/git-gitlab/)
+Platzi Course [https://courses.platzi.com/courses/git-doggohub/](https://courses.platzi.com/courses/git-doggohub/)
 Code School tutorial [http://try.github.io/](http://try.github.io/)
-Contact Us - [subscribers@gitlab.com](subscribers@gitlab.com)
+Contact Us - [subscribers@doggohub.com](subscribers@doggohub.com)

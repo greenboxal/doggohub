@@ -3,7 +3,7 @@
 1. The first thing you need to do is go to your [command line](start-using-git.md)
    and follow the [instructions](../ssh/README.md) to generate your SSH key pair.
 
-1. Once you do that, login to GitLab with your credentials.
+1. Once you do that, login to DoggoHub with your credentials.
 1. On the upper right corner, click on your avatar and go to your **Profile settings**.
 
     ![Profile settings dropdown](img/profile_settings.png)
@@ -22,7 +22,7 @@
 
     ![SSH key title](img/profile_settings_ssh_keys_title.png)
 
-1. Finally, click on **Add key** to add it to GitLab. You will be able to see
+1. Finally, click on **Add key** to add it to DoggoHub. You will be able to see
    its fingerprint, its title and creation date.
 
     ![SSH key single page](img/profile_settings_ssh_keys_single_key.png)

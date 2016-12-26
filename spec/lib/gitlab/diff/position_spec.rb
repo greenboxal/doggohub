@@ -326,7 +326,7 @@ describe Gitlab::Diff::Position, lib: true do
 
         expect(diff_line.removed?).to be true
         expect(diff_line.old_line).to eq(subject.old_line)
-        expect(diff_line.text).to eq("-Copyright (c) 2014 gitlabhq")
+        expect(diff_line.text).to eq("-Copyright (c) 2014 doggohubhq")
       end
     end
 

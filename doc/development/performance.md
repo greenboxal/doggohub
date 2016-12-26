@@ -1,16 +1,16 @@
 # Performance Guidelines
 
 This document describes various guidelines to follow to ensure good and
-consistent performance of GitLab.
+consistent performance of DoggoHub.
 
 ## Workflow
 
 The process of solving performance problems is roughly as follows:
 
-1. Make sure there's an issue open somewhere (e.g., on the GitLab CE issue
+1. Make sure there's an issue open somewhere (e.g., on the DoggoHub CE issue
    tracker), create one if there isn't. See [#15607][#15607] for an example.
 2. Measure the performance of the code in a production environment such as
-   GitLab.com (see the [Tooling](#tooling) section below). Performance should be
+   DoggoHub.com (see the [Tooling](#tooling) section below). Performance should be
    measured over a period of _at least_ 24 hours.
 3. Add your findings based on the measurement period (screenshots of graphs,
    timings, etc) to the issue mentioned in step 1.
@@ -28,21 +28,21 @@ When providing timings make sure to provide:
 * The mean
 
 When providing screenshots of graphs, make sure that both the X and Y axes and
-the legend are clearly visible. If you happen to have access to GitLab.com's own
+the legend are clearly visible. If you happen to have access to DoggoHub.com's own
 monitoring tools you should also provide a link to any relevant
 graphs/dashboards.
 
 ## Tooling
 
-GitLab provides built-in tools to aid the process of improving performance:
+DoggoHub provides built-in tools to aid the process of improving performance:
 
 * [Sherlock](profiling.md#sherlock)
-* [GitLab Performance Monitoring](../administration/monitoring/performance/introduction.md)
+* [DoggoHub Performance Monitoring](../administration/monitoring/performance/introduction.md)
 * [Request Profiling](../administration/monitoring/performance/request_profiling.md)
 
-GitLab employees can use GitLab.com's performance monitoring systems located at
-<http://performance.gitlab.net>, this requires you to log in using your
-`@gitlab.com` Email address. Non-GitLab employees are advised to set up their
+DoggoHub employees can use DoggoHub.com's performance monitoring systems located at
+<http://performance.doggohub.net>, this requires you to log in using your
+`@doggohub.com` Email address. Non-DoggoHub employees are advised to set up their
 own InfluxDB + Grafana stack.
 
 ## Benchmarks
@@ -105,7 +105,7 @@ In short:
 
 By collecting snapshots of process state at regular intervals, profiling allows
 you to see where time is spent in a process. The [StackProf](https://github.com/tmm1/stackprof)
-gem is included in GitLab's development environment, allowing you to investigate
+gem is included in DoggoHub's development environment, allowing you to investigate
 the behaviour of suspect code in detail.
 
 It's important to note that profiling an application *alters its performance*,
@@ -170,7 +170,7 @@ It may be useful to zoom in on a specific method, e.g.:
 
 ```
 $ stackprof tmp/project_policy_spec.rb.dump --method warm_asset_cache
-TestEnv#warm_asset_cache (/Users/lupine/dev/gitlab.com/gitlab-org/gitlab-development-kit/gitlab/spec/support/test_env.rb:164)
+TestEnv#warm_asset_cache (/Users/lupine/dev/doggohub.com/doggohub-org/doggohub-development-kit/doggohub/spec/support/test_env.rb:164)
   samples:     0 self (0.0%)  /   6288 total (36.9%)
   callers:
     6288  (  100.0%)  block (2 levels) in <top (required)>
@@ -184,7 +184,7 @@ TestEnv#warm_asset_cache (/Users/lupine/dev/gitlab.com/gitlab-org/gitlab-develop
  6288   (36.9%)                   |   168  |     Capybara.current_session.driver.visit '/'
                                   |   169  |   end
 $ stackprof tmp/project_policy_spec.rb.dump --method BasePolicy#abilities
-BasePolicy#abilities (/Users/lupine/dev/gitlab.com/gitlab-org/gitlab-development-kit/gitlab/app/policies/base_policy.rb:79)
+BasePolicy#abilities (/Users/lupine/dev/doggohub.com/doggohub-org/doggohub-development-kit/doggohub/app/policies/base_policy.rb:79)
   samples:     0 self (0.0%)  /     50 total (0.3%)
   callers:
       25  (   50.0%)  BasePolicy.abilities
@@ -363,6 +363,6 @@ performance, but there's no guarantee this will. Looking up constants has an
 impact on runtime performance, and as such, using a constant instead of
 referencing an object directly may even slow code down.
 
-[#15607]: https://gitlab.com/gitlab-org/gitlab-ce/issues/15607
-[yorickpeterse]: https://gitlab.com/yorickpeterse
+[#15607]: https://doggohub.com/doggohub-org/doggohub-ce/issues/15607
+[yorickpeterse]: https://doggohub.com/yorickpeterse
 [anti-pattern]: https://en.wikipedia.org/wiki/Anti-pattern

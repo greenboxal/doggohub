@@ -2,39 +2,39 @@
 
 ## Consider the Omnibus package installation
 
-Since an installation from source is a lot of work and error prone we strongly recommend the fast and reliable [Omnibus package installation](https://about.gitlab.com/downloads/) (deb/rpm).
+Since an installation from source is a lot of work and error prone we strongly recommend the fast and reliable [Omnibus package installation](https://about.doggohub.com/downloads/) (deb/rpm).
 
-One reason the Omnibus package is more reliable is its use of Runit to restart any of the GitLab processes in case one crashes.
-On heavily used GitLab instances the memory usage of the Sidekiq background worker will grow over time.
-Omnibus packages solve this by [letting the Sidekiq terminate gracefully](http://docs.gitlab.com/ce/operations/sidekiq_memory_killer.html) if it uses too much memory.
+One reason the Omnibus package is more reliable is its use of Runit to restart any of the DoggoHub processes in case one crashes.
+On heavily used DoggoHub instances the memory usage of the Sidekiq background worker will grow over time.
+Omnibus packages solve this by [letting the Sidekiq terminate gracefully](http://docs.doggohub.com/ce/operations/sidekiq_memory_killer.html) if it uses too much memory.
 After this termination Runit will detect Sidekiq is not running and will start it.
 Since installations from source don't have Runit, Sidekiq can't be terminated and its memory usage will grow over time.
 
 ## Select Version to Install
 
-Make sure you view [this installation guide](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md) from the tag (version) of GitLab you would like to install.
+Make sure you view [this installation guide](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/install/installation.md) from the tag (version) of DoggoHub you would like to install.
 In most cases this should be the highest numbered production tag (without rc in it).
-You can select the tag in the version dropdown in the top left corner of GitLab (below the menu bar).
+You can select the tag in the version dropdown in the top left corner of DoggoHub (below the menu bar).
 
-If the highest number stable branch is unclear please check the [GitLab Blog](https://about.gitlab.com/blog/) for installation guide links by version.
+If the highest number stable branch is unclear please check the [DoggoHub Blog](https://about.doggohub.com/blog/) for installation guide links by version.
 
 ## Important Notes
 
 This guide is long because it covers many cases and includes all commands you need, this is [one of the few installation scripts that actually works out of the box](https://twitter.com/robinvdvleuten/status/424163226532986880).
 
-This installation guide was created for and tested on **Debian/Ubuntu** operating systems. Please read [requirements.md](requirements.md) for hardware and operating system requirements. If you want to install on RHEL/CentOS we recommend using the [Omnibus packages](https://about.gitlab.com/downloads/).
+This installation guide was created for and tested on **Debian/Ubuntu** operating systems. Please read [requirements.md](requirements.md) for hardware and operating system requirements. If you want to install on RHEL/CentOS we recommend using the [Omnibus packages](https://about.doggohub.com/downloads/).
 
-This is the official installation guide to set up a production server. To set up a **development installation** or for many other installation options please see [the installation section of the readme](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/README.md#installation).
+This is the official installation guide to set up a production server. To set up a **development installation** or for many other installation options please see [the installation section of the readme](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/README.md#installation).
 
-The following steps have been known to work. Please **use caution when you deviate** from this guide. Make sure you don't violate any assumptions GitLab makes about its environment. For example many people run into permission problems because they changed the location of directories or run services as the wrong user.
+The following steps have been known to work. Please **use caution when you deviate** from this guide. Make sure you don't violate any assumptions DoggoHub makes about its environment. For example many people run into permission problems because they changed the location of directories or run services as the wrong user.
 
 If you find a bug/error in this guide please **submit a merge request**
 following the
-[contributing guide](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md).
+[contributing guide](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md).
 
 ## Overview
 
-The GitLab installation consists of setting up the following components:
+The DoggoHub installation consists of setting up the following components:
 
 1. Packages / Dependencies
 1. Ruby
@@ -42,7 +42,7 @@ The GitLab installation consists of setting up the following components:
 1. System Users
 1. Database
 1. Redis
-1. GitLab
+1. DoggoHub
 1. Nginx
 
 ## 1. Packages / Dependencies
@@ -98,9 +98,9 @@ Is the system packaged Git too old? Remove it and compile from source.
     # Install into /usr/local/bin
     sudo make prefix=/usr/local install
 
-    # When editing config/gitlab.yml (Step 5), change the git -> bin_path to /usr/local/bin/git
+    # When editing config/doggohub.yml (Step 5), change the git -> bin_path to /usr/local/bin/git
 
-**Note:** In order to receive mail notifications, make sure to install a mail server. By default, Debian is shipped with exim4 but this [has problems](https://github.com/gitlabhq/gitlabhq/issues/4866#issuecomment-32726573) while Ubuntu does not ship with one. The recommended mail server is postfix and you can install it with:
+**Note:** In order to receive mail notifications, make sure to install a mail server. By default, Debian is shipped with exim4 but this [has problems](https://github.com/doggohubhq/doggohubhq/issues/4866#issuecomment-32726573) while Ubuntu does not ship with one. The recommended mail server is postfix and you can install it with:
 
     sudo apt-get install -y postfix
 
@@ -110,9 +110,9 @@ Then select 'Internet Site' and press enter to confirm the hostname.
 
 **Note:** The current supported Ruby versions are 2.1.x and 2.3.x. 2.3.x is preferred, and support for 2.1.x will be dropped in the future.
 
-The use of Ruby version managers such as [RVM], [rbenv] or [chruby] with GitLab
+The use of Ruby version managers such as [RVM], [rbenv] or [chruby] with DoggoHub
 in production, frequently leads to hard to diagnose problems. For example,
-GitLab Shell is called from OpenSSH, and having a version manager can prevent
+DoggoHub Shell is called from OpenSSH, and having a version manager can prevent
 pushing and pulling over SSH. Version managers are not supported and we strongly
 advise everyone to follow the instructions below to use a system Ruby.
 
@@ -136,9 +136,9 @@ Install the Bundler Gem:
 
 ## 3. Go
 
-Since GitLab 8.0, Git HTTP requests are handled by gitlab-workhorse (formerly
-gitlab-git-http-server). This is a small daemon written in Go. To install
-gitlab-workhorse we need a Go compiler. The instructions below assume you
+Since DoggoHub 8.0, Git HTTP requests are handled by doggohub-workhorse (formerly
+doggohub-git-http-server). This is a small daemon written in Go. To install
+doggohub-workhorse we need a Go compiler. The instructions below assume you
 use 64-bit Linux. You can find downloads for other platforms at the [Go download
 page](https://golang.org/dl).
 
@@ -153,9 +153,9 @@ page](https://golang.org/dl).
 
 ## 4. System Users
 
-Create a `git` user for GitLab:
+Create a `git` user for DoggoHub:
 
-    sudo adduser --disabled-login --gecos 'GitLab' git
+    sudo adduser --disabled-login --gecos 'DoggoHub' git
 
 ## 5. Database
 
@@ -170,28 +170,28 @@ We recommend using a PostgreSQL database. For MySQL check the
     sudo apt-get install -y postgresql postgresql-client libpq-dev postgresql-contrib
     ```
 
-1. Create a database user for GitLab:
+1. Create a database user for DoggoHub:
 
     ```bash
     sudo -u postgres psql -d template1 -c "CREATE USER git CREATEDB;"
     ```
 
-1. Create the `pg_trgm` extension (required for GitLab 8.6+):
+1. Create the `pg_trgm` extension (required for DoggoHub 8.6+):
 
     ```bash
     sudo -u postgres psql -d template1 -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
     ```
 
-1. Create the GitLab production database and grant all privileges on database:
+1. Create the DoggoHub production database and grant all privileges on database:
 
     ```bash
-    sudo -u postgres psql -d template1 -c "CREATE DATABASE gitlabhq_production OWNER git;"
+    sudo -u postgres psql -d template1 -c "CREATE DATABASE doggohubhq_production OWNER git;"
     ```
 
 1. Try connecting to the new database with the new user:
 
     ```bash
-    sudo -u git -H psql -d gitlabhq_production
+    sudo -u git -H psql -d doggohubhq_production
     ```
 
 1. Check if the `pg_trgm` extension is enabled:
@@ -215,12 +215,12 @@ We recommend using a PostgreSQL database. For MySQL check the
 1. Quit the database session:
 
     ```bash
-    gitlabhq_production> \q
+    doggohubhq_production> \q
     ```
 
 ## 6. Redis
 
-GitLab requires at least Redis 2.8.
+DoggoHub requires at least Redis 2.8.
 
 If you are using Debian 8 or Ubuntu 14.04 and up, then you can simply install
 Redis 2.8 with:
@@ -263,48 +263,48 @@ sudo service redis-server restart
 sudo usermod -aG redis git
 ```
 
-## 7. GitLab
+## 7. DoggoHub
 
-    # We'll install GitLab into home directory of the user "git"
+    # We'll install DoggoHub into home directory of the user "git"
     cd /home/git
 
 ### Clone the Source
 
-    # Clone GitLab repository
-    sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 8-15-stable gitlab
+    # Clone DoggoHub repository
+    sudo -u git -H git clone https://doggohub.com/doggohub-org/doggohub-ce.git -b 8-15-stable doggohub
 
 **Note:** You can change `8-15-stable` to `master` if you want the *bleeding edge* version, but never install master on a production server!
 
 ### Configure It
 
-    # Go to GitLab installation folder
-    cd /home/git/gitlab
+    # Go to DoggoHub installation folder
+    cd /home/git/doggohub
 
-    # Copy the example GitLab config
-    sudo -u git -H cp config/gitlab.yml.example config/gitlab.yml
+    # Copy the example DoggoHub config
+    sudo -u git -H cp config/doggohub.yml.example config/doggohub.yml
 
-    # Update GitLab config file, follow the directions at top of file
-    sudo -u git -H editor config/gitlab.yml
+    # Update DoggoHub config file, follow the directions at top of file
+    sudo -u git -H editor config/doggohub.yml
 
     # Copy the example secrets file
     sudo -u git -H cp config/secrets.yml.example config/secrets.yml
     sudo -u git -H chmod 0600 config/secrets.yml
 
-    # Make sure GitLab can write to the log/ and tmp/ directories
+    # Make sure DoggoHub can write to the log/ and tmp/ directories
     sudo chown -R git log/
     sudo chown -R git tmp/
     sudo chmod -R u+rwX,go-w log/
     sudo chmod -R u+rwX tmp/
 
-    # Make sure GitLab can write to the tmp/pids/ and tmp/sockets/ directories
+    # Make sure DoggoHub can write to the tmp/pids/ and tmp/sockets/ directories
     sudo chmod -R u+rwX tmp/pids/
     sudo chmod -R u+rwX tmp/sockets/
 
     # Create the public/uploads/ directory
     sudo -u git -H mkdir public/uploads/
 
-    # Make sure only the GitLab user has access to the public/uploads/ directory
-    # now that files in public/uploads are served by gitlab-workhorse
+    # Make sure only the DoggoHub user has access to the public/uploads/ directory
+    # now that files in public/uploads are served by doggohub-workhorse
     sudo chmod 0700 public/uploads
 
     # Change the permissions of the directory where CI build traces are stored
@@ -331,7 +331,7 @@ sudo usermod -aG redis git
     # 'autocrlf' is needed for the web editor
     sudo -u git -H git config --global core.autocrlf input
 
-    # Disable 'git gc --auto' because GitLab already runs 'git gc' when needed
+    # Disable 'git gc --auto' because DoggoHub already runs 'git gc' when needed
     sudo -u git -H git config --global gc.auto 0
 
     # Enable packfile bitmaps
@@ -343,11 +343,11 @@ sudo usermod -aG redis git
     # Change the Redis socket path if you are not using the default Debian / Ubuntu configuration
     sudo -u git -H editor config/resque.yml
 
-**Important Note:** Make sure to edit both `gitlab.yml` and `unicorn.rb` to match your setup.
+**Important Note:** Make sure to edit both `doggohub.yml` and `unicorn.rb` to match your setup.
 
 **Note:** If you want to use HTTPS, see [Using HTTPS](#using-https) for the additional steps.
 
-### Configure GitLab DB Settings
+### Configure DoggoHub DB Settings
 
     # PostgreSQL only:
     sudo -u git cp config/database.yml.postgresql config/database.yml
@@ -379,46 +379,46 @@ sudo usermod -aG redis git
 
 **Note:** If you want to use Kerberos for user authentication, then omit `kerberos` in the `--without` option above.
 
-### Install GitLab Shell
+### Install DoggoHub Shell
 
-GitLab Shell is an SSH access and repository management software developed specially for GitLab.
+DoggoHub Shell is an SSH access and repository management software developed specially for DoggoHub.
 
-    # Run the installation task for gitlab-shell (replace `REDIS_URL` if needed):
-    sudo -u git -H bundle exec rake gitlab:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true
+    # Run the installation task for doggohub-shell (replace `REDIS_URL` if needed):
+    sudo -u git -H bundle exec rake doggohub:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true
 
-    # By default, the gitlab-shell config is generated from your main GitLab config.
-    # You can review (and modify) the gitlab-shell config as follows:
-    sudo -u git -H editor /home/git/gitlab-shell/config.yml
+    # By default, the doggohub-shell config is generated from your main DoggoHub config.
+    # You can review (and modify) the doggohub-shell config as follows:
+    sudo -u git -H editor /home/git/doggohub-shell/config.yml
 
 **Note:** If you want to use HTTPS, see [Using HTTPS](#using-https) for the additional steps.
 
-**Note:** Make sure your hostname can be resolved on the machine itself by either a proper DNS record or an additional line in /etc/hosts ("127.0.0.1  hostname"). This might be necessary for example if you set up GitLab behind a reverse proxy. If the hostname cannot be resolved, the final installation check will fail with "Check GitLab API access: FAILED. code: 401" and pushing commits will be rejected with "[remote rejected] master -> master (hook declined)".
+**Note:** Make sure your hostname can be resolved on the machine itself by either a proper DNS record or an additional line in /etc/hosts ("127.0.0.1  hostname"). This might be necessary for example if you set up DoggoHub behind a reverse proxy. If the hostname cannot be resolved, the final installation check will fail with "Check DoggoHub API access: FAILED. code: 401" and pushing commits will be rejected with "[remote rejected] master -> master (hook declined)".
 
-### Install gitlab-workhorse
+### Install doggohub-workhorse
 
-GitLab-Workhorse uses [GNU Make](https://www.gnu.org/software/make/). The
-following command-line will install GitLab-Workhorse in `/home/git/gitlab-workhorse`
+DoggoHub-Workhorse uses [GNU Make](https://www.gnu.org/software/make/). The
+following command-line will install DoggoHub-Workhorse in `/home/git/doggohub-workhorse`
 which is the recommended location.
 
-    cd /home/git/gitlab
+    cd /home/git/doggohub
 
-    sudo -u git -H bundle exec rake "gitlab:workhorse:install[/home/git/gitlab-workhorse]" RAILS_ENV=production
+    sudo -u git -H bundle exec rake "doggohub:workhorse:install[/home/git/doggohub-workhorse]" RAILS_ENV=production
 
 ### Initialize Database and Activate Advanced Features
 
-    # Go to GitLab installation folder
+    # Go to DoggoHub installation folder
 
-    cd /home/git/gitlab
+    cd /home/git/doggohub
 
-    sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
+    sudo -u git -H bundle exec rake doggohub:setup RAILS_ENV=production
 
     # Type 'yes' to create the database tables.
 
     # When done you see 'Administrator account created:'
 
-**Note:** You can set the Administrator/root password and e-mail by supplying them in environmental variables, `GITLAB_ROOT_PASSWORD` and `GITLAB_ROOT_EMAIL` respectively, as seen below. If you don't set the password (and it is set to the default one) please wait with exposing GitLab to the public internet until the installation is done and you've logged into the server the first time. During the first login you'll be forced to change the default password.
+**Note:** You can set the Administrator/root password and e-mail by supplying them in environmental variables, `DOGGOHUB_ROOT_PASSWORD` and `DOGGOHUB_ROOT_EMAIL` respectively, as seen below. If you don't set the password (and it is set to the default one) please wait with exposing DoggoHub to the public internet until the installation is done and you've logged into the server the first time. During the first login you'll be forced to change the default password.
 
-    sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production GITLAB_ROOT_PASSWORD=yourpassword GITLAB_ROOT_EMAIL=youremail
+    sudo -u git -H bundle exec rake doggohub:setup RAILS_ENV=production DOGGOHUB_ROOT_PASSWORD=yourpassword DOGGOHUB_ROOT_EMAIL=youremail
 
 ### Secure secrets.yml
 
@@ -428,43 +428,43 @@ Otherwise your secrets are exposed if one of your backups is compromised.
 
 ### Install Init Script
 
-Download the init script (will be `/etc/init.d/gitlab`):
+Download the init script (will be `/etc/init.d/doggohub`):
 
-    sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
+    sudo cp lib/support/init.d/doggohub /etc/init.d/doggohub
 
 And if you are installing with a non-default folder or user copy and edit the defaults file:
 
-    sudo cp lib/support/init.d/gitlab.default.example /etc/default/gitlab
+    sudo cp lib/support/init.d/doggohub.default.example /etc/default/doggohub
 
-If you installed GitLab in another directory or as a user other than the default you should change these settings in `/etc/default/gitlab`. Do not edit `/etc/init.d/gitlab` as it will be changed on upgrade.
+If you installed DoggoHub in another directory or as a user other than the default you should change these settings in `/etc/default/doggohub`. Do not edit `/etc/init.d/doggohub` as it will be changed on upgrade.
 
-Make GitLab start on boot:
+Make DoggoHub start on boot:
 
-    sudo update-rc.d gitlab defaults 21
+    sudo update-rc.d doggohub defaults 21
 
 ### Setup Logrotate
 
-    sudo cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab
+    sudo cp lib/support/logrotate/doggohub /etc/logrotate.d/doggohub
 
 ### Check Application Status
 
-Check if GitLab and its environment are configured correctly:
+Check if DoggoHub and its environment are configured correctly:
 
-    sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+    sudo -u git -H bundle exec rake doggohub:env:info RAILS_ENV=production
 
 ### Compile Assets
 
     sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production
 
-### Start Your GitLab Instance
+### Start Your DoggoHub Instance
 
-    sudo service gitlab start
+    sudo service doggohub start
     # or
-    sudo /etc/init.d/gitlab restart
+    sudo /etc/init.d/doggohub restart
 
 ## 8. Nginx
 
-**Note:** Nginx is the officially supported web server for GitLab. If you cannot or do not want to use Nginx as your web server, have a look at the [GitLab recipes](https://gitlab.com/gitlab-org/gitlab-recipes/).
+**Note:** Nginx is the officially supported web server for DoggoHub. If you cannot or do not want to use Nginx as your web server, have a look at the [DoggoHub recipes](https://doggohub.com/doggohub-org/doggohub-recipes/).
 
 ### Installation
 
@@ -474,31 +474,31 @@ Check if GitLab and its environment are configured correctly:
 
 Copy the example site config:
 
-    sudo cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab
-    sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
+    sudo cp lib/support/nginx/doggohub /etc/nginx/sites-available/doggohub
+    sudo ln -s /etc/nginx/sites-available/doggohub /etc/nginx/sites-enabled/doggohub
 
-Make sure to edit the config file to match your setup. Also, ensure that you match your paths to GitLab, especially if installing for a user other than the 'git' user:
+Make sure to edit the config file to match your setup. Also, ensure that you match your paths to DoggoHub, especially if installing for a user other than the 'git' user:
 
     # Change YOUR_SERVER_FQDN to the fully-qualified
-    # domain name of your host serving GitLab.
+    # domain name of your host serving DoggoHub.
     #
-    # Remember to match your paths to GitLab, especially
+    # Remember to match your paths to DoggoHub, especially
     # if installing for a user other than 'git'.
     #
     # If using Ubuntu default nginx install:
     # either remove the default_server from the listen line
     # or else sudo rm -f /etc/nginx/sites-enabled/default
-    sudo editor /etc/nginx/sites-available/gitlab
+    sudo editor /etc/nginx/sites-available/doggohub
 
-**Note:** If you want to use HTTPS, replace the `gitlab` Nginx config with `gitlab-ssl`. See [Using HTTPS](#using-https) for HTTPS configuration details.
+**Note:** If you want to use HTTPS, replace the `doggohub` Nginx config with `doggohub-ssl`. See [Using HTTPS](#using-https) for HTTPS configuration details.
 
 ### Test Configuration
 
-Validate your `gitlab` or `gitlab-ssl` Nginx config file with the following command:
+Validate your `doggohub` or `doggohub-ssl` Nginx config file with the following command:
 
     sudo nginx -t
 
-You should receive `syntax is okay` and `test is successful` messages. If you receive errors check your `gitlab` or `gitlab-ssl` Nginx config file for typos, etc. as indicated in the error message given.
+You should receive `syntax is okay` and `test is successful` messages. If you receive errors check your `doggohub` or `doggohub-ssl` Nginx config file for typos, etc. as indicated in the error message given.
 
 ### Restart
 
@@ -510,15 +510,15 @@ You should receive `syntax is okay` and `test is successful` messages. If you re
 
 To make sure you didn't miss anything run a more thorough check with:
 
-    sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+    sudo -u git -H bundle exec rake doggohub:check RAILS_ENV=production
 
-If all items are green, then congratulations on successfully installing GitLab!
+If all items are green, then congratulations on successfully installing DoggoHub!
 
-NOTE: Supply `SANITIZE=true` environment variable to `gitlab:check` to omit project names from the output of the check command.
+NOTE: Supply `SANITIZE=true` environment variable to `doggohub:check` to omit project names from the output of the check command.
 
 ### Initial Login
 
-Visit YOUR_SERVER in your web browser for your first GitLab login.
+Visit YOUR_SERVER in your web browser for your first DoggoHub login.
 
 If you didn't [provide a root password during setup](#initialize-database-and-activate-advanced-features),
 you'll be redirected to a password reset screen to provide the password for the
@@ -530,26 +530,26 @@ earlier and login. After login you can change the username if you wish.
 
 **Enjoy!**
 
-You can use `sudo service gitlab start` and `sudo service gitlab stop` to start and stop GitLab.
+You can use `sudo service doggohub start` and `sudo service doggohub stop` to start and stop DoggoHub.
 
 ## Advanced Setup Tips
 
 ### Relative URL support
 
 See the [Relative URL documentation](relative_url.md) for more information on
-how to configure GitLab with a relative URL.
+how to configure DoggoHub with a relative URL.
 
 ### Using HTTPS
 
-To use GitLab with HTTPS:
+To use DoggoHub with HTTPS:
 
-1. In `gitlab.yml`:
+1. In `doggohub.yml`:
     1. Set the `port` option in section 1 to `443`.
     1. Set the `https` option in section 1 to `true`.
-1. In the `config.yml` of gitlab-shell:
-    1. Set `gitlab_url` option to the HTTPS endpoint of GitLab (e.g. `https://git.example.com`).
+1. In the `config.yml` of doggohub-shell:
+    1. Set `doggohub_url` option to the HTTPS endpoint of DoggoHub (e.g. `https://git.example.com`).
     1. Set the certificates using either the `ca_file` or `ca_path` option.
-1. Use the `gitlab-ssl` Nginx example config instead of the `gitlab` config.
+1. Use the `doggohub-ssl` Nginx example config instead of the `doggohub` config.
     1. Update `YOUR_SERVER_FQDN`.
     1. Update `ssl_certificate` and `ssl_certificate_key`.
     1. Review the configuration file and consider applying other security and performance enhancing features.
@@ -561,10 +561,10 @@ Using a self-signed certificate is discouraged but if you must use it follow the
     ```
     mkdir -p /etc/nginx/ssl/
     cd /etc/nginx/ssl/
-    sudo openssl req -newkey rsa:2048 -x509 -nodes -days 3560 -out gitlab.crt -keyout gitlab.key
-    sudo chmod o-r gitlab.key
+    sudo openssl req -newkey rsa:2048 -x509 -nodes -days 3560 -out doggohub.crt -keyout doggohub.key
+    sudo chmod o-r doggohub.key
     ```
-1. In the `config.yml` of gitlab-shell set `self_signed_cert` to `true`.
+1. In the `config.yml` of doggohub-shell set `self_signed_cert` to `true`.
 
 ### Enable Reply by email
 
@@ -572,7 +572,7 @@ See the ["Reply by email" documentation](../administration/reply_by_email.md) fo
 
 ### LDAP Authentication
 
-You can configure LDAP authentication in `config/gitlab.yml`. Please restart GitLab after editing this file.
+You can configure LDAP authentication in `config/doggohub.yml`. Please restart DoggoHub after editing this file.
 
 ### Using Custom Omniauth Providers
 
@@ -580,8 +580,8 @@ See the [omniauth integration document](../integration/omniauth.md)
 
 ### Build your projects
 
-GitLab can build your projects. To enable that feature you need GitLab Runners to do that for you.
-Checkout the [GitLab Runner section](https://about.gitlab.com/gitlab-ci/#gitlab-runner) to install it
+DoggoHub can build your projects. To enable that feature you need DoggoHub Runners to do that for you.
+Checkout the [DoggoHub Runner section](https://about.doggohub.com/doggohub-ci/#doggohub-runner) to install it
 
 ### Adding your Trusted Proxies
 
@@ -589,8 +589,8 @@ If you are using a reverse proxy on an separate machine, you may want to add the
 proxy to the trusted proxies list. Otherwise users will appear signed in from the
 proxy's IP address.
 
-You can add trusted proxies in `config/gitlab.yml` by customizing the `trusted_proxies`
-option in section 1. Save the file and [reconfigure GitLab](../administration/restart_gitlab.md)
+You can add trusted proxies in `config/doggohub.yml` by customizing the `trusted_proxies`
+option in section 1. Save the file and [reconfigure DoggoHub](../administration/restart_doggohub.md)
 for the changes to take effect.
 
 ### Custom Redis Connection
@@ -609,7 +609,7 @@ If you want to connect the Redis server via socket, then use the "unix:" URL sch
 
 ### Custom SSH Connection
 
-If you are running SSH on a non-standard port, you must change the GitLab user's SSH config.
+If you are running SSH on a non-standard port, you must change the DoggoHub user's SSH config.
 
     # Add to /home/git/.ssh/config
     host localhost          # Give your setup a name (here: override localhost)
@@ -617,20 +617,20 @@ If you are running SSH on a non-standard port, you must change the GitLab user's
         port 2222           # Your port number
         hostname 127.0.0.1; # Your server name or IP
 
-You also need to change the corresponding options (e.g. `ssh_user`, `ssh_host`, `admin_uri`) in the `config\gitlab.yml` file.
+You also need to change the corresponding options (e.g. `ssh_user`, `ssh_host`, `admin_uri`) in the `config\doggohub.yml` file.
 
 ### Additional Markup Styles
 
-Apart from the always supported markdown style there are other rich text files that GitLab can display. But you might have to install a dependency to do so. Please see the [github-markup gem readme](https://github.com/gitlabhq/markup#markups) for more information.
+Apart from the always supported markdown style there are other rich text files that DoggoHub can display. But you might have to install a dependency to do so. Please see the [github-markup gem readme](https://github.com/doggohubhq/markup#markups) for more information.
 
 ## Troubleshooting
 
 ### "You appear to have cloned an empty repository."
 
-If you see this message when attempting to clone a repository hosted by GitLab,
+If you see this message when attempting to clone a repository hosted by DoggoHub,
 this is likely due to an outdated Nginx or Apache configuration, or a missing or
-misconfigured gitlab-workhorse instance. Double-check that you've
-[installed Go](#3-go), [installed gitlab-workhorse](#install-gitlab-workhorse),
+misconfigured doggohub-workhorse instance. Double-check that you've
+[installed Go](#3-go), [installed doggohub-workhorse](#install-doggohub-workhorse),
 and correctly [configured Nginx](#site-configuration).
 
 [RVM]: https://rvm.io/ "RVM Homepage"

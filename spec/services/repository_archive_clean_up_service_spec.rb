@@ -70,7 +70,7 @@ describe RepositoryArchiveCleanUpService, services: true do
     end
 
     def stub_repository_downloads_path(path)
-      allow(Gitlab.config.gitlab).to receive(:repository_downloads_path).and_return(path)
+      allow(Gitlab.config.doggohub).to receive(:repository_downloads_path).and_return(path)
     end
 
     def create_temporary_files(dir, extensions, mtime)

@@ -44,7 +44,7 @@ to avoid getting this error, you need to remove all instances of the
 **Omnibus Installation**
 
 ```
-$ sudo gitlab-rails runner "Service.where(type: ['JenkinsService', 'JenkinsDeprecatedService']).delete_all"
+$ sudo doggohub-rails runner "Service.where(type: ['JenkinsService', 'JenkinsDeprecatedService']).delete_all"
 ```
 
 **Source Installation**
@@ -56,24 +56,24 @@ $ bundle exec rails runner "Service.where(type: ['JenkinsService', 'JenkinsDepre
 ## Downgrade to CE
 
 After performing the above mentioned steps, you are now ready to downgrade your
-GitLab installation to the Community Edition.
+DoggoHub installation to the Community Edition.
 
 **Omnibus Installation**
 
 To downgrade an Omnibus installation, it is sufficient to install the Community
 Edition package on top of the currently installed one. You can do this manually,
-by directly [downloading the package](https://packages.gitlab.com/gitlab/gitlab-ce)
+by directly [downloading the package](https://packages.doggohub.com/doggohub/doggohub-ce)
 you need, or by adding our CE package repository and following the
-[CE installation instructions](https://about.gitlab.com/downloads/).
+[CE installation instructions](https://about.doggohub.com/downloads/).
 
 **Source Installation**
 
 To downgrade a source installation, you need to replace the current remote of
-your GitLab installation with the Community Edition's remote, fetch the latest
+your DoggoHub installation with the Community Edition's remote, fetch the latest
 changes, and checkout the latest stable branch:
 
 ```
-$ git remote set-url origin git@gitlab.com:gitlab-org/gitlab-ce.git
+$ git remote set-url origin git@doggohub.com:doggohub-org/doggohub-ce.git
 $ git fetch --all
 $ git checkout 8-x-stable
 ```

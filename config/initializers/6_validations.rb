@@ -10,7 +10,7 @@ def find_parent_path(name, path)
 end
 
 def storage_validation_error(message)
-  raise "#{message}. Please fix this in your gitlab.yml before starting GitLab."
+  raise "#{message}. Please fix this in your doggohub.yml before starting DoggoHub."
 end
 
 def validate_storages

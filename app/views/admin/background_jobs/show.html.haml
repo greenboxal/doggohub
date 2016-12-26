@@ -4,7 +4,7 @@
 
 %div{ class: container_class }
   %h3.page-title Background Jobs
-  %p.light GitLab uses #{link_to "sidekiq", "http://sidekiq.org/"} library for async job processing
+  %p.light DoggoHub uses #{link_to "sidekiq", "http://sidekiq.org/"} library for async job processing
 
   %hr
 
@@ -14,7 +14,7 @@
       - if @sidekiq_processes.empty?
         %h4.cred
           %i.fa.fa-exclamation-triangle
-          There are no running sidekiq processes. Please restart GitLab
+          There are no running sidekiq processes. Please restart DoggoHub
       - else
         .table-holder
           %table.table
@@ -29,16 +29,16 @@
             %tbody
               - @sidekiq_processes.each do |process|
                 %tr
-                  %td= gitlab_config.user
+                  %td= doggohub_config.user
                   - parse_sidekiq_ps(process).each do |value|
                     %td= value
         .clearfix
           %p
             %i.fa.fa-exclamation-circle
-            If '[25 of 25 busy]' is shown, restart GitLab with 'sudo service gitlab reload'.
+            If '[25 of 25 busy]' is shown, restart DoggoHub with 'sudo service doggohub reload'.
           %p
             %i.fa.fa-exclamation-circle
-            If more than one sidekiq process is listed, stop GitLab, kill the remaining sidekiq processes (sudo pkill -u #{gitlab_config.user} -f sidekiq) and restart GitLab.
+            If more than one sidekiq process is listed, stop DoggoHub, kill the remaining sidekiq processes (sudo pkill -u #{doggohub_config.user} -f sidekiq) and restart DoggoHub.
 
 
 

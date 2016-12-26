@@ -1,7 +1,7 @@
 module Gitlab
   module Ci
     ##
-    # Base GitLab CI Configuration facade
+    # Base DoggoHub CI Configuration facade
     #
     class Config
       def initialize(config)

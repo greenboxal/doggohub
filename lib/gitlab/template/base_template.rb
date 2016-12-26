@@ -49,7 +49,7 @@ module Gitlab
 
         # Defines which strategy will be used to get templates files
         # RepoTemplateFinder - Finds templates on project repository, templates are filtered perproject
-        # GlobalTemplateFinder - Finds templates on gitlab installation source, templates can be used in all projects
+        # GlobalTemplateFinder - Finds templates on doggohub installation source, templates can be used in all projects
         def finder(project = nil)
           raise NotImplementedError
         end

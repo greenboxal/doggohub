@@ -14,7 +14,7 @@ AllCops:
   # behavior by overriding DisplayStyleGuide, or by giving the
   # -S/--display-style-guide option.
   DisplayStyleGuide: false
-  # Exclude some GitLab files
+  # Exclude some DoggoHub files
   Exclude:
     - 'vendor/**/*'
     - 'db/*'
@@ -26,8 +26,8 @@ AllCops:
     - 'lib/tasks/**/*'
     - 'lib/ci/migrate/**/*'
     - 'lib/email_validator.rb'
-    - 'lib/gitlab/upgrader.rb'
-    - 'lib/gitlab/seeder.rb'
+    - 'lib/doggohub/upgrader.rb'
+    - 'lib/doggohub/seeder.rb'
     - 'generator_templates/**/*'
 
 

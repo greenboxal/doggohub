@@ -1,5 +1,5 @@
 /* eslint-disable func-names, space-before-function-paren, wrap-iife, no-var, no-new, padded-blocks, max-len */
-/* global GitLab */
+/* global DoggoHub */
 /* global DropzoneInput */
 /* global autosize */
 

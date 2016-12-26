@@ -10,7 +10,7 @@ describe ChatMessage::BuildMessage do
       tag: false,
 
       project_name: 'project_name',
-      project_url: 'http://example.gitlab.com',
+      project_url: 'http://example.doggohub.com',
 
       commit: {
         status: status,
@@ -48,10 +48,10 @@ describe ChatMessage::BuildMessage do
   end
 
   def build_message(status_text = status)
-    "<http://example.gitlab.com|project_name>:" \
-    " Commit <http://example.gitlab.com/commit/" \
+    "<http://example.doggohub.com|project_name>:" \
+    " Commit <http://example.doggohub.com/commit/" \
     "97de212e80737a608d939f648d959671fb0a0142/builds|97de212e>" \
-    " of <http://example.gitlab.com/commits/develop|develop> branch" \
+    " of <http://example.doggohub.com/commits/develop|develop> branch" \
     " by hacker #{status_text} in #{duration} #{'second'.pluralize(duration)}"
   end
 end

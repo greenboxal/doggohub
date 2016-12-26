@@ -81,7 +81,7 @@ describe Service, models: true do
       BambooService.create(
         project: create(:project),
         properties: {
-          bamboo_url: 'http://gitlab.com',
+          bamboo_url: 'http://doggohub.com',
           username: 'mic',
           password: "password"
         }
@@ -105,7 +105,7 @@ describe Service, models: true do
     end
 
     it "returns false when the property has been re-assigned the same value" do
-      service.bamboo_url = 'http://gitlab.com'
+      service.bamboo_url = 'http://doggohub.com'
       expect(service.bamboo_url_changed?).to be_falsy
     end
 
@@ -121,7 +121,7 @@ describe Service, models: true do
       BambooService.create(
         project: create(:project),
         properties: {
-          bamboo_url: 'http://gitlab.com',
+          bamboo_url: 'http://doggohub.com',
           username: 'mic',
           password: "password"
         }
@@ -145,7 +145,7 @@ describe Service, models: true do
     end
 
     it "returns true when the property has been re-assigned the same value" do
-      service.bamboo_url = 'http://gitlab.com'
+      service.bamboo_url = 'http://doggohub.com'
       expect(service.bamboo_url_touched?).to be_truthy
     end
 
@@ -161,7 +161,7 @@ describe Service, models: true do
       BambooService.create(
         project: create(:project),
         properties: {
-          bamboo_url: 'http://gitlab.com',
+          bamboo_url: 'http://doggohub.com',
           username: 'mic',
           password: "password"
         }
@@ -175,18 +175,18 @@ describe Service, models: true do
 
     it "returns the previous value when the property has been assigned a different value" do
       service.bamboo_url = "http://example.com"
-      expect(service.bamboo_url_was).to eq('http://gitlab.com')
+      expect(service.bamboo_url_was).to eq('http://doggohub.com')
     end
 
     it "returns initial value when the property has been re-assigned the same value" do
-      service.bamboo_url = 'http://gitlab.com'
-      expect(service.bamboo_url_was).to eq('http://gitlab.com')
+      service.bamboo_url = 'http://doggohub.com'
+      expect(service.bamboo_url_was).to eq('http://doggohub.com')
     end
 
     it "returns initial value when the property has been assigned multiple values" do
       service.bamboo_url = "http://example.com"
       service.bamboo_url = "http://example2.com"
-      expect(service.bamboo_url_was).to eq('http://gitlab.com')
+      expect(service.bamboo_url_was).to eq('http://doggohub.com')
     end
 
     it "returns nil when the property has been assigned a new value then saved" do

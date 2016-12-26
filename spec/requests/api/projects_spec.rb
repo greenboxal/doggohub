@@ -398,7 +398,7 @@ describe API::Projects, api: true  do
 
         expect(response).to have_http_status(400)
         expect(json_response['message']['visibility_level'].first).to(
-          match('restricted by your GitLab administrator')
+          match('restricted by your DoggoHub administrator')
         )
       end
 
@@ -592,7 +592,7 @@ describe API::Projects, api: true  do
         expect(json_response['namespace']).to be_present
         expect(json_response['avatar_url']).to be_nil
         expect(json_response['star_count']).to be_present
-        expect(json_response['forks_count']).to be_present
+        expect(json_response['borks_count']).to be_present
         expect(json_response['public_builds']).to be_present
         expect(json_response['shared_with_groups']).to be_an Array
         expect(json_response['shared_with_groups'].length).to eq(1)
@@ -866,81 +866,81 @@ describe API::Projects, api: true  do
     end
   end
 
-  describe :fork_admin do
-    let(:project_fork_target) { create(:project) }
-    let(:project_fork_source) { create(:project, :public) }
+  describe :bork_admin do
+    let(:project_bork_target) { create(:project) }
+    let(:project_bork_source) { create(:project, :public) }
 
-    describe 'POST /projects/:id/fork/:forked_from_id' do
-      let(:new_project_fork_source) { create(:project, :public) }
+    describe 'POST /projects/:id/bork/:borked_from_id' do
+      let(:new_project_bork_source) { create(:project, :public) }
 
       it "is not available for non admin users" do
-        post api("/projects/#{project_fork_target.id}/fork/#{project_fork_source.id}", user)
+        post api("/projects/#{project_bork_target.id}/bork/#{project_bork_source.id}", user)
         expect(response).to have_http_status(403)
       end
 
-      it 'allows project to be forked from an existing project' do
-        expect(project_fork_target.forked?).not_to be_truthy
-        post api("/projects/#{project_fork_target.id}/fork/#{project_fork_source.id}", admin)
+      it 'allows project to be borked from an existing project' do
+        expect(project_bork_target.borked?).not_to be_truthy
+        post api("/projects/#{project_bork_target.id}/bork/#{project_bork_source.id}", admin)
         expect(response).to have_http_status(201)
-        project_fork_target.reload
-        expect(project_fork_target.forked_from_project.id).to eq(project_fork_source.id)
-        expect(project_fork_target.forked_project_link).not_to be_nil
-        expect(project_fork_target.forked?).to be_truthy
+        project_bork_target.reload
+        expect(project_bork_target.borked_from_project.id).to eq(project_bork_source.id)
+        expect(project_bork_target.borked_project_link).not_to be_nil
+        expect(project_bork_target.borked?).to be_truthy
       end
 
-      it 'fails if forked_from project which does not exist' do
-        post api("/projects/#{project_fork_target.id}/fork/9999", admin)
+      it 'fails if borked_from project which does not exist' do
+        post api("/projects/#{project_bork_target.id}/bork/9999", admin)
         expect(response).to have_http_status(404)
       end
 
-      it 'fails with 409 if already forked' do
-        post api("/projects/#{project_fork_target.id}/fork/#{project_fork_source.id}", admin)
-        project_fork_target.reload
-        expect(project_fork_target.forked_from_project.id).to eq(project_fork_source.id)
-        post api("/projects/#{project_fork_target.id}/fork/#{new_project_fork_source.id}", admin)
+      it 'fails with 409 if already borked' do
+        post api("/projects/#{project_bork_target.id}/bork/#{project_bork_source.id}", admin)
+        project_bork_target.reload
+        expect(project_bork_target.borked_from_project.id).to eq(project_bork_source.id)
+        post api("/projects/#{project_bork_target.id}/bork/#{new_project_bork_source.id}", admin)
         expect(response).to have_http_status(409)
-        project_fork_target.reload
-        expect(project_fork_target.forked_from_project.id).to eq(project_fork_source.id)
-        expect(project_fork_target.forked?).to be_truthy
+        project_bork_target.reload
+        expect(project_bork_target.borked_from_project.id).to eq(project_bork_source.id)
+        expect(project_bork_target.borked?).to be_truthy
       end
     end
 
-    describe 'DELETE /projects/:id/fork' do
+    describe 'DELETE /projects/:id/bork' do
       it "is not visible to users outside group" do
-        delete api("/projects/#{project_fork_target.id}/fork", user)
+        delete api("/projects/#{project_bork_target.id}/bork", user)
         expect(response).to have_http_status(404)
       end
 
       context 'when users belong to project group' do
-        let(:project_fork_target) { create(:project, group: create(:group)) }
+        let(:project_bork_target) { create(:project, group: create(:group)) }
 
         before do
-          project_fork_target.group.add_owner user
-          project_fork_target.group.add_developer user2
+          project_bork_target.group.add_owner user
+          project_bork_target.group.add_developer user2
         end
 
         it 'is forbidden to non-owner users' do
-          delete api("/projects/#{project_fork_target.id}/fork", user2)
+          delete api("/projects/#{project_bork_target.id}/bork", user2)
           expect(response).to have_http_status(403)
         end
 
-        it 'makes forked project unforked' do
-          post api("/projects/#{project_fork_target.id}/fork/#{project_fork_source.id}", admin)
-          project_fork_target.reload
-          expect(project_fork_target.forked_from_project).not_to be_nil
-          expect(project_fork_target.forked?).to be_truthy
-          delete api("/projects/#{project_fork_target.id}/fork", admin)
+        it 'makes borked project unborked' do
+          post api("/projects/#{project_bork_target.id}/bork/#{project_bork_source.id}", admin)
+          project_bork_target.reload
+          expect(project_bork_target.borked_from_project).not_to be_nil
+          expect(project_bork_target.borked?).to be_truthy
+          delete api("/projects/#{project_bork_target.id}/bork", admin)
           expect(response).to have_http_status(200)
-          project_fork_target.reload
-          expect(project_fork_target.forked_from_project).to be_nil
-          expect(project_fork_target.forked?).not_to be_truthy
+          project_bork_target.reload
+          expect(project_bork_target.borked_from_project).to be_nil
+          expect(project_bork_target.borked?).not_to be_truthy
         end
 
-        it 'is idempotent if not forked' do
-          expect(project_fork_target.forked_from_project).to be_nil
-          delete api("/projects/#{project_fork_target.id}/fork", admin)
+        it 'is idempotent if not borked' do
+          expect(project_bork_target.borked_from_project).to be_nil
+          delete api("/projects/#{project_bork_target.id}/bork", admin)
           expect(response).to have_http_status(304)
-          expect(project_fork_target.reload.forked_from_project).to be_nil
+          expect(project_bork_target.reload.borked_from_project).to be_nil
         end
       end
     end

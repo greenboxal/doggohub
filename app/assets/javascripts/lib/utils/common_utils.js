@@ -69,7 +69,7 @@
       var hash = w.gl.utils.getLocationHash();
       if (!hash) return;
 
-      var navbar = document.querySelector('.navbar-gitlab');
+      var navbar = document.querySelector('.navbar-doggohub');
       var subnav = document.querySelector('.layout-nav');
       var fixedTabs = document.querySelector('.js-tabs-affix');
 

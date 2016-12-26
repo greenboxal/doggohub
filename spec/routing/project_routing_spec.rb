@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'project routing' do
   before do
     allow(Project).to receive(:find_with_namespace).and_return(false)
-    allow(Project).to receive(:find_with_namespace).with('gitlab/gitlabhq').and_return(true)
+    allow(Project).to receive(:find_with_namespace).with('doggohub/doggohubhq').and_return(true)
   end
 
   # Shared examples for a resource inside a Project
@@ -31,31 +31,31 @@ describe 'project routing' do
     let(:actions) { [:index, :create, :new, :edit, :show, :update, :destroy] }
 
     it 'to #index' do
-      expect(get("/gitlab/gitlabhq/#{controller}")).to route_to("projects/#{controller}#index", namespace_id: 'gitlab', project_id: 'gitlabhq') if actions.include?(:index)
+      expect(get("/doggohub/doggohubhq/#{controller}")).to route_to("projects/#{controller}#index", namespace_id: 'doggohub', project_id: 'doggohubhq') if actions.include?(:index)
     end
 
     it 'to #create' do
-      expect(post("/gitlab/gitlabhq/#{controller}")).to route_to("projects/#{controller}#create", namespace_id: 'gitlab', project_id: 'gitlabhq') if actions.include?(:create)
+      expect(post("/doggohub/doggohubhq/#{controller}")).to route_to("projects/#{controller}#create", namespace_id: 'doggohub', project_id: 'doggohubhq') if actions.include?(:create)
     end
 
     it 'to #new' do
-      expect(get("/gitlab/gitlabhq/#{controller}/new")).to route_to("projects/#{controller}#new", namespace_id: 'gitlab', project_id: 'gitlabhq') if actions.include?(:new)
+      expect(get("/doggohub/doggohubhq/#{controller}/new")).to route_to("projects/#{controller}#new", namespace_id: 'doggohub', project_id: 'doggohubhq') if actions.include?(:new)
     end
 
     it 'to #edit' do
-      expect(get("/gitlab/gitlabhq/#{controller}/1/edit")).to route_to("projects/#{controller}#edit", namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1') if actions.include?(:edit)
+      expect(get("/doggohub/doggohubhq/#{controller}/1/edit")).to route_to("projects/#{controller}#edit", namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1') if actions.include?(:edit)
     end
 
     it 'to #show' do
-      expect(get("/gitlab/gitlabhq/#{controller}/1")).to route_to("projects/#{controller}#show", namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1') if actions.include?(:show)
+      expect(get("/doggohub/doggohubhq/#{controller}/1")).to route_to("projects/#{controller}#show", namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1') if actions.include?(:show)
     end
 
     it 'to #update' do
-      expect(put("/gitlab/gitlabhq/#{controller}/1")).to route_to("projects/#{controller}#update", namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1') if actions.include?(:update)
+      expect(put("/doggohub/doggohubhq/#{controller}/1")).to route_to("projects/#{controller}#update", namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1') if actions.include?(:update)
     end
 
     it 'to #destroy' do
-      expect(delete("/gitlab/gitlabhq/#{controller}/1")).to route_to("projects/#{controller}#destroy", namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1') if actions.include?(:destroy)
+      expect(delete("/doggohub/doggohubhq/#{controller}/1")).to route_to("projects/#{controller}#destroy", namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1') if actions.include?(:destroy)
     end
   end
 
@@ -77,38 +77,38 @@ describe 'project routing' do
     end
 
     it 'to #edit' do
-      expect(get('/gitlab/gitlabhq/edit')).to route_to('projects#edit', namespace_id: 'gitlab', id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/edit')).to route_to('projects#edit', namespace_id: 'doggohub', id: 'doggohubhq')
     end
 
     describe 'to #show' do
       context 'regular name' do
-        it { expect(get('/gitlab/gitlabhq')).to route_to('projects#show', namespace_id: 'gitlab', id: 'gitlabhq') }
+        it { expect(get('/doggohub/doggohubhq')).to route_to('projects#show', namespace_id: 'doggohub', id: 'doggohubhq') }
       end
 
       context 'name with dot' do
-        before { allow(Project).to receive(:find_with_namespace).with('gitlab/gitlabhq.keys').and_return(true) }
+        before { allow(Project).to receive(:find_with_namespace).with('doggohub/doggohubhq.keys').and_return(true) }
 
-        it { expect(get('/gitlab/gitlabhq.keys')).to route_to('projects#show', namespace_id: 'gitlab', id: 'gitlabhq.keys') }
+        it { expect(get('/doggohub/doggohubhq.keys')).to route_to('projects#show', namespace_id: 'doggohub', id: 'doggohubhq.keys') }
       end
 
       context 'with nested group' do
-        before { allow(Project).to receive(:find_with_namespace).with('gitlab/subgroup/gitlabhq').and_return(true) }
+        before { allow(Project).to receive(:find_with_namespace).with('doggohub/subgroup/doggohubhq').and_return(true) }
 
-        it { expect(get('/gitlab/subgroup/gitlabhq')).to route_to('projects#show', namespace_id: 'gitlab/subgroup', id: 'gitlabhq') }
+        it { expect(get('/doggohub/subgroup/doggohubhq')).to route_to('projects#show', namespace_id: 'doggohub/subgroup', id: 'doggohubhq') }
       end
     end
 
     it 'to #update' do
-      expect(put('/gitlab/gitlabhq')).to route_to('projects#update', namespace_id: 'gitlab', id: 'gitlabhq')
+      expect(put('/doggohub/doggohubhq')).to route_to('projects#update', namespace_id: 'doggohub', id: 'doggohubhq')
     end
 
     it 'to #destroy' do
-      expect(delete('/gitlab/gitlabhq')).to route_to('projects#destroy', namespace_id: 'gitlab', id: 'gitlabhq')
+      expect(delete('/doggohub/doggohubhq')).to route_to('projects#destroy', namespace_id: 'doggohub', id: 'doggohubhq')
     end
 
     it 'to #preview_markdown' do
-      expect(post('/gitlab/gitlabhq/preview_markdown')).to(
-        route_to('projects#preview_markdown', namespace_id: 'gitlab', id: 'gitlabhq')
+      expect(post('/doggohub/doggohubhq/preview_markdown')).to(
+        route_to('projects#preview_markdown', namespace_id: 'doggohub', id: 'doggohubhq')
       )
     end
   end
@@ -123,7 +123,7 @@ describe 'project routing' do
   describe Projects::AutocompleteSourcesController, 'routing' do
     [:emojis, :members, :issues, :merge_requests, :labels, :milestones, :commands].each do |action|
       it "to ##{action}" do
-        expect(get("/gitlab/gitlabhq/autocomplete_sources/#{action}")).to route_to("projects/autocomplete_sources##{action}", namespace_id: 'gitlab', project_id: 'gitlabhq')
+        expect(get("/doggohub/doggohubhq/autocomplete_sources/#{action}")).to route_to("projects/autocomplete_sources##{action}", namespace_id: 'doggohub', project_id: 'doggohubhq')
       end
     end
   end
@@ -136,11 +136,11 @@ describe 'project routing' do
   #                      DELETE /:project_id/wikis/:id(.:format)         projects/wikis#destroy
   describe Projects::WikisController, 'routing' do
     it 'to #pages' do
-      expect(get('/gitlab/gitlabhq/wikis/pages')).to route_to('projects/wikis#pages', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/wikis/pages')).to route_to('projects/wikis#pages', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #history' do
-      expect(get('/gitlab/gitlabhq/wikis/1/history')).to route_to('projects/wikis#history', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/wikis/1/history')).to route_to('projects/wikis#history', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it_behaves_like 'RESTful project resources' do
@@ -155,39 +155,39 @@ describe 'project routing' do
   #     edit_project_repository GET    /:project_id/repository/edit(.:format)     projects/repositories#edit
   describe Projects::RepositoriesController, 'routing' do
     it 'to #archive' do
-      expect(get('/gitlab/gitlabhq/repository/archive')).to route_to('projects/repositories#archive', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/repository/archive')).to route_to('projects/repositories#archive', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #archive format:zip' do
-      expect(get('/gitlab/gitlabhq/repository/archive.zip')).to route_to('projects/repositories#archive', namespace_id: 'gitlab', project_id: 'gitlabhq', format: 'zip')
+      expect(get('/doggohub/doggohubhq/repository/archive.zip')).to route_to('projects/repositories#archive', namespace_id: 'doggohub', project_id: 'doggohubhq', format: 'zip')
     end
 
     it 'to #archive format:tar.bz2' do
-      expect(get('/gitlab/gitlabhq/repository/archive.tar.bz2')).to route_to('projects/repositories#archive', namespace_id: 'gitlab', project_id: 'gitlabhq', format: 'tar.bz2')
+      expect(get('/doggohub/doggohubhq/repository/archive.tar.bz2')).to route_to('projects/repositories#archive', namespace_id: 'doggohub', project_id: 'doggohubhq', format: 'tar.bz2')
     end
   end
 
   describe Projects::BranchesController, 'routing' do
     it 'to #branches' do
-      expect(get('/gitlab/gitlabhq/branches')).to route_to('projects/branches#index', namespace_id: 'gitlab', project_id: 'gitlabhq')
-      expect(delete('/gitlab/gitlabhq/branches/feature%2345')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45')
-      expect(delete('/gitlab/gitlabhq/branches/feature%2B45')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45')
-      expect(delete('/gitlab/gitlabhq/branches/feature@45')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45')
-      expect(delete('/gitlab/gitlabhq/branches/feature%2345/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45/foo/bar/baz')
-      expect(delete('/gitlab/gitlabhq/branches/feature%2B45/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45/foo/bar/baz')
-      expect(delete('/gitlab/gitlabhq/branches/feature@45/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45/foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/branches')).to route_to('projects/branches#index', namespace_id: 'doggohub', project_id: 'doggohubhq')
+      expect(delete('/doggohub/doggohubhq/branches/feature%2345')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45')
+      expect(delete('/doggohub/doggohubhq/branches/feature%2B45')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45')
+      expect(delete('/doggohub/doggohubhq/branches/feature@45')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45')
+      expect(delete('/doggohub/doggohubhq/branches/feature%2345/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45/foo/bar/baz')
+      expect(delete('/doggohub/doggohubhq/branches/feature%2B45/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45/foo/bar/baz')
+      expect(delete('/doggohub/doggohubhq/branches/feature@45/foo/bar/baz')).to route_to('projects/branches#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45/foo/bar/baz')
     end
   end
 
   describe Projects::TagsController, 'routing' do
     it 'to #tags' do
-      expect(get('/gitlab/gitlabhq/tags')).to route_to('projects/tags#index', namespace_id: 'gitlab', project_id: 'gitlabhq')
-      expect(delete('/gitlab/gitlabhq/tags/feature%2345')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45')
-      expect(delete('/gitlab/gitlabhq/tags/feature%2B45')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45')
-      expect(delete('/gitlab/gitlabhq/tags/feature@45')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45')
-      expect(delete('/gitlab/gitlabhq/tags/feature%2345/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45/foo/bar/baz')
-      expect(delete('/gitlab/gitlabhq/tags/feature%2B45/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45/foo/bar/baz')
-      expect(delete('/gitlab/gitlabhq/tags/feature@45/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45/foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/tags')).to route_to('projects/tags#index', namespace_id: 'doggohub', project_id: 'doggohubhq')
+      expect(delete('/doggohub/doggohubhq/tags/feature%2345')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45')
+      expect(delete('/doggohub/doggohubhq/tags/feature%2B45')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45')
+      expect(delete('/doggohub/doggohubhq/tags/feature@45')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45')
+      expect(delete('/doggohub/doggohubhq/tags/feature%2345/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45/foo/bar/baz')
+      expect(delete('/doggohub/doggohubhq/tags/feature%2B45/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45/foo/bar/baz')
+      expect(delete('/doggohub/doggohubhq/tags/feature@45/foo/bar/baz')).to route_to('projects/tags#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45/foo/bar/baz')
     end
   end
 
@@ -218,19 +218,19 @@ describe 'project routing' do
   #  logs_file_project_ref GET    /:project_id/refs/:id/logs_tree/:path(.:format) refs#logs_tree
   describe Projects::RefsController, 'routing' do
     it 'to #switch' do
-      expect(get('/gitlab/gitlabhq/refs/switch')).to route_to('projects/refs#switch', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/refs/switch')).to route_to('projects/refs#switch', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #logs_tree' do
-      expect(get('/gitlab/gitlabhq/refs/stable/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'stable')
-      expect(get('/gitlab/gitlabhq/refs/feature%2345/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45')
-      expect(get('/gitlab/gitlabhq/refs/feature%2B45/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45')
-      expect(get('/gitlab/gitlabhq/refs/feature@45/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45')
-      expect(get('/gitlab/gitlabhq/refs/stable/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'stable', path: 'foo/bar/baz')
-      expect(get('/gitlab/gitlabhq/refs/feature%2345/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature#45', path: 'foo/bar/baz')
-      expect(get('/gitlab/gitlabhq/refs/feature%2B45/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature+45', path: 'foo/bar/baz')
-      expect(get('/gitlab/gitlabhq/refs/feature@45/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'feature@45', path: 'foo/bar/baz')
-      expect(get('/gitlab/gitlabhq/refs/stable/logs_tree/files.scss')).to route_to('projects/refs#logs_tree', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'stable', path: 'files.scss')
+      expect(get('/doggohub/doggohubhq/refs/stable/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'stable')
+      expect(get('/doggohub/doggohubhq/refs/feature%2345/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45')
+      expect(get('/doggohub/doggohubhq/refs/feature%2B45/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45')
+      expect(get('/doggohub/doggohubhq/refs/feature@45/logs_tree')).to             route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45')
+      expect(get('/doggohub/doggohubhq/refs/stable/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'stable', path: 'foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/refs/feature%2345/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature#45', path: 'foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/refs/feature%2B45/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature+45', path: 'foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/refs/feature@45/logs_tree/foo/bar/baz')).to route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'feature@45', path: 'foo/bar/baz')
+      expect(get('/doggohub/doggohubhq/refs/stable/logs_tree/files.scss')).to route_to('projects/refs#logs_tree', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'stable', path: 'files.scss')
     end
   end
 
@@ -252,35 +252,35 @@ describe 'project routing' do
   #                                                     PUT      /:namespace_id/:project_id/merge_requests/:id(.:format)                     projects/merge_requests#update
   describe Projects::MergeRequestsController, 'routing' do
     it 'to #diffs' do
-      expect(get('/gitlab/gitlabhq/merge_requests/1/diffs')).to route_to('projects/merge_requests#diffs', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/merge_requests/1/diffs')).to route_to('projects/merge_requests#diffs', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #commits' do
-      expect(get('/gitlab/gitlabhq/merge_requests/1/commits')).to route_to('projects/merge_requests#commits', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/merge_requests/1/commits')).to route_to('projects/merge_requests#commits', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #merge' do
-      expect(post('/gitlab/gitlabhq/merge_requests/1/merge')).to route_to(
+      expect(post('/doggohub/doggohubhq/merge_requests/1/merge')).to route_to(
         'projects/merge_requests#merge',
-        namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1'
+        namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1'
       )
     end
 
     it 'to #merge_check' do
-      expect(get('/gitlab/gitlabhq/merge_requests/1/merge_check')).to route_to('projects/merge_requests#merge_check', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/merge_requests/1/merge_check')).to route_to('projects/merge_requests#merge_check', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #branch_from' do
-      expect(get('/gitlab/gitlabhq/merge_requests/branch_from')).to route_to('projects/merge_requests#branch_from', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/merge_requests/branch_from')).to route_to('projects/merge_requests#branch_from', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #branch_to' do
-      expect(get('/gitlab/gitlabhq/merge_requests/branch_to')).to route_to('projects/merge_requests#branch_to', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/merge_requests/branch_to')).to route_to('projects/merge_requests#branch_to', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/merge_requests/1.diff')).to route_to('projects/merge_requests#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1', format: 'diff')
-      expect(get('/gitlab/gitlabhq/merge_requests/1.patch')).to route_to('projects/merge_requests#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1', format: 'patch')
+      expect(get('/doggohub/doggohubhq/merge_requests/1.diff')).to route_to('projects/merge_requests#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1', format: 'diff')
+      expect(get('/doggohub/doggohubhq/merge_requests/1.patch')).to route_to('projects/merge_requests#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1', format: 'patch')
     end
 
     it_behaves_like 'RESTful project resources' do
@@ -299,35 +299,35 @@ describe 'project routing' do
   #                      DELETE /:project_id/snippets/:id(.:format)      snippets#destroy
   describe SnippetsController, 'routing' do
     it 'to #raw' do
-      expect(get('/gitlab/gitlabhq/snippets/1/raw')).to route_to('projects/snippets#raw', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/snippets/1/raw')).to route_to('projects/snippets#raw', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #index' do
-      expect(get('/gitlab/gitlabhq/snippets')).to route_to('projects/snippets#index', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/snippets')).to route_to('projects/snippets#index', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #create' do
-      expect(post('/gitlab/gitlabhq/snippets')).to route_to('projects/snippets#create', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(post('/doggohub/doggohubhq/snippets')).to route_to('projects/snippets#create', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #new' do
-      expect(get('/gitlab/gitlabhq/snippets/new')).to route_to('projects/snippets#new', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/snippets/new')).to route_to('projects/snippets#new', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #edit' do
-      expect(get('/gitlab/gitlabhq/snippets/1/edit')).to route_to('projects/snippets#edit', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/snippets/1/edit')).to route_to('projects/snippets#edit', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/snippets/1')).to route_to('projects/snippets#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/snippets/1')).to route_to('projects/snippets#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #update' do
-      expect(put('/gitlab/gitlabhq/snippets/1')).to route_to('projects/snippets#update', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(put('/doggohub/doggohubhq/snippets/1')).to route_to('projects/snippets#update', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it 'to #destroy' do
-      expect(delete('/gitlab/gitlabhq/snippets/1')).to route_to('projects/snippets#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(delete('/doggohub/doggohubhq/snippets/1')).to route_to('projects/snippets#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
   end
 
@@ -337,7 +337,7 @@ describe 'project routing' do
   #      project_hook DELETE /:project_id/hooks/:id(.:format)      hooks#destroy
   describe Projects::HooksController, 'routing' do
     it 'to #test' do
-      expect(get('/gitlab/gitlabhq/hooks/1/test')).to route_to('projects/hooks#test', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '1')
+      expect(get('/doggohub/doggohubhq/hooks/1/test')).to route_to('projects/hooks#test', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '1')
     end
 
     it_behaves_like 'RESTful project resources' do
@@ -349,10 +349,10 @@ describe 'project routing' do
   # project_commit GET    /:project_id/commit/:id(.:format) commit#show {id: /\h{7,40}/, project_id: /[^\/]+/}
   describe Projects::CommitController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/commit/4246fbd')).to route_to('projects/commit#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '4246fbd')
-      expect(get('/gitlab/gitlabhq/commit/4246fbd.diff')).to route_to('projects/commit#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '4246fbd', format: 'diff')
-      expect(get('/gitlab/gitlabhq/commit/4246fbd.patch')).to route_to('projects/commit#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '4246fbd', format: 'patch')
-      expect(get('/gitlab/gitlabhq/commit/4246fbd13872934f72a8fd0d6fb1317b47b59cb5')).to route_to('projects/commit#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: '4246fbd13872934f72a8fd0d6fb1317b47b59cb5')
+      expect(get('/doggohub/doggohubhq/commit/4246fbd')).to route_to('projects/commit#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '4246fbd')
+      expect(get('/doggohub/doggohubhq/commit/4246fbd.diff')).to route_to('projects/commit#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '4246fbd', format: 'diff')
+      expect(get('/doggohub/doggohubhq/commit/4246fbd.patch')).to route_to('projects/commit#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '4246fbd', format: 'patch')
+      expect(get('/doggohub/doggohubhq/commit/4246fbd13872934f72a8fd0d6fb1317b47b59cb5')).to route_to('projects/commit#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: '4246fbd13872934f72a8fd0d6fb1317b47b59cb5')
     end
   end
 
@@ -367,7 +367,7 @@ describe 'project routing' do
     end
 
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/commits/master.atom')).to route_to('projects/commits#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master.atom')
+      expect(get('/doggohub/doggohubhq/commits/master.atom')).to route_to('projects/commits#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master.atom')
     end
   end
 
@@ -399,7 +399,7 @@ describe 'project routing' do
   # project_labels GET    /:project_id/labels(.:format) labels#index
   describe Projects::LabelsController, 'routing' do
     it 'to #index' do
-      expect(get('/gitlab/gitlabhq/labels')).to route_to('projects/labels#index', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/labels')).to route_to('projects/labels#index', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
   end
 
@@ -415,7 +415,7 @@ describe 'project routing' do
   #                            DELETE /:project_id/issues/:id(.:format)         issues#destroy
   describe Projects::IssuesController, 'routing' do
     it 'to #bulk_update' do
-      expect(post('/gitlab/gitlabhq/issues/bulk_update')).to route_to('projects/issues#bulk_update', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(post('/doggohub/doggohubhq/issues/bulk_update')).to route_to('projects/issues#bulk_update', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it_behaves_like 'RESTful project resources' do
@@ -437,26 +437,26 @@ describe 'project routing' do
   # project_blame GET    /:project_id/blame/:id(.:format) blame#show {id: /.+/, project_id: /[^\/]+/}
   describe Projects::BlameController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/blame/master/app/models/project.rb')).to route_to('projects/blame#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/app/models/project.rb')
-      expect(get('/gitlab/gitlabhq/blame/master/files.scss')).to route_to('projects/blame#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/files.scss')
+      expect(get('/doggohub/doggohubhq/blame/master/app/models/project.rb')).to route_to('projects/blame#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/app/models/project.rb')
+      expect(get('/doggohub/doggohubhq/blame/master/files.scss')).to route_to('projects/blame#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/files.scss')
     end
   end
 
   # project_blob GET    /:project_id/blob/:id(.:format) blob#show {id: /.+/, project_id: /[^\/]+/}
   describe Projects::BlobController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/blob/master/app/models/project.rb')).to route_to('projects/blob#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/app/models/project.rb')
-      expect(get('/gitlab/gitlabhq/blob/master/app/models/compare.rb')).to route_to('projects/blob#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/app/models/compare.rb')
-      expect(get('/gitlab/gitlabhq/blob/master/app/models/diff.js')).to route_to('projects/blob#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/app/models/diff.js')
-      expect(get('/gitlab/gitlabhq/blob/master/files.scss')).to route_to('projects/blob#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/files.scss')
+      expect(get('/doggohub/doggohubhq/blob/master/app/models/project.rb')).to route_to('projects/blob#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/app/models/project.rb')
+      expect(get('/doggohub/doggohubhq/blob/master/app/models/compare.rb')).to route_to('projects/blob#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/app/models/compare.rb')
+      expect(get('/doggohub/doggohubhq/blob/master/app/models/diff.js')).to route_to('projects/blob#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/app/models/diff.js')
+      expect(get('/doggohub/doggohubhq/blob/master/files.scss')).to route_to('projects/blob#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/files.scss')
     end
   end
 
   # project_tree GET    /:project_id/tree/:id(.:format) tree#show {id: /.+/, project_id: /[^\/]+/}
   describe Projects::TreeController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/tree/master/app/models/project.rb')).to route_to('projects/tree#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/app/models/project.rb')
-      expect(get('/gitlab/gitlabhq/tree/master/files.scss')).to route_to('projects/tree#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master/files.scss')
+      expect(get('/doggohub/doggohubhq/tree/master/app/models/project.rb')).to route_to('projects/tree#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/app/models/project.rb')
+      expect(get('/doggohub/doggohubhq/tree/master/files.scss')).to route_to('projects/tree#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master/files.scss')
     end
   end
 
@@ -464,26 +464,26 @@ describe 'project routing' do
   # project_files     GET /:namespace_id/:project_id/files/*id(.:format)      projects/find_file#list {:id=>/(?:[^.]|\.(?!json$))+/, :namespace_id=>/[a-zA-Z.0-9_\-]+/, :project_id=>/[a-zA-Z.0-9_\-]+(?<!\.atom)/, :format=>/json/}
   describe Projects::FindFileController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/find_file/master')).to route_to('projects/find_file#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master')
+      expect(get('/doggohub/doggohubhq/find_file/master')).to route_to('projects/find_file#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master')
     end
 
     it 'to #list' do
-      expect(get('/gitlab/gitlabhq/files/master.json')).to route_to('projects/find_file#list', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master', format: 'json')
+      expect(get('/doggohub/doggohubhq/files/master.json')).to route_to('projects/find_file#list', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master', format: 'json')
     end
   end
 
   describe Projects::BlobController, 'routing' do
     it 'to #edit' do
-      expect(get('/gitlab/gitlabhq/edit/master/app/models/project.rb')).to(
+      expect(get('/doggohub/doggohubhq/edit/master/app/models/project.rb')).to(
         route_to('projects/blob#edit',
-                 namespace_id: 'gitlab', project_id: 'gitlabhq',
+                 namespace_id: 'doggohub', project_id: 'doggohubhq',
                  id: 'master/app/models/project.rb'))
     end
 
     it 'to #preview' do
-      expect(post('/gitlab/gitlabhq/preview/master/app/models/project.rb')).to(
+      expect(post('/doggohub/doggohubhq/preview/master/app/models/project.rb')).to(
         route_to('projects/blob#preview',
-                 namespace_id: 'gitlab', project_id: 'gitlabhq',
+                 namespace_id: 'doggohub', project_id: 'doggohubhq',
                  id: 'master/app/models/project.rb'))
     end
   end
@@ -493,50 +493,50 @@ describe 'project routing' do
   #       project_compare        /:project_id/compare/:from...:to(.:format) compare#show {from: /.+/, to: /.+/, id: /[^\/]+/, project_id: /[^\/]+/}
   describe Projects::CompareController, 'routing' do
     it 'to #index' do
-      expect(get('/gitlab/gitlabhq/compare')).to route_to('projects/compare#index', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/compare')).to route_to('projects/compare#index', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #compare' do
-      expect(post('/gitlab/gitlabhq/compare')).to route_to('projects/compare#create', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(post('/doggohub/doggohubhq/compare')).to route_to('projects/compare#create', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/compare/master...stable')).to     route_to('projects/compare#show', namespace_id: 'gitlab', project_id: 'gitlabhq', from: 'master', to: 'stable')
-      expect(get('/gitlab/gitlabhq/compare/issue/1234...stable')).to route_to('projects/compare#show', namespace_id: 'gitlab', project_id: 'gitlabhq', from: 'issue/1234', to: 'stable')
+      expect(get('/doggohub/doggohubhq/compare/master...stable')).to     route_to('projects/compare#show', namespace_id: 'doggohub', project_id: 'doggohubhq', from: 'master', to: 'stable')
+      expect(get('/doggohub/doggohubhq/compare/issue/1234...stable')).to route_to('projects/compare#show', namespace_id: 'doggohub', project_id: 'doggohubhq', from: 'issue/1234', to: 'stable')
     end
   end
 
   describe Projects::NetworkController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/network/master')).to route_to('projects/network#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master')
-      expect(get('/gitlab/gitlabhq/network/ends-with.json')).to route_to('projects/network#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'ends-with.json')
-      expect(get('/gitlab/gitlabhq/network/master?format=json')).to route_to('projects/network#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master', format: 'json')
+      expect(get('/doggohub/doggohubhq/network/master')).to route_to('projects/network#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master')
+      expect(get('/doggohub/doggohubhq/network/ends-with.json')).to route_to('projects/network#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'ends-with.json')
+      expect(get('/doggohub/doggohubhq/network/master?format=json')).to route_to('projects/network#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master', format: 'json')
     end
   end
 
   describe Projects::GraphsController, 'routing' do
     it 'to #show' do
-      expect(get('/gitlab/gitlabhq/graphs/master')).to route_to('projects/graphs#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master')
-      expect(get('/gitlab/gitlabhq/graphs/ends-with.json')).to route_to('projects/graphs#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'ends-with.json')
-      expect(get('/gitlab/gitlabhq/graphs/master?format=json')).to route_to('projects/graphs#show', namespace_id: 'gitlab', project_id: 'gitlabhq', id: 'master', format: 'json')
+      expect(get('/doggohub/doggohubhq/graphs/master')).to route_to('projects/graphs#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master')
+      expect(get('/doggohub/doggohubhq/graphs/ends-with.json')).to route_to('projects/graphs#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'ends-with.json')
+      expect(get('/doggohub/doggohubhq/graphs/master?format=json')).to route_to('projects/graphs#show', namespace_id: 'doggohub', project_id: 'doggohubhq', id: 'master', format: 'json')
     end
   end
 
-  describe Projects::ForksController, 'routing' do
+  describe Projects::BorksController, 'routing' do
     it 'to #new' do
-      expect(get('/gitlab/gitlabhq/forks/new')).to route_to('projects/forks#new', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(get('/doggohub/doggohubhq/borks/new')).to route_to('projects/borks#new', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
 
     it 'to #create' do
-      expect(post('/gitlab/gitlabhq/forks')).to route_to('projects/forks#create', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(post('/doggohub/doggohubhq/borks')).to route_to('projects/borks#create', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
   end
 
   # project_avatar DELETE /project/avatar(.:format) projects/avatars#destroy
   describe Projects::AvatarsController, 'routing' do
     it 'to #destroy' do
-      expect(delete('/gitlab/gitlabhq/avatar')).to route_to(
-        'projects/avatars#destroy', namespace_id: 'gitlab', project_id: 'gitlabhq')
+      expect(delete('/doggohub/doggohubhq/avatar')).to route_to(
+        'projects/avatars#destroy', namespace_id: 'doggohub', project_id: 'doggohubhq')
     end
   end
 end

@@ -1,15 +1,15 @@
-# Using Git submodules with GitLab CI
+# Using Git submodules with DoggoHub CI
 
 > **Notes:**
-- GitLab 8.12 introduced a new [CI build permissions model][newperms] and you
-  are encouraged to upgrade your GitLab instance if you haven't done already.
-  If you are **not** using GitLab 8.12 or higher, you would need to work your way
-  around submodules in order to access the sources of e.g., `gitlab.com/group/project`
+- DoggoHub 8.12 introduced a new [CI build permissions model][newperms] and you
+  are encouraged to upgrade your DoggoHub instance if you haven't done already.
+  If you are **not** using DoggoHub 8.12 or higher, you would need to work your way
+  around submodules in order to access the sources of e.g., `doggohub.com/group/project`
   with the use of [SSH keys](ssh_keys/README.md).
-- With GitLab 8.12 onward, your permissions are used to evaluate what a CI build
+- With DoggoHub 8.12 onward, your permissions are used to evaluate what a CI build
   can access. More information about how this system works can be found in the
   [Build permissions model](../user/permissions.md#builds-permissions).
-- The HTTP(S) Git protocol [must be enabled][gitpro] in your GitLab instance.
+- The HTTP(S) Git protocol [must be enabled][gitpro] in your DoggoHub instance.
 
 ## Configuring the `.gitmodules` file
 
@@ -18,13 +18,13 @@ named `.gitmodules`.
 
 Let's consider the following example:
 
-1. Your project is located at `https://gitlab.com/secret-group/my-project`.
+1. Your project is located at `https://doggohub.com/secret-group/my-project`.
 1. To checkout your sources you usually use an SSH address like
-   `git@gitlab.com:secret-group/my-project.git`.
-1. Your project depends on `https://gitlab.com/group/project`, which you want
+   `git@doggohub.com:secret-group/my-project.git`.
+1. Your project depends on `https://doggohub.com/group/project`, which you want
    to include as a submodule.
 
-If you are using GitLab 8.12+ and your submodule is on the same GitLab server,
+If you are using DoggoHub 8.12+ and your submodule is on the same DoggoHub server,
 you must update your `.gitmodules` file to use **relative URLs**.
 Since Git allows the usage of relative URLs for your `.gitmodules` configuration,
 this easily allows you to use HTTP(S) for cloning all your CI builds and SSH
@@ -39,10 +39,10 @@ for all your local checkouts. The `.gitmodules` would look like:
 The above configuration will instruct Git to automatically deduce the URL that
 should be used when cloning sources. Whether you use HTTP(S) or SSH, Git will use
 that same channel and it will allow to make all your CI builds use HTTP(S)
-(because GitLab CI only uses HTTP(S) for cloning your sources), and all your local
+(because DoggoHub CI only uses HTTP(S) for cloning your sources), and all your local
 clones will continue using SSH.
 
-For all other submodules not located on the same GitLab server, use the full
+For all other submodules not located on the same DoggoHub server, use the full
 HTTP(S) protocol URL:
 
 ```ini
@@ -52,7 +52,7 @@ HTTP(S) protocol URL:
 ```
 
 Once `.gitmodules` is correctly configured, you can move on to
-[configuring your `.gitlab-ci.yml`](#using-git-submodules-in-your-ci-jobs).
+[configuring your `.doggohub-ci.yml`](#using-git-submodules-in-your-ci-jobs).
 
 ## Using Git submodules in your CI jobs
 
@@ -60,7 +60,7 @@ There are a few steps you need to take in order to make submodules work
 correctly with your CI builds:
 
 1. First, make sure you have used [relative URLs](#configuring-the-gitmodules-file)
-   for the submodules located in the same GitLab server.
+   for the submodules located in the same DoggoHub server.
 1. Then, use `git submodule sync/update` in `before_script`:
 
     ```yaml

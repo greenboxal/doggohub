@@ -21,7 +21,7 @@ module Gitlab
       end
 
       def author_id
-        gitlab_author_id || project.creator_id
+        doggohub_author_id || project.creator_id
       end
 
       def body
@@ -52,7 +52,7 @@ module Gitlab
       end
 
       def note
-        if gitlab_author_id
+        if doggohub_author_id
           body
         else
           formatter.author_line(author) + body

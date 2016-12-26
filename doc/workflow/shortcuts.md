@@ -1,6 +1,6 @@
-# GitLab keyboard shortcuts
+# DoggoHub keyboard shortcuts
 
-You can see GitLab's keyboard shortcuts by using 'shift + ?'
+You can see DoggoHub's keyboard shortcuts by using 'shift + ?'
 
 ## Global Shortcuts
 

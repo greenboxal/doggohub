@@ -1,4 +1,4 @@
-## GitLab CI Services
+## DoggoHub CI Services
 
 + [Using MySQL](mysql.md)
 + [Using PostgreSQL](postgres.md)

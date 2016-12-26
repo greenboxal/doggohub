@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'rainbow/ext/string'
 
 describe 'seed production settings', lib: true do
-  context 'GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN is set in the environment' do
+  context 'DOGGOHUB_SHARED_RUNNERS_REGISTRATION_TOKEN is set in the environment' do
     before do
       allow(ENV).to receive(:[]).and_call_original
-      allow(ENV).to receive(:[]).with('GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN').and_return('013456789')
+      allow(ENV).to receive(:[]).with('DOGGOHUB_SHARED_RUNNERS_REGISTRATION_TOKEN').and_return('013456789')
     end
 
     it 'writes the token to the database' do

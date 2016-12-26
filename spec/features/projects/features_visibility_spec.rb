@@ -5,7 +5,7 @@ describe 'Edit Project Settings', feature: true do
   include WaitForAjax
 
   let(:member) { create(:user) }
-  let!(:project) { create(:project, :public, path: 'gitlab', name: 'sample') }
+  let!(:project) { create(:project, :public, path: 'doggohub', name: 'sample') }
   let!(:issue) { create(:issue, project: project) }
   let(:non_member) { create(:user) }
 
@@ -183,7 +183,7 @@ describe 'Edit Project Settings', feature: true do
       end
     end
 
-    # Regression spec for https://gitlab.com/gitlab-org/gitlab-ce/issues/25272
+    # Regression spec for https://doggohub.com/doggohub-org/doggohub-ce/issues/25272
     it "hides comments activity tab only on disabled issues, merge requests and repository" do
       select "Disabled", from: "project_project_feature_attributes_issues_access_level"
 
@@ -222,7 +222,7 @@ describe 'Edit Project Settings', feature: true do
     end
   end
 
-  # Regression spec for https://gitlab.com/gitlab-org/gitlab-ce/issues/24056
+  # Regression spec for https://doggohub.com/doggohub-org/doggohub-ce/issues/24056
   describe 'project statistic visibility' do
     let!(:project) { create(:project, :private) }
 

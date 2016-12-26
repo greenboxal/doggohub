@@ -14,19 +14,19 @@ if defined?(ActiveRecord::ConnectionAdapters::Mysql2Adapter)
   module ActiveRecord
     module ConnectionAdapters
       class Mysql2Adapter < AbstractMysqlAdapter
-        alias_method :__gitlab_add_index, :add_index
-        alias_method :__gitlab_add_index_sql, :add_index_sql
-        alias_method :__gitlab_add_index_options, :add_index_options
+        alias_method :__doggohub_add_index, :add_index
+        alias_method :__doggohub_add_index_sql, :add_index_sql
+        alias_method :__doggohub_add_index_options, :add_index_options
 
         def add_index(table_name, column_name, options = {})
           unless options[:opclasses]
-            __gitlab_add_index(table_name, column_name, options)
+            __doggohub_add_index(table_name, column_name, options)
           end
         end
 
         def add_index_sql(table_name, column_name, options = {})
           unless options[:opclasses]
-            __gitlab_add_index_sql(table_name, column_name, options)
+            __doggohub_add_index_sql(table_name, column_name, options)
           end
         end
 
@@ -41,7 +41,7 @@ if defined?(ActiveRecord::ConnectionAdapters::Mysql2Adapter)
             options.delete(:opclasses)
           end
 
-          __gitlab_add_index_options(table_name, column_name, options)
+          __doggohub_add_index_options(table_name, column_name, options)
         end
       end
     end

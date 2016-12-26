@@ -3,10 +3,10 @@ require 'sidekiq/testing'
 Sidekiq::Testing.inline! do
   Gitlab::Seeder.quiet do
     project_urls = [
-      'https://gitlab.com/gitlab-org/gitlab-test.git',
-      'https://gitlab.com/gitlab-org/gitlab-ce.git',
-      'https://gitlab.com/gitlab-org/gitlab-ci.git',
-      'https://gitlab.com/gitlab-org/gitlab-shell.git',
+      'https://doggohub.com/doggohub-org/doggohub-test.git',
+      'https://doggohub.com/doggohub-org/doggohub-ce.git',
+      'https://doggohub.com/doggohub-org/doggohub-ci.git',
+      'https://doggohub.com/doggohub-org/doggohub-shell.git',
       'https://github.com/documentcloud/underscore.git',
       'https://github.com/twitter/flight.git',
       'https://github.com/twitter/typeahead.js.git',

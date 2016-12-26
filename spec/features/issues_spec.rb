@@ -150,7 +150,7 @@ describe 'Issues', feature: true do
 
   describe 'Filter issue' do
     before do
-      ['foobar', 'barbaz', 'gitlab'].each do |title|
+      ['foobar', 'barbaz', 'doggohub'].each do |title|
         create(:issue,
                author: @user,
                assignee: @user,
@@ -171,7 +171,7 @@ describe 'Issues', feature: true do
 
       expect(page).to have_content 'foobar'
       expect(page).not_to have_content 'barbaz'
-      expect(page).not_to have_content 'gitlab'
+      expect(page).not_to have_content 'doggohub'
     end
 
     it 'allows filtering by a specified assignee' do
@@ -179,7 +179,7 @@ describe 'Issues', feature: true do
 
       expect(page).not_to have_content 'foobar'
       expect(page).to have_content 'barbaz'
-      expect(page).to have_content 'gitlab'
+      expect(page).to have_content 'doggohub'
     end
   end
 

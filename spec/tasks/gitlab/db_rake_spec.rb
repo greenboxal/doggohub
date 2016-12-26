@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'rake'
 
-describe 'gitlab:db namespace rake task' do
+describe 'doggohub:db namespace rake task' do
   before :all do
     Rake.application.rake_require 'active_record/railties/databases'
     Rake.application.rake_require 'tasks/seed_fu'
-    Rake.application.rake_require 'tasks/gitlab/db'
+    Rake.application.rake_require 'tasks/doggohub/db'
 
     # empty task as env is already loaded
     Rake::Task.define_task :environment
@@ -24,7 +24,7 @@ describe 'gitlab:db namespace rake task' do
       expect(Rake::Task['db:migrate']).to receive(:invoke)
       expect(Rake::Task['db:schema:load']).not_to receive(:invoke)
       expect(Rake::Task['db:seed_fu']).not_to receive(:invoke)
-      expect { run_rake_task('gitlab:db:configure') }.not_to raise_error
+      expect { run_rake_task('doggohub:db:configure') }.not_to raise_error
     end
 
     it 'invokes db:shema:load and db:seed_fu when schema is not loaded' do
@@ -32,7 +32,7 @@ describe 'gitlab:db namespace rake task' do
       expect(Rake::Task['db:schema:load']).to receive(:invoke)
       expect(Rake::Task['db:seed_fu']).to receive(:invoke)
       expect(Rake::Task['db:migrate']).not_to receive(:invoke)
-      expect { run_rake_task('gitlab:db:configure') }.not_to raise_error
+      expect { run_rake_task('doggohub:db:configure') }.not_to raise_error
     end
 
     it 'does not invoke any other rake tasks during an error' do
@@ -40,7 +40,7 @@ describe 'gitlab:db namespace rake task' do
       expect(Rake::Task['db:migrate']).not_to receive(:invoke)
       expect(Rake::Task['db:schema:load']).not_to receive(:invoke)
       expect(Rake::Task['db:seed_fu']).not_to receive(:invoke)
-      expect { run_rake_task('gitlab:db:configure') }.to raise_error(RuntimeError, 'error')
+      expect { run_rake_task('doggohub:db:configure') }.to raise_error(RuntimeError, 'error')
       # unstub connection so that the database cleaner still works
       allow(ActiveRecord::Base).to receive(:connection).and_call_original
     end
@@ -51,7 +51,7 @@ describe 'gitlab:db namespace rake task' do
       expect(Rake::Task['db:schema:load']).to receive(:invoke)
       expect(Rake::Task['db:seed_fu']).not_to receive(:invoke)
       expect(Rake::Task['db:migrate']).not_to receive(:invoke)
-      expect { run_rake_task('gitlab:db:configure') }.to raise_error(RuntimeError, 'error')
+      expect { run_rake_task('doggohub:db:configure') }.to raise_error(RuntimeError, 'error')
     end
   end
 

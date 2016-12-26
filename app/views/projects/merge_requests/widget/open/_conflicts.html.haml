@@ -8,7 +8,7 @@
     - if @merge_request.conflicts_can_be_resolved_in_ui?
       = link_to "resolve these conflicts", conflicts_namespace_project_merge_request_path(@project.namespace, @project, @merge_request)
     - else
-      %span.has-tooltip{title: "These conflicts cannot be resolved through GitLab"}
+      %span.has-tooltip{title: "These conflicts cannot be resolved through DoggoHub"}
         resolve these conflicts locally
   - else
     resolve these conflicts

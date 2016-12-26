@@ -1,6 +1,6 @@
-# GitLab Notification Emails
+# DoggoHub Notification Emails
 
-GitLab has a notification system in place to notify a user of events that are important for the workflow.
+DoggoHub has a notification system in place to notify a user of events that are important for the workflow.
 
 ## Notification settings
 

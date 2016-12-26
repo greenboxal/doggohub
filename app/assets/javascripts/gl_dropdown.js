@@ -3,11 +3,11 @@
 /* global Turbolinks */
 
 (function() {
-  var GitLabDropdown, GitLabDropdownFilter, GitLabDropdownRemote,
+  var DoggoHubDropdown, DoggoHubDropdownFilter, DoggoHubDropdownRemote,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  GitLabDropdownFilter = (function() {
+  DoggoHubDropdownFilter = (function() {
     var ARROW_KEY_CODES, BLUR_KEYCODES, HAS_VALUE_CLASS;
 
     BLUR_KEYCODES = [27, 40];
@@ -16,7 +16,7 @@
 
     HAS_VALUE_CLASS = "has-value";
 
-    function GitLabDropdownFilter(input, options) {
+    function DoggoHubDropdownFilter(input, options) {
       var $clearButton, $inputContainer, ref, timeout;
       this.input = input;
       this.options = options;
@@ -60,11 +60,11 @@
         }.bind(this));
     }
 
-    GitLabDropdownFilter.prototype.shouldBlur = function(keyCode) {
+    DoggoHubDropdownFilter.prototype.shouldBlur = function(keyCode) {
       return BLUR_KEYCODES.indexOf(keyCode) >= 0;
     };
 
-    GitLabDropdownFilter.prototype.filter = function(search_text) {
+    DoggoHubDropdownFilter.prototype.filter = function(search_text) {
       var data, elements, group, key, results, tmp;
       if (this.options.onFilter) {
         this.options.onFilter(search_text);
@@ -132,17 +132,17 @@
       }
     };
 
-    return GitLabDropdownFilter;
+    return DoggoHubDropdownFilter;
 
   })();
 
-  GitLabDropdownRemote = (function() {
-    function GitLabDropdownRemote(dataEndpoint, options) {
+  DoggoHubDropdownRemote = (function() {
+    function DoggoHubDropdownRemote(dataEndpoint, options) {
       this.dataEndpoint = dataEndpoint;
       this.options = options;
     }
 
-    GitLabDropdownRemote.prototype.execute = function() {
+    DoggoHubDropdownRemote.prototype.execute = function() {
       if (typeof this.dataEndpoint === "string") {
         return this.fetchData();
       } else if (typeof this.dataEndpoint === "function") {
@@ -163,7 +163,7 @@
       }
     };
 
-    GitLabDropdownRemote.prototype.fetchData = function() {
+    DoggoHubDropdownRemote.prototype.fetchData = function() {
       return $.ajax({
         url: this.dataEndpoint,
         dataType: this.options.dataType,
@@ -185,11 +185,11 @@
     // Fetch the data through ajax if the data is a string
     };
 
-    return GitLabDropdownRemote;
+    return DoggoHubDropdownRemote;
 
   })();
 
-  GitLabDropdown = (function() {
+  DoggoHubDropdown = (function() {
     var ACTIVE_CLASS, FILTER_INPUT, INDETERMINATE_CLASS, LOADING_CLASS, PAGE_TWO_CLASS, NON_SELECTABLE_CLASSES, SELECTABLE_CLASSES, CURSOR_SELECT_SCROLL_PADDING, currentIndex;
 
     LOADING_CLASS = "is-loading";
@@ -210,7 +210,7 @@
 
     FILTER_INPUT = '.dropdown-input .dropdown-input-field';
 
-    function GitLabDropdown(el1, options) {
+    function DoggoHubDropdown(el1, options) {
       var searchFields, selector, self;
       this.el = el1;
       this.options = options;
@@ -243,7 +243,7 @@
           this.parseData(this.options.data);
           this.focusTextInput();
         } else {
-          this.remote = new GitLabDropdownRemote(this.options.data, {
+          this.remote = new DoggoHubDropdownRemote(this.options.data, {
             dataType: this.options.dataType,
             beforeSend: this.toggleLoading.bind(this),
             success: (function(_this) {
@@ -262,7 +262,7 @@
       }
       // Init filterable
       if (this.options.filterable) {
-        this.filter = new GitLabDropdownFilter(this.filterInput, {
+        this.filter = new DoggoHubDropdownFilter(this.filterInput, {
           elIsInput: $(this.el).is('input'),
           filterInputBlur: this.filterInputBlur,
           filterByText: this.options.filterByText,
@@ -363,15 +363,15 @@
     }
 
     // Finds an element inside wrapper element
-    GitLabDropdown.prototype.getElement = function(selector) {
+    DoggoHubDropdown.prototype.getElement = function(selector) {
       return this.dropdown.find(selector);
     };
 
-    GitLabDropdown.prototype.toggleLoading = function() {
+    DoggoHubDropdown.prototype.toggleLoading = function() {
       return $('.dropdown-menu', this.dropdown).toggleClass(LOADING_CLASS);
     };
 
-    GitLabDropdown.prototype.togglePage = function() {
+    DoggoHubDropdown.prototype.togglePage = function() {
       var menu;
       menu = $('.dropdown-menu', this.dropdown);
       if (menu.hasClass(PAGE_TWO_CLASS)) {
@@ -384,7 +384,7 @@
       return this.dropdown.find('[class^="dropdown-page-"]:visible :text:visible:first').focus();
     };
 
-    GitLabDropdown.prototype.parseData = function(data) {
+    DoggoHubDropdown.prototype.parseData = function(data) {
       var full_html, groupData, html, name;
       this.renderedData = data;
       if (this.options.filterable && data.length === 0) {
@@ -414,7 +414,7 @@
       return this.appendMenu(full_html);
     };
 
-    GitLabDropdown.prototype.renderData = function(data, group) {
+    DoggoHubDropdown.prototype.renderData = function(data, group) {
       if (group == null) {
         group = false;
       }
@@ -425,7 +425,7 @@
       })(this));
     };
 
-    GitLabDropdown.prototype.shouldPropagate = function(e) {
+    DoggoHubDropdown.prototype.shouldPropagate = function(e) {
       var $target;
       if (this.options.multiSelect) {
         $target = $(e.target);
@@ -440,7 +440,7 @@
       }
     };
 
-    GitLabDropdown.prototype.opened = function() {
+    DoggoHubDropdown.prototype.opened = function() {
       var contentHtml;
       this.resetRows();
       this.addArrowKeyEvent();
@@ -463,14 +463,14 @@
       return this.dropdown.trigger('shown.gl.dropdown');
     };
 
-    GitLabDropdown.prototype.positionMenuAbove = function() {
+    DoggoHubDropdown.prototype.positionMenuAbove = function() {
       var $button = $(this.el);
       var $menu = this.dropdown.find('.dropdown-menu');
 
       $menu.css('top', ($button.height() + $menu.height()) * -1);
     };
 
-    GitLabDropdown.prototype.hidden = function(e) {
+    DoggoHubDropdown.prototype.hidden = function(e) {
       var $input;
       this.resetRows();
       this.removeArrayKeyEvent();
@@ -488,7 +488,7 @@
     };
 
     // Render the full menu
-    GitLabDropdown.prototype.renderMenu = function(html) {
+    DoggoHubDropdown.prototype.renderMenu = function(html) {
       if (this.options.renderMenu) {
         return this.options.renderMenu(html);
       } else {
@@ -513,7 +513,7 @@
     };
 
     // Append the menu into the dropdown
-    GitLabDropdown.prototype.appendMenu = function(html) {
+    DoggoHubDropdown.prototype.appendMenu = function(html) {
       var selector;
       selector = '.dropdown-content';
       if (this.dropdown.find(".dropdown-toggle-page").length) {
@@ -522,7 +522,7 @@
       return $(selector, this.dropdown).empty().append(html);
     };
 
-    GitLabDropdown.prototype.renderItem = function(data, group, index) {
+    DoggoHubDropdown.prototype.renderItem = function(data, group, index) {
       var field, fieldName, html, selected, text, url, value;
       if (group == null) {
         group = false;
@@ -592,7 +592,7 @@
       return html;
     };
 
-    GitLabDropdown.prototype.highlightTextMatches = function(text, term) {
+    DoggoHubDropdown.prototype.highlightTextMatches = function(text, term) {
       var occurrences;
       occurrences = fuzzaldrinPlus.match(text, term);
       return text.split('').map(function(character, i) {
@@ -604,12 +604,12 @@
       }).join('');
     };
 
-    GitLabDropdown.prototype.noResults = function() {
+    DoggoHubDropdown.prototype.noResults = function() {
       var html;
       return html = "<li class='dropdown-menu-empty-link'> <a href='#' class='is-focused'> No matching results. </a> </li>";
     };
 
-    GitLabDropdown.prototype.rowClicked = function(el) {
+    DoggoHubDropdown.prototype.rowClicked = function(el) {
       var field, fieldName, groupName, isInput, selectedIndex, selectedObject, value, isMarking;
 
       fieldName = this.options.fieldName;
@@ -694,11 +694,11 @@
       return [selectedObject, isMarking];
     };
 
-    GitLabDropdown.prototype.focusTextInput = function() {
+    DoggoHubDropdown.prototype.focusTextInput = function() {
       if (this.options.filterable) { this.filterInput.focus() }
     }
 
-    GitLabDropdown.prototype.addInput = function(fieldName, value, selectedObject) {
+    DoggoHubDropdown.prototype.addInput = function(fieldName, value, selectedObject) {
       var $input;
       // Create hidden input for form
       $input = $('<input>').attr('type', 'hidden').attr('name', fieldName).val(value);
@@ -708,7 +708,7 @@
       return this.dropdown.before($input);
     };
 
-    GitLabDropdown.prototype.selectRowAtIndex = function(index) {
+    DoggoHubDropdown.prototype.selectRowAtIndex = function(index) {
       var $el, selector;
       // If we pass an option index
       if (typeof index !== "undefined") {
@@ -731,7 +731,7 @@
       }
     };
 
-    GitLabDropdown.prototype.addArrowKeyEvent = function() {
+    DoggoHubDropdown.prototype.addArrowKeyEvent = function() {
       var $input, ARROW_KEY_CODES, selector;
       ARROW_KEY_CODES = [38, 40];
       $input = this.dropdown.find(".dropdown-input-field");
@@ -774,16 +774,16 @@
       })(this));
     };
 
-    GitLabDropdown.prototype.removeArrayKeyEvent = function() {
+    DoggoHubDropdown.prototype.removeArrayKeyEvent = function() {
       return $('body').off('keydown');
     };
 
-    GitLabDropdown.prototype.resetRows = function resetRows() {
+    DoggoHubDropdown.prototype.resetRows = function resetRows() {
       currentIndex = -1;
       $('.is-focused', this.dropdown).removeClass('is-focused');
     };
 
-    GitLabDropdown.prototype.highlightRowAtIndex = function($listItems, index) {
+    DoggoHubDropdown.prototype.highlightRowAtIndex = function($listItems, index) {
       var $dropdownContent, $listItem, dropdownContentBottom, dropdownContentHeight, dropdownContentTop, dropdownScrollTop, listItemBottom, listItemHeight, listItemTop;
       // Remove the class for the previously focused row
       $('.is-focused', this.dropdown).removeClass('is-focused');
@@ -815,7 +815,7 @@
       }
     };
 
-    GitLabDropdown.prototype.updateLabel = function(selected, el, instance) {
+    DoggoHubDropdown.prototype.updateLabel = function(selected, el, instance) {
       if (selected == null) {
         selected = null;
       }
@@ -828,14 +828,14 @@
       return $(this.el).find(".dropdown-toggle-text").text(this.options.toggleLabel(selected, el, instance));
     };
 
-    return GitLabDropdown;
+    return DoggoHubDropdown;
 
   })();
 
   $.fn.glDropdown = function(opts) {
     return this.each(function() {
       if (!$.data(this, 'glDropdown')) {
-        return $.data(this, 'glDropdown', new GitLabDropdown(this, opts));
+        return $.data(this, 'glDropdown', new DoggoHubDropdown(this, opts));
       }
     });
   };

@@ -702,7 +702,7 @@ Parameters:
 | `id` | integer | yes | The ID of the user |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/users/:id/events
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/users/:id/events
 ```
 
 Example response:
@@ -751,17 +751,17 @@ Example response:
       "user_id": 1,
       "user_name": "Dmitriy Zaporozhets",
       "repository": {
-        "name": "gitlabhq",
-        "url": "git@dev.gitlab.org:gitlab/gitlabhq.git",
-        "description": "GitLab: self hosted Git management software. \r\nDistributed under the MIT License.",
-        "homepage": "https://dev.gitlab.org/gitlab/gitlabhq"
+        "name": "doggohubhq",
+        "url": "git@dev.doggohub.org:doggohub/doggohubhq.git",
+        "description": "DoggoHub: self hosted Git management software. \r\nDistributed under the MIT License.",
+        "homepage": "https://dev.doggohub.org/doggohub/doggohubhq"
       },
       "commits": [
         {
           "id": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
           "message": "Add simple search to projects in public area",
           "timestamp": "2013-05-13T18:18:08+00:00",
-          "url": "https://dev.gitlab.org/gitlab/gitlabhq/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+          "url": "https://dev.doggohub.org/doggohub/doggohubhq/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
           "author": {
             "name": "Dmitriy Zaporozhets",
             "email": "dmitriy.zaporozhets@gmail.com"

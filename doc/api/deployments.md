@@ -13,7 +13,7 @@ GET /projects/:id/deployments
 | `id`      | integer | yes      | The ID of a project |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/deployments"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/deployments"
 ```
 
 Example of response
@@ -61,7 +61,7 @@ Example of response
       }
     },
     "environment": {
-      "external_url": "https://about.gitlab.com",
+      "external_url": "https://about.doggohub.com",
       "id": 9,
       "name": "production"
     },
@@ -119,7 +119,7 @@ Example of response
       }
     },
     "environment": {
-      "external_url": "https://about.gitlab.com",
+      "external_url": "https://about.doggohub.com",
       "id": 9,
       "name": "production"
     },
@@ -151,7 +151,7 @@ GET /projects/:id/deployments/:deployment_id
 | `deployment_id` | integer | yes      | The ID of the deployment |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/deployments/1"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/deployments/1"
 ```
 
 Example of response
@@ -174,7 +174,7 @@ Example of response
   "environment": {
     "id": 9,
     "name": "production",
-    "external_url": "https://about.gitlab.com"
+    "external_url": "https://about.doggohub.com"
   },
   "deployable": {
     "id": 664,

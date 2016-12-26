@@ -1,5 +1,5 @@
-# See http://doc.gitlab.com/ce/development/migration_style_guide.html
-# for more information on how to write migrations for GitLab.
+# See http://doc.doggohub.com/ce/development/migration_style_guide.html
+# for more information on how to write migrations for DoggoHub.
 
 class RemoveDotGitFromGroupNames < ActiveRecord::Migration
   include Gitlab::Database::MigrationHelpers
@@ -66,9 +66,9 @@ class RemoveDotGitFromGroupNames < ActiveRecord::Migration
     # Move the namespace directory in all storages paths used by member projects
     repository_storage_paths.each do |repository_storage_path|
       # Ensure old directory exists before moving it
-      gitlab_shell.add_namespace(repository_storage_path, path_was)
+      doggohub_shell.add_namespace(repository_storage_path, path_was)
 
-      unless gitlab_shell.mv_namespace(repository_storage_path, path_was, path)
+      unless doggohub_shell.mv_namespace(repository_storage_path, path_was, path)
         Rails.logger.error "Exception moving path #{repository_storage_path} from #{path_was} to #{path}"
 
         # if we cannot move namespace directory we should rollback

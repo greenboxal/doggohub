@@ -1,15 +1,15 @@
-# Configuration of your builds with .gitlab-ci.yml
+# Configuration of your builds with .doggohub-ci.yml
 
-This document describes the usage of `.gitlab-ci.yml`, the file that is used by
-GitLab Runner to manage your project's builds.
+This document describes the usage of `.doggohub-ci.yml`, the file that is used by
+DoggoHub Runner to manage your project's builds.
 
-If you want a quick introduction to GitLab CI, follow our
+If you want a quick introduction to DoggoHub CI, follow our
 [quick start guide](../quick_start/README.md).
 
-## .gitlab-ci.yml
+## .doggohub-ci.yml
 
-From version 7.12, GitLab CI uses a [YAML](https://en.wikipedia.org/wiki/YAML)
-file (`.gitlab-ci.yml`) for the project configuration. It is placed in the root
+From version 7.12, DoggoHub CI uses a [YAML](https://en.wikipedia.org/wiki/YAML)
+file (`.doggohub-ci.yml`) for the project configuration. It is placed in the root
 of your repository and contains definitions of how your project should be built.
 
 The YAML file defines a set of jobs with constraints stating when they should
@@ -90,7 +90,7 @@ builds, including deploy builds. This can be an array or a multi-line string.
 
 ### after_script
 
-> Introduced in GitLab 8.7 and requires Gitlab Runner v1.2
+> Introduced in DoggoHub 8.7 and requires Gitlab Runner v1.2
 
 `after_script` is used to define the command that will be run after for all
 builds. This has to be an array or a multi-line string.
@@ -124,7 +124,7 @@ stages:
 
 There are also two edge cases worth mentioning:
 
-1. If no `stages` are defined in `.gitlab-ci.yml`, then by default the `build`,
+1. If no `stages` are defined in `.doggohub-ci.yml`, then by default the `build`,
    `test` and `deploy` are allowed to be used as job's stage by default.
 2. If a job doesn't specify a `stage`, the job is assigned the `test` stage.
 
@@ -134,9 +134,9 @@ Alias for [stages](#stages).
 
 ### variables
 
-> Introduced in GitLab Runner v0.5.0.
+> Introduced in DoggoHub Runner v0.5.0.
 
-GitLab CI allows you to add variables to `.gitlab-ci.yml` that are set in the
+DoggoHub CI allows you to add variables to `.doggohub-ci.yml` that are set in the
 build environment. The variables are stored in the Git repository and are meant
 to store non-sensitive project configuration, for example:
 
@@ -153,14 +153,14 @@ thus allowing to fine tune them. Variables can be also defined on a
 Except for the user defined variables, there are also the ones set up by the
 Runner itself. One example would be `CI_BUILD_REF_NAME` which has the value of
 the branch or tag name for which project is built. Apart from the variables
-you can set in `.gitlab-ci.yml`, there are also the so called secret variables
-which can be set in GitLab's UI.
+you can set in `.doggohub-ci.yml`, there are also the so called secret variables
+which can be set in DoggoHub's UI.
 
 [Learn more about variables.][variables]
 
 ### cache
 
-> Introduced in GitLab Runner v0.7.0.
+> Introduced in DoggoHub Runner v0.7.0.
 
 `cache` is used to specify a list of files and directories which should be
 cached between builds. You can only use paths that are within the project
@@ -218,11 +218,11 @@ rspec:
 ```
 
 The cache is provided on a best-effort basis, so don't expect that the cache
-will be always present. For implementation details, please check GitLab Runner.
+will be always present. For implementation details, please check DoggoHub Runner.
 
 #### cache:key
 
-> Introduced in GitLab Runner v1.0.0.
+> Introduced in DoggoHub Runner v1.0.0.
 
 The `key` directive allows you to define the affinity of caching
 between jobs, allowing to have a single cache for all jobs,
@@ -280,7 +280,7 @@ cache:
 
 ## Jobs
 
-`.gitlab-ci.yml` allows you to specify an unlimited number of jobs. Each job
+`.doggohub-ci.yml` allows you to specify an unlimited number of jobs. Each job
 must have a unique name, which is not one of the Keywords mentioned above.
 A job is defined by a list of parameters that define the build behavior.
 
@@ -303,8 +303,8 @@ job_name:
 | Keyword       | Required | Description |
 |---------------|----------|-------------|
 | script        | yes | Defines a shell script which is executed by Runner |
-| image         | no | Use docker image, covered in [Using Docker Images](../docker/using_docker_images.md#define-image-and-services-from-gitlab-ciyml) |
-| services      | no | Use docker services, covered in [Using Docker Images](../docker/using_docker_images.md#define-image-and-services-from-gitlab-ciyml) |
+| image         | no | Use docker image, covered in [Using Docker Images](../docker/using_docker_images.md#define-image-and-services-from-doggohub-ciyml) |
+| services      | no | Use docker services, covered in [Using Docker Images](../docker/using_docker_images.md#define-image-and-services-from-doggohub-ciyml) |
 | stage         | no | Defines a build stage (default: `test`) |
 | type          | no | Alias for `stage` |
 | variables     | no | Define build variables on a job level |
@@ -363,7 +363,7 @@ There are a few rules that apply to the usage of refs policy:
 * `only` and `except` allow the use of regular expressions.
 * `only` and `except` allow the use of special keywords: `branches`, `tags`, and `triggers`.
 * `only` and `except` allow to specify a repository path to filter jobs for
-   forks.
+   borks.
 
 In the example below, `job` will run only for refs that start with `issue-`,
 whereas all branches will be skipped.
@@ -390,17 +390,17 @@ job:
 ```
 
 The repository path can be used to have jobs executed only for the parent
-repository and not forks:
+repository and not borks:
 
 ```yaml
 job:
   only:
-    - branches@gitlab-org/gitlab-ce
+    - branches@doggohub-org/doggohub-ce
   except:
-    - master@gitlab-org/gitlab-ce
+    - master@doggohub-org/doggohub-ce
 ```
 
-The above example will run `job` for all branches on `gitlab-org/gitlab-ce`,
+The above example will run `job` for all branches on `doggohub-org/doggohub-ce`,
 except master.
 
 ### job variables
@@ -487,7 +487,7 @@ failure.
 1. `on_failure` - execute build only when at least one build from prior stages
     fails.
 1. `always` - execute build regardless of the status of builds from prior stages.
-1. `manual` - execute build manually (added in GitLab 8.10). Read about
+1. `manual` - execute build manually (added in DoggoHub 8.10). Read about
     [manual actions](#manual-actions) below.
 
 For example:
@@ -534,11 +534,11 @@ The above script will:
 1. Execute `cleanup_build_job` only when `build_job` fails.
 2. Always execute `cleanup_job` as the last step in pipeline regardless of
    success or failure.
-3. Allow you to manually execute `deploy_job` from GitLab's UI.
+3. Allow you to manually execute `deploy_job` from DoggoHub's UI.
 
 #### Manual actions
 
-> Introduced in GitLab 8.10.
+> Introduced in DoggoHub 8.10.
 
 Manual actions are a special type of job that are not executed automatically;
 they need to be explicitly started by a user. Manual actions can be started
@@ -551,7 +551,7 @@ Read more at the [environments documentation][env-manual].
 
 ### environment
 
-> Introduced in GitLab 8.9.
+> Introduced in DoggoHub 8.9.
 
 > You can read more about environments and find more examples in the
 [documentation about environments][environment].
@@ -575,10 +575,10 @@ deployment to the `production` environment.
 
 #### environment:name
 
-> Introduced in GitLab 8.11.
+> Introduced in DoggoHub 8.11.
 
 >**Note:**
-Before GitLab 8.11, the name of an environment could be defined as a string like
+Before DoggoHub 8.11, the name of an environment could be defined as a string like
 `environment: production`. The recommended way now is to define it under the
 `name` keyword.
 
@@ -611,14 +611,14 @@ deploy to production:
 
 #### environment:url
 
-> Introduced in GitLab 8.11.
+> Introduced in DoggoHub 8.11.
 
 >**Note:**
-Before GitLab 8.11, the URL could be added only in GitLab's UI. The
-recommended way now is to define it in `.gitlab-ci.yml`.
+Before DoggoHub 8.11, the URL could be added only in DoggoHub's UI. The
+recommended way now is to define it in `.doggohub-ci.yml`.
 
 This is an optional value that when set, it exposes buttons in various places
-in GitLab which when clicked take you to the defined URL.
+in DoggoHub which when clicked take you to the defined URL.
 
 In the example below, if the job finishes successfully, it will create buttons
 in the merge requests and in the environments/deployments pages which will point
@@ -637,9 +637,9 @@ deploy to production:
 
 >
 **Notes:**
-- [Introduced][ce-6669] in GitLab 8.13.
-- Starting with GitLab 8.14, when you have an environment that has a stop action
-  defined, GitLab will automatically trigger a stop action when the associated
+- [Introduced][ce-6669] in DoggoHub 8.13.
+- Starting with DoggoHub 8.14, when you have an environment that has a stop action
+  defined, DoggoHub will automatically trigger a stop action when the associated
   branch is deleted.
 
 Closing (stoping) environments can be achieved with the `on_stop` keyword defined under
@@ -650,7 +650,7 @@ Read the `environment:action` section for an example.
 
 #### environment:action
 
-> [Introduced][ce-6669] in GitLab 8.13.
+> [Introduced][ce-6669] in DoggoHub 8.13.
 
 The `action` keyword is to be used in conjunction with `on_stop` and is defined
 in the job that is called to close the environment.
@@ -679,7 +679,7 @@ environment, and we also defined a new `stop_review_app` job under `on_stop`.
 Once the `review_app` job is successfully finished, it will trigger the
 `stop_review_app` job based on what is defined under `when`. In this case we
 set it up to `manual` so it will need a [manual action](#manual-actions) via
-GitLab's web interface in order to run.
+DoggoHub's web interface in order to run.
 
 The `stop_review_app` job is **required** to have the following keywords defined:
 
@@ -689,12 +689,12 @@ The `stop_review_app` job is **required** to have the following keywords defined
 
 #### dynamic environments
 
-> [Introduced][ce-6323] in GitLab 8.12 and GitLab Runner 1.6.
-  `$CI_ENVIRONMENT_SLUG` was [introduced][ce-7983] in GitLab 8.15
+> [Introduced][ce-6323] in DoggoHub 8.12 and DoggoHub Runner 1.6.
+  `$CI_ENVIRONMENT_SLUG` was [introduced][ce-7983] in DoggoHub 8.15
 
 `environment` can also represent a configuration hash with `name` and `url`.
 These parameters can use any of the defined [CI variables](#variables)
-(including predefined, secure variables and `.gitlab-ci.yml` variables).
+(including predefined, secure variables and `.doggohub-ci.yml` variables).
 
 For example:
 
@@ -720,14 +720,14 @@ is properly configured.
 
 The common use case is to create dynamic environments for branches and use them
 as Review Apps. You can see a simple example using Review Apps at
-https://gitlab.com/gitlab-examples/review-apps-nginx/.
+https://doggohub.com/doggohub-examples/review-apps-nginx/.
 
 ### artifacts
 
 >**Notes:**
 >
-> - Introduced in GitLab Runner v0.7.0 for non-Windows platforms.
-> - Windows support was added in GitLab Runner v.1.0.0.
+> - Introduced in DoggoHub Runner v0.7.0 for non-Windows platforms.
+> - Windows support was added in DoggoHub Runner v.1.0.0.
 > - Currently not all executors are supported.
 > - Build artifacts are only collected for successful builds by default.
 
@@ -793,16 +793,16 @@ release-job:
     - tags
 ```
 
-The artifacts will be sent to GitLab after a successful build and will
-be available for download in the GitLab UI.
+The artifacts will be sent to DoggoHub after a successful build and will
+be available for download in the DoggoHub UI.
 
 #### artifacts:name
 
-> Introduced in GitLab 8.6 and GitLab Runner v1.1.0.
+> Introduced in DoggoHub 8.6 and DoggoHub Runner v1.1.0.
 
 The `name` directive allows you to define the name of the created artifacts
 archive. That way, you can have a unique name for every archive which could be
-useful when you'd like to download the archive from GitLab. The `artifacts:name`
+useful when you'd like to download the archive from DoggoHub. The `artifacts:name`
 variable can make use of any of the [predefined variables](../variables/README.md).
 The default name is `artifacts`, which becomes `artifacts.zip` when downloaded.
 
@@ -861,7 +861,7 @@ job:
 
 #### artifacts:when
 
-> Introduced in GitLab 8.9 and GitLab Runner v1.3.0.
+> Introduced in DoggoHub 8.9 and DoggoHub Runner v1.3.0.
 
 `artifacts:when` is used to upload artifacts on build failure or despite the
 failure.
@@ -886,12 +886,12 @@ job:
 
 #### artifacts:expire_in
 
-> Introduced in GitLab 8.9 and GitLab Runner v1.3.0.
+> Introduced in DoggoHub 8.9 and DoggoHub Runner v1.3.0.
 
 `artifacts:expire_in` is used to delete uploaded artifacts after the specified
-time. By default, artifacts are stored on GitLab forever. `expire_in` allows you
+time. By default, artifacts are stored on DoggoHub forever. `expire_in` allows you
 to specify how long artifacts should live before they expire, counting from the
-time they are uploaded and stored on GitLab.
+time they are uploaded and stored on DoggoHub.
 
 You can use the **Keep** button on the build page to override expiration and
 keep artifacts forever.
@@ -921,7 +921,7 @@ job:
 
 ### dependencies
 
-> Introduced in GitLab 8.6 and GitLab Runner v1.1.1.
+> Introduced in DoggoHub 8.6 and DoggoHub Runner v1.1.1.
 
 This feature should be used in conjunction with [`artifacts`](#artifacts) and
 allows you to define the artifacts to pass between different builds.
@@ -995,8 +995,8 @@ job:
 
 ## Git Strategy
 
-> Introduced in GitLab 8.9 as an experimental feature.  May change or be removed
-  completely in future releases. `GIT_STRATEGY=none` requires GitLab Runner
+> Introduced in DoggoHub 8.9 as an experimental feature.  May change or be removed
+  completely in future releases. `GIT_STRATEGY=none` requires DoggoHub Runner
   v1.7+.
 
 You can set the `GIT_STRATEGY` used for getting recent application code, either
@@ -1024,7 +1024,7 @@ variables:
 ```
 
 `none` also re-uses the project workspace, but skips all Git operations
-(including GitLab Runner's pre-clone script, if present). It is mostly useful
+(including DoggoHub Runner's pre-clone script, if present). It is mostly useful
 for jobs that operate exclusively on artifacts (e.g., `deploy`). Git repository
 data may be present, but it is certain to be out of date, so you should only
 rely on files brought into the project workspace from cache or artifacts.
@@ -1036,7 +1036,7 @@ variables:
 
 ## Build stages attempts
 
-> Introduced in GitLab, it requires GitLab Runner v1.9+.
+> Introduced in DoggoHub, it requires DoggoHub Runner v1.9+.
 
 You can set the number for attempts the running build will try to execute each
 of the following stages:
@@ -1061,7 +1061,7 @@ section for individual jobs.
 
 ## Shallow cloning
 
-> Introduced in GitLab 8.9 as an experimental feature. May change in future
+> Introduced in DoggoHub 8.9 as an experimental feature. May change in future
 releases or be removed completely.
 
 You can specify the depth of fetching and cloning using `GIT_DEPTH`. This allows
@@ -1091,9 +1091,9 @@ variables:
 
 ## Hidden keys
 
-> Introduced in GitLab 8.6 and GitLab Runner v1.1.1.
+> Introduced in DoggoHub 8.6 and DoggoHub Runner v1.1.1.
 
-Keys that start with a dot (`.`) will be not processed by GitLab CI. You can
+Keys that start with a dot (`.`) will be not processed by DoggoHub CI. You can
 use this feature to ignore jobs, or use the
 [special YAML features](#special-yaml-features) and transform the hidden keys
 into templates.
@@ -1113,13 +1113,13 @@ different types of structures to leverage special YAML features.
 
 It's possible to use special YAML features like anchors (`&`), aliases (`*`)
 and map merging (`<<`), which will allow you to greatly reduce the complexity
-of `.gitlab-ci.yml`.
+of `.doggohub-ci.yml`.
 
 Read more about the various [YAML features](https://learnxinyminutes.com/docs/yaml/).
 
 ### Anchors
 
-> Introduced in GitLab 8.6 and GitLab Runner v1.1.1.
+> Introduced in DoggoHub 8.6 and DoggoHub Runner v1.1.1.
 
 YAML also has a handy feature called 'anchors', which let you easily duplicate
 content across your document. Anchors can be used to duplicate/inherit
@@ -1246,10 +1246,10 @@ with an API call.
 
 [Read more in the triggers documentation.](../triggers/README.md)
 
-## Validate the .gitlab-ci.yml
+## Validate the .doggohub-ci.yml
 
-Each instance of GitLab CI has an embedded debug tool called Lint.
-You can find the link under `/ci/lint` of your gitlab instance.
+Each instance of DoggoHub CI has an embedded debug tool called Lint.
+You can find the link under `/ci/lint` of your doggohub instance.
 
 ## Skipping builds
 
@@ -1258,13 +1258,13 @@ capitalization, the commit will be created but the builds will be skipped.
 
 ## Examples
 
-Visit the [examples README][examples] to see a list of examples using GitLab
+Visit the [examples README][examples] to see a list of examples using DoggoHub
 CI with various languages.
 
 [env-manual]: ../environments.md#manually-deploying-to-environments
 [examples]: ../examples/README.md
-[ce-6323]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/6323
+[ce-6323]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/6323
 [environment]: ../environments.md
-[ce-6669]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/6669
+[ce-6669]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/6669
 [variables]: ../variables/README.md
-[ce-7983]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7983
+[ce-7983]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7983

@@ -131,7 +131,7 @@ describe "Search", feature: true  do
   describe 'Right header search field', feature: true do
     it 'allows enter key to search', js: true do
       visit namespace_project_path(project.namespace, project)
-      fill_in 'search', with: 'gitlab'
+      fill_in 'search', with: 'doggohub'
       find('#search').native.send_keys(:enter)
 
       page.within '.title' do

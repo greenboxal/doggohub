@@ -1,7 +1,7 @@
 # Gitlab::Access module
 #
 # Define allowed roles that can be used
-# in GitLab code to determine authorization level
+# in DoggoHub code to determine authorization level
 #
 module Gitlab
   module Access

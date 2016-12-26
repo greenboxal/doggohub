@@ -1,25 +1,25 @@
-namespace :gitlab do
-  desc "GitLab | Check the configuration of GitLab and its environment"
-  task check: %w{gitlab:gitlab_shell:check
-                 gitlab:sidekiq:check
-                 gitlab:incoming_email:check
-                 gitlab:ldap:check
-                 gitlab:app:check}
+namespace :doggohub do
+  desc "DoggoHub | Check the configuration of DoggoHub and its environment"
+  task check: %w{doggohub:doggohub_shell:check
+                 doggohub:sidekiq:check
+                 doggohub:incoming_email:check
+                 doggohub:ldap:check
+                 doggohub:app:check}
 
 
 
   namespace :app do
-    desc "GitLab | Check the configuration of the GitLab Rails app"
+    desc "DoggoHub | Check the configuration of the DoggoHub Rails app"
     task check: :environment  do
-      warn_user_is_not_gitlab
-      start_checking "GitLab"
+      warn_user_is_not_doggohub
+      start_checking "DoggoHub"
 
       check_git_config
       check_database_config_exists
       check_migrations_are_up
       check_orphaned_group_members
-      check_gitlab_config_exists
-      check_gitlab_config_not_outdated
+      check_doggohub_config_exists
+      check_doggohub_config_not_outdated
       check_log_writable
       check_tmp_writable
       check_uploads
@@ -31,7 +31,7 @@ namespace :gitlab do
       check_git_version
       check_active_users
 
-      finished_checking "GitLab"
+      finished_checking "DoggoHub"
     end
 
 
@@ -59,10 +59,10 @@ namespace :gitlab do
         else
           puts "Failed".color(:red)
           try_fixing_it(
-            sudo_gitlab("\"#{Gitlab.config.git.bin_path}\" config --global core.autocrlf \"#{options["core.autocrlf"]}\"")
+            sudo_doggohub("\"#{Gitlab.config.git.bin_path}\" config --global core.autocrlf \"#{options["core.autocrlf"]}\"")
           )
           for_more_information(
-            see_installation_guide_section "GitLab"
+            see_installation_guide_section "DoggoHub"
           )
         end
       end
@@ -89,31 +89,31 @@ namespace :gitlab do
       end
     end
 
-    def check_gitlab_config_exists
-      print "GitLab config exists? ... "
+    def check_doggohub_config_exists
+      print "DoggoHub config exists? ... "
 
-      gitlab_config_file = Rails.root.join("config", "gitlab.yml")
+      doggohub_config_file = Rails.root.join("config", "doggohub.yml")
 
-      if File.exist?(gitlab_config_file)
+      if File.exist?(doggohub_config_file)
         puts "yes".color(:green)
       else
         puts "no".color(:red)
         try_fixing_it(
-          "Copy config/gitlab.yml.example to config/gitlab.yml",
-          "Update config/gitlab.yml to match your setup"
+          "Copy config/doggohub.yml.example to config/doggohub.yml",
+          "Update config/doggohub.yml to match your setup"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
       end
     end
 
-    def check_gitlab_config_not_outdated
-      print "GitLab config outdated? ... "
+    def check_doggohub_config_not_outdated
+      print "DoggoHub config outdated? ... "
 
-      gitlab_config_file = Rails.root.join("config", "gitlab.yml")
-      unless File.exist?(gitlab_config_file)
+      doggohub_config_file = Rails.root.join("config", "doggohub.yml")
+      unless File.exist?(doggohub_config_file)
         puts "can't check because of previous errors".color(:magenta)
       end
 
@@ -123,12 +123,12 @@ namespace :gitlab do
       else
         puts "yes".color(:red)
         try_fixing_it(
-          "Backup your config/gitlab.yml",
-          "Copy config/gitlab.yml.example to config/gitlab.yml",
-          "Update config/gitlab.yml to match your setup"
+          "Backup your config/doggohub.yml",
+          "Copy config/doggohub.yml.example to config/doggohub.yml",
+          "Update config/doggohub.yml to match your setup"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
       end
@@ -137,12 +137,12 @@ namespace :gitlab do
     def check_init_script_exists
       print "Init script exists? ... "
 
-      if omnibus_gitlab?
-        puts 'skipped (omnibus-gitlab has no init script)'.color(:magenta)
+      if omnibus_doggohub?
+        puts 'skipped (omnibus-doggohub has no init script)'.color(:magenta)
         return
       end
 
-      script_path = "/etc/init.d/gitlab"
+      script_path = "/etc/init.d/doggohub"
 
       if File.exist?(script_path)
         puts "yes".color(:green)
@@ -161,13 +161,13 @@ namespace :gitlab do
     def check_init_script_up_to_date
       print "Init script up-to-date? ... "
 
-      if omnibus_gitlab?
-        puts 'skipped (omnibus-gitlab has no init script)'.color(:magenta)
+      if omnibus_doggohub?
+        puts 'skipped (omnibus-doggohub has no init script)'.color(:magenta)
         return
       end
 
-      recipe_path = Rails.root.join("lib/support/init.d/", "gitlab")
-      script_path = "/etc/init.d/gitlab"
+      recipe_path = Rails.root.join("lib/support/init.d/", "doggohub")
+      script_path = "/etc/init.d/doggohub"
 
       unless File.exist?(script_path)
         puts "can't check because of previous errors".color(:magenta)
@@ -201,7 +201,7 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          sudo_gitlab("bundle exec rake db:migrate RAILS_ENV=production")
+          sudo_doggohub("bundle exec rake db:migrate RAILS_ENV=production")
         )
         fix_and_rerun
       end
@@ -213,7 +213,7 @@ namespace :gitlab do
         puts "yes".color(:red)
         try_fixing_it(
           "You can delete the orphaned records using something along the lines of:",
-          sudo_gitlab("bundle exec rails runner -e production 'GroupMember.where(\"user_id NOT IN (SELECT id FROM users)\").delete_all'")
+          sudo_doggohub("bundle exec rails runner -e production 'GroupMember.where(\"user_id NOT IN (SELECT id FROM users)\").delete_all'")
         )
       else
         puts "no".color(:green)
@@ -230,11 +230,11 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          "sudo chown -R gitlab #{log_path}",
+          "sudo chown -R doggohub #{log_path}",
           "sudo chmod -R u+rwX #{log_path}"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
       end
@@ -250,11 +250,11 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          "sudo chown -R gitlab #{tmp_path}",
+          "sudo chown -R doggohub #{tmp_path}",
           "sudo chmod -R u+rwX #{tmp_path}"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
       end
@@ -266,10 +266,10 @@ namespace :gitlab do
       unless File.directory?(Rails.root.join('public/uploads'))
         puts "no".color(:red)
         try_fixing_it(
-          "sudo -u #{gitlab_user} mkdir #{Rails.root}/public/uploads"
+          "sudo -u #{doggohub_user} mkdir #{Rails.root}/public/uploads"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
         return
@@ -291,12 +291,12 @@ namespace :gitlab do
         else
           puts "no".color(:red)
           try_fixing_it(
-            "sudo chown -R #{gitlab_user} #{upload_path}",
+            "sudo chown -R #{doggohub_user} #{upload_path}",
             "sudo find #{upload_path} -type f -exec chmod 0644 {} \\;",
             "sudo find #{upload_path} -type d -not -path #{upload_path} -exec chmod 0700 {} \\;"
           )
           for_more_information(
-            see_installation_guide_section "GitLab"
+            see_installation_guide_section "DoggoHub"
           )
           fix_and_rerun
         end
@@ -306,7 +306,7 @@ namespace :gitlab do
           "sudo chmod 700 #{upload_path}"
         )
         for_more_information(
-          see_installation_guide_section "GitLab"
+          see_installation_guide_section "DoggoHub"
         )
         fix_and_rerun
       end
@@ -327,28 +327,28 @@ namespace :gitlab do
           "Update your redis server to a version >= #{min_redis_version}"
         )
         for_more_information(
-          "gitlab-public-wiki/wiki/Trouble-Shooting-Guide in section sidekiq"
+          "doggohub-public-wiki/wiki/Trouble-Shooting-Guide in section sidekiq"
         )
         fix_and_rerun
       end
     end
   end
 
-  namespace :gitlab_shell do
-    desc "GitLab | Check the configuration of GitLab Shell"
+  namespace :doggohub_shell do
+    desc "DoggoHub | Check the configuration of DoggoHub Shell"
     task check: :environment  do
-      warn_user_is_not_gitlab
-      start_checking "GitLab Shell"
+      warn_user_is_not_doggohub
+      start_checking "DoggoHub Shell"
 
-      check_gitlab_shell
+      check_doggohub_shell
       check_repo_base_exists
       check_repo_base_is_not_symlink
       check_repo_base_user_and_group
       check_repo_base_permissions
       check_repos_hooks_directory_is_link
-      check_gitlab_shell_self_test
+      check_doggohub_shell_self_test
 
-      finished_checking "GitLab Shell"
+      finished_checking "DoggoHub Shell"
     end
 
 
@@ -367,12 +367,12 @@ namespace :gitlab do
           puts "no".color(:red)
           puts "#{repo_base_path} is missing".color(:red)
           try_fixing_it(
-            "This should have been created when setting up GitLab Shell.",
-            "Make sure it's set correctly in config/gitlab.yml",
-            "Make sure GitLab Shell is installed correctly."
+            "This should have been created when setting up DoggoHub Shell.",
+            "Make sure it's set correctly in config/doggohub.yml",
+            "Make sure DoggoHub Shell is installed correctly."
           )
           for_more_information(
-            see_installation_guide_section "GitLab Shell"
+            see_installation_guide_section "DoggoHub Shell"
           )
           fix_and_rerun
         end
@@ -395,7 +395,7 @@ namespace :gitlab do
         else
           puts "yes".color(:red)
           try_fixing_it(
-            "Make sure it's set to the real directory in config/gitlab.yml"
+            "Make sure it's set to the real directory in config/doggohub.yml"
           )
           fix_and_rerun
         end
@@ -423,7 +423,7 @@ namespace :gitlab do
             "sudo find #{repo_base_path} -type d -print0 | sudo xargs -0 chmod g+s"
           )
           for_more_information(
-            see_installation_guide_section "GitLab Shell"
+            see_installation_guide_section "DoggoHub Shell"
           )
           fix_and_rerun
         end
@@ -431,9 +431,9 @@ namespace :gitlab do
     end
 
     def check_repo_base_user_and_group
-      gitlab_shell_ssh_user = Gitlab.config.gitlab_shell.ssh_user
-      gitlab_shell_owner_group = Gitlab.config.gitlab_shell.owner_group
-      puts "Repo paths owned by #{gitlab_shell_ssh_user}:#{gitlab_shell_owner_group}?"
+      doggohub_shell_ssh_user = Gitlab.config.doggohub_shell.ssh_user
+      doggohub_shell_owner_group = Gitlab.config.doggohub_shell.owner_group
+      puts "Repo paths owned by #{doggohub_shell_ssh_user}:#{doggohub_shell_owner_group}?"
 
       Gitlab.config.repositories.storages.each do |name, repo_base_path|
         print "#{name}... "
@@ -443,18 +443,18 @@ namespace :gitlab do
           return
         end
 
-        uid = uid_for(gitlab_shell_ssh_user)
-        gid = gid_for(gitlab_shell_owner_group)
+        uid = uid_for(doggohub_shell_ssh_user)
+        gid = gid_for(doggohub_shell_owner_group)
         if File.stat(repo_base_path).uid == uid && File.stat(repo_base_path).gid == gid
           puts "yes".color(:green)
         else
           puts "no".color(:red)
-          puts "  User id for #{gitlab_shell_ssh_user}: #{uid}. Groupd id for #{gitlab_shell_owner_group}: #{gid}".color(:blue)
+          puts "  User id for #{doggohub_shell_ssh_user}: #{uid}. Groupd id for #{doggohub_shell_owner_group}: #{gid}".color(:blue)
           try_fixing_it(
-            "sudo chown -R #{gitlab_shell_ssh_user}:#{gitlab_shell_owner_group} #{repo_base_path}"
+            "sudo chown -R #{doggohub_shell_ssh_user}:#{doggohub_shell_owner_group} #{repo_base_path}"
           )
           for_more_information(
-            see_installation_guide_section "GitLab Shell"
+            see_installation_guide_section "DoggoHub Shell"
           )
           fix_and_rerun
         end
@@ -464,7 +464,7 @@ namespace :gitlab do
     def check_repos_hooks_directory_is_link
       print "hooks directories in repos are links: ... "
 
-      gitlab_shell_hooks_path = Gitlab.config.gitlab_shell.hooks_path
+      doggohub_shell_hooks_path = Gitlab.config.doggohub_shell.hooks_path
 
       unless Project.count > 0
         puts "can't check, you have no projects".color(:magenta)
@@ -478,18 +478,18 @@ namespace :gitlab do
 
         if project.empty_repo?
           puts "repository is empty".color(:magenta)
-        elsif File.directory?(project_hook_directory) && File.directory?(gitlab_shell_hooks_path) &&
-            (File.realpath(project_hook_directory) == File.realpath(gitlab_shell_hooks_path))
+        elsif File.directory?(project_hook_directory) && File.directory?(doggohub_shell_hooks_path) &&
+            (File.realpath(project_hook_directory) == File.realpath(doggohub_shell_hooks_path))
           puts 'ok'.color(:green)
         else
           puts "wrong or missing hooks".color(:red)
           try_fixing_it(
-            sudo_gitlab("#{File.join(gitlab_shell_path, 'bin/create-hooks')} #{repository_storage_paths_args.join(' ')}"),
-            'Check the hooks_path in config/gitlab.yml',
-            'Check your gitlab-shell installation'
+            sudo_doggohub("#{File.join(doggohub_shell_path, 'bin/create-hooks')} #{repository_storage_paths_args.join(' ')}"),
+            'Check the hooks_path in config/doggohub.yml',
+            'Check your doggohub-shell installation'
           )
           for_more_information(
-            see_installation_guide_section "GitLab Shell"
+            see_installation_guide_section "DoggoHub Shell"
           )
           fix_and_rerun
         end
@@ -497,18 +497,18 @@ namespace :gitlab do
       end
     end
 
-    def check_gitlab_shell_self_test
-      gitlab_shell_repo_base = gitlab_shell_path
-      check_cmd = File.expand_path('bin/check', gitlab_shell_repo_base)
+    def check_doggohub_shell_self_test
+      doggohub_shell_repo_base = doggohub_shell_path
+      check_cmd = File.expand_path('bin/check', doggohub_shell_repo_base)
       puts "Running #{check_cmd}"
-      if system(check_cmd, chdir: gitlab_shell_repo_base)
-        puts 'gitlab-shell self-check successful'.color(:green)
+      if system(check_cmd, chdir: doggohub_shell_repo_base)
+        puts 'doggohub-shell self-check successful'.color(:green)
       else
-        puts 'gitlab-shell self-check failed'.color(:red)
+        puts 'doggohub-shell self-check failed'.color(:red)
         try_fixing_it(
-          'Make sure GitLab is running;',
-          'Check the gitlab-shell configuration file:',
-          sudo_gitlab("editor #{File.expand_path('config.yml', gitlab_shell_repo_base)}")
+          'Make sure DoggoHub is running;',
+          'Check the doggohub-shell configuration file:',
+          sudo_doggohub("editor #{File.expand_path('config.yml', doggohub_shell_repo_base)}")
         )
         fix_and_rerun
       end
@@ -544,23 +544,23 @@ namespace :gitlab do
     # Helper methods
     ########################
 
-    def gitlab_shell_path
-      Gitlab.config.gitlab_shell.path
+    def doggohub_shell_path
+      Gitlab.config.doggohub_shell.path
     end
 
-    def gitlab_shell_version
+    def doggohub_shell_version
       Gitlab::Shell.new.version
     end
 
-    def gitlab_shell_major_version
+    def doggohub_shell_major_version
       Gitlab::Shell.version_required.split('.')[0].to_i
     end
 
-    def gitlab_shell_minor_version
+    def doggohub_shell_minor_version
       Gitlab::Shell.version_required.split('.')[1].to_i
     end
 
-    def gitlab_shell_patch_version
+    def doggohub_shell_patch_version
       Gitlab::Shell.version_required.split('.')[2].to_i
     end
   end
@@ -568,9 +568,9 @@ namespace :gitlab do
 
 
   namespace :sidekiq do
-    desc "GitLab | Check the configuration of Sidekiq"
+    desc "DoggoHub | Check the configuration of Sidekiq"
     task check: :environment  do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       start_checking "Sidekiq"
 
       check_sidekiq_running
@@ -591,7 +591,7 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          sudo_gitlab("RAILS_ENV=production bin/background_jobs start")
+          sudo_doggohub("RAILS_ENV=production bin/background_jobs start")
         )
         for_more_information(
           see_installation_guide_section("Install Init Script"),
@@ -611,10 +611,10 @@ namespace :gitlab do
       else
         puts "#{process_count}".color(:red)
         try_fixing_it(
-          'sudo service gitlab stop',
-          "sudo pkill -u #{gitlab_user} -f sidekiq",
-          "sleep 10 && sudo pkill -9 -u #{gitlab_user} -f sidekiq",
-          'sudo service gitlab start'
+          'sudo service doggohub stop',
+          "sudo pkill -u #{doggohub_user} -f sidekiq",
+          "sleep 10 && sudo pkill -9 -u #{doggohub_user} -f sidekiq",
+          'sudo service doggohub start'
         )
         fix_and_rerun
       end
@@ -628,9 +628,9 @@ namespace :gitlab do
 
 
   namespace :incoming_email do
-    desc "GitLab | Check the configuration of Reply by email"
+    desc "DoggoHub | Check the configuration of Reply by email"
     task check: :environment  do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       start_checking "Reply by email"
 
       if Gitlab.config.incoming_email.enabled
@@ -643,7 +643,7 @@ namespace :gitlab do
           check_foreman_configured_correctly
         end
       else
-        puts 'Reply by email is disabled in config/gitlab.yml'
+        puts 'Reply by email is disabled in config/doggohub.yml'
       end
 
       finished_checking "Reply by email"
@@ -656,12 +656,12 @@ namespace :gitlab do
     def check_initd_configured_correctly
       print "Init.d configured correctly? ... "
 
-      if omnibus_gitlab?
-        puts 'skipped (omnibus-gitlab has no init script)'.color(:magenta)
+      if omnibus_doggohub?
+        puts 'skipped (omnibus-doggohub has no init script)'.color(:magenta)
         return
       end
 
-      path = "/etc/default/gitlab"
+      path = "/etc/default/doggohub"
 
       if File.exist?(path) && File.read(path).include?("mail_room_enabled=true")
         puts "yes".color(:green)
@@ -699,7 +699,7 @@ namespace :gitlab do
     def check_mail_room_running
       print "MailRoom running? ... "
 
-      path = "/etc/default/gitlab"
+      path = "/etc/default/doggohub"
 
       unless File.exist?(path) && File.read(path).include?("mail_room_enabled=true")
         puts "can't check because of previous errors".color(:magenta)
@@ -711,7 +711,7 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          sudo_gitlab("RAILS_ENV=production bin/mail_room start")
+          sudo_doggohub("RAILS_ENV=production bin/mail_room start")
         )
         for_more_information(
           see_installation_guide_section("Install Init Script"),
@@ -744,7 +744,7 @@ namespace :gitlab do
       else
         puts "no".color(:red)
         try_fixing_it(
-          "Check that the information in config/gitlab.yml is correct"
+          "Check that the information in config/doggohub.yml is correct"
         )
         for_more_information(
           "doc/administration/reply_by_email.md"
@@ -762,15 +762,15 @@ namespace :gitlab do
   namespace :ldap do
     task :check, [:limit] => :environment do |_, args|
       # Only show up to 100 results because LDAP directories can be very big.
-      # This setting only affects the `rake gitlab:check` script.
+      # This setting only affects the `rake doggohub:check` script.
       args.with_defaults(limit: 100)
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       start_checking "LDAP"
 
       if Gitlab::LDAP::Config.enabled?
         check_ldap(args.limit)
       else
-        puts 'LDAP is disabled in config/gitlab.yml'
+        puts 'LDAP is disabled in config/doggohub.yml'
       end
 
       finished_checking "LDAP"
@@ -786,7 +786,7 @@ namespace :gitlab do
           Gitlab::LDAP::Adapter.open(server) do |adapter|
             check_ldap_auth(adapter)
 
-            puts "LDAP users with access to your GitLab server (only showing the first #{limit} results)"
+            puts "LDAP users with access to your DoggoHub server (only showing the first #{limit} results)"
 
             users = adapter.users(adapter.config.uid, '*', limit)
             users.each do |user|
@@ -815,7 +815,7 @@ namespace :gitlab do
   end
 
   namespace :repo do
-    desc "GitLab | Check the integrity of the repositories managed by GitLab"
+    desc "DoggoHub | Check the integrity of the repositories managed by DoggoHub"
     task check: :environment do
       Gitlab.config.repositories.storages.each do |name, path|
         namespace_dirs = Dir.glob(File.join(path, '*'))
@@ -829,7 +829,7 @@ namespace :gitlab do
   end
 
   namespace :user do
-    desc "GitLab | Check the integrity of a specific user's repositories"
+    desc "DoggoHub | Check the integrity of a specific user's repositories"
     task :check_repos, [:username] => :environment do |t, args|
       username = args[:username] || prompt("Check repository integrity for fsername? ".color(:blue))
       user = User.find_by(username: username)
@@ -878,12 +878,12 @@ namespace :gitlab do
     "doc/install/installation.md in section \"#{section}\""
   end
 
-  def sudo_gitlab(command)
-    "sudo -u #{gitlab_user} -H #{command}"
+  def sudo_doggohub(command)
+    "sudo -u #{doggohub_user} -H #{command}"
   end
 
-  def gitlab_user
-    Gitlab.config.gitlab.user
+  def doggohub_user
+    Gitlab.config.doggohub.user
   end
 
   def start_checking(component)
@@ -900,15 +900,15 @@ namespace :gitlab do
     end
   end
 
-  def check_gitlab_shell
-    required_version = Gitlab::VersionInfo.new(gitlab_shell_major_version, gitlab_shell_minor_version, gitlab_shell_patch_version)
-    current_version = Gitlab::VersionInfo.parse(gitlab_shell_version)
+  def check_doggohub_shell
+    required_version = Gitlab::VersionInfo.new(doggohub_shell_major_version, doggohub_shell_minor_version, doggohub_shell_patch_version)
+    current_version = Gitlab::VersionInfo.parse(doggohub_shell_version)
 
-    print "GitLab Shell version >= #{required_version} ? ... "
+    print "DoggoHub Shell version >= #{required_version} ? ... "
     if current_version.valid? && required_version <= current_version
       puts "OK (#{current_version})".color(:green)
     else
-      puts "FAIL. Please update gitlab-shell to #{required_version} from #{current_version}".color(:red)
+      puts "FAIL. Please update doggohub-shell to #{required_version} from #{current_version}".color(:red)
     end
   end
 
@@ -951,8 +951,8 @@ namespace :gitlab do
     puts "Active users: #{User.active.count}"
   end
 
-  def omnibus_gitlab?
-    Dir.pwd == '/opt/gitlab/embedded/service/gitlab-rails'
+  def omnibus_doggohub?
+    Dir.pwd == '/opt/doggohub/embedded/service/doggohub-rails'
   end
 
   def sanitized_message(project)

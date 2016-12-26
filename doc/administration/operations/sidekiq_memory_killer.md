@@ -1,16 +1,16 @@
 # Sidekiq MemoryKiller
 
-The GitLab Rails application code suffers from memory leaks. For web requests
+The DoggoHub Rails application code suffers from memory leaks. For web requests
 this problem is made manageable using
 [unicorn-worker-killer](https://github.com/kzk/unicorn-worker-killer) which
 restarts Unicorn worker processes in between requests when needed. The Sidekiq
-MemoryKiller applies the same approach to the Sidekiq processes used by GitLab
+MemoryKiller applies the same approach to the Sidekiq processes used by DoggoHub
 to process background jobs.
 
-Unlike unicorn-worker-killer, which is enabled by default for all GitLab
-installations since GitLab 6.4, the Sidekiq MemoryKiller is enabled by default
+Unlike unicorn-worker-killer, which is enabled by default for all DoggoHub
+installations since DoggoHub 6.4, the Sidekiq MemoryKiller is enabled by default
 _only_ for Omnibus packages. The reason for this is that the MemoryKiller
-relies on Runit to restart Sidekiq after a memory-induced shutdown and GitLab
+relies on Runit to restart Sidekiq after a memory-induced shutdown and DoggoHub
 installations from source do not all use Runit or an equivalent.
 
 With the default settings, the MemoryKiller will cause a Sidekiq restart no
@@ -26,8 +26,8 @@ The MemoryKiller is controlled using environment variables.
   RSS of the Sidekiq process that executed the job. If the RSS of the Sidekiq
   process (expressed in kilobytes) exceeds SIDEKIQ_MEMORY_KILLER_MAX_RSS, a
   delayed shutdown is triggered. The default value for Omnibus packages is set
-  [in the omnibus-gitlab
-  repository](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/attributes/default.rb).
+  [in the omnibus-doggohub
+  repository](https://doggohub.com/doggohub-org/omnibus-doggohub/blob/master/files/doggohub-cookbooks/doggohub/attributes/default.rb).
 - `SIDEKIQ_MEMORY_KILLER_GRACE_TIME`: defaults 900 seconds (15 minutes). When
   a shutdown is triggered, the Sidekiq process will keep working normally for
   another 15 minutes.

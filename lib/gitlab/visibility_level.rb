@@ -1,7 +1,7 @@
 # Gitlab::VisibilityLevel module
 #
 # Define allowed public modes that can be used for
-# GitLab projects to determine project public mode
+# DoggoHub projects to determine project public mode
 #
 module Gitlab
   module VisibilityLevel

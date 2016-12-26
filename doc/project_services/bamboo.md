@@ -1,6 +1,6 @@
 # Atlassian Bamboo CI Service
 
-GitLab provides integration with Atlassian Bamboo for continuous integration.
+DoggoHub provides integration with Atlassian Bamboo for continuous integration.
 When configured, pushes to a project will trigger a build in Bamboo automatically.
 Merge requests will also display CI status showing whether the build is pending,
 failed, or completed successfully. It also provides a link to the Bamboo build
@@ -8,7 +8,7 @@ page for more information.
 
 Bamboo doesn't quite provide the same features as a traditional build system when
 it comes to accepting webhooks and commit data. There are a few things that
-need to be configured in a Bamboo build plan before GitLab can integrate.
+need to be configured in a Bamboo build plan before DoggoHub can integrate.
 
 ## Setup
 
@@ -18,10 +18,10 @@ need to be configured in a Bamboo build plan before GitLab can integrate.
 dropdown.
 1. Select the 'Triggers' tab.
 1. Click 'Add trigger'.
-1. Enter a description such as 'GitLab trigger'
+1. Enter a description such as 'DoggoHub trigger'
 1. Choose 'Repository triggers the build when changes are committed'
 1. Check one or more repositories checkboxes
-1. Enter the GitLab IP address in the 'Trigger IP addresses' box. This is a 
+1. Enter the DoggoHub IP address in the 'Trigger IP addresses' box. This is a 
 whitelist of IP addresses that are allowed to trigger Bamboo builds.
 1. Save the trigger.
 1. In the left pane, select a build stage. If you have multiple build stages 
@@ -31,10 +31,10 @@ you want to select the last stage that contains the git checkout task.
 in the 'Labels' box.
 1. Save
 
-Bamboo is now ready to accept triggers from GitLab. Next, set up the Bamboo
-service in GitLab
+Bamboo is now ready to accept triggers from DoggoHub. Next, set up the Bamboo
+service in DoggoHub
 
-### Complete these steps in GitLab:
+### Complete these steps in DoggoHub:
 
 1. Navigate to the project you want to configure to trigger builds.
 1. Select 'Settings' in the top navigation.
@@ -54,7 +54,7 @@ will actually trigger a build in Bamboo.
 
 If builds are not triggered, these are a couple of things to keep in mind.
 
-1. Ensure you entered the right GitLab IP address in Bamboo under 'Trigger
+1. Ensure you entered the right DoggoHub IP address in Bamboo under 'Trigger
 IP addresses'.
-1. Remember that GitLab only triggers builds on push events. A commit via the
+1. Remember that DoggoHub only triggers builds on push events. A commit via the
 web interface will not trigger CI currently.

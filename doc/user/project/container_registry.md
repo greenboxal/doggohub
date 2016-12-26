@@ -1,20 +1,20 @@
-# GitLab Container Registry
+# DoggoHub Container Registry
 
-> [Introduced][ce-4040] in GitLab 8.8.
+> [Introduced][ce-4040] in DoggoHub 8.8.
 
 ---
 
 >**Notes:**
-- Docker Registry manifest `v1` support was added in GitLab 8.9 to support Docker
+- Docker Registry manifest `v1` support was added in DoggoHub 8.9 to support Docker
   versions earlier than 1.10.
-- This document is about the user guide. To learn how to enable GitLab Container
-  Registry across your GitLab instance, visit the
+- This document is about the user guide. To learn how to enable DoggoHub Container
+  Registry across your DoggoHub instance, visit the
   [administrator documentation](../../administration/container_registry.md).
-- Starting from GitLab 8.12, if you have 2FA enabled in your account, you need
+- Starting from DoggoHub 8.12, if you have 2FA enabled in your account, you need
   to pass a personal access token instead of your password in order to login to
-  GitLab's Container Registry.
+  DoggoHub's Container Registry.
 
-With the Docker Container Registry integrated into GitLab, every project can
+With the Docker Container Registry integrated into DoggoHub, every project can
 have its own space to store its Docker images.
 
 You can read more about Docker Registry at https://docs.docker.com/registry/introduction/.
@@ -23,14 +23,14 @@ You can read more about Docker Registry at https://docs.docker.com/registry/intr
 
 ## Enable the Container Registry for your project
 
-1. First, ask your system administrator to enable GitLab Container Registry
+1. First, ask your system administrator to enable DoggoHub Container Registry
    following the [administration documentation](../../administration/container_registry.md).
-   If you are using GitLab.com, this is enabled by default so you can start using
+   If you are using DoggoHub.com, this is enabled by default so you can start using
    the Registry immediately.
 
 1. Go to your project's settings and enable the **Container Registry** feature
    on your project. For new projects this might be enabled by default. For
-   existing projects (prior GitLab 8.8), you will have to explicitly enable it.
+   existing projects (prior DoggoHub 8.8), you will have to explicitly enable it.
 
     ![Enable Container Registry](img/container_registry_enable.png)
 
@@ -42,7 +42,7 @@ You can read more about Docker Registry at https://docs.docker.com/registry/intr
 ## Build and push images
 
 If you visit the **Registry** link under your project's menu, you can see the
-explicit instructions to login to the Container Registry using your GitLab
+explicit instructions to login to the Container Registry using your DoggoHub
 credentials.
 
 For example if the Registry's URL is `registry.example.com`, the you should be
@@ -54,7 +54,7 @@ docker login registry.example.com
 
 Building and publishing images should be a straightforward process. Just make
 sure that you are using the Registry URL with the namespace and project name
-that is hosted on GitLab:
+that is hosted on DoggoHub:
 
 ```
 docker build -t registry.example.com/group/project .
@@ -70,9 +70,9 @@ Your image will be named after the following scheme:
 As such, the name of the image is unique, but you can differentiate the images
 using tags.
 
-## Use images from GitLab Container Registry
+## Use images from DoggoHub Container Registry
 
-To download and run a container from images hosted in GitLab Container Registry,
+To download and run a container from images hosted in DoggoHub Container Registry,
 use `docker run`:
 
 ```
@@ -82,9 +82,9 @@ docker run [options] registry.example.com/group/project [arguments]
 For more information on running Docker containers, visit the
 [Docker documentation][docker-docs].
 
-## Control Container Registry from within GitLab
+## Control Container Registry from within DoggoHub
 
-GitLab offers a simple Container Registry management panel. Go to your project
+DoggoHub offers a simple Container Registry management panel. Go to your project
 and click **Registry** in the project menu.
 
 This view will show you all tags in your project and will easily allow you to
@@ -92,27 +92,27 @@ delete them.
 
 ![Container Registry panel](img/container_registry_panel.png)
 
-## Build and push images using GitLab CI
+## Build and push images using DoggoHub CI
 
 > **Note:**
-This feature requires GitLab 8.8 and GitLab Runner 1.2.
+This feature requires DoggoHub 8.8 and DoggoHub Runner 1.2.
 
-Make sure that your GitLab Runner is configured to allow building Docker images by
+Make sure that your DoggoHub Runner is configured to allow building Docker images by
 following the [Using Docker Build](../ci/docker/using_docker_build.md)
-and [Using the GitLab Container Registry documentation](../ci/docker/using_docker_build.md#using-the-gitlab-container-registry).
+and [Using the DoggoHub Container Registry documentation](../ci/docker/using_docker_build.md#using-the-doggohub-container-registry).
 
 ## Limitations
 
 In order to use a container image from your private project as an `image:` in
-your `.gitlab-ci.yml`, you have to follow the
+your `.doggohub-ci.yml`, you have to follow the
 [Using a private Docker Registry][private-docker]
 documentation. This workflow will be simplified in the future.
 
-## Troubleshooting the GitLab Container Registry
+## Troubleshooting the DoggoHub Container Registry
 
 ### Basic Troubleshooting
 
-1. Check to make sure that the system clock on your Docker client and GitLab server have
+1. Check to make sure that the system clock on your Docker client and DoggoHub server have
    been synchronized (e.g. via NTP).
 
 2. If you are using an S3-backed Registry, double check that the IAM
@@ -120,8 +120,8 @@ documentation. This workflow will be simplified in the future.
    sample IAM policy](https://docs.docker.com/registry/storage-drivers/s3/)
    for more details.
 
-3. Check the Registry logs (e.g. `/var/log/gitlab/registry/current`) and the GitLab production logs
-   for errors (e.g. `/var/log/gitlab/gitlab-rails/production.log`). You may be able to find clues
+3. Check the Registry logs (e.g. `/var/log/doggohub/registry/current`) and the DoggoHub production logs
+   for errors (e.g. `/var/log/doggohub/doggohub-rails/production.log`). You may be able to find clues
    there.
 
 ### Advanced Troubleshooting
@@ -154,7 +154,7 @@ error parsing HTTP 403 response body: unexpected end of JSON input: ""
 ```
 
 This error is ambiguous, as it's not clear whether the 403 is coming from the
-GitLab Rails application, the Docker Registry, or something else. In this
+DoggoHub Rails application, the Docker Registry, or something else. In this
 case, since we know that since the login succeeded, we probably need to look
 at the communication between the client and the Registry.
 
@@ -250,6 +250,6 @@ What does this mean? This strongly suggests that the S3 user does not have the r
 The solution: check the [IAM permissions again](https://docs.docker.com/registry/storage-drivers/s3/).
 Once the right permissions were set, the error will go away.
 
-[ce-4040]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/4040
+[ce-4040]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/4040
 [docker-docs]: https://docs.docker.com/engine/userguide/intro/
-[private-docker]: https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/configuration/advanced-configuration.md#using-a-private-docker-registry
+[private-docker]: https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/blob/master/docs/configuration/advanced-configuration.md#using-a-private-docker-registry

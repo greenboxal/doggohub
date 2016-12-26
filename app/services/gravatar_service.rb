@@ -12,8 +12,8 @@ class GravatarService
     end
   end
 
-  def gitlab_config
-    Gitlab.config.gitlab
+  def doggohub_config
+    Gitlab.config.doggohub
   end
 
   def gravatar_config
@@ -21,7 +21,7 @@ class GravatarService
   end
 
   def gravatar_url
-    if gitlab_config.https
+    if doggohub_config.https
       gravatar_config.ssl_url
     else
       gravatar_config.plain_url

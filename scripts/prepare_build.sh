@@ -31,5 +31,5 @@ else
     cp config/database.yml.mysql config/database.yml
     sed "s/username\:.*$/username\: runner/" -i config/database.yml
     sed "s/password\:.*$/password\: 'password'/" -i config/database.yml
-    sed "s/gitlabhq_test/gitlabhq_test_$rnd/" -i config/database.yml
+    sed "s/doggohubhq_test/doggohubhq_test_$rnd/" -i config/database.yml
 fi

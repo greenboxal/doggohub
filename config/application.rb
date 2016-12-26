@@ -6,7 +6,7 @@ Bundler.require(:default, Rails.env)
 
 module Gitlab
   class Application < Rails::Application
-    require_dependency Rails.root.join('lib/gitlab/redis')
+    require_dependency Rails.root.join('lib/doggohub/redis')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -49,9 +49,9 @@ module Gitlab
     # - Two-factor tokens (:otp_attempt)
     # - Repo/Project Import URLs (:import_url)
     # - Build variables (:variables)
-    # - GitLab Pages SSL cert/key info (:certificate, :encrypted_key)
+    # - DoggoHub Pages SSL cert/key info (:certificate, :encrypted_key)
     # - Webhook URLs (:hook)
-    # - GitLab-shell secret token (:secret_token)
+    # - DoggoHub-shell secret token (:secret_token)
     # - Sentry DSN (:sentry_dsn)
     # - Deploy keys (:key)
     config.filter_parameters += %i(
@@ -118,10 +118,10 @@ module Gitlab
 
     config.middleware.insert_before Warden::Manager, Rack::Attack
 
-    # Allow access to GitLab API from other domains
+    # Allow access to DoggoHub API from other domains
     config.middleware.insert_before Warden::Manager, Rack::Cors do
       allow do
-        origins Gitlab.config.gitlab.url
+        origins Gitlab.config.doggohub.url
         resource '/api/*',
           credentials: true,
           headers: :any,
@@ -154,8 +154,8 @@ module Gitlab
 
     config.active_job.queue_adapter = :sidekiq
 
-    # This is needed for gitlab-shell
-    ENV['GITLAB_PATH_OUTSIDE_HOOK'] = ENV['PATH']
+    # This is needed for doggohub-shell
+    ENV['DOGGOHUB_PATH_OUTSIDE_HOOK'] = ENV['PATH']
 
     config.generators do |g|
       g.factory_girl false

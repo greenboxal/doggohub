@@ -37,7 +37,7 @@ class Key < ActiveRecord::Base
   def publishable_key
     # Strip out the keys comment so we don't leak email addresses
     # Replace with simple ident of user_name (hostname)
-    self.key.split[0..1].push("#{self.user_name} (#{Gitlab.config.gitlab.host})").join(' ')
+    self.key.split[0..1].push("#{self.user_name} (#{Gitlab.config.doggohub.host})").join(' ')
   end
 
   # projects that has this key

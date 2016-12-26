@@ -3,8 +3,8 @@ class RemoveKeysFingerprintIndexIfExists < ActiveRecord::Migration
 
   disable_ddl_transaction!
 
-  # https://gitlab.com/gitlab-org/gitlab-ee/merge_requests/250
-  # That MR was added on gitlab-ee so we need to check if the index
+  # https://doggohub.com/doggohub-org/doggohub-ee/merge_requests/250
+  # That MR was added on doggohub-ee so we need to check if the index
   # already exists because we want to do is create an unique index instead.
 
   def up

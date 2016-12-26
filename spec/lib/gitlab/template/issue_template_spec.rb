@@ -5,9 +5,9 @@ describe Gitlab::Template::IssueTemplate do
 
   let(:user) { create(:user) }
   let(:project) { create(:project) }
-  let(:file_path_1) { '.gitlab/issue_templates/bug.md' }
-  let(:file_path_2) { '.gitlab/issue_templates/template_test.md' }
-  let(:file_path_3) { '.gitlab/issue_templates/feature_proposal.md' }
+  let(:file_path_1) { '.doggohub/issue_templates/bug.md' }
+  let(:file_path_2) { '.doggohub/issue_templates/template_test.md' }
+  let(:file_path_3) { '.doggohub/issue_templates/feature_proposal.md' }
 
   before do
     project.add_user(user, Gitlab::Access::MASTER)
@@ -64,14 +64,14 @@ describe Gitlab::Template::IssueTemplate do
 
   describe '#content' do
     it 'loads the full file' do
-      issue_template = subject.new('.gitlab/issue_templates/bug.md', project)
+      issue_template = subject.new('.doggohub/issue_templates/bug.md', project)
 
       expect(issue_template.name).to eq 'bug'
       expect(issue_template.content).to eq('something valid')
     end
 
     it 'raises error when file is not found' do
-      issue_template = subject.new('.gitlab/issue_templates/bugnot.md', project)
+      issue_template = subject.new('.doggohub/issue_templates/bugnot.md', project)
       expect { issue_template.content }.to raise_error(Gitlab::Template::Finders::RepoTemplateFinder::FileNotFoundError)
     end
 
@@ -81,7 +81,7 @@ describe Gitlab::Template::IssueTemplate do
       before { empty_project.add_user(user, Gitlab::Access::MASTER) }
 
       it "raises file not found" do
-        issue_template = subject.new('.gitlab/issue_templates/not_existent.md', empty_project)
+        issue_template = subject.new('.doggohub/issue_templates/not_existent.md', empty_project)
         expect { issue_template.content }.to raise_error(Gitlab::Template::Finders::RepoTemplateFinder::FileNotFoundError)
       end
     end

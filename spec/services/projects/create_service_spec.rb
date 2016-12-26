@@ -4,7 +4,7 @@ describe Projects::CreateService, '#execute', services: true do
   let(:user) { create :user }
   let(:opts) do
     {
-      name: "GitLab",
+      name: "DoggoHub",
       namespace: user.namespace
     }
   end
@@ -112,7 +112,7 @@ describe Projects::CreateService, '#execute', services: true do
       expect(project).to respond_to(:errors)
       expect(project.errors.messages).to have_key(:visibility_level)
       expect(project.errors.messages[:visibility_level].first).to(
-        match('restricted by your GitLab administrator')
+        match('restricted by your DoggoHub administrator')
       )
     end
 

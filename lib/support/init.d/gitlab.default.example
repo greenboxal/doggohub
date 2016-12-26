@@ -1,24 +1,24 @@
-# Copy this lib/support/init.d/gitlab.default.example file to
-# /etc/default/gitlab in order for it to apply to your system.
+# Copy this lib/support/init.d/doggohub.default.example file to
+# /etc/default/doggohub in order for it to apply to your system.
 
 # RAILS_ENV defines the type of installation that is running.
 # Normal values are "production", "test" and "development".
 RAILS_ENV="production"
 
-# app_user defines the user that GitLab is run as.
+# app_user defines the user that DoggoHub is run as.
 # The default is "git".
 app_user="git"
 
-# app_root defines the folder in which gitlab and its components are installed.
-# The default is "/home/$app_user/gitlab"
-app_root="/home/$app_user/gitlab"
+# app_root defines the folder in which doggohub and its components are installed.
+# The default is "/home/$app_user/doggohub"
+app_root="/home/$app_user/doggohub"
 
-# pid_path defines a folder in which the gitlab and its components place their pids.
-# This variable is also used below to define the relevant pids for the gitlab components.
+# pid_path defines a folder in which the doggohub and its components place their pids.
+# This variable is also used below to define the relevant pids for the doggohub components.
 # The default is "$app_root/tmp/pids"
 pid_path="$app_root/tmp/pids"
 
-# socket_path defines the folder in which gitlab places the sockets
+# socket_path defines the folder in which doggohub places the sockets
 #The default is "$app_root/tmp/sockets"
 socket_path="$app_root/tmp/sockets"
 
@@ -30,22 +30,22 @@ web_server_pid_path="$pid_path/unicorn.pid"
 # The default is "$pid_path/sidekiq.pid"
 sidekiq_pid_path="$pid_path/sidekiq.pid"
 
-# The directory where the gitlab-workhorse binaries are. Usually
-# /home/git/gitlab-workhorse .
-gitlab_workhorse_dir=$(cd $app_root/../gitlab-workhorse && pwd)
-gitlab_workhorse_pid_path="$pid_path/gitlab-workhorse.pid"
+# The directory where the doggohub-workhorse binaries are. Usually
+# /home/git/doggohub-workhorse .
+doggohub_workhorse_dir=$(cd $app_root/../doggohub-workhorse && pwd)
+doggohub_workhorse_pid_path="$pid_path/doggohub-workhorse.pid"
 
-# The -listenXxx settings determine where gitlab-workhorse
+# The -listenXxx settings determine where doggohub-workhorse
 # listens for connections from the web server. By default it listens to a
 # socket. To listen on TCP connections (needed by Apache) change to:
 # '-listenNetwork tcp -listenAddr 127.0.0.1:8181'
 #
-# The -authBackend setting tells gitlab-workhorse where it can reach Unicorn.
+# The -authBackend setting tells doggohub-workhorse where it can reach Unicorn.
 # For relative URL support change to:
-# '-authBackend http://127.0.0.1/8080/gitlab'
-# Read more in http://doc.gitlab.com/ce/install/relative_url.html
-gitlab_workhorse_options="-listenUmask 0 -listenNetwork unix -listenAddr $socket_path/gitlab-workhorse.socket -authBackend http://127.0.0.1:8080 -authSocket $socket_path/gitlab.socket -documentRoot $app_root/public"
-gitlab_workhorse_log="$app_root/log/gitlab-workhorse.log"
+# '-authBackend http://127.0.0.1/8080/doggohub'
+# Read more in http://doc.doggohub.com/ce/install/relative_url.html
+doggohub_workhorse_options="-listenUmask 0 -listenNetwork unix -listenAddr $socket_path/doggohub-workhorse.socket -authBackend http://127.0.0.1:8080 -authSocket $socket_path/doggohub.socket -documentRoot $app_root/public"
+doggohub_workhorse_log="$app_root/log/doggohub-workhorse.log"
 
 # mail_room_enabled specifies whether mail_room, which is used to process incoming email, is enabled.
 # This is required for the Reply by email feature.

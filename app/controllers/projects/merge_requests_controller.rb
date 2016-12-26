@@ -164,7 +164,7 @@ class Projects::MergeRequestsController < Projects::ApplicationController
           }
         else
           render json: {
-            message: 'The merge conflicts for this merge request cannot be resolved through GitLab. Please try to resolve them locally.',
+            message: 'The merge conflicts for this merge request cannot be resolved through DoggoHub. Please try to resolve them locally.',
             type: 'error'
           }
         end
@@ -454,10 +454,10 @@ class Projects::MergeRequestsController < Projects::ApplicationController
   protected
 
   def selected_target_project
-    if @project.id.to_s == params[:target_project_id] || @project.forked_project_link.nil?
+    if @project.id.to_s == params[:target_project_id] || @project.borked_project_link.nil?
       @project
     else
-      @project.forked_project_link.forked_from_project
+      @project.borked_project_link.borked_from_project
     end
   end
 

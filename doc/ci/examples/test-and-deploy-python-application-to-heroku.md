@@ -1,10 +1,10 @@
 ## Test and Deploy a python application
 This example will guide you how to run tests in your Python application and deploy it automatically as Heroku application.
 
-You can checkout the example [source](https://gitlab.com/ayufan/python-getting-started) and check [CI status](https://gitlab.com/ayufan/python-getting-started/builds?scope=all).
+You can checkout the example [source](https://doggohub.com/ayufan/python-getting-started) and check [CI status](https://doggohub.com/ayufan/python-getting-started/builds?scope=all).
 
 ### Configure project
-This is what the `.gitlab-ci.yml` file looks like for this project:
+This is what the `.doggohub-ci.yml` file looks like for this project:
 ```yaml
 test:
   script:
@@ -21,7 +21,7 @@ staging:
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
-  - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
+  - dpl --provider=heroku --app=doggohub-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
   only:
   - master
 
@@ -31,7 +31,7 @@ production:
   - apt-get update -qy
   - apt-get install -y ruby-dev
   - gem install dpl
-  - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
+  - dpl --provider=heroku --app=doggohub-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
   only:
   - tags
 ```
@@ -54,12 +54,12 @@ You can do this through the [Dashboard](https://dashboard.heroku.com/).
 
 ### Create runner
 First install [Docker Engine](https://docs.docker.com/installation/).
-To build this project you also need to have [GitLab Runner](https://about.gitlab.com/gitlab-ci/#gitlab-runner). 
-You can use public runners available on `gitlab.com/ci`, but you can register your own:
+To build this project you also need to have [DoggoHub Runner](https://about.doggohub.com/doggohub-ci/#doggohub-runner). 
+You can use public runners available on `doggohub.com/ci`, but you can register your own:
 ```
-gitlab-ci-multi-runner register \
+doggohub-ci-multi-runner register \
   --non-interactive \
-  --url "https://gitlab.com/ci/" \
+  --url "https://doggohub.com/ci/" \
   --registration-token "PROJECT_REGISTRATION_TOKEN" \
   --description "python-3.5" \
   --executor "docker" \

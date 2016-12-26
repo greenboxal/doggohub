@@ -19,8 +19,8 @@ module SubmoduleHelper
       relative_self_links(url, submodule_item.id)
     elsif github_dot_com_url?(url)
       standard_links('github.com', namespace, project, submodule_item.id)
-    elsif gitlab_dot_com_url?(url)
-      standard_links('gitlab.com', namespace, project, submodule_item.id)
+    elsif doggohub_dot_com_url?(url)
+      standard_links('doggohub.com', namespace, project, submodule_item.id)
     else
       return url, nil
     end
@@ -32,14 +32,14 @@ module SubmoduleHelper
     url =~ /github\.com[\/:][^\/]+\/[^\/]+\Z/
   end
 
-  def gitlab_dot_com_url?(url)
-    url =~ /gitlab\.com[\/:][^\/]+\/[^\/]+\Z/
+  def doggohub_dot_com_url?(url)
+    url =~ /doggohub\.com[\/:][^\/]+\/[^\/]+\Z/
   end
 
   def self_url?(url, namespace, project)
-    return true if url == [ Gitlab.config.gitlab.url, '/', namespace, '/',
+    return true if url == [ Gitlab.config.doggohub.url, '/', namespace, '/',
                             project, '.git' ].join('')
-    url == gitlab_shell.url_to_repo([namespace, '/', project].join(''))
+    url == doggohub_shell.url_to_repo([namespace, '/', project].join(''))
   end
 
   def relative_self_url?(url)

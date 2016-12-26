@@ -4,7 +4,7 @@
 
 Even though Git is very resilient and tries to prevent data integrity issues,
 there are times when things go wrong. The following Rake tasks intend to
-help GitLab administrators diagnose problem repositories so they can be fixed.
+help DoggoHub administrators diagnose problem repositories so they can be fixed.
 
 There are 3 things that are checked to determine integrity.
 
@@ -15,7 +15,7 @@ There are 3 things that are checked to determine integrity.
 
 It's important to note that the existence of `config.lock` or reference locks
 alone do not necessarily indicate a problem. Lock files are routinely created
-and removed as Git and GitLab perform operations on the repository. They serve
+and removed as Git and DoggoHub perform operations on the repository. They serve
 to prevent data integrity issues. However, if a Git operation is interrupted these
 locks may not be cleaned up properly.
 
@@ -24,23 +24,23 @@ experience these symptoms you may use the rake tasks described below to determin
 exactly which repositories are causing the trouble.
 
 - Receiving an error when trying to push code - `remote: error: cannot lock ref`
-- A 500 error when viewing the GitLab dashboard or when accessing a specific project.
+- A 500 error when viewing the DoggoHub dashboard or when accessing a specific project.
 
-### Check all GitLab repositories
+### Check all DoggoHub repositories
 
-This task loops through all repositories on the GitLab server and runs the
+This task loops through all repositories on the DoggoHub server and runs the
 3 integrity checks described previously.
 
 **Omnibus Installation**
 
 ```
-sudo gitlab-rake gitlab:repo:check
+sudo doggohub-rake doggohub:repo:check
 ```
 
 **Source Installation**
 
 ```bash
-sudo -u git -H bundle exec rake gitlab:repo:check RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:repo:check RAILS_ENV=production
 ```
 
 ### Check repositories for a specific user
@@ -55,24 +55,24 @@ to enter a username.
 **Omnibus Installation**
 
 ```bash
-sudo gitlab-rake gitlab:user:check_repos
-sudo gitlab-rake gitlab:user:check_repos[<username>]
+sudo doggohub-rake doggohub:user:check_repos
+sudo doggohub-rake doggohub:user:check_repos[<username>]
 ```
 
 **Source Installation**
 
 ```bash
-sudo -u git -H bundle exec rake gitlab:user:check_repos RAILS_ENV=production
-sudo -u git -H bundle exec rake gitlab:user:check_repos[<username>] RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:user:check_repos RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:user:check_repos[<username>] RAILS_ENV=production
 ```
 
 Example output:
 
-![gitlab:user:check_repos output](../img/raketasks/check_repos_output.png)
+![doggohub:user:check_repos output](../img/raketasks/check_repos_output.png)
 
 ## LDAP Check
 
 The LDAP check Rake task will test the bind_dn and password credentials
 (if configured) and will list a sample of LDAP users. This task is also
-executed as part of the `gitlab:check` task, but can run independently.
+executed as part of the `doggohub:check` task, but can run independently.
 See [LDAP Rake Tasks - LDAP Check](ldap.md#check) for details.

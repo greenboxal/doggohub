@@ -119,7 +119,7 @@ PUT /projects/:id/services/buildkite
 
 Parameters:
 
-- `token` (**required**) - Buildkite project GitLab token
+- `token` (**required**) - Buildkite project DoggoHub token
 - `project_url` (**required**) - https://buildkite.com/example/project
 - `enable_ssl_verification` (optional) - Enable SSL verification
 
@@ -141,7 +141,7 @@ GET /projects/:id/services/buildkite
 
 ## Build-Emails
 
-Get emails for GitLab CI builds.
+Get emails for DoggoHub CI builds.
 
 ### Create/Edit Build-Emails service
 
@@ -503,7 +503,7 @@ GET /projects/:id/services/jira
 Set JIRA service for a project.
 
 >**Notes:**
-- Starting with GitLab 8.14, `api_url`, `issues_url`, `new_issue_url` and
+- Starting with DoggoHub 8.14, `api_url`, `issues_url`, `new_issue_url` and
   `project_url` are replaced by `project_key`, `url`.  If you are using an
   older version, [follow this documentation][old-jira-api].
 
@@ -513,10 +513,10 @@ PUT /projects/:id/services/jira
 
 | Attribute | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `url`           | string | yes | The URL to the JIRA project which is being linked to this GitLab project, e.g., `https://jira.example.com`. |
+| `url`           | string | yes | The URL to the JIRA project which is being linked to this DoggoHub project, e.g., `https://jira.example.com`. |
 | `project_key`   | string | yes | The short identifier for your JIRA project, all uppercase, e.g., `PROJ`. |
-| `username`      | string | no  | The username of the user created to be used with GitLab/JIRA. |
-| `password`      | string | no  | The password of the user created to be used with GitLab/JIRA. |
+| `username`      | string | no  | The username of the user created to be used with DoggoHub/JIRA. |
+| `password`      | string | no  | The password of the user created to be used with DoggoHub/JIRA. |
 | `jira_issue_transition_id` | integer | no | The ID of a transition that moves issues to a closed state. You can find this number under the JIRA workflow administration (**Administration > Issues > Workflows**) by selecting **View** under **Operations** of the desired workflow of your project. The ID of each state can be found inside the parenthesis of each transition name under the **Transitions (id)** column ([see screenshot][trans]). By default, this ID is set to `2`. |
 
 ### Delete JIRA service
@@ -564,7 +564,7 @@ GET /projects/:id/services/mattermost-slash-commands
 
 ## Pipeline-Emails
 
-Get emails for GitLab CI pipelines.
+Get emails for DoggoHub CI pipelines.
 
 ### Create/Edit Pipeline-Emails service
 
@@ -809,4 +809,4 @@ GET /projects/:id/services/teamcity
 ```
 
 [jira-doc]: ../project_services/jira.md
-[old-jira-api]: https://gitlab.com/gitlab-org/gitlab-ce/blob/8-13-stable/doc/api/services.md#jira
+[old-jira-api]: https://doggohub.com/doggohub-org/doggohub-ce/blob/8-13-stable/doc/api/services.md#jira

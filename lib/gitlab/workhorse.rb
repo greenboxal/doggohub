@@ -5,8 +5,8 @@ require 'securerandom'
 module Gitlab
   class Workhorse
     SEND_DATA_HEADER = 'Gitlab-Workhorse-Send-Data'
-    VERSION_FILE = 'GITLAB_WORKHORSE_VERSION'
-    INTERNAL_API_CONTENT_TYPE = 'application/vnd.gitlab-workhorse+json'
+    VERSION_FILE = 'DOGGOHUB_WORKHORSE_VERSION'
+    INTERNAL_API_CONTENT_TYPE = 'application/vnd.doggohub-workhorse+json'
     INTERNAL_API_REQUEST_HEADER = 'Gitlab-Workhorse-Api-Request'
 
     # Supposedly the effective key size for HMAC-SHA256 is 256 bits, i.e. 32
@@ -48,7 +48,7 @@ module Gitlab
       def send_git_archive(repository, ref:, format:)
         format ||= 'tar.gz'
         format.downcase!
-        params = repository.archive_metadata(ref, Gitlab.config.gitlab.repository_downloads_path, format)
+        params = repository.archive_metadata(ref, Gitlab.config.doggohub.repository_downloads_path, format)
         raise "Repository or ref not found" if params.empty?
 
         [
@@ -138,12 +138,12 @@ module Gitlab
           encoded_message,
           secret,
           true,
-          { iss: 'gitlab-workhorse', verify_iss: true, algorithm: 'HS256' },
+          { iss: 'doggohub-workhorse', verify_iss: true, algorithm: 'HS256' },
         )
       end
 
       def secret_path
-        Rails.root.join('.gitlab_workhorse_secret')
+        Rails.root.join('.doggohub_workhorse_secret')
       end
 
       protected

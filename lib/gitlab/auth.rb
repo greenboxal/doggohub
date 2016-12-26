@@ -86,7 +86,7 @@ module Gitlab
 
         raise Gitlab::Auth::MissingPersonalTokenError if user.two_factor_enabled?
 
-        Gitlab::Auth::Result.new(user, nil, :gitlab_or_ldap, full_authentication_abilities)
+        Gitlab::Auth::Result.new(user, nil, :doggohub_or_ldap, full_authentication_abilities)
       end
 
       def oauth_access_token_check(login, password)
@@ -147,7 +147,7 @@ module Gitlab
       end
 
       def build_access_token_check(login, password)
-        return unless login == 'gitlab-ci-token'
+        return unless login == 'doggohub-ci-token'
         return unless password
 
         build = ::Ci::Build.running.find_by_token(password)

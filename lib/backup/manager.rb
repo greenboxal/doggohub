@@ -11,10 +11,10 @@ module Backup
       s = {}
       s[:db_version]         = "#{ActiveRecord::Migrator.current_version}"
       s[:backup_created_at]  = Time.now
-      s[:gitlab_version]     = Gitlab::VERSION
+      s[:doggohub_version]     = Gitlab::VERSION
       s[:tar_version]        = tar_version
       s[:skipped]            = ENV["SKIP"]
-      tar_file = s[:backup_created_at].strftime('%s_%Y_%m_%d') + '_gitlab_backup.tar'
+      tar_file = s[:backup_created_at].strftime('%s_%Y_%m_%d') + '_doggohub_backup.tar'
 
       Dir.chdir(Gitlab.config.backup.path) do
         File.open("#{Gitlab.config.backup.path}/backup_information.yml",
@@ -82,8 +82,8 @@ module Backup
         removed = 0
 
         Dir.chdir(Gitlab.config.backup.path) do
-          Dir.glob('*_gitlab_backup.tar').each do |file|
-            next unless file =~ /(\d+)(?:_\d{4}_\d{2}_\d{2})?_gitlab_backup\.tar/
+          Dir.glob('*_doggohub_backup.tar').each do |file|
+            next unless file =~ /(\d+)(?:_\d{4}_\d{2}_\d{2})?_doggohub_backup\.tar/
 
             timestamp = $1.to_i
 
@@ -108,12 +108,12 @@ module Backup
       Dir.chdir(Gitlab.config.backup.path)
 
       # check for existing backups in the backup dir
-      file_list = Dir.glob("*_gitlab_backup.tar")
+      file_list = Dir.glob("*_doggohub_backup.tar")
       puts "no backups found" if file_list.count == 0
 
       if file_list.count > 1 && ENV["BACKUP"].nil?
         puts "Found more than one backup, please specify which one you want to restore:"
-        puts "rake gitlab:backup:restore BACKUP=timestamp_of_backup"
+        puts "rake doggohub:backup:restore BACKUP=timestamp_of_backup"
         exit 1
       end
 
@@ -136,13 +136,13 @@ module Backup
       ENV["VERSION"] = "#{settings[:db_version]}" if settings[:db_version].to_i > 0
 
       # restoring mismatching backups can lead to unexpected problems
-      if settings[:gitlab_version] != Gitlab::VERSION
-        puts "GitLab version mismatch:".color(:red)
-        puts "  Your current GitLab version (#{Gitlab::VERSION}) differs from the GitLab version in the backup!".color(:red)
+      if settings[:doggohub_version] != Gitlab::VERSION
+        puts "DoggoHub version mismatch:".color(:red)
+        puts "  Your current DoggoHub version (#{Gitlab::VERSION}) differs from the DoggoHub version in the backup!".color(:red)
         puts "  Please switch to the following version and try again:".color(:red)
-        puts "  version: #{settings[:gitlab_version]}".color(:red)
+        puts "  version: #{settings[:doggohub_version]}".color(:red)
         puts
-        puts "Hint: git checkout v#{settings[:gitlab_version]}"
+        puts "Hint: git checkout v#{settings[:doggohub_version]}"
         exit 1
       end
     end

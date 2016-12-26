@@ -1,7 +1,7 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :git do
 
-    desc "GitLab | Git | Repack"
+    desc "DoggoHub | Git | Repack"
     task repack: :environment do
       failures = perform_git_cmd(%W(git repack -a --quiet), "Repacking repo")
       if failures.empty?
@@ -11,7 +11,7 @@ namespace :gitlab do
       end
     end
 
-    desc "GitLab | Git | Run garbage collection on all repos"
+    desc "DoggoHub | Git | Run garbage collection on all repos"
     task gc: :environment do
       failures = perform_git_cmd(%W(git gc --auto --quiet), "Garbage Collecting")
       if failures.empty?
@@ -21,7 +21,7 @@ namespace :gitlab do
       end
     end
     
-    desc "GitLab | Git | Prune all repos"
+    desc "DoggoHub | Git | Prune all repos"
     task prune: :environment do
       failures = perform_git_cmd(%W(git prune), "Git Prune")
       if failures.empty?

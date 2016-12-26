@@ -170,7 +170,7 @@ class NotificationService
   def new_note(note)
     return true unless note.noteable_type.present?
 
-    # ignore gitlab service messages
+    # ignore doggohub service messages
     return true if note.cross_reference? && note.system?
 
     target = note.noteable

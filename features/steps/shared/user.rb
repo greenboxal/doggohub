@@ -9,7 +9,7 @@ module SharedUser
     user_exists("Mary Jane", { username: "mary_jane" })
   end
 
-  step 'gitlab user "Mike"' do
+  step 'doggohub user "Mike"' do
     create(:user, name: "Mike")
   end
 

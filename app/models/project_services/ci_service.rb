@@ -1,6 +1,6 @@
 # Base class for CI services
 # List methods you need to implement to get your CI service
-# working with GitLab Merge Requests
+# working with DoggoHub Merge Requests
 class CiService < Service
   default_value_for :category, 'ci'
 

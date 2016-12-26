@@ -1,5 +1,5 @@
 class Import::GitlabProjectsController < Import::BaseController
-  before_action :verify_gitlab_project_import_enabled
+  before_action :verify_doggohub_project_import_enabled
 
   def new
     @namespace = Namespace.find(project_params[:namespace_id])
@@ -9,7 +9,7 @@ class Import::GitlabProjectsController < Import::BaseController
 
   def create
     unless file_is_valid?
-      return redirect_back_or_default(options: { alert: "You need to upload a GitLab project export archive." })
+      return redirect_back_or_default(options: { alert: "You need to upload a DoggoHub project export archive." })
     end
 
     import_upload_path = Gitlab::ImportExport.import_upload_path(filename: project_params[:file].original_filename)
@@ -38,8 +38,8 @@ class Import::GitlabProjectsController < Import::BaseController
     project_params[:file] && project_params[:file].respond_to?(:read)
   end
 
-  def verify_gitlab_project_import_enabled
-    render_404 unless gitlab_project_import_enabled?
+  def verify_doggohub_project_import_enabled
+    render_404 unless doggohub_project_import_enabled?
   end
 
   def project_params

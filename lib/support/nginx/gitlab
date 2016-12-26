@@ -1,4 +1,4 @@
-## GitLab
+## DoggoHub
 ##
 ## Lines starting with two hashes (##) are comments with information.
 ## Lines starting with one hash (#) are configuration parameters that can be uncommented.
@@ -8,7 +8,7 @@
 ##################################
 ##
 ## If you change this file in a Merge Request, please also create
-## a Merge Request on https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests
+## a Merge Request on https://doggohub.com/doggohub-org/omnibus-doggohub/merge_requests
 ##
 ###################################
 ##         configuration         ##
@@ -16,11 +16,11 @@
 ##
 ## See installation.md#using-https for additional HTTPS configuration details.
 
-upstream gitlab-workhorse {
-  server unix:/home/git/gitlab/tmp/sockets/gitlab-workhorse.socket fail_timeout=0;
+upstream doggohub-workhorse {
+  server unix:/home/git/doggohub/tmp/sockets/doggohub-workhorse.socket fail_timeout=0;
 }
 
-map $http_upgrade $connection_upgrade_gitlab {
+map $http_upgrade $connection_upgrade_doggohub {
     default upgrade;
     ''      close;
 }
@@ -28,25 +28,25 @@ map $http_upgrade $connection_upgrade_gitlab {
 ## Normal HTTP host
 server {
   ## Either remove "default_server" from the listen line below,
-  ## or delete the /etc/nginx/sites-enabled/default file. This will cause gitlab
+  ## or delete the /etc/nginx/sites-enabled/default file. This will cause doggohub
   ## to be served if you visit any address that your server responds to, eg.
   ## the ip address of the server (http://x.x.x.x/)n 0.0.0.0:80 default_server;
   listen 0.0.0.0:80 default_server;
   listen [::]:80 default_server;
-  server_name YOUR_SERVER_FQDN; ## Replace this with something like gitlab.example.com
+  server_name YOUR_SERVER_FQDN; ## Replace this with something like doggohub.example.com
   server_tokens off; ## Don't show the nginx version number, a security best practice
 
   ## See app/controllers/application_controller.rb for headers set
 
-  ## Individual nginx logs for this GitLab vhost
-  access_log  /var/log/nginx/gitlab_access.log;
-  error_log   /var/log/nginx/gitlab_error.log;
+  ## Individual nginx logs for this DoggoHub vhost
+  access_log  /var/log/nginx/doggohub_access.log;
+  error_log   /var/log/nginx/doggohub_error.log;
 
   location / {
     client_max_body_size 0;
     gzip off;
 
-    ## https://github.com/gitlabhq/gitlabhq/issues/694
+    ## https://github.com/doggohubhq/doggohubhq/issues/694
     ## Some requests take more than 30 seconds.
     proxy_read_timeout      300;
     proxy_connect_timeout   300;
@@ -59,9 +59,9 @@ server {
     proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
     proxy_set_header    X-Forwarded-Proto   $scheme;
     proxy_set_header    Upgrade             $http_upgrade;
-    proxy_set_header    Connection          $connection_upgrade_gitlab;
+    proxy_set_header    Connection          $connection_upgrade_doggohub;
 
-    proxy_pass http://gitlab-workhorse;
+    proxy_pass http://doggohub-workhorse;
   }
 
   error_page 404 /404.html;
@@ -70,7 +70,7 @@ server {
   error_page 502 /502.html;
   error_page 503 /503.html;
   location ~ ^/(404|422|500|502|503)\.html$ {
-    root /home/git/gitlab/public;
+    root /home/git/doggohub/public;
     internal;
   }
 

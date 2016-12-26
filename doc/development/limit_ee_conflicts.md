@@ -4,7 +4,7 @@ This guide contains best-practices for avoiding conflicts between CE and EE.
 
 ## Context
 
-Usually, GitLab Community Edition is merged into the Enterprise Edition once a
+Usually, DoggoHub Community Edition is merged into the Enterprise Edition once a
 week. During these merges, it's very common to get conflicts when some changes
 in CE do not apply cleanly to EE.
 
@@ -40,7 +40,7 @@ Notes:
   developers that their work needs to be ported to EE.
 - Community contributors shouldn't submit merge requests against EE, but
   reviewers should take actions by either creating such EE merge request or
-  asking a GitLab developer to do it once the merge request is merged.
+  asking a DoggoHub developer to do it once the merge request is merged.
 - If you branch is more than 500 commits behind `master`, the job will fail and
   you should rebase your branch upon latest `master`.
 

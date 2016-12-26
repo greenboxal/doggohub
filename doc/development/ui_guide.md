@@ -1,27 +1,27 @@
-# UI Guide for building GitLab
+# UI Guide for building DoggoHub
 
-## GitLab UI development kit
+## DoggoHub UI development kit
 
-We created a page inside GitLab where you can check commonly used html and css elements.
+We created a page inside DoggoHub where you can check commonly used html and css elements.
 
-When you run GitLab instance locally - just visit http://localhost:3000/help/ui page to see UI examples
-you can use during GitLab development.
+When you run DoggoHub instance locally - just visit http://localhost:3000/help/ui page to see UI examples
+you can use during DoggoHub development.
 
 ## Design repository
 
-All design files are stored in the [gitlab-design](https://gitlab.com/gitlab-org/gitlab-design)
-repository and maintained by GitLab UX designers.
+All design files are stored in the [doggohub-design](https://doggohub.com/doggohub-org/doggohub-design)
+repository and maintained by DoggoHub UX designers.
 
 ## Navigation
 
-GitLab's layout contains 2 sections: the left sidebar and the content. The left sidebar contains a static navigation menu.
+DoggoHub's layout contains 2 sections: the left sidebar and the content. The left sidebar contains a static navigation menu.
 This menu will be visible regardless of what page you visit.
-The content section contains a header and the content itself. The header describes the current GitLab page and what navigation is
+The content section contains a header and the content itself. The header describes the current DoggoHub page and what navigation is
 available to the user in this area. Depending on the area (project, group, profile setting) the header name and navigation may change. For example, when the user visits one of the
 project pages the header will contain the project's name and navigation for that project. When the user visits a group page it will contain the group's name and navigation related to this group.
 
-You can see a visual representation of the navigation in GitLab in the GitLab Product Map, which is located in the [Design Repository](gitlab-map-graffle)
-along with [PDF](gitlab-map-pdf) and [PNG](gitlab-map-png) exports.
+You can see a visual representation of the navigation in DoggoHub in the DoggoHub Product Map, which is located in the [Design Repository](doggohub-map-graffle)
+along with [PDF](doggohub-map-pdf) and [PNG](doggohub-map-png) exports.
 
 
 ### Adding new tab to header navigation
@@ -35,7 +35,7 @@ We want to keep links short and easy to remember and fit all of them in the smal
 
 ## Mobile screen size
 
-We want GitLab to work well on small mobile screens as well. Size limitations make it is impossible to fit everything on a mobile screen. In this case it is OK to hide
+We want DoggoHub to work well on small mobile screens as well. Size limitations make it is impossible to fit everything on a mobile screen. In this case it is OK to hide
 part of the UI for smaller resolutions in favor of a better user experience.
 However core functionality like browsing files, creating issues, writing comments, should
 be available on all resolutions.
@@ -102,6 +102,6 @@ Do not use both green and blue button in one form.
   display counts in the UI.
 
 [number_with_delimiter]: http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_with_delimiter
-[gitlab-map-graffle]: https://gitlab.com/gitlab-org/gitlab-design/blob/master/production/resources/gitlab-map.graffle
-[gitlab-map-pdf]: https://gitlab.com/gitlab-org/gitlab-design/raw/master/production/resources/gitlab-map.pdf
-[gitlab-map-png]: https://gitlab.com/gitlab-org/gitlab-design/raw/master/production/resources/gitlab-map.png
+[doggohub-map-graffle]: https://doggohub.com/doggohub-org/doggohub-design/blob/master/production/resources/doggohub-map.graffle
+[doggohub-map-pdf]: https://doggohub.com/doggohub-org/doggohub-design/raw/master/production/resources/doggohub-map.pdf
+[doggohub-map-png]: https://doggohub.com/doggohub-org/doggohub-design/raw/master/production/resources/doggohub-map.png

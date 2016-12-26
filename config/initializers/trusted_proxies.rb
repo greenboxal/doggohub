@@ -13,7 +13,7 @@ module Rack
   end
 end
 
-gitlab_trusted_proxies = Array(Gitlab.config.gitlab.trusted_proxies).map do |proxy|
+doggohub_trusted_proxies = Array(Gitlab.config.doggohub.trusted_proxies).map do |proxy|
   begin
     IPAddr.new(proxy)
   rescue IPAddr::InvalidAddressError
@@ -21,4 +21,4 @@ gitlab_trusted_proxies = Array(Gitlab.config.gitlab.trusted_proxies).map do |pro
 end.compact
 
 Rails.application.config.action_dispatch.trusted_proxies = (
-  [ '127.0.0.1', '::1' ] + gitlab_trusted_proxies)
+  [ '127.0.0.1', '::1' ] + doggohub_trusted_proxies)

@@ -4,6 +4,6 @@ class GitlabShellWorker
   include DedicatedSidekiqQueue
 
   def perform(action, *arg)
-    gitlab_shell.send(action, *arg)
+    doggohub_shell.send(action, *arg)
   end
 end

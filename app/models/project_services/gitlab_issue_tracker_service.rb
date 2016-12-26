@@ -8,7 +8,7 @@ class GitlabIssueTrackerService < IssueTrackerService
   default_value_for :default, true
 
   def to_param
-    'gitlab'
+    'doggohub'
   end
 
   def project_url

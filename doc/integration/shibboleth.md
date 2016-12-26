@@ -1,8 +1,8 @@
 # Shibboleth OmniAuth Provider
 
-This documentation is for enabling shibboleth with omnibus-gitlab package.
+This documentation is for enabling shibboleth with omnibus-doggohub package.
 
-In order to enable Shibboleth support in gitlab we need to use Apache instead of Nginx (It may be possible to use Nginx, however this is difficult to configure using the bundled Nginx provided in the omnibus-gitlab package). Apache uses mod_shib2 module for shibboleth authentication and can pass attributes as headers to omniauth-shibboleth provider.
+In order to enable Shibboleth support in doggohub we need to use Apache instead of Nginx (It may be possible to use Nginx, however this is difficult to configure using the bundled Nginx provided in the omnibus-doggohub package). Apache uses mod_shib2 module for shibboleth authentication and can pass attributes as headers to omniauth-shibboleth provider.
 
 
 To enable the Shibboleth OmniAuth provider you must:
@@ -10,7 +10,7 @@ To enable the Shibboleth OmniAuth provider you must:
 1. Configure Apache shibboleth module. Installation and configuration of module it self is out of scope of this document.
 Check https://wiki.shibboleth.net/ for more info.
 
-1. You can find Apache config in gitlab-recipes (https://gitlab.com/gitlab-org/gitlab-recipes/tree/master/web-server/apache)
+1. You can find Apache config in doggohub-recipes (https://doggohub.com/doggohub-org/doggohub-recipes/tree/master/web-server/apache)
 
 Following changes are needed to enable shibboleth:
 
@@ -43,20 +43,20 @@ exclude shibboleth URLs from rewriting, add "RewriteCond %{REQUEST_URI} !/Shibbo
   RequestHeader set X_FORWARDED_PROTO 'https'
 ```
 
-1.  Edit /etc/gitlab/gitlab.rb configuration file, your shibboleth attributes should be in form of "HTTP_ATTRIBUTE" and you should addjust them to your need and environment. Add any other configuration you need.
+1.  Edit /etc/doggohub/doggohub.rb configuration file, your shibboleth attributes should be in form of "HTTP_ATTRIBUTE" and you should addjust them to your need and environment. Add any other configuration you need.
 
 File should look like this:
 ```
-external_url 'https://gitlab.example.com'
-gitlab_rails['internal_api_url'] = 'https://gitlab.example.com'
+external_url 'https://doggohub.example.com'
+doggohub_rails['internal_api_url'] = 'https://doggohub.example.com'
 
 # disable Nginx
 nginx['enable'] = false
 
-gitlab_rails['omniauth_allow_single_sign_on'] = true
-gitlab_rails['omniauth_block_auto_created_users'] = false
-gitlab_rails['omniauth_enabled'] = true
-gitlab_rails['omniauth_providers'] = [
+doggohub_rails['omniauth_allow_single_sign_on'] = true
+doggohub_rails['omniauth_block_auto_created_users'] = false
+doggohub_rails['omniauth_enabled'] = true
+doggohub_rails['omniauth_providers'] = [
   {
     "name" => 'shibboleth',
         "args" => {
@@ -70,14 +70,14 @@ gitlab_rails['omniauth_providers'] = [
 ]
 
 ```
-1. Save changes and reconfigure gitlab:
+1. Save changes and reconfigure doggohub:
 ```
-sudo gitlab-ctl reconfigure
+sudo doggohub-ctl reconfigure
 ```
 
-On the sign in page there should now be a "Sign in with: Shibboleth" icon below the regular sign in form. Click the icon to begin the authentication process. You will be redirected to IdP server (Depends on your Shibboleth module configuration). If everything goes well the user will be returned to GitLab and will be signed in.
+On the sign in page there should now be a "Sign in with: Shibboleth" icon below the regular sign in form. Click the icon to begin the authentication process. You will be redirected to IdP server (Depends on your Shibboleth module configuration). If everything goes well the user will be returned to DoggoHub and will be signed in.
 
-## Apache 2.4 / GitLab 8.6 update
+## Apache 2.4 / DoggoHub 8.6 update
 The order of the first 2 Location directives is important. If they are reversed,
 you will not get a shibboleth session!
 
@@ -113,7 +113,7 @@ you will not get a shibboleth session!
   RewriteCond %{REQUEST_URI} !/shibboleth-sp
   RewriteRule .* http://127.0.0.1:8181%{REQUEST_URI} [P,QSA,NE]
 
-  #Forward all requests to gitlab-workhorse except existing files
+  #Forward all requests to doggohub-workhorse except existing files
   RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f [OR]
   RewriteCond %{REQUEST_URI} ^/uploads/.*
   RewriteCond %{REQUEST_URI} !/Shibboleth.sso

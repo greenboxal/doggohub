@@ -1,4 +1,4 @@
-# This is a helper class used by the GitLab Markdown feature spec
+# This is a helper class used by the DoggoHub Markdown feature spec
 #
 # Because the feature spec only cares about the output of the Markdown, and the
 # test setup and teardown and parsing is fairly expensive, we only want to do it

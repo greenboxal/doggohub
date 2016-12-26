@@ -1,14 +1,14 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :workhorse do
-    desc "GitLab | Install or upgrade gitlab-workhorse"
+    desc "DoggoHub | Install or upgrade doggohub-workhorse"
     task :install, [:dir] => :environment do |t, args|
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
       unless args.dir.present?
-        abort %(Please specify the directory where you want to install gitlab-workhorse:\n  rake "gitlab:workhorse:install[/home/git/gitlab-workhorse]")
+        abort %(Please specify the directory where you want to install doggohub-workhorse:\n  rake "doggohub:workhorse:install[/home/git/doggohub-workhorse]")
       end
 
       tag = "v#{Gitlab::Workhorse.version}"
-      repo = 'https://gitlab.com/gitlab-org/gitlab-workhorse.git'
+      repo = 'https://doggohub.com/doggohub-org/doggohub-workhorse.git'
 
       checkout_or_clone_tag(tag: tag, repo: repo, target_dir: args.dir)
 

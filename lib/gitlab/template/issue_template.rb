@@ -7,7 +7,7 @@ module Gitlab
         end
 
         def base_dir
-          '.gitlab/issue_templates/'
+          '.doggohub/issue_templates/'
         end
 
         def finder(project)

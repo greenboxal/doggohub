@@ -68,7 +68,7 @@ describe Profiles::KeysController do
       it "does not render the comment of the key" do
         get :get_keys, username: user.username
 
-        expect(response.body).not_to match(/dummy@gitlab.com/)
+        expect(response.body).not_to match(/dummy@doggohub.com/)
       end
 
       it "responds with text/plain content type" do

@@ -1,7 +1,7 @@
 %div.branch-commit
   - if deployment.ref
     .icon-container
-      = deployment.tag? ? icon('tag') : icon('code-fork')
+      = deployment.tag? ? icon('tag') : icon('code-bork')
     = link_to deployment.ref, namespace_project_commits_path(@project.namespace, @project, deployment.ref), class: "monospace branch-name"
   .icon-container.commit-icon
     = custom_icon("icon_commit")

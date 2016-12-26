@@ -95,7 +95,7 @@ module Gitlab
 
       def missing_author_note(updated_at, author_name)
         timestamp = updated_at.split('.').first
-        "\n\n *By #{author_name} on #{timestamp} (imported from GitLab project)*"
+        "\n\n *By #{author_name} on #{timestamp} (imported from DoggoHub project)*"
       end
 
       def generate_imported_object

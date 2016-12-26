@@ -1,14 +1,14 @@
 # Runners
 
-In GitLab CI, Runners run your [yaml](../yaml/README.md).
+In DoggoHub CI, Runners run your [yaml](../yaml/README.md).
 A runner is an isolated (virtual) machine that picks up builds
-through the coordinator API of GitLab CI.
+through the coordinator API of DoggoHub CI.
 
 A runner can be specific to a certain project or serve any project
-in GitLab CI. A runner that serves all projects is called a shared runner.
+in DoggoHub CI. A runner that serves all projects is called a shared runner.
 
-Ideally, GitLab Runner should not be installed on the same machine as GitLab.
-Read the [requirements documentation](../../install/requirements.md#gitlab-runner)
+Ideally, DoggoHub Runner should not be installed on the same machine as DoggoHub.
+Read the [requirements documentation](../../install/requirements.md#doggohub-runner)
 for more information.
 
 ## Shared vs. Specific Runners
@@ -36,26 +36,26 @@ You can set up a specific runner to be used by multiple projects. The difference
 with a shared runner is that you have to enable each project explicitly for
 the runner to be able to run its jobs.
 
-Specific runners do not get shared with forked projects automatically.
-A fork does copy the CI settings (jobs, allow shared, etc) of the cloned repository.
+Specific runners do not get shared with borked projects automatically.
+A bork does copy the CI settings (jobs, allow shared, etc) of the cloned repository.
 
 # Creating and Registering a Runner
 
 There are several ways to create a runner. Only after creation, upon
 registration its status as Shared or Specific is determined.
 
-[See the documentation for](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/#installation)
+[See the documentation for](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/#installation)
 the different methods of installing a Runner instance.
 
 After installing the runner, you can either register it as `Shared` or as `Specific`.
-You can only register a Shared Runner if you have admin access to the GitLab instance.
+You can only register a Shared Runner if you have admin access to the DoggoHub instance.
 
 ## Registering a Shared Runner
 
 You can only register a shared runner if you are an admin on the linked
-GitLab instance.
+DoggoHub instance.
 
-Grab the shared-runner token on the `admin/runners` page of your GitLab CI
+Grab the shared-runner token on the `admin/runners` page of your DoggoHub CI
 instance.
 
 ![shared token](shared_runner.png)
@@ -63,11 +63,11 @@ instance.
 Now simply register the runner as any runner:
 
 ```
-sudo gitlab-ci-multi-runner register
+sudo doggohub-ci-multi-runner register
 ```
 
-Shared runners are enabled by default as of GitLab 8.2, but can be disabled with the
-`DISABLE SHARED RUNNERS` button. Previous versions of GitLab defaulted shared runners to
+Shared runners are enabled by default as of DoggoHub 8.2, but can be disabled with the
+`DISABLE SHARED RUNNERS` button. Previous versions of DoggoHub defaulted shared runners to
 disabled.
 
 ## Registering a Specific Runner
@@ -78,22 +78,22 @@ Registering a specific can be done in two ways:
 1. Converting a shared runner into a specific runner (one-way, admin only)
 
 There are several ways to create a runner instance. The steps below only
-concern registering the runner on GitLab CI.
+concern registering the runner on DoggoHub CI.
 
 ###  Registering a Specific Runner with a Project Registration token
 
-To create a specific runner without having admin rights to the GitLab instance,
-visit the project you want to make the runner work for in GitLab CI.
+To create a specific runner without having admin rights to the DoggoHub instance,
+visit the project you want to make the runner work for in DoggoHub CI.
 
 Click on the runner tab and use the registration token you find there to
 setup a specific runner for this project.
 
-![project runners in GitLab CI](project_specific.png)
+![project runners in DoggoHub CI](project_specific.png)
 
 To register the runner, run the command below and follow instructions:
 
 ```
-sudo gitlab-ci-multi-runner register
+sudo doggohub-ci-multi-runner register
 ```
 
 ###  Lock a specific runner from being enabled for other projects
@@ -104,7 +104,7 @@ This setting is available on each runner in *Project Settings* > *Runners*.
 
 ###  Making an existing Shared Runner Specific
 
-If you are an admin on your GitLab instance,
+If you are an admin on your DoggoHub instance,
 you can make any shared runner a specific runner, _but you can not
 make a specific runner a shared runner_.
 
@@ -128,7 +128,7 @@ problematic for large amounts of projects, if it wasn't for tags.
 By tagging a Runner for the types of jobs it can handle, you can make sure
 shared runners will only run the jobs they are equipped to run.
 
-For instance, at GitLab we have runners tagged with "rails" if they contain
+For instance, at DoggoHub we have runners tagged with "rails" if they contain
 the appropriate dependencies to run Rails test suites.
 
 ### Prevent runner with tags from picking jobs without tags
@@ -147,16 +147,16 @@ In addition, because you can get access to the runner token, it is possible
 to create a clone of a runner and submit false builds, for example.
 
 The above is easily avoided by restricting the usage of shared runners
-on large public GitLab instances and controlling access to your GitLab instance.
+on large public DoggoHub instances and controlling access to your DoggoHub instance.
 
-### Forks
+### Borks
 
-Whenever a project is forked, it copies the settings of the jobs that relate
+Whenever a project is borked, it copies the settings of the jobs that relate
 to it. This means that if you have shared runners setup for a project and
-someone forks that project, the shared runners will also serve jobs of this
+someone borks that project, the shared runners will also serve jobs of this
 project.
 
 ## Attack vectors in Runners
 
 Mentioned briefly earlier, but the following things of runners can be exploited.
-We're always looking for contributions that can mitigate these [Security Considerations](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/security/index.md).
+We're always looking for contributions that can mitigate these [Security Considerations](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/blob/master/docs/security/index.md).

@@ -1,34 +1,34 @@
-# Configuring a Database for GitLab HA
+# Configuring a Database for DoggoHub HA
 
 You can choose to install and manage a database server (PostgreSQL/MySQL)
-yourself, or you can use GitLab Omnibus packages to help. GitLab recommends
+yourself, or you can use DoggoHub Omnibus packages to help. DoggoHub recommends
 PostgreSQL. This is the database that will be installed if you use the
 Omnibus package to manage your database.
 
 ## Configure your own database server
 
-If you're hosting GitLab on a cloud provider, you can optionally use a
+If you're hosting DoggoHub on a cloud provider, you can optionally use a
 managed service for PostgreSQL. For example, AWS offers a managed Relational
 Database Service (RDS) that runs PostgreSQL.
 
 If you use a cloud-managed service, or provide your own PostgreSQL:
 
-1. Set up a `gitlab` username with a password of your choice. The `gitlab` user
-   needs privileges to create the `gitlabhq_production` database.
-1. Configure the GitLab application servers with the appropriate details.
-   This step is covered in [Configuring GitLab for HA](gitlab.md)
+1. Set up a `doggohub` username with a password of your choice. The `doggohub` user
+   needs privileges to create the `doggohubhq_production` database.
+1. Configure the DoggoHub application servers with the appropriate details.
+   This step is covered in [Configuring DoggoHub for HA](doggohub.md)
 
 ## Configure using Omnibus
 
-1. Download/install GitLab Omnibus using **steps 1 and 2** from
-   [GitLab downloads](https://about.gitlab.com/downloads). Do not complete other
+1. Download/install DoggoHub Omnibus using **steps 1 and 2** from
+   [DoggoHub downloads](https://about.doggohub.com/downloads). Do not complete other
    steps on the download page.
-1. Create/edit `/etc/gitlab/gitlab.rb` and use the following configuration.
-   Be sure to change the `external_url` to match your eventual GitLab front-end
+1. Create/edit `/etc/doggohub/doggohub.rb` and use the following configuration.
+   Be sure to change the `external_url` to match your eventual DoggoHub front-end
    URL.
 
     ```ruby
-    external_url 'https://gitlab.example.com'
+    external_url 'https://doggohub.example.com'
 
     # Disable all components except PostgreSQL
     postgresql['enable'] = true
@@ -37,19 +37,19 @@ If you use a cloud-managed service, or provide your own PostgreSQL:
     unicorn['enable'] = false
     sidekiq['enable'] = false
     redis['enable'] = false
-    gitlab_workhorse['enable'] = false
+    doggohub_workhorse['enable'] = false
     mailroom['enable'] = false
 
     # PostgreSQL configuration
-    gitlab_rails['db_password'] = 'DB password'
+    doggohub_rails['db_password'] = 'DB password'
     postgresql['md5_auth_cidr_addresses'] = ['0.0.0.0/0']
     postgresql['listen_address'] = '0.0.0.0'
 
     # Disable automatic database migrations
-    gitlab_rails['auto_migrate'] = false
+    doggohub_rails['auto_migrate'] = false
     ```
 
-1. Run `sudo gitlab-ctl reconfigure` to install and configure PostgreSQL.
+1. Run `sudo doggohub-ctl reconfigure` to install and configure PostgreSQL.
 
     > **Note**: This `reconfigure` step will result in some errors.
       That's OK - don't be alarmed.
@@ -57,9 +57,9 @@ If you use a cloud-managed service, or provide your own PostgreSQL:
 1. Open a database prompt:
 
     ```
-    su - gitlab-psql
+    su - doggohub-psql
     /bin/bash
-    psql -h /var/opt/gitlab/postgresql -d template1
+    psql -h /var/opt/doggohub/postgresql -d template1
 
     # Output:
 
@@ -81,12 +81,12 @@ If you use a cloud-managed service, or provide your own PostgreSQL:
     Enter it again:
     ```
 
-1. Similarly, set the password for the `gitlab` database user. Use the same
-   password that you specified in the `/etc/gitlab/gitlab.rb` file for
-   `gitlab_rails['db_password']`.
+1. Similarly, set the password for the `doggohub` database user. Use the same
+   password that you specified in the `/etc/doggohub/doggohub.rb` file for
+   `doggohub_rails['db_password']`.
 
     ```
-    \password gitlab
+    \password doggohub
 
     # Output:
 
@@ -103,8 +103,8 @@ If you use a cloud-managed service, or provide your own PostgreSQL:
     CREATE EXTENSION
     ```
 1. Exit the database prompt by typing `\q` and Enter.
-1. Exit the `gitlab-psql` user by running `exit` twice.
-1. Run `sudo gitlab-ctl reconfigure` a final time.
+1. Exit the `doggohub-psql` user by running `exit` twice.
+1. Run `sudo doggohub-ctl reconfigure` a final time.
 
 ---
 
@@ -112,5 +112,5 @@ Read more on high-availability configuration:
 
 1. [Configure Redis](redis.md)
 1. [Configure NFS](nfs.md)
-1. [Configure the GitLab application servers](gitlab.md)
+1. [Configure the DoggoHub application servers](doggohub.md)
 1. [Configure the load balancers](load_balancer.md)

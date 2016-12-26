@@ -25,11 +25,11 @@ class Notify < BaseMailer
         )
   end
 
-  # Splits "gitlab.corp.company.com" up into "gitlab.corp.company.com",
+  # Splits "doggohub.corp.company.com" up into "doggohub.corp.company.com",
   # "corp.company.com" and "company.com".
   # Respects set tld length so "company.co.uk" won't match "somethingelse.uk"
   def self.allowed_email_domains
-    domain_parts = Gitlab.config.gitlab.host.split(".")
+    domain_parts = Gitlab.config.doggohub.host.split(".")
     allowed_domains = []
     begin
       allowed_domains << domain_parts.join(".")
@@ -93,7 +93,7 @@ class Notify < BaseMailer
     subject = ""
     subject << "#{@project.name} | " if @project
     subject << extra.join(' | ') if extra.present?
-    subject << " | #{Gitlab.config.gitlab.email_subject_suffix}" if Gitlab.config.gitlab.email_subject_suffix.present?
+    subject << " | #{Gitlab.config.doggohub.email_subject_suffix}" if Gitlab.config.doggohub.email_subject_suffix.present?
     subject
   end
 
@@ -102,13 +102,13 @@ class Notify < BaseMailer
   # The message-id is generated from the unique URL to a model object.
   def message_id(model)
     model_name = model.class.model_name.singular_route_key
-    "<#{model_name}_#{model.id}@#{Gitlab.config.gitlab.host}>"
+    "<#{model_name}_#{model.id}@#{Gitlab.config.doggohub.host}>"
   end
 
   def mail_thread(model, headers = {})
     add_project_headers
-    headers["X-GitLab-#{model.class.name}-ID"] = model.id
-    headers['X-GitLab-Reply-Key'] = reply_key
+    headers["X-DoggoHub-#{model.class.name}-ID"] = model.id
+    headers['X-DoggoHub-Reply-Key'] = reply_key
 
     if !@labels_url && @sent_notification && @sent_notification.unsubscribable?
       headers['List-Unsubscribe'] = "<#{unsubscribe_sent_notification_url(@sent_notification, force: true)}>"
@@ -122,7 +122,7 @@ class Notify < BaseMailer
 
       headers['Reply-To'] = address
 
-      fallback_reply_message_id = "<reply-#{reply_key}@#{Gitlab.config.gitlab.host}>".freeze
+      fallback_reply_message_id = "<reply-#{reply_key}@#{Gitlab.config.doggohub.host}>".freeze
       headers['References'] ||= ''
       headers['References'] << ' ' << fallback_reply_message_id
 
@@ -151,7 +151,7 @@ class Notify < BaseMailer
   #  * have a 'In-Reply-To' or 'References' header that references the original 'Message-ID'
   #
   def mail_answer_thread(model, headers = {})
-    headers['Message-ID'] = "<#{SecureRandom.hex}@#{Gitlab.config.gitlab.host}>"
+    headers['Message-ID'] = "<#{SecureRandom.hex}@#{Gitlab.config.doggohub.host}>"
     headers['In-Reply-To'] = message_id(model)
     headers['References'] = message_id(model)
 
@@ -167,8 +167,8 @@ class Notify < BaseMailer
   def add_project_headers
     return unless @project
 
-    headers['X-GitLab-Project'] = @project.name
-    headers['X-GitLab-Project-Id'] = @project.id
-    headers['X-GitLab-Project-Path'] = @project.path_with_namespace
+    headers['X-DoggoHub-Project'] = @project.name
+    headers['X-DoggoHub-Project-Id'] = @project.id
+    headers['X-DoggoHub-Project-Path'] = @project.path_with_namespace
   end
 end

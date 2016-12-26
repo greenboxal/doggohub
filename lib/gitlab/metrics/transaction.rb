@@ -2,7 +2,7 @@ module Gitlab
   module Metrics
     # Class for storing metrics information of a single transaction.
     class Transaction
-      THREAD_KEY = :_gitlab_metrics_transaction
+      THREAD_KEY = :_doggohub_metrics_transaction
 
       # The series to store events (e.g. Git pushes) in.
       EVENT_SERIES = 'events'

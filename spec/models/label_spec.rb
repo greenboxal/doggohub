@@ -32,8 +32,8 @@ describe Label, models: true do
       is_expected.not_to allow_value('G,ITLAB').for(:title)
       is_expected.not_to allow_value('').for(:title)
 
-      is_expected.to allow_value('GITLAB').for(:title)
-      is_expected.to allow_value('gitlab').for(:title)
+      is_expected.to allow_value('DOGGOHUB').for(:title)
+      is_expected.to allow_value('doggohub').for(:title)
       is_expected.to allow_value('G?ITLAB').for(:title)
       is_expected.to allow_value('G&ITLAB').for(:title)
       is_expected.to allow_value("customer's request").for(:title)

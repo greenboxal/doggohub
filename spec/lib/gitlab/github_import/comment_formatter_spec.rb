@@ -66,10 +66,10 @@ describe Gitlab::GithubImport::CommentFormatter, lib: true do
       end
     end
 
-    context 'when author is a GitLab user' do
+    context 'when author is a DoggoHub user' do
       let(:raw) { double(base.merge(user: octocat)) }
 
-      it 'returns GitLab user id as author_id' do
+      it 'returns DoggoHub user id as author_id' do
         gl_user = create(:omniauth_user, extern_uid: octocat.id, provider: 'github')
         expect(comment.attributes.fetch(:author_id)).to eq gl_user.id
       end

@@ -87,7 +87,7 @@ class Spinach::Features::Project < Spinach::FeatureSteps
 
   step 'I should see project "Forum" README' do
     page.within('.readme-holder') do
-      expect(page).to have_content 'Sample repo for testing gitlab features'
+      expect(page).to have_content 'Sample repo for testing doggohub features'
     end
   end
 

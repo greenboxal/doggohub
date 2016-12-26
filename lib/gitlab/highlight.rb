@@ -44,7 +44,7 @@ module Gitlab
     private
 
     def custom_language
-      language_name = @repository && @repository.gitattribute(@blob_name, 'gitlab-language')
+      language_name = @repository && @repository.gitattribute(@blob_name, 'doggohub-language')
 
       return nil unless language_name
 

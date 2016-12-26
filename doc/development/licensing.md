@@ -1,10 +1,10 @@
-# GitLab Licensing and Compatibility
+# DoggoHub Licensing and Compatibility
 
-GitLab CE is licensed under the terms of the MIT License. GitLab EE is licensed under "The GitLab Enterprise Edition (EE) license" wherein there are more restrictions. See their respective LICENSE files ([CE][CE], [EE][EE]) for more information.
+DoggoHub CE is licensed under the terms of the MIT License. DoggoHub EE is licensed under "The DoggoHub Enterprise Edition (EE) license" wherein there are more restrictions. See their respective LICENSE files ([CE][CE], [EE][EE]) for more information.
 
 ## Automated Testing
 
-In order to comply with the terms the libraries we use are licensed under, we have to make sure to check new gems for compatible licenses whenever they're added. To automate this process, we use the [license_finder][license_finder] gem by Pivotal. It runs every time a new commit is pushed and verifies that all gems in the bundle use a license that doesn't conflict with the licensing of either GitLab Community Edition or GitLab Enterprise Edition.
+In order to comply with the terms the libraries we use are licensed under, we have to make sure to check new gems for compatible licenses whenever they're added. To automate this process, we use the [license_finder][license_finder] gem by Pivotal. It runs every time a new commit is pushed and verifies that all gems in the bundle use a license that doesn't conflict with the licensing of either DoggoHub Community Edition or DoggoHub Enterprise Edition.
 
 There are some limitations with the automated testing, however. CSS and JavaScript libraries, as well as any Ruby libraries not included by way of Bundler, must be verified manually and independently. Take care whenever one such library is used, as automated tests won't catch problematic licenses from them.
 
@@ -76,8 +76,8 @@ Gems which are included only in the "development" or "test" groups by Bundler ar
 
 **NOTE:** This document is **not** legal advice, nor is it comprehensive. It should not be taken as such.
 
-[CE]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/LICENSE
-[EE]: https://gitlab.com/gitlab-org/gitlab-ee/blob/master/LICENSE
+[CE]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/LICENSE
+[EE]: https://doggohub.com/doggohub-org/doggohub-ee/blob/master/LICENSE
 [license_finder]: https://github.com/pivotal/LicenseFinder
 [MIT]: http://choosealicense.com/licenses/mit/
 [LGPL]: http://choosealicense.com/licenses/lgpl-3.0/

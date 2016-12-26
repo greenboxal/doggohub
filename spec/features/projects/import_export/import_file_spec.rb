@@ -27,9 +27,9 @@ feature 'Import/Export - project import integration test', feature: true, js: tr
 
       select2(namespace.id, from: '#project_namespace_id')
       fill_in :project_path, with: 'test-project-path', visible: true
-      click_link 'GitLab export'
+      click_link 'DoggoHub export'
 
-      expect(page).to have_content('GitLab project export')
+      expect(page).to have_content('DoggoHub project export')
       expect(URI.parse(current_url).query).to eq("namespace_id=#{namespace.id}&path=test-project-path")
 
       attach_file('file', file)
@@ -52,7 +52,7 @@ feature 'Import/Export - project import integration test', feature: true, js: tr
 
       select2(namespace.id, from: '#project_namespace_id')
       fill_in :project_path, with: project.name, visible: true
-      click_link 'GitLab export'
+      click_link 'DoggoHub export'
 
       attach_file('file', file)
       click_on 'Import project'
@@ -70,7 +70,7 @@ feature 'Import/Export - project import integration test', feature: true, js: tr
       select2(namespace.id, from: '#project_namespace_id')
 
       # click on disabled element
-      find(:link, 'GitLab export').trigger('click')
+      find(:link, 'DoggoHub export').trigger('click')
 
       page.within('.flash-container') do
         expect(page).to have_content('Please enter path and name')
@@ -89,9 +89,9 @@ feature 'Import/Export - project import integration test', feature: true, js: tr
 
       fill_in :project_path, with: 'test-project-path', visible: true
 
-      click_link 'GitLab export'
+      click_link 'DoggoHub export'
 
-      expect(page).to have_content('GitLab project export')
+      expect(page).to have_content('DoggoHub project export')
       expect(URI.parse(current_url).query).to eq("namespace_id=#{user.namespace.id}&path=test-project-path")
     end
   end

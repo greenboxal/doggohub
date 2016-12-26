@@ -15,7 +15,7 @@ describe Ci::API::Builds do
 
     describe "POST /builds/register" do
       let!(:build) { create(:ci_build, pipeline: pipeline, name: 'spinach', stage: 'test', stage_idx: 0) }
-      let(:user_agent) { 'gitlab-ci-multi-runner 1.5.2 (1-5-stable; go1.6.3; linux/amd64)' }
+      let(:user_agent) { 'doggohub-ci-multi-runner 1.5.2 (1-5-stable; go1.6.3; linux/amd64)' }
 
       before do
         stub_container_registry_config(enabled: false)
@@ -28,7 +28,7 @@ describe Ci::API::Builds do
           end
 
           context 'for beta version' do
-            let(:user_agent) { 'gitlab-ci-multi-runner 1.6.0~beta.167.g2b2bacc (1-5-stable; go1.6.3; linux/amd64)' }
+            let(:user_agent) { 'doggohub-ci-multi-runner 1.6.0~beta.167.g2b2bacc (1-5-stable; go1.6.3; linux/amd64)' }
             it { expect(response).to have_http_status(204) }
           end
         end
@@ -67,7 +67,7 @@ describe Ci::API::Builds do
           let(:registry_credentials) do
             { 'type' => 'registry',
               'url' => 'registry.example.com:5005',
-              'username' => 'gitlab-ci-token',
+              'username' => 'doggohub-ci-token',
               'password' => build.token }
           end
 
@@ -406,8 +406,8 @@ describe Ci::API::Builds do
       let(:post_url) { ci_api("/builds/#{build.id}/artifacts") }
       let(:delete_url) { ci_api("/builds/#{build.id}/artifacts") }
       let(:get_url) { ci_api("/builds/#{build.id}/artifacts") }
-      let(:jwt_token) { JWT.encode({ 'iss' => 'gitlab-workhorse' }, Gitlab::Workhorse.secret, 'HS256') }
-      let(:headers) { { "GitLab-Workhorse" => "1.0", Gitlab::Workhorse::INTERNAL_API_REQUEST_HEADER => jwt_token } }
+      let(:jwt_token) { JWT.encode({ 'iss' => 'doggohub-workhorse' }, Gitlab::Workhorse.secret, 'HS256') }
+      let(:headers) { { "DoggoHub-Workhorse" => "1.0", Gitlab::Workhorse::INTERNAL_API_REQUEST_HEADER => jwt_token } }
       let(:token) { build.token }
       let(:headers_with_token) { headers.merge(Ci::API::Helpers::BUILD_TOKEN_HEADER => token) }
 
@@ -439,7 +439,7 @@ describe Ci::API::Builds do
             expect(json_response["TempPath"]).not_to be_nil
           end
 
-          it "reject requests that did not go through gitlab-workhorse" do
+          it "reject requests that did not go through doggohub-workhorse" do
             headers.delete(Gitlab::Workhorse::INTERNAL_API_REQUEST_HEADER)
 
             post authorize_url, { token: build.token }, headers
@@ -635,8 +635,8 @@ describe Ci::API::Builds do
             end
           end
 
-          context 'GitLab Workhorse is not configured' do
-            it "fails to post artifacts without GitLab-Workhorse" do
+          context 'DoggoHub Workhorse is not configured' do
+            it "fails to post artifacts without DoggoHub-Workhorse" do
               post post_url, { token: build.token }, {}
               expect(response).to have_http_status(403)
             end

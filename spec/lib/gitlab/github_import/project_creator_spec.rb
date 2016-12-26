@@ -9,7 +9,7 @@ describe Gitlab::GithubImport::ProjectCreator, lib: true do
       login: 'vim',
       name: 'vim',
       full_name: 'asd/vim',
-      clone_url: 'https://gitlab.com/asd/vim.git'
+      clone_url: 'https://doggohub.com/asd/vim.git'
     )
   end
 
@@ -28,8 +28,8 @@ describe Gitlab::GithubImport::ProjectCreator, lib: true do
     it 'handle GitHub credentials' do
       project = service.execute
 
-      expect(project.import_url).to eq('https://asdffg@gitlab.com/asd/vim.git')
-      expect(project.safe_import_url).to eq('https://*****@gitlab.com/asd/vim.git')
+      expect(project.import_url).to eq('https://asdffg@doggohub.com/asd/vim.git')
+      expect(project.safe_import_url).to eq('https://*****@doggohub.com/asd/vim.git')
       expect(project.import_data.credentials).to eq(user: 'asdffg', password: nil)
     end
 

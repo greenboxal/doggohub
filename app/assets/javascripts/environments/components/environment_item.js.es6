@@ -18,7 +18,7 @@
    * in a table.
    * Recursive component based on [Tree View](https://vuejs.org/examples/tree-view.html)
    *
-   * See this [issue](https://gitlab.com/gitlab-org/gitlab-ce/issues/22539)
+   * See this [issue](https://doggohub.com/doggohub-org/doggohub-ce/issues/22539)
    * for more information.15
    */
 

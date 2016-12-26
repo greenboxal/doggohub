@@ -18,8 +18,8 @@ feature 'issuable templates', feature: true, js: true do
     let(:description_addition) { ' appending to description' }
 
     background do
-      project.repository.commit_file(user, '.gitlab/issue_templates/bug.md', template_content, 'added issue template', 'master', false)
-      project.repository.commit_file(user, '.gitlab/issue_templates/test.md', longtemplate_content, 'added issue template', 'master', false)
+      project.repository.commit_file(user, '.doggohub/issue_templates/bug.md', template_content, 'added issue template', 'master', false)
+      project.repository.commit_file(user, '.doggohub/issue_templates/test.md', longtemplate_content, 'added issue template', 'master', false)
       visit edit_namespace_project_issue_path project.namespace, project, issue
       fill_in :'issue[title]', with: 'test issue title'
     end
@@ -68,7 +68,7 @@ feature 'issuable templates', feature: true, js: true do
     let(:issue) { create(:issue, author: user, assignee: user, project: project) }
 
     background do
-      project.repository.commit_file(user, '.gitlab/issue_templates/bug.md', template_content, 'added issue template', 'master', false)
+      project.repository.commit_file(user, '.doggohub/issue_templates/bug.md', template_content, 'added issue template', 'master', false)
       visit edit_namespace_project_issue_path project.namespace, project, issue
       fill_in :'issue[title]', with: 'test issue title'
       fill_in :'issue[description]', with: prior_description
@@ -87,7 +87,7 @@ feature 'issuable templates', feature: true, js: true do
     let(:merge_request) { create(:merge_request, :with_diffs, source_project: project) }
 
     background do
-      project.repository.commit_file(user, '.gitlab/merge_request_templates/feature-proposal.md', template_content, 'added merge request template', 'master', false)
+      project.repository.commit_file(user, '.doggohub/merge_request_templates/feature-proposal.md', template_content, 'added merge request template', 'master', false)
       visit edit_namespace_project_merge_request_path project.namespace, project, merge_request
       fill_in :'merge_request[title]', with: 'test merge request title'
     end
@@ -100,19 +100,19 @@ feature 'issuable templates', feature: true, js: true do
     end
   end
 
-  context 'user creates a merge request from a forked project using templates' do
+  context 'user creates a merge request from a borked project using templates' do
     let(:template_content) { 'this is a test "feature-proposal" template' }
-    let(:fork_user) { create(:user) }
-    let(:fork_project) { create(:project, :public) }
-    let(:merge_request) { create(:merge_request, :with_diffs, source_project: fork_project, target_project: project) }
+    let(:bork_user) { create(:user) }
+    let(:bork_project) { create(:project, :public) }
+    let(:merge_request) { create(:merge_request, :with_diffs, source_project: bork_project, target_project: project) }
 
     background do
       logout
-      project.team << [fork_user, :developer]
-      fork_project.team << [fork_user, :master]
-      create(:forked_project_link, forked_to_project: fork_project, forked_from_project: project)
-      login_as fork_user
-      project.repository.commit_file(fork_user, '.gitlab/merge_request_templates/feature-proposal.md', template_content, 'added merge request template', 'master', false)
+      project.team << [bork_user, :developer]
+      bork_project.team << [bork_user, :master]
+      create(:borked_project_link, borked_to_project: bork_project, borked_from_project: project)
+      login_as bork_user
+      project.repository.commit_file(bork_user, '.doggohub/merge_request_templates/feature-proposal.md', template_content, 'added merge request template', 'master', false)
       visit edit_namespace_project_merge_request_path project.namespace, project, merge_request
       fill_in :'merge_request[title]', with: 'test merge request title'
     end

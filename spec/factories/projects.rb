@@ -93,18 +93,18 @@ FactoryGirl.define do
   # Project with test repository
   #
   # Test repository source can be found at
-  # https://gitlab.com/gitlab-org/gitlab-test
+  # https://doggohub.com/doggohub-org/doggohub-test
   factory :project, parent: :empty_project do
-    path { 'gitlabhq' }
+    path { 'doggohubhq' }
 
     test_repo
   end
 
-  factory :forked_project_with_submodules, parent: :empty_project do
-    path { 'forked-gitlabhq' }
+  factory :borked_project_with_submodules, parent: :empty_project do
+    path { 'borked-doggohubhq' }
 
     after :create do |project|
-      TestEnv.copy_forked_repo_with_submodules(project)
+      TestEnv.copy_borked_repo_with_submodules(project)
     end
   end
 

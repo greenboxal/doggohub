@@ -4,8 +4,8 @@
 
 ## 7.14.2
 
-- Upgrade gitlab_git to 7.2.15 to fix `git blame` errors with ISO-encoded files (Stan Hu)
-- Allow configuration of LDAP attributes GitLab will use for the new user account.
+- Upgrade doggohub_git to 7.2.15 to fix `git blame` errors with ISO-encoded files (Stan Hu)
+- Allow configuration of LDAP attributes DoggoHub will use for the new user account.
 
 ## 7.14.1
 
@@ -21,7 +21,7 @@
 - Fix bug where non-project members of the target project could set labels on new merge requests.
 - Update default robots.txt rules to disallow crawling of irrelevant pages (Ben Bodenmiller)
 - Fix redirection after sign in when using auto_sign_in_with_provider
-- Upgrade gitlab_git to 7.2.14 to ignore CRLFs in .gitmodules (Stan Hu)
+- Upgrade doggohub_git to 7.2.14 to ignore CRLFs in .gitmodules (Stan Hu)
 - Clear cache to prevent listing deleted branches after MR removes source branch (Stan Hu)
 - Provide more feedback what went wrong if HipChat service failed test (Stan Hu)
 - Fix bug where backslashes in inline diffs could be dropped (Stan Hu)
@@ -37,7 +37,7 @@
 - Fix multi-line syntax highlighting (Stan Hu)
 - Fix network graph when branch name has single quotes (Stan Hu)
 - Add "Confirm user" button in user admin page (Stan Hu)
-- Upgrade gitlab_git to version 7.2.6 to fix Error 500 when creating network graphs (Stan Hu)
+- Upgrade doggohub_git to version 7.2.6 to fix Error 500 when creating network graphs (Stan Hu)
 - Add support for Unicode filenames in relative links (Hiroyuki Sato)
 - Fix URL used for refreshing notes if relative_url is present (Bartłomiej Święcki)
 - Fix commit data retrieval when branch name has single quotes (Stan Hu)
@@ -47,7 +47,7 @@
 - Fix the "Reload with full diff" URL button (Stan Hu)
 - Fix label read access for unauthenticated users (Daniel Gerhardt)
 - Fix access to disabled features for unauthenticated users (Daniel Gerhardt)
-- Fix OAuth provider bug where GitLab would not go return to the redirect_uri after sign-in (Stan Hu)
+- Fix OAuth provider bug where DoggoHub would not go return to the redirect_uri after sign-in (Stan Hu)
 - Fix file upload dialog for comment editing (Daniel Gerhardt)
 - Set OmniAuth full_host parameter to ensure redirect URIs are correct (Stan Hu)
 - Return comments in created order in merge request API (Stan Hu)
@@ -55,7 +55,7 @@
 - Expire Rails cache entries after two weeks to prevent endless Redis growth
 - Add support for destroying project milestones (Stan Hu)
 - Allow custom backup archive permissions
-- Add project star and fork count, group avatar URL and user/group web URL attributes to API
+- Add project star and bork count, group avatar URL and user/group web URL attributes to API
 - Show who last edited a comment if it wasn't the original author
 - Send notification to all participants when MR is merged.
 - Add ability to manage user email addresses via the API.
@@ -66,7 +66,7 @@
 - Update gravatar link on profile page to link to configured gravatar host (Ben Bodenmiller)
 - Remove redis-store TTL monkey patch
 - Add support for CI skipped status
-- Fetch code from forks to refs/merge-requests/:id/head when merge request created
+- Fetch code from borks to refs/merge-requests/:id/head when merge request created
 - Remove comments and email addresses when publicly exposing ssh keys (Zeger-Jan van de Weg)
 - Add "Check out branch" button to the MR page.
 - Improve MR merge widget text and UI consistency.
@@ -107,7 +107,7 @@
 - Fix Error 500 when browsing projects with no HEAD (Stan Hu)
 - Fix labels / assignee / milestone for the merge requests when issues are disabled
 - Show the first tab automatically on MergeRequests#new
-- Add rake task 'gitlab:update_commit_count' (Daniel Gerhardt)
+- Add rake task 'doggohub:update_commit_count' (Daniel Gerhardt)
 - Fix Gmail Actions
 
 ## 7.13.1
@@ -166,7 +166,7 @@
 - Use native Postgres database cleaning during backup restore
 - Redesign project page. Show README as default instead of activity. Move project activity to separate page
 - Make left menu more hierarchical and less contextual by adding back item at top
-- A fork can’t have a visibility level that is greater than the original project.
+- A bork can’t have a visibility level that is greater than the original project.
 - Faster code search in repository and wiki. Fixes search page timeout for big repositories
 - Allow administrators to disable 2FA for a specific user
 - Add error message for SSH key linebreaks
@@ -208,7 +208,7 @@
 - Show warning when a comment will add 10 or more people to the discussion.
 - Disable changing of the source branch in merge request update API (Stan Hu)
 - Shorten merge request WIP text.
-- Add option to disallow users from registering any application to use GitLab as an OAuth provider
+- Add option to disallow users from registering any application to use DoggoHub as an OAuth provider
 - Support editing target branch of merge request (Stan Hu)
 - Refactor permission checks with issues and merge requests project settings (Stan Hu)
 - Fix Markdown preview not working in Edit Milestone page (Stan Hu)
@@ -224,7 +224,7 @@
 - Fix clone URL losing selection after a single click in Safari and Chrome (Stan Hu)
 - Fix git blame syntax highlighting when different commits break up lines (Stan Hu)
 - Add "Resend confirmation e-mail" link in profile settings (Stan Hu)
-- Allow to configure location of the `.gitlab_shell_secret` file. (Jakub Jirutka)
+- Allow to configure location of the `.doggohub_shell_secret` file. (Jakub Jirutka)
 - Disabled expansion of top/bottom blobs for new file diffs
 - Update Asciidoctor gem to version 1.5.2. (Jakub Jirutka)
 - Fix resolving of relative links to repository files in AsciiDoc documents. (Jakub Jirutka)
@@ -245,12 +245,12 @@
 - Add SAML support as an omniauth provider
 - Allow to configure a URL to show after sign out
 - Add an option to automatically sign-in with an Omniauth provider
-- GitLab CI service sends .gitlab-ci.yml in each push call
+- DoggoHub CI service sends .doggohub-ci.yml in each push call
 - When remove project - move repository and schedule it removal
 - Improve group removing logic
 - Trigger create-hooks on backup restore task
 - Add option to automatically link omniauth and LDAP identities
-- Allow special character in users bio. I.e.: I <3 GitLab
+- Allow special character in users bio. I.e.: I <3 DoggoHub
 
 ## 7.11.4
 
@@ -289,7 +289,7 @@
 - Fix "Cannot move project" error message from popping up after a successful transfer (Stan Hu)
 - Redirect to sign in page after signing out.
 - Fix "Hello @username." references not working by no longer allowing usernames to end in period.
-- Fix "Revspec not found" errors when viewing diffs in a forked project with submodules (Stan Hu)
+- Fix "Revspec not found" errors when viewing diffs in a borked project with submodules (Stan Hu)
 - Improve project page UI
 - Fix broken file browsing with relative submodule in personal projects (Stan Hu)
 - Add "Reply quoting selected text" shortcut key (`r`)
@@ -297,13 +297,13 @@
 - Fix bug causing `@whatever` inside an inline code snippet (backtick-style) to be picked up as a user mention.
 - When use change branches link at MR form - save source branch selection instead of target one
 - Improve handling of large diffs
-- Added GitLab Event header for project hooks
-- Add Two-factor authentication (2FA) for GitLab logins
+- Added DoggoHub Event header for project hooks
+- Add Two-factor authentication (2FA) for DoggoHub logins
 - Show Atom feed buttons everywhere where applicable.
 - Add project activity atom feed.
-- Don't crash when an MR from a fork has a cross-reference comment from the target project on one of its commits.
+- Don't crash when an MR from a bork has a cross-reference comment from the target project on one of its commits.
 - Explain how to get a new password reset token in welcome emails
-- Include commit comments in MR from a forked project.
+- Include commit comments in MR from a borked project.
 - Group milestones by title in the dashboard and all other issue views.
 - Query issues, merge requests and milestones with their IID through API (Julien Bianchi)
 - Add default project and snippet visibility settings to the admin web UI.
@@ -341,7 +341,7 @@
 ## 7.10.4
 
 - Fix migrations broken in 7.10.2
-- Make tags for GitLab installations running on MySQL case sensitive
+- Make tags for DoggoHub installations running on MySQL case sensitive
 - Get Gitorious importer to work again.
 - Fix adding new group members from admin area
 - Fix DB error when trying to tag a repository (Stan Hu)
@@ -373,7 +373,7 @@
 - Fix bug where Wiki pages that included a '/' were no longer accessible (Stan Hu)
 - Fix bug where error messages from Dropzone would not be displayed on the issues page (Stan Hu)
 - Add a rake task to check repository integrity with `git fsck`
-- Add ability to configure Reply-To address in gitlab.yml (Stan Hu)
+- Add ability to configure Reply-To address in doggohub.yml (Stan Hu)
 - Move current user to the top of the list in assignee/author filters (Stan Hu)
 - Fix broken side-by-side diff view on merge request page (Stan Hu)
 - Set Application controller default URL options to ensure all url_for calls are consistent (Stan Hu)
@@ -398,14 +398,14 @@
 - Fix alignment of navbar toggle button (Cody Mize)
 - Fix checkbox rendering for nested task lists
 - Identical look of selectboxes in UI
-- Upgrade the gitlab_git gem to version 7.1.3
+- Upgrade the doggohub_git gem to version 7.1.3
 - Move "Import existing repository by URL" option to button.
 - Improve error message when save profile has error.
-- Passing the name of pushed ref to CI service (requires GitLab CI 7.9+)
+- Passing the name of pushed ref to CI service (requires DoggoHub CI 7.9+)
 - Add location field to user profile
 - Fix print view for markdown files and wiki pages
 - Fix errors when deleting old backups
-- Improve GitLab performance when working with git repositories
+- Improve DoggoHub performance when working with git repositories
 - Add tag message and last commit to tag hook (Kamil Trzciński)
 - Restrict permissions on backup files
 - Improve oauth accounts UI in profile page
@@ -430,14 +430,14 @@
 - Don't leak private group existence by redirecting from namespace controller to group controller.
 - Ability to skip some items from backup (database, respositories or uploads)
 - Archive repositories in background worker.
-- Import GitHub, Bitbucket or GitLab.com projects owned by authenticated user into current namespace.
+- Import GitHub, Bitbucket or DoggoHub.com projects owned by authenticated user into current namespace.
 - Project labels are now available over the API under the "tag_list" field (Cristian Medina)
 - Fixed link paths for HTTP and SSH on the admin project view (Jeremy Maziarz)
 - Fix and improve help rendering (Sullivan Sénéchal)
 - Fix final line in EmailsOnPush email diff being rendered as error.
 - Prevent duplicate Buildkite service creation.
 - Fix git over ssh errors 'fatal: protocol error: bad line length character'
-- Automatically setup GitLab CI project for forks if origin project has GitLab CI enabled
+- Automatically setup DoggoHub CI project for borks if origin project has DoggoHub CI enabled
 - Bust group page project list cache when namespace name or path changes.
 - Explicitly set image alt-attribute to prevent graphical glitches if gravatars could not be loaded
 - Allow user to choose a public email to show on public profile
@@ -447,7 +447,7 @@
 - Fix Resource Owner Password Authentication Flow
 - Add icons to Add dropdown items.
 - Allow admin to create public deploy keys that are accessible to any project.
-- Warn when gitlab-shell version doesn't match requirement.
+- Warn when doggohub-shell version doesn't match requirement.
 - Skip email confirmation when set by admin or via LDAP.
 - Only allow users to reference groups, projects, issues, MRs, commits they have access to.
 
@@ -469,11 +469,11 @@
 
 - Include missing events and fix save functionality in admin service template settings form (Stan Hu)
 - Fix "Import projects from" button to show the correct instructions (Stan Hu)
-- Fix OAuth2 issue importing a new project from GitHub and GitLab (Stan Hu)
+- Fix OAuth2 issue importing a new project from GitHub and DoggoHub (Stan Hu)
 - Fix for LDAP with commas in DN
 - Fix missing events and in admin Slack service template settings form (Stan Hu)
 - Don't show commit comment button when user is not signed in.
-- Downgrade gemnasium-gitlab-service gem
+- Downgrade gemnasium-doggohub-service gem
 
 ## 7.9.0
 
@@ -494,7 +494,7 @@
 - Improve UI for commits, issues and merge request lists
 - Fix commit comments on first line of diff not rendering in Merge Request Discussion view.
 - Allow admins to override restricted project visibility settings.
-- Move restricted visibility settings from gitlab.yml into the web UI.
+- Move restricted visibility settings from doggohub.yml into the web UI.
 - Improve trigger merge request hook when source project branch has been updated (Kirill Zaitsev)
 - Save web edit in new branch
 - Fix ordering of imported but unchanged projects (Marco Wessel)
@@ -531,7 +531,7 @@
 - Fix highliht of selected lines in file
 - Reject access to group/project avatar if the user doesn't have access.
 - Add database migration to clean group duplicates with same path and name (Make sure you have a backup before update)
-- Add GitLab active users count to rake gitlab:check
+- Add DoggoHub active users count to rake doggohub:check
 - Starred projects page at dashboard
 - Make email display name configurable
 - Improve json validation in hook data
@@ -549,7 +549,7 @@
 - Block and unblock user if he/she was blocked/unblocked in Active Directory
 - Raise recommended number of unicorn workers from 2 to 3
 - Use same layout and interactivity for project members as group members.
-- Prevent gitlab-shell character encoding issues by receiving its changes as raw data.
+- Prevent doggohub-shell character encoding issues by receiving its changes as raw data.
 - Ability to unsubscribe/subscribe to issue or merge request
 - Delete deploy key when last connection to a project is destroyed.
 - Fix invalid Atom feeds when using emoji, horizontal rules, or images (Christian Walther)
@@ -567,13 +567,13 @@
 
 ## 7.8.3
 
-- Bump version of gitlab_git fixing annotated tags without message
+- Bump version of doggohub_git fixing annotated tags without message
 
 ## 7.8.2
 
 - Fix service migration issue when upgrading from versions prior to 7.3
 - Fix setting of the default use project limit via admin UI
-- Fix showing of already imported projects for GitLab and Gitorious importers
+- Fix showing of already imported projects for DoggoHub and Gitorious importers
 - Fix response of push to repository to return "Not found" if user doesn't have access
 - Fix check if user is allowed to view the file attachment
 - Fix import check for case sensetive namespaces
@@ -592,7 +592,7 @@
 ## 7.8.0
 
 - Fix access control and protection against XSS for note attachments and other uploads.
-- Replace highlight.js with rouge-fork rugments (Stefan Tatschner)
+- Replace highlight.js with rouge-bork rugments (Stefan Tatschner)
 - Make project search case insensitive (Hannes Rosenögger)
 - Include issue/mr participants in list of recipients for reassign/close/reopen emails
 - Expose description in groups API
@@ -608,7 +608,7 @@
 - Only count a user's vote once on a merge request or issue (Michael Clarke)
 - Increase font size when browse source files and diffs
 - Service Templates now let you set default values for all services
-- Create new file in empty repository using GitLab UI
+- Create new file in empty repository using DoggoHub UI
 - Ability to clone project using oauth2 token
 - Upgrade Sidekiq gem to version 3.3.0
 - Stop git zombie creation during force push check
@@ -618,11 +618,11 @@
 - Async load a branch information at the commit page
 - Disable blacklist validation for project names
 - Allow configuring protection of the default branch upon first push (Marco Wessel)
-- Add gitlab.com importer
-- Add an ability to login with gitlab.com
+- Add doggohub.com importer
+- Add an ability to login with doggohub.com
 - Add a commit calendar to the user profile (Hannes Rosenögger)
 - Submit comment on command-enter
-- Notify all members of a group when that group is mentioned in a comment, for example: `@gitlab-org` or `@sales`.
+- Notify all members of a group when that group is mentioned in a comment, for example: `@doggohub-org` or `@sales`.
 - Extend issue clossing pattern to include "Resolve", "Resolves", "Resolved", "Resolving" and "Close" (Julien Bianchi and Hannes Rosenögger)
 - Fix long broadcast message cut-off on left sidebar (Visay Keo)
 - Add Project Avatars (Steven Thonus and Hannes Rosenögger)
@@ -647,19 +647,19 @@
 - Link head panel titles to relevant root page.
 - Allow users that signed up via OAuth to set their password in order to use Git over HTTP(S).
 - Show users button to share their newly created public or internal projects on twitter
-- Add quick help links to the GitLab pricing and feature comparison pages.
+- Add quick help links to the DoggoHub pricing and feature comparison pages.
 - Fix duplicate authorized applications in user profile and incorrect application client count in admin area.
 - Make sure Markdown previews always use the same styling as the eventual destination.
 - Remove deprecated Group#owner_id from API
 - Show projects user contributed to on user page. Show stars near project on user page.
-- Improve database performance for GitLab
+- Improve database performance for DoggoHub
 - Add Asana service (Jeremy Benoist)
 - Improve project webhooks with extra data
 
 ## 7.7.2
 
-- Update GitLab Shell to version 2.4.2 that fixes a bug when developers can push to protected branch
-- Fix issue when LDAP user can't login with existing GitLab account
+- Update DoggoHub Shell to version 2.4.2 that fixes a bug when developers can push to protected branch
+- Fix issue when LDAP user can't login with existing DoggoHub account
 
 ## 7.7.1
 
@@ -683,13 +683,13 @@
 - New UI layout with side navigation
 - Add alert message in case of outdated browser (IE < 10)
 - Added API support for sorting projects
-- Update gitlab_git to version 7.0.0.rc14
+- Update doggohub_git to version 7.0.0.rc14
 - Add API project search filter option for authorized projects
 - Fix File blame not respecting branch selection
 - Change some of application settings on fly in admin area UI
 - Redesign signin/signup pages
 - Close standard input in Gitlab::Popen.popen
-- Trigger GitLab CI when push tags
+- Trigger DoggoHub CI when push tags
 - When accept merge request - do merge using sidaekiq job
 - Enable web signups by default
 - Fixes for diff comments: drag-n-drop images, selecting images
@@ -698,7 +698,7 @@
 
 ## 7.6.0
 
-- Fork repository to groups
+- Bork repository to groups
 - New rugged version
 - Add CRON=1 backup setting for quiet backups
 - Fix failing wiki restore
@@ -723,7 +723,7 @@
 
 ## 7.5.3
 
-- Bump gitlab_git to 7.0.0.rc12 (includes Rugged 0.21.2)
+- Bump doggohub_git to 7.0.0.rc12 (includes Rugged 0.21.2)
 
 ## 7.5.2
 
@@ -737,7 +737,7 @@
 ## 7.5.0
 
 - API: Add support for Hipchat (Kevin Houdebert)
-- Add time zone configuration in gitlab.yml (Sullivan Senechal)
+- Add time zone configuration in doggohub.yml (Sullivan Senechal)
 - Fix LDAP authentication for Git HTTP access
 - Run 'GC.start' after every EmailsOnPushWorker job
 - Fix LDAP config lookup for provider 'ldap'
@@ -751,21 +751,21 @@
 - Expose username in project events API (sponsored by O'Reilly Media)
 - Adds comments to commits in the API
 - Performance improvements
-- Fix post-receive issue for projects with deleted forks
-- New gitlab-shell version with custom hooks support
+- Fix post-receive issue for projects with deleted borks
+- New doggohub-shell version with custom hooks support
 - Improve code
-- GitLab CI 5.2+ support (does not support older versions)
+- DoggoHub CI 5.2+ support (does not support older versions)
 - Fixed bug when you can not push commits starting with 000000 to protected branches
 - Added a password strength indicator
 - Change project name and path in one form
 - Display renamed files in diff views (Vinnie Okada)
 - Fix raw view for public snippets
-- Use secret token with GitLab internal API.
+- Use secret token with DoggoHub internal API.
 - Add missing timestamps to 'members' table
 
 ## 7.4.5
 
-- Bump gitlab_git to 7.0.0.rc12 (includes Rugged 0.21.2)
+- Bump doggohub_git to 7.0.0.rc12 (includes Rugged 0.21.2)
 
 ## 7.4.4
 
@@ -800,13 +800,13 @@
 - Do not delete tmp/repositories itself during clean-up, only its contents
 - Support for backup uploads to remote storage
 - Prevent notes polling when there are not notes
-- Internal ForkService: Prepare support for fork to a given namespace
-- API: Add support for forking a project via the API (Bernhard Kaindl)
+- Internal BorkService: Prepare support for bork to a given namespace
+- API: Add support for borking a project via the API (Bernhard Kaindl)
 - API: filter project issues by milestone (Julien Bianchi)
 - Fail harder in the backup script
 - Changes to Slack service structure, only webhook url needed
 - Zen mode for wiki and milestones (Robert Schilling)
-- Move Emoji parsing to html-pipeline-gitlab (Robert Schilling)
+- Move Emoji parsing to html-pipeline-doggohub (Robert Schilling)
 - Font Awesome 4.2 integration (Sullivan Senechal)
 - Add Pushover service integration (Sullivan Senechal)
 - Add select field type for services options (Sullivan Senechal)
@@ -815,7 +815,7 @@
 - Snippets can be public, internal or private
 - Improve danger zone: ask project path to confirm data-loss action
 - Raise exception on forgery
-- Show build coverage in Merge Requests (requires GitLab CI v5.1)
+- Show build coverage in Merge Requests (requires DoggoHub CI v5.1)
 - New milestone and label links on issue edit form
 - Improved repository graphs
 - Improve event note display in dashboard and project activity views (Vinnie Okada)
@@ -831,7 +831,7 @@
 ## 7.3.2
 
 - Fix creating new file via web editor
-- Use gitlab-shell v2.0.1
+- Use doggohub-shell v2.0.1
 
 ## 7.3.1
 
@@ -851,11 +851,11 @@
 - Improved comments UI
 - Better search with filtering, pagination etc
 - Added a checkbox to toggle line wrapping in diff (Yuriy Glukhov)
-- Prevent project stars duplication when fork project
+- Prevent project stars duplication when bork project
 - Use the default Unicorn socket backlog value of 1024
 - Support Unix domain sockets for Redis
-- Store session Redis keys in 'session:gitlab:' namespace
-- Deprecate LDAP account takeover based on partial LDAP email / GitLab username match
+- Store session Redis keys in 'session:doggohub:' namespace
+- Deprecate LDAP account takeover based on partial LDAP email / DoggoHub username match
 - Use /bin/sh instead of Bash in bin/web, bin/background_jobs (Pavel Novitskiy)
 - Keyboard shortcuts for productivity (Robert Schilling)
 - API: filter issues by state (Julien Bianchi)
@@ -873,9 +873,9 @@
 - Project wiki search (Ralf Seidler)
 - Enabled Shibboleth authentication support (Matus Banas)
 - Zen mode (fullscreen) for issues/MR/notes (Robert Schilling)
-- Add ability to configure webhook timeout via gitlab.yml (Wes Gurney)
+- Add ability to configure webhook timeout via doggohub.yml (Wes Gurney)
 - Sort project merge requests in asc or desc order for updated_at or created_at field (sponsored by O'Reilly Media)
-- Add Redis socket support to 'rake gitlab:shell:install'
+- Add Redis socket support to 'rake doggohub:shell:install'
 
 ## 7.2.1
 
@@ -893,7 +893,7 @@
 - Expose the full commit message via API
 - Fix 500 error on repository rename
 - Fix bug when MR download patch return invalid diff
-- Test gitlab-shell integration
+- Test doggohub-shell integration
 - Repository import timeout increased from 2 to 4 minutes allowing larger repos to be imported
 - API for labels (Robert Schilling)
 - API: ability to set an import url when creating project for specific user
@@ -928,7 +928,7 @@
 - Improve branch removal logic when accept MR
 - Fix bug where comment form is spawned inside the Reply button
 - Remove Dir.chdir from Satellite#lock for thread-safety
-- Increased default git max_size value from 5MB to 20MB in gitlab.yml. Please update your configs!
+- Increased default git max_size value from 5MB to 20MB in doggohub.yml. Please update your configs!
 - Show error message in case of timeout in satellite when create MR
 - Show first 100 files for huge diff instead of hiding all
 - Change default admin email from admin@local.host to admin@example.com
@@ -945,7 +945,7 @@
 - Redirect to Files view when create new branch via UI
 - Drag and drop upload of image in every markdown-area (Earle Randolph Bunao and Neil Francis Calabroso)
 - Refactor the markdown relative links processing
-- Make it easier to implement other CI services for GitLab
+- Make it easier to implement other CI services for DoggoHub
 - Group masters can create projects in group
 - Deprecate ruby 1.9.3 support
 - Only masters can rewrite/remove git tags
@@ -955,7 +955,7 @@
 - Update to rails 4.1
 - Improve performance of application for projects and groups with a lot of members
 - Formally support Ruby 2.1
-- Include Nginx gitlab-ssl config
+- Include Nginx doggohub-ssl config
 - Add manual language detection for highlight.js
 - Added example.com/:username routing
 - Show notice if your profile is public
@@ -967,7 +967,7 @@
 - Add notice about huge push over http to unicorn config
 - File action in satellites uses default 30 seconds timeout instead of old 10 seconds one
 - Overall performance improvements
-- Skip init script check on omnibus-gitlab
+- Skip init script check on omnibus-doggohub
 - Be more selective when killing stray Sidekiqs
 - Check LDAP user filter during sign-in
 - Remove wall feature (no data loss - you can take it from database)
@@ -987,7 +987,7 @@
 
 ## 6.9.0
 
-- Store Rails cache data in the Redis `cache:gitlab` namespace
+- Store Rails cache data in the Redis `cache:doggohub` namespace
 - Adjust MySQL limits for existing installations
 - Add db index on project_id+iid column. This prevents duplicate on iid (During migration duplicates will be removed)
 - Markdown preview or diff during editing via web editor (Evgeniy Sokovikov)
@@ -1018,9 +1018,9 @@
 - Drop all tables before restoring a Postgres backup
 - Make the repository downloads path configurable
 - Create branches via API (sponsored by O'Reilly Media)
-- Changed permission of gitlab-satellites directory not to be world accessible
+- Changed permission of doggohub-satellites directory not to be world accessible
 - Protected branch does not allow force push
-- Fix popen bug in `rake gitlab:satellites:create`
+- Fix popen bug in `rake doggohub:satellites:create`
 - Disable connection reaping for MySQL
 - Allow oauth signup without email for twitter and github
 - Fix faulty namespace names that caused 500 on user creation
@@ -1042,7 +1042,7 @@
 
 ## 6.7.1
 
-- Fix GitLab CI integration
+- Fix DoggoHub CI integration
 
 ## 6.7.0
 
@@ -1054,7 +1054,7 @@
 - Blob and tree gfm links to anchors work
 - Piwik Integration (Sebastian Winkler)
 - Show contribution guide link for new issue form (Jeroen van Baarsen)
-- Fix CI status for merge requests from fork
+- Fix CI status for merge requests from bork
 - Added option to remove issue assignee on project issue page and issue edit page (Jason Blanchard)
 - New page load indicator that includes a spinner that scrolls with the page
 - Converted all the help sections into markdown
@@ -1066,16 +1066,16 @@
 - Add webhook when a new tag is pushed (Jeroen van Baarsen)
 - Add button for toggling inline comments in diff view
 - Add retry feature for repository import
-- Reuse the GitLab LDAP connection within each request
+- Reuse the DoggoHub LDAP connection within each request
 - Changed markdown new line behaviour to conform to markdown standards
 - Fix global search
-- Faster authorized_keys rebuilding in `rake gitlab:shell:setup` (requires gitlab-shell 1.8.5)
+- Faster authorized_keys rebuilding in `rake doggohub:shell:setup` (requires doggohub-shell 1.8.5)
 - Create and Update MR calls now support the description parameter (Greg Messner)
 - Markdown relative links in the wiki link to wiki pages, markdown relative links in repositories link to files in the repository
 - Added Slack service integration (Federico Ravasio)
 - Better API responses for access_levels (sponsored by O'Reilly Media)
 - Requires at least 2 unicorn workers
-- Requires gitlab-shell v1.9+
+- Requires doggohub-shell v1.9+
 - Replaced gemoji(due to closed licencing problem) with Phantom Open Emoji library(combined SIL Open Font License, MIT License and the CC 3.0 License)
 - Fix `/:username.keys` response content type (Dmitry Medvinsky)
 
@@ -1130,7 +1130,7 @@
 
 ## 6.5.1
 
-- Fix branch selectbox when create merge request from fork
+- Fix branch selectbox when create merge request from bork
 
 ## 6.5.0
 
@@ -1186,25 +1186,25 @@
 - Rails 4
 - Add time ago tooltips to show actual date/time
 - UI: Fixed UI for admin system hooks
-- Ruby script for easier GitLab upgrade
-- Do not remove Merge requests if fork project was removed
+- Ruby script for easier DoggoHub upgrade
+- Do not remove Merge requests if bork project was removed
 - Improve sign-in/signup UX
 - Add resend confirmation link to sign-in page
 - Set noreply@HOSTNAME for reply_to field in all emails
-- Show GitLab API version on Admin#dashboard
+- Show DoggoHub API version on Admin#dashboard
 - API Cross-origin resource sharing
 - Show READMe link at project home page
 - Show repo size for projects in Admin area
 
 ## 6.3.0
 
-- API for adding gitlab-ci service
+- API for adding doggohub-ci service
 - Init script now waits for pids to appear after (re)starting before reporting status (Rovanion Luckey)
 - Restyle project home page
 - Grammar fixes
 - Show branches list (which branches contains commit) on commit page (Andrew Kumanyaev)
 - Security improvements
-- Added support for GitLab CI 4.0
+- Added support for DoggoHub CI 4.0
 - Fixed issue with 500 error when group did not exist
 - Ability to leave project
 - You can create file in repo using UI
@@ -1224,18 +1224,18 @@
 ## 6.2.4
 
 - Security: Cast API private_token to string (CVE-2013-4580)
-- Security: Require gitlab-shell 1.7.8 (CVE-2013-4581, CVE-2013-4582, CVE-2013-4583)
+- Security: Require doggohub-shell 1.7.8 (CVE-2013-4581, CVE-2013-4582, CVE-2013-4583)
 - Fix for Git SSH access for LDAP users
 
 ## 6.2.3
 
 - Security: More protection against CVE-2013-4489
-- Security: Require gitlab-shell 1.7.4 (CVE-2013-4490, CVE-2013-4546)
+- Security: Require doggohub-shell 1.7.4 (CVE-2013-4490, CVE-2013-4546)
 - Fix sidekiq rake tasks
 
 ## 6.2.2
 
-- Security: Update gitlab_git (CVE-2013-4489)
+- Security: Update doggohub_git (CVE-2013-4489)
 
 ## 6.2.1
 
@@ -1294,12 +1294,12 @@
   We introduce group membership in 6.0 as a replacement for teams.
   The old combination of groups and teams was confusing for a lot of people.
   And when the members of a team where changed this wasn't reflected in the project permissions.
-  In GitLab 6.0 you will be able to add members to a group with a permission level for each member.
+  In DoggoHub 6.0 you will be able to add members to a group with a permission level for each member.
   These group members will have access to the projects in that group.
   Any changes to group members will immediately be reflected in the project permissions.
   You can even have multiple owners for a group, greatly simplifying administration.
 - Feature: Ability to have multiple owners for group
-- Feature: Merge Requests between fork and project (Izaak Alpert)
+- Feature: Merge Requests between bork and project (Izaak Alpert)
 - Feature: Generate fingerprint for ssh keys
 - Feature: Ability to create and remove branches with UI
 - Feature: Ability to create and remove git tags with UI
@@ -1332,12 +1332,12 @@
 ## 5.4.2
 
 - Security: Cast API private_token to string (CVE-2013-4580)
-- Security: Require gitlab-shell 1.7.8 (CVE-2013-4581, CVE-2013-4582, CVE-2013-4583)
+- Security: Require doggohub-shell 1.7.8 (CVE-2013-4581, CVE-2013-4582, CVE-2013-4583)
 
 ## 5.4.1
 
 - Security: Fixes for CVE-2013-4489
-- Security: Require gitlab-shell 1.7.4 (CVE-2013-4490, CVE-2013-4546)
+- Security: Require doggohub-shell 1.7.4 (CVE-2013-4490, CVE-2013-4546)
 
 ## 5.4.0
 
@@ -1345,7 +1345,7 @@
 - Documentation improvements
 - Improve dashboard projects page
 - Fixed nav for empty repos
-- GitLab Markdown help page
+- DoggoHub Markdown help page
 - Misspelling fixes
 - Added support of unicorn and fog gems
 - Added client list to API doc
@@ -1366,7 +1366,7 @@
 - Respect newlines in wall messages
 - Generate the Rails secret token on first run
 - Rename repo feature
-- Init.d: remove gitlab.socket on service start
+- Init.d: remove doggohub.socket on service start
 - Api: added teams api
 - Api: Prevent blob content being escaped
 - Api: Smart deploy key add behaviour
@@ -1375,13 +1375,13 @@
 - Advanced snippets: public/private, project/personal (Andrew Kulakov)
 - Repository Graphs (Karlo Nicholas T. Soriano)
 - Fix dashboard lost if comment on commit
-- Update gitlab-grack. Fixes issue with --depth option
+- Update doggohub-grack. Fixes issue with --depth option
 - Fix project events duplicate on project page
 - Fix postgres error when displaying network graph.
 - Fix dashboard event filter when navigate via turbolinks
 - init.d: Ensure socket is removed before starting service
 - Admin area: Style teams:index, group:show pages
-- Own page for failed forking
+- Own page for failed borking
 - Scrum view for milestone
 
 ## 5.2.0
@@ -1392,12 +1392,12 @@
 - Default values for project features
 - Fixed huge_commit view
 - Restyle project clone panel
-- Move Gitlab::Git code to gitlab_git gem
+- Move Gitlab::Git code to doggohub_git gem
 - Move update docs in repo
-- Requires gitlab-shell v1.4.0
+- Requires doggohub-shell v1.4.0
 - Fixed submodules listing under file tab
-- Fork feature (Angus MacArthur)
-- git version check in gitlab:check
+- Bork feature (Angus MacArthur)
+- git version check in doggohub:check
 - Shared deploy keys feature
 - Ability to generate default labels set for issues
 - Improve gfm autocomplete (Harold Luo)
@@ -1428,14 +1428,14 @@
 
 ## 5.0.1
 
-- Fixed issue with gitlab-grit being overridden by grit
+- Fixed issue with doggohub-grit being overridden by grit
 
 ## 5.0.0
 
-- Replaced gitolite with gitlab-shell
+- Replaced gitolite with doggohub-shell
 - Removed gitolite-related libraries
 - State machine added
-- Setup gitlab as git user
+- Setup doggohub as git user
 - Internal API
 - Show team tab for empty projects
 - Import repository feature
@@ -1452,7 +1452,7 @@
 - Don't show user emails in autocomplete lists, profile pages
 - Added settings tab for group, team, project
 - Replace user popup with icons in header
-- Handle project moving with gitlab-shell
+- Handle project moving with doggohub-shell
 - Added select2-rails for selectboxes with ajax data load
 - Fixed search field on projects page
 - Added teams to search autocomplete
@@ -1561,7 +1561,7 @@
 
 ## 3.0.2
 
-- Fixed gitlab:app:setup
+- Fixed doggohub:app:setup
 - Fixed application error on empty project in admin area
 - Restyled last push widget
 
@@ -1605,7 +1605,7 @@
 - restyled projects list on dashboard
 - ssh keys validation to prevent gitolite crash
 - send notifications if changed permission in project
-- scss refactoring. gitlab_bootstrap/ dir
+- scss refactoring. doggohub_bootstrap/ dir
 - fix git push http body bigger than 112k problem
 - list of labels  page under issues tab
 - API for milestones, keys
@@ -1729,7 +1729,7 @@
 
 ## 1.2.2
 
-- common config file gitlab.yml
+- common config file doggohub.yml
 - issues restyle
 - snippets restyle
 - clickable news feed header on dashboard

@@ -2,9 +2,9 @@
 
 Git is a distributed version control system, which means you can work locally
 but you can also share or "push" your changes to other servers.
-Before you can push your changes to a GitLab server
+Before you can push your changes to a DoggoHub server
 you need a secure communication channel for sharing information.
-GitLab uses Public-key or asymmetric cryptography
+DoggoHub uses Public-key or asymmetric cryptography
 which encrypts a communication channel by locking it with your "private key"
 and allows trusted parties to unlock it with your "public key".
 If someone does not have your public key they cannot access the unencrypted message.
@@ -40,7 +40,7 @@ custom name continue onto the next step.
     **GNU/Linux / macOS:**
 
     ```bash
-    ssh-keygen -t rsa -C "GitLab" -b 4096
+    ssh-keygen -t rsa -C "DoggoHub" -b 4096
     ```
 
     **Windows:**
@@ -97,7 +97,7 @@ custom name continue onto the next step.
     cat ~/.ssh/id_rsa.pub | clip
     ```
 
-1. The final step is to add your public SSH key to GitLab.
+1. The final step is to add your public SSH key to DoggoHub.
 
     Navigate to the 'SSH Keys' tab in you 'Profile Settings'.
     Paste your key in the 'Key' section and give it a relevant 'Title'.
@@ -109,21 +109,21 @@ custom name continue onto the next step.
 
 ## Working with non-default SSH key pair paths
 
-If you used a non-default file path for your GitLab SSH key pair,
-you must configure your SSH client to find your GitLab SSH private key
-for connections to your GitLab server (perhaps gitlab.com).
+If you used a non-default file path for your DoggoHub SSH key pair,
+you must configure your SSH client to find your DoggoHub SSH private key
+for connections to your DoggoHub server (perhaps doggohub.com).
 
 For OpenSSH clients this is configured in the `~/.ssh/config` file.
 Below are two example host configurations using their own key:
 
 ```
-# GitLab.com server
-Host gitlab.com
+# DoggoHub.com server
+Host doggohub.com
 RSAAuthentication yes
 IdentityFile ~/.ssh/config/private-key-filename-01
 
-# Private GitLab server
-Host gitlab.company.com
+# Private DoggoHub server
+Host doggohub.company.com
 RSAAuthentication yes
 IdentityFile ~/.ssh/config/private-key-filename
 ```

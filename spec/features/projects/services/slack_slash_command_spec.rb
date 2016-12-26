@@ -17,7 +17,7 @@ feature 'Slack slash commands', feature: true do
 
     wait_for_ajax
 
-    expect(page).to have_content('This service allows GitLab users to perform common')
+    expect(page).to have_content('This service allows DoggoHub users to perform common')
   end
 
   scenario 'shows the token after saving' do

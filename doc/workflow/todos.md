@@ -1,10 +1,10 @@
-# GitLab Todos
+# DoggoHub Todos
 
-> [Introduced][ce-2817] in GitLab 8.5.
+> [Introduced][ce-2817] in DoggoHub 8.5.
 
-When you log into GitLab, you normally want to see where you should spend your
+When you log into DoggoHub, you normally want to see where you should spend your
 time and take some action, or what you need to keep an eye on. All without the
-mess of a huge pile of e-mail notifications. GitLab is where you do your work,
+mess of a huge pile of e-mail notifications. DoggoHub is where you do your work,
 so being able to get started quickly is very important.
 
 Todos is a chronological list of to-dos that are waiting for your input, all
@@ -89,4 +89,4 @@ There are four kinds of filters you can use on your Todos dashboard.
 
 You can also filter by more than one of these at the same time.
 
-[ce-2817]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/2817
+[ce-2817]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/2817

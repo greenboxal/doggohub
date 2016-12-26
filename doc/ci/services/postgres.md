@@ -2,14 +2,14 @@
 
 As many applications depend on PostgreSQL as their database, you will
 eventually need it in order for your tests to run. Below you are guided how to
-do this with the Docker and Shell executors of GitLab Runner.
+do this with the Docker and Shell executors of DoggoHub Runner.
 
 ## Use PostgreSQL with the Docker executor
 
-If you are using [GitLab Runner](../runners/README.md) with the Docker executor
+If you are using [DoggoHub Runner](../runners/README.md) with the Docker executor
 you basically have everything set up already.
 
-First, in your `.gitlab-ci.yml` add:
+First, in your `.doggohub-ci.yml` add:
 
 ```yaml
 services:
@@ -42,7 +42,7 @@ check the documentation on [Docker Hub][hub-pg].
 ## Use PostgreSQL with the Shell executor
 
 You can also use PostgreSQL on manually configured servers that are using
-GitLab Runner with the Shell executor.
+DoggoHub Runner with the Shell executor.
 
 First install the PostgreSQL server:
 
@@ -104,11 +104,11 @@ Database: nice_marmot
 ## Example project
 
 We have set up an [Example PostgreSQL Project][postgres-example-repo] for your
-convenience that runs on [GitLab.com](https://gitlab.com) using our publicly
+convenience that runs on [DoggoHub.com](https://doggohub.com) using our publicly
 available [shared runners](../runners/README.md).
 
-Want to hack on it? Simply fork it, commit and push  your changes. Within a few
+Want to hack on it? Simply bork it, commit and push  your changes. Within a few
 moments the changes will be picked by a public runner and the build will begin.
 
 [hub-pg]: https://hub.docker.com/r/_/postgres/
-[postgres-example-repo]: https://gitlab.com/gitlab-examples/postgres
+[postgres-example-repo]: https://doggohub.com/doggohub-examples/postgres

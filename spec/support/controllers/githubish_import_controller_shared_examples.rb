@@ -108,7 +108,7 @@ shared_examples 'a GitHub-ish import controller: POST create' do
   end
 
   context "when the repository owner is the provider user" do
-    context "when the provider user and GitLab user's usernames match" do
+    context "when the provider user and DoggoHub user's usernames match" do
       it "takes the current user's namespace" do
         expect(Gitlab::GithubImport::ProjectCreator).
           to receive(:new).with(provider_repo, provider_repo.name, user.namespace, user, access_params, type: provider).
@@ -118,7 +118,7 @@ shared_examples 'a GitHub-ish import controller: POST create' do
       end
     end
 
-    context "when the provider user and GitLab user's usernames don't match" do
+    context "when the provider user and DoggoHub user's usernames don't match" do
       let(:provider_username) { "someone_else" }
 
       it "takes the current user's namespace" do
@@ -142,7 +142,7 @@ shared_examples 'a GitHub-ish import controller: POST create' do
     context "when a namespace with the provider user's username already exists" do
       let!(:existing_namespace) { create(:namespace, name: other_username, owner: user) }
 
-      context "when the namespace is owned by the GitLab user" do
+      context "when the namespace is owned by the DoggoHub user" do
         it "takes the existing namespace" do
           expect(Gitlab::GithubImport::ProjectCreator).
             to receive(:new).with(provider_repo, provider_repo.name, existing_namespace, user, access_params, type: provider).
@@ -152,7 +152,7 @@ shared_examples 'a GitHub-ish import controller: POST create' do
         end
       end
 
-      context "when the namespace is not owned by the GitLab user" do
+      context "when the namespace is not owned by the DoggoHub user" do
         before do
           existing_namespace.owner = create(:user)
           existing_namespace.save

@@ -65,7 +65,7 @@ class Projects::EnvironmentsController < Projects::ApplicationController
     @terminals = environment.terminals
   end
 
-  # GET .../terminal.ws : implemented in gitlab-workhorse
+  # GET .../terminal.ws : implemented in doggohub-workhorse
   def terminal_websocket_authorize
     # Just return the first terminal for now. If the list is in the process of
     # being looked up, this may result in a 404 response, so the frontend

@@ -119,5 +119,5 @@ may be affected by factors such as (but not limited to):
   scans instead of index scans.
 
 In other words, this data is only reliable for a frequently used database with
-plenty of data and with as many GitLab features enabled (and being used) as
+plenty of data and with as many DoggoHub features enabled (and being used) as
 possible.

@@ -1,12 +1,12 @@
-# GitLab Markdown
+# DoggoHub Markdown
 
-This document is intended to be a comprehensive example of custom GitLab
+This document is intended to be a comprehensive example of custom DoggoHub
 Markdown usage. It will be parsed and then tested for accuracy. Let's get
 started.
 
 ## Markdown
 
-GitLab uses [Redcarpet](http://git.io/ld_NVQ) to parse all Markdown into
+DoggoHub uses [Redcarpet](http://git.io/ld_NVQ) to parse all Markdown into
 HTML.
 
 It has some special features. Let's try 'em out!
@@ -54,7 +54,7 @@ After the Markdown has been turned into HTML, it gets passed through...
 
 ### SanitizationFilter
 
-GitLab uses <a href="http://git.io/vfW8a">HTML::Pipeline::SanitizationFilter</a>
+DoggoHub uses <a href="http://git.io/vfW8a">HTML::Pipeline::SanitizationFilter</a>
 to sanitize the generated HTML, stripping dangerous or unwanted tags.
 
 Its default whitelist is pretty permissive. Check it:
@@ -121,7 +121,7 @@ All headers in this document should be linkable. Try it.
 
 These are all plain text that should get turned into links:
 
-- http://about.gitlab.com/
+- http://about.doggohub.com/
 - https://google.com/
 - ftp://ftp.us.debian.org/debian/
 - smb://foo/bar/baz
@@ -130,16 +130,16 @@ These are all plain text that should get turned into links:
 
 But it shouldn't autolink text inside certain tags:
 
-- <code>http://code.gitlab.com/</code>
-- <a>http://a.gitlab.com/</a>
-- <kbd>http://kbd.gitlab.com/</kbd>
+- <code>http://code.doggohub.com/</code>
+- <a>http://a.doggohub.com/</a>
+- <kbd>http://kbd.doggohub.com/</kbd>
 
 ### ExternalLinkFilter
 
 External links get a `rel="nofollow noreferrer"` and `target="_blank"` attributes:
 
 - [Google](https://google.com/)
-- [GitLab Root](<%= Gitlab.config.gitlab.url %>)
+- [DoggoHub Root](<%= Gitlab.config.doggohub.url %>)
 
 ### Reference Filters (e.g., <%= issue.to_reference %>)
 
@@ -259,4 +259,4 @@ However the wrapping tags can not be mixed as such -
 
 ### Videos
 
-![My Video](/assets/videos/gitlab-demo.mp4)
+![My Video](/assets/videos/doggohub-demo.mp4)

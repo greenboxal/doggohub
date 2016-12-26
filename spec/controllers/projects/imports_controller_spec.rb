@@ -68,13 +68,13 @@ describe Projects::ImportsController do
           project.update_attribute(:import_status, :finished)
         end
 
-        context 'when project is a fork' do
+        context 'when project is a bork' do
           it 'redirects to namespace_project_path' do
-            allow_any_instance_of(Project).to receive(:forked?).and_return(true)
+            allow_any_instance_of(Project).to receive(:borked?).and_return(true)
 
             get :show, namespace_id: project.namespace.to_param, project_id: project.to_param
 
-            expect(flash[:notice]).to eq 'The project was successfully forked.'
+            expect(flash[:notice]).to eq 'The project was successfully borked.'
             expect(response).to redirect_to namespace_project_path(project.namespace, project)
           end
         end

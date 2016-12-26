@@ -112,7 +112,7 @@ describe GitPushService, services: true do
         it do
           is_expected.to include(
             url: [
-              Gitlab.config.gitlab.url,
+              Gitlab.config.doggohub.url,
               project.namespace.to_param,
               project.to_param,
               'commit',
@@ -424,7 +424,7 @@ describe GitPushService, services: true do
         stub_jira_urls("JIRA-1")
 
         allow(closing_commit).to receive_messages({
-                                                    issue_closing_regex: Regexp.new(Gitlab.config.gitlab.issue_closing_pattern),
+                                                    issue_closing_regex: Regexp.new(Gitlab.config.doggohub.issue_closing_pattern),
                                                     safe_message: message,
                                                     author_name: commit_author.name,
                                                     author_email: commit_author.email
@@ -451,7 +451,7 @@ describe GitPushService, services: true do
 
       context "closing an issue" do
         let(:message)         { "this is some work.\n\ncloses JIRA-1" }
-        let(:comment_body)    { { body: "Issue solved with [#{closing_commit.id}|http://#{Gitlab.config.gitlab.host}/#{project.path_with_namespace}/commit/#{closing_commit.id}]." }.to_json }
+        let(:comment_body)    { { body: "Issue solved with [#{closing_commit.id}|http://#{Gitlab.config.doggohub.host}/#{project.path_with_namespace}/commit/#{closing_commit.id}]." }.to_json }
 
         before do
           open_issue   = JIRA::Resource::Issue.new(jira_tracker.client, attrs: { "id" => "JIRA-1" })

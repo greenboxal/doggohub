@@ -105,9 +105,9 @@ module CreatesCommit
       @tree_edit_project = @project
       @mr_source_project = @project
 
-      if @project.forked?
-        # Merge request from this project to fork origin
-        @mr_target_project = @project.forked_from_project
+      if @project.borked?
+        # Merge request from this project to bork origin
+        @mr_target_project = @project.borked_from_project
         @mr_target_branch = @mr_target_project.repository.root_ref
       else
         # Merge request to this project
@@ -115,9 +115,9 @@ module CreatesCommit
         @mr_target_branch ||= @ref
       end
     else
-      # Edit file in fork
-      @tree_edit_project = current_user.fork_of(@project)
-      # Merge request from fork to this project
+      # Edit file in bork
+      @tree_edit_project = current_user.bork_of(@project)
+      # Merge request from bork to this project
       @mr_source_project = @tree_edit_project
       @mr_target_project = @project
       @mr_target_branch ||= @ref

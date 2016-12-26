@@ -1,20 +1,20 @@
 require 'spec_helper'
 require 'rake'
 
-describe 'gitlab:app namespace rake task' do
+describe 'doggohub:app namespace rake task' do
   let(:enable_registry) { true }
 
   before :all do
-    Rake.application.rake_require 'tasks/gitlab/helpers'
-    Rake.application.rake_require 'tasks/gitlab/backup'
-    Rake.application.rake_require 'tasks/gitlab/shell'
-    Rake.application.rake_require 'tasks/gitlab/db'
+    Rake.application.rake_require 'tasks/doggohub/helpers'
+    Rake.application.rake_require 'tasks/doggohub/backup'
+    Rake.application.rake_require 'tasks/doggohub/shell'
+    Rake.application.rake_require 'tasks/doggohub/db'
     Rake.application.rake_require 'tasks/cache'
 
     # empty task as env is already loaded
     Rake::Task.define_task :environment
 
-    # We need this directory to run `gitlab:backup:create` task
+    # We need this directory to run `doggohub:backup:create` task
     FileUtils.mkdir_p('public/uploads')
   end
 
@@ -29,7 +29,7 @@ describe 'gitlab:app namespace rake task' do
 
   def reenable_backup_sub_tasks
     %w{db repo uploads builds artifacts lfs registry}.each do |subtask|
-      Rake::Task["gitlab:backup:#{subtask}:create"].reenable
+      Rake::Task["doggohub:backup:#{subtask}:create"].reenable
     end
   end
 
@@ -39,7 +39,7 @@ describe 'gitlab:app namespace rake task' do
       allow($stdout).to receive :write
     end
 
-    context 'gitlab version' do
+    context 'doggohub version' do
       before do
         allow(Dir).to receive(:glob).and_return([])
         allow(Dir).to receive(:chdir)
@@ -47,41 +47,41 @@ describe 'gitlab:app namespace rake task' do
         allow(Kernel).to receive(:system).and_return(true)
         allow(FileUtils).to receive(:cp_r).and_return(true)
         allow(FileUtils).to receive(:mv).and_return(true)
-        allow(Rake::Task["gitlab:shell:setup"]).
+        allow(Rake::Task["doggohub:shell:setup"]).
           to receive(:invoke).and_return(true)
         ENV['force'] = 'yes'
       end
 
-      let(:gitlab_version) { Gitlab::VERSION }
+      let(:doggohub_version) { Gitlab::VERSION }
 
       it 'fails on mismatch' do
         allow(YAML).to receive(:load_file).
-          and_return({ gitlab_version: "not #{gitlab_version}" })
+          and_return({ doggohub_version: "not #{doggohub_version}" })
 
-        expect { run_rake_task('gitlab:backup:restore') }.
+        expect { run_rake_task('doggohub:backup:restore') }.
           to raise_error(SystemExit)
       end
 
       it 'invokes restoration on match' do
         allow(YAML).to receive(:load_file).
-          and_return({ gitlab_version: gitlab_version })
-        expect(Rake::Task['gitlab:db:drop_tables']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:db:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:repo:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:builds:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:uploads:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:artifacts:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:lfs:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:backup:registry:restore']).to receive(:invoke)
-        expect(Rake::Task['gitlab:shell:setup']).to receive(:invoke)
-        expect { run_rake_task('gitlab:backup:restore') }.not_to raise_error
+          and_return({ doggohub_version: doggohub_version })
+        expect(Rake::Task['doggohub:db:drop_tables']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:db:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:repo:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:builds:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:uploads:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:artifacts:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:lfs:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:backup:registry:restore']).to receive(:invoke)
+        expect(Rake::Task['doggohub:shell:setup']).to receive(:invoke)
+        expect { run_rake_task('doggohub:backup:restore') }.not_to raise_error
       end
     end
   end # backup_restore task
 
   describe 'backup' do
     def tars_glob
-      Dir.glob(File.join(Gitlab.config.backup.path, '*_gitlab_backup.tar'))
+      Dir.glob(File.join(Gitlab.config.backup.path, '*_doggohub_backup.tar'))
     end
 
     def create_backup
@@ -91,7 +91,7 @@ describe 'gitlab:app namespace rake task' do
       orig_stdout = $stdout
       $stdout = StringIO.new
       reenable_backup_sub_tasks
-      run_rake_task('gitlab:backup:create')
+      run_rake_task('doggohub:backup:create')
       reenable_backup_sub_tasks
       $stdout = orig_stdout
 
@@ -102,7 +102,7 @@ describe 'gitlab:app namespace rake task' do
       orig_stdout = $stdout
       $stdout = StringIO.new
       reenable_backup_sub_tasks
-      run_rake_task('gitlab:backup:restore')
+      run_rake_task('doggohub:backup:restore')
       reenable_backup_sub_tasks
       $stdout = orig_stdout
     end
@@ -119,7 +119,7 @@ describe 'gitlab:app namespace rake task' do
         FileUtils.touch(File.join(path, "dummy.txt"))
 
         # We need to use the full path instead of the relative one
-        allow(Gitlab.config.gitlab_shell).to receive(:path).and_return(File.expand_path(Gitlab.config.gitlab_shell.path, Rails.root.to_s))
+        allow(Gitlab.config.doggohub_shell).to receive(:path).and_return(File.expand_path(Gitlab.config.doggohub_shell.path, Rails.root.to_s))
 
         ENV["SKIP"] = "db"
         create_backup
@@ -277,7 +277,7 @@ describe 'gitlab:app namespace rake task' do
 
   describe "Skipping items" do
     def tars_glob
-      Dir.glob(File.join(Gitlab.config.backup.path, '*_gitlab_backup.tar'))
+      Dir.glob(File.join(Gitlab.config.backup.path, '*_doggohub_backup.tar'))
     end
 
     before :all do
@@ -291,7 +291,7 @@ describe 'gitlab:app namespace rake task' do
       orig_stdout = $stdout
       $stdout = StringIO.new
       ENV["SKIP"] = "repositories,uploads"
-      run_rake_task('gitlab:backup:create')
+      run_rake_task('doggohub:backup:create')
       $stdout = orig_stdout
 
       @backup_tar = tars_glob.first
@@ -317,26 +317,26 @@ describe 'gitlab:app namespace rake task' do
     end
 
     it 'does not invoke repositories restore' do
-      allow(Rake::Task['gitlab:shell:setup']).
+      allow(Rake::Task['doggohub:shell:setup']).
         to receive(:invoke).and_return(true)
       allow($stdout).to receive :write
 
-      expect(Rake::Task['gitlab:db:drop_tables']).to receive :invoke
-      expect(Rake::Task['gitlab:backup:db:restore']).to receive :invoke
-      expect(Rake::Task['gitlab:backup:repo:restore']).not_to receive :invoke
-      expect(Rake::Task['gitlab:backup:uploads:restore']).not_to receive :invoke
-      expect(Rake::Task['gitlab:backup:builds:restore']).to receive :invoke
-      expect(Rake::Task['gitlab:backup:artifacts:restore']).to receive :invoke
-      expect(Rake::Task['gitlab:backup:lfs:restore']).to receive :invoke
-      expect(Rake::Task['gitlab:backup:registry:restore']).to receive :invoke
-      expect(Rake::Task['gitlab:shell:setup']).to receive :invoke
-      expect { run_rake_task('gitlab:backup:restore') }.not_to raise_error
+      expect(Rake::Task['doggohub:db:drop_tables']).to receive :invoke
+      expect(Rake::Task['doggohub:backup:db:restore']).to receive :invoke
+      expect(Rake::Task['doggohub:backup:repo:restore']).not_to receive :invoke
+      expect(Rake::Task['doggohub:backup:uploads:restore']).not_to receive :invoke
+      expect(Rake::Task['doggohub:backup:builds:restore']).to receive :invoke
+      expect(Rake::Task['doggohub:backup:artifacts:restore']).to receive :invoke
+      expect(Rake::Task['doggohub:backup:lfs:restore']).to receive :invoke
+      expect(Rake::Task['doggohub:backup:registry:restore']).to receive :invoke
+      expect(Rake::Task['doggohub:shell:setup']).to receive :invoke
+      expect { run_rake_task('doggohub:backup:restore') }.not_to raise_error
     end
   end
 
   describe "Human Readable Backup Name" do
     def tars_glob
-      Dir.glob(File.join(Gitlab.config.backup.path, '*_gitlab_backup.tar'))
+      Dir.glob(File.join(Gitlab.config.backup.path, '*_doggohub_backup.tar'))
     end
 
     before :all do
@@ -349,7 +349,7 @@ describe 'gitlab:app namespace rake task' do
       # Redirect STDOUT and run the rake task
       orig_stdout = $stdout
       $stdout = StringIO.new
-      run_rake_task('gitlab:backup:create')
+      run_rake_task('doggohub:backup:create')
       $stdout = orig_stdout
 
       @backup_tar = tars_glob.first
@@ -361,7 +361,7 @@ describe 'gitlab:app namespace rake task' do
     end
 
     it 'name has human readable time' do
-      expect(@backup_tar).to match(/\d+_\d{4}_\d{2}_\d{2}_gitlab_backup.tar$/)
+      expect(@backup_tar).to match(/\d+_\d{4}_\d{2}_\d{2}_doggohub_backup.tar$/)
     end
   end
-end # gitlab:app namespace
+end # doggohub:app namespace

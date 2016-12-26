@@ -4,7 +4,7 @@ describe Gitlab::GithubImport::PullRequestFormatter, lib: true do
   let(:project) { create(:project) }
   let(:source_sha) { create(:commit, project: project).id }
   let(:target_sha) { create(:commit, project: project, git_commit: RepoHelpers.another_sample_commit).id }
-  let(:repository) { double(id: 1, fork: false) }
+  let(:repository) { double(id: 1, bork: false) }
   let(:source_repo) { repository }
   let(:source_branch) { double(ref: 'feature', repo: source_repo, sha: source_sha) }
   let(:target_repo) { repository }
@@ -117,25 +117,25 @@ describe Gitlab::GithubImport::PullRequestFormatter, lib: true do
     context 'when it is assigned to someone' do
       let(:raw_data) { double(base_data.merge(assignee: octocat)) }
 
-      it 'returns nil as assignee_id when is not a GitLab user' do
+      it 'returns nil as assignee_id when is not a DoggoHub user' do
         expect(pull_request.attributes.fetch(:assignee_id)).to be_nil
       end
 
-      it 'returns GitLab user id as assignee_id when is a GitLab user' do
+      it 'returns DoggoHub user id as assignee_id when is a DoggoHub user' do
         gl_user = create(:omniauth_user, extern_uid: octocat.id, provider: 'github')
 
         expect(pull_request.attributes.fetch(:assignee_id)).to eq gl_user.id
       end
     end
 
-    context 'when author is a GitLab user' do
+    context 'when author is a DoggoHub user' do
       let(:raw_data) { double(base_data.merge(user: octocat)) }
 
-      it 'returns project#creator_id as author_id when is not a GitLab user' do
+      it 'returns project#creator_id as author_id when is not a DoggoHub user' do
         expect(pull_request.attributes.fetch(:author_id)).to eq project.creator_id
       end
 
-      it 'returns GitLab user id as author_id when is a GitLab user' do
+      it 'returns DoggoHub user id as author_id when is a DoggoHub user' do
         gl_user = create(:omniauth_user, extern_uid: octocat.id, provider: 'github')
 
         expect(pull_request.attributes.fetch(:author_id)).to eq gl_user.id
@@ -227,7 +227,7 @@ describe Gitlab::GithubImport::PullRequestFormatter, lib: true do
   end
 
   describe '#valid?' do
-    context 'when source, and target repos are not a fork' do
+    context 'when source, and target repos are not a bork' do
       let(:raw_data) { double(base_data) }
 
       it 'returns true' do
@@ -235,7 +235,7 @@ describe Gitlab::GithubImport::PullRequestFormatter, lib: true do
       end
     end
 
-    context 'when source repo is a fork' do
+    context 'when source repo is a bork' do
       let(:source_repo) { double(id: 2) }
       let(:raw_data) { double(base_data) }
 
@@ -244,7 +244,7 @@ describe Gitlab::GithubImport::PullRequestFormatter, lib: true do
       end
     end
 
-    context 'when target repo is a fork' do
+    context 'when target repo is a bork' do
       let(:target_repo) { double(id: 2) }
       let(:raw_data) { double(base_data) }
 

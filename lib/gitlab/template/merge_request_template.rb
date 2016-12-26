@@ -7,7 +7,7 @@ module Gitlab
         end
 
         def base_dir
-          '.gitlab/merge_request_templates/'
+          '.doggohub/merge_request_templates/'
         end
 
         def finder(project)

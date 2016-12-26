@@ -12,16 +12,16 @@
       - if @project.description.present?
         = markdown_field(@project, :description)
 
-      - if forked_from_project = @project.forked_from_project
+      - if borked_from_project = @project.borked_from_project
         %p
-          Forked from
-          = link_to project_path(forked_from_project) do
-            = forked_from_project.namespace.try(:name)
+          Borked from
+          = link_to project_path(borked_from_project) do
+            = borked_from_project.namespace.try(:name)
 
     .project-repo-buttons
       .count-buttons
         = render 'projects/buttons/star'
-        = render 'projects/buttons/fork'
+        = render 'projects/buttons/bork'
 
       %span.hidden-xs
         - if @project.feature_available?(:repository, current_user)

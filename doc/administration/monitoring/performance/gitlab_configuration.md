@@ -1,6 +1,6 @@
-# GitLab Configuration
+# DoggoHub Configuration
 
-GitLab Performance Monitoring is disabled by default. To enable it and change any of its
+DoggoHub Performance Monitoring is disabled by default. To enable it and change any of its
 settings, navigate to the Admin area in **Settings > Metrics**
 (`/admin/application_settings`).
 
@@ -10,19 +10,19 @@ changes.
 
 ---
 
-![GitLab Performance Monitoring Admin Settings](img/metrics_gitlab_configuration_settings.png)
+![DoggoHub Performance Monitoring Admin Settings](img/metrics_doggohub_configuration_settings.png)
 
 ---
 
-Finally, a restart of all GitLab processes is required for the changes to take
+Finally, a restart of all DoggoHub processes is required for the changes to take
 effect:
 
 ```bash
 # For Omnibus installations
-sudo gitlab-ctl restart
+sudo doggohub-ctl restart
 
 # For installations from source
-sudo service gitlab restart
+sudo service doggohub restart
 ```
 
 ## Pending Migrations
@@ -34,7 +34,7 @@ have been performed.
 
 Read more on:
 
-- [Introduction to GitLab Performance Monitoring](introduction.md)
+- [Introduction to DoggoHub Performance Monitoring](introduction.md)
 - [InfluxDB Configuration](influxdb_configuration.md)
 - [InfluxDB Schema](influxdb_schema.md)
 - [Grafana Install/Configuration](grafana_configuration.md)

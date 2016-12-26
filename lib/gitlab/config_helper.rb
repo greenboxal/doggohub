@@ -1,9 +1,9 @@
 module Gitlab::ConfigHelper
-  def gitlab_config_features
-    Gitlab.config.gitlab.default_projects_features
+  def doggohub_config_features
+    Gitlab.config.doggohub.default_projects_features
   end
 
-  def gitlab_config
-    Gitlab.config.gitlab
+  def doggohub_config
+    Gitlab.config.doggohub
   end
 end

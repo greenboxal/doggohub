@@ -18,7 +18,7 @@ module PageLayoutHelper
   #
   # Examples:
   #
-  #   page_description # => "GitLab Community Edition"
+  #   page_description # => "DoggoHub Community Edition"
   #   page_description("Foo")
   #   page_description # => "Foo"
   #
@@ -35,7 +35,7 @@ module PageLayoutHelper
   end
 
   def page_image
-    default = image_url('gitlab_logo.png')
+    default = image_url('doggohub_logo.png')
 
     subject = @project || @user || @group
 

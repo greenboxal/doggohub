@@ -9,7 +9,7 @@ class HelpController < ApplicationController
     # Prefix Markdown links with `help/` unless they are external links
     # See http://rubular.com/r/X3baHTbPO2
     @help_index.gsub!(%r{(?<delim>\]\()(?!.+://)(?!/)(?<link>[^\)\(]+\))}) do
-      "#{$~[:delim]}#{Gitlab.config.gitlab.relative_url_root}/help/#{$~[:link]}"
+      "#{$~[:delim]}#{Gitlab.config.doggohub.relative_url_root}/help/#{$~[:link]}"
     end
   end
 

@@ -8,19 +8,19 @@ module Gitlab
     #
     # Returns boolean
     def markup?(filename)
-      gitlab_markdown?(filename) ||
+      doggohub_markdown?(filename) ||
         asciidoc?(filename) ||
         filename.downcase.end_with?(*%w(.textile .rdoc .org .creole .wiki
                                         .mediawiki .rst))
     end
 
     # Public: Determines if a given filename is compatible with
-    # GitLab-flavored Markdown.
+    # DoggoHub-flavored Markdown.
     #
     # filename - Filename string to check
     #
     # Returns boolean
-    def gitlab_markdown?(filename)
+    def doggohub_markdown?(filename)
       filename.downcase.end_with?(*%w(.mdown .mkd .mkdn .md .markdown))
     end
 

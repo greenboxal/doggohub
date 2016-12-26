@@ -33,7 +33,7 @@ module API
       end
 
       # Note: The internal data model moved from `developers_can_{merge,push}` to `allowed_to_{merge,push}`
-      # in `gitlab-org/gitlab-ce!5081`. The API interface has not been changed (to maintain compatibility),
+      # in `doggohub-org/doggohub-ce!5081`. The API interface has not been changed (to maintain compatibility),
       # but it works with the changed data model to infer `developers_can_merge` and `developers_can_push`.
       desc 'Protect a single branch' do
         success Entities::RepoBranch

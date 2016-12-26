@@ -1,5 +1,5 @@
 
-require_dependency 'gitlab/email/handler'
+require_dependency 'doggohub/email/handler'
 
 # Inspired in great part by Discourse's Email::Receiver
 module Gitlab

@@ -112,7 +112,7 @@
         if (this.diffViewType() === 'parallel') {
           this.expandViewContainer();
         }
-        const navBarHeight = $('.navbar-gitlab').outerHeight();
+        const navBarHeight = $('.navbar-doggohub').outerHeight();
         $.scrollTo('.merge-request-details .merge-request-tabs', {
           offset: -navBarHeight,
         });
@@ -132,7 +132,7 @@
     scrollToElement(container) {
       if (location.hash) {
         const offset = 0 - (
-          $('.navbar-gitlab').outerHeight() +
+          $('.navbar-doggohub').outerHeight() +
           $('.layout-nav').outerHeight() +
           $('.js-tabs-affix').outerHeight()
         );

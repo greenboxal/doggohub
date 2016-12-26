@@ -4,7 +4,7 @@ require 'email_spec'
 describe Notify do
   include EmailSpec::Matchers
 
-  include_context 'gitlab email notification'
+  include_context 'doggohub email notification'
 
   describe 'build notification email' do
     let(:build) { create(:ci_build) }
@@ -20,10 +20,10 @@ describe Notify do
       end
     end
 
-    shared_examples 'an email with X-GitLab headers containing build details' do
-      it 'has X-GitLab-Build* headers' do
-        is_expected.to have_header 'X-GitLab-Build-Id', /#{build.id}/
-        is_expected.to have_header 'X-GitLab-Build-Ref', /#{build.ref}/
+    shared_examples 'an email with X-DoggoHub headers containing build details' do
+      it 'has X-DoggoHub-Build* headers' do
+        is_expected.to have_header 'X-DoggoHub-Build-Id', /#{build.id}/
+        is_expected.to have_header 'X-DoggoHub-Build-Ref', /#{build.ref}/
       end
     end
 
@@ -32,11 +32,11 @@ describe Notify do
       before { build.success }
 
       it_behaves_like 'build email'
-      it_behaves_like 'an email with X-GitLab headers containing build details'
-      it_behaves_like 'an email with X-GitLab headers containing project details'
+      it_behaves_like 'an email with X-DoggoHub headers containing build details'
+      it_behaves_like 'an email with X-DoggoHub headers containing project details'
 
       it 'has header indicating build status' do
-        is_expected.to have_header 'X-GitLab-Build-Status', 'success'
+        is_expected.to have_header 'X-DoggoHub-Build-Status', 'success'
       end
 
       it 'has the correct subject' do
@@ -49,11 +49,11 @@ describe Notify do
       before { build.drop }
 
       it_behaves_like 'build email'
-      it_behaves_like 'an email with X-GitLab headers containing build details'
-      it_behaves_like 'an email with X-GitLab headers containing project details'
+      it_behaves_like 'an email with X-DoggoHub headers containing build details'
+      it_behaves_like 'an email with X-DoggoHub headers containing project details'
 
       it 'has header indicating build status' do
-        is_expected.to have_header 'X-GitLab-Build-Status', 'failed'
+        is_expected.to have_header 'X-DoggoHub-Build-Status', 'failed'
       end
 
       it 'has the correct subject' do

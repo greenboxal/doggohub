@@ -1,4 +1,4 @@
-image: "dev.gitlab.org:5005/gitlab/gitlab-build-images:ruby-2.3.3-git-2.7-phantomjs-2.1-node-7.1"
+image: "dev.doggohub.org:5005/doggohub/doggohub-build-images:ruby-2.3.3-git-2.7-phantomjs-2.1-node-7.1"
 
 cache:
   key: "ruby-233"
@@ -19,7 +19,7 @@ variables:
 
 before_script:
   - source ./scripts/prepare_build.sh
-  - cp config/gitlab.yml.example config/gitlab.yml
+  - cp config/doggohub.yml.example config/doggohub.yml
   - bundle --version
   - '[ "$USE_BUNDLE_INSTALL" != "true" ] || retry bundle install --without postgres production --jobs $(nproc) $FLAGS'
   - retry gem install knapsack
@@ -34,7 +34,7 @@ stages:
 # Predefined scopes
 .dedicated-runner: &dedicated-runner
   tags:
-    - gitlab-org
+    - doggohub-org
     - 2gb
 
 .knapsack-state: &knapsack-state
@@ -125,10 +125,10 @@ update-knapsack:
     - scripts/merge-reports knapsack/spinach_report.json knapsack/spinach_node_*.json
     - rm -f knapsack/*_node_*.json
   only:
-    - master@gitlab-org/gitlab-ce
-    - master@gitlab-org/gitlab-ee
-    - master@gitlab/gitlabhq
-    - master@gitlab/gitlab-ee
+    - master@doggohub-org/doggohub-ce
+    - master@doggohub-org/doggohub-ee
+    - master@doggohub/doggohubhq
+    - master@doggohub/doggohub-ee
 
 rspec 0 20: *rspec-knapsack
 rspec 1 20: *rspec-knapsack
@@ -164,13 +164,13 @@ spinach 9 10: *spinach-knapsack
 
 # Execute all testing suites against Ruby 2.1
 .ruby-21: &ruby-21
-  image: "dev.gitlab.org:5005/gitlab/gitlab-build-images:ruby-2.1-git-2.7-phantomjs-2.1"
+  image: "dev.doggohub.org:5005/doggohub/doggohub-build-images:ruby-2.1-git-2.7-phantomjs-2.1"
   <<: *use-db
   only:
-    - master@gitlab-org/gitlab-ce
-    - master@gitlab-org/gitlab-ee
-    - master@gitlab/gitlabhq
-    - master@gitlab/gitlab-ee
+    - master@doggohub-org/doggohub-ce
+    - master@doggohub-org/doggohub-ee
+    - master@doggohub/doggohubhq
+    - master@doggohub/doggohub-ee
   cache:
     key: "ruby21"
     paths:
@@ -243,7 +243,7 @@ rake downtime_check: *exec
 rake ee_compat_check:
   <<: *exec
   only:
-    - branches@gitlab-org/gitlab-ce
+    - branches@doggohub-org/doggohub-ce
   except:
     - master
     - tags
@@ -277,8 +277,8 @@ rake db:seed_fu:
     SETUP_DB: "false"
     RAILS_ENV: "development"
   script:
-    - git clone https://gitlab.com/gitlab-org/gitlab-test.git
-       /home/git/repositories/gitlab-org/gitlab-test.git
+    - git clone https://doggohub.com/doggohub-org/doggohub-test.git
+       /home/git/repositories/doggohub-org/doggohub-test.git
     - bundle exec rake db:setup db:seed_fu
   artifacts:
     when: on_failure
@@ -324,10 +324,10 @@ bundler:audit:
   <<: *ruby-static-analysis
   <<: *dedicated-runner
   only:
-    - master@gitlab-org/gitlab-ce
-    - master@gitlab-org/gitlab-ee
-    - master@gitlab/gitlabhq
-    - master@gitlab/gitlab-ee
+    - master@doggohub-org/doggohub-ce
+    - master@doggohub-org/doggohub-ee
+    - master@doggohub/doggohubhq
+    - master@doggohub/doggohub-ee
   script:
     - "bundle exec bundle-audit check --update --ignore OSVDB-115941"
 
@@ -338,10 +338,10 @@ migration paths:
   variables:
     SETUP_DB: "false"
   only:
-    - master@gitlab-org/gitlab-ce
-    - master@gitlab-org/gitlab-ee
-    - master@gitlab/gitlabhq
-    - master@gitlab/gitlab-ee
+    - master@doggohub-org/doggohub-ce
+    - master@doggohub-org/doggohub-ee
+    - master@doggohub/doggohubhq
+    - master@doggohub/doggohub-ee
   script:
     - git fetch origin v8.5.9
     - git checkout -f FETCH_HEAD
@@ -400,7 +400,7 @@ lint:javascript:report:
     - eslint-report.html
 
 # Trigger docs build
-# https://gitlab.com/gitlab-com/doc-gitlab-com/blob/master/README.md#deployment-process
+# https://doggohub.com/doggohub-com/doc-doggohub-com/blob/master/README.md#deployment-process
 trigger_docs:
   stage: post-test
   image: "alpine"
@@ -412,9 +412,9 @@ trigger_docs:
   cache: {}
   artifacts: {}
   script:
-    - "curl -X POST -F token=${DOCS_TRIGGER_TOKEN} -F ref=master -F variables[PROJECT]=ce https://gitlab.com/api/v3/projects/1794617/trigger/builds"
+    - "curl -X POST -F token=${DOCS_TRIGGER_TOKEN} -F ref=master -F variables[PROJECT]=ce https://doggohub.com/api/v3/projects/1794617/trigger/builds"
   only:
-    - master@gitlab-org/gitlab-ce
+    - master@doggohub-org/doggohub-ce
 
 # Notify slack in the end
 
@@ -425,13 +425,13 @@ notify:slack:
     SETUP_DB: "false"
     USE_BUNDLE_INSTALL: "false"
   script:
-    - ./scripts/notify_slack.sh "#development" "Build on \`$CI_BUILD_REF_NAME\` failed! Commit \`$(git log -1 --oneline)\` See <https://gitlab.com/gitlab-org/$(basename "$PWD")/commit/"$CI_BUILD_REF"/builds>"
+    - ./scripts/notify_slack.sh "#development" "Build on \`$CI_BUILD_REF_NAME\` failed! Commit \`$(git log -1 --oneline)\` See <https://doggohub.com/doggohub-org/$(basename "$PWD")/commit/"$CI_BUILD_REF"/builds>"
   when: on_failure
   only:
-    - master@gitlab-org/gitlab-ce
-    - tags@gitlab-org/gitlab-ce
-    - master@gitlab-org/gitlab-ee
-    - tags@gitlab-org/gitlab-ee
+    - master@doggohub-org/doggohub-ce
+    - tags@doggohub-org/doggohub-ce
+    - master@doggohub-org/doggohub-ee
+    - tags@doggohub-org/doggohub-ee
 
 pages:
   before_script: []
@@ -451,7 +451,7 @@ pages:
     paths:
       - public
   only:
-    - master@gitlab-org/gitlab-ce
+    - master@doggohub-org/doggohub-ce
 
 # Insurance in case a gem needed by one of our releases gets yanked from
 # rubygems.org in the future.
@@ -467,4 +467,4 @@ cache gems:
     paths:
       - vendor/cache
   only:
-    - master@gitlab-org/gitlab-ce
+    - master@doggohub-org/doggohub-ce

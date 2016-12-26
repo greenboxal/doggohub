@@ -61,7 +61,7 @@ describe BambooService, models: true do
         it 'resets password if url changed' do
           bamboo_service = service
 
-          bamboo_service.bamboo_url = 'http://gitlab1.com'
+          bamboo_service.bamboo_url = 'http://doggohub1.com'
           bamboo_service.save
 
           expect(bamboo_service.password).to be_nil
@@ -79,12 +79,12 @@ describe BambooService, models: true do
         it "does not reset password if new url is set together with password, even if it's the same password" do
           bamboo_service = service
 
-          bamboo_service.bamboo_url = 'http://gitlab_edited.com'
+          bamboo_service.bamboo_url = 'http://doggohub_edited.com'
           bamboo_service.password = 'password'
           bamboo_service.save
 
           expect(bamboo_service.password).to eq('password')
-          expect(bamboo_service.bamboo_url).to eq('http://gitlab_edited.com')
+          expect(bamboo_service.bamboo_url).to eq('http://doggohub_edited.com')
         end
       end
 
@@ -92,12 +92,12 @@ describe BambooService, models: true do
         bamboo_service = service
         bamboo_service.password = nil
 
-        bamboo_service.bamboo_url = 'http://gitlab_edited.com'
+        bamboo_service.bamboo_url = 'http://doggohub_edited.com'
         bamboo_service.password = 'password'
         bamboo_service.save
 
         expect(bamboo_service.password).to eq('password')
-        expect(bamboo_service.bamboo_url).to eq('http://gitlab_edited.com')
+        expect(bamboo_service.bamboo_url).to eq('http://doggohub_edited.com')
       end
     end
   end
@@ -106,25 +106,25 @@ describe BambooService, models: true do
     it 'returns a specific URL when status is 500' do
       stub_request(status: 500)
 
-      expect(service.build_page('123', 'unused')).to eq('http://gitlab.com/bamboo/browse/foo')
+      expect(service.build_page('123', 'unused')).to eq('http://doggohub.com/bamboo/browse/foo')
     end
 
     it 'returns a specific URL when response has no results' do
       stub_request(body: %Q({"results":{"results":{"size":"0"}}}))
 
-      expect(service.build_page('123', 'unused')).to eq('http://gitlab.com/bamboo/browse/foo')
+      expect(service.build_page('123', 'unused')).to eq('http://doggohub.com/bamboo/browse/foo')
     end
 
     it 'returns a build URL when bamboo_url has no trailing slash' do
       stub_request(body: %Q({"results":{"results":{"result":{"planResultKey":{"key":"42"}}}}}))
 
-      expect(service(bamboo_url: 'http://gitlab.com/bamboo').build_page('123', 'unused')).to eq('http://gitlab.com/bamboo/browse/42')
+      expect(service(bamboo_url: 'http://doggohub.com/bamboo').build_page('123', 'unused')).to eq('http://doggohub.com/bamboo/browse/42')
     end
 
     it 'returns a build URL when bamboo_url has a trailing slash' do
       stub_request(body: %Q({"results":{"results":{"result":{"planResultKey":{"key":"42"}}}}}))
 
-      expect(service(bamboo_url: 'http://gitlab.com/bamboo/').build_page('123', 'unused')).to eq('http://gitlab.com/bamboo/browse/42')
+      expect(service(bamboo_url: 'http://doggohub.com/bamboo/').build_page('123', 'unused')).to eq('http://doggohub.com/bamboo/browse/42')
     end
   end
 
@@ -172,7 +172,7 @@ describe BambooService, models: true do
     end
   end
 
-  def service(bamboo_url: 'http://gitlab.com/bamboo')
+  def service(bamboo_url: 'http://doggohub.com/bamboo')
     described_class.create(
       project: create(:empty_project),
       properties: {
@@ -185,7 +185,7 @@ describe BambooService, models: true do
   end
 
   def stub_request(status: 200, body: nil, build_state: 'success')
-    bamboo_full_url = 'http://mic:password@gitlab.com/bamboo/rest/api/latest/result?label=123&os_authType=basic'
+    bamboo_full_url = 'http://mic:password@doggohub.com/bamboo/rest/api/latest/result?label=123&os_authType=basic'
     body ||= %Q({"results":{"results":{"result":{"buildState":"#{build_state}"}}}})
 
     WebMock.stub_request(:get, bamboo_full_url).to_return(

@@ -3,15 +3,15 @@ module API
     GLOBAL_TEMPLATE_TYPES = {
       gitignores: {
         klass: Gitlab::Template::GitignoreTemplate,
-        gitlab_version: 8.8
+        doggohub_version: 8.8
       },
-      gitlab_ci_ymls: {
+      doggohub_ci_ymls: {
         klass: Gitlab::Template::GitlabCiYmlTemplate,
-        gitlab_version: 8.9
+        doggohub_version: 8.9
       },
       dockerfiles: {
         klass: Gitlab::Template::DockerfileTemplate,
-        gitlab_version: 8.15
+        doggohub_version: 8.15
       }
     }.freeze
     PROJECT_TEMPLATE_REGEX =
@@ -24,7 +24,7 @@ module API
       /[\<\{\[]
         (fullname|name\sof\s(author|copyright\sowner))
       [\>\}\]]/xi.freeze
-    DEPRECATION_MESSAGE = ' This endpoint is deprecated and will be removed in GitLab 9.0.'.freeze
+    DEPRECATION_MESSAGE = ' This endpoint is deprecated and will be removed in DoggoHub 9.0.'.freeze
 
     helpers do
       def parsed_license_template
@@ -48,7 +48,7 @@ module API
 
     { "licenses" => :deprecated, "templates/licenses" => :ok }.each do |route, status|
       desc 'Get the list of the available license template' do
-        detailed_desc = 'This feature was introduced in GitLab 8.7.'
+        detailed_desc = 'This feature was introduced in DoggoHub 8.7.'
         detailed_desc << DEPRECATION_MESSAGE unless status == :ok
         detail detailed_desc
         success Entities::RepoLicense
@@ -66,7 +66,7 @@ module API
 
     { "licenses/:name" => :deprecated, "templates/licenses/:name" => :ok }.each do |route, status|
       desc 'Get the text for a specific license' do
-        detailed_desc = 'This feature was introduced in GitLab 8.7.'
+        detailed_desc = 'This feature was introduced in DoggoHub 8.7.'
         detailed_desc << DEPRECATION_MESSAGE unless status == :ok
         detail detailed_desc
         success Entities::RepoLicense
@@ -85,11 +85,11 @@ module API
 
     GLOBAL_TEMPLATE_TYPES.each do |template_type, properties|
       klass = properties[:klass]
-      gitlab_version = properties[:gitlab_version]
+      doggohub_version = properties[:doggohub_version]
 
       { template_type => :deprecated, "templates/#{template_type}" => :ok }.each do |route, status|
         desc 'Get the list of the available template' do
-          detailed_desc = "This feature was introduced in GitLab #{gitlab_version}."
+          detailed_desc = "This feature was introduced in DoggoHub #{doggohub_version}."
           detailed_desc << DEPRECATION_MESSAGE unless status == :ok
           detail detailed_desc
           success Entities::TemplatesList
@@ -101,7 +101,7 @@ module API
 
       { "#{template_type}/:name" => :deprecated, "templates/#{template_type}/:name" => :ok }.each do |route, status|
         desc 'Get the text for a specific template present in local filesystem' do
-          detailed_desc = "This feature was introduced in GitLab #{gitlab_version}."
+          detailed_desc = "This feature was introduced in DoggoHub #{doggohub_version}."
           detailed_desc << DEPRECATION_MESSAGE unless status == :ok
           detail detailed_desc
           success Entities::Template

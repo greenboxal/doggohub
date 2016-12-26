@@ -49,7 +49,7 @@ describe PostReceive do
       end
     end
 
-    context "gitlab-ci.yml" do
+    context "doggohub-ci.yml" do
       subject { PostReceive.new.perform(pwd(project), key_id, base64_changes) }
 
       context "creates a Ci::Pipeline for every change" do

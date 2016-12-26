@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "environment#{n}" }
 
     project factory: :empty_project
-    sequence(:external_url) { |n| "https://env#{n}.example.gitlab.com" }
+    sequence(:external_url) { |n| "https://env#{n}.example.doggohub.com" }
 
     trait :with_review_app do |environment|
       project

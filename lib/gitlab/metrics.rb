@@ -3,7 +3,7 @@ module Gitlab
     extend Gitlab::CurrentSettings
 
     RAILS_ROOT   = Rails.root.to_s
-    METRICS_ROOT = Rails.root.join('lib', 'gitlab', 'metrics').to_s
+    METRICS_ROOT = Rails.root.join('lib', 'doggohub', 'metrics').to_s
     PATH_REGEX   = /^#{RAILS_ROOT}\/?/
 
     def self.settings

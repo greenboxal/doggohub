@@ -1,5 +1,5 @@
 module AuthHelper
-  PROVIDERS_WITH_ICONS = %w(twitter github gitlab bitbucket google_oauth2 facebook azure_oauth2 authentiq).freeze
+  PROVIDERS_WITH_ICONS = %w(twitter github doggohub bitbucket google_oauth2 facebook azure_oauth2 authentiq).freeze
   FORM_BASED_PROVIDERS = [/\Aldap/, 'crowd'].freeze
 
   def ldap_enabled?

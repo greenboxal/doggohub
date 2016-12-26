@@ -5,7 +5,7 @@ module Gitlab
 
       def authorize_chat_name(url)
         message = if url
-                    ":wave: Hi there! Before I do anything for you, please [connect your GitLab account](#{url})."
+                    ":wave: Hi there! Before I do anything for you, please [connect your DoggoHub account](#{url})."
                   else
                     ":sweat_smile: Couldn't identify you, nor can I autorize you!"
                   end
@@ -58,7 +58,7 @@ module Gitlab
       end
 
       def not_found
-        ephemeral_response("404 not found! GitLab couldn't find what you were looking for! :boom:")
+        ephemeral_response("404 not found! DoggoHub couldn't find what you were looking for! :boom:")
       end
 
       def single_resource(resource)

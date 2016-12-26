@@ -1,6 +1,6 @@
 # Using Docker Images
 
-GitLab CI in conjunction with [GitLab Runner](../runners/README.md) can use
+DoggoHub CI in conjunction with [DoggoHub Runner](../runners/README.md) can use
 [Docker Engine](https://www.docker.com/) to test and build any application.
 
 Docker is an open-source project that allows you to use predefined images to
@@ -8,9 +8,9 @@ run applications in independent "containers" that are run within a single Linux
 instance. [Docker Hub][hub] has a rich database of pre-built images that can be
 used to test and build your applications.
 
-Docker, when used with GitLab CI, runs each build in a separate and isolated
+Docker, when used with DoggoHub CI, runs each build in a separate and isolated
 container using the predefined image that is set up in
-[`.gitlab-ci.yml`](../yaml/README.md).
+[`.doggohub-ci.yml`](../yaml/README.md).
 
 This makes it easier to have a simple and reproducible build environment that
 can also run on your workstation. The added benefit is that you can test all
@@ -19,12 +19,12 @@ test them on a dedicated CI server.
 
 ## Register docker runner
 
-To use GitLab Runner with docker you need to register a new runner to use the
+To use DoggoHub Runner with docker you need to register a new runner to use the
 `docker` executor:
 
 ```bash
-gitlab-ci-multi-runner register \
-  --url "https://gitlab.com/" \
+doggohub-ci-multi-runner register \
+  --url "https://doggohub.com/" \
   --registration-token "PROJECT_REGISTRATION_TOKEN" \
   --description "docker-ruby-2.1" \
   --executor "docker" \
@@ -80,10 +80,10 @@ See [How to use other images as services](#how-to-use-other-images-as-services).
 ## How to use other images as services
 
 You are not limited to have only database services. You can add as many
-services you need to `.gitlab-ci.yml` or manually modify `config.toml`.
+services you need to `.doggohub-ci.yml` or manually modify `config.toml`.
 Any image found at [Docker Hub][hub] can be used as a service.
 
-## Define image and services from `.gitlab-ci.yml`
+## Define image and services from `.doggohub-ci.yml`
 
 You can simply define an image that will be used for all jobs and a list of
 services that you want to use during build time.
@@ -138,21 +138,21 @@ that runner.
 
 ## Define an image from a private Docker registry
 
-Starting with GitLab Runner 0.6.0, you are able to define images located to
+Starting with DoggoHub Runner 0.6.0, you are able to define images located to
 private registries that could also require authentication.
 
-All you have to do is be explicit on the image definition in `.gitlab-ci.yml`.
+All you have to do is be explicit on the image definition in `.doggohub-ci.yml`.
 
 ```yaml
 image: my.registry.tld:5000/namepace/image:tag
 ```
 
-In the example above, GitLab Runner will look at `my.registry.tld:5000` for the
+In the example above, DoggoHub Runner will look at `my.registry.tld:5000` for the
 image `namespace/image:tag`.
 
-If the repository is private you need to authenticate your GitLab Runner in the
+If the repository is private you need to authenticate your DoggoHub Runner in the
 registry. Learn how to do that on
-[GitLab Runner's documentation][runner-priv-reg].
+[DoggoHub Runner's documentation][runner-priv-reg].
 
 ## Accessing the services
 
@@ -160,7 +160,7 @@ Let's say that you need a Wordpress instance to test some API integration with
 your application.
 
 You can then use for example the [tutum/wordpress][] image in your
-`.gitlab-ci.yml`:
+`.doggohub-ci.yml`:
 
 ```yaml
 services:
@@ -181,7 +181,7 @@ rules:
 Many services accept environment variables which allow you to easily change
 database names or set account names depending on the environment.
 
-GitLab Runner 0.5.0 and up passes all YAML-defined variables to the created
+DoggoHub Runner 0.5.0 and up passes all YAML-defined variables to the created
 service containers.
 
 For all possible configuration variables check the documentation of each image
@@ -212,7 +212,7 @@ time.
 1. Start build container and send build script to the container.
 1. Run build script.
 1. Checkout code in: `/builds/group-name/project-name/`.
-1. Run any step defined in `.gitlab-ci.yml`.
+1. Run any step defined in `.doggohub-ci.yml`.
 1. Check exit status of build script.
 1. Remove build container and all created service containers.
 
@@ -225,13 +225,13 @@ First start with creating a file named `build_script`:
 
 ```bash
 cat <<EOF > build_script
-git clone https://gitlab.com/gitlab-org/gitlab-ci-multi-runner.git /builds/gitlab-org/gitlab-ci-multi-runner
-cd /builds/gitlab-org/gitlab-ci-multi-runner
+git clone https://doggohub.com/doggohub-org/doggohub-ci-multi-runner.git /builds/doggohub-org/doggohub-ci-multi-runner
+cd /builds/doggohub-org/doggohub-ci-multi-runner
 make
 EOF
 ```
 
-Here we use as an example the GitLab Runner repository which contains a
+Here we use as an example the DoggoHub Runner repository which contains a
 Makefile, so running `make` will execute the commands defined in the Makefile.
 Your mileage may vary, so instead of `make` you could run the command which
 is specific to your project.
@@ -276,4 +276,4 @@ creation.
 [tutum/wordpress]: https://hub.docker.com/r/tutum/wordpress/
 [postgres-hub]: https://hub.docker.com/r/_/postgres/
 [mysql-hub]: https://hub.docker.com/r/_/mysql/
-[runner-priv-reg]: https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/configuration/advanced-configuration.md#using-a-private-docker-registry
+[runner-priv-reg]: https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/blob/master/docs/configuration/advanced-configuration.md#using-a-private-docker-registry

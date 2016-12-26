@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :can?, :current_application_settings
-  helper_method :import_sources_enabled?, :github_import_enabled?, :gitea_import_enabled?, :github_import_configured?, :gitlab_import_enabled?, :gitlab_import_configured?, :bitbucket_import_enabled?, :bitbucket_import_configured?, :google_code_import_enabled?, :fogbugz_import_enabled?, :git_import_enabled?, :gitlab_project_import_enabled?
+  helper_method :import_sources_enabled?, :github_import_enabled?, :gitea_import_enabled?, :github_import_configured?, :doggohub_import_enabled?, :doggohub_import_configured?, :bitbucket_import_enabled?, :bitbucket_import_configured?, :google_code_import_enabled?, :fogbugz_import_enabled?, :git_import_enabled?, :doggohub_project_import_enabled?
 
   rescue_from Encoding::CompatibilityError do |exception|
     log_exception(exception)
@@ -146,7 +146,7 @@ class ApplicationController < ActionController::Base
     headers['X-UA-Compatible'] = 'IE=edge'
     headers['X-Content-Type-Options'] = 'nosniff'
     # Enabling HSTS for non-standard ports would send clients to the wrong port
-    if Gitlab.config.gitlab.https and Gitlab.config.gitlab.port == 443
+    if Gitlab.config.doggohub.https and Gitlab.config.doggohub.port == 443
       headers['Strict-Transport-Security'] = 'max-age=31536000'
     end
   end
@@ -195,7 +195,7 @@ class ApplicationController < ActionController::Base
     @event_filter ||= EventFilter.new(filters)
   end
 
-  def gitlab_ldap_access(&block)
+  def doggohub_ldap_access(&block)
     Gitlab::LDAP::Access.open { |access| block.call(access) }
   end
 
@@ -253,12 +253,12 @@ class ApplicationController < ActionController::Base
     Gitlab::OAuth::Provider.enabled?(:github)
   end
 
-  def gitlab_import_enabled?
-    request.host != 'gitlab.com' && current_application_settings.import_sources.include?('gitlab')
+  def doggohub_import_enabled?
+    request.host != 'doggohub.com' && current_application_settings.import_sources.include?('doggohub')
   end
 
-  def gitlab_import_configured?
-    Gitlab::OAuth::Provider.enabled?(:gitlab)
+  def doggohub_import_configured?
+    Gitlab::OAuth::Provider.enabled?(:doggohub)
   end
 
   def bitbucket_import_enabled?
@@ -281,8 +281,8 @@ class ApplicationController < ActionController::Base
     current_application_settings.import_sources.include?('git')
   end
 
-  def gitlab_project_import_enabled?
-    current_application_settings.import_sources.include?('gitlab_project')
+  def doggohub_project_import_enabled?
+    current_application_settings.import_sources.include?('doggohub_project')
   end
 
   def two_factor_authentication_required?
@@ -308,7 +308,7 @@ class ApplicationController < ActionController::Base
     return false unless current_application_settings.home_page_url.present?
 
     home_page_url = current_application_settings.home_page_url.chomp('/')
-    root_urls = [Gitlab.config.gitlab['url'].chomp('/'), root_url.chomp('/')]
+    root_urls = [Gitlab.config.doggohub['url'].chomp('/'), root_url.chomp('/')]
 
     return false if root_urls.include?(home_page_url)
 

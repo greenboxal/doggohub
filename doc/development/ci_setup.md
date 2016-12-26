@@ -1,29 +1,29 @@
 # CI setup
 
-This document describes what services we use for testing GitLab and GitLab CI.
+This document describes what services we use for testing DoggoHub and DoggoHub CI.
 
-We currently use three CI services to test GitLab:
+We currently use three CI services to test DoggoHub:
 
-1. GitLab CI on [GitHost.io](https://gitlab-ce.githost.io/projects/4/) for the [GitLab.com repo](https://gitlab.com/gitlab-org/gitlab-ce)
-2. GitLab CI at ci.gitlab.org to test the private GitLab B.V. repo at dev.gitlab.org
-3. [Semephore](https://semaphoreapp.com/gitlabhq/gitlabhq/) for [GitHub.com repo](https://github.com/gitlabhq/gitlabhq)
+1. DoggoHub CI on [GitHost.io](https://doggohub-ce.githost.io/projects/4/) for the [DoggoHub.com repo](https://doggohub.com/doggohub-org/doggohub-ce)
+2. DoggoHub CI at ci.doggohub.org to test the private DoggoHub B.V. repo at dev.doggohub.org
+3. [Semephore](https://semaphoreapp.com/doggohubhq/doggohubhq/) for [GitHub.com repo](https://github.com/doggohubhq/doggohubhq)
 
-| Software @ configuration being tested | GitLab CI (ci.gitlab.org) | GitLab CI (GitHost.io) | Semaphore |
+| Software @ configuration being tested | DoggoHub CI (ci.doggohub.org) | DoggoHub CI (GitHost.io) | Semaphore |
 |---------------------------------------|---------------------------|---------------------------------------------------------------------------|-----------|
-| GitLab CE @ MySQL                     | ✓                         | ✓ [Core team can trigger builds](https://gitlab-ce.githost.io/projects/4) |           |
-| GitLab CE @ PostgreSQL                |                           |                                                                           | ✓ [Core team can trigger builds](https://semaphoreapp.com/gitlabhq/gitlabhq/branches/master) |
-| GitLab EE @ MySQL                     | ✓                         |                                                                           |           |
-| GitLab CI @ MySQL                     | ✓                         |                                                                           |           |
-| GitLab CI @ PostgreSQL                |                           |                                                                           | ✓         |
-| GitLab CI Runner                      | ✓                         |                                                                           | ✓         |
-| GitLab Shell                          | ✓                         |                                                                           | ✓         |
-| GitLab Shell                          | ✓                         |                                                                           | ✓         |
+| DoggoHub CE @ MySQL                     | ✓                         | ✓ [Core team can trigger builds](https://doggohub-ce.githost.io/projects/4) |           |
+| DoggoHub CE @ PostgreSQL                |                           |                                                                           | ✓ [Core team can trigger builds](https://semaphoreapp.com/doggohubhq/doggohubhq/branches/master) |
+| DoggoHub EE @ MySQL                     | ✓                         |                                                                           |           |
+| DoggoHub CI @ MySQL                     | ✓                         |                                                                           |           |
+| DoggoHub CI @ PostgreSQL                |                           |                                                                           | ✓         |
+| DoggoHub CI Runner                      | ✓                         |                                                                           | ✓         |
+| DoggoHub Shell                          | ✓                         |                                                                           | ✓         |
+| DoggoHub Shell                          | ✓                         |                                                                           | ✓         |
 
-Core team has access to trigger builds if needed for GitLab CE.
+Core team has access to trigger builds if needed for DoggoHub CE.
 
-We use [these build scripts](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.gitlab-ci.yml) for testing with GitLab CI.
+We use [these build scripts](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/.doggohub-ci.yml) for testing with DoggoHub CI.
 
-# Build configuration on [Semaphore](https://semaphoreapp.com/gitlabhq/gitlabhq/) for testing the [GitHub.com repo](https://github.com/gitlabhq/gitlabhq)
+# Build configuration on [Semaphore](https://semaphoreapp.com/doggohubhq/doggohubhq/) for testing the [GitHub.com repo](https://github.com/doggohubhq/doggohubhq)
 
 - Language: Ruby
 - Ruby version: 2.1.8
@@ -34,7 +34,7 @@ Build commands
 ```bash
 sudo apt-get install cmake libicu-dev -y (Setup)
 bundle install --deployment --path vendor/bundle (Setup)
-cp config/gitlab.yml.example config/gitlab.yml (Setup)
+cp config/doggohub.yml.example config/doggohub.yml (Setup)
 bundle exec rake db:create (Setup)
 bundle exec rake spinach (Thread #1)
 bundle exec rake spec (thread #2)

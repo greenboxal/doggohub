@@ -154,7 +154,7 @@
         Export project
       %p.append-bottom-0
         %p
-          Export this project with all its related data in order to move your project to a new GitLab instance. Once the export is finished, you can import the file from the "New Project" page.
+          Export this project with all its related data in order to move your project to a new DoggoHub instance. Once the export is finished, you can import the file from the "New Project" page.
         %p
           Once the exported file is ready, you will receive a notification email with a download link.
 
@@ -255,22 +255,22 @@
               %li You will need to update your local repositories to point to the new location.
               %li Project visibility level will be changed to match namespace rules when transfering to a group.
           = f.submit 'Transfer project', class: "btn btn-remove js-confirm-danger", data: { "confirm-danger-message" => transfer_project_message(@project) }
-  - if @project.forked? && can?(current_user, :remove_fork_project, @project)
+  - if @project.borked? && can?(current_user, :remove_bork_project, @project)
     %hr
     .row.prepend-top-default.append-bottom-default
       .col-lg-3
         %h4.prepend-top-0.danger-title
-          Remove fork relationship
+          Remove bork relationship
         %p.append-bottom-0
           %p
-            This will remove the fork relationship to source project
+            This will remove the bork relationship to source project
             = succeed "." do
-              = link_to @project.forked_from_project.name_with_namespace, project_path(@project.forked_from_project)
+              = link_to @project.borked_from_project.name_with_namespace, project_path(@project.borked_from_project)
       .col-lg-9
-        = form_for([@project.namespace.becomes(Namespace), @project], url: remove_fork_namespace_project_path(@project.namespace, @project), method: :delete, remote: true, html: { class: 'transfer-project' }) do |f|
+        = form_for([@project.namespace.becomes(Namespace), @project], url: remove_bork_namespace_project_path(@project.namespace, @project), method: :delete, remote: true, html: { class: 'transfer-project' }) do |f|
           %p
-            %strong Once removed, the fork relationship cannot be restored and you will no longer be able to send merge requests to the source.
-          = button_to 'Remove fork relationship', '#', class: "btn btn-remove js-confirm-danger", data: { "confirm-danger-message" => remove_fork_project_message(@project) }
+            %strong Once removed, the bork relationship cannot be restored and you will no longer be able to send merge requests to the source.
+          = button_to 'Remove bork relationship', '#', class: "btn btn-remove js-confirm-danger", data: { "confirm-danger-message" => remove_bork_project_message(@project) }
   - if can?(current_user, :remove_project, @project)
     %hr
     .row.prepend-top-default.append-bottom-default

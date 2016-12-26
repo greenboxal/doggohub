@@ -1,10 +1,10 @@
 # Cherry-pick changes
 
-> [Introduced][ce-3514] in GitLab 8.7.
+> [Introduced][ce-3514] in DoggoHub 8.7.
 
 ---
 
-GitLab implements Git's powerful feature to [cherry-pick any commit][git-cherry-pick]
+DoggoHub implements Git's powerful feature to [cherry-pick any commit][git-cherry-pick]
 with introducing a **Cherry-pick** button in Merge Requests and commit details.
 
 ## Cherry-picking a Merge Request
@@ -48,5 +48,5 @@ mainline:
 git cherry-pick -m 2 7a39eb0
 ```
 
-[ce-3514]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/3514 "Cherry-pick button Merge Request"
+[ce-3514]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/3514 "Cherry-pick button Merge Request"
 [git-cherry-pick]: https://git-scm.com/docs/git-cherry-pick "Git cherry-pick documentation"

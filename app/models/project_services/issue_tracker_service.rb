@@ -41,7 +41,7 @@ class IssueTrackerService < Service
   def initialize_properties(&block)
     return unless properties.nil?
 
-    if enabled_in_gitlab_config
+    if enabled_in_doggohub_config
       if block_given?
         yield
       else
@@ -83,7 +83,7 @@ class IssueTrackerService < Service
 
   private
 
-  def enabled_in_gitlab_config
+  def enabled_in_doggohub_config
     Gitlab.config.issues_tracker &&
       Gitlab.config.issues_tracker.values.any? &&
       issues_tracker

@@ -118,7 +118,7 @@ module Gitlab
           if send_from_committer_email? && @notify.can_send_from_user_email?(author)
             author.email
           else
-            Gitlab.config.gitlab.email_reply_to
+            Gitlab.config.doggohub.email_reply_to
           end
         end
 

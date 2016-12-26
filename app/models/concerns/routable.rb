@@ -17,7 +17,7 @@ module Routable
     #
     # Usage:
     #
-    #     Klass.find_by_full_path('gitlab-org/gitlab-ce')
+    #     Klass.find_by_full_path('doggohub-org/doggohub-ce')
     #
     # Returns a single object, or nil.
     def find_by_full_path(path)
@@ -36,7 +36,7 @@ module Routable
     #
     # Usage:
     #
-    #     Klass.where_full_path_in(%w{gitlab-org/gitlab-ce gitlab-org/gitlab-ee})
+    #     Klass.where_full_path_in(%w{doggohub-org/doggohub-ce doggohub-org/doggohub-ee})
     #
     # Returns an ActiveRecord::Relation.
     def where_full_path_in(paths)

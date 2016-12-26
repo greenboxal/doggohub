@@ -55,11 +55,11 @@
                     - unless bitbucket_import_configured?
                       = render 'bitbucket_import_modal'
                 %div
-                  - if gitlab_import_enabled?
-                    = link_to status_import_gitlab_path, class: "btn import_gitlab #{'how_to_import_link' unless gitlab_import_configured?}" do
-                      = icon('gitlab', text: 'GitLab.com')
-                    - unless gitlab_import_configured?
-                      = render 'gitlab_import_modal'
+                  - if doggohub_import_enabled?
+                    = link_to status_import_doggohub_path, class: "btn import_doggohub #{'how_to_import_link' unless doggohub_import_configured?}" do
+                      = icon('doggohub', text: 'DoggoHub.com')
+                    - unless doggohub_import_configured?
+                      = render 'doggohub_import_modal'
                 %div
                   - if google_code_import_enabled?
                     = link_to new_import_google_code_path, class: 'btn import_google_code' do
@@ -77,10 +77,10 @@
                   - if git_import_enabled?
                     = link_to "#", class: 'btn js-toggle-button import_git' do
                       = icon('git', text: 'Repo by URL')
-                %div{ class: 'import_gitlab_project' }
-                  - if gitlab_project_import_enabled?
-                    = link_to new_import_gitlab_project_path, class: 'btn btn_import_gitlab_project project-submit' do
-                      = icon('gitlab', text: 'GitLab export')
+                %div{ class: 'import_doggohub_project' }
+                  - if doggohub_project_import_enabled?
+                    = link_to new_import_doggohub_project_path, class: 'btn btn_import_doggohub_project project-submit' do
+                      = icon('doggohub', text: 'DoggoHub export')
 
             .js-toggle-content.hide
               = render "shared/import_form", f: f
@@ -118,16 +118,16 @@
     $(".modal").hide();
   });
 
-  $('.btn_import_gitlab_project').bind('click', function() {
-    var _href = $("a.btn_import_gitlab_project").attr("href");
-    $(".btn_import_gitlab_project").attr("href", _href + '?namespace_id=' + $("#project_namespace_id").val() + '&path=' + $("#project_path").val());
+  $('.btn_import_doggohub_project').bind('click', function() {
+    var _href = $("a.btn_import_doggohub_project").attr("href");
+    $(".btn_import_doggohub_project").attr("href", _href + '?namespace_id=' + $("#project_namespace_id").val() + '&path=' + $("#project_path").val());
   });
 
-  $('.btn_import_gitlab_project').attr('disabled',true)
-  $('.import_gitlab_project').attr('title', 'Project path and name required.');
+  $('.btn_import_doggohub_project').attr('disabled',true)
+  $('.import_doggohub_project').attr('title', 'Project path and name required.');
 
-  $('.import_gitlab_project').click(function( event ) {
-    if($('.btn_import_gitlab_project').attr('disabled')) {
+  $('.import_doggohub_project').click(function( event ) {
+    if($('.btn_import_doggohub_project').attr('disabled')) {
       event.preventDefault();
       new Flash("Please enter path and name for the project to be imported to.");
     }
@@ -140,12 +140,12 @@
 
   $('#project_path').keyup(function(){
     if($(this).val().length !=0) {
-      $('.btn_import_gitlab_project').attr('disabled', false);
-      $('.import_gitlab_project').attr('title','');
+      $('.btn_import_doggohub_project').attr('disabled', false);
+      $('.import_doggohub_project').attr('title','');
       $(".flash-container").html("")
     } else {
-      $('.btn_import_gitlab_project').attr('disabled',true);
-      $('.import_gitlab_project').attr('title', 'Project path and name required.');
+      $('.btn_import_doggohub_project').attr('disabled',true);
+      $('.import_doggohub_project').attr('title', 'Project path and name required.');
     }
   });
 

@@ -2,11 +2,11 @@
 
 This example will guide you how to run tests in your Clojure application.
 
-You can checkout the example [source](https://gitlab.com/dzaporozhets/clojure-web-application) and check [CI status](https://gitlab.com/dzaporozhets/clojure-web-application/builds?scope=all).
+You can checkout the example [source](https://doggohub.com/dzaporozhets/clojure-web-application) and check [CI status](https://doggohub.com/dzaporozhets/clojure-web-application/builds?scope=all).
 
 ### Configure project
 
-This is what the `.gitlab-ci.yml` file looks like for this project:
+This is what the `.doggohub-ci.yml` file looks like for this project:
 
 ```yaml
 variables:
@@ -32,4 +32,4 @@ In before script we install JRE and [Leiningen](http://leiningen.org/).
 Sample project uses [migratus](https://github.com/yogthos/migratus) library to manage database migrations. 
 So we added database migration as last step of `before_script` section
 
-You can use public runners available on `gitlab.com` for testing your application with such configuration.
+You can use public runners available on `doggohub.com` for testing your application with such configuration.

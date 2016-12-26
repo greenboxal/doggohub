@@ -44,7 +44,7 @@ describe ProjectTeam, models: true do
       group.add_reporter(reporter)
       group.add_guest(guest)
 
-      # If user is a group and a project member - GitLab uses highest permission
+      # If user is a group and a project member - DoggoHub uses highest permission
       # So we add group guest as master and add group master as guest
       # to this project to test highest access
       project.add_master(guest)

@@ -1,13 +1,13 @@
 - page_title "CI Lint"
-- page_description "Validate your GitLab CI configuration file"
+- page_description "Validate your DoggoHub CI configuration file"
 
-%h2 Check your .gitlab-ci.yml
+%h2 Check your .doggohub-ci.yml
 %hr
 
 .row
   = form_tag ci_lint_path, method: :post do
     .form-group
-      = label_tag(:content, 'Content of .gitlab-ci.yml', class: 'control-label text-nowrap')
+      = label_tag(:content, 'Content of .doggohub-ci.yml', class: 'control-label text-nowrap')
       .col-sm-12
         = text_area_tag(:content, @content, class: 'form-control span1', rows: 7, require: true)
     .col-sm-12

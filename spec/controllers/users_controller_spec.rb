@@ -72,18 +72,18 @@ describe UsersController do
       expect(response).to render_template('calendar')
     end
 
-    context 'forked project' do
+    context 'borked project' do
       let(:project) { create(:project) }
-      let(:forked_project) { Projects::ForkService.new(project, user).execute }
+      let(:borked_project) { Projects::BorkService.new(project, user).execute }
 
       before do
         sign_in(user)
         project.team << [user, :developer]
         EventCreateService.new.push(project, user, [])
-        EventCreateService.new.push(forked_project, user, [])
+        EventCreateService.new.push(borked_project, user, [])
       end
 
-      it 'includes forked projects' do
+      it 'includes borked projects' do
         get :calendar, username: user.username
         expect(assigns(:contributions_calendar).projects.count).to eq(2)
       end

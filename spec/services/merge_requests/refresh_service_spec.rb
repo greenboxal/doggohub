@@ -12,7 +12,7 @@ describe MergeRequests::RefreshService, services: true do
       group.add_owner(@user)
 
       @project = create(:project, namespace: group)
-      @fork_project = Projects::ForkService.new(@project, @user).execute
+      @bork_project = Projects::BorkService.new(@project, @user).execute
       @merge_request = create(:merge_request,
                               source_project: @project,
                               source_branch: 'master',
@@ -21,8 +21,8 @@ describe MergeRequests::RefreshService, services: true do
                               merge_when_build_succeeds: true,
                               merge_user: @user)
 
-      @fork_merge_request = create(:merge_request,
-                                   source_project: @fork_project,
+      @bork_merge_request = create(:merge_request,
+                                   source_project: @bork_project,
                                    source_branch: 'master',
                                    target_branch: 'feature',
                                    target_project: @project)
@@ -34,7 +34,7 @@ describe MergeRequests::RefreshService, services: true do
                                   target: @merge_request,
                                   author: @user)
 
-      @fork_build_failed_todo = create(:todo,
+      @bork_build_failed_todo = create(:todo,
                                        :build_failed,
                                        user: @user,
                                        project: @project,
@@ -64,10 +64,10 @@ describe MergeRequests::RefreshService, services: true do
       it { expect(@merge_request).to be_open }
       it { expect(@merge_request.merge_when_build_succeeds).to be_falsey }
       it { expect(@merge_request.diff_head_sha).to eq(@newrev) }
-      it { expect(@fork_merge_request).to be_open }
-      it { expect(@fork_merge_request.notes).to be_empty }
+      it { expect(@bork_merge_request).to be_open }
+      it { expect(@bork_merge_request.notes).to be_empty }
       it { expect(@build_failed_todo).to be_done }
-      it { expect(@fork_build_failed_todo).to be_done }
+      it { expect(@bork_build_failed_todo).to be_done }
     end
 
     context 'push to origin repo target branch' do
@@ -78,16 +78,16 @@ describe MergeRequests::RefreshService, services: true do
 
       it { expect(@merge_request.notes.last.note).to include('merged') }
       it { expect(@merge_request).to be_merged }
-      it { expect(@fork_merge_request).to be_merged }
-      it { expect(@fork_merge_request.notes.last.note).to include('merged') }
+      it { expect(@bork_merge_request).to be_merged }
+      it { expect(@bork_merge_request.notes.last.note).to include('merged') }
       it { expect(@build_failed_todo).to be_done }
-      it { expect(@fork_build_failed_todo).to be_done }
+      it { expect(@bork_build_failed_todo).to be_done }
     end
 
     context 'manual merge of source branch' do
       before do
         # Merge master -> feature branch
-        author = { email: 'test@gitlab.com', time: Time.now, name: "Me" }
+        author = { email: 'test@doggohub.com', time: Time.now, name: "Me" }
         commit_options = { message: 'Test message', committer: author, author: author }
         @project.repository.merge(@user, @merge_request, commit_options)
         commit = @project.repository.commit('feature')
@@ -98,14 +98,14 @@ describe MergeRequests::RefreshService, services: true do
       it { expect(@merge_request.notes.last.note).to include('merged') }
       it { expect(@merge_request).to be_merged }
       it { expect(@merge_request.diffs.size).to be > 0 }
-      it { expect(@fork_merge_request).to be_merged }
-      it { expect(@fork_merge_request.notes.last.note).to include('merged') }
+      it { expect(@bork_merge_request).to be_merged }
+      it { expect(@bork_merge_request.notes.last.note).to include('merged') }
       it { expect(@build_failed_todo).to be_done }
-      it { expect(@fork_build_failed_todo).to be_done }
+      it { expect(@bork_build_failed_todo).to be_done }
     end
 
-    context 'push to fork repo source branch' do
-      let(:refresh_service) { service.new(@fork_project, @user) }
+    context 'push to bork repo source branch' do
+      let(:refresh_service) { service.new(@bork_project, @user) }
       before do
         allow(refresh_service).to receive(:execute_hooks)
         refresh_service.execute(@oldrev, @newrev, 'refs/heads/master')
@@ -114,62 +114,62 @@ describe MergeRequests::RefreshService, services: true do
 
       it 'executes hooks with update action' do
         expect(refresh_service).to have_received(:execute_hooks).
-          with(@fork_merge_request, 'update', @oldrev)
+          with(@bork_merge_request, 'update', @oldrev)
       end
 
       it { expect(@merge_request.notes).to be_empty }
       it { expect(@merge_request).to be_open }
-      it { expect(@fork_merge_request.notes.last.note).to include('added 28 commits') }
-      it { expect(@fork_merge_request).to be_open }
+      it { expect(@bork_merge_request.notes.last.note).to include('added 28 commits') }
+      it { expect(@bork_merge_request).to be_open }
       it { expect(@build_failed_todo).to be_pending }
-      it { expect(@fork_build_failed_todo).to be_pending }
+      it { expect(@bork_build_failed_todo).to be_pending }
     end
 
-    context 'push to fork repo target branch' do
+    context 'push to bork repo target branch' do
       describe 'changes to merge requests' do
         before do
-          service.new(@fork_project, @user).execute(@oldrev, @newrev, 'refs/heads/feature')
+          service.new(@bork_project, @user).execute(@oldrev, @newrev, 'refs/heads/feature')
           reload_mrs
         end
 
         it { expect(@merge_request.notes).to be_empty }
         it { expect(@merge_request).to be_open }
-        it { expect(@fork_merge_request.notes).to be_empty }
-        it { expect(@fork_merge_request).to be_open }
+        it { expect(@bork_merge_request.notes).to be_empty }
+        it { expect(@bork_merge_request).to be_open }
         it { expect(@build_failed_todo).to be_pending }
-        it { expect(@fork_build_failed_todo).to be_pending }
+        it { expect(@bork_build_failed_todo).to be_pending }
       end
 
       describe 'merge request diff' do
-        it 'does not reload the diff of the merge request made from fork' do
+        it 'does not reload the diff of the merge request made from bork' do
           expect do
-            service.new(@fork_project, @user).execute(@oldrev, @newrev, 'refs/heads/feature')
-          end.not_to change { @fork_merge_request.reload.merge_request_diff }
+            service.new(@bork_project, @user).execute(@oldrev, @newrev, 'refs/heads/feature')
+          end.not_to change { @bork_merge_request.reload.merge_request_diff }
         end
       end
     end
 
-    context 'push to origin repo target branch after fork project was removed' do
+    context 'push to origin repo target branch after bork project was removed' do
       before do
-        @fork_project.destroy
+        @bork_project.destroy
         service.new(@project, @user).execute(@oldrev, @newrev, 'refs/heads/feature')
         reload_mrs
       end
 
       it { expect(@merge_request.notes.last.note).to include('merged') }
       it { expect(@merge_request).to be_merged }
-      it { expect(@fork_merge_request).to be_open }
-      it { expect(@fork_merge_request.notes).to be_empty }
+      it { expect(@bork_merge_request).to be_open }
+      it { expect(@bork_merge_request.notes).to be_empty }
       it { expect(@build_failed_todo).to be_done }
-      it { expect(@fork_build_failed_todo).to be_done }
+      it { expect(@bork_build_failed_todo).to be_done }
     end
 
     context 'push new branch that exists in a merge request' do
-      let(:refresh_service) { service.new(@fork_project, @user) }
+      let(:refresh_service) { service.new(@bork_project, @user) }
 
       it 'refreshes the merge request' do
         expect(refresh_service).to receive(:execute_hooks).
-                                       with(@fork_merge_request, 'update', Gitlab::Git::BLANK_SHA)
+                                       with(@bork_merge_request, 'update', Gitlab::Git::BLANK_SHA)
         allow_any_instance_of(Repository).to receive(:merge_base).and_return(@oldrev)
 
         refresh_service.execute(Gitlab::Git::BLANK_SHA, @newrev, 'refs/heads/master')
@@ -178,10 +178,10 @@ describe MergeRequests::RefreshService, services: true do
         expect(@merge_request.notes).to be_empty
         expect(@merge_request).to be_open
 
-        notes = @fork_merge_request.notes.reorder(:created_at).map(&:note)
+        notes = @bork_merge_request.notes.reorder(:created_at).map(&:note)
         expect(notes[0]).to include('restored source branch `master`')
         expect(notes[1]).to include('added 28 commits')
-        expect(@fork_merge_request).to be_open
+        expect(@bork_merge_request).to be_open
       end
     end
 
@@ -219,14 +219,14 @@ describe MergeRequests::RefreshService, services: true do
 
       context 'when the merge request is sourced from a different project' do
         it 'creates a `MergeRequestsClosingIssues` record for each issue closed by a commit' do
-          forked_project = create(:project)
-          create(:forked_project_link, forked_to_project: forked_project, forked_from_project: @project)
+          borked_project = create(:project)
+          create(:borked_project_link, borked_to_project: borked_project, borked_from_project: @project)
 
           merge_request = create(:merge_request,
                                  target_branch: 'master',
                                  source_branch: 'feature',
                                  target_project: @project,
-                                 source_project: forked_project)
+                                 source_project: borked_project)
           refresh_service = service.new(@project, @user)
           allow(refresh_service).to receive(:execute_hooks)
           refresh_service.execute(@oldrev, @newrev, 'refs/heads/feature')
@@ -239,9 +239,9 @@ describe MergeRequests::RefreshService, services: true do
 
     def reload_mrs
       @merge_request.reload
-      @fork_merge_request.reload
+      @bork_merge_request.reload
       @build_failed_todo.reload
-      @fork_build_failed_todo.reload
+      @bork_build_failed_todo.reload
     end
   end
 end

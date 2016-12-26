@@ -1,30 +1,30 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :shell do
-    desc "GitLab | Install or upgrade gitlab-shell"
+    desc "DoggoHub | Install or upgrade doggohub-shell"
     task :install, [:tag, :repo] => :environment do |t, args|
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
 
       default_version = Gitlab::Shell.version_required
       default_version_tag = "v#{default_version}"
-      args.with_defaults(tag: default_version_tag, repo: 'https://gitlab.com/gitlab-org/gitlab-shell.git')
+      args.with_defaults(tag: default_version_tag, repo: 'https://doggohub.com/doggohub-org/doggohub-shell.git')
 
-      gitlab_url = Gitlab.config.gitlab.url
-      # gitlab-shell requires a / at the end of the url
-      gitlab_url += '/' unless gitlab_url.end_with?('/')
-      target_dir = Gitlab.config.gitlab_shell.path
+      doggohub_url = Gitlab.config.doggohub.url
+      # doggohub-shell requires a / at the end of the url
+      doggohub_url += '/' unless doggohub_url.end_with?('/')
+      target_dir = Gitlab.config.doggohub_shell.path
 
       checkout_or_clone_tag(tag: default_version_tag, repo: args.repo, target_dir: target_dir)
 
       # Make sure we're on the right tag
       Dir.chdir(target_dir) do
         config = {
-          user: Gitlab.config.gitlab.user,
-          gitlab_url: gitlab_url,
+          user: Gitlab.config.doggohub.user,
+          doggohub_url: doggohub_url,
           http_settings: {self_signed_cert: false}.stringify_keys,
           auth_file: File.join(user_home, ".ssh", "authorized_keys"),
           redis: {
             bin: %x{which redis-cli}.chomp,
-            namespace: "resque:gitlab"
+            namespace: "resque:doggohub"
           }.stringify_keys,
           log_level: "INFO",
           audit_usernames: false
@@ -39,7 +39,7 @@ namespace :gitlab do
           config['redis']['port'] = redis_url.port
         end
 
-        # Generate config.yml based on existing gitlab settings
+        # Generate config.yml based on existing doggohub settings
         File.open("config.yml", "w+") {|f| f.puts config.to_yaml}
 
         # Launch installation process
@@ -47,13 +47,13 @@ namespace :gitlab do
       end
 
       # (Re)create hooks
-      Rake::Task['gitlab:shell:create_hooks'].invoke
+      Rake::Task['doggohub:shell:create_hooks'].invoke
 
       # Required for debian packaging with PKGR: Setup .ssh/environment with
       # the current PATH, so that the correct ruby version gets loaded
       # Requires to set "PermitUserEnvironment yes" in sshd config (should not
       # be an issue since it is more than likely that there are no "normal"
-      # user accounts on a gitlab server). The alternative is for the admin to
+      # user accounts on a doggohub server). The alternative is for the admin to
       # install a ruby (1.9.3+) in the global path.
       File.open(File.join(user_home, ".ssh", "environment"), "w+") do |f|
         f.puts "PATH=#{ENV['PATH']}"
@@ -62,12 +62,12 @@ namespace :gitlab do
       Gitlab::Shell.ensure_secret_token!
     end
 
-    desc "GitLab | Setup gitlab-shell"
+    desc "DoggoHub | Setup doggohub-shell"
     task setup: :environment do
       setup
     end
 
-    desc "GitLab | Build missing projects"
+    desc "DoggoHub | Build missing projects"
     task build_missing_projects: :environment do
       Project.find_each(batch_size: 1000) do |project|
         path_to_repo = project.repository.path_to_repo
@@ -86,16 +86,16 @@ namespace :gitlab do
 
     desc 'Create or repair repository hooks symlink'
     task create_hooks: :environment do
-      warn_user_is_not_gitlab
+      warn_user_is_not_doggohub
 
       puts 'Creating/Repairing hooks symlinks for all repositories'
-      system(*%W(#{Gitlab.config.gitlab_shell.path}/bin/create-hooks) + repository_storage_paths_args)
+      system(*%W(#{Gitlab.config.doggohub_shell.path}/bin/create-hooks) + repository_storage_paths_args)
       puts 'done'.color(:green)
     end
   end
 
   def setup
-    warn_user_is_not_gitlab
+    warn_user_is_not_doggohub
 
     unless ENV['force'] == 'yes'
       puts "This will rebuild an authorized_keys file."

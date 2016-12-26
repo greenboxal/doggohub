@@ -21,15 +21,15 @@ module Gitlab
 
       private
 
-      def gitlab_user_id(github_id)
+      def doggohub_user_id(github_id)
         User.joins(:identities).
           find_by("identities.extern_uid = ? AND identities.provider = 'github'", github_id.to_s).
           try(:id)
       end
 
-      def gitlab_author_id
-        return @gitlab_author_id if defined?(@gitlab_author_id)
-        @gitlab_author_id = gitlab_user_id(raw_data.user.id)
+      def doggohub_author_id
+        return @doggohub_author_id if defined?(@doggohub_author_id)
+        @doggohub_author_id = doggohub_user_id(raw_data.user.id)
       end
     end
   end

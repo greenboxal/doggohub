@@ -29,8 +29,8 @@ Feature: Admin Groups
   @javascript
   Scenario: Invite user to a group by e-mail
     When I visit admin group page
-    When I select user "johndoe@gitlab.com" from user list as "Reporter"
-    Then I should see "johndoe@gitlab.com" in team list in every project as "Reporter"
+    When I select user "johndoe@doggohub.com" from user list as "Reporter"
+    Then I should see "johndoe@doggohub.com" in team list in every project as "Reporter"
 
   @javascript
   Scenario: Signed in admin should be able to add himself to a group

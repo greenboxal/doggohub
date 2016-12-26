@@ -22,11 +22,11 @@ describe Gitlab::AwardEmoji do
 
     context 'handles relative root' do
       it 'includes the full path' do
-        allow(Gitlab::Application.config).to receive(:relative_url_root).and_return('/gitlab')
+        allow(Gitlab::Application.config).to receive(:relative_url_root).and_return('/doggohub')
 
         subject.each do |hash|
           expect(hash[:name]).to be_an_instance_of(String)
-          expect(hash[:path]).to start_with('/gitlab')
+          expect(hash[:path]).to start_with('/doggohub')
         end
       end
     end

@@ -1,7 +1,7 @@
-# GitLab logrotate settings
+# DoggoHub logrotate settings
 # based on: http://stackoverflow.com/a/4883967
 
-/home/git/gitlab/log/*.log {
+/home/git/doggohub/log/*.log {
     daily
     missingok
     rotate 90
@@ -10,7 +10,7 @@
     copytruncate
 }
 
-/home/git/gitlab-shell/gitlab-shell.log {
+/home/git/doggohub-shell/doggohub-shell.log {
     daily
     missingok
     rotate 90

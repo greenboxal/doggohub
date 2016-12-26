@@ -12,7 +12,7 @@ module Gitlab
       version: 'version',
       gitignore: '.gitignore',
       koding: '.koding.yml',
-      gitlab_ci: '.gitlab-ci.yml',
+      doggohub_ci: '.doggohub-ci.yml',
       avatar: /\Alogo\.(png|jpg|gif)\z/
     }
 

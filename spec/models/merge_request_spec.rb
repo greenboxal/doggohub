@@ -239,16 +239,16 @@ describe MergeRequest, models: true do
     end
   end
 
-  describe '#for_fork?' do
-    it 'returns true if the merge request is for a fork' do
+  describe '#for_bork?' do
+    it 'returns true if the merge request is for a bork' do
       subject.source_project = create(:project, namespace: create(:group))
       subject.target_project = create(:project, namespace: create(:group))
 
-      expect(subject.for_fork?).to be_truthy
+      expect(subject.for_bork?).to be_truthy
     end
 
-    it 'returns false if is not for a fork' do
-      expect(subject.for_fork?).to be_falsey
+    it 'returns false if is not for a bork' do
+      expect(subject.for_bork?).to be_falsey
     end
   end
 
@@ -494,7 +494,7 @@ describe MergeRequest, models: true do
 
   describe '#diverged_commits_count' do
     let(:project)      { create(:project) }
-    let(:fork_project) { create(:project, forked_from_project: project) }
+    let(:bork_project) { create(:project, borked_from_project: project) }
 
     context 'when the target branch does not exist anymore' do
       subject { create(:merge_request, source_project: project, target_project: project) }
@@ -521,16 +521,16 @@ describe MergeRequest, models: true do
       end
     end
 
-    context 'diverged on fork' do
-      subject(:merge_request_fork_with_divergence) { create(:merge_request, :diverged, source_project: fork_project, target_project: project) }
+    context 'diverged on bork' do
+      subject(:merge_request_bork_with_divergence) { create(:merge_request, :diverged, source_project: bork_project, target_project: project) }
 
       it 'counts commits that are on target branch but not on source branch' do
         expect(subject.diverged_commits_count).to eq(29)
       end
     end
 
-    context 'rebased on fork' do
-      subject(:merge_request_rebased) { create(:merge_request, :rebased, source_project: fork_project, target_project: project) }
+    context 'rebased on bork' do
+      subject(:merge_request_rebased) { create(:merge_request, :rebased, source_project: bork_project, target_project: project) }
 
       it 'counts commits that are on target branch but not on source branch' do
         expect(subject.diverged_commits_count).to eq(0)
@@ -1008,8 +1008,8 @@ describe MergeRequest, models: true do
 
     context 'with environments on source project' do
       let(:source_project) do
-        create(:project) do |fork_project|
-          fork_project.create_forked_project_link(forked_to_project_id: fork_project.id, forked_from_project_id: project.id)
+        create(:project) do |bork_project|
+          bork_project.create_borked_project_link(borked_to_project_id: bork_project.id, borked_from_project_id: project.id)
         end
       end
 
@@ -1386,14 +1386,14 @@ describe MergeRequest, models: true do
 
   describe "#source_project_missing?" do
     let(:project)      { create(:project) }
-    let(:fork_project) { create(:project, forked_from_project: project) }
+    let(:bork_project) { create(:project, borked_from_project: project) }
     let(:user)         { create(:user) }
-    let(:unlink_project) { Projects::UnlinkForkService.new(fork_project, user) }
+    let(:unlink_project) { Projects::UnlinkBorkService.new(bork_project, user) }
 
-    context "when the fork exists" do
+    context "when the bork exists" do
       let(:merge_request) do
         create(:merge_request,
-          source_project: fork_project,
+          source_project: bork_project,
           target_project: project)
       end
 
@@ -1406,10 +1406,10 @@ describe MergeRequest, models: true do
       it { expect(merge_request.source_project_missing?).to be_falsey }
     end
 
-    context "when the fork does not exist" do
+    context "when the bork does not exist" do
       let(:merge_request) do
         create(:merge_request,
-          source_project: fork_project,
+          source_project: bork_project,
           target_project: project)
       end
 
@@ -1422,40 +1422,40 @@ describe MergeRequest, models: true do
     end
   end
 
-  describe "#closed_without_fork?" do
+  describe "#closed_without_bork?" do
     let(:project)      { create(:project) }
-    let(:fork_project) { create(:project, forked_from_project: project) }
+    let(:bork_project) { create(:project, borked_from_project: project) }
     let(:user)         { create(:user) }
-    let(:unlink_project) { Projects::UnlinkForkService.new(fork_project, user) }
+    let(:unlink_project) { Projects::UnlinkBorkService.new(bork_project, user) }
 
     context "when the merge request is closed" do
       let(:closed_merge_request) do
         create(:closed_merge_request,
-          source_project: fork_project,
+          source_project: bork_project,
           target_project: project)
       end
 
-      it "returns false if the fork exist" do
-        expect(closed_merge_request.closed_without_fork?).to be_falsey
+      it "returns false if the bork exist" do
+        expect(closed_merge_request.closed_without_bork?).to be_falsey
       end
 
-      it "returns true if the fork does not exist" do
+      it "returns true if the bork does not exist" do
         unlink_project.execute
         closed_merge_request.reload
 
-        expect(closed_merge_request.closed_without_fork?).to be_truthy
+        expect(closed_merge_request.closed_without_bork?).to be_truthy
       end
     end
 
     context "when the merge request is open" do
       let(:open_merge_request) do
         create(:merge_request,
-          source_project: fork_project,
+          source_project: bork_project,
           target_project: project)
       end
 
       it "returns false" do
-        expect(open_merge_request.closed_without_fork?).to be_falsey
+        expect(open_merge_request.closed_without_bork?).to be_falsey
       end
     end
   end
@@ -1468,25 +1468,25 @@ describe MergeRequest, models: true do
         expect(subject.reopenable?).to be_truthy
       end
 
-      context 'forked project' do
+      context 'borked project' do
         let(:project)      { create(:project) }
         let(:user)         { create(:user) }
-        let(:fork_project) { create(:project, forked_from_project: project, namespace: user.namespace) }
+        let(:bork_project) { create(:project, borked_from_project: project, namespace: user.namespace) }
 
         let!(:merge_request) do
           create(:closed_merge_request,
-            source_project: fork_project,
+            source_project: bork_project,
             target_project: project)
         end
 
-        it 'returns false if unforked' do
-          Projects::UnlinkForkService.new(fork_project, user).execute
+        it 'returns false if unborked' do
+          Projects::UnlinkBorkService.new(bork_project, user).execute
 
           expect(merge_request.reload.reopenable?).to be_falsey
         end
 
         it 'returns false if the source project is deleted' do
-          Projects::DestroyService.new(fork_project, user).execute
+          Projects::DestroyService.new(bork_project, user).execute
 
           expect(merge_request.reload.reopenable?).to be_falsey
         end

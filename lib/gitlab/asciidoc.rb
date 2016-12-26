@@ -6,8 +6,8 @@ module Gitlab
   # the resulting HTML through HTML pipeline filters.
   module Asciidoc
     DEFAULT_ADOC_ATTRS = [
-      'showtitle', 'idprefix=user-content-', 'idseparator=-', 'env=gitlab',
-      'env-gitlab', 'source-highlighter=html-pipeline', 'icons=font'
+      'showtitle', 'idprefix=user-content-', 'idseparator=-', 'env=doggohub',
+      'env-doggohub', 'source-highlighter=html-pipeline', 'icons=font'
     ].freeze
 
     # Public: Converts the provided Asciidoc markup into HTML.
@@ -24,7 +24,7 @@ module Gitlab
     def self.render(input, context, asciidoc_opts = {})
       asciidoc_opts.reverse_merge!(
         safe: :secure,
-        backend: :gitlab_html5,
+        backend: :doggohub_html5,
         attributes: []
       )
       asciidoc_opts[:attributes].unshift(*DEFAULT_ADOC_ATTRS)
@@ -39,7 +39,7 @@ module Gitlab
     class Html5Converter < Asciidoctor::Converter::Html5Converter
       extend Asciidoctor::Converter::Config
 
-      register_for 'gitlab_html5'
+      register_for 'doggohub_html5'
 
       def stem(node)
         return super unless node.style.to_sym == :latexmath

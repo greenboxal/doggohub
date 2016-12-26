@@ -373,7 +373,7 @@ describe API::Helpers, api: true do
     end
 
     it 'does not report a MethodNotAllowed exception to Sentry' do
-      exception = Grape::Exceptions::MethodNotAllowed.new({ 'X-GitLab-Test' => '1' })
+      exception = Grape::Exceptions::MethodNotAllowed.new({ 'X-DoggoHub-Test' => '1' })
       allow(exception).to receive(:backtrace).and_return(caller)
 
       expect(Raven).not_to receive(:capture_exception).with(exception)

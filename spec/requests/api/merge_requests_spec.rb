@@ -306,17 +306,17 @@ describe API::MergeRequests, api: true  do
       end
     end
 
-    context 'forked projects' do
+    context 'borked projects' do
       let!(:user2) { create(:user) }
-      let!(:fork_project) { create(:project, forked_from_project: project,  namespace: user2.namespace, creator_id: user2.id) }
+      let!(:bork_project) { create(:project, borked_from_project: project,  namespace: user2.namespace, creator_id: user2.id) }
       let!(:unrelated_project) { create(:project,  namespace: create(:user).namespace, creator_id: user2.id) }
 
       before :each do |each|
-        fork_project.team << [user2, :reporter]
+        bork_project.team << [user2, :reporter]
       end
 
       it "returns merge_request" do
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
           title: 'Test merge_request', source_branch: "feature_conflict", target_branch: "master",
           author: user2, target_project_id: project.id, description: 'Test description for Test merge_request'
         expect(response).to have_http_status(201)
@@ -325,46 +325,46 @@ describe API::MergeRequests, api: true  do
       end
 
       it "does not return 422 when source_branch equals target_branch" do
-        expect(project.id).not_to eq(fork_project.id)
-        expect(fork_project.forked?).to be_truthy
-        expect(fork_project.forked_from_project).to eq(project)
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
+        expect(project.id).not_to eq(bork_project.id)
+        expect(bork_project.borked?).to be_truthy
+        expect(bork_project.borked_from_project).to eq(project)
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
         title: 'Test merge_request', source_branch: "master", target_branch: "master", author: user2, target_project_id: project.id
         expect(response).to have_http_status(201)
         expect(json_response['title']).to eq('Test merge_request')
       end
 
       it "returns 400 when source_branch is missing" do
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
         title: 'Test merge_request', target_branch: "master", author: user2, target_project_id: project.id
         expect(response).to have_http_status(400)
       end
 
       it "returns 400 when target_branch is missing" do
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
         title: 'Test merge_request', target_branch: "master", author: user2, target_project_id: project.id
         expect(response).to have_http_status(400)
       end
 
       it "returns 400 when title is missing" do
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
         target_branch: 'master', source_branch: 'markdown', author: user2, target_project_id: project.id
         expect(response).to have_http_status(400)
       end
 
       context 'when target_branch is specified' do
-        it 'returns 422 if not a forked project' do
+        it 'returns 422 if not a borked project' do
           post api("/projects/#{project.id}/merge_requests", user),
                title: 'Test merge_request',
                target_branch: 'master',
                source_branch: 'markdown',
                author: user,
-               target_project_id: fork_project.id
+               target_project_id: bork_project.id
           expect(response).to have_http_status(422)
         end
 
-        it 'returns 422 if targeting a different fork' do
-          post api("/projects/#{fork_project.id}/merge_requests", user2),
+        it 'returns 422 if targeting a different bork' do
+          post api("/projects/#{bork_project.id}/merge_requests", user2),
                title: 'Test merge_request',
                target_branch: 'master',
                source_branch: 'markdown',
@@ -375,8 +375,8 @@ describe API::MergeRequests, api: true  do
       end
 
       it "returns 201 when target_branch is specified and for the same project" do
-        post api("/projects/#{fork_project.id}/merge_requests", user2),
-        title: 'Test merge_request', target_branch: 'master', source_branch: 'markdown', author: user2, target_project_id: fork_project.id
+        post api("/projects/#{bork_project.id}/merge_requests", user2),
+        title: 'Test merge_request', target_branch: 'master', source_branch: 'markdown', author: user2, target_project_id: bork_project.id
         expect(response).to have_http_status(201)
       end
     end

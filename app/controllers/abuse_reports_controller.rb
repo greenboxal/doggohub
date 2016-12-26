@@ -12,7 +12,7 @@ class AbuseReportsController < ApplicationController
     if @abuse_report.save
       @abuse_report.notify
 
-      message = "Thank you for your report. A GitLab administrator will look into it shortly."
+      message = "Thank you for your report. A DoggoHub administrator will look into it shortly."
       redirect_to @abuse_report.user, notice: message
     else
       render :new

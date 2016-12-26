@@ -2,7 +2,7 @@
 
 ## Start working on your project
 
-In Git, when you copy a project you say you "clone" it. To work on a git project locally (from your own computer), you will need to clone it. To do this, sign in to GitLab.
+In Git, when you copy a project you say you "clone" it. To work on a git project locally (from your own computer), you will need to clone it. To do this, sign in to DoggoHub.
 
 When you are on your Dashboard, click on the project that you'd like to clone.
 To work in the project, you can copy a link to the Git repository through a SSH

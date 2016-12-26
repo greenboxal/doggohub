@@ -41,7 +41,7 @@
               </template>
               <template v-else>
                 <span class="merge-request-branch" v-if="mergeRequest.branch">
-                  <i class= "fa fa-code-fork"></i>
+                  <i class= "fa fa-code-bork"></i>
                   <a :href="mergeRequest.branch.url">{{ mergeRequest.branch.name }}</a>
                 </span>
               </template>

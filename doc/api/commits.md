@@ -16,7 +16,7 @@ GET /projects/:id/repository/commits
 | `until` | string | no | Only commits before or in this date will be returned in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/repository/commits"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/repository/commits"
 ```
 
 Example response:
@@ -52,7 +52,7 @@ Example response:
 
 ## Create a commit with multiple files and actions
 
-> [Introduced][ce-6096] in GitLab 8.13.
+> [Introduced][ce-6096] in DoggoHub 8.13.
 
 Create a commit by posting a JSON payload
 
@@ -108,7 +108,7 @@ PAYLOAD=$(cat << 'JSON'
 }
 JSON
 )
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --header "Content-Type: application/json" --data "$PAYLOAD" https://gitlab.example.com/api/v3/projects/1/repository/commits
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --header "Content-Type: application/json" --data "$PAYLOAD" https://doggohub.example.com/api/v3/projects/1/repository/commits
 ```
 
 Example response:
@@ -153,7 +153,7 @@ Parameters:
 | `sha` | string | yes | The commit hash or name of a repository branch or tag |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/repository/commits/master
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/repository/commits/master
 ```
 
 Example response:
@@ -185,7 +185,7 @@ Example response:
 
 ## Cherry pick a commit
 
-> [Introduced][ce-8047] in GitLab 8.15.
+> [Introduced][ce-8047] in DoggoHub 8.15.
 
 Cherry picks a commit to a given branch.
 
@@ -202,7 +202,7 @@ Parameters:
 | `branch` | string | yes | The name of the branch  |
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --form "branch=master" "https://gitlab.example.com/api/v3/projects/5/repository/commits/master/cherry_pick"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --form "branch=master" "https://doggohub.example.com/api/v3/projects/5/repository/commits/master/cherry_pick"
 ```
 
 Example response:
@@ -237,7 +237,7 @@ Parameters:
 | `sha` | string | yes | The commit hash or name of a repository branch or tag |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/repository/commits/master/diff"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/repository/commits/master/diff"
 ```
 
 Example response:
@@ -273,7 +273,7 @@ Parameters:
 | `sha` | string | yes | The commit hash or name of a repository branch or tag |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/repository/commits/master/comments"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/repository/commits/master/comments"
 ```
 
 Example response:
@@ -326,7 +326,7 @@ POST /projects/:id/repository/commits/:sha/comments
 | `line_type` | string  | no  | The line type. Takes `new` or `old` as arguments |
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --form "note=Nice picture man\!" --form "path=dudeism.md" --form "line=11" --form "line_type=new" https://gitlab.example.com/api/v3/projects/17/repository/commits/18f3e63d05582537db6d183d9d557be09e1f90c8/comments
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" --form "note=Nice picture man\!" --form "path=dudeism.md" --form "line=11" --form "line_type=new" https://doggohub.example.com/api/v3/projects/17/repository/commits/18f3e63d05582537db6d183d9d557be09e1f90c8/comments
 ```
 
 Example response:
@@ -334,8 +334,8 @@ Example response:
 ```json
 {
    "author" : {
-      "web_url" : "https://gitlab.example.com/thedude",
-      "avatar_url" : "https://gitlab.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
+      "web_url" : "https://doggohub.example.com/thedude",
+      "avatar_url" : "https://doggohub.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
       "username" : "thedude",
       "state" : "active",
       "name" : "Jeff Lebowski",
@@ -351,7 +351,7 @@ Example response:
 
 ## Commit status
 
-Since GitLab 8.1, this is the new commit status API.
+Since DoggoHub 8.1, this is the new commit status API.
 
 ### Get the status of a commit
 
@@ -371,7 +371,7 @@ GET /projects/:id/repository/commits/:sha/statuses
 | `all`     | boolean | no  | Return all statuses, not only the latest ones
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/17/repository/commits/18f3e63d05582537db6d183d9d557be09e1f90c8/statuses
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/17/repository/commits/18f3e63d05582537db6d183d9d557be09e1f90c8/statuses
 ```
 
 Example response:
@@ -389,14 +389,14 @@ Example response:
       "author" : {
          "username" : "thedude",
          "state" : "active",
-         "web_url" : "https://gitlab.example.com/thedude",
-         "avatar_url" : "https://gitlab.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
+         "web_url" : "https://doggohub.example.com/thedude",
+         "avatar_url" : "https://doggohub.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
          "id" : 28,
          "name" : "Jeff Lebowski"
       },
       "description" : null,
       "sha" : "18f3e63d05582537db6d183d9d557be09e1f90c8",
-      "target_url" : "https://gitlab.example.com/thedude/gitlab-ce/builds/91",
+      "target_url" : "https://doggohub.example.com/thedude/doggohub-ce/builds/91",
       "finished_at" : null,
       "id" : 91,
       "ref" : "master"
@@ -407,7 +407,7 @@ Example response:
       "allow_failure" : false,
       "status" : "pending",
       "created_at" : "2016-01-19T08:40:25.832Z",
-      "target_url" : "https://gitlab.example.com/thedude/gitlab-ce/builds/90",
+      "target_url" : "https://doggohub.example.com/thedude/doggohub-ce/builds/90",
       "id" : 90,
       "finished_at" : null,
       "ref" : "master",
@@ -416,9 +416,9 @@ Example response:
          "id" : 28,
          "name" : "Jeff Lebowski",
          "username" : "thedude",
-         "web_url" : "https://gitlab.example.com/thedude",
+         "web_url" : "https://doggohub.example.com/thedude",
          "state" : "active",
-         "avatar_url" : "https://gitlab.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png"
+         "avatar_url" : "https://doggohub.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png"
       },
       "description" : null
    },
@@ -446,7 +446,7 @@ POST /projects/:id/statuses/:sha
 | `description` | string  | no  | The short description of the status
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/17/statuses/18f3e63d05582537db6d183d9d557be09e1f90c8?state=success"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/17/statuses/18f3e63d05582537db6d183d9d557be09e1f90c8?state=success"
 ```
 
 Example response:
@@ -454,9 +454,9 @@ Example response:
 ```json
 {
    "author" : {
-      "web_url" : "https://gitlab.example.com/thedude",
+      "web_url" : "https://doggohub.example.com/thedude",
       "name" : "Jeff Lebowski",
-      "avatar_url" : "https://gitlab.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
+      "avatar_url" : "https://doggohub.example.com/uploads/user/avatar/28/The-Big-Lebowski-400-400.png",
       "username" : "thedude",
       "state" : "active",
       "id" : 28
@@ -475,5 +475,5 @@ Example response:
 }
 ```
 
-[ce-6096]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/6096 "Multi-file commit"
-[ce-8047]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/8047
+[ce-6096]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/6096 "Multi-file commit"
+[ce-8047]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/8047

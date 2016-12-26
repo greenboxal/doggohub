@@ -64,7 +64,7 @@ describe Projects::EnvironmentsController do
 
   describe 'PATCH #update' do
     it 'responds with a 302' do
-      patch_params = environment_params.merge(environment: { external_url: 'https://git.gitlab.com' })
+      patch_params = environment_params.merge(environment: { external_url: 'https://git.doggohub.com' })
       patch :update, patch_params
 
       expect(response).to have_http_status(302)

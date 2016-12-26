@@ -7,16 +7,16 @@ SSH+sudo access to both the production environment and the staging VM.
 **Destroy your staging VM** when you are done with it. It is important to avoid
 data leaks.
 
-On the staging VM, add the following line to `/etc/gitlab/gitlab.rb` to speed up
+On the staging VM, add the following line to `/etc/doggohub/doggohub.rb` to speed up
 large database imports.
 
 ```
 # On STAGING
-echo "postgresql['checkpoint_segments'] = 64" | sudo tee -a /etc/gitlab/gitlab.rb
-sudo touch /etc/gitlab/skip-auto-migrations
-sudo gitlab-ctl reconfigure
-sudo gitlab-ctl stop unicorn
-sudo gitlab-ctl stop sidekiq
+echo "postgresql['checkpoint_segments'] = 64" | sudo tee -a /etc/doggohub/doggohub.rb
+sudo touch /etc/doggohub/skip-auto-migrations
+sudo doggohub-ctl reconfigure
+sudo doggohub-ctl stop unicorn
+sudo doggohub-ctl stop sidekiq
 ```
 
 Next, we let the production environment stream a compressed SQL dump to our
@@ -25,8 +25,8 @@ VM.
 
 ```
 # On LOCAL MACHINE
-ssh -C gitlab.example.com sudo -u gitlab-psql /opt/gitlab/embedded/bin/pg_dump -Cc gitlabhq_production |\
-  ssh -C staging-vm sudo -u gitlab-psql /opt/gitlab/embedded/bin/psql -d template1
+ssh -C doggohub.example.com sudo -u doggohub-psql /opt/doggohub/embedded/bin/pg_dump -Cc doggohubhq_production |\
+  ssh -C staging-vm sudo -u doggohub-psql /opt/doggohub/embedded/bin/psql -d template1
 ```
 
 ## Recreating directory structure
@@ -39,7 +39,7 @@ re-create.
 
 ```
 # On PRODUCTION
-(umask 077; sudo find /var/opt/gitlab/git-data/repositories -maxdepth 1 -type d -print0 > directories.txt)
+(umask 077; sudo find /var/opt/doggohub/git-data/repositories -maxdepth 1 -type d -print0 > directories.txt)
 ```
 
 Copy `directories.txt` to the staging server and create the directories there.

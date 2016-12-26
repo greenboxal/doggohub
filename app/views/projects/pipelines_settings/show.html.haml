@@ -7,7 +7,7 @@
   .col-lg-9
     = form_for @project, url: namespace_project_pipelines_settings_path(@project.namespace.becomes(Namespace), @project) do |f|
       %fieldset.builds-feature
-        - unless @repository.gitlab_ci_yml
+        - unless @repository.doggohub_ci_yml
           .form-group
             %p Pipelines need to be configured before you can begin using Continuous Integration.
             = link_to 'Get started with CI/CD Pipelines', help_page_path('ci/quick_start/README'), class: 'btn btn-info'

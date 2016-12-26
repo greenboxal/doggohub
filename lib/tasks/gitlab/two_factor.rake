@@ -1,6 +1,6 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :two_factor do
-    desc "GitLab | Disable Two-factor authentication (2FA) for all users"
+    desc "DoggoHub | Disable Two-factor authentication (2FA) for all users"
     task disable_for_all_users: :environment do
       scope = User.with_two_factor
       count = scope.count

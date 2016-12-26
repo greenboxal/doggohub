@@ -4,10 +4,10 @@ describe MergeRequests::ResolveService do
   let(:user) { create(:user) }
   let(:project) { create(:project) }
 
-  let(:fork_project) do
-    create(:forked_project_with_submodules) do |fork_project|
-      fork_project.build_forked_project_link(forked_to_project_id: fork_project.id, forked_from_project_id: project.id)
-      fork_project.save
+  let(:bork_project) do
+    create(:borked_project_with_submodules) do |bork_project|
+      bork_project.build_borked_project_link(borked_to_project_id: bork_project.id, borked_from_project_id: project.id)
+      bork_project.save
     end
   end
 
@@ -17,9 +17,9 @@ describe MergeRequests::ResolveService do
            target_branch: 'conflict-start')
   end
 
-  let(:merge_request_from_fork) do
+  let(:merge_request_from_bork) do
     create(:merge_request,
-           source_branch: 'conflict-resolvable-fork', source_project: fork_project,
+           source_branch: 'conflict-resolvable-bork', source_project: bork_project,
            target_branch: 'conflict-start', target_project: project)
   end
 
@@ -64,21 +64,21 @@ describe MergeRequests::ResolveService do
         end
       end
 
-      context 'when the source project is a fork and does not contain the HEAD of the target branch' do
+      context 'when the source project is a bork and does not contain the HEAD of the target branch' do
         let!(:target_head) do
           project.repository.commit_file(user, 'new-file-in-target', '', 'Add new file in target', 'conflict-start', false)
         end
 
         before do
-          MergeRequests::ResolveService.new(fork_project, user, params).execute(merge_request_from_fork)
+          MergeRequests::ResolveService.new(bork_project, user, params).execute(merge_request_from_bork)
         end
 
         it 'creates a commit with the message' do
-          expect(merge_request_from_fork.source_branch_head.message).to eq(params[:commit_message])
+          expect(merge_request_from_bork.source_branch_head.message).to eq(params[:commit_message])
         end
 
         it 'creates a commit with the correct parents' do
-          expect(merge_request_from_fork.source_branch_head.parents.map(&:id)).
+          expect(merge_request_from_bork.source_branch_head.parents.map(&:id)).
             to eq(['404fa3fc7c2c9b5dacff102f353bdf55b1be2813',
                    target_head])
         end

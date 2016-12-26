@@ -52,7 +52,7 @@ class Spinach::Features::ProjectSourceBrowseFiles < Spinach::FeatureSteps
   end
 
   step 'I should see raw file content' do
-    expect(source).to eq '' # Body is filled in by gitlab-workhorse
+    expect(source).to eq '' # Body is filled in by doggohub-workhorse
   end
 
   step 'I click button "Edit"' do
@@ -262,9 +262,9 @@ class Spinach::Features::ProjectSourceBrowseFiles < Spinach::FeatureSteps
     expect(current_path).to eq(new_namespace_project_merge_request_path(@project.namespace, @project))
   end
 
-  step "I am redirected to the fork's new merge request page" do
-    fork = @user.fork_of(@project)
-    expect(current_path).to eq(new_namespace_project_merge_request_path(fork.namespace, fork))
+  step "I am redirected to the bork's new merge request page" do
+    bork = @user.bork_of(@project)
+    expect(current_path).to eq(new_namespace_project_merge_request_path(bork.namespace, bork))
   end
 
   step 'I am redirected to the root directory' do
@@ -362,8 +362,8 @@ class Spinach::Features::ProjectSourceBrowseFiles < Spinach::FeatureSteps
     end
   end
 
-  step 'I should see a notice about a new fork having been created' do
-    expect(page).to have_content "You're not allowed to make changes to this project directly. A fork of this project has been created that you can make changes in, so you can submit a merge request."
+  step 'I should see a notice about a new bork having been created' do
+    expect(page).to have_content "You're not allowed to make changes to this project directly. A bork of this project has been created that you can make changes in, so you can submit a merge request."
   end
 
   # SVG files

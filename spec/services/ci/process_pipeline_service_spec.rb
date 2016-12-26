@@ -324,7 +324,7 @@ describe Ci::ProcessPipelineService, services: true do
         # When builds succeed we will enqueue remaining builds.
         #
         # We will have 2 succeeded, 1 pending (from stage test), total 4 (two
-        # additional build from `.gitlab-ci.yml`).
+        # additional build from `.doggohub-ci.yml`).
         #
         succeed_pending
         process_pipeline

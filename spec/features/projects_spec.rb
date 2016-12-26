@@ -34,24 +34,24 @@ feature 'Project', feature: true do
     end
   end
 
-  describe 'remove forked relationship', js: true do
+  describe 'remove borked relationship', js: true do
     let(:user)    { create(:user) }
     let(:project) { create(:project, namespace: user.namespace) }
 
     before do
       login_with user
-      create(:forked_project_link, forked_to_project: project)
+      create(:borked_project_link, borked_to_project: project)
       visit edit_namespace_project_path(project.namespace, project)
     end
 
-    it 'removes fork' do
-      expect(page).to have_content 'Remove fork relationship'
+    it 'removes bork' do
+      expect(page).to have_content 'Remove bork relationship'
 
-      remove_with_confirm('Remove fork relationship', project.path)
+      remove_with_confirm('Remove bork relationship', project.path)
 
-      expect(page).to have_content 'The fork relationship has been removed.'
-      expect(project.forked?).to be_falsey
-      expect(page).not_to have_content 'Remove fork relationship'
+      expect(page).to have_content 'The bork relationship has been removed.'
+      expect(project.borked?).to be_falsey
+      expect(page).not_to have_content 'Remove bork relationship'
     end
   end
 
@@ -121,7 +121,7 @@ feature 'Project', feature: true do
 
   describe 'tree view (default view is set to Files)' do
     let(:user) { create(:user, project_view: 'files') }
-    let(:project) { create(:forked_project_with_submodules) }
+    let(:project) { create(:borked_project_with_submodules) }
 
     before do
       project.team << [user, :master]

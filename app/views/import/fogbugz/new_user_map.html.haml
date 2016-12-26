@@ -7,22 +7,22 @@
 
 = form_tag create_user_map_import_fogbugz_path, class: 'form-horizontal' do
   %p
-    Customize how FogBugz email addresses and usernames are imported into GitLab.
+    Customize how FogBugz email addresses and usernames are imported into DoggoHub.
     In the next step, you'll be able to select the projects you want to import.
   %p
-    The user map is a mapping of the FogBugz users that participated on your projects to the way their email address and usernames wil be imported into GitLab. You can change this by populating the table below.
+    The user map is a mapping of the FogBugz users that participated on your projects to the way their email address and usernames wil be imported into DoggoHub. You can change this by populating the table below.
   %ul
     %li
       %strong Default: Map a FogBugz account ID to a full name
       %p
-        An empty GitLab User field will add the FogBugz user's full name
+        An empty DoggoHub User field will add the FogBugz user's full name
         (e.g. "By John Smith") in the description of all issues and comments.
         It will also associate and/or assign these issues and comments with
         the project creator.
     %li
-      %strong Map a FogBugz account ID to a GitLab user
+      %strong Map a FogBugz account ID to a DoggoHub user
       %p
-        Selecting a GitLab user will add a link to the GitLab user in the descriptions
+        Selecting a DoggoHub user will add a link to the DoggoHub user in the descriptions
         of issues and comments (e.g. "By <a href="#">@johnsmith</a>"). It will also
         associate and/or assign these issues and comments with the selected user.
 
@@ -33,7 +33,7 @@
           %th ID
           %th Name
           %th Email
-          %th GitLab User
+          %th DoggoHub User
       %tbody
         - @user_map.each do |id, user|
           %tr
@@ -41,8 +41,8 @@
             %td= text_field_tag "users[#{id}][name]", user[:name], class: 'form-control'
             %td= text_field_tag "users[#{id}][email]", user[:email], class: 'form-control'
             %td
-              = users_select_tag("users[#{id}][gitlab_user]", class: 'custom-form-control',
-                scope: :all, email_user: true, selected: user[:gitlab_user])
+              = users_select_tag("users[#{id}][doggohub_user]", class: 'custom-form-control',
+                scope: :all, email_user: true, selected: user[:doggohub_user])
 
   .form-actions
     = submit_tag 'Continue to the next step', class: 'btn btn-create'

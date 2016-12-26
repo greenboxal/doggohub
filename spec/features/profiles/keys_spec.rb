@@ -15,7 +15,7 @@ feature 'Profile > SSH Keys', feature: true do
     scenario 'auto-populates the title', js: true do
       fill_in('Key', with: attributes_for(:key).fetch(:key))
 
-      expect(find_field('Title').value).to eq 'dummy@gitlab.com'
+      expect(find_field('Title').value).to eq 'dummy@doggohub.com'
     end
 
     scenario 'saves the new key' do

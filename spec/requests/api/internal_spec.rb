@@ -319,7 +319,7 @@ describe API::Internal, api: true  do
 
     context 'project does not exist' do
       it do
-        pull(key, project_with_repo_path('gitlab/notexist'))
+        pull(key, project_with_repo_path('doggohub/notexist'))
 
         expect(response).to have_http_status(200)
         expect(json_response["status"]).to be_falsey
@@ -406,7 +406,7 @@ describe API::Internal, api: true  do
     it 'returns link to create new merge request' do
       expect(json_response).to match [{
         "branch_name" => "new_branch",
-        "url" => "http://#{Gitlab.config.gitlab.host}/#{project.namespace.name}/#{project.path}/merge_requests/new?merge_request%5Bsource_branch%5D=new_branch",
+        "url" => "http://#{Gitlab.config.doggohub.host}/#{project.namespace.name}/#{project.path}/merge_requests/new?merge_request%5Bsource_branch%5D=new_branch",
         "new_merge_request" => true
       }]
     end

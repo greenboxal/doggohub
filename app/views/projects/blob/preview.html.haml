@@ -1,6 +1,6 @@
 .diff-file
   .diff-content
-    - if gitlab_markdown?(@blob.name)
+    - if doggohub_markdown?(@blob.name)
       .file-content.wiki
         = preserve do
           = markdown(@content)

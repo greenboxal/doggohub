@@ -29,15 +29,15 @@
 
 - if pipeline.yaml_errors.present?
   .bs-callout.bs-callout-danger
-    %h4 Found errors in your .gitlab-ci.yml:
+    %h4 Found errors in your .doggohub-ci.yml:
     %ul
       - pipeline.yaml_errors.split(",").each do |error|
         %li= error
-    You can also test your .gitlab-ci.yml in the #{link_to "Lint", ci_lint_path}
+    You can also test your .doggohub-ci.yml in the #{link_to "Lint", ci_lint_path}
 
 - if pipeline.project.builds_enabled? && !pipeline.ci_yaml_file
   .bs-callout.bs-callout-warning
-    \.gitlab-ci.yml not found in this commit
+    \.doggohub-ci.yml not found in this commit
 
 .table-holder.pipeline-holder
   %table.table.ci-table.pipeline

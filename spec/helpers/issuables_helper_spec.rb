@@ -54,8 +54,8 @@ describe IssuablesHelper do
           label_name: ['bug', 'discussion', 'documentation'],
           milestone_title: 'v4.0',
           sort: 'due_date_asc',
-          namespace_id: 'gitlab-org',
-          project_id: 'gitlab-ce',
+          namespace_id: 'doggohub-org',
+          project_id: 'doggohub-ce',
           page: 2
         }.with_indifferent_access
       end
@@ -119,7 +119,7 @@ describe IssuablesHelper do
     it 'returns true when any key is present' do
       allow(helper).to receive(:params).and_return(
         ActionController::Parameters.new(milestone_title: 'Velit consectetur asperiores natus delectus.',
-                                         project_id: 'gitlabhq',
+                                         project_id: 'doggohubhq',
                                          scope: 'all')
       )
 
@@ -128,7 +128,7 @@ describe IssuablesHelper do
 
     it 'returns false when no key is present' do
       allow(helper).to receive(:params).and_return(
-        ActionController::Parameters.new(project_id: 'gitlabhq',
+        ActionController::Parameters.new(project_id: 'doggohubhq',
                                          scope: 'all')
       )
 

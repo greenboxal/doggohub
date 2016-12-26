@@ -20,7 +20,7 @@ module Gitlab
       end
 
       def git_restore_hooks
-        execute(%W(#{Gitlab.config.gitlab_shell.path}/bin/create-hooks) + repository_storage_paths_args)
+        execute(%W(#{Gitlab.config.doggohub_shell.path}/bin/create-hooks) + repository_storage_paths_args)
       end
 
       def mkdir_p(path)

@@ -51,12 +51,12 @@ module Projects
         project.send_move_instructions(old_path)
 
         # Move main repository
-        unless gitlab_shell.mv_repository(project.repository_storage_path, old_path, new_path)
+        unless doggohub_shell.mv_repository(project.repository_storage_path, old_path, new_path)
           raise TransferError.new('Cannot move project')
         end
 
         # Move wiki repo also if present
-        gitlab_shell.mv_repository(project.repository_storage_path, "#{old_path}.wiki", "#{new_path}.wiki")
+        doggohub_shell.mv_repository(project.repository_storage_path, "#{old_path}.wiki", "#{new_path}.wiki")
 
         # Move missing group labels to project
         Labels::TransferService.new(current_user, old_group, project).execute

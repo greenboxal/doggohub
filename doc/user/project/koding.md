@@ -1,12 +1,12 @@
-# Koding & GitLab
+# Koding & DoggoHub
 
-> [Introduced][ce-5909] in GitLab 8.11.
+> [Introduced][ce-5909] in DoggoHub 8.11.
 
-This document will guide you through using Koding integration on GitLab in
+This document will guide you through using Koding integration on DoggoHub in
 detail. For configuring and installing please follow the
 [administrator guide](../../administration/integration/koding.md).
 
-You can use Koding integration to run and develop your projects on GitLab. This
+You can use Koding integration to run and develop your projects on DoggoHub. This
 will allow you and the users to test your project without leaving the browser.
 Koding handles projects as stacks which are basic recipes to define your
 environment for your project. With this integration you can automatically
@@ -42,7 +42,7 @@ landing page;
 
 ![Set Up Koding](img/koding_set-up-ide.png)
 
-Once you click this will open a New File page on GitLab with auto-generated
+Once you click this will open a New File page on DoggoHub with auto-generated
 `.koding.yml` content based on your server and repository configuration.
 
 ![Commit .koding.yml](img/koding_commit-koding.yml.png)
@@ -64,7 +64,7 @@ importing the project's stack file.
 You should see the details of your repository imported into your Koding
 instance. Once it's completed it will lead you to the Stack Editor and from
 there you can start using your new stack integrated with your project on your
-GitLab instance. For details about what's next you can follow
+DoggoHub instance. For details about what's next you can follow
 [this guide](https://www.koding.com/docs/creating-an-aws-stack) from step 8.
 
 Once stack initialized you will see the `README.md` content from your project
@@ -109,20 +109,20 @@ see the difference;
 
 The flow for the branch stack is also same with the regular project flow.
 
-## Open GitLab from Koding
+## Open DoggoHub from Koding
 
 Since stacks generated with import flow defined in previous steps, they have
 information about the repository they are belonging to. By using this
-information you can access to related GitLab page from stacks on your sidebar
+information you can access to related DoggoHub page from stacks on your sidebar
 on Koding.
 
-![Open GitLab from Koding](img/koding_open-gitlab-from-koding.png)
+![Open DoggoHub from Koding](img/koding_open-doggohub-from-koding.png)
 
 ## Other links
 
-- [YouTube video on GitLab + Koding workflow][youtube]
+- [YouTube video on DoggoHub + Koding workflow][youtube]
 - [Koding documentation][koding-docs]
 
-[ce-5909]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5909
+[ce-5909]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5909
 [youtube]: https://youtu.be/3wei5yv_Ye8
 [koding-docs]: https://www.koding.com/docs

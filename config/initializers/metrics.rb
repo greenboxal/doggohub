@@ -6,9 +6,9 @@ if Gitlab::Metrics.enabled?
 
   # These are manually require'd so the classes are registered properly with
   # ActiveSupport.
-  require 'gitlab/metrics/subscribers/action_view'
-  require 'gitlab/metrics/subscribers/active_record'
-  require 'gitlab/metrics/subscribers/rails_cache'
+  require 'doggohub/metrics/subscribers/action_view'
+  require 'doggohub/metrics/subscribers/active_record'
+  require 'doggohub/metrics/subscribers/rails_cache'
 
   Gitlab::Application.configure do |config|
     config.middleware.use(Gitlab::Metrics::RackMiddleware)
@@ -67,10 +67,10 @@ if Gitlab::Metrics.enabled?
       ['app', 'finders']                    => ['app', 'finders'],
       ['app', 'mailers', 'emails']          => ['app', 'mailers'],
       ['app', 'services', '**']             => ['app', 'services'],
-      ['lib', 'gitlab', 'conflicts']        => ['lib'],
-      ['lib', 'gitlab', 'diff']             => ['lib'],
-      ['lib', 'gitlab', 'email', 'message'] => ['lib'],
-      ['lib', 'gitlab', 'checks']           => ['lib']
+      ['lib', 'doggohub', 'conflicts']        => ['lib'],
+      ['lib', 'doggohub', 'diff']             => ['lib'],
+      ['lib', 'doggohub', 'email', 'message'] => ['lib'],
+      ['lib', 'doggohub', 'checks']           => ['lib']
     }
 
     paths_to_instrument.each do |(path, prefix)|

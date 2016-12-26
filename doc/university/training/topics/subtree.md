@@ -17,7 +17,7 @@
 * Pull: git subtree add --prefix <target-folder> <url> <branch> --squash
 * Push: git subtree add --prefix <target-folder> <url> <branch>
 * Ex: git config alias.sbp 'subtree pull --prefix st /
-  git@gitlab.com:balameb/subtree-nested-example.git master --squash'
+  git@doggohub.com:balameb/subtree-nested-example.git master --squash'
 
 ----------
 
@@ -25,13 +25,13 @@
   # Add an alias
   # Add
   git config alias.sba 'subtree add --prefix st /
-  git@gitlab.com:balameb/subtree-nested-example.git master --squash'
+  git@doggohub.com:balameb/subtree-nested-example.git master --squash'
   # Pull
   git config alias.sbpl 'subtree pull --prefix st /
-  git@gitlab.com:balameb/subtree-nested-example.git master --squash'
+  git@doggohub.com:balameb/subtree-nested-example.git master --squash'
   # Push
   git config alias.sbph 'subtree push --prefix st /
-  git@gitlab.com:balameb/subtree-nested-example.git master'
+  git@doggohub.com:balameb/subtree-nested-example.git master'
 
   # Adding this subtree adds a st dir with a readme
   git sba

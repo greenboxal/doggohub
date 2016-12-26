@@ -125,7 +125,7 @@ describe Gitlab::GithubImport::Importer, lib: true do
       )
     end
 
-    let(:repository) { double(id: 1, fork: false) }
+    let(:repository) { double(id: 1, bork: false) }
     let(:source_sha) { create(:commit, project: project).id }
     let(:source_branch) { double(ref: 'feature', repo: repository, sha: source_sha) }
     let(:target_sha) { create(:commit, project: project, git_commit: RepoHelpers.another_sample_commit).id }

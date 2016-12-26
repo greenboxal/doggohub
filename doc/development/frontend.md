@@ -1,11 +1,11 @@
 # Frontend Development Guidelines
 
 This document describes various guidelines to ensure consistency and quality
-across GitLab's frontend team.
+across DoggoHub's frontend team.
 
 ## Overview
 
-GitLab is built on top of [Ruby on Rails][rails] using [Haml][haml] with
+DoggoHub is built on top of [Ruby on Rails][rails] using [Haml][haml] with
 [Hamlit][hamlit]. Be wary of [the limitations that come with using
 Hamlit][hamlit-limits]. We also use [SCSS][scss] and plain JavaScript with
 [ES6 by way of Babel][es6].
@@ -85,7 +85,7 @@ General tips:
 ### Resources
 
 [Chrome Accessibility Developer Tools][chrome-accessibility-developer-tools]
-are useful for testing for potential accessibility problems in GitLab.
+are useful for testing for potential accessibility problems in DoggoHub.
 
 Accessibility best-practices and more in-depth information is available on
 [the Audit Rules page][audit-rules] for the Chrome Accessibility Developer Tools.
@@ -108,7 +108,7 @@ Content Security Policy rules should be taken into consideration when
 implementing new features, especially those that may rely on connection with
 external services.
 
-GitLab's CSP is used for the following:
+DoggoHub's CSP is used for the following:
 
 - Blocking plugins like Flash and Silverlight from running at all on our pages.
 - Blocking the use of scripts and stylesheets downloaded from external sources.
@@ -118,11 +118,11 @@ GitLab's CSP is used for the following:
 Some exceptions include:
 
 - Scripts from Google Analytics and Piwik if either is enabled.
-- Connecting with GitHub, Bitbucket, GitLab.com, etc. to allow project importing.
+- Connecting with GitHub, Bitbucket, DoggoHub.com, etc. to allow project importing.
 - Connecting with Google, Twitter, GitHub, etc. to allow OAuth authentication.
 
 We use [the Secure Headers gem][secure_headers] to enable Content
-Security Policy headers in the GitLab Rails app.
+Security Policy headers in the DoggoHub Rails app.
 
 Some resources on implementing Content Security Policy:
 
@@ -154,7 +154,7 @@ Some resources on implementing Subresource Integrity:
 
 External fonts, CSS, and JavaScript should never be used with the exception of
 Google Analytics and Piwik - and only when the instance has enabled it. Assets
-should always be hosted and served locally from the GitLab instance. Embedded
+should always be hosted and served locally from the DoggoHub instance. Embedded
 resources via `iframes` should never be used except in certain circumstances
 such as with ReCaptcha, which cannot be used without an `iframe`.
 
@@ -276,7 +276,7 @@ For our currently-supported browsers, see our [requirements][requirements].
 [browser-diet]: https://browserdiet.com/
 [d3]: https://d3js.org/
 [chartjs]: http://www.chartjs.org/
-[page-specific-js-example]: https://gitlab.com/gitlab-org/gitlab-ce/blob/13bb9ed77f405c5f6ee4fdbc964ecf635c9a223f/app/views/projects/graphs/_head.html.haml#L6-8
+[page-specific-js-example]: https://doggohub.com/doggohub-org/doggohub-ce/blob/13bb9ed77f405c5f6ee4fdbc964ecf635c9a223f/app/views/projects/graphs/_head.html.haml#L6-8
 [chrome-accessibility-developer-tools]: https://github.com/GoogleChrome/accessibility-developer-tools
 [audit-rules]: https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules
 [observatory-cli]: https://github.com/mozilla/http-observatory-cli

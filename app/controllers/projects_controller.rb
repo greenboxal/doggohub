@@ -75,11 +75,11 @@ class ProjectsController < Projects::ApplicationController
     end
   end
 
-  def remove_fork
-    return access_denied! unless can?(current_user, :remove_fork_project, @project)
+  def remove_bork
+    return access_denied! unless can?(current_user, :remove_bork_project, @project)
 
-    if ::Projects::UnlinkForkService.new(@project, current_user).execute
-      flash[:notice] = 'The fork relationship has been removed.'
+    if ::Projects::UnlinkBorkService.new(@project, current_user).execute
+      flash[:notice] = 'The bork relationship has been removed.'
     end
   end
 

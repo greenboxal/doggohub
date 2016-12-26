@@ -1,4 +1,4 @@
-![GitLab Flow](gitlab_flow.png)
+![DoggoHub Flow](doggohub_flow.png)
 
 ## Introduction
 
@@ -6,11 +6,11 @@ Version management with git makes branching and merging much easier than older v
 This allows a wide variety of branching strategies and workflows.
 Almost all of these are an improvement over the methods used before git.
 But many organizations end up with a workflow that is not clearly defined, overly complex or not integrated with issue tracking systems.
-Therefore we propose the GitLab flow as clearly defined set of best practices.
+Therefore we propose the DoggoHub flow as clearly defined set of best practices.
 It combines [feature driven development](https://en.wikipedia.org/wiki/Feature-driven_development) and [feature branches](http://martinfowler.com/bliki/FeatureBranch.html) with issue tracking.
 
 Organizations coming to git from other version control systems frequently find it hard to develop an effective workflow.
-This article describes the GitLab flow that integrates the git workflow with an issue tracking system.
+This article describes the DoggoHub flow that integrates the git workflow with an issue tracking system.
 It offers a simple, transparent and effective way to work with git.
 
 ![Four stages (working copy, index, local repo, remote repo) and three steps between them](four_stages.png)
@@ -27,7 +27,7 @@ Since many organizations new to git have no conventions how to work with it, it 
 The biggest problem they run into is that many long running branches that each contain part of the changes are around.
 People have a hard time figuring out which branch they should develop on or deploy to production.
 Frequently the reaction to this problem is to adopt a standardized pattern such as [git flow](http://nvie.com/posts/a-successful-git-branching-model/) and [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html).
-We think there is still room for improvement and will detail a set of practices we call GitLab flow.
+We think there is still room for improvement and will detail a set of practices we call DoggoHub flow.
 
 ## Git flow and its problems
 
@@ -60,9 +60,9 @@ This is very simple and clean, many organizations have adopted it with great suc
 Atlassian recommends [a similar strategy](http://blogs.atlassian.com/2014/01/simple-git-workflow-simple/) although they rebase feature branches.
 Merging everything into the master branch and deploying often means you minimize the amount of code in 'inventory' which is in line with the lean and continuous delivery best practices.
 But this flow still leaves a lot of questions unanswered regarding deployments, environments, releases and integrations with issues.
-With GitLab flow we offer additional guidance for these questions.
+With DoggoHub flow we offer additional guidance for these questions.
 
-## Production branch with GitLab flow
+## Production branch with DoggoHub flow
 
 ![Master branch and production branch with arrow that indicate deployments](production_branch.png)
 
@@ -78,7 +78,7 @@ This time is pretty accurate if you automatically deploy your production branch.
 If you need a more exact time you can have your deployment script create a tag on each deployment.
 This flow prevents the overhead of releasing, tagging and merging that is common to git flow.
 
-## Environment branches with GitLab flow
+## Environment branches with DoggoHub flow
 
 ![Multiple branches with the code cascading from one to another](environment_branches.png)
 
@@ -93,7 +93,7 @@ If master is good to go (it should be if you are practicing [continuous delivery
 If this is not possible because more manual testing is required you can send merge requests from the feature branch to the downstream branches.
 An 'extreme' version of environment branches are setting up an environment for each feature branch as done by [Teatro](https://teatro.io/).
 
-## Release branches with GitLab flow
+## Release branches with DoggoHub flow
 
 ![Master and multiple release branches that vary in length with cherry-picks from master](release_branches.png)
 
@@ -109,13 +109,13 @@ Every time a bug-fix is included in a release branch the patch version is raised
 Some projects also have a stable branch that points to the same commit as the latest released branch.
 In this flow it is not common to have a production branch (or git flow master branch).
 
-## Merge/pull requests with GitLab flow
+## Merge/pull requests with DoggoHub flow
 
 ![Merge request with line comments](mr_inline_comments.png)
 
 Merge or pull requests are created in a git management application and ask an assigned person to merge two branches.
 Tools such as GitHub and Bitbucket choose the name pull request since the first manual action would be to pull the feature branch.
-Tools such as GitLab and others choose the name merge request since that is the final action that is requested of the assignee.
+Tools such as DoggoHub and others choose the name merge request since that is the final action that is requested of the assignee.
 In this article we'll refer to them as merge requests.
 
 If you work on a feature branch for more than a few hours it is good to share the intermediate result with the rest of the team.
@@ -131,18 +131,18 @@ When you feel comfortable with it to be merged you assign it to the person that 
 There is room for more feedback and after the assigned person feels comfortable with the result the branch is merged.
 If the assigned person does not feel comfortable they can close the merge request without merging.
 
-In GitLab it is common to protect the long-lived branches (e.g. the master branch) so that normal developers [can't modify these protected branches](http://docs.gitlab.com/ce/permissions/permissions.html).
+In DoggoHub it is common to protect the long-lived branches (e.g. the master branch) so that normal developers [can't modify these protected branches](http://docs.doggohub.com/ce/permissions/permissions.html).
 So if you want to merge it into a protected branch you assign it to someone with master authorizations.
 
-## Issues with GitLab flow
+## Issues with DoggoHub flow
 
 ![Merge request with the branch name 15-require-a-password-to-change-it and assignee field shown](merge_request.png)
 
-GitLab flow is a way to make the relation between the code and the issue tracker more transparent.
+DoggoHub flow is a way to make the relation between the code and the issue tracker more transparent.
 
 Any significant change to the code should start with an issue where the goal is described.
 Having a reason for every code change is important to inform everyone on the team and to help people keep the scope of a feature branch small.
-In GitLab each change to the codebase starts with an issue in the issue tracking system.
+In DoggoHub each change to the codebase starts with an issue in the issue tracking system.
 If there is no issue yet it should be created first provided there is significant work involved (more than 1 hour).
 For many organizations this will be natural since the issue will have to be estimated for the sprint.
 Issue titles should describe the desired state of the system, e.g. "As an administrator I want to remove users without receiving an error" instead of "Admin can't remove users.".
@@ -162,7 +162,7 @@ The reviewer presses the merge button when they think the code is ready for incl
 In this case the code is merged and a merge commit is generated that makes this event easily visible later on.
 Merge requests always create a merge commit even when the commit could be added without one.
 This merge strategy is called 'no fast-forward' in git.
-After the merge the feature branch is deleted since it is no longer needed, in GitLab this deletion is an option when merging.
+After the merge the feature branch is deleted since it is no longer needed, in DoggoHub this deletion is an option when merging.
 
 Suppose that a branch is merged but a problem occurs and the issue is reopened.
 In this case it is no problem to reuse the same branch name since it was deleted when the branch was merged.
@@ -174,7 +174,7 @@ It is possible that one feature branch solves more than one issue.
 ![Merge request showing the linked issues that will be closed](close_issue_mr.png)
 
 Linking to the issue can happen by mentioning them from commit messages (fixes #14, closes #67, etc.) or from the merge request description.
-In GitLab this creates a comment in the issue that the merge requests mentions the issue.
+In DoggoHub this creates a comment in the issue that the merge requests mentions the issue.
 And the merge request shows the linked issues.
 These issues are closed once code is merged into the default branch.
 
@@ -187,7 +187,7 @@ If you have an issue that spans across multiple repositories, the best thing is 
 ![Vim screen showing the rebase view](rebase.png)
 
 With git you can use an interactive rebase (`rebase -i`) to squash multiple commits into one and reorder them.
-In GitLab EE and .com you can also [rebase before merge](http://docs.gitlab.com/ee/workflow/rebase_before_merge.html) from the web interface.
+In DoggoHub EE and .com you can also [rebase before merge](http://docs.doggohub.com/ee/workflow/rebase_before_merge.html) from the web interface.
 This functionality is useful if you made a couple of commits for small changes during development and want to replace them with a single commit or if you want to make the order more logical.
 However you should never rebase commits you have pushed to a remote server.
 Somebody can have referred to the commits or cherry-picked them.
@@ -228,10 +228,10 @@ We'll discuss the three reasons to merge in master: leveraging code, merge confl
 If you need to leverage some code that was introduced in master after you created the feature branch you can sometimes solve this by just cherry-picking a commit.
 If your feature branch has a merge conflict, creating a merge commit is a normal way of solving this.
 You can prevent some merge conflicts by using [gitattributes](http://git-scm.com/docs/gitattributes) for files that can be in a random order.
-For example in GitLab our changelog file is specified in .gitattributes as `CHANGELOG.md merge=union` so that there are fewer merge conflicts in it.
+For example in DoggoHub our changelog file is specified in .gitattributes as `CHANGELOG.md merge=union` so that there are fewer merge conflicts in it.
 The last reason for creating merge commits is having long lived branches that you want to keep up to date with the latest state of the project.
 Martin Fowler, in [his article about feature branches](http://martinfowler.com/bliki/FeatureBranch.html) talks about this Continuous Integration (CI).
-At GitLab we are guilty of confusing CI with branch testing. Quoting Martin Fowler: "I've heard people say they are doing CI because they are running builds, perhaps using a CI server, on every branch with every commit.
+At DoggoHub we are guilty of confusing CI with branch testing. Quoting Martin Fowler: "I've heard people say they are doing CI because they are running builds, perhaps using a CI server, on every branch with every commit.
 That's continuous building, and a Good Thing, but there's no integration, so it's not CI.".
 The solution to prevent many merge commits is to keep your feature branches short-lived, the vast majority should take less than one day of work.
 If your feature branches commonly take more than a day of work, look into ways to create smaller units of work and/or use [feature toggles](http://martinfowler.com/bliki/FeatureToggle.html).
@@ -248,9 +248,9 @@ If you rebase code the history is incorrect, and there is no way for tools to re
 
 ## Award emojis on issues and merge requests
 
-![Emoji bar in GitLab](award_emoji.png)
+![Emoji bar in DoggoHub](award_emoji.png)
 
-It is common to voice approval or disapproval by using +1 or -1. In GitLab you
+It is common to voice approval or disapproval by using +1 or -1. In DoggoHub you
 can use emojis to give a virtual high five on issues and merge requests.
 
 ## Pushing and removing branches
@@ -262,7 +262,7 @@ By doing this you prevent team members from accidentally starting to work on the
 Of course this situation should already be prevented by assigning someone to the issue in the issue tracking software.
 However sometimes one of the two parties forgets to assign someone in the issue tracking software.
 After a branch is merged it should be removed from the source control software.
-In GitLab and similar systems this is an option when merging.
+In DoggoHub and similar systems this is an option when merging.
 This ensures that the branch overview in the repository management software shows only work in progress.
 This also ensures that when someone reopens the issue a new branch with the same name can be used without problem.
 When you reopen an issue you need to create a new merge request.
@@ -289,9 +289,9 @@ To see more information about the formatting of commit messages please see this 
 
 In old workflows the Continuous Integration (CI) server commonly ran tests on the master branch only.
 Developers had to ensure their code did not break the master branch.
-When using GitLab flow developers create their branches from this master branch so it is essential it is green.
+When using DoggoHub flow developers create their branches from this master branch so it is essential it is green.
 Therefore each merge request must be tested before it is accepted.
-CI software like Travis and GitLab CI show the build results right in the merge request itself to make this easy.
+CI software like Travis and DoggoHub CI show the build results right in the merge request itself to make this easy.
 One drawback is that they are testing the feature branch itself and not the merged result.
 What one can do to improve this is to test the merged result itself.
 The problem is that the merge result changes every time something is merged into master.

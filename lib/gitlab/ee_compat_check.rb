@@ -2,8 +2,8 @@
 module Gitlab
   # Checks if a set of migrations requires downtime or not.
   class EeCompatCheck
-    CE_REPO = 'https://gitlab.com/gitlab-org/gitlab-ce.git'.freeze
-    EE_REPO = 'https://gitlab.com/gitlab-org/gitlab-ee.git'.freeze
+    CE_REPO = 'https://doggohub.com/doggohub-org/doggohub-ce.git'.freeze
+    EE_REPO = 'https://doggohub.com/doggohub-org/doggohub-ee.git'.freeze
     CHECK_DIR = Rails.root.join('ee_compat_check')
     MAX_FETCH_DEPTH = 500
     IGNORED_FILES_REGEX = /(VERSION|CHANGELOG\.md:\d+)/.freeze

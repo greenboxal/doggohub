@@ -2,61 +2,61 @@
 
 ## Select Version to Install
 
-Make sure you view [this update guide](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/patch_versions.md) from the tag (version) of GitLab you would like to install.
+Make sure you view [this update guide](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/update/patch_versions.md) from the tag (version) of DoggoHub you would like to install.
 In most cases this should be the highest numbered production tag (without rc in it).
-You can select the tag in the version dropdown in the top left corner of GitLab (below the menu bar).
+You can select the tag in the version dropdown in the top left corner of DoggoHub (below the menu bar).
 
 ### 0. Backup
 
 It's useful to make a backup just in case things go south:
-(With MySQL, this may require granting "LOCK TABLES" privileges to the GitLab
+(With MySQL, this may require granting "LOCK TABLES" privileges to the DoggoHub
 user on the database version)
 
 ```bash
-cd /home/git/gitlab
-sudo -u git -H bundle exec rake gitlab:backup:create RAILS_ENV=production
+cd /home/git/doggohub
+sudo -u git -H bundle exec rake doggohub:backup:create RAILS_ENV=production
 ```
 
 ### 1. Stop server
 
 ```bash
-sudo service gitlab stop
+sudo service doggohub stop
 ```
 
 ### 2. Get latest code for the stable branch
 
-In the commands below, replace `LATEST_TAG` with the latest GitLab tag you want
+In the commands below, replace `LATEST_TAG` with the latest DoggoHub tag you want
 to update to, for example `v8.0.3`. Use `git tag -l 'v*.[0-9]' --sort='v:refname'`
 to see a list of all tags. Make sure to update patch versions only (check your
 current version with `cat VERSION`).
 
 ```bash
-cd /home/git/gitlab
+cd /home/git/doggohub
 sudo -u git -H git fetch --all
 sudo -u git -H git checkout -- Gemfile.lock db/schema.rb
 sudo -u git -H git checkout LATEST_TAG -b LATEST_TAG
 ```
 
-### 3. Update gitlab-shell to the corresponding version
+### 3. Update doggohub-shell to the corresponding version
 
 ```bash
-cd /home/git/gitlab-shell
+cd /home/git/doggohub-shell
 sudo -u git -H git fetch
-sudo -u git -H git checkout v`cat /home/git/gitlab/GITLAB_SHELL_VERSION` -b v`cat /home/git/gitlab/GITLAB_SHELL_VERSION`
+sudo -u git -H git checkout v`cat /home/git/doggohub/DOGGOHUB_SHELL_VERSION` -b v`cat /home/git/doggohub/DOGGOHUB_SHELL_VERSION`
 ```
 
-### 4. Update gitlab-workhorse to the corresponding version
+### 4. Update doggohub-workhorse to the corresponding version
 
 ```bash
-cd /home/git/gitlab
+cd /home/git/doggohub
 
-sudo -u git -H bundle exec rake "gitlab:workhorse:install[/home/git/gitlab-workhorse]" RAILS_ENV=production
+sudo -u git -H bundle exec rake "doggohub:workhorse:install[/home/git/doggohub-workhorse]" RAILS_ENV=production
 ```
 
 ### 5. Install libs, migrations, etc.
 
 ```bash
-cd /home/git/gitlab
+cd /home/git/doggohub
 
 # PostgreSQL
 sudo -u git -H bundle install --without development test mysql --deployment
@@ -77,22 +77,22 @@ sudo -u git -H bundle exec rake assets:clean assets:precompile cache:clear RAILS
 ### 6. Start application
 
 ```bash
-sudo service gitlab start
+sudo service doggohub start
 sudo service nginx restart
 ```
 
 ### 7. Check application status
 
-Check if GitLab and its environment are configured correctly:
+Check if DoggoHub and its environment are configured correctly:
 
 ```bash
-sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:env:info RAILS_ENV=production
 ```
 
 To make sure you didn't miss anything run a more thorough check with:
 
 ```bash
-sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+sudo -u git -H bundle exec rake doggohub:check RAILS_ENV=production
 ```
 
 If all items are green, then congratulations upgrade complete!

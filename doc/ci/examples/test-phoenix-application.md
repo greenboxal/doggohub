@@ -3,9 +3,9 @@
 This example demonstrates the integration of Gitlab CI with Phoenix, Elixir and
 Postgres.
 
-### Add `.gitlab-ci.yml` file to project
+### Add `.doggohub-ci.yml` file to project
 
-The following `.gitlab-ci.yml` should be added in the root of your
+The following `.doggohub-ci.yml` should be added in the root of your
 repository to trigger CI:
 
 ```yaml
@@ -52,5 +52,5 @@ If you do not have any migrations yet, you will need to create an empty
 
 ### Sources
 
-- https://medium.com/@nahtnam/using-phoenix-on-gitlab-ci-5a51eec81142
-- https://davejlong.com/ci-with-phoenix-and-gitlab/
+- https://medium.com/@nahtnam/using-phoenix-on-doggohub-ci-5a51eec81142
+- https://davejlong.com/ci-with-phoenix-and-doggohub/

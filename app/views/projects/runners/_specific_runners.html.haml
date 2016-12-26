@@ -5,8 +5,8 @@
 
   %ol
     %li
-      Install a Runner compatible with GitLab CI
-      (checkout the #{link_to 'GitLab Runner section', 'https://about.gitlab.com/gitlab-ci/#gitlab-runner', target: '_blank'} for information on how to install it).
+      Install a Runner compatible with DoggoHub CI
+      (checkout the #{link_to 'DoggoHub Runner section', 'https://about.doggohub.com/doggohub-ci/#doggohub-runner', target: '_blank'} for information on how to install it).
     %li
       Specify the following URL during the Runner setup:
       %code #{ci_root_url(only_path: false)}
@@ -26,4 +26,4 @@
   %h4.underlined-title Available specific runners
   %ul.bordered-list.available-specific-runners
     = render partial: 'runner', collection: @assignable_runners, as: :runner
-  = paginate @assignable_runners, theme: "gitlab"
+  = paginate @assignable_runners, theme: "doggohub"

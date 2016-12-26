@@ -1,4 +1,4 @@
-# Full project: https://gitlab.com/pages/hyde
+# Full project: https://doggohub.com/pages/hyde
 image: python:2.7
 
 cache:

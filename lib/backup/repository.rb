@@ -74,7 +74,7 @@ module Backup
         # Move repos dir to 'repositories.old' dir
         bk_repos_path = File.join(path, '..', 'repositories.old.' + Time.now.to_i.to_s)
         FileUtils.mv(path, bk_repos_path)
-        # This is expected from gitlab:check
+        # This is expected from doggohub:check
         FileUtils.mkdir_p(path, mode: 02770)
       end
 
@@ -138,8 +138,8 @@ module Backup
         end
       end
 
-      $progress.print 'Put GitLab hooks in repositories dirs'.color(:yellow)
-      cmd = %W(#{Gitlab.config.gitlab_shell.path}/bin/create-hooks) + repository_storage_paths_args
+      $progress.print 'Put DoggoHub hooks in repositories dirs'.color(:yellow)
+      cmd = %W(#{Gitlab.config.doggohub_shell.path}/bin/create-hooks) + repository_storage_paths_args
 
       output, status = Gitlab::Popen.popen(cmd)
       if status.zero?

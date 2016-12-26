@@ -1,6 +1,6 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :db do
-    desc 'GitLab | Manually insert schema migration version'
+    desc 'DoggoHub | Manually insert schema migration version'
     task :mark_migration_complete, [:version] => :environment do |_, args|
       unless args[:version]
         puts "Must specify a migration version as an argument".color(:red)

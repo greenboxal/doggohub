@@ -289,11 +289,11 @@ describe API::Users, api: true  do
     end
 
     it "updates user with organization" do
-      put api("/users/#{user.id}", admin), { organization: 'GitLab' }
+      put api("/users/#{user.id}", admin), { organization: 'DoggoHub' }
 
       expect(response).to have_http_status(200)
-      expect(json_response['organization']).to eq('GitLab')
-      expect(user.reload.organization).to eq('GitLab')
+      expect(json_response['organization']).to eq('DoggoHub')
+      expect(user.reload.organization).to eq('DoggoHub')
     end
 
     it 'updates user with his own email' do

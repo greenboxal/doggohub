@@ -1,18 +1,18 @@
 # LDAP
 
-GitLab integrates with LDAP to support user authentication.
+DoggoHub integrates with LDAP to support user authentication.
 This integration works with most LDAP-compliant directory
 servers, including Microsoft Active Directory, Apple Open Directory, Open LDAP,
-and 389 Server. GitLab EE includes enhanced integration, including group
+and 389 Server. DoggoHub EE includes enhanced integration, including group
 membership syncing.
 
 ## Security
 
-GitLab assumes that LDAP users are not able to change their LDAP 'mail', 'email'
+DoggoHub assumes that LDAP users are not able to change their LDAP 'mail', 'email'
 or 'userPrincipalName' attribute. An LDAP user who is allowed to change their
 email on the LDAP server can potentially
-[take over any account](#enabling-ldap-sign-in-for-existing-gitlab-users)
-on your GitLab server.
+[take over any account](#enabling-ldap-sign-in-for-existing-doggohub-users)
+on your DoggoHub server.
 
 We recommend against using LDAP integration if your LDAP users are
 allowed to change their 'mail', 'email' or 'userPrincipalName'  attribute on
@@ -20,44 +20,44 @@ the LDAP server.
 
 ### User deletion
 
-If a user is deleted from the LDAP server, they will be blocked in GitLab, as
+If a user is deleted from the LDAP server, they will be blocked in DoggoHub, as
 well. Users will be immediately blocked from logging in. However, there is an
 LDAP check cache time (sync time) of one hour (see note). This means users that
 are already logged in or are using Git over SSH will still be able to access
-GitLab for up to one hour. Manually block the user in the GitLab Admin area to
+DoggoHub for up to one hour. Manually block the user in the DoggoHub Admin area to
 immediately block all access.
 
->**Note**: GitLab EE supports a configurable sync time, with a default
+>**Note**: DoggoHub EE supports a configurable sync time, with a default
 of one hour.
 
 ## Configuration
 
 To enable LDAP integration you need to add your LDAP server settings in
-`/etc/gitlab/gitlab.rb` or `/home/git/gitlab/config/gitlab.yml`.
+`/etc/doggohub/doggohub.rb` or `/home/git/doggohub/config/doggohub.yml`.
 
 There is a Rake task to check LDAP configuration. After configuring LDAP
 using the documentation below, see [LDAP check Rake task](../raketasks/check.md#ldap-check)
 for information on the LDAP check Rake task.
 
->**Note**: In GitLab EE, you can configure multiple LDAP servers to connect to
-one GitLab server.
+>**Note**: In DoggoHub EE, you can configure multiple LDAP servers to connect to
+one DoggoHub server.
 
-Prior to version 7.4, GitLab used a different syntax for configuring
+Prior to version 7.4, DoggoHub used a different syntax for configuring
 LDAP integration. The old LDAP integration syntax still works but may be
-removed in a future version. If your `gitlab.rb` or `gitlab.yml` file contains
+removed in a future version. If your `doggohub.rb` or `doggohub.yml` file contains
 LDAP settings in both the old syntax and the new syntax, only the __old__
-syntax will be used by GitLab.
+syntax will be used by DoggoHub.
 
-The configuration inside `gitlab_rails['ldap_servers']` below is sensitive to
+The configuration inside `doggohub_rails['ldap_servers']` below is sensitive to
 incorrect indentation. Be sure to retain the indentation given in the example.
 Copy/paste can sometimes cause problems.
 
 **Omnibus configuration**
 
 ```ruby
-gitlab_rails['ldap_enabled'] = true
-gitlab_rails['ldap_servers'] = YAML.load <<-EOS # remember to close this block with 'EOS' below
-main: # 'main' is the GitLab 'provider ID' of this LDAP server
+doggohub_rails['ldap_enabled'] = true
+doggohub_rails['ldap_servers'] = YAML.load <<-EOS # remember to close this block with 'EOS' below
+main: # 'main' is the DoggoHub 'provider ID' of this LDAP server
   ## label
   #
   # A human-friendly name for your LDAP server. It is OK to change the label later,
@@ -83,25 +83,25 @@ main: # 'main' is the GitLab 'provider ID' of this LDAP server
   # If your LDAP server is not AD, set this to false.
   active_directory: true
 
-  # If allow_username_or_email_login is enabled, GitLab will ignore everything
+  # If allow_username_or_email_login is enabled, DoggoHub will ignore everything
   # after the first '@' in the LDAP username submitted by the user on login.
   #
   # Example:
   # - the user enters 'jane.doe@example.com' and 'p@ssw0rd' as LDAP credentials;
-  # - GitLab queries the LDAP server with 'jane.doe' and 'p@ssw0rd'.
+  # - DoggoHub queries the LDAP server with 'jane.doe' and 'p@ssw0rd'.
   #
   # If you are using "uid: 'userPrincipalName'" on ActiveDirectory you need to
   # disable this setting, because the userPrincipalName contains an '@'.
   allow_username_or_email_login: false
 
-  # To maintain tight control over the number of active users on your GitLab installation,
+  # To maintain tight control over the number of active users on your DoggoHub installation,
   # enable this setting to keep new users blocked until they have been cleared by the admin
   # (default: false).
   block_auto_created_users: false
 
   # Base where we can search for users
   #
-  #   Ex. ou=People,dc=gitlab,dc=example
+  #   Ex. ou=People,dc=doggohub,dc=example
   #
   base: ''
 
@@ -110,20 +110,20 @@ main: # 'main' is the GitLab 'provider ID' of this LDAP server
   #   Format: RFC 4515 https://tools.ietf.org/search/rfc4515
   #   Ex. (employeeType=developer)
   #
-  #   Note: GitLab does not support omniauth-ldap's custom filter syntax.
+  #   Note: DoggoHub does not support omniauth-ldap's custom filter syntax.
   #
   user_filter: ''
 
-  # LDAP attributes that GitLab will use to create an account for the LDAP user.
+  # LDAP attributes that DoggoHub will use to create an account for the LDAP user.
   # The specified attribute can either be the attribute name as a string (e.g. 'mail'),
   # or an array of attribute names to try in order (e.g. ['mail', 'email']).
   # Note that the user's LDAP login will always be the attribute specified as `uid` above.
   attributes:
     # The username will be used in paths for the user's own projects
-    # (like `gitlab.example.com/username/project`) and when mentioning
+    # (like `doggohub.example.com/username/project`) and when mentioning
     # them in issues, merge request and comments (like `@username`).
     # If the attribute specified for `username` contains an email address,
-    # the GitLab username will be the part of the email address before the '@'.
+    # the DoggoHub username will be the part of the email address before the '@'.
     username: ['uid', 'userid', 'sAMAccountName']
     email:    ['mail', 'email', 'userPrincipalName']
 
@@ -138,11 +138,11 @@ main: # 'main' is the GitLab 'provider ID' of this LDAP server
 
   # Base where we can search for groups
   #
-  #   Ex. ou=groups,dc=gitlab,dc=example
+  #   Ex. ou=groups,dc=doggohub,dc=example
   #
   group_base: ''
 
-  # The CN of a group containing GitLab administrators
+  # The CN of a group containing DoggoHub administrators
   #
   #   Ex. administrators
   #
@@ -156,9 +156,9 @@ main: # 'main' is the GitLab 'provider ID' of this LDAP server
   #
   sync_ssh_keys: false
 
-# GitLab EE only: add more LDAP servers
+# DoggoHub EE only: add more LDAP servers
 # Choose an ID made of a-z and 0-9 . This ID will be stored in the database
-# so that GitLab can remember which LDAP server a user belongs to.
+# so that DoggoHub can remember which LDAP server a user belongs to.
 # uswest2:
 #   label:
 #   host:
@@ -168,7 +168,7 @@ EOS
 
 **Source configuration**
 
-Use the same format as `gitlab_rails['ldap_servers']` for the contents under
+Use the same format as `doggohub_rails['ldap_servers']` for the contents under
 `servers:` in the example below:
 
 ```
@@ -177,7 +177,7 @@ production:
   ldap:
     enabled: false
     servers:
-      main: # 'main' is the GitLab 'provider ID' of this LDAP server
+      main: # 'main' is the DoggoHub 'provider ID' of this LDAP server
         ## label
         #
         # A human-friendly name for your LDAP server. It is OK to change the label later,
@@ -188,9 +188,9 @@ production:
         # snip...
 ```
 
-## Using an LDAP filter to limit access to your GitLab server
+## Using an LDAP filter to limit access to your DoggoHub server
 
-If you want to limit all GitLab access to a subset of the LDAP users on your
+If you want to limit all DoggoHub access to a subset of the LDAP users on your
 LDAP server, the first step should be to narrow the configured `base`. However,
 it is sometimes necessary to filter users further. In this case, you can set up
 an LDAP user filter. The filter must comply with
@@ -199,7 +199,7 @@ an LDAP user filter. The filter must comply with
 **Omnibus configuration**
 
 ```ruby
-gitlab_rails['ldap_servers'] = YAML.load <<-EOS
+doggohub_rails['ldap_servers'] = YAML.load <<-EOS
 main:
   # snip...
   user_filter: '(employeeType=developer)'
@@ -224,19 +224,19 @@ group you can use the following syntax:
 (memberOf=CN=My Group,DC=Example,DC=com)
 ```
 
-Please note that GitLab does not support the custom filter syntax used by
+Please note that DoggoHub does not support the custom filter syntax used by
 omniauth-ldap.
 
-## Enabling LDAP sign-in for existing GitLab users
+## Enabling LDAP sign-in for existing DoggoHub users
 
-When a user signs in to GitLab with LDAP for the first time, and their LDAP
-email address is the primary email address of an existing GitLab user, then
+When a user signs in to DoggoHub with LDAP for the first time, and their LDAP
+email address is the primary email address of an existing DoggoHub user, then
 the LDAP DN will be associated with the existing user. If the LDAP email
-attribute is not found in GitLab's database, a new user is created.
+attribute is not found in DoggoHub's database, a new user is created.
 
-In other words, if an existing GitLab user wants to enable LDAP sign-in for
-themselves, they should check that their GitLab email address matches their
-LDAP email address, and then sign into GitLab via their LDAP credentials.
+In other words, if an existing DoggoHub user wants to enable LDAP sign-in for
+themselves, they should check that their DoggoHub email address matches their
+LDAP email address, and then sign into DoggoHub via their LDAP credentials.
 
 ## Limitations
 
@@ -249,7 +249,7 @@ be mandatory and clients cannot be authenticated with the TLS protocol.
 
 ### TLS Server Authentication
 
-Not supported by GitLab's configuration options.
+Not supported by DoggoHub's configuration options.
 When setting `method: ssl`, the underlying authentication method used by
 `omniauth-ldap` is `simple_tls`.  This method establishes TLS encryption with
 the LDAP server before any LDAP-protocol data is exchanged but no validation of
@@ -261,7 +261,7 @@ the LDAP server's SSL certificate is performed.
 
 This example uses ldapsearch and assumes you are using ActiveDirectory. The
 following query returns the login names of the users that will be allowed to
-log in to GitLab if you configure your own user_filter.
+log in to DoggoHub if you configure your own user_filter.
 
 ```
 ldapsearch -H ldaps://$host:$port -D "$bind_dn" -y bind_dn_password.txt  -b "$base" "$user_filter" sAMAccountName
@@ -281,21 +281,21 @@ ldapsearch -H ldaps://$host:$port -D "$bind_dn" -y bind_dn_password.txt  -b "$ba
 tree and traverse it.
 - Check that the `user_filter` is not blocking otherwise valid users.
 - Run the following check command to make sure that the LDAP settings are
-  correct and GitLab can see your users:
+  correct and DoggoHub can see your users:
 
     ```bash
     # For Omnibus installations
-    sudo gitlab-rake gitlab:ldap:check
+    sudo doggohub-rake doggohub:ldap:check
 
     # For installations from source
-    sudo -u git -H bundle exec rake gitlab:ldap:check RAILS_ENV=production
+    sudo -u git -H bundle exec rake doggohub:ldap:check RAILS_ENV=production
     ```
 
 ### Connection Refused
 
 If you are getting 'Connection Refused' errors when trying to connect to the
 LDAP server please double-check the LDAP `port` and `method` settings used by
-GitLab. Common combinations are `method: 'plain'` and `port: 389`, OR
+DoggoHub. Common combinations are `method: 'plain'` and `port: 389`, OR
 `method: 'ssl'` and `port: 636`.
 
 ### Login with valid credentials rejected

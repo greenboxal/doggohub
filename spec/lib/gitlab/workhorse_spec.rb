@@ -139,7 +139,7 @@ describe Gitlab::Workhorse, lib: true do
 
   describe '#verify_api_request!' do
     let(:header_key) { described_class::INTERNAL_API_REQUEST_HEADER }
-    let(:payload) { { 'iss' => 'gitlab-workhorse' } }
+    let(:payload) { { 'iss' => 'doggohub-workhorse' } }
 
     it 'accepts a correct header' do
       headers = { header_key => JWT.encode(payload, described_class.secret, 'HS256') }

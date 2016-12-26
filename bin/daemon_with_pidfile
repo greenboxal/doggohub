@@ -4,14 +4,14 @@
 # Daemonize, write a pidfile, and exec the remainder of the command line.
 
 def main(pidfile, cmd)
-  if middle_pid = Process.fork
+  if middle_pid = Process.bork
     # outer process
     # Do not exit the outer process before the middle process finishes
     Process.waitpid(middle_pid)
     exit $?.exitstatus
   end
 
-  if final_pid = Process.fork
+  if final_pid = Process.bork
     # middle process
     open(pidfile, 'w') { |f| f.puts final_pid }
     exit

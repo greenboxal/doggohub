@@ -576,22 +576,22 @@ describe Repository, models: true do
     end
   end
 
-  describe "#gitlab_ci_yml", caching: true do
+  describe "#doggohub_ci_yml", caching: true do
     it 'returns valid file' do
-      files = [TestBlob.new('file'), TestBlob.new('.gitlab-ci.yml'), TestBlob.new('copying')]
+      files = [TestBlob.new('file'), TestBlob.new('.doggohub-ci.yml'), TestBlob.new('copying')]
       expect(repository.tree).to receive(:blobs).and_return(files)
 
-      expect(repository.gitlab_ci_yml.name).to eq('.gitlab-ci.yml')
+      expect(repository.doggohub_ci_yml.name).to eq('.doggohub-ci.yml')
     end
 
     it 'returns nil if not exists' do
       expect(repository.tree).to receive(:blobs).and_return([])
-      expect(repository.gitlab_ci_yml).to be_nil
+      expect(repository.doggohub_ci_yml).to be_nil
     end
 
     it 'returns nil for empty repository' do
       allow(repository).to receive(:file_on_head).and_raise(Rugged::ReferenceError)
-      expect(repository.gitlab_ci_yml).to be_nil
+      expect(repository.doggohub_ci_yml).to be_nil
     end
   end
 

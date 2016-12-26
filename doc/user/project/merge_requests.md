@@ -5,10 +5,10 @@ collaborate with other people on the same project.
 
 ## Authorization for merge requests
 
-There are two main ways to have a merge request flow with GitLab:
+There are two main ways to have a merge request flow with DoggoHub:
 
 1. Working with [protected branches][] in a single repository
-1. Working with forks of an authoritative project
+1. Working with borks of an authoritative project
 
 [Learn more about the authorization for merge requests.](merge_requests/authorization_for_merge_requests.md)
 
@@ -38,14 +38,14 @@ you hide discussions that are no longer relevant.
 
 ## Resolve conflicts
 
-When a merge request has conflicts, GitLab may provide the option to resolve
-those conflicts in the GitLab UI.
+When a merge request has conflicts, DoggoHub may provide the option to resolve
+those conflicts in the DoggoHub UI.
 
 [Learn more about resolving merge conflicts in the UI.](merge_requests/resolve_conflicts.md)
 
 ## Revert changes
 
-GitLab implements Git's powerful feature to revert any commit with introducing
+DoggoHub implements Git's powerful feature to revert any commit with introducing
 a **Revert** button in merge requests and commit details.
 
 [Learn more about reverting changes in the UI](merge_requests/revert_changes.md)
@@ -62,7 +62,7 @@ request diffs.
 ## Work In Progress merge requests
 
 To prevent merge requests from accidentally being accepted before they're
-completely ready, GitLab blocks the "Accept" button for merge requests that
+completely ready, DoggoHub blocks the "Accept" button for merge requests that
 have been marked as a **Work In Progress**.
 
 [Learn more about settings a merge request as "Work In Progress".](merge_requests/work_in_progress_merge_requests.md)
@@ -94,7 +94,7 @@ commits added to the branch associated with the merge request. Here's a few
 tricks to checkout a merge request locally.
 
 Please note that you can checkout a merge request locally even if the source
-project is a fork (even a private fork) of the target project.
+project is a bork (even a private bork) of the target project.
 
 #### Checkout locally by adding a git alias
 
@@ -106,7 +106,7 @@ Add the following alias to your `~/.gitconfig`:
 ```
 
 Now you can check out a particular merge request from any repository and any
-remote. For example, to check out the merge request with ID 5 as shown in GitLab
+remote. For example, to check out the merge request with ID 5 as shown in DoggoHub
 from the `upstream` remote, do:
 
 ```
@@ -118,12 +118,12 @@ it out.
 
 #### Checkout locally by modifying `.git/config` for a given repository
 
-Locate the section for your GitLab remote in the `.git/config` file. It looks
+Locate the section for your DoggoHub remote in the `.git/config` file. It looks
 like this:
 
 ```
 [remote "origin"]
-  url = https://gitlab.com/gitlab-org/gitlab-ce.git
+  url = https://doggohub.com/doggohub-org/doggohub-ce.git
   fetch = +refs/heads/*:refs/remotes/origin/*
 ```
 
@@ -143,7 +143,7 @@ In the end, it should look like this:
 
 ```
 [remote "origin"]
-  url = https://gitlab.com/gitlab-org/gitlab-ce.git
+  url = https://doggohub.com/doggohub-org/doggohub-ce.git
   fetch = +refs/heads/*:refs/remotes/origin/*
   fetch = +refs/merge-requests/*/head:refs/remotes/origin/merge-requests/*
 ```
@@ -154,7 +154,7 @@ Now you can fetch all the merge requests:
 git fetch origin
 
 ...
-From https://gitlab.com/gitlab-org/gitlab-ce.git
+From https://doggohub.com/doggohub-org/doggohub-ce.git
  * [new ref]         refs/merge-requests/1/head -> origin/merge-requests/1
  * [new ref]         refs/merge-requests/2/head -> origin/merge-requests/2
 ...

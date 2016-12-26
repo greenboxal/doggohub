@@ -14095,18 +14095,18 @@
     ],
     "moji": "👣"
   },
-  "fork_and_knife": {
+  "bork_and_knife": {
     "unicode": "1F374",
     "unicode_alternates": [],
-    "name": "fork and knife",
-    "shortname": ":fork_and_knife:",
+    "name": "bork and knife",
+    "shortname": ":bork_and_knife:",
     "category": "food",
     "aliases": [],
     "aliases_ascii": [],
     "keywords": [
       "cutlery",
       "kitchen",
-      "fork",
+      "bork",
       "knife",
       "restaurant",
       "meal",
@@ -14117,14 +14117,14 @@
     ],
     "moji": "🍴"
   },
-  "fork_knife_plate": {
+  "bork_knife_plate": {
     "unicode": "1F37D",
     "unicode_alternates": [],
-    "name": "fork and knife with plate",
-    "shortname": ":fork_knife_plate:",
+    "name": "bork and knife with plate",
+    "shortname": ":bork_knife_plate:",
     "category": "food",
     "aliases": [
-      ":fork_and_knife_with_plate:"
+      ":bork_and_knife_with_plate:"
     ],
     "aliases_ascii": [],
     "keywords": [

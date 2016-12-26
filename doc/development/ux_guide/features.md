@@ -13,7 +13,7 @@
 
 ### Global navigation
 
-The global navigation is accessible via the menu button on the top left of the screen, and can be pinned to keep it open. It contains a consistent list of pages that allow you to view content that is across GitLab. For example, you can view your todos, issues and merge requests across projects and groups.
+The global navigation is accessible via the menu button on the top left of the screen, and can be pinned to keep it open. It contains a consistent list of pages that allow you to view content that is across DoggoHub. For example, you can view your todos, issues and merge requests across projects and groups.
 
 ![Global nav](img/features-globalnav.png)
 
@@ -26,13 +26,13 @@ The navigation in the header is contextual to each page. These options change de
 
 ### Information architecture
 
-The [GitLab Product Map](https://gitlab.com/gitlab-org/gitlab-design/raw/master/production/resources/gitlab-map.png) shows a visual representation of the information architecture for GitLab.
+The [DoggoHub Product Map](https://doggohub.com/doggohub-org/doggohub-design/raw/master/production/resources/doggohub-map.png) shows a visual representation of the information architecture for DoggoHub.
 
 ---
 
 ## Filtering
 
-Today, lists are filtered by a series of dropdowns. Some of these dropdowns allow multiselect (labels), while others allow you to filter to one option (milestones). However, we are currently implementing a [new model](https://gitlab.com/gitlab-org/gitlab-ce/issues/21747) for this, and will update the guide when it is ready.
+Today, lists are filtered by a series of dropdowns. Some of these dropdowns allow multiselect (labels), while others allow you to filter to one option (milestones). However, we are currently implementing a [new model](https://doggohub.com/doggohub-org/doggohub-ce/issues/21747) for this, and will update the guide when it is ready.
 
 ![Filters](img/features-filters.png)
 
@@ -42,11 +42,11 @@ Today, lists are filtered by a series of dropdowns. Some of these dropdowns allo
 
 ### Global search
 
-[Global search](https://gitlab.com/search?group_id=&project_id=13083&repository_ref=&scope=issues&search=mobile) allows you to search across items in a project, or even across multiple projects. You can switch tabs to filter on type of object, or filter by group.
+[Global search](https://doggohub.com/search?group_id=&project_id=13083&repository_ref=&scope=issues&search=mobile) allows you to search across items in a project, or even across multiple projects. You can switch tabs to filter on type of object, or filter by group.
 
 ### List search
 
-There are several core lists in the GitLab experience, such as the Issue list and the Merge Request list. You are also able to [filter and search these lists](https://gitlab.com/gitlab-org/gitlab-ce/issues?utf8=%E2%9C%93&search=mobile). This UI will be updated with the [new filtering model](https://gitlab.com/gitlab-org/gitlab-ce/issues/21747).
+There are several core lists in the DoggoHub experience, such as the Issue list and the Merge Request list. You are also able to [filter and search these lists](https://doggohub.com/doggohub-org/doggohub-ce/issues?utf8=%E2%9C%93&search=mobile). This UI will be updated with the [new filtering model](https://doggohub.com/doggohub-org/doggohub-ce/issues/21747).
 
 ---
 

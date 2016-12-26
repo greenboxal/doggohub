@@ -10,7 +10,7 @@ module MergeRequests
 
       merge_request.target_project = nil unless can?(current_user, :read_project, merge_request.target_project)
 
-      merge_request.target_project ||= (project.forked_from_project || project)
+      merge_request.target_project ||= (project.borked_from_project || project)
       merge_request.target_branch ||= merge_request.target_project.default_branch
 
       messages = validate_branches(merge_request)

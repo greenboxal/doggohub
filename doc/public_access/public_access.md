@@ -1,11 +1,11 @@
 # Public access
 
-GitLab allows you to change your projects' visibility in order be accessed
+DoggoHub allows you to change your projects' visibility in order be accessed
 **publicly** or **internally**.
 
 Projects with either of these visibility levels will be listed in the
-public access directory (`/public` under your GitLab instance).
-Here is the [GitLab.com example](https://gitlab.com/public).
+public access directory (`/public` under your DoggoHub instance).
+Here is the [DoggoHub.com example](https://doggohub.com/public).
 
 Internal projects will only be available to authenticated users.
 
@@ -38,7 +38,7 @@ on the repository.
 ## Visibility of groups
 
 >**Note:**
-[Starting with][3323] GitLab 8.6, the group visibility has changed and can be
+[Starting with][3323] DoggoHub 8.6, the group visibility has changed and can be
 configured the same way as projects. In previous versions, a group's page was
 always visible to all users.
 
@@ -48,7 +48,7 @@ it. The restriction for visibility levels on the application setting level also
 applies to groups, so if that's set to internal, the explore page will be empty
 for anonymous users. The group page now has a visibility level icon.
 
-[3323]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/3323
+[3323]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/3323
 
 ## Visibility of users
 

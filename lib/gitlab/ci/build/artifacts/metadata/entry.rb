@@ -3,7 +3,7 @@ module Gitlab
     class Metadata
       ##
       # Class that represents an entry (path and metadata) to a file or
-      # directory in GitLab CI Build Artifacts binary file / archive
+      # directory in DoggoHub CI Build Artifacts binary file / archive
       #
       # This is IO-operations safe class, that does similar job to
       # Ruby's Pathname but without the risk of accessing filesystem.

@@ -7,7 +7,7 @@ project itself, the highest permission level is used.
 On public and internal projects the Guest role is not enforced. All users will
 be able to create issues, leave comments, and pull or download the project code.
 
-GitLab administrators receive all permissions.
+DoggoHub administrators receive all permissions.
 
 To add or import a user, you can follow the [project users and members
 documentation](../workflow/add-user/add-user.md).
@@ -116,9 +116,9 @@ which visibility level you select on project settings.
 - Only team members: only team members will see even if your project is public or internal
 - Everyone with access: everyone can see depending on your project visibility level
 
-## GitLab CI
+## DoggoHub CI
 
-GitLab CI permissions rely on the role the user has in GitLab. There are four
+DoggoHub CI permissions rely on the role the user has in DoggoHub. There are four
 permission levels it total:
 
 - admin
@@ -126,7 +126,7 @@ permission levels it total:
 - developer
 - guest/reporter
 
-The admin user can perform any action on GitLab CI in scope of the GitLab
+The admin user can perform any action on DoggoHub CI in scope of the DoggoHub
 instance and project. In addition, all admins can use the admin interface under
 `/admin/runners`.
 
@@ -145,7 +145,7 @@ instance and project. In addition, all admins can use the admin interface under
 ### Builds permissions
 
 >**Note:**
-GitLab 8.12 has a completely redesigned build permissions system.
+DoggoHub 8.12 has a completely redesigned build permissions system.
 Read all about the [new model and its implications][new-mod].
 
 This table shows granted privileges for builds triggered by specific types of
@@ -168,5 +168,5 @@ users:
 
 [^3]: Only if user is not external one.
 [^4]: Only if user is a member of the project.
-[ce-18994]: https://gitlab.com/gitlab-org/gitlab-ce/issues/18994
+[ce-18994]: https://doggohub.com/doggohub-org/doggohub-ce/issues/18994
 [new-mod]: project/new_ci_build_permissions_model.md

@@ -26,7 +26,7 @@ Feature: Project Source Markdown Render
   Scenario: I view README in markdown branch to see reference links to directory
     Then I should see files from repository in markdown
     And I should see rendered README which contains correct links
-    And I click on GitLab API doc directory in README
+    And I click on DoggoHub API doc directory in README
     Then I should see correct doc/api directory rendered
 
   Scenario: I view README in markdown branch to see reference links to file
@@ -55,7 +55,7 @@ Feature: Project Source Markdown Render
 
   Scenario: I navigate to doc directory to view user doc in markdown
     And I navigate to the doc/api/README
-    And Header "GitLab API" should have correct id and link
+    And Header "DoggoHub API" should have correct id and link
 
   # Markdown branch
 
@@ -120,7 +120,7 @@ Feature: Project Source Markdown Render
     And I click on test link
     Then I see new wiki page named test
     When I go back to wiki page home
-    And I click on GitLab API doc link
+    And I click on DoggoHub API doc link
     Then I see Gitlab API document
     When I go back to wiki page home
     And I click on Rake tasks link

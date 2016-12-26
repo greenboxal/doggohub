@@ -50,7 +50,7 @@ describe Gitlab::ProjectSearchResults, lib: true do
       end
 
       context "when filename has extension" do
-        let(:search_result) { "master:CONTRIBUTE.md:5:- [Contribute to GitLab](#contribute-to-gitlab)\n" }
+        let(:search_result) { "master:CONTRIBUTE.md:5:- [Contribute to DoggoHub](#contribute-to-doggohub)\n" }
 
         it { expect(subject.filename).to eq('CONTRIBUTE.md') }
         it { expect(subject.basename).to eq('CONTRIBUTE') }

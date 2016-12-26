@@ -42,7 +42,7 @@ module Gitlab
     private
 
     def redis_key
-      "gitlab:lfs_token:#{actor.class.name.underscore}_#{actor.id}" if actor
+      "doggohub:lfs_token:#{actor.class.name.underscore}_#{actor.id}" if actor
     end
   end
 end

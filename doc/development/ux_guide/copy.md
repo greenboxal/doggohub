@@ -1,8 +1,8 @@
 # Copy
 
-The copy for GitLab is clear and direct. We strike a clear balance between professional and friendly. We can empathesize with users (such as celebrating completing all Todos), and remain respectful of the importance of the work. We are that trusted, friendly coworker that is helpful and understanding.
+The copy for DoggoHub is clear and direct. We strike a clear balance between professional and friendly. We can empathesize with users (such as celebrating completing all Todos), and remain respectful of the importance of the work. We are that trusted, friendly coworker that is helpful and understanding.
 
-The copy and messaging is a core part of the experience of GitLab and the conversation with our users. Follow the below conventions throughout GitLab. 
+The copy and messaging is a core part of the experience of DoggoHub and the conversation with our users. Follow the below conventions throughout DoggoHub. 
 
 >**Note:**
 We are currently inconsistent with this guidance. Images below are created to illustrate the point. As this guidance is refined, we will ensure that our experiences align.
@@ -18,7 +18,7 @@ We are currently inconsistent with this guidance. Images below are created to il
 Users will skim content, rather than read text carefully.
 When familiar with a web app, users rely on muscle memory, and may read even less when moving quickly.
 A good experience should quickly orient a user, regardless of their experience, to the purpose of the current screen. This should happen without the user having to consciously read long strings of text.
-In general, text is burdensome and adds cognitive load. This is especially pronounced in a powerful productivity tool such as GitLab.
+In general, text is burdensome and adds cognitive load. This is especially pronounced in a powerful productivity tool such as DoggoHub.
 We should _not_ rely on words as a crutch to explain the purpose of a screen.
 The current navigation and composition of the elements on the screen should get the user 95% there, with the remaining 5% being specific elements such as text.
 This means that, as a rule, copy should be very short. A long message or label is a red flag hinting at design that needs improvement.

@@ -650,7 +650,7 @@ var contains = exports.contains = function contains(arr, el) {
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * Originally forked from (with the author's permission):
+ * Originally borked from (with the author's permission):
  *   Fabrice Bellard's javascript vt100 for jslinux:
  *   http://bellard.org/jslinux/
  *   Copyright (c) 2011 Fabrice Bellard

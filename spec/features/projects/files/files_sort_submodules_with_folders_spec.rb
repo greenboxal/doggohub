@@ -4,7 +4,7 @@ feature 'User views files page', feature: true do
   include WaitForAjax
 
   let(:user) { create(:user) }
-  let(:project) { create(:forked_project_with_submodules) }
+  let(:project) { create(:borked_project_with_submodules) }
 
   before do
     project.team << [user, :master]

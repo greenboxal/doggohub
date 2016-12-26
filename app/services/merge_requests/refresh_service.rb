@@ -53,11 +53,11 @@ module MergeRequests
     end
 
     # Refresh merge request diff if we push to source or target branch of merge request
-    # Note: we should update merge requests from forks too
+    # Note: we should update merge requests from borks too
     def reload_merge_requests
       merge_requests = @project.merge_requests.opened.
         by_source_or_target_branch(@branch_name).to_a
-      merge_requests += fork_merge_requests
+      merge_requests += bork_merge_requests
       merge_requests = filter_merge_requests(merge_requests)
 
       merge_requests.each do |merge_request|
@@ -95,8 +95,8 @@ module MergeRequests
           # Since any number of commits could have been made to the restored branch,
           # find the common root to see what has been added.
           common_ref = @project.repository.merge_base(merge_request.diff_head_sha, @newrev)
-          # If the a commit no longer exists in this repo, gitlab_git throws
-          # a Rugged::OdbError. This is fixed in https://gitlab.com/gitlab-org/gitlab_git/merge_requests/52
+          # If the a commit no longer exists in this repo, doggohub_git throws
+          # a Rugged::OdbError. This is fixed in https://doggohub.com/doggohub-org/doggohub_git/merge_requests/52
           @commits = @project.repository.commits_between(common_ref, @newrev) if common_ref
         rescue
         end
@@ -158,13 +158,13 @@ module MergeRequests
     def merge_requests_for_source_branch
       @source_merge_requests ||= begin
         merge_requests = @project.origin_merge_requests.opened.where(source_branch: @branch_name).to_a
-        merge_requests += fork_merge_requests
+        merge_requests += bork_merge_requests
         filter_merge_requests(merge_requests)
       end
     end
 
-    def fork_merge_requests
-      @fork_merge_requests ||= @project.fork_merge_requests.opened.
+    def bork_merge_requests
+      @bork_merge_requests ||= @project.bork_merge_requests.opened.
         where(source_branch: @branch_name).to_a
     end
 

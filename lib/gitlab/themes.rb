@@ -1,5 +1,5 @@
 module Gitlab
-  # Module containing GitLab's application theme definitions and helper methods
+  # Module containing DoggoHub's application theme definitions and helper methods
   # for accessing them.
   module Themes
     extend self
@@ -74,7 +74,7 @@ module Gitlab
     private
 
     def default_id
-      id = Gitlab.config.gitlab.default_theme.to_i
+      id = Gitlab.config.doggohub.default_theme.to_i
 
       # Prevent an invalid configuration setting from causing an infinite loop
       if id < THEMES.first.id || id > THEMES.last.id

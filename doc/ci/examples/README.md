@@ -1,8 +1,8 @@
 # CI Examples
 
-A collection of `.gitlab-ci.yml` files is maintained at the [GitLab CI Yml project][gitlab-ci-templates].
+A collection of `.doggohub-ci.yml` files is maintained at the [DoggoHub CI Yml project][doggohub-ci-templates].
 If your favorite programming language or framework are missing we would love your help by sending a merge request
-with a `.gitlab-ci.yml`.
+with a `.doggohub-ci.yml`.
 
 Apart from those, here is an collection of tutorials and guides on setting up your CI pipeline:
 
@@ -13,9 +13,9 @@ Apart from those, here is an collection of tutorials and guides on setting up yo
 - [Test a Scala application](test-scala-application.md)
 - [Test a Phoenix application](test-phoenix-application.md)
 - [Using `dpl` as deployment tool](deployment/README.md)
-- [Example project that shows how to use Review Apps](https://gitlab.com/gitlab-examples/review-apps-nginx/)
-- [Blog post about using GitLab CI for iOS projects](https://about.gitlab.com/2016/03/10/setting-up-gitlab-ci-for-ios-projects/)
-- [Repositories with examples for various languages](https://gitlab.com/groups/gitlab-examples)
-- [The .gitlab-ci.yml file for GitLab itself](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/.gitlab-ci.yml)
+- [Example project that shows how to use Review Apps](https://doggohub.com/doggohub-examples/review-apps-nginx/)
+- [Blog post about using DoggoHub CI for iOS projects](https://about.doggohub.com/2016/03/10/setting-up-doggohub-ci-for-ios-projects/)
+- [Repositories with examples for various languages](https://doggohub.com/groups/doggohub-examples)
+- [The .doggohub-ci.yml file for DoggoHub itself](https://doggohub.com/doggohub-org/doggohub-ce/blob/master/.doggohub-ci.yml)
 
-[gitlab-ci-templates]: https://gitlab.com/gitlab-org/gitlab-ci-yml
+[doggohub-ci-templates]: https://doggohub.com/doggohub-org/doggohub-ci-yml

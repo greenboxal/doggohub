@@ -48,7 +48,7 @@ describe BuildkiteService, models: true do
     describe '#commit_status_path' do
       it 'returns the correct status page' do
         expect(@service.commit_status_path('2ab7834c')).to eq(
-          'https://gitlab.buildkite.com/status/secret-sauce-status-token.json?commit=2ab7834c'
+          'https://doggohub.buildkite.com/status/secret-sauce-status-token.json?commit=2ab7834c'
         )
       end
     end

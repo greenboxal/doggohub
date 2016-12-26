@@ -76,7 +76,7 @@ module API
       end
 
       desc 'Download the artifacts file from build' do
-        detail 'This feature was introduced in GitLab 8.5'
+        detail 'This feature was introduced in DoggoHub 8.5'
       end
       params do
         requires :build_id, type: Integer, desc: 'The ID of a build'
@@ -90,7 +90,7 @@ module API
       end
 
       desc 'Download the artifacts file from build' do
-        detail 'This feature was introduced in GitLab 8.10'
+        detail 'This feature was introduced in DoggoHub 8.10'
       end
       params do
         requires :ref_name, type: String, desc: 'The ref from repository'
@@ -199,7 +199,7 @@ module API
 
       desc 'Trigger a manual build' do
         success Entities::Build
-        detail 'This feature was added in GitLab 8.11'
+        detail 'This feature was added in DoggoHub 8.11'
       end
       params do
         requires :build_id, type: Integer, desc: 'The ID of a Build'

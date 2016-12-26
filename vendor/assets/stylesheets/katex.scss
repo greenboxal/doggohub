@@ -29,16 +29,16 @@ SOFTWARE.
 */
 
 /*
- Here is how to build a version of KaTeX that works with gitlab.
+ Here is how to build a version of KaTeX that works with doggohub.
 
  The problem is that the standard procedure for changing font location doesn't work for the empty string.
 
  1. Clone KaTeX. Anything later than 4fb9445a9 (is merged into master) will do.
  2. make (requires node)
  3. sed -e 's,fonts/,,' -e 's/url\(([^)]*)\)/url(font-path\1)/g' build/katex.css > build/katex.scss
- 4. Copy build/katex.js to gitlab/vendor/assets/javascripts/katex.js,
-    build/katex.scss to gitlab/vendor/assets/stylesheets/katex.scss and
-    fonts/* to gitlab/vendor/assets/fonts/.
+ 4. Copy build/katex.js to doggohub/vendor/assets/javascripts/katex.js,
+    build/katex.scss to doggohub/vendor/assets/stylesheets/katex.scss and
+    fonts/* to doggohub/vendor/assets/fonts/.
 */
 
 @font-face {

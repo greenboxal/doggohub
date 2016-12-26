@@ -12,7 +12,7 @@ namespace :import do
     get :jobs
   end
 
-  resource :gitlab, only: [:create], controller: :gitlab do
+  resource :doggohub, only: [:create], controller: :doggohub do
     get :status
     get :callback
     get :jobs
@@ -42,7 +42,7 @@ namespace :import do
     post  :create_user_map, path: :user_map
   end
 
-  resource :gitlab_project, only: [:create, :new] do
+  resource :doggohub_project, only: [:create, :new] do
     post :create
   end
 end

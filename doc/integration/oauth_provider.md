@@ -1,10 +1,10 @@
-# GitLab as OAuth2 authentication service provider
+# DoggoHub as OAuth2 authentication service provider
 
-This document is about using GitLab as an OAuth authentication service provider
+This document is about using DoggoHub as an OAuth authentication service provider
 to sign in to other services.
 
 If you want to use other OAuth authentication service providers to sign in to
-GitLab, please see the [OAuth2 client documentation](../api/oauth2.md).
+DoggoHub, please see the [OAuth2 client documentation](../api/oauth2.md).
 
 ## Introduction to OAuth
 
@@ -15,21 +15,21 @@ resource owner, or the end-user.
 
 OAuth is mostly used as a Single Sign-On service (SSO), but you can find a
 lot of different uses for this functionality. For example, you can allow users
-to sign in to your application with their GitLab.com account, or GitLab.com
-can be used for authentication to your GitLab instance
-(see [GitLab OmniAuth](gitlab.md)).
+to sign in to your application with their DoggoHub.com account, or DoggoHub.com
+can be used for authentication to your DoggoHub instance
+(see [DoggoHub OmniAuth](doggohub.md)).
 
-The 'GitLab Importer' feature is also using the OAuth protocol to give access
-to repositories without sharing user credentials to your GitLab.com account.
+The 'DoggoHub Importer' feature is also using the OAuth protocol to give access
+to repositories without sharing user credentials to your DoggoHub.com account.
 
 ---
 
-GitLab supports two ways of adding a new OAuth2 application to an instance. You
+DoggoHub supports two ways of adding a new OAuth2 application to an instance. You
 can either add an application as a regular user or add it in the admin area.
-What this means is that GitLab can actually have instance-wide and a user-wide
+What this means is that DoggoHub can actually have instance-wide and a user-wide
 applications. There is no difference between them except for the different
 permission levels they are set (user/admin). The default callback URL is 
-`http://your-gitlab.example.com/users/auth/gitlab/callback`
+`http://your-doggohub.example.com/users/auth/doggohub/callback`
 
 ## Adding an application through the profile
 
@@ -42,7 +42,7 @@ In order to add a new application via your profile, navigate to
 
 In the application form, enter a **Name** (arbitrary), and make sure to set up
 correctly the **Redirect URI** which is the URL where users will be sent after
-they authorize with GitLab.
+they authorize with DoggoHub.
 
 ![New OAuth application form](img/oauth_provider_application_form.png)
 
@@ -50,7 +50,7 @@ they authorize with GitLab.
 
 When you hit **Submit** you will be provided with the application ID and
 the application secret which you can then use with your application that
-connects to GitLab.
+connects to DoggoHub.
 
 ![OAuth application ID and secret](img/oauth_provider_application_id_secret.png)
 
@@ -67,7 +67,7 @@ it from the admin area.
 
 ## Authorized applications
 
-Every application you authorized to use your GitLab credentials will be shown
+Every application you authorized to use your DoggoHub credentials will be shown
 in the **Authorized applications** section under **Profile Settings > Applications**.
 
 ![Authorized_applications](img/oauth_provider_authorized_application.png)
@@ -75,7 +75,7 @@ in the **Authorized applications** section under **Profile Settings > Applicatio
 ---
 
 As you can see, the default scope `api` is used, which is the only scope that
-GitLab supports so far. At any time you can revoke any access by just clicking
+DoggoHub supports so far. At any time you can revoke any access by just clicking
 **Revoke**.
 
 [oauth]: http://oauth.net/2/ "OAuth website"

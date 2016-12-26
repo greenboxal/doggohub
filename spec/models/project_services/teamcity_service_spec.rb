@@ -61,7 +61,7 @@ describe TeamcityService, models: true do
         it 'resets password if url changed' do
           teamcity_service = service
 
-          teamcity_service.teamcity_url = 'http://gitlab1.com'
+          teamcity_service.teamcity_url = 'http://doggohub1.com'
           teamcity_service.save
 
           expect(teamcity_service.password).to be_nil
@@ -79,12 +79,12 @@ describe TeamcityService, models: true do
         it "does not reset password if new url is set together with password, even if it's the same password" do
           teamcity_service = service
 
-          teamcity_service.teamcity_url = 'http://gitlab_edited.com'
+          teamcity_service.teamcity_url = 'http://doggohub_edited.com'
           teamcity_service.password = 'password'
           teamcity_service.save
 
           expect(teamcity_service.password).to eq('password')
-          expect(teamcity_service.teamcity_url).to eq('http://gitlab_edited.com')
+          expect(teamcity_service.teamcity_url).to eq('http://doggohub_edited.com')
         end
       end
 
@@ -92,12 +92,12 @@ describe TeamcityService, models: true do
         teamcity_service = service
         teamcity_service.password = nil
 
-        teamcity_service.teamcity_url = 'http://gitlab_edited.com'
+        teamcity_service.teamcity_url = 'http://doggohub_edited.com'
         teamcity_service.password = 'password'
         teamcity_service.save
 
         expect(teamcity_service.password).to eq('password')
-        expect(teamcity_service.teamcity_url).to eq('http://gitlab_edited.com')
+        expect(teamcity_service.teamcity_url).to eq('http://doggohub_edited.com')
       end
     end
   end
@@ -106,19 +106,19 @@ describe TeamcityService, models: true do
     it 'returns a specific URL when status is 500' do
       stub_request(status: 500)
 
-      expect(service.build_page('123', 'unused')).to eq('http://gitlab.com/teamcity/viewLog.html?buildTypeId=foo')
+      expect(service.build_page('123', 'unused')).to eq('http://doggohub.com/teamcity/viewLog.html?buildTypeId=foo')
     end
 
     it 'returns a build URL when teamcity_url has no trailing slash' do
       stub_request(body: %Q({"build":{"id":"666"}}))
 
-      expect(service(teamcity_url: 'http://gitlab.com/teamcity').build_page('123', 'unused')).to eq('http://gitlab.com/teamcity/viewLog.html?buildId=666&buildTypeId=foo')
+      expect(service(teamcity_url: 'http://doggohub.com/teamcity').build_page('123', 'unused')).to eq('http://doggohub.com/teamcity/viewLog.html?buildId=666&buildTypeId=foo')
     end
 
     it 'returns a build URL when teamcity_url has a trailing slash' do
       stub_request(body: %Q({"build":{"id":"666"}}))
 
-      expect(service(teamcity_url: 'http://gitlab.com/teamcity/').build_page('123', 'unused')).to eq('http://gitlab.com/teamcity/viewLog.html?buildId=666&buildTypeId=foo')
+      expect(service(teamcity_url: 'http://doggohub.com/teamcity/').build_page('123', 'unused')).to eq('http://doggohub.com/teamcity/viewLog.html?buildId=666&buildTypeId=foo')
     end
   end
 
@@ -160,7 +160,7 @@ describe TeamcityService, models: true do
     end
   end
 
-  def service(teamcity_url: 'http://gitlab.com/teamcity')
+  def service(teamcity_url: 'http://doggohub.com/teamcity')
     described_class.create(
       project: create(:empty_project),
       properties: {
@@ -173,7 +173,7 @@ describe TeamcityService, models: true do
   end
 
   def stub_request(status: 200, body: nil, build_status: 'success')
-    teamcity_full_url = 'http://mic:password@gitlab.com/teamcity/httpAuth/app/rest/builds/branch:unspecified:any,number:123'
+    teamcity_full_url = 'http://mic:password@doggohub.com/teamcity/httpAuth/app/rest/builds/branch:unspecified:any,number:123'
     body ||= %Q({"build":{"status":"#{build_status}","id":"666"}})
 
     WebMock.stub_request(:get, teamcity_full_url).to_return(

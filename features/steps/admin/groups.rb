@@ -23,18 +23,18 @@ class Spinach::Features::AdminGroups < Spinach::FeatureSteps
   end
 
   step 'submit form with new group info' do
-    fill_in 'group_path', with: 'gitlab'
+    fill_in 'group_path', with: 'doggohub'
     fill_in 'group_description', with: 'Group description'
     click_button "Create group"
   end
 
   step 'I should see newly created group' do
-    expect(page).to have_content "Group: gitlab"
+    expect(page).to have_content "Group: doggohub"
     expect(page).to have_content "Group description"
   end
 
   step 'I should be redirected to group page' do
-    expect(current_path).to eq admin_group_path(Group.find_by(path: 'gitlab'))
+    expect(current_path).to eq admin_group_path(Group.find_by(path: 'doggohub'))
   end
 
   When 'I select user "John Doe" from user list as "Reporter"' do
@@ -45,8 +45,8 @@ class Spinach::Features::AdminGroups < Spinach::FeatureSteps
     click_button "Add users to group"
   end
 
-  When 'I select user "johndoe@gitlab.com" from user list as "Reporter"' do
-    select2('johndoe@gitlab.com', from: "#user_ids", multiple: true)
+  When 'I select user "johndoe@doggohub.com" from user list as "Reporter"' do
+    select2('johndoe@doggohub.com', from: "#user_ids", multiple: true)
     page.within "#new_project_member" do
       select "Reporter", from: "access_level"
     end
@@ -60,9 +60,9 @@ class Spinach::Features::AdminGroups < Spinach::FeatureSteps
     end
   end
 
-  step 'I should see "johndoe@gitlab.com" in team list in every project as "Reporter"' do
+  step 'I should see "johndoe@doggohub.com" in team list in every project as "Reporter"' do
     page.within ".group-users-list" do
-      expect(page).to have_content "johndoe@gitlab.com"
+      expect(page).to have_content "johndoe@doggohub.com"
       expect(page).to have_content "Invited by"
       expect(page).to have_content "Reporter"
     end

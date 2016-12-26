@@ -1,8 +1,8 @@
 # Repository storages
 
-> [Introduced][ce-4578] in GitLab 8.10.
+> [Introduced][ce-4578] in DoggoHub 8.10.
 
-GitLab allows you to define multiple repository storage paths to distribute the
+DoggoHub allows you to define multiple repository storage paths to distribute the
 storage load between several mount points.
 
 >**Notes:**
@@ -12,20 +12,20 @@ storage load between several mount points.
   can pick to name the file path.
 - The target directories and any of its subpaths must not be a symlink.
 
-## Configure GitLab
+## Configure DoggoHub
 
 >**Warning:**
 In order for [backups] to work correctly, the storage path must **not** be a
-mount point and the GitLab user should have correct permissions for the parent
-directory of the path. In Omnibus GitLab this is taken care of automatically,
+mount point and the DoggoHub user should have correct permissions for the parent
+directory of the path. In Omnibus DoggoHub this is taken care of automatically,
 but for source installations you should be extra careful.
 >
-The thing is that for compatibility reasons `gitlab.yml` has a different
-structure than Omnibus. In `gitlab.yml` you indicate the path for the
+The thing is that for compatibility reasons `doggohub.yml` has a different
+structure than Omnibus. In `doggohub.yml` you indicate the path for the
 repositories, for example `/home/git/repositories`, while in Omnibus you
 indicate `git_data_dirs`, which for the example above would be `/home/git`.
 Then, Omnibus will create a `repositories` directory under that path to use with
-`gitlab.yml`.
+`doggohub.yml`.
 >
 This little detail matters because while restoring a backup, the current
 contents of  `/home/git/repositories` [are moved to][raketask] `/home/git/repositories.old`,
@@ -45,7 +45,7 @@ respectively.
 
 **For installations from source**
 
-1. Edit `gitlab.yml` and add the storage paths:
+1. Edit `doggohub.yml` and add the storage paths:
 
     ```yaml
     repositories:
@@ -57,10 +57,10 @@ respectively.
         cephfs: /mnt/cephfs/repositories
     ```
 
-1. [Restart GitLab] for the changes to take effect.
+1. [Restart DoggoHub] for the changes to take effect.
 
 >**Note:**
-The [`gitlab_shell: repos_path` entry][repospath] in `gitlab.yml` will be
+The [`doggohub_shell: repos_path` entry][repospath] in `doggohub.yml` will be
 deprecated and replaced by `repositories: storages` in the future, so if you
 are upgrading from a version prior to 8.10, make sure to add the configuration
 as described in the step above. After you make the changes and confirm they are
@@ -70,12 +70,12 @@ working, you can remove the `repos_path` line.
 
 **For Omnibus installations**
 
-1. Edit `/etc/gitlab/gitlab.rb` by appending the rest of the paths to the
+1. Edit `/etc/doggohub/doggohub.rb` by appending the rest of the paths to the
    default one:
 
     ```ruby
     git_data_dirs({
-      "default" => "/var/opt/gitlab/git-data",
+      "default" => "/var/opt/doggohub/git-data",
       "nfs" => "/mnt/nfs/git-data",
       "cephfs" => "/mnt/cephfs/git-data"
     })
@@ -91,12 +91,12 @@ be stored via the **Application Settings** in the Admin area.
 
 ![Choose repository storage path in Admin area](img/repository_storages_admin_ui.png)
 
-Beginning with GitLab 8.13.4, multiple paths can be chosen. New projects will be
+Beginning with DoggoHub 8.13.4, multiple paths can be chosen. New projects will be
 randomly placed on one of the selected paths.
 
-[ce-4578]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/4578
-[restart gitlab]: restart_gitlab.md#installations-from-source
-[reconfigure gitlab]: restart_gitlab.md#omnibus-gitlab-reconfigure
+[ce-4578]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/4578
+[restart doggohub]: restart_doggohub.md#installations-from-source
+[reconfigure doggohub]: restart_doggohub.md#omnibus-doggohub-reconfigure
 [backups]: ../raketasks/backup_restore.md
-[raketask]: https://gitlab.com/gitlab-org/gitlab-ce/blob/033e5423a2594e08a7ebcd2379bd2331f4c39032/lib/backup/repository.rb#L54-56
-[repospath]: https://gitlab.com/gitlab-org/gitlab-ce/blob/8-9-stable/config/gitlab.yml.example#L457
+[raketask]: https://doggohub.com/doggohub-org/doggohub-ce/blob/033e5423a2594e08a7ebcd2379bd2331f4c39032/lib/backup/repository.rb#L54-56
+[repospath]: https://doggohub.com/doggohub-org/doggohub-ce/blob/8-9-stable/config/doggohub.yml.example#L457

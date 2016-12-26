@@ -21,7 +21,7 @@
     - if ref
       - if build.ref
         .icon-container
-          = build.tag? ? icon('tag') : icon('code-fork')
+          = build.tag? ? icon('tag') : icon('code-bork')
         = link_to build.ref, namespace_project_commits_path(build.project.namespace, build.project, build.ref), class: "monospace branch-name"
       - else
         .light none

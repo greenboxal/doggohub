@@ -57,7 +57,7 @@ describe ApplicationHelper do
     it 'returns an url for the avatar' do
       project = create(:project, avatar: File.open(uploaded_image_temp_path))
 
-      avatar_url = "http://#{Gitlab.config.gitlab.host}/uploads/project/avatar/#{project.id}/banana_sample.gif"
+      avatar_url = "http://#{Gitlab.config.doggohub.host}/uploads/project/avatar/#{project.id}/banana_sample.gif"
       expect(helper.project_icon("#{project.namespace.to_param}/#{project.to_param}").to_s).
         to eq "<img src=\"#{avatar_url}\" alt=\"Banana sample\" />"
     end
@@ -67,7 +67,7 @@ describe ApplicationHelper do
 
       allow_any_instance_of(Project).to receive(:avatar_in_git).and_return(true)
 
-      avatar_url = "http://#{Gitlab.config.gitlab.host}#{namespace_project_avatar_path(project.namespace, project)}"
+      avatar_url = "http://#{Gitlab.config.doggohub.host}#{namespace_project_avatar_path(project.namespace, project)}"
       expect(helper.project_icon("#{project.namespace.to_param}/#{project.to_param}").to_s).to match(
         image_tag(avatar_url))
     end
@@ -82,14 +82,14 @@ describe ApplicationHelper do
     end
 
     it 'returns an url for the avatar with relative url' do
-      stub_config_setting(relative_url_root: '/gitlab')
+      stub_config_setting(relative_url_root: '/doggohub')
       # Must be stubbed after the stub above, and separately
-      stub_config_setting(url: Settings.send(:build_gitlab_url))
+      stub_config_setting(url: Settings.send(:build_doggohub_url))
 
       user = create(:user, avatar: File.open(uploaded_image_temp_path))
 
       expect(helper.avatar_icon(user.email).to_s).
-        to match("/gitlab/uploads/user/avatar/#{user.id}/banana_sample.gif")
+        to match("/doggohub/uploads/user/avatar/#{user.id}/banana_sample.gif")
     end
 
     it 'calls gravatar_icon when no User exists with the given email' do
@@ -252,7 +252,7 @@ describe ApplicationHelper do
     end
 
     it "delegates to #markdown when file name corresponds to Markdown" do
-      expect(helper).to receive(:gitlab_markdown?).with('foo.md').and_return(true)
+      expect(helper).to receive(:doggohub_markdown?).with('foo.md').and_return(true)
       expect(helper).to receive(:markdown).and_return('NOEL')
 
       expect(helper.render_markup('foo.md', content)).to eq('NOEL')

@@ -1,4 +1,4 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :dev do
     desc 'Checks if the branch would apply cleanly to EE'
     task :ee_compat_check, [:branch] => :environment do |_, args|

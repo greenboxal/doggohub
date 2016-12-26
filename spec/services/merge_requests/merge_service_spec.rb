@@ -45,7 +45,7 @@ describe MergeRequests::MergeService, services: true do
         allow(project).to receive(:default_branch).and_return(merge_request.target_branch)
       end
 
-      it 'closes GitLab issue tracker issues' do
+      it 'closes DoggoHub issue tracker issues' do
         issue  = create :issue, project: project
         commit = double('commit', safe_message: "Fixes #{issue.to_reference}")
         allow(merge_request).to receive(:commits).and_return([commit])

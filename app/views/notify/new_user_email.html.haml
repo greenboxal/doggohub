@@ -1,10 +1,10 @@
 %p
   Hi #{@user['name']}!
 %p
-  - if Gitlab.config.gitlab.signup_enabled
+  - if Gitlab.config.doggohub.signup_enabled
     Your account has been created successfully.
   - else
-    The Administrator created an account for you. Now you are a member of the company GitLab application.
+    The Administrator created an account for you. Now you are a member of the company DoggoHub application.
 %p
   login..........................................
   %code= @user['email']

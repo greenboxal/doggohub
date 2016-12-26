@@ -1,11 +1,11 @@
 # How to add an image
 
 The following are the steps to add images to your repository in
-GitLab:
+DoggoHub:
 
 Find the image that you’d like to add.
 
-In your computer files, find the GitLab project to which you'd like to add the image
+In your computer files, find the DoggoHub project to which you'd like to add the image
 (you'll find it as a regular file). Click on every file until you find exactly where you'd
 like to add the image. There, paste the image.
 
@@ -53,10 +53,10 @@ Add the commit:
 git commit -m “DESCRIBE COMMIT IN A FEW WORDS”
 ```
 
-Now you can push (send) your changes (in the branch NAME-OF-BRANCH) to GitLab (the git remote named 'origin'):
+Now you can push (send) your changes (in the branch NAME-OF-BRANCH) to DoggoHub (the git remote named 'origin'):
 ```
 git push origin NAME-OF-BRANCH
 ```
 
-Your image will be added to your branch in your repository in GitLab. Create a [Merge Request](add-merge-request.md)
+Your image will be added to your branch in your repository in DoggoHub. Create a [Merge Request](add-merge-request.md)
 to integrate your changes to your project.

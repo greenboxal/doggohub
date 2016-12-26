@@ -43,7 +43,7 @@ class BuildkiteService < CiService
   end
 
   def commit_status_path(sha)
-    "#{buildkite_endpoint('gitlab')}/status/#{status_token}.json?commit=#{sha}"
+    "#{buildkite_endpoint('doggohub')}/status/#{status_token}.json?commit=#{sha}"
   end
 
   def build_page(sha, ref)
@@ -66,7 +66,7 @@ class BuildkiteService < CiService
     [
       { type: 'text',
         name: 'token',
-        placeholder: 'Buildkite project GitLab token' },
+        placeholder: 'Buildkite project DoggoHub token' },
 
       { type: 'text',
         name: 'project_url',

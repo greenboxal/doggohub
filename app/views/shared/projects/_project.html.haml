@@ -1,6 +1,6 @@
 - avatar = true unless local_assigns[:avatar] == false
 - stars = true unless local_assigns[:stars] == false
-- forks = false unless local_assigns[:forks] == true
+- borks = false unless local_assigns[:borks] == true
 - ci = false unless local_assigns[:ci] == true
 - skip_namespace = false unless local_assigns[:skip_namespace] == true
 - css_class = '' unless local_assigns[:css_class]
@@ -17,10 +17,10 @@
       - if project.commit.try(:status)
         %span
           = render_commit_status(project.commit)
-      - if forks
+      - if borks
         %span
-          = icon('code-fork')
-          = number_with_delimiter(project.forks_count)
+          = icon('code-bork')
+          = number_with_delimiter(project.borks_count)
       - if stars
         %span
           = icon('star')

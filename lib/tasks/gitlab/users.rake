@@ -1,6 +1,6 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :users do
-    desc "GitLab | Clear the authentication token for all users"
+    desc "DoggoHub | Clear the authentication token for all users"
     task clear_all_authentication_tokens: :environment  do |t, args|
       # Do small batched updates because these updates will be slow and locking
       User.select(:id).find_in_batches(batch_size: 100) do |batch|

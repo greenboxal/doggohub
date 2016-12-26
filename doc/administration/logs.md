@@ -1,18 +1,18 @@
 # Log system
 
-GitLab has an advanced log system where everything is logged so that you
+DoggoHub has an advanced log system where everything is logged so that you
 can analyze your instance using various system log files. In addition to
-system log files, GitLab Enterprise Edition comes with Audit Events.
+system log files, DoggoHub Enterprise Edition comes with Audit Events.
 Find more about them [in Audit Events
-documentation](http://docs.gitlab.com/ee/administration/audit_events.html)
+documentation](http://docs.doggohub.com/ee/administration/audit_events.html)
 
 System log files are typically plain text in a standard log file format.
 This guide talks about how to read and use these system log files.
 
 ## `production.log`
 
-This file lives in `/var/log/gitlab/gitlab-rails/production.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/production.log` for
+This file lives in `/var/log/doggohub/doggohub-rails/production.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/production.log` for
 installations from source. (When Gitlab is running in an environment
 other than production, the corresponding logfile is shown here.)
 
@@ -20,13 +20,13 @@ It contains information about all performed requests. You can see the
 URL and type of request, IP address and what exactly parts of code were
 involved to service this particular request. Also you can see all SQL
 request that have been performed and how much time it took. This task is
-more useful for GitLab contributors and developers. Use part of this log
+more useful for DoggoHub contributors and developers. Use part of this log
 file when you are going to report bug. For example:
 
 ```
-Started GET "/gitlabhq/yaml_db/tree/master" for 168.111.56.1 at 2015-02-12 19:34:53 +0200
+Started GET "/doggohubhq/yaml_db/tree/master" for 168.111.56.1 at 2015-02-12 19:34:53 +0200
 Processing by Projects::TreeController#show as HTML
-  Parameters: {"project_id"=>"gitlabhq/yaml_db", "id"=>"master"}
+  Parameters: {"project_id"=>"doggohubhq/yaml_db", "id"=>"master"}
 
   ... [CUT OUT]
 
@@ -42,14 +42,14 @@ Completed 200 OK in 166ms (Views: 117.4ms | ActiveRecord: 27.2ms)
 ```
 
 In this example we can see that server processed an HTTP request with URL
-`/gitlabhq/yaml_db/tree/master` from IP 168.111.56.1 at 2015-02-12
+`/doggohubhq/yaml_db/tree/master` from IP 168.111.56.1 at 2015-02-12
 19:34:53 +0200. Also we can see that request was processed by
 `Projects::TreeController`.
 
 ## `application.log`
 
-This file lives in `/var/log/gitlab/gitlab-rails/application.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/application.log` for
+This file lives in `/var/log/doggohub/doggohub-rails/application.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/application.log` for
 installations from source.
 
 It helps you discover events happening in your instance such as user creation,
@@ -65,29 +65,29 @@ October 07, 2014 11:25: Project "project133" was removed
 
 ## `githost.log`
 
-This file lives in `/var/log/gitlab/gitlab-rails/githost.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/githost.log` for
+This file lives in `/var/log/doggohub/doggohub-rails/githost.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/githost.log` for
 installations from source.
 
-GitLab has to interact with Git repositories but in some rare cases
+DoggoHub has to interact with Git repositories but in some rare cases
 something can go wrong and in this case you will know what exactly
-happened. This log file contains all failed requests from GitLab to Git
+happened. This log file contains all failed requests from DoggoHub to Git
 repositories. In the majority of cases this file will be useful for developers
 only. For example:
 
 ```
-December 03, 2014 13:20 -> ERROR -> Command failed [1]: /usr/bin/git --git-dir=/Users/vsizov/gitlab-development-kit/gitlab/tmp/tests/gitlab-satellites/group184/gitlabhq/.git --work-tree=/Users/vsizov/gitlab-development-kit/gitlab/tmp/tests/gitlab-satellites/group184/gitlabhq merge --no-ff -mMerge branch 'feature_conflict' into 'feature' source/feature_conflict
+December 03, 2014 13:20 -> ERROR -> Command failed [1]: /usr/bin/git --git-dir=/Users/vsizov/doggohub-development-kit/doggohub/tmp/tests/doggohub-satellites/group184/doggohubhq/.git --work-tree=/Users/vsizov/doggohub-development-kit/doggohub/tmp/tests/doggohub-satellites/group184/doggohubhq merge --no-ff -mMerge branch 'feature_conflict' into 'feature' source/feature_conflict
 
-error: failed to push some refs to '/Users/vsizov/gitlab-development-kit/repositories/gitlabhq/gitlab_git.git'
+error: failed to push some refs to '/Users/vsizov/doggohub-development-kit/repositories/doggohubhq/doggohub_git.git'
 ```
 
 ## `sidekiq.log`
 
-This file lives in `/var/log/gitlab/gitlab-rails/sidekiq.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/sidekiq.log` for
+This file lives in `/var/log/doggohub/doggohub-rails/sidekiq.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/sidekiq.log` for
 installations from source.
 
-GitLab uses background jobs for processing tasks which can take a long
+DoggoHub uses background jobs for processing tasks which can take a long
 time. All information about processing these jobs are written down to
 this file. For example:
 
@@ -96,35 +96,35 @@ this file. For example:
 2014-06-10T18:18:26Z 14299 TID-55uqo INFO: Booting Sidekiq 3.0.0 with redis options {:url=>"redis://localhost:6379/0", :namespace=>"sidekiq"}
 ```
 
-## `gitlab-shell.log`
+## `doggohub-shell.log`
 
-This file lives in `/var/log/gitlab/gitlab-shell/gitlab-shell.log` for
-Omnibus GitLab packages or in `/home/git/gitlab-shell/gitlab-shell.log` for
+This file lives in `/var/log/doggohub/doggohub-shell/doggohub-shell.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub-shell/doggohub-shell.log` for
 installations from source.
 
-GitLab shell is used by Gitlab for executing Git commands and provide
+DoggoHub shell is used by Gitlab for executing Git commands and provide
 SSH access to Git repositories. For example:
 
 ```
-I, [2015-02-13T06:17:00.671315 #9291]  INFO -- : Adding project root/example.git at </var/opt/gitlab/git-data/repositories/root/dcdcdcdcd.git>.
-I, [2015-02-13T06:17:00.679433 #9291]  INFO -- : Moving existing hooks directory and symlinking global hooks directory for /var/opt/gitlab/git-data/repositories/root/example.git.
+I, [2015-02-13T06:17:00.671315 #9291]  INFO -- : Adding project root/example.git at </var/opt/doggohub/git-data/repositories/root/dcdcdcdcd.git>.
+I, [2015-02-13T06:17:00.679433 #9291]  INFO -- : Moving existing hooks directory and symlinking global hooks directory for /var/opt/doggohub/git-data/repositories/root/example.git.
 ```
 
 ## `unicorn\_stderr.log`
 
-This file lives in `/var/log/gitlab/unicorn/unicorn_stderr.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/unicorn_stderr.log` for
+This file lives in `/var/log/doggohub/unicorn/unicorn_stderr.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/unicorn_stderr.log` for
 installations from source.
 
-Unicorn is a high-performance forking Web server which is used for
-serving the GitLab application. You can look at this log if, for
+Unicorn is a high-performance borking Web server which is used for
+serving the DoggoHub application. You can look at this log if, for
 example, your application does not respond. This log contains all
 information about the state of unicorn processes at any given time.
 
 ```
 I, [2015-02-13T06:14:46.680381 #9047]  INFO -- : Refreshing Gem list
 I, [2015-02-13T06:14:56.931002 #9047]  INFO -- : listening on addr=127.0.0.1:8080 fd=12
-I, [2015-02-13T06:14:56.931381 #9047]  INFO -- : listening on addr=/var/opt/gitlab/gitlab-rails/sockets/gitlab.socket fd=13
+I, [2015-02-13T06:14:56.931381 #9047]  INFO -- : listening on addr=/var/opt/doggohub/doggohub-rails/sockets/doggohub.socket fd=13
 I, [2015-02-13T06:14:56.936638 #9047]  INFO -- : master process ready
 I, [2015-02-13T06:14:56.946504 #9092]  INFO -- : worker=0 spawned pid=9092
 I, [2015-02-13T06:14:56.946943 #9092]  INFO -- : worker=0 ready
@@ -139,8 +139,8 @@ I, [2015-02-13T07:16:01.534848 #13379]  INFO -- : worker=1 ready
 
 ## `repocheck.log`
 
-This file lives in `/var/log/gitlab/gitlab-rails/repocheck.log` for
-Omnibus GitLab packages or in `/home/git/gitlab/log/repocheck.log` for
+This file lives in `/var/log/doggohub/doggohub-rails/repocheck.log` for
+Omnibus DoggoHub packages or in `/home/git/doggohub/log/repocheck.log` for
 installations from source.
 
 It logs information whenever a [repository check is run][repocheck] on a project.

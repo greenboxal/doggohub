@@ -27,7 +27,7 @@ Feature: Project Source Browse Files
   Scenario: I can create file when I don't have write access
     Given I don't have write access
     And I click on "New file" link in repo
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     Then I can see new file page
 
   @javascript
@@ -48,7 +48,7 @@ Feature: Project Source Browse Files
     And I fill the new file name
     And I fill the commit message
     And I click on "Commit Changes"
-    Then I am redirected to the fork's new merge request page
+    Then I am redirected to the bork's new merge request page
     And I can see the new commit message
 
   @javascript
@@ -90,13 +90,13 @@ Feature: Project Source Browse Files
   Scenario: I can upload file and commit when I don't have write access
     Given I don't have write access
     And I click on "Upload file" link in repo
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     When I click on "Upload file" link in repo
     And I upload a new text file
     And I fill the upload file commit message
     And I click on "Upload file"
     Then I can see the new commit message
-    And I am redirected to the fork's new merge request page
+    And I am redirected to the bork's new merge request page
     When I click on "Changes" tab
     Then I can see the new text file
 
@@ -117,13 +117,13 @@ Feature: Project Source Browse Files
     And I click on ".gitignore" file in repo
     And I see the ".gitignore"
     And I click on "Replace"
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     When I click on "Replace"
     And I replace it with a text file
     And I fill the replace file commit message
     And I click on "Replace file"
     And I can see the replacement commit message
-    And I am redirected to the fork's new merge request page
+    And I am redirected to the bork's new merge request page
     When I click on "Changes" tab
     Then I can see the new text file
 
@@ -158,7 +158,7 @@ Feature: Project Source Browse Files
     Given I don't have write access
     And I click on ".gitignore" file in repo
     And I click button "Edit"
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     And I can edit code
 
   Scenario: If the file is binary the edit link is hidden
@@ -183,7 +183,7 @@ Feature: Project Source Browse Files
     And I edit code
     And I fill the commit message
     And I click on "Commit Changes"
-    Then I am redirected to the fork's new merge request page
+    Then I am redirected to the bork's new merge request page
     And I can see the new commit message
 
   @javascript
@@ -221,12 +221,12 @@ Feature: Project Source Browse Files
   Scenario: I can create directory in repo when I don't have write access
     Given I don't have write access
     When I click on "New directory" link in repo
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     When I click on "New directory" link in repo
     And I fill the new directory name
     And I fill the commit message
     And I click on "Create directory"
-    Then I am redirected to the fork's new merge request page
+    Then I am redirected to the bork's new merge request page
 
   @javascript
   Scenario: I attempt to create an existing directory
@@ -261,11 +261,11 @@ Feature: Project Source Browse Files
     And I click on ".gitignore" file in repo
     And I see the ".gitignore"
     And I click on "Delete"
-    Then I should see a notice about a new fork having been created
+    Then I should see a notice about a new bork having been created
     When I click on "Delete"
     And I fill the commit message
     And I click on "Delete file"
-    Then I am redirected to the fork's new merge request page
+    Then I am redirected to the bork's new merge request page
     And I can see the new commit message
 
   Scenario: I can browse directory with Browse Dir

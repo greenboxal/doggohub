@@ -8,12 +8,12 @@ describe 'mail_room.yml' do
 
   context 'when incoming email is disabled' do
     before do
-      ENV['MAIL_ROOM_GITLAB_CONFIG_FILE'] = Rails.root.join('spec/fixtures/mail_room_disabled.yml').to_s
+      ENV['MAIL_ROOM_DOGGOHUB_CONFIG_FILE'] = Rails.root.join('spec/fixtures/mail_room_disabled.yml').to_s
       Gitlab::MailRoom.reset_config!
     end
 
     after do
-      ENV['MAIL_ROOM_GITLAB_CONFIG_FILE'] = nil
+      ENV['MAIL_ROOM_DOGGOHUB_CONFIG_FILE'] = nil
     end
 
     it 'contains no configuration' do
@@ -23,15 +23,15 @@ describe 'mail_room.yml' do
 
   context 'when incoming email is enabled' do
     let(:redis_config) { Rails.root.join('spec/fixtures/config/redis_new_format_host.yml') }
-    let(:gitlab_redis) { Gitlab::Redis.new(Rails.env) }
+    let(:doggohub_redis) { Gitlab::Redis.new(Rails.env) }
 
     before do
-      ENV['MAIL_ROOM_GITLAB_CONFIG_FILE'] = Rails.root.join('spec/fixtures/mail_room_enabled.yml').to_s
+      ENV['MAIL_ROOM_DOGGOHUB_CONFIG_FILE'] = Rails.root.join('spec/fixtures/mail_room_enabled.yml').to_s
       Gitlab::MailRoom.reset_config!
     end
 
     after do
-      ENV['MAIL_ROOM_GITLAB_CONFIG_FILE'] = nil
+      ENV['MAIL_ROOM_DOGGOHUB_CONFIG_FILE'] = nil
     end
 
     it 'contains the intended configuration' do
@@ -44,13 +44,13 @@ describe 'mail_room.yml' do
       expect(mailbox[:port]).to eq(993)
       expect(mailbox[:ssl]).to eq(true)
       expect(mailbox[:start_tls]).to eq(false)
-      expect(mailbox[:email]).to eq('gitlab-incoming@gmail.com')
+      expect(mailbox[:email]).to eq('doggohub-incoming@gmail.com')
       expect(mailbox[:password]).to eq('[REDACTED]')
       expect(mailbox[:name]).to eq('inbox')
       expect(mailbox[:idle_timeout]).to eq(60)
 
-      redis_url = gitlab_redis.url
-      sentinels = gitlab_redis.sentinels
+      redis_url = doggohub_redis.url
+      sentinels = doggohub_redis.sentinels
 
       expect(mailbox[:delivery_options][:redis_url]).to be_present
       expect(mailbox[:delivery_options][:redis_url]).to eq(redis_url)

@@ -5,7 +5,7 @@ Log into your server with root privileges. Then start a Ruby on Rails console.
 Start the console with this command:
 
 ```bash
-gitlab-rails console production
+doggohub-rails console production
 ```
 
 Wait until the console has loaded.

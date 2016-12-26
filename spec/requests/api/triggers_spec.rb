@@ -54,7 +54,7 @@ describe API::Triggers do
         expect(pipeline.builds.size).to eq(5)
       end
 
-      it 'creates builds on webhook from other gitlab repository and branch' do
+      it 'creates builds on webhook from other doggohub repository and branch' do
         expect do
           post api("/projects/#{project.id}/ref/master/trigger/builds?token=#{trigger_token}"), { ref: 'refs/heads/other-branch' }
         end.to change(project.builds, :count).by(5)

@@ -88,7 +88,7 @@ class Profiles::TwoFactorAuthsController < Profiles::ApplicationController
   end
 
   def issuer_host
-    Gitlab.config.gitlab.host
+    Gitlab.config.doggohub.host
   end
 
   # Setup in preparation of communication with a U2F (universal 2nd factor) device

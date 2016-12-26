@@ -19,8 +19,8 @@ class RemoveWrongImportUrlFromProjects < ActiveRecord::Migration
   def up
     say("Encrypting and migrating project import credentials...")
 
-    # This should cover GitHub, GitLab, Bitbucket user:password, token@domain, and other similar URLs.
-    in_transaction(message: "Projects including GitHub and GitLab projects with an unsecured URL.") { process_projects_with_wrong_url }
+    # This should cover GitHub, DoggoHub, Bitbucket user:password, token@domain, and other similar URLs.
+    in_transaction(message: "Projects including GitHub and DoggoHub projects with an unsecured URL.") { process_projects_with_wrong_url }
 
     in_transaction(message: "Migrating Bitbucket credentials...") { process_project(import_type: 'bitbucket', credentials_keys: ['bb_session']) }
 

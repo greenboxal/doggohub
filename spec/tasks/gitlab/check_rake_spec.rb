@@ -1,12 +1,12 @@
 require 'rake_helper'
 
-describe 'gitlab:ldap:check rake task' do
+describe 'doggohub:ldap:check rake task' do
   include LdapHelpers
 
   before do
-    Rake.application.rake_require 'tasks/gitlab/check'
+    Rake.application.rake_require 'tasks/doggohub/check'
 
-    stub_warn_user_is_not_gitlab
+    stub_warn_user_is_not_doggohub
   end
 
   context 'when LDAP is not enabled' do
@@ -14,7 +14,7 @@ describe 'gitlab:ldap:check rake task' do
       expect(Gitlab::LDAP::Config).not_to receive(:providers)
       expect(Gitlab::LDAP::Adapter).not_to receive(:open)
 
-      run_rake_task('gitlab:ldap:check')
+      run_rake_task('doggohub:ldap:check')
     end
   end
 
@@ -37,7 +37,7 @@ describe 'gitlab:ldap:check rake task' do
 
       expect(ldap).to receive(:bind)
 
-      run_rake_task('gitlab:ldap:check')
+      run_rake_task('doggohub:ldap:check')
     end
 
     it 'searches for 100 LDAP users' do
@@ -45,7 +45,7 @@ describe 'gitlab:ldap:check rake task' do
 
       expect(adapter).to receive(:users).with('uid', '*', 100)
 
-      run_rake_task('gitlab:ldap:check')
+      run_rake_task('doggohub:ldap:check')
     end
   end
 end

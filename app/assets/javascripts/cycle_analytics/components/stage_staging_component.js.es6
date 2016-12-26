@@ -20,7 +20,7 @@
               <img class="avatar" :src="build.author.avatarUrl">
               <h5 class="item-title">
                 <a :href="build.url" class="pipeline-id">#{{ build.id }}</a>
-                <i class="fa fa-code-fork"></i>
+                <i class="fa fa-code-bork"></i>
                 <a :href="build.branch.url" class="branch-name monospace">{{ build.branch.name }}</a>
                 <span class="icon-branch">${global.cycleAnalytics.svgs.iconBranch}</span>
                 <a :href="build.commitUrl" class="short-sha monospace">{{ build.shortSha }}</a>

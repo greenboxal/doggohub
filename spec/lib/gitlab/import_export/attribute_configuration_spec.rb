@@ -20,7 +20,7 @@ describe 'Import/Export attribute configuration', lib: true do
     names.flatten.uniq - ['milestones', 'labels'] + ['project']
   end
 
-  let(:safe_attributes_file) { 'spec/lib/gitlab/import_export/safe_model_attributes.yml' }
+  let(:safe_attributes_file) { 'spec/lib/doggohub/import_export/safe_model_attributes.yml' }
   let(:safe_model_attributes) { YAML.load_file(safe_attributes_file) }
 
   it 'has no new columns' do

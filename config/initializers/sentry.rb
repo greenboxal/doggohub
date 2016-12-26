@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-require 'gitlab/current_settings'
+require 'doggohub/current_settings'
 include Gitlab::CurrentSettings
 
 if Rails.env.production?

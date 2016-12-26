@@ -13,7 +13,7 @@ GET /projects/:id/environments
 | `id`      | integer | yes      | The ID of the project |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/projects/1/environments
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/projects/1/environments
 ```
 
 Example response:
@@ -24,7 +24,7 @@ Example response:
     "id": 1,
     "name": "review/fix-foo",
     "slug": "review-fix-foo-dfjre3",
-    "external_url": "https://review-fix-foo-dfjre3.example.gitlab.com"
+    "external_url": "https://review-fix-foo-dfjre3.example.doggohub.com"
   }
 ]
 ```
@@ -46,7 +46,7 @@ POST /projects/:id/environment
 | `external_url` | string  | no     | Place to link to for this environment |
 
 ```bash
-curl --data "name=deploy&external_url=https://deploy.example.gitlab.com" --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/environments"
+curl --data "name=deploy&external_url=https://deploy.example.doggohub.com" --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/environments"
 ```
 
 Example response:
@@ -56,7 +56,7 @@ Example response:
   "id": 1,
   "name": "deploy",
   "slug": "deploy",
-  "external_url": "https://deploy.example.gitlab.com"
+  "external_url": "https://deploy.example.doggohub.com"
 }
 ```
 
@@ -78,7 +78,7 @@ PUT /projects/:id/environments/:environments_id
 | `external_url`  | string  | no                                | The new external_url             |
 
 ```bash
-curl --request PUT --data "name=staging&external_url=https://staging.example.gitlab.com" --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/environment/1"
+curl --request PUT --data "name=staging&external_url=https://staging.example.doggohub.com" --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/environment/1"
 ```
 
 Example response:
@@ -88,7 +88,7 @@ Example response:
   "id": 1,
   "name": "staging",
   "slug": "staging",
-  "external_url": "https://staging.example.gitlab.com"
+  "external_url": "https://staging.example.doggohub.com"
 }
 ```
 
@@ -106,7 +106,7 @@ DELETE /projects/:id/environments/:environment_id
 | `environment_id` | integer | yes | The ID of the environment |
 
 ```bash
-curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/environment/1"
+curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/environment/1"
 ```
 
 Example response:
@@ -116,6 +116,6 @@ Example response:
   "id": 1,
   "name": "deploy",
   "slug": "deploy",
-  "external_url": "https://deploy.example.gitlab.com"
+  "external_url": "https://deploy.example.doggohub.com"
 }
 ```

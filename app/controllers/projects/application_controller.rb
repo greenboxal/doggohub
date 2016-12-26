@@ -52,7 +52,7 @@ class Projects::ApplicationController < ApplicationController
     project ||= @project
 
     can?(current_user, :push_code, project) ||
-      (current_user && current_user.already_forked?(project))
+      (current_user && current_user.already_borked?(project))
   end
 
   def authorize_project!(action)

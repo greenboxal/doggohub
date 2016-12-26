@@ -19,7 +19,7 @@ module Ci
     # Image with build status for sha or ref
     #
     # This action in DEPRECATED, this is here only for backwards compatibility
-    # with projects migrated from GitLab CI.
+    # with projects migrated from DoggoHub CI.
     #
     def badge
       return render_404 unless @project

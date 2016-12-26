@@ -82,7 +82,7 @@ constraints(ProjectUrlConstrainer.new) do
         end
       end
 
-      resources :forks, only: [:index, :new, :create]
+      resources :borks, only: [:index, :new, :create]
       resource :import, only: [:new, :create, :show]
 
       resources :merge_requests, concerns: :awardable, constraints: { id: /\d+/ } do
@@ -319,7 +319,7 @@ constraints(ProjectUrlConstrainer.new) do
               only: [:edit, :show, :update, :destroy]) do
       member do
         put :transfer
-        delete :remove_fork
+        delete :remove_bork
         post :archive
         post :unarchive
         post :housekeeping

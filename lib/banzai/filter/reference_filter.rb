@@ -1,6 +1,6 @@
 module Banzai
   module Filter
-    # Base class for GitLab Flavored Markdown reference filters.
+    # Base class for DoggoHub Flavored Markdown reference filters.
     #
     # References within <pre>, <code>, <a>, and <style> elements are ignored.
     #

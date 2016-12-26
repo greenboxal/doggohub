@@ -18,7 +18,7 @@
 
 %script#js-authenticate-u2f-authenticated{ type: "text/template" }
   %div
-    %p We heard back from your U2F device. Click this button to authenticate with the GitLab server.
+    %p We heard back from your U2F device. Click this button to authenticate with the DoggoHub server.
     = form_tag(new_user_session_path, method: :post) do |f|
       - resource_params = params[resource_name].presence || params
       = hidden_field_tag 'user[remember_me]', resource_params.fetch(:remember_me, 0)

@@ -68,7 +68,7 @@
     Build.prototype.initSidebar = function() {
       this.$sidebar = $('.js-build-sidebar');
       this.sidebarTranslationLimits = {
-        min: $('.navbar-gitlab').outerHeight() + $('.layout-nav').outerHeight()
+        min: $('.navbar-doggohub').outerHeight() + $('.layout-nav').outerHeight()
       }
       this.sidebarTranslationLimits.max = this.sidebarTranslationLimits.min + $('.scrolling-tabs-container').outerHeight();
       this.$sidebar.css({
@@ -275,7 +275,7 @@
       e.preventDefault();
       $currentTarget = $(e.currentTarget);
       $.scrollTo($currentTarget.attr('href'), {
-        offset: -($('.navbar-gitlab').outerHeight() + $('.layout-nav').outerHeight())
+        offset: -($('.navbar-doggohub').outerHeight() + $('.layout-nav').outerHeight())
       });
     };
 

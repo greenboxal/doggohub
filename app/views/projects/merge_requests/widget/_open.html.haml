@@ -2,7 +2,7 @@
   = render 'projects/merge_requests/widget/heading'
   .mr-widget-body
     -# After conflicts are resolved, the user is redirected back to the MR page.
-    -# There is a short window before background workers run and GitLab processes
+    -# There is a short window before background workers run and DoggoHub processes
     -# the new push and commits, during which it will think the conflicts still exist.
     -# We send this param to get the widget to treat the MR as having no more conflicts.
     - resolved_conflicts = params[:resolved_conflicts]

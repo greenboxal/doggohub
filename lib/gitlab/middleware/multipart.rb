@@ -2,12 +2,12 @@
 #
 # Rack::Multipart leaves behind tempfiles in /tmp and uses valuable Ruby
 # process time to copy files around. This alternative solution uses
-# gitlab-workhorse to clean up the tempfiles and puts the tempfiles in a
+# doggohub-workhorse to clean up the tempfiles and puts the tempfiles in a
 # location where copying should not be needed.
 #
-# When gitlab-workhorse finds files in a multipart MIME body it sends
+# When doggohub-workhorse finds files in a multipart MIME body it sends
 # a signed message via a request header. This message lists the names of
-# the multipart entries that gitlab-workhorse filtered out of the
+# the multipart entries that doggohub-workhorse filtered out of the
 # multipart structure and saved to tempfiles. Workhorse adds new entries
 # in the multipart structure with paths to the tempfiles.
 #
@@ -26,7 +26,7 @@
 module Gitlab
   module Middleware
     class Multipart
-      RACK_ENV_KEY = 'HTTP_GITLAB_WORKHORSE_MULTIPART_FIELDS'
+      RACK_ENV_KEY = 'HTTP_DOGGOHUB_WORKHORSE_MULTIPART_FIELDS'
 
       class Handler
         def initialize(env, message)

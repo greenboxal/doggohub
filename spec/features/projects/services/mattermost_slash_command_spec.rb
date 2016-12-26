@@ -19,7 +19,7 @@ feature 'Setup Mattermost slash commands', feature: true do
     it 'shows a help message' do
       wait_for_ajax
 
-      expect(page).to have_content("This service allows GitLab users to perform common")
+      expect(page).to have_content("This service allows DoggoHub users to perform common")
     end
 
     it 'shows the token after saving' do

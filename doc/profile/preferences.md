@@ -12,7 +12,7 @@ The default is **Charcoal**.
 
 ## Syntax highlighting theme
 
-_GitLab uses the [rouge ruby library][rouge] for syntax highlighting. For a
+_DoggoHub uses the [rouge ruby library][rouge] for syntax highlighting. For a
 list of supported languages visit the rouge website._
 
 Changing this setting allows the user to customize the theme used when viewing

@@ -5,7 +5,7 @@ module Projects
     class Error < StandardError; end
 
     def execute
-      add_repository_to_project unless project.gitlab_project_import?
+      add_repository_to_project unless project.doggohub_project_import?
 
       import_data
 
@@ -33,7 +33,7 @@ module Projects
 
     def import_repository
       begin
-        gitlab_shell.import_repository(project.repository_storage_path, project.path_with_namespace, project.import_url)
+        doggohub_shell.import_repository(project.repository_storage_path, project.path_with_namespace, project.import_url)
       rescue => e
         # Expire cache to prevent scenarios such as:
         # 1. First import failed, but the repo was imported successfully, so +exists?+ returns true
@@ -47,7 +47,7 @@ module Projects
     def import_data
       return unless has_importer?
 
-      project.repository.before_import unless project.gitlab_project_import?
+      project.repository.before_import unless project.doggohub_project_import?
 
       unless importer.execute
         raise Error, 'The remote data could not be imported.'

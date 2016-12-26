@@ -1,54 +1,54 @@
 require 'spec_helper'
 
-describe ForkedProjectLink, "add link on fork" do
+describe BorkedProjectLink, "add link on bork" do
   let(:project_from) { create(:project) }
   let(:namespace) { create(:namespace) }
   let(:user) { create(:user, namespace: namespace) }
 
   before do
     create(:project_member, :reporter, user: user, project: project_from)
-    @project_to = fork_project(project_from, user)
+    @project_to = bork_project(project_from, user)
   end
 
-  it "project_to knows it is forked" do
-    expect(@project_to.forked?).to be_truthy
+  it "project_to knows it is borked" do
+    expect(@project_to.borked?).to be_truthy
   end
 
-  it "project knows who it is forked from" do
-    expect(@project_to.forked_from_project).to eq(project_from)
+  it "project knows who it is borked from" do
+    expect(@project_to.borked_from_project).to eq(project_from)
   end
 end
 
-describe '#forked?' do
-  let(:forked_project_link) { build(:forked_project_link) }
+describe '#borked?' do
+  let(:borked_project_link) { build(:borked_project_link) }
   let(:project_from) { create(:project) }
-  let(:project_to) { create(:project, forked_project_link: forked_project_link) }
+  let(:project_to) { create(:project, borked_project_link: borked_project_link) }
 
   before :each do
-    forked_project_link.forked_from_project = project_from
-    forked_project_link.forked_to_project = project_to
-    forked_project_link.save!
+    borked_project_link.borked_from_project = project_from
+    borked_project_link.borked_to_project = project_to
+    borked_project_link.save!
   end
 
-  it "project_to knows it is forked" do
-    expect(project_to.forked?).to be_truthy
+  it "project_to knows it is borked" do
+    expect(project_to.borked?).to be_truthy
   end
 
-  it "project_from is not forked" do
-    expect(project_from.forked?).to be_falsey
+  it "project_from is not borked" do
+    expect(project_from.borked?).to be_falsey
   end
 
-  it "project_to.destroy destroys fork_link" do
-    expect(forked_project_link).to receive(:destroy)
+  it "project_to.destroy destroys bork_link" do
+    expect(borked_project_link).to receive(:destroy)
     project_to.destroy
   end
 end
 
-def fork_project(from_project, user)
-  shell = double('gitlab_shell', fork_repository: true)
+def bork_project(from_project, user)
+  shell = double('doggohub_shell', bork_repository: true)
 
-  service = Projects::ForkService.new(from_project, user)
-  allow(service).to receive(:gitlab_shell).and_return(shell)
+  service = Projects::BorkService.new(from_project, user)
+  allow(service).to receive(:doggohub_shell).and_return(shell)
 
   service.execute
 end

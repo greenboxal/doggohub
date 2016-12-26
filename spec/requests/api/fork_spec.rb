@@ -21,104 +21,104 @@ describe API::API, api: true  do
     create(:project_member, :reporter, user: user2, project: project)
   end
 
-  describe 'POST /projects/fork/:id' do
+  describe 'POST /projects/bork/:id' do
     before { project_user2 }
     before { user3 }
 
     context 'when authenticated' do
-      it 'forks if user has sufficient access to project' do
-        post api("/projects/fork/#{project.id}", user2)
+      it 'borks if user has sufficient access to project' do
+        post api("/projects/bork/#{project.id}", user2)
 
         expect(response).to have_http_status(201)
         expect(json_response['name']).to eq(project.name)
         expect(json_response['path']).to eq(project.path)
         expect(json_response['owner']['id']).to eq(user2.id)
         expect(json_response['namespace']['id']).to eq(user2.namespace.id)
-        expect(json_response['forked_from_project']['id']).to eq(project.id)
+        expect(json_response['borked_from_project']['id']).to eq(project.id)
       end
 
-      it 'forks if user is admin' do
-        post api("/projects/fork/#{project.id}", admin)
+      it 'borks if user is admin' do
+        post api("/projects/bork/#{project.id}", admin)
 
         expect(response).to have_http_status(201)
         expect(json_response['name']).to eq(project.name)
         expect(json_response['path']).to eq(project.path)
         expect(json_response['owner']['id']).to eq(admin.id)
         expect(json_response['namespace']['id']).to eq(admin.namespace.id)
-        expect(json_response['forked_from_project']['id']).to eq(project.id)
+        expect(json_response['borked_from_project']['id']).to eq(project.id)
       end
 
-      it 'fails on missing project access for the project to fork' do
-        post api("/projects/fork/#{project.id}", user3)
+      it 'fails on missing project access for the project to bork' do
+        post api("/projects/bork/#{project.id}", user3)
 
         expect(response).to have_http_status(404)
         expect(json_response['message']).to eq('404 Project Not Found')
       end
 
-      it 'fails if forked project exists in the user namespace' do
-        post api("/projects/fork/#{project.id}", user)
+      it 'fails if borked project exists in the user namespace' do
+        post api("/projects/bork/#{project.id}", user)
 
         expect(response).to have_http_status(409)
         expect(json_response['message']['name']).to eq(['has already been taken'])
         expect(json_response['message']['path']).to eq(['has already been taken'])
       end
 
-      it 'fails if project to fork from does not exist' do
-        post api('/projects/fork/424242', user)
+      it 'fails if project to bork from does not exist' do
+        post api('/projects/bork/424242', user)
 
         expect(response).to have_http_status(404)
         expect(json_response['message']).to eq('404 Project Not Found')
       end
 
-      it 'forks with explicit own user namespace id' do
-        post api("/projects/fork/#{project.id}", user2), namespace: user2.namespace.id
+      it 'borks with explicit own user namespace id' do
+        post api("/projects/bork/#{project.id}", user2), namespace: user2.namespace.id
 
         expect(response).to have_http_status(201)
         expect(json_response['owner']['id']).to eq(user2.id)
       end
 
-      it 'forks with explicit own user name as namespace' do
-        post api("/projects/fork/#{project.id}", user2), namespace: user2.username
+      it 'borks with explicit own user name as namespace' do
+        post api("/projects/bork/#{project.id}", user2), namespace: user2.username
 
         expect(response).to have_http_status(201)
         expect(json_response['owner']['id']).to eq(user2.id)
       end
 
-      it 'forks to another user when admin' do
-        post api("/projects/fork/#{project.id}", admin), namespace: user2.username
+      it 'borks to another user when admin' do
+        post api("/projects/bork/#{project.id}", admin), namespace: user2.username
 
         expect(response).to have_http_status(201)
         expect(json_response['owner']['id']).to eq(user2.id)
       end
 
-      it 'fails if trying to fork to another user when not admin' do
-        post api("/projects/fork/#{project.id}", user2), namespace: admin.namespace.id
+      it 'fails if trying to bork to another user when not admin' do
+        post api("/projects/bork/#{project.id}", user2), namespace: admin.namespace.id
 
         expect(response).to have_http_status(404)
       end
 
-      it 'fails if trying to fork to non-existent namespace' do
-        post api("/projects/fork/#{project.id}", user2), namespace: 42424242
+      it 'fails if trying to bork to non-existent namespace' do
+        post api("/projects/bork/#{project.id}", user2), namespace: 42424242
 
         expect(response).to have_http_status(404)
         expect(json_response['message']).to eq('404 Target Namespace Not Found')
       end
 
-      it 'forks to owned group' do
-        post api("/projects/fork/#{project.id}", user2), namespace: group2.name
+      it 'borks to owned group' do
+        post api("/projects/bork/#{project.id}", user2), namespace: group2.name
 
         expect(response).to have_http_status(201)
         expect(json_response['namespace']['name']).to eq(group2.name)
       end
 
-      it 'fails to fork to not owned group' do
-        post api("/projects/fork/#{project.id}", user2), namespace: group.name
+      it 'fails to bork to not owned group' do
+        post api("/projects/bork/#{project.id}", user2), namespace: group.name
 
         expect(response).to have_http_status(404)
       end
 
-      it 'forks to not owned group when admin' do
-        post api("/projects/fork/#{project.id}", admin), namespace: group.name
+      it 'borks to not owned group when admin' do
+        post api("/projects/bork/#{project.id}", admin), namespace: group.name
 
         expect(response).to have_http_status(201)
         expect(json_response['namespace']['name']).to eq(group.name)
@@ -127,7 +127,7 @@ describe API::API, api: true  do
 
     context 'when unauthenticated' do
       it 'returns authentication error' do
-        post api("/projects/fork/#{project.id}")
+        post api("/projects/bork/#{project.id}")
 
         expect(response).to have_http_status(401)
         expect(json_response['message']).to eq('401 Unauthorized')

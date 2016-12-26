@@ -39,5 +39,5 @@
 Review the Thoughtbot code-review guide for suggestions to follow when reviewing merge requests:
 [https://github.com/thoughtbot/guides/tree/master/code-review](https://github.com/thoughtbot/guides/tree/master/code-review)
 
-See GitLab merge requests for examples:
-[https://gitlab.com/gitlab-org/gitlab-ce/merge_requests](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests)
+See DoggoHub merge requests for examples:
+[https://doggohub.com/doggohub-org/doggohub-ce/merge_requests](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests)

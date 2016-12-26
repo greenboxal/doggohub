@@ -60,39 +60,39 @@ describe ProtectedBranch, models: true do
         let(:protected_branch) { build(:protected_branch, name: "*/production/*") }
 
         it "returns true for branch names matching the wildcard" do
-          expect(protected_branch.matches?("gitlab/production/some-branch")).to be true
+          expect(protected_branch.matches?("doggohub/production/some-branch")).to be true
           expect(protected_branch.matches?("/production/some-branch")).to be true
-          expect(protected_branch.matches?("gitlab/production/")).to be true
+          expect(protected_branch.matches?("doggohub/production/")).to be true
           expect(protected_branch.matches?("/production/")).to be true
         end
 
         it "returns false for branch names not matching the wildcard" do
-          expect(protected_branch.matches?("gitlabproductionsome-branch")).to be false
+          expect(protected_branch.matches?("doggohubproductionsome-branch")).to be false
           expect(protected_branch.matches?("production/some-branch")).to be false
-          expect(protected_branch.matches?("gitlab/production")).to be false
+          expect(protected_branch.matches?("doggohub/production")).to be false
           expect(protected_branch.matches?("production")).to be false
         end
       end
 
       context "when there are arbitrarily placed '*'s" do
-        let(:protected_branch) { build(:protected_branch, name: "pro*duction/*/gitlab/*") }
+        let(:protected_branch) { build(:protected_branch, name: "pro*duction/*/doggohub/*") }
 
         it "returns true for branch names matching the wildcard" do
-          expect(protected_branch.matches?("production/some-branch/gitlab/second-branch")).to be true
-          expect(protected_branch.matches?("proXYZduction/some-branch/gitlab/second-branch")).to be true
-          expect(protected_branch.matches?("proXYZduction/gitlab/gitlab/gitlab")).to be true
-          expect(protected_branch.matches?("proXYZduction//gitlab/")).to be true
-          expect(protected_branch.matches?("proXYZduction/some-branch/gitlab/")).to be true
-          expect(protected_branch.matches?("proXYZduction//gitlab/some-branch")).to be true
+          expect(protected_branch.matches?("production/some-branch/doggohub/second-branch")).to be true
+          expect(protected_branch.matches?("proXYZduction/some-branch/doggohub/second-branch")).to be true
+          expect(protected_branch.matches?("proXYZduction/doggohub/doggohub/doggohub")).to be true
+          expect(protected_branch.matches?("proXYZduction//doggohub/")).to be true
+          expect(protected_branch.matches?("proXYZduction/some-branch/doggohub/")).to be true
+          expect(protected_branch.matches?("proXYZduction//doggohub/some-branch")).to be true
         end
 
         it "returns false for branch names not matching the wildcard" do
-          expect(protected_branch.matches?("production/some-branch/not-gitlab/second-branch")).to be false
-          expect(protected_branch.matches?("prodXYZuction/some-branch/gitlab/second-branch")).to be false
-          expect(protected_branch.matches?("proXYZduction/gitlab/some-branch/gitlab")).to be false
-          expect(protected_branch.matches?("proXYZduction/gitlab//")).to be false
-          expect(protected_branch.matches?("proXYZduction/gitlab/")).to be false
-          expect(protected_branch.matches?("proXYZduction//some-branch/gitlab")).to be false
+          expect(protected_branch.matches?("production/some-branch/not-doggohub/second-branch")).to be false
+          expect(protected_branch.matches?("prodXYZuction/some-branch/doggohub/second-branch")).to be false
+          expect(protected_branch.matches?("proXYZduction/doggohub/some-branch/doggohub")).to be false
+          expect(protected_branch.matches?("proXYZduction/doggohub//")).to be false
+          expect(protected_branch.matches?("proXYZduction/doggohub/")).to be false
+          expect(protected_branch.matches?("proXYZduction//some-branch/doggohub")).to be false
         end
       end
     end

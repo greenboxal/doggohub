@@ -59,18 +59,18 @@ describe VisibilityLevelHelper do
   end
 
   describe "skip_level?" do
-    describe "forks" do
+    describe "borks" do
       let(:project)       { create(:project, :internal) }
-      let(:fork_project)  { create(:project, forked_from_project: project) }
+      let(:bork_project)  { create(:project, borked_from_project: project) }
 
       it "skips levels" do
-        expect(skip_level?(fork_project, Gitlab::VisibilityLevel::PUBLIC)).to be_truthy
-        expect(skip_level?(fork_project, Gitlab::VisibilityLevel::INTERNAL)).to be_falsey
-        expect(skip_level?(fork_project, Gitlab::VisibilityLevel::PRIVATE)).to be_falsey
+        expect(skip_level?(bork_project, Gitlab::VisibilityLevel::PUBLIC)).to be_truthy
+        expect(skip_level?(bork_project, Gitlab::VisibilityLevel::INTERNAL)).to be_falsey
+        expect(skip_level?(bork_project, Gitlab::VisibilityLevel::PRIVATE)).to be_falsey
       end
     end
 
-    describe "non-forked project" do
+    describe "non-borked project" do
       let(:project) { create(:project, :internal) }
 
       it "skips levels" do

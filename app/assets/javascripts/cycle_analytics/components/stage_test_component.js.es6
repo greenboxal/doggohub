@@ -22,7 +22,7 @@
                 <a :href="build.url" class="item-build-name">{{ build.name }}</a>
                 &middot;
                 <a :href="build.url" class="pipeline-id">#{{ build.id }}</a>
-                <i class="fa fa-code-fork"></i>
+                <i class="fa fa-code-bork"></i>
                 <a :href="build.branch.url" class="branch-name monospace">{{ build.branch.name }}</a>
                 <span class="icon-branch">${global.cycleAnalytics.svgs.iconBranch}</span>
                 <a :href="build.commitUrl" class="short-sha monospace">{{ build.shortSha }}</a>

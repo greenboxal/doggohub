@@ -57,7 +57,7 @@ Parameters:
 | `tag_name` | string | yes | The name of the tag |
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/projects/5/repository/tags/v1.0.0
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/projects/5/repository/tags/v1.0.0
 ```
 
 Example Response:
@@ -97,7 +97,7 @@ Parameters:
 - `tag_name` (required) - The name of a tag
 - `ref` (required) - Create tag using commit SHA, another tag name, or branch name.
 - `message` (optional) - Creates annotated tag.
-- `release_description` (optional) - Add release notes to the git tag and store it in the GitLab database.
+- `release_description` (optional) - Add release notes to the git tag and store it in the DoggoHub database.
 
 ```json
 {

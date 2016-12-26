@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 20161221140236) do
     t.integer "polling_interval"
     t.boolean "public", default: false, null: false
     t.string "ssh_url_to_repo"
-    t.integer "gitlab_id"
+    t.integer "doggohub_id"
     t.boolean "allow_git_fetch", default: true, null: false
     t.string "email_recipients", default: "", null: false
     t.boolean "email_add_pusher", default: true, null: false
@@ -453,14 +453,14 @@ ActiveRecord::Schema.define(version: 20161221140236) do
   add_index "events", ["target_id"], name: "index_events_on_target_id", using: :btree
   add_index "events", ["target_type"], name: "index_events_on_target_type", using: :btree
 
-  create_table "forked_project_links", force: :cascade do |t|
-    t.integer "forked_to_project_id", null: false
-    t.integer "forked_from_project_id", null: false
+  create_table "borked_project_links", force: :cascade do |t|
+    t.integer "borked_to_project_id", null: false
+    t.integer "borked_from_project_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "forked_project_links", ["forked_to_project_id"], name: "index_forked_project_links_on_forked_to_project_id", unique: true, using: :btree
+  add_index "borked_project_links", ["borked_to_project_id"], name: "index_borked_project_links_on_borked_to_project_id", unique: true, using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.string "extern_uid"

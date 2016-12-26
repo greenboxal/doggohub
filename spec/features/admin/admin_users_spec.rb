@@ -74,9 +74,9 @@ describe "Admin::Users", feature: true  do
       click_button "Create user"
       user = User.find_by(username: 'bang')
       expect(user.projects_limit).
-        to eq(Gitlab.config.gitlab.default_projects_limit)
+        to eq(Gitlab.config.doggohub.default_projects_limit)
       expect(user.can_create_group).
-        to eq(Gitlab.config.gitlab.default_can_create_group)
+        to eq(Gitlab.config.doggohub.default_can_create_group)
     end
 
     it "creates user with valid data" do

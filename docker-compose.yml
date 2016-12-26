@@ -1,2 +1,2 @@
 app:
-  image: gitlab/gitlab-ce:latest
+  image: doggohub/doggohub-ce:latest

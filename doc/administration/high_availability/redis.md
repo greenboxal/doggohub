@@ -1,7 +1,7 @@
-# Configuring Redis for GitLab HA
+# Configuring Redis for DoggoHub HA
 
 >
-Experimental Redis Sentinel support was [Introduced][ce-1877] in GitLab 8.11.
+Experimental Redis Sentinel support was [Introduced][ce-1877] in DoggoHub 8.11.
 Starting with 8.14, Redis Sentinel is no longer experimental.
 If you've used it with versions `< 8.14` before, please check the updated
 documentation here.
@@ -12,7 +12,7 @@ start the failover procedure.
 
 You can choose to install and manage Redis and Sentinel yourself, use
 a hosted cloud solution or you can use the one that comes bundled with
-Omnibus GitLab packages.
+Omnibus DoggoHub packages.
 
 > **Notes:**
 - Redis requires authentication for High Availability. See
@@ -20,12 +20,12 @@ Omnibus GitLab packages.
   information. We recommend using a combination of a Redis password and tight
   firewall rules to secure your Redis service.
 - You are highly encouraged to read the [Redis Sentinel][sentinel] documentation
-  before configuring Redis HA with GitLab to fully understand the topology and
+  before configuring Redis HA with DoggoHub to fully understand the topology and
   architecture.
-- This is the documentation for the Omnibus GitLab packages. For installations
+- This is the documentation for the Omnibus DoggoHub packages. For installations
   from source, follow the [Redis HA source installation](redis_source.md) guide.
-- Redis Sentinel daemon is bundled with Omnibus GitLab Enterprise Edition only.
-  For configuring Sentinel with the Omnibus GitLab Community Edition and
+- Redis Sentinel daemon is bundled with Omnibus DoggoHub Enterprise Edition only.
+  For configuring Sentinel with the Omnibus DoggoHub Community Edition and
   installations from source, read the
   [Available configuration setups](#available-configuration-setups) section
   below.
@@ -47,7 +47,7 @@ No more than one Sentinel in the same machine though.
 
 You also need to take in consideration the underlying network topology,
 making sure you have redundant connectivity between Redis / Sentinel and
-GitLab instances, otherwise the networks will become a single point of
+DoggoHub instances, otherwise the networks will become a single point of
 failure.
 
 Make sure that you read this document once as a whole before configuring the
@@ -56,9 +56,9 @@ components below.
 ### High Availability with Sentinel
 
 >**Notes:**
-- Starting with GitLab `8.11`, you can configure a list of Redis Sentinel
+- Starting with DoggoHub `8.11`, you can configure a list of Redis Sentinel
   servers that will monitor a group of Redis servers to provide failover support.
-- Starting with GitLab `8.14`, the Omnibus GitLab Enterprise Edition package
+- Starting with DoggoHub `8.14`, the Omnibus DoggoHub Enterprise Edition package
   comes with Redis Sentinel daemon built-in.
 
 High Availability with Redis requires a few things:
@@ -79,7 +79,7 @@ to help keep servers online with minimal to no downtime. Redis Sentinel:
   server
 
 When a **Master** fails to respond, it's the application's responsibility
-(in our case GitLab) to handle timeout and reconnect (querying a **Sentinel**
+(in our case DoggoHub) to handle timeout and reconnect (querying a **Sentinel**
 for a new **Master**).
 
 To get a better understanding on how to correctly setup Sentinel, please read
@@ -89,7 +89,7 @@ whole cluster down, invalidating the failover effort.
 
 ### Recommended setup
 
-For a minimal setup, you will install the Omnibus GitLab package in `3`
+For a minimal setup, you will install the Omnibus DoggoHub package in `3`
 **independent** machines, both with **Redis** and **Sentinel**:
 
 - Redis Master + Sentinel
@@ -101,7 +101,7 @@ from, read [Redis setup overview](#redis-setup-overview) and
 [Sentinel setup overview](#sentinel-setup-overview).
 
 For a recommended setup that can resist more failures, you will install
-the Omnibus GitLab package in `5` **independent** machines, both with
+the Omnibus DoggoHub package in `5` **independent** machines, both with
 **Redis** and **Sentinel**:
 
 - Redis Master + Sentinel
@@ -204,35 +204,35 @@ the official documentation:
 
 ### Available configuration setups
 
-Based on your infrastructure setup and how you have installed GitLab, there are
-multiple ways to configure Redis HA. Omnibus GitLab packages have Redis and/or
+Based on your infrastructure setup and how you have installed DoggoHub, there are
+multiple ways to configure Redis HA. Omnibus DoggoHub packages have Redis and/or
 Redis Sentinel bundled with them so you only need to focus on configuration.
 Pick the one that suits your needs.
 
 - [Installations from source][source]: You need to install Redis and Sentinel
   yourself. Use the [Redis HA installation from source](redis_source.md)
   documentation.
-- [Omnibus GitLab **Community Edition** (CE) package][ce]: Redis is bundled, so you
+- [Omnibus DoggoHub **Community Edition** (CE) package][ce]: Redis is bundled, so you
   can use the package with only the Redis service enabled as described in steps
   1 and 2 of this document (works for both master and slave setups). To install
   and configure Sentinel, jump directly to the Sentinel section in the
   [Redis HA installation from source](redis_source.md#step-3-configuring-the-redis-sentinel-instances) documentation.
-- [Omnibus GitLab **Enterprise Edition** (EE) package][ee]: Both Redis and Sentinel
+- [Omnibus DoggoHub **Enterprise Edition** (EE) package][ee]: Both Redis and Sentinel
   are bundled in the package, so you can use the EE package to setup the whole
   Redis HA infrastructure (master, slave and Sentinel) which is described in
   this document.
-- If you have installed GitLab using the Omnibus GitLab packages (CE or EE),
+- If you have installed DoggoHub using the Omnibus DoggoHub packages (CE or EE),
   but you want to use your own external Redis server, follow steps 1-3 in the
   [Redis HA installation from source](redis_source.md) documentation, then go
   straight to step 4 in this guide to
-  [set up the GitLab application](#step-4-configuring-the-gitlab-application).
+  [set up the DoggoHub application](#step-4-configuring-the-doggohub-application).
 
 ## Configuring Redis HA
 
 This is the section where we install and setup the new Redis instances.
 
 >**Notes:**
-- We assume that you install GitLab and all HA components from scratch. If you
+- We assume that you install DoggoHub and all HA components from scratch. If you
   already have it installed and running, read how to
   [switch from a single-machine installation to Redis HA](#switching-from-an-existing-single-machine-installation-to-redis-ha).
 - Redis nodes (both master and slaves) will need the same password defined in
@@ -246,13 +246,13 @@ The prerequisites for a HA Redis setup are the following:
 1. Provision the minimum required number of instances as specified in the
    [recommended setup](#recommended-setup) section.
 1. **Do NOT** install Redis or Redis Sentinel in the same machines your
-   GitLab application is running on. You can however opt in to install Redis
+   DoggoHub application is running on. You can however opt in to install Redis
    and Sentinel in the same machine (each in independent ones is recommended
    though).
 1. All Redis nodes must be able to talk to each other and accept incoming
    connections over Redis (`6379`) and Sentinel (`26379`) ports (unless you
    change the default ones).
-1. The server that hosts the GitLab application must be able to access the
+1. The server that hosts the DoggoHub application must be able to access the
    Redis nodes.
 1. Protect the nodes from access from external networks ([Internet][it]), using
    firewall.
@@ -260,13 +260,13 @@ The prerequisites for a HA Redis setup are the following:
 ### Step 1. Configuring the master Redis instance
 
 1. SSH into the **master** Redis server.
-1. [Download/install](https://about.gitlab.com/installation) the Omnibus GitLab
-   package you want using **steps 1 and 2** from the GitLab downloads page.
+1. [Download/install](https://about.doggohub.com/installation) the Omnibus DoggoHub
+   package you want using **steps 1 and 2** from the DoggoHub downloads page.
      - Make sure you select the correct Omnibus package, with the same version
        and type (Community, Enterprise editions) of your current install.
      - Do not complete any other steps on the download page.
 
-1. Edit `/etc/gitlab/gitlab.rb` and add the contents:
+1. Edit `/etc/doggohub/doggohub.rb` and add the contents:
 
     ```ruby
     # Enable the master role and disable all other services in the machine
@@ -287,26 +287,26 @@ The prerequisites for a HA Redis setup are the following:
     redis['password'] = 'redis-password-goes-here'
     ```
 
-1. Only the primary GitLab application server should handle migrations. To
+1. Only the primary DoggoHub application server should handle migrations. To
    prevent database migrations from running on upgrade, add the following
-   configuration to your `/etc/gitlab/gitlab.rb` file:
+   configuration to your `/etc/doggohub/doggohub.rb` file:
 
     ```
-    gitlab_rails['auto_migrate'] = false
+    doggohub_rails['auto_migrate'] = false
     ```
 
-1. [Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+1. [Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
 ### Step 2. Configuring the slave Redis instances
 
 1. SSH into the **slave** Redis server.
-1. [Download/install](https://about.gitlab.com/installation) the Omnibus GitLab
-   package you want using **steps 1 and 2** from the GitLab downloads page.
+1. [Download/install](https://about.doggohub.com/installation) the Omnibus DoggoHub
+   package you want using **steps 1 and 2** from the DoggoHub downloads page.
      - Make sure you select the correct Omnibus package, with the same version
        and type (Community, Enterprise editions) of your current install.
      - Do not complete any other steps on the download page.
 
-1. Edit `/etc/gitlab/gitlab.rb` and add the contents:
+1. Edit `/etc/doggohub/doggohub.rb` and add the contents:
 
     ```ruby
     # Enable the slave role and disable all other services in the machine
@@ -338,26 +338,26 @@ The prerequisites for a HA Redis setup are the following:
 1. To prevent database migrations from running on upgrade, run:
 
     ```
-    sudo touch /etc/gitlab/skip-auto-migrations
+    sudo touch /etc/doggohub/skip-auto-migrations
     ```
 
-    Only the primary GitLab application server should handle migrations.
+    Only the primary DoggoHub application server should handle migrations.
 
-1. [Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+1. [Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 1. Go through the steps again for all the other slave nodes.
 
 ---
 
-These values don't have to be changed again in `/etc/gitlab/gitlab.rb` after
+These values don't have to be changed again in `/etc/doggohub/doggohub.rb` after
 a failover, as the nodes will be managed by the Sentinels, and even after a
-`gitlab-ctl reconfigure`, they will get their configuration restored by
+`doggohub-ctl reconfigure`, they will get their configuration restored by
 the same Sentinels.
 
 ### Step 3. Configuring the Redis Sentinel instances
 
 >**Note:**
-Redis Sentinel is bundled with Omnibus GitLab Enterprise Edition only. The
-following section assumes you are using Omnibus GitLab Enterprise Edition.
+Redis Sentinel is bundled with Omnibus DoggoHub Enterprise Edition only. The
+following section assumes you are using Omnibus DoggoHub Enterprise Edition.
 For the Omnibus Community Edition and installations from source, follow the
 [Redis HA source install](redis_source.md) guide.
 
@@ -372,7 +372,7 @@ You must have at least `3` Redis Sentinel servers, and they need to
 be each in an independent machine. You can configure them in the same
 machines where you've configured the other Redis servers.
 
-With GitLab Enterprise Edition, you can use the Omnibus package to setup
+With DoggoHub Enterprise Edition, you can use the Omnibus package to setup
 multiple machines with the Sentinel daemon.
 
 ---
@@ -381,14 +381,14 @@ multiple machines with the Sentinel daemon.
 1. **You can omit this step if the Sentinels will be hosted in the same node as
    the other Redis instances.**
 
-     [Download/install](https://about.gitlab.com/downloads-ee) the
-     Omnibus GitLab Enterprise Edition package using **steps 1 and 2** from the
-     GitLab downloads page.
+     [Download/install](https://about.doggohub.com/downloads-ee) the
+     Omnibus DoggoHub Enterprise Edition package using **steps 1 and 2** from the
+     DoggoHub downloads page.
        - Make sure you select the correct Omnibus package, with the same version
-         the GitLab application is running.
+         the DoggoHub application is running.
        - Do not complete any other steps on the download page.
 
-1. Edit `/etc/gitlab/gitlab.rb` and add the contents (if you are installing the
+1. Edit `/etc/doggohub/doggohub.rb` and add the contents (if you are installing the
    Sentinels in the same node as the other Redis instances, some values might
    be duplicate below):
 
@@ -396,7 +396,7 @@ multiple machines with the Sentinel daemon.
     redis_sentinel_role['enable'] = true
 
     # Must be the same in every sentinel node
-    redis['master_name'] = 'gitlab-redis'
+    redis['master_name'] = 'doggohub-redis'
 
     # The same password for Redis authentication you set up for the master node.
     redis['password'] = 'redis-password-goes-here'
@@ -460,53 +460,53 @@ multiple machines with the Sentinel daemon.
 1. To prevent database migrations from running on upgrade, run:
 
     ```
-    sudo touch /etc/gitlab/skip-auto-migrations
+    sudo touch /etc/doggohub/skip-auto-migrations
     ```
 
-    Only the primary GitLab application server should handle migrations.
+    Only the primary DoggoHub application server should handle migrations.
 
-1. [Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+1. [Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 1. Go through the steps again for all the other Sentinel nodes.
 
-### Step 4. Configuring the GitLab application
+### Step 4. Configuring the DoggoHub application
 
-The final part is to inform the main GitLab application server of the Redis
+The final part is to inform the main DoggoHub application server of the Redis
 Sentinels servers and authentication credentials.
 
 You can enable or disable Sentinel support at any time in new or existing
-installations. From the GitLab application perspective, all it requires is
+installations. From the DoggoHub application perspective, all it requires is
 the correct credentials for the Sentinel nodes.
 
 While it doesn't require a list of all Sentinel nodes, in case of a failure,
 it needs to access at least one of the listed.
 
 >**Note:**
-The following steps should be performed in the [GitLab application server](gitlab.md)
+The following steps should be performed in the [DoggoHub application server](doggohub.md)
 which ideally should not have Redis or Sentinels on it for a HA setup.
 
-1. SSH into the server where the GitLab application is installed.
-1. Edit `/etc/gitlab/gitlab.rb` and add/change the following lines:
+1. SSH into the server where the DoggoHub application is installed.
+1. Edit `/etc/doggohub/doggohub.rb` and add/change the following lines:
 
     ```
     ## Must be the same in every sentinel node
-    redis['master_name'] = 'gitlab-redis'
+    redis['master_name'] = 'doggohub-redis'
 
     ## The same password for Redis authentication you set up for the master node.
     redis['password'] = 'redis-password-goes-here'
 
     ## A list of sentinels with `host` and `port`
-    gitlab_rails['redis_sentinels'] = [
+    doggohub_rails['redis_sentinels'] = [
       {'host' => '10.0.0.1', 'port' => 26379},
       {'host' => '10.0.0.2', 'port' => 26379},
       {'host' => '10.0.0.3', 'port' => 26379}
     ]
     ```
 
-1. [Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+1. [Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
 ## Switching from an existing single-machine installation to Redis HA
 
-If you already have a single-machine GitLab install running, you will need to
+If you already have a single-machine DoggoHub install running, you will need to
 replicate from this machine first, before de-activating the Redis instance
 inside it.
 
@@ -518,7 +518,7 @@ single-machine install, to rotate the **Master** to one of the new nodes.
 
 Make the required changes in configuration and restart the new nodes again.
 
-To disable redis in the single install, edit `/etc/gitlab/gitlab.rb`:
+To disable redis in the single install, edit `/etc/doggohub/doggohub.rb`:
 
 ```ruby
 redis['enable'] = false
@@ -529,7 +529,7 @@ If you fail to replicate first, you may loose data (unprocessed background jobs)
 ## Example of a minimal configuration with 1 master, 2 slaves and 3 Sentinels
 
 >**Note:**
-Redis Sentinel is bundled with Omnibus GitLab Enterprise Edition only. For
+Redis Sentinel is bundled with Omnibus DoggoHub Enterprise Edition only. For
 different setups, read the
 [available configuration setups](#available-configuration-setups) section.
 
@@ -550,7 +550,7 @@ Here is a list and description of each **machine** and the assigned **IP**:
 * `10.0.0.1`: Redis Master + Sentinel 1
 * `10.0.0.2`: Redis Slave 1 + Sentinel 2
 * `10.0.0.3`: Redis Slave 2 + Sentinel 3
-* `10.0.0.4`: GitLab application
+* `10.0.0.4`: DoggoHub application
 
 Please note that after the initial configuration, if a failover is initiated
 by the Sentinel nodes, the Redis nodes will be reconfigured and the **Master**
@@ -563,7 +563,7 @@ or a failover promotes a different **Master** node.
 
 ### Example configuration for Redis master and Sentinel 1
 
-In `/etc/gitlab/gitlab.rb`:
+In `/etc/doggohub/doggohub.rb`:
 
 ```ruby
 redis_master_role['enable'] = true
@@ -571,7 +571,7 @@ redis_sentinel_role['enable'] = true
 redis['bind'] = '10.0.0.1'
 redis['port'] = 6379
 redis['password'] = 'redis-password-goes-here'
-redis['master_name'] = 'gitlab-redis' # must be the same in every sentinel node
+redis['master_name'] = 'doggohub-redis' # must be the same in every sentinel node
 redis['master_password'] = 'redis-password-goes-here' # the same value defined in redis['password'] in the master instance
 redis['master_ip'] = '10.0.0.1' # ip of the initial master redis instance
 #redis['master_port'] = 6379 # port of the initial master redis instance, uncomment to change to non default
@@ -582,11 +582,11 @@ sentinel['quorum'] = 2
 # sentinel['failover_timeout'] = 60000
 ```
 
-[Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+[Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
 ### Example configuration for Redis slave 1 and Sentinel 2
 
-In `/etc/gitlab/gitlab.rb`:
+In `/etc/doggohub/doggohub.rb`:
 
 ```ruby
 redis_slave_role['enable'] = true
@@ -597,7 +597,7 @@ redis['password'] = 'redis-password-goes-here'
 redis['master_password'] = 'redis-password-goes-here'
 redis['master_ip'] = '10.0.0.1' # IP of master Redis server
 #redis['master_port'] = 6379 # Port of master Redis server, uncomment to change to non default
-redis['master_name'] = 'gitlab-redis' # must be the same in every sentinel node
+redis['master_name'] = 'doggohub-redis' # must be the same in every sentinel node
 sentinel['bind'] = '10.0.0.2'
 # sentinel['port'] = 26379 # uncomment to change default port
 sentinel['quorum'] = 2
@@ -605,11 +605,11 @@ sentinel['quorum'] = 2
 # sentinel['failover_timeout'] = 60000
 ```
 
-[Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+[Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
 ### Example configuration for Redis slave 2 and Sentinel 3
 
-In `/etc/gitlab/gitlab.rb`:
+In `/etc/doggohub/doggohub.rb`:
 
 ```ruby
 redis_slave_role['enable'] = true
@@ -620,7 +620,7 @@ redis['password'] = 'redis-password-goes-here'
 redis['master_password'] = 'redis-password-goes-here'
 redis['master_ip'] = '10.0.0.1' # IP of master Redis server
 #redis['master_port'] = 6379 # Port of master Redis server, uncomment to change to non default
-redis['master_name'] = 'gitlab-redis' # must be the same in every sentinel node
+redis['master_name'] = 'doggohub-redis' # must be the same in every sentinel node
 sentinel['bind'] = '10.0.0.3'
 # sentinel['port'] = 26379 # uncomment to change default port
 sentinel['quorum'] = 2
@@ -628,27 +628,27 @@ sentinel['quorum'] = 2
 # sentinel['failover_timeout'] = 60000
 ```
 
-[Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+[Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
-### Example configuration for the GitLab application
+### Example configuration for the DoggoHub application
 
-In `/etc/gitlab/gitlab.rb`:
+In `/etc/doggohub/doggohub.rb`:
 
 ```ruby
-redis['master_name'] = 'gitlab-redis'
+redis['master_name'] = 'doggohub-redis'
 redis['password'] = 'redis-password-goes-here'
-gitlab_rails['redis_sentinels'] = [
+doggohub_rails['redis_sentinels'] = [
   {'host' => '10.0.0.1', 'port' => 26379},
   {'host' => '10.0.0.2', 'port' => 26379},
   {'host' => '10.0.0.3', 'port' => 26379}
 ]
 ```
 
-[Reconfigure Omnibus GitLab][reconfigure] for the changes to take effect.
+[Reconfigure Omnibus DoggoHub][reconfigure] for the changes to take effect.
 
 ## Advanced configuration
 
-Omnibus GitLab configures some things behind the curtains to make the sysadmins'
+Omnibus DoggoHub configures some things behind the curtains to make the sysadmins'
 lives easier. If you want to know what happens underneath keep reading.
 
 ### Control running services
@@ -671,7 +671,7 @@ redis['enable'] = false
 bootstrap['enable'] = false
 nginx['enable'] = false
 postgresql['enable'] = false
-gitlab_rails['enable'] = false
+doggohub_rails['enable'] = false
 mailroom['enable'] = false
 
 -------
@@ -689,14 +689,14 @@ sentinel['enable'] = false
 bootstrap['enable'] = false
 nginx['enable'] = false
 postgresql['enable'] = false
-gitlab_rails['enable'] = false
+doggohub_rails['enable'] = false
 mailroom['enable'] = false
 
 # For Redis Slave role, also change this setting from default 'true' to 'false':
 redis['master'] = false
 ```
 
-You can find the relevant attributes defined in [gitlab_rails.rb][omnifile].
+You can find the relevant attributes defined in [doggohub_rails.rb][omnifile].
 
 ## Troubleshooting
 
@@ -780,12 +780,12 @@ a few extra configs.
 
 To make sure your configuration is correct:
 
-1. SSH into your GitLab application server
+1. SSH into your DoggoHub application server
 1. Enter the Rails console:
 
     ```
     # For Omnibus installations
-    sudo gitlab-rails console
+    sudo doggohub-rails console
 
     # For source installations
     sudo -u git rails console production
@@ -823,7 +823,7 @@ Changes to Redis HA over time.
 
 **8.14**
 
-- Redis Sentinel support is production-ready and bundled in the Omnibus GitLab
+- Redis Sentinel support is production-ready and bundled in the Omnibus DoggoHub
   Enterprise Edition package
 - Documentation restructure for better readability
 
@@ -838,18 +838,18 @@ Read more on High Availability:
 1. [High Availability Overview](README.md)
 1. [Configure the database](database.md)
 1. [Configure NFS](nfs.md)
-1. [Configure the GitLab application servers](gitlab.md)
+1. [Configure the DoggoHub application servers](doggohub.md)
 1. [Configure the load balancers](load_balancer.md)
 
-[ce-1877]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/1877
-[restart]: ../restart_gitlab.md#installations-from-source
-[reconfigure]: ../restart_gitlab.md#omnibus-gitlab-reconfigure
+[ce-1877]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/1877
+[restart]: ../restart_doggohub.md#installations-from-source
+[reconfigure]: ../restart_doggohub.md#omnibus-doggohub-reconfigure
 [gh-531]: https://github.com/redis/redis-rb/issues/531
 [gh-534]: https://github.com/redis/redis-rb/issues/534
 [redis]: http://redis.io/
 [sentinel]: http://redis.io/topics/sentinel
-[omnifile]: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-cookbooks/gitlab/libraries/gitlab_rails.rb
+[omnifile]: https://doggohub.com/doggohub-org/omnibus-doggohub/blob/master/files/doggohub-cookbooks/doggohub/libraries/doggohub_rails.rb
 [source]: ../../install/installation.md
-[ce]: https://about.gitlab.com/downloads
-[ee]: https://about.gitlab.com/downloads-ee
-[it]: https://gitlab.com/gitlab-org/gitlab-ce/uploads/c4cc8cd353604bd80315f9384035ff9e/The_Internet_IT_Crowd.png
+[ce]: https://about.doggohub.com/downloads
+[ee]: https://about.doggohub.com/downloads-ee
+[it]: https://doggohub.com/doggohub-org/doggohub-ce/uploads/c4cc8cd353604bd80315f9384035ff9e/The_Internet_IT_Crowd.png

@@ -33,9 +33,9 @@ module Emails
     end
 
     def add_pipeline_headers
-      headers['X-GitLab-Pipeline-Id'] = @pipeline.id
-      headers['X-GitLab-Pipeline-Ref'] = @pipeline.ref
-      headers['X-GitLab-Pipeline-Status'] = @pipeline.status
+      headers['X-DoggoHub-Pipeline-Id'] = @pipeline.id
+      headers['X-DoggoHub-Pipeline-Ref'] = @pipeline.ref
+      headers['X-DoggoHub-Pipeline-Status'] = @pipeline.status
     end
 
     def pipeline_subject(status)

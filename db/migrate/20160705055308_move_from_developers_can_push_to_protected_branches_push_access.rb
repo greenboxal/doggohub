@@ -1,5 +1,5 @@
-# See http://doc.gitlab.com/ce/development/migration_style_guide.html
-# for more information on how to write migrations for GitLab.
+# See http://doc.doggohub.com/ce/development/migration_style_guide.html
+# for more information on how to write migrations for DoggoHub.
 
 class MoveFromDevelopersCanPushToProtectedBranchesPushAccess < ActiveRecord::Migration
   DOWNTIME = true
@@ -8,7 +8,7 @@ class MoveFromDevelopersCanPushToProtectedBranchesPushAccess < ActiveRecord::Mig
     is running, we might be left with a `protected_branch` _without_ an associated `push_access_level`. The `protected_branches`
     table must not change while this is running, so downtime is required.
 
-    https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5081#note_13247410
+    https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5081#note_13247410
   HEREDOC
 
   def up

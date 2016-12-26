@@ -1,6 +1,6 @@
-if ENV['GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN'].present?
+if ENV['DOGGOHUB_SHARED_RUNNERS_REGISTRATION_TOKEN'].present?
   settings = ApplicationSetting.current || ApplicationSetting.create_from_defaults
-  settings.set_runners_registration_token(ENV['GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN'])
+  settings.set_runners_registration_token(ENV['DOGGOHUB_SHARED_RUNNERS_REGISTRATION_TOKEN'])
 
   if settings.save
     puts "Saved Runner Registration Token".color(:green)

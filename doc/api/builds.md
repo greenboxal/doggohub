@@ -14,7 +14,7 @@ GET /projects/:id/builds
 | `scope`   | string **or** array of strings | no | The scope of builds to show, one or array of: `created`, `pending`, `running`, `failed`, `success`, `canceled`, `skipped`; showing all builds if none provided |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" 'https://gitlab.example.com/api/v3/projects/1/builds?scope%5B0%5D=pending&scope%5B1%5D=running'
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" 'https://doggohub.example.com/api/v3/projects/1/builds?scope%5B0%5D=pending&scope%5B1%5D=running'
 ```
 
 Example of response
@@ -64,7 +64,7 @@ Example of response
       "state": "active",
       "twitter": "",
       "username": "root",
-      "web_url": "http://gitlab.dev/root",
+      "web_url": "http://doggohub.dev/root",
       "website_url": ""
     }
   },
@@ -108,7 +108,7 @@ Example of response
       "state": "active",
       "twitter": "",
       "username": "root",
-      "web_url": "http://gitlab.dev/root",
+      "web_url": "http://doggohub.dev/root",
       "website_url": ""
     }
   }
@@ -135,7 +135,7 @@ GET /projects/:id/repository/commits/:sha/builds
 | `scope`   | string **or** array of strings | no | The scope of builds to show, one or array of: `created`, `pending`, `running`, `failed`, `success`, `canceled`, `skipped`; showing all builds if none provided |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" 'https://gitlab.example.com/api/v3/projects/1/repository/commits/0ff3ae198f8601a285adcf5c0fff204ee6fba5fd/builds?scope%5B0%5D=pending&scope%5B1%5D=running'
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" 'https://doggohub.example.com/api/v3/projects/1/repository/commits/0ff3ae198f8601a285adcf5c0fff204ee6fba5fd/builds?scope%5B0%5D=pending&scope%5B1%5D=running'
 ```
 
 Example of response
@@ -212,7 +212,7 @@ Example of response
       "state": "active",
       "twitter": "",
       "username": "root",
-      "web_url": "http://gitlab.dev/root",
+      "web_url": "http://doggohub.dev/root",
       "website_url": ""
     }
   }
@@ -233,7 +233,7 @@ GET /projects/:id/builds/:build_id
 | `build_id` | integer | yes      | The ID of a build   |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/8"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/8"
 ```
 
 Example of response
@@ -279,7 +279,7 @@ Example of response
     "state": "active",
     "twitter": "",
     "username": "root",
-    "web_url": "http://gitlab.dev/root",
+    "web_url": "http://doggohub.dev/root",
     "website_url": ""
   }
 }
@@ -287,7 +287,7 @@ Example of response
 
 ## Get build artifacts
 
-> [Introduced][ce-2893] in GitLab 8.5
+> [Introduced][ce-2893] in DoggoHub 8.5
 
 Get build artifacts of a project
 
@@ -301,7 +301,7 @@ GET /projects/:id/builds/:build_id/artifacts
 | `build_id` | integer | yes      | The ID of a build   |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/8/artifacts"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/8/artifacts"
 ```
 
 Response:
@@ -311,11 +311,11 @@ Response:
 | 200       | Serves the artifacts file       |
 | 404       | Build not found or no artifacts |
 
-[ce-2893]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/2893
+[ce-2893]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/2893
 
 ## Download the artifacts file
 
-> [Introduced][ce-5347] in GitLab 8.10.
+> [Introduced][ce-5347] in DoggoHub 8.10.
 
 Download the artifacts file from the given reference name and job provided the
 build finished successfully.
@@ -335,7 +335,7 @@ Parameters
 Example request:
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/artifacts/master/download?job=test"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/artifacts/master/download?job=test"
 ```
 
 Example response:
@@ -345,7 +345,7 @@ Example response:
 | 200       | Serves the artifacts file       |
 | 404       | Build not found or no artifacts |
 
-[ce-5347]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5347
+[ce-5347]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5347
 
 ## Get a trace file
 
@@ -361,7 +361,7 @@ GET /projects/:id/builds/:build_id/trace
 | build_id   | integer | yes      | The ID of a build   |
 
 ```
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/8/trace"
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/8/trace"
 ```
 
 Response:
@@ -385,7 +385,7 @@ POST /projects/:id/builds/:build_id/cancel
 | `build_id` | integer | yes      | The ID of a build   |
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/1/cancel"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/1/cancel"
 ```
 
 Example of response
@@ -431,7 +431,7 @@ POST /projects/:id/builds/:build_id/retry
 | `build_id` | integer | yes      | The ID of a build   |
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/1/retry"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/1/retry"
 ```
 
 Example of response
@@ -481,7 +481,7 @@ Parameters
 Example of request
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/1/erase"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/1/erase"
 ```
 
 Example of response
@@ -531,7 +531,7 @@ Parameters
 Example request:
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/1/artifacts/keep"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/1/artifacts/keep"
 ```
 
 Example response:
@@ -577,7 +577,7 @@ POST /projects/:id/builds/:build_id/play
 | `build_id` | integer | yes      | The ID of a build   |
 
 ```
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/1/builds/1/play"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/1/builds/1/play"
 ```
 
 Example of response

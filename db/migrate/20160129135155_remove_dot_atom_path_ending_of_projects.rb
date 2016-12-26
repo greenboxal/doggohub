@@ -69,8 +69,8 @@ class RemoveDotAtomPathEndingOfProjects < ActiveRecord::Migration
     old_path_with_namespace = File.join(project_path.namespace_path, project_path.old_path)
     new_path_with_namespace = File.join(project_path.namespace_path, project_path.clean_path)
 
-    gitlab_shell.mv_repository("#{old_path_with_namespace}.wiki", "#{new_path_with_namespace}.wiki")
-    gitlab_shell.mv_repository(old_path_with_namespace, new_path_with_namespace)
+    doggohub_shell.mv_repository("#{old_path_with_namespace}.wiki", "#{new_path_with_namespace}.wiki")
+    doggohub_shell.mv_repository(old_path_with_namespace, new_path_with_namespace)
   rescue
     false
   end

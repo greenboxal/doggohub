@@ -172,7 +172,7 @@ ruleset in `.scss-lint.yml`, which is located in the home directory of the
 project.
 
 To check if any warnings will be produced by your changes, you can run `rake 
-scss_lint` in the GitLab directory. SCSS Lint will also run in GitLab CI to 
+scss_lint` in the DoggoHub directory. SCSS Lint will also run in DoggoHub CI to 
 catch any warnings.
 
 If the Rake task is throwing warnings you don't understand, SCSS Lint's 
@@ -183,7 +183,7 @@ documentation includes [a full list of their linters][scss-lint-documentation].
 If you want to automate changing a large portion of the codebase to conform to 
 the SCSS style guide, you can use [CSSComb][csscomb]. First install
 [Node][node] and [NPM][npm], then run `npm install csscomb -g` to install 
-CSSComb globally (system-wide). Run it in the GitLab directory with 
+CSSComb globally (system-wide). Run it in the DoggoHub directory with 
 `csscomb app/assets/stylesheets` to automatically fix issues with CSS/SCSS.
 
 Note that this won't fix every problem, but it should fix a majority.

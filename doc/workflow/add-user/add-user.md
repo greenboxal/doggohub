@@ -62,7 +62,7 @@ had on the project you imported from are retained.
 
 ## Invite people using their e-mail address
 
-If a user you want to give access to doesn't have an account on your GitLab
+If a user you want to give access to doesn't have an account on your DoggoHub
 instance, you can invite them just by typing their e-mail address in the
 user search field.
 
@@ -71,7 +71,7 @@ user search field.
 ---
 
 As you can imagine, you can mix inviting multiple people and adding existing
-GitLab users to the project.
+DoggoHub users to the project.
 
 ![Invite user by mail ready to submit](img/add_user_email_ready.png)
 
@@ -86,7 +86,7 @@ invitation, change their access level or even delete them.
 ---
 
 Once the user accepts the invitation, they will be prompted to create a new
-GitLab account using the same e-mail address the invitation was sent to.
+DoggoHub account using the same e-mail address the invitation was sent to.
 
 ## Request access to a project
 

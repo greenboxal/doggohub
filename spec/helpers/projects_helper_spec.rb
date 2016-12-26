@@ -12,7 +12,7 @@ describe ProjectsHelper do
   describe "can_change_visibility_level?" do
     let(:project) { create(:project) }
     let(:user) { create(:project_member, :reporter, user: create(:user), project: project).user }
-    let(:fork_project) { Projects::ForkService.new(project, user).execute }
+    let(:bork_project) { Projects::BorkService.new(project, user).execute }
 
     it "returns false if there are no appropriate permissions" do
       allow(helper).to receive(:can?) { false }
@@ -20,19 +20,19 @@ describe ProjectsHelper do
       expect(helper.can_change_visibility_level?(project, user)).to be_falsey
     end
 
-    it "returns true if there are permissions and it is not fork" do
+    it "returns true if there are permissions and it is not bork" do
       allow(helper).to receive(:can?) { true }
 
       expect(helper.can_change_visibility_level?(project, user)).to be_truthy
     end
 
-    context "forks" do
+    context "borks" do
       it "returns false if there are permissions and origin project is PRIVATE" do
         allow(helper).to receive(:can?) { true }
 
         project.update visibility_level:  Gitlab::VisibilityLevel::PRIVATE
 
-        expect(helper.can_change_visibility_level?(fork_project, user)).to be_falsey
+        expect(helper.can_change_visibility_level?(bork_project, user)).to be_falsey
       end
 
       it "returns true if there are permissions and origin project is INTERNAL" do
@@ -40,7 +40,7 @@ describe ProjectsHelper do
 
         project.update visibility_level:  Gitlab::VisibilityLevel::INTERNAL
 
-        expect(helper.can_change_visibility_level?(fork_project, user)).to be_truthy
+        expect(helper.can_change_visibility_level?(bork_project, user)).to be_truthy
       end
     end
   end
@@ -78,7 +78,7 @@ describe ProjectsHelper do
   end
 
   describe 'default_clone_protocol' do
-    context 'when user is not logged in and gitlab protocol is HTTP' do
+    context 'when user is not logged in and doggohub protocol is HTTP' do
       it 'returns HTTP' do
         allow(helper).to receive(:current_user).and_return(nil)
 
@@ -86,7 +86,7 @@ describe ProjectsHelper do
       end
     end
 
-    context 'when user is not logged in and gitlab protocol is HTTPS' do
+    context 'when user is not logged in and doggohub protocol is HTTPS' do
       it 'returns HTTPS' do
         stub_config_setting(protocol: 'https')
         allow(helper).to receive(:current_user).and_return(nil)
@@ -138,7 +138,7 @@ describe ProjectsHelper do
   end
 
   describe '#last_push_event' do
-    let(:user) { double(:user, fork_of: nil) }
+    let(:user) { double(:user, bork_of: nil) }
     let(:project) { double(:project, id: 1) }
 
     before do
@@ -161,16 +161,16 @@ describe ProjectsHelper do
       expect(helper.last_push_event).to eq(event)
     end
 
-    context 'when current user has a fork of the current project' do
-      let(:fork) { double(:fork, id: 2) }
+    context 'when current user has a bork of the current project' do
+      let(:bork) { double(:bork, id: 2) }
 
-      it 'returns recent push considering fork events' do
-        expect(user).to receive(:fork_of).with(project).and_return(fork)
+      it 'returns recent push considering bork events' do
+        expect(user).to receive(:bork_of).with(project).and_return(bork)
 
-        event_on_fork = double(:event)
-        expect(user).to receive(:recent_push).with([project.id, fork.id]).and_return(event_on_fork)
+        event_on_bork = double(:event)
+        expect(user).to receive(:recent_push).with([project.id, bork.id]).and_return(event_on_bork)
 
-        expect(helper.last_push_event).to eq(event_on_fork)
+        expect(helper.last_push_event).to eq(event_on_bork)
       end
     end
   end

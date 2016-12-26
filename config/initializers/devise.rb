@@ -148,7 +148,7 @@ Devise.setup do |config|
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
   # change their passwords.
-  # When someone else invites you to GitLab this time is also used so it should be pretty long.
+  # When someone else invites you to DoggoHub this time is also used so it should be pretty long.
   config.reset_password_within = 2.days
 
   # When set to false, does not sign a user in automatically after their password is

@@ -112,11 +112,11 @@ describe Namespace, models: true do
   end
 
   describe ".clean_path" do
-    let!(:user)       { create(:user, username: "johngitlab-etc") }
-    let!(:namespace)  { create(:namespace, path: "JohnGitLab-etc1") }
+    let!(:user)       { create(:user, username: "johndoggohub-etc") }
+    let!(:namespace)  { create(:namespace, path: "JohnDoggoHub-etc1") }
 
     it "cleans the path and makes sure it's available" do
-      expect(Namespace.clean_path("-john+gitlab-ETC%.git@gmail.com")).to eq("johngitlab-ETC2")
+      expect(Namespace.clean_path("-john+doggohub-ETC%.git@gmail.com")).to eq("johndoggohub-ETC2")
       expect(Namespace.clean_path("--%+--valid_*&%name=.git.%.atom.atom.@email.com")).to eq("valid_name")
     end
   end

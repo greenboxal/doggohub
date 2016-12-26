@@ -170,8 +170,8 @@ the following query:
 SELECT *
 FROM projects
 JOIN namespaces ON namespaces.id = projects.namespace_id
-WHERE projects.name ILIKE '%gitlab%'
-OR namespaces.name ILIKE '%gitlab%';
+WHERE projects.name ILIKE '%doggohub%'
+OR namespaces.name ILIKE '%doggohub%';
 ```
 
 Using a large database this query can easily take around 800 milliseconds to
@@ -180,14 +180,14 @@ run. Using a UNION we'd write the following instead:
 ```sql
 SELECT projects.*
 FROM projects
-WHERE projects.name ILIKE '%gitlab%'
+WHERE projects.name ILIKE '%doggohub%'
 
 UNION
 
 SELECT projects.*
 FROM projects
 JOIN namespaces ON namespaces.id = projects.namespace_id
-WHERE namespaces.name ILIKE '%gitlab%';
+WHERE namespaces.name ILIKE '%doggohub%';
 ```
 
 This query in turn only takes around 15 milliseconds to complete while returning
@@ -197,7 +197,7 @@ This doesn't mean you should start using UNIONs everywhere, but it's something
 to keep in mind when using lots of JOINs in a query and filtering out records
 based on the joined data.
 
-GitLab comes with a `Gitlab::SQL::Union` class that can be used to build a UNION
+DoggoHub comes with a `Gitlab::SQL::Union` class that can be used to build a UNION
 of multiple `ActiveRecord::Relation` objects. You can use this class as
 follows:
 

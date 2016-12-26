@@ -69,7 +69,7 @@ describe BlobHelper do
   end
 
   describe "#edit_blob_link" do
-    let(:namespace) { create(:namespace, name: 'gitlab' )}
+    let(:namespace) { create(:namespace, name: 'doggohub' )}
     let(:project) { create(:project, namespace: namespace) }
 
     before do
@@ -96,13 +96,13 @@ describe BlobHelper do
     it 'returns a link with the proper route' do
       link = edit_blob_link(project, 'master', 'README.md')
 
-      expect(Capybara.string(link).find_link('Edit')[:href]).to eq('/gitlab/gitlabhq/edit/master/README.md')
+      expect(Capybara.string(link).find_link('Edit')[:href]).to eq('/doggohub/doggohubhq/edit/master/README.md')
     end
 
     it 'returns a link with the passed link_opts on the expected route' do
       link = edit_blob_link(project, 'master', 'README.md', link_opts: { mr_id: 10 })
 
-      expect(Capybara.string(link).find_link('Edit')[:href]).to eq('/gitlab/gitlabhq/edit/master/README.md?mr_id=10')
+      expect(Capybara.string(link).find_link('Edit')[:href]).to eq('/doggohub/doggohubhq/edit/master/README.md?mr_id=10')
     end
   end
 end

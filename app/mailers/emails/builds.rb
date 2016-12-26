@@ -22,9 +22,9 @@ module Emails
     private
 
     def add_build_headers(status)
-      headers['X-GitLab-Build-Id'] = @build.id
-      headers['X-GitLab-Build-Ref'] = @build.ref
-      headers['X-GitLab-Build-Status'] = status.to_s
+      headers['X-DoggoHub-Build-Id'] = @build.id
+      headers['X-DoggoHub-Build-Ref'] = @build.ref
+      headers['X-DoggoHub-Build-Status'] = status.to_s
     end
   end
 end

@@ -7,8 +7,8 @@ describe IssuesFinder do
   let(:project2) { create(:empty_project) }
   let(:milestone) { create(:milestone, project: project1) }
   let(:label) { create(:label, project: project2) }
-  let(:issue1) { create(:issue, author: user, assignee: user, project: project1, milestone: milestone, title: 'gitlab') }
-  let(:issue2) { create(:issue, author: user, assignee: user, project: project2, description: 'gitlab') }
+  let(:issue1) { create(:issue, author: user, assignee: user, project: project1, milestone: milestone, title: 'doggohub') }
+  let(:issue2) { create(:issue, author: user, assignee: user, project: project2, description: 'doggohub') }
   let(:issue3) { create(:issue, author: user2, assignee: user2, project: project2) }
 
   describe '#execute' do

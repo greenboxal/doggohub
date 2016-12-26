@@ -5,7 +5,7 @@
       = icon("caret-down")
     %ul.dropdown-menu.dropdown-menu-align-right.project-home-dropdown
       - can_create_issue = can?(current_user, :create_issue, @project)
-      - merge_project = can?(current_user, :create_merge_request, @project) ? @project : (current_user && current_user.fork_of(@project))
+      - merge_project = can?(current_user, :create_merge_request, @project) ? @project : (current_user && current_user.bork_of(@project))
       - can_create_snippet = can?(current_user, :create_snippet, @project)
 
       - if can_create_issue
@@ -36,24 +36,24 @@
             New file
         %li
           = link_to new_namespace_project_branch_path(@project.namespace, @project) do
-            = icon('code-fork fw')
+            = icon('code-bork fw')
             New branch
         %li
           = link_to new_namespace_project_tag_path(@project.namespace, @project) do
             = icon('tags fw')
             New tag
-      - elsif current_user && current_user.already_forked?(@project)
+      - elsif current_user && current_user.already_borked?(@project)
         %li
           = link_to namespace_project_new_blob_path(@project.namespace, @project, @project.default_branch || 'master') do
             = icon('file fw')
             New file
-      - elsif can?(current_user, :fork_project, @project)
+      - elsif can?(current_user, :bork_project, @project)
         %li
           - continue_params = { to:         namespace_project_new_blob_path(@project.namespace, @project, @project.default_branch || 'master'),
-                                notice:     edit_in_new_fork_notice,
-                                notice_now: edit_in_new_fork_notice_now }
-          - fork_path = namespace_project_forks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
+                                notice:     edit_in_new_bork_notice,
+                                notice_now: edit_in_new_bork_notice_now }
+          - bork_path = namespace_project_borks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
                                                                                   continue:       continue_params)
-          = link_to fork_path, method: :post do
+          = link_to bork_path, method: :post do
             = icon('file fw')
             New file

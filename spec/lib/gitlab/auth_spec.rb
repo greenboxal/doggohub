@@ -5,14 +5,14 @@ describe Gitlab::Auth, lib: true do
 
   describe 'find_for_git_client' do
     context 'build token' do
-      subject { gl_auth.find_for_git_client('gitlab-ci-token', build.token, project: project, ip: 'ip') }
+      subject { gl_auth.find_for_git_client('doggohub-ci-token', build.token, project: project, ip: 'ip') }
 
       context 'for running build' do
         let!(:build) { create(:ci_build, :running) }
         let(:project) { build.project }
 
         before do
-          expect(gl_auth).to receive(:rate_limit!).with('ip', success: true, login: 'gitlab-ci-token')
+          expect(gl_auth).to receive(:rate_limit!).with('ip', success: true, login: 'doggohub-ci-token')
         end
 
         it 'recognises user-less build' do
@@ -32,7 +32,7 @@ describe Gitlab::Auth, lib: true do
           let(:project) { build.project }
 
           before do
-            expect(gl_auth).to receive(:rate_limit!).with('ip', success: false, login: 'gitlab-ci-token')
+            expect(gl_auth).to receive(:rate_limit!).with('ip', success: false, login: 'doggohub-ci-token')
           end
 
           it 'denies authentication' do
@@ -55,7 +55,7 @@ describe Gitlab::Auth, lib: true do
       user = create(:user, password: 'password')
 
       expect(gl_auth).to receive(:rate_limit!).with('ip', success: true, login: user.username)
-      expect(gl_auth.find_for_git_client(user.username, 'password', project: nil, ip: 'ip')).to eq(Gitlab::Auth::Result.new(user, nil, :gitlab_or_ldap, full_authentication_abilities))
+      expect(gl_auth.find_for_git_client(user.username, 'password', project: nil, ip: 'ip')).to eq(Gitlab::Auth::Result.new(user, nil, :doggohub_or_ldap, full_authentication_abilities))
     end
 
     it 'recognizes user lfs tokens' do

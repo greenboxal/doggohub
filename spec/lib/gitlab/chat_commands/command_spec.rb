@@ -20,12 +20,12 @@ describe Gitlab::ChatCommands::Command, service: true do
     end
 
     context 'when an unknown command is triggered' do
-      let(:params) { { command: '/gitlab', text: "unknown command 123" } }
+      let(:params) { { command: '/doggohub', text: "unknown command 123" } }
 
       it 'displays the help message' do
         expect(subject[:response_type]).to be(:ephemeral)
         expect(subject[:text]).to start_with('Available commands')
-        expect(subject[:text]).to match('/gitlab issue show')
+        expect(subject[:text]).to match('/doggohub issue show')
       end
     end
 

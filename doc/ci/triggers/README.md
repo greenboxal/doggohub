@@ -1,9 +1,9 @@
 # Triggering Builds through the API
 
-> [Introduced][ci-229] in GitLab CE 7.14.
+> [Introduced][ci-229] in DoggoHub CE 7.14.
 
 > **Note**:
-GitLab 8.12 has a completely redesigned build permissions system.
+DoggoHub 8.12 has a completely redesigned build permissions system.
 Read all about the [new model and its implications](../../user/project/new_ci_build_permissions_model.md#build-triggers).
 
 Triggers can be used to force a rebuild of a specific `ref` (branch or tag)
@@ -16,7 +16,7 @@ The **Add trigger** button will create a new token which you can then use to
 trigger a rebuild of this particular project.
 
 Every new trigger you create, gets assigned a different token which you can
-then use inside your scripts or `.gitlab-ci.yml`. You also have a nice
+then use inside your scripts or `.doggohub-ci.yml`. You also have a nice
 overview of the time the triggers were last used.
 
 ![Triggers page overview](img/triggers_page.png)
@@ -33,7 +33,7 @@ irreversible.
 Valid refs are only the branches and tags. If you pass a commit SHA as a ref,
 it will not trigger a build.
 
-To trigger a build you need to send a `POST` request to GitLab's API endpoint:
+To trigger a build you need to send a `POST` request to DoggoHub's API endpoint:
 
 ```
 POST /projects/:id/trigger/builds
@@ -44,7 +44,7 @@ the trigger will be performed. Valid refs are the branch and the tag. The `:id`
 of a project can be found by [querying the API](../../api/projects.md)
 or by visiting the **Triggers** page which provides self-explanatory examples.
 
-When a rebuild is triggered, the information is exposed in GitLab's UI under
+When a rebuild is triggered, the information is exposed in DoggoHub's UI under
 the **Builds** page and the builds are marked as `triggered`.
 
 ![Marked rebuilds as triggered on builds page](img/builds_page.png)
@@ -64,13 +64,13 @@ trigger a rebuild.
 
 ## Trigger a build from webhook
 
-> Introduced in GitLab 8.14.
+> Introduced in DoggoHub 8.14.
 
 To trigger a build from webhook of another project you need to add the following
 webhook url for Push and Tag push events:
 
 ```
-https://gitlab.example.com/api/v3/projects/:id/ref/:ref/trigger/builds?token=TOKEN
+https://doggohub.example.com/api/v3/projects/:id/ref/:ref/trigger/builds?token=TOKEN
 ```
 
 > **Note**:
@@ -81,7 +81,7 @@ https://gitlab.example.com/api/v3/projects/:id/ref/:ref/trigger/builds?token=TOK
 ## Pass build variables to a trigger
 
 You can pass any number of arbitrary variables in the trigger API call and they
-will be available in GitLab CI so that they can be used in your `.gitlab-ci.yml`
+will be available in DoggoHub CI so that they can be used in your `.doggohub-ci.yml`
 file. The parameter is of the form:
 
 ```
@@ -104,7 +104,7 @@ Using cURL you can trigger a rebuild with minimal effort, for example:
 curl --request POST \
      --form token=TOKEN \
      --form ref=master \
-     https://gitlab.example.com/api/v3/projects/9/trigger/builds
+     https://doggohub.example.com/api/v3/projects/9/trigger/builds
 ```
 
 In this case, the project with ID `9` will get rebuilt on `master` branch.
@@ -113,21 +113,21 @@ Alternatively, you can pass the `token` and `ref` arguments in the query string:
 
 ```bash
 curl --request POST \
-    "https://gitlab.example.com/api/v3/projects/9/trigger/builds?token=TOKEN&ref=master"
+    "https://doggohub.example.com/api/v3/projects/9/trigger/builds?token=TOKEN&ref=master"
 ```
 
-### Triggering a build within `.gitlab-ci.yml`
+### Triggering a build within `.doggohub-ci.yml`
 
-You can also benefit by using triggers in your `.gitlab-ci.yml`. Let's say that
+You can also benefit by using triggers in your `.doggohub-ci.yml`. Let's say that
 you have two projects, A and B, and you want to trigger a rebuild on the `master`
 branch of project B whenever a tag on project A is created. This is the job you
-need to add in project's A `.gitlab-ci.yml`:
+need to add in project's A `.doggohub-ci.yml`:
 
 ```yaml
 build_docs:
   stage: deploy
   script:
-  - "curl --request POST --form token=TOKEN --form ref=master https://gitlab.example.com/api/v3/projects/9/trigger/builds"
+  - "curl --request POST --form token=TOKEN --form ref=master https://doggohub.example.com/api/v3/projects/9/trigger/builds"
   only:
   - tags
 ```
@@ -152,7 +152,7 @@ Using trigger variables can be proven useful for a variety of reasons.
 * Conditional job processing. You can have conditional jobs that run whenever
   a certain variable is present.
 
-Consider the following `.gitlab-ci.yml` where we set three
+Consider the following `.doggohub-ci.yml` where we set three
 [stages](../yaml/README.md#stages) and the `upload_package` job is run only
 when all jobs from the test and build stages pass. When the `UPLOAD_TO_S3`
 variable is non-zero, `make upload` is run.
@@ -186,7 +186,7 @@ curl --request POST \
   --form token=TOKEN \
   --form ref=master \
   --form "variables[UPLOAD_TO_S3]=true" \
-  https://gitlab.example.com/api/v3/projects/9/trigger/builds
+  https://doggohub.example.com/api/v3/projects/9/trigger/builds
 ```
 
 ### Using webhook to trigger builds
@@ -194,7 +194,7 @@ curl --request POST \
 You can add the following webhook to another project in order to trigger a build:
 
 ```
-https://gitlab.example.com/api/v3/projects/9/ref/master/trigger/builds?token=TOKEN&variables[UPLOAD_TO_S3]=true
+https://doggohub.example.com/api/v3/projects/9/ref/master/trigger/builds?token=TOKEN&variables[UPLOAD_TO_S3]=true
 ```
 
 ### Using cron to trigger nightly builds
@@ -204,7 +204,7 @@ in conjunction with cron. The example below triggers a build on the `master`
 branch of project with ID `9` every night at `00:30`:
 
 ```bash
-30 0 * * * curl --request POST --form token=TOKEN --form ref=master https://gitlab.example.com/api/v3/projects/9/trigger/builds
+30 0 * * * curl --request POST --form token=TOKEN --form ref=master https://doggohub.example.com/api/v3/projects/9/trigger/builds
 ```
 
-[ci-229]: https://gitlab.com/gitlab-org/gitlab-ci/merge_requests/229
+[ci-229]: https://doggohub.com/doggohub-org/doggohub-ci/merge_requests/229

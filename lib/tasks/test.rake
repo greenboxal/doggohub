@@ -1,11 +1,11 @@
 Rake::Task["test"].clear
 
-desc "GitLab | Run all tests"
+desc "DoggoHub | Run all tests"
 task :test do
-  Rake::Task["gitlab:test"].invoke
+  Rake::Task["doggohub:test"].invoke
 end
 
 unless Rails.env.production?
-  desc "GitLab | Run all tests on CI with simplecov"
+  desc "DoggoHub | Run all tests on CI with simplecov"
   task test_ci: [:rubocop, :brakeman, :teaspoon, :spinach, :spec]
 end

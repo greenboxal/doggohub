@@ -1,7 +1,7 @@
 module Rouge
   module Formatters
     class HTMLGitlab < Rouge::Formatters::HTML
-      tag 'html_gitlab'
+      tag 'html_doggohub'
 
       # Creates a new <tt>Rouge::Formatter::HTMLGitlab</tt> instance.
       #

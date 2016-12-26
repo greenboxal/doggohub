@@ -39,7 +39,7 @@ module Gitlab
         # 1. Labels are required by other items while not having a dependency on anything else
         # so need to be first
         # 2. Pull requests must come before issues. Every pull request is also an issue but not
-        # all issues are pull requests. Only the issue entity has labels defined in GitHub. GitLab
+        # all issues are pull requests. Only the issue entity has labels defined in GitHub. DoggoHub
         # doesn't structure data like this so we need to make sure that we've created the MRs
         # before we attempt to add the labels defined in the GitHub issue for the related, already
         # imported, pull request
@@ -245,7 +245,7 @@ module Gitlab
       def import_wiki
         unless project.wiki.repository_exists?
           wiki = WikiFormatter.new(project)
-          gitlab_shell.import_repository(project.repository_storage_path, wiki.path_with_namespace, wiki.import_url)
+          doggohub_shell.import_repository(project.repository_storage_path, wiki.path_with_namespace, wiki.import_url)
         end
       rescue Gitlab::Shell::Error => e
         # GitHub error message when the wiki repo has not been created,

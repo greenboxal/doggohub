@@ -13,7 +13,7 @@ module API
       end
 
       desc 'Get all broadcast messages' do
-        detail 'This feature was introduced in GitLab 8.12.'
+        detail 'This feature was introduced in DoggoHub 8.12.'
         success Entities::BroadcastMessage
       end
       params do
@@ -26,7 +26,7 @@ module API
       end
 
       desc 'Create a broadcast message' do
-        detail 'This feature was introduced in GitLab 8.12.'
+        detail 'This feature was introduced in DoggoHub 8.12.'
         success Entities::BroadcastMessage
       end
       params do
@@ -47,7 +47,7 @@ module API
       end
 
       desc 'Get a specific broadcast message' do
-        detail 'This feature was introduced in GitLab 8.12.'
+        detail 'This feature was introduced in DoggoHub 8.12.'
         success Entities::BroadcastMessage
       end
       params do
@@ -60,7 +60,7 @@ module API
       end
 
       desc 'Update a broadcast message' do
-        detail 'This feature was introduced in GitLab 8.12.'
+        detail 'This feature was introduced in DoggoHub 8.12.'
         success Entities::BroadcastMessage
       end
       params do
@@ -82,7 +82,7 @@ module API
       end
 
       desc 'Delete a broadcast message' do
-        detail 'This feature was introduced in GitLab 8.12.'
+        detail 'This feature was introduced in DoggoHub 8.12.'
         success Entities::BroadcastMessage
       end
       params do

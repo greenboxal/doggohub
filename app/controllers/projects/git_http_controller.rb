@@ -78,7 +78,7 @@ class Projects::GitHttpController < Projects::GitHttpClientController
   end
 
   def upload_pack_allowed?
-    return false unless Gitlab.config.gitlab_shell.upload_pack
+    return false unless Gitlab.config.doggohub_shell.upload_pack
 
     access_check.allowed? || ci?
   end
@@ -89,7 +89,7 @@ class Projects::GitHttpController < Projects::GitHttpClientController
 
   def access_check
     # Use the magic string '_any' to indicate we do not know what the
-    # changes are. This is also what gitlab-shell does.
+    # changes are. This is also what doggohub-shell does.
     @access_check ||= access.check(git_command, '_any')
   end
 
@@ -98,7 +98,7 @@ class Projects::GitHttpController < Projects::GitHttpClientController
   end
 
   def receive_pack_allowed?
-    return false unless Gitlab.config.gitlab_shell.receive_pack
+    return false unless Gitlab.config.doggohub_shell.receive_pack
 
     access_check.allowed?
   end

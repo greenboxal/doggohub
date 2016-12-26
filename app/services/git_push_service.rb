@@ -7,7 +7,7 @@ class GitPushService < BaseService
   PROCESS_COMMIT_LIMIT = 100
 
   # This method will be called after each git update
-  # and only if the provided user and project are present in GitLab.
+  # and only if the provided user and project are present in DoggoHub.
   #
   # All callbacks for post receive action should be placed here.
   #

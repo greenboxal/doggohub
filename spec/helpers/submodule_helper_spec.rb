@@ -5,7 +5,7 @@ describe SubmoduleHelper do
 
   describe 'submodule links' do
     let(:submodule_item) { double(id: 'hash', path: 'rack') }
-    let(:config) { Gitlab.config.gitlab }
+    let(:config) { Gitlab.config.doggohub }
     let(:repo) { double() }
 
     before do
@@ -14,102 +14,102 @@ describe SubmoduleHelper do
 
     context 'submodule on self' do
       before do
-        allow(Gitlab.config.gitlab).to receive(:protocol).and_return('http') # set this just to be sure
+        allow(Gitlab.config.doggohub).to receive(:protocol).and_return('http') # set this just to be sure
       end
 
       it 'detects ssh on standard port' do
-        allow(Gitlab.config.gitlab_shell).to receive(:ssh_port).and_return(22) # set this just to be sure
-        allow(Gitlab.config.gitlab_shell).to receive(:ssh_path_prefix).and_return(Settings.send(:build_gitlab_shell_ssh_path_prefix))
-        stub_url([ config.user, '@', config.host, ':gitlab-org/gitlab-ce.git' ].join(''))
-        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('gitlab-org', 'gitlab-ce'), namespace_project_tree_path('gitlab-org', 'gitlab-ce', 'hash') ])
+        allow(Gitlab.config.doggohub_shell).to receive(:ssh_port).and_return(22) # set this just to be sure
+        allow(Gitlab.config.doggohub_shell).to receive(:ssh_path_prefix).and_return(Settings.send(:build_doggohub_shell_ssh_path_prefix))
+        stub_url([ config.user, '@', config.host, ':doggohub-org/doggohub-ce.git' ].join(''))
+        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('doggohub-org', 'doggohub-ce'), namespace_project_tree_path('doggohub-org', 'doggohub-ce', 'hash') ])
       end
 
       it 'detects ssh on non-standard port' do
-        allow(Gitlab.config.gitlab_shell).to receive(:ssh_port).and_return(2222)
-        allow(Gitlab.config.gitlab_shell).to receive(:ssh_path_prefix).and_return(Settings.send(:build_gitlab_shell_ssh_path_prefix))
-        stub_url([ 'ssh://', config.user, '@', config.host, ':2222/gitlab-org/gitlab-ce.git' ].join(''))
-        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('gitlab-org', 'gitlab-ce'), namespace_project_tree_path('gitlab-org', 'gitlab-ce', 'hash') ])
+        allow(Gitlab.config.doggohub_shell).to receive(:ssh_port).and_return(2222)
+        allow(Gitlab.config.doggohub_shell).to receive(:ssh_path_prefix).and_return(Settings.send(:build_doggohub_shell_ssh_path_prefix))
+        stub_url([ 'ssh://', config.user, '@', config.host, ':2222/doggohub-org/doggohub-ce.git' ].join(''))
+        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('doggohub-org', 'doggohub-ce'), namespace_project_tree_path('doggohub-org', 'doggohub-ce', 'hash') ])
       end
 
       it 'detects http on standard port' do
-        allow(Gitlab.config.gitlab).to receive(:port).and_return(80)
-        allow(Gitlab.config.gitlab).to receive(:url).and_return(Settings.send(:build_gitlab_url))
-        stub_url([ 'http://', config.host, '/gitlab-org/gitlab-ce.git' ].join(''))
-        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('gitlab-org', 'gitlab-ce'), namespace_project_tree_path('gitlab-org', 'gitlab-ce', 'hash') ])
+        allow(Gitlab.config.doggohub).to receive(:port).and_return(80)
+        allow(Gitlab.config.doggohub).to receive(:url).and_return(Settings.send(:build_doggohub_url))
+        stub_url([ 'http://', config.host, '/doggohub-org/doggohub-ce.git' ].join(''))
+        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('doggohub-org', 'doggohub-ce'), namespace_project_tree_path('doggohub-org', 'doggohub-ce', 'hash') ])
       end
 
       it 'detects http on non-standard port' do
-        allow(Gitlab.config.gitlab).to receive(:port).and_return(3000)
-        allow(Gitlab.config.gitlab).to receive(:url).and_return(Settings.send(:build_gitlab_url))
-        stub_url([ 'http://', config.host, ':3000/gitlab-org/gitlab-ce.git' ].join(''))
-        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('gitlab-org', 'gitlab-ce'), namespace_project_tree_path('gitlab-org', 'gitlab-ce', 'hash') ])
+        allow(Gitlab.config.doggohub).to receive(:port).and_return(3000)
+        allow(Gitlab.config.doggohub).to receive(:url).and_return(Settings.send(:build_doggohub_url))
+        stub_url([ 'http://', config.host, ':3000/doggohub-org/doggohub-ce.git' ].join(''))
+        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('doggohub-org', 'doggohub-ce'), namespace_project_tree_path('doggohub-org', 'doggohub-ce', 'hash') ])
       end
 
       it 'works with relative_url_root' do
-        allow(Gitlab.config.gitlab).to receive(:port).and_return(80) # set this just to be sure
-        allow(Gitlab.config.gitlab).to receive(:relative_url_root).and_return('/gitlab/root')
-        allow(Gitlab.config.gitlab).to receive(:url).and_return(Settings.send(:build_gitlab_url))
-        stub_url([ 'http://', config.host, '/gitlab/root/gitlab-org/gitlab-ce.git' ].join(''))
-        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('gitlab-org', 'gitlab-ce'), namespace_project_tree_path('gitlab-org', 'gitlab-ce', 'hash') ])
+        allow(Gitlab.config.doggohub).to receive(:port).and_return(80) # set this just to be sure
+        allow(Gitlab.config.doggohub).to receive(:relative_url_root).and_return('/doggohub/root')
+        allow(Gitlab.config.doggohub).to receive(:url).and_return(Settings.send(:build_doggohub_url))
+        stub_url([ 'http://', config.host, '/doggohub/root/doggohub-org/doggohub-ce.git' ].join(''))
+        expect(submodule_links(submodule_item)).to eq([ namespace_project_path('doggohub-org', 'doggohub-ce'), namespace_project_tree_path('doggohub-org', 'doggohub-ce', 'hash') ])
       end
     end
 
     context 'submodule on github.com' do
       it 'detects ssh' do
-        stub_url('git@github.com:gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/gitlab-org/gitlab-ce', 'https://github.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('git@github.com:doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/doggohub-org/doggohub-ce', 'https://github.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'detects http' do
-        stub_url('http://github.com/gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/gitlab-org/gitlab-ce', 'https://github.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('http://github.com/doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/doggohub-org/doggohub-ce', 'https://github.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'detects https' do
-        stub_url('https://github.com/gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/gitlab-org/gitlab-ce', 'https://github.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('https://github.com/doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://github.com/doggohub-org/doggohub-ce', 'https://github.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'returns original with non-standard url' do
-        stub_url('http://github.com/gitlab-org/gitlab-ce')
+        stub_url('http://github.com/doggohub-org/doggohub-ce')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
 
-        stub_url('http://github.com/another/gitlab-org/gitlab-ce.git')
+        stub_url('http://github.com/another/doggohub-org/doggohub-ce.git')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
       end
     end
 
-    context 'submodule on gitlab.com' do
+    context 'submodule on doggohub.com' do
       it 'detects ssh' do
-        stub_url('git@gitlab.com:gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://gitlab.com/gitlab-org/gitlab-ce', 'https://gitlab.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('git@doggohub.com:doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://doggohub.com/doggohub-org/doggohub-ce', 'https://doggohub.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'detects http' do
-        stub_url('http://gitlab.com/gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://gitlab.com/gitlab-org/gitlab-ce', 'https://gitlab.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('http://doggohub.com/doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://doggohub.com/doggohub-org/doggohub-ce', 'https://doggohub.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'detects https' do
-        stub_url('https://gitlab.com/gitlab-org/gitlab-ce.git')
-        expect(submodule_links(submodule_item)).to eq([ 'https://gitlab.com/gitlab-org/gitlab-ce', 'https://gitlab.com/gitlab-org/gitlab-ce/tree/hash' ])
+        stub_url('https://doggohub.com/doggohub-org/doggohub-ce.git')
+        expect(submodule_links(submodule_item)).to eq([ 'https://doggohub.com/doggohub-org/doggohub-ce', 'https://doggohub.com/doggohub-org/doggohub-ce/tree/hash' ])
       end
 
       it 'returns original with non-standard url' do
-        stub_url('http://gitlab.com/gitlab-org/gitlab-ce')
+        stub_url('http://doggohub.com/doggohub-org/doggohub-ce')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
 
-        stub_url('http://gitlab.com/another/gitlab-org/gitlab-ce.git')
+        stub_url('http://doggohub.com/another/doggohub-org/doggohub-ce.git')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
       end
     end
 
     context 'submodule on unsupported' do
       it 'returns original' do
-        stub_url('http://mygitserver.com/gitlab-org/gitlab-ce')
+        stub_url('http://mygitserver.com/doggohub-org/doggohub-ce')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
 
-        stub_url('http://mygitserver.com/gitlab-org/gitlab-ce.git')
+        stub_url('http://mygitserver.com/doggohub-org/doggohub-ce.git')
         expect(submodule_links(submodule_item)).to eq([ repo.submodule_url_for, nil ])
       end
     end

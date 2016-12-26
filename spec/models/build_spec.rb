@@ -297,7 +297,7 @@ describe Ci::Build, models: true do
     let(:predefined_variables) do
       [
         { key: 'CI', value: 'true', public: true },
-        { key: 'GITLAB_CI', value: 'true', public: true },
+        { key: 'DOGGOHUB_CI', value: 'true', public: true },
         { key: 'CI_BUILD_ID', value: build.id.to_s, public: true },
         { key: 'CI_BUILD_TOKEN', value: build.token, public: false },
         { key: 'CI_BUILD_REF', value: build.sha, public: true },
@@ -306,7 +306,7 @@ describe Ci::Build, models: true do
         { key: 'CI_BUILD_REF_SLUG', value: 'master', public: true },
         { key: 'CI_BUILD_NAME', value: 'test', public: true },
         { key: 'CI_BUILD_STAGE', value: 'test', public: true },
-        { key: 'CI_SERVER_NAME', value: 'GitLab', public: true },
+        { key: 'CI_SERVER_NAME', value: 'DoggoHub', public: true },
         { key: 'CI_SERVER_VERSION', value: Gitlab::VERSION, public: true },
         { key: 'CI_SERVER_REVISION', value: Gitlab::REVISION, public: true },
         { key: 'CI_PROJECT_ID', value: project.id.to_s, public: true },
@@ -336,8 +336,8 @@ describe Ci::Build, models: true do
       let(:user) { create(:user, username: 'starter') }
       let(:user_variables) do
         [
-          { key: 'GITLAB_USER_ID',    value: user.id.to_s, public: true },
-          { key: 'GITLAB_USER_EMAIL', value: user.email,   public: true }
+          { key: 'DOGGOHUB_USER_ID',    value: user.id.to_s, public: true },
+          { key: 'DOGGOHUB_USER_EMAIL', value: user.email,   public: true }
         ]
       end
 
@@ -423,7 +423,7 @@ describe Ci::Build, models: true do
         build.yaml_variables = nil
       end
 
-      context 'use from gitlab-ci.yml' do
+      context 'use from doggohub-ci.yml' do
         before do
           stub_ci_pipeline_yaml_file(config)
         end
@@ -673,7 +673,7 @@ describe Ci::Build, models: true do
     it { is_expected.to end_with(".git") }
     it { is_expected.to start_with(project.web_url[0..6]) }
     it { is_expected.to include(build.token) }
-    it { is_expected.to include('gitlab-ci-token') }
+    it { is_expected.to include('doggohub-ci-token') }
     it { is_expected.to include(project.web_url[7..-1]) }
   end
 
@@ -926,7 +926,7 @@ describe Ci::Build, models: true do
         build.when = nil
       end
 
-      context 'use from gitlab-ci.yml' do
+      context 'use from doggohub-ci.yml' do
         before do
           stub_ci_pipeline_yaml_file(config)
         end
@@ -1126,7 +1126,7 @@ describe Ci::Build, models: true do
         build.when = nil
       end
 
-      context 'use from gitlab-ci.yml' do
+      context 'use from doggohub-ci.yml' do
         before do
           stub_ci_pipeline_yaml_file(config)
         end

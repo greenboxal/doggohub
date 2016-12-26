@@ -7,7 +7,7 @@ module Banzai
     #
     # When external issues tracker like Jira is activated we should not
     # use issue reference pattern, but we should still be able
-    # to reference issues from other GitLab projects.
+    # to reference issues from other DoggoHub projects.
     class IssueReferenceFilter < AbstractReferenceFilter
       self.reference_type = :issue
 
@@ -75,7 +75,7 @@ module Banzai
       end
 
       def projects_relation_for_paths(paths)
-        super(paths).includes(:gitlab_issue_tracker_service)
+        super(paths).includes(:doggohub_issue_tracker_service)
       end
     end
   end

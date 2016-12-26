@@ -3,7 +3,7 @@
  * License: MIT
  * Version: v2.0.2
  * https://github.com/hustcc/timeago.js
- * This is a forked from (https://gitlab.com/ClemMakesApps/timeago.js)
+ * This is a borked from (https://doggohub.com/ClemMakesApps/timeago.js)
 **/
 /* eslint-disable */
 /* jshint expr: true */

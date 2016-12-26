@@ -38,19 +38,19 @@ module TestEnv
     'deleted-image-test'                 => '6c17798'
   }
 
-  # gitlab-test-fork is a fork of gitlab-fork, but we don't necessarily
+  # doggohub-test-bork is a bork of doggohub-bork, but we don't necessarily
   # need to keep all the branches in sync.
   # We currently only need a subset of the branches
-  FORKED_BRANCH_SHA = {
+  BORKED_BRANCH_SHA = {
     'add-submodule-version-bump' => '3f547c0',
     'master'                     => '5937ac0',
     'remove-submodule'           => '2a33e0c',
-    'conflict-resolvable-fork'   => '404fa3f'
+    'conflict-resolvable-bork'   => '404fa3f'
   }
 
   # Test environment
   #
-  # See gitlab.yml.example test section for paths
+  # See doggohub.yml.example test section for paths
   #
   def init(opts = {})
     # Disable mailer for spinach tests
@@ -61,14 +61,14 @@ module TestEnv
     FileUtils.mkdir_p(repos_path)
     FileUtils.mkdir_p(backup_path)
 
-    # Setup GitLab shell for test instance
-    setup_gitlab_shell
+    # Setup DoggoHub shell for test instance
+    setup_doggohub_shell
 
     # Create repository for FactoryGirl.create(:project)
     setup_factory_repo
 
-    # Create repository for FactoryGirl.create(:forked_project_with_submodules)
-    setup_forked_repo
+    # Create repository for FactoryGirl.create(:borked_project_with_submodules)
+    setup_borked_repo
   end
 
   def disable_mailer
@@ -87,21 +87,21 @@ module TestEnv
 
   # Clean /tmp/tests
   #
-  # Keeps gitlab-shell and gitlab-test
+  # Keeps doggohub-shell and doggohub-test
   def clean_test_path
     tmp_test_path = Rails.root.join('tmp', 'tests', '**')
 
     Dir[tmp_test_path].each do |entry|
-      unless File.basename(entry) =~ /\Agitlab-(shell|test|test-fork)\z/
+      unless File.basename(entry) =~ /\Adoggohub-(shell|test|test-bork)\z/
         FileUtils.rm_rf(entry)
       end
     end
   end
 
-  def setup_gitlab_shell
-    unless File.directory?(Gitlab.config.gitlab_shell.path)
-      unless system('rake', 'gitlab:shell:install')
-        raise 'Can`t clone gitlab-shell'
+  def setup_doggohub_shell
+    unless File.directory?(Gitlab.config.doggohub_shell.path)
+      unless system('rake', 'doggohub:shell:install')
+        raise 'Can`t clone doggohub-shell'
       end
     end
   end
@@ -113,13 +113,13 @@ module TestEnv
 
   # This repo has a submodule commit that is not present in the main test
   # repository.
-  def setup_forked_repo
-    setup_repo(forked_repo_path, forked_repo_path_bare, forked_repo_name,
-               FORKED_BRANCH_SHA)
+  def setup_borked_repo
+    setup_repo(borked_repo_path, borked_repo_path_bare, borked_repo_name,
+               BORKED_BRANCH_SHA)
   end
 
   def setup_repo(repo_path, repo_path_bare, repo_name, branch_sha)
-    clone_url = "https://gitlab.com/gitlab-org/#{repo_name}.git"
+    clone_url = "https://doggohub.com/doggohub-org/#{repo_name}.git"
 
     unless File.directory?(repo_path)
       system(*%W(#{Gitlab.config.git.bin_path} clone -q #{clone_url} #{repo_path}))
@@ -148,13 +148,13 @@ module TestEnv
     Gitlab.config.backup.path
   end
 
-  def copy_forked_repo_with_submodules(project)
-    base_repo_path = File.expand_path(forked_repo_path_bare)
+  def copy_borked_repo_with_submodules(project)
+    base_repo_path = File.expand_path(borked_repo_path_bare)
     target_repo_path = File.expand_path(project.repository_storage_path + "/#{project.namespace.path}/#{project.path}.git")
     FileUtils.mkdir_p(target_repo_path)
     FileUtils.cp_r("#{base_repo_path}/.", target_repo_path)
     FileUtils.chmod_R 0755, target_repo_path
-    set_repo_refs(target_repo_path, FORKED_BRANCH_SHA)
+    set_repo_refs(target_repo_path, BORKED_BRANCH_SHA)
   end
 
   # When no cached assets exist, manually hit the root path to create them
@@ -184,19 +184,19 @@ module TestEnv
   end
 
   def factory_repo_name
-    'gitlab-test'
+    'doggohub-test'
   end
 
-  def forked_repo_path
-    @forked_repo_path ||= Rails.root.join('tmp', 'tests', forked_repo_name)
+  def borked_repo_path
+    @borked_repo_path ||= Rails.root.join('tmp', 'tests', borked_repo_name)
   end
 
-  def forked_repo_path_bare
-    "#{forked_repo_path}_bare"
+  def borked_repo_path_bare
+    "#{borked_repo_path}_bare"
   end
 
-  def forked_repo_name
-    'gitlab-test-fork'
+  def borked_repo_name
+    'doggohub-test-bork'
   end
 
   # Prevent developer git configurations from being persisted to test

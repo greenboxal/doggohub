@@ -70,7 +70,7 @@ module Gitlab
       end
 
       def generate_temporarily_email(username)
-        "temp-email-for-oauth-#{username}@gitlab.localhost"
+        "temp-email-for-oauth-#{username}@doggohub.localhost"
       end
     end
   end

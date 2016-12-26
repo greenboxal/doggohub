@@ -2,10 +2,10 @@
 
 ## Enabled Git access protocols
 
-> [Introduced][ce-4696] in GitLab 8.10.
+> [Introduced][ce-4696] in DoggoHub 8.10.
 
-With GitLab's Access restrictions you can choose which Git access protocols you
-want your users to use to communicate with GitLab. This feature can be enabled
+With DoggoHub's Access restrictions you can choose which Git access protocols you
+want your users to use to communicate with DoggoHub. This feature can be enabled
 via the `Application Settings` in the Admin interface.
 
 The setting is called `Enabled Git access protocols`, and it gives you the option
@@ -17,7 +17,7 @@ to choose between:
 
 ![Settings Overview](img/access_restrictions.png)
 
-When both SSH and HTTP(S) are enabled, GitLab will behave as usual, it will give
+When both SSH and HTTP(S) are enabled, DoggoHub will behave as usual, it will give
 your users the option to choose which protocol they would like to use.
 
 When you choose to allow only one of the protocols, a couple of things will happen:
@@ -29,12 +29,12 @@ When you choose to allow only one of the protocols, a couple of things will happ
 
 ![Project URL with SSH only access](img/restricted_url.png)
 
-On top of these UI restrictions, GitLab will deny all Git actions on the protocol
+On top of these UI restrictions, DoggoHub will deny all Git actions on the protocol
 not selected.
 
 > **Note:** Please keep in mind that disabling an access protocol does not actually
   block access to the server itself. The ports used for the protocol, be it SSH or
-  HTTP, will still be accessible. What GitLab does is restrict access on the
+  HTTP, will still be accessible. What DoggoHub does is restrict access on the
   application level.
 
-[ce-4696]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/4696
+[ce-4696]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/4696

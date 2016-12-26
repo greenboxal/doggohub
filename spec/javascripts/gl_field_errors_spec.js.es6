@@ -72,7 +72,7 @@
       expect(fieldState.valid).toBe(false);
 
       // Then valid input
-      emailInputElement.val('email@gitlab.com').keyup();
+      emailInputElement.val('email@doggohub.com').keyup();
       expect(emailInputElement).not.toHaveClass('gl-field-error-outline');
       expect(fieldState.empty).toBe(false);
       expect(fieldState.valid).toBe(true);
@@ -90,7 +90,7 @@
       expect(fieldState.valid).toBe(false);
 
       // Then valid input
-      emailInputElement.val('email@gitlab.com').keyup();
+      emailInputElement.val('email@doggohub.com').keyup();
       expect(emailInputElement).not.toHaveClass('gl-field-error-outline');
       expect(fieldState.empty).toBe(false);
       expect(fieldState.valid).toBe(true);

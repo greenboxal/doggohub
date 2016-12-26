@@ -42,7 +42,7 @@ describe BuildsEmailService do
   describe '#test' do
     it 'sends email' do
       data = Gitlab::DataBuilder::Build.build(create(:ci_build))
-      subject.recipients = 'test@gitlab.com'
+      subject.recipients = 'test@doggohub.com'
 
       expect(BuildEmailWorker).to receive(:perform_async)
 
@@ -53,7 +53,7 @@ describe BuildsEmailService do
       it 'sends email' do
         data = Gitlab::DataBuilder::Build.build(create(:ci_build))
         data[:build_status] = "success"
-        subject.recipients = 'test@gitlab.com'
+        subject.recipients = 'test@doggohub.com'
 
         expect(subject).not_to receive(:notify_only_broken_builds)
         expect(BuildEmailWorker).to receive(:perform_async)
@@ -65,7 +65,7 @@ describe BuildsEmailService do
 
   describe '#execute' do
     it 'sends email' do
-      subject.recipients = 'test@gitlab.com'
+      subject.recipients = 'test@doggohub.com'
       data[:build_status] = 'failed'
 
       expect(BuildEmailWorker).to receive(:perform_async)

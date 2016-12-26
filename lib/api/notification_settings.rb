@@ -7,7 +7,7 @@ module API
 
     resource :notification_settings do
       desc 'Get global notification level settings and email, defaults to Participate' do
-        detail 'This feature was introduced in GitLab 8.12'
+        detail 'This feature was introduced in DoggoHub 8.12'
         success Entities::GlobalNotificationSetting
       end
       get do
@@ -17,7 +17,7 @@ module API
       end
 
       desc 'Update global notification level settings and email, defaults to Participate' do
-        detail 'This feature was introduced in GitLab 8.12'
+        detail 'This feature was introduced in DoggoHub 8.12'
         success Entities::GlobalNotificationSetting
       end
       params do
@@ -50,7 +50,7 @@ module API
     %w[group project].each do |source_type|
       resource source_type.pluralize do
         desc "Get #{source_type} level notification level settings, defaults to Global" do
-          detail 'This feature was introduced in GitLab 8.12'
+          detail 'This feature was introduced in DoggoHub 8.12'
           success Entities::NotificationSetting
         end
         params do
@@ -65,7 +65,7 @@ module API
         end
 
         desc "Update #{source_type} level notification level settings, defaults to Global" do
-          detail 'This feature was introduced in GitLab 8.12'
+          detail 'This feature was introduced in DoggoHub 8.12'
           success Entities::NotificationSetting
         end
         params do

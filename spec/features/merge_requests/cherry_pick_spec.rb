@@ -19,7 +19,7 @@ describe 'Cherry-pick Merge Requests' do
       end
     end
 
-    # Fast-forward merge, or merged before GitLab 8.5.
+    # Fast-forward merge, or merged before DoggoHub 8.5.
     context "Without a merge commit" do
       before do
         merge_request.merge_commit_sha = nil

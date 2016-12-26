@@ -34,7 +34,7 @@ describe SlackSlashCommandsService, :models do
       it 'uses slack compatible links' do
         response = service.trigger(params)
 
-        expect(response[:text]).to include("<#{authorize_url}|connect your GitLab account>")
+        expect(response[:text]).to include("<#{authorize_url}|connect your DoggoHub account>")
       end
     end
   end

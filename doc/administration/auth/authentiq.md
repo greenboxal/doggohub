@@ -6,17 +6,17 @@ Authentiq will generate a Client ID and the accompanying Client Secret for you t
 
 1. Get your Client credentials (Client ID and Client Secret) at [Authentiq](https://www.authentiq.com/register).
 
-2. On your GitLab server, open the configuration file:
+2. On your DoggoHub server, open the configuration file:
 
     For omnibus installation
     ```sh
-    sudo editor /etc/gitlab/gitlab.rb
+    sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-    sudo -u git -H editor /home/git/gitlab/config/gitlab.yml
+    sudo -u git -H editor /home/git/doggohub/config/doggohub.yml
     ```
     
 3. See [Initial OmniAuth Configuration](../../integration/omniauth.md#initial-omniauth-configuration) for initial settings to enable single sign-on and add Authentiq as an OAuth provider. 
@@ -26,7 +26,7 @@ Authentiq will generate a Client ID and the accompanying Client Secret for you t
     For Omnibus packages:
 
     ```ruby
-    gitlab_rails['omniauth_providers'] = [
+    doggohub_rails['omniauth_providers'] = [
       {
         "name" => "authentiq",
         "app_id" => "YOUR_CLIENT_ID",
@@ -58,12 +58,12 @@ See [OmniAuth Authentiq strategy](https://github.com/AuthentiqID/omniauth-authen
 
 7. Save the configuration file.
 
-8. [Reconfigure](../restart_gitlab.md#omnibus-gitlab-reconfigure) or [restart GitLab](../restart_gitlab.md#installations-from-source)
-   for the changes to take effect if you installed GitLab via Omnibus or from source respectively.
+8. [Reconfigure](../restart_doggohub.md#omnibus-doggohub-reconfigure) or [restart DoggoHub](../restart_doggohub.md#installations-from-source)
+   for the changes to take effect if you installed DoggoHub via Omnibus or from source respectively.
 
 On the sign in page there should now be an Authentiq icon below the regular sign in form. Click the icon to begin the authentication process. 
 
-- If the user has the Authentiq ID app installed in their iOS or Android device, they can scan the QR code, decide what personal details to share and sign in to your GitLab installation. 
+- If the user has the Authentiq ID app installed in their iOS or Android device, they can scan the QR code, decide what personal details to share and sign in to your DoggoHub installation. 
 - If not they will be prompted to download the app and then follow the procedure above. 
 
-If everything goes right, the user will be returned to GitLab and will be signed in.
+If everything goes right, the user will be returned to DoggoHub and will be signed in.

@@ -1,5 +1,5 @@
 require 'ruby-prof'
-require_dependency 'gitlab/request_profiler'
+require_dependency 'doggohub/request_profiler'
 
 module Gitlab
   module RequestProfiler

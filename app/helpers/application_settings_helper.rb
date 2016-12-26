@@ -30,7 +30,7 @@ module ApplicationSettingsHelper
   def enabled_protocol
     case current_application_settings.enabled_git_access_protocol
     when 'http'
-      gitlab_config.protocol
+      doggohub_config.protocol
     when 'ssh'
       'ssh'
     end

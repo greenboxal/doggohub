@@ -1,6 +1,6 @@
 # Git Attributes
 
-GitLab supports defining custom [Git attributes][gitattributes] such as what
+DoggoHub supports defining custom [Git attributes][gitattributes] such as what
 files to treat as binary, and what language to use for syntax highlighting
 diffs.
 

@@ -112,17 +112,17 @@ describe 'Commits' do
           end
         end
 
-        describe '.gitlab-ci.yml not found warning' do
+        describe '.doggohub-ci.yml not found warning' do
           context 'ci builds enabled' do
             it "does not show warning" do
               visit ci_status_path(pipeline)
-              expect(page).not_to have_content '.gitlab-ci.yml not found in this commit'
+              expect(page).not_to have_content '.doggohub-ci.yml not found in this commit'
             end
 
             it 'shows warning' do
               stub_ci_pipeline_yaml_file(nil)
               visit ci_status_path(pipeline)
-              expect(page).to have_content '.gitlab-ci.yml not found in this commit'
+              expect(page).to have_content '.doggohub-ci.yml not found in this commit'
             end
           end
 
@@ -134,7 +134,7 @@ describe 'Commits' do
             end
 
             it 'does not show warning' do
-              expect(page).not_to have_content '.gitlab-ci.yml not found in this commit'
+              expect(page).not_to have_content '.doggohub-ci.yml not found in this commit'
             end
           end
         end

@@ -298,7 +298,7 @@ describe User, models: true do
       allow_any_instance_of(ApplicationSetting).to receive(:send_user_confirmation_email).and_return(true)
     end
 
-    let(:user) { create(:user, confirmed_at: nil, unconfirmed_email: 'test@gitlab.com') }
+    let(:user) { create(:user, confirmed_at: nil, unconfirmed_email: 'test@doggohub.com') }
 
     it 'returns unconfirmed' do
       expect(user.confirmed?).to be_falsey
@@ -539,9 +539,9 @@ describe User, models: true do
       let(:user) { User.new }
 
       it "applies defaults to user" do
-        expect(user.projects_limit).to eq(Gitlab.config.gitlab.default_projects_limit)
-        expect(user.can_create_group).to eq(Gitlab.config.gitlab.default_can_create_group)
-        expect(user.theme_id).to eq(Gitlab.config.gitlab.default_theme)
+        expect(user.projects_limit).to eq(Gitlab.config.doggohub.default_projects_limit)
+        expect(user.can_create_group).to eq(Gitlab.config.doggohub.default_can_create_group)
+        expect(user.theme_id).to eq(Gitlab.config.doggohub.default_theme)
         expect(user.external).to be_falsey
       end
     end
@@ -995,7 +995,7 @@ describe User, models: true do
   describe "#contributed_projects" do
     subject { create(:user) }
     let!(:project1) { create(:project) }
-    let!(:project2) { create(:project, forked_from_project: project3) }
+    let!(:project2) { create(:project, borked_from_project: project3) }
     let!(:project3) { create(:project) }
     let!(:merge_request) { create(:merge_request, source_project: project2, target_project: project3, author: subject) }
     let!(:push_event) { create(:event, action: Event::PUSHED, project: project1, target: project1, author: subject) }
@@ -1039,7 +1039,7 @@ describe User, models: true do
   describe "#recent_push" do
     subject { create(:user) }
     let!(:project1) { create(:project) }
-    let!(:project2) { create(:project, forked_from_project: project1) }
+    let!(:project2) { create(:project, borked_from_project: project1) }
     let!(:push_data) do
       Gitlab::DataBuilder::Push.build_sample(project2, subject)
     end

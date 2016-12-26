@@ -1,12 +1,12 @@
 require 'spec_helper'
 require 'rake'
 
-describe 'gitlab:users namespace rake task' do
+describe 'doggohub:users namespace rake task' do
   let(:enable_registry) { true }
 
   before :all do
-    Rake.application.rake_require 'tasks/gitlab/helpers'
-    Rake.application.rake_require 'tasks/gitlab/users'
+    Rake.application.rake_require 'tasks/doggohub/helpers'
+    Rake.application.rake_require 'tasks/doggohub/users'
 
     # empty task as env is already loaded
     Rake::Task.define_task :environment
@@ -23,13 +23,13 @@ describe 'gitlab:users namespace rake task' do
       allow($stdout).to receive :write
     end
 
-    context 'gitlab version' do
+    context 'doggohub version' do
       it 'clears the authentication token for all users' do
         create_list(:user, 2)
 
         expect(User.pluck(:authentication_token)).to all(be_present)
 
-        run_rake_task('gitlab:users:clear_all_authentication_tokens')
+        run_rake_task('doggohub:users:clear_all_authentication_tokens')
 
         expect(User.pluck(:authentication_token)).to all(be_nil)
       end

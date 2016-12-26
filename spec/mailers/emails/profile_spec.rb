@@ -3,7 +3,7 @@ require 'email_spec'
 
 describe Notify do
   include EmailSpec::Matchers
-  include_context 'gitlab email notification'
+  include_context 'doggohub email notification'
 
   describe 'profile notifications' do
     describe 'for new users, the email' do
@@ -13,7 +13,7 @@ describe Notify do
 
       subject { Notify.new_user_email(new_user.id, token) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'a new user email'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like 'a user cannot unsubscribe through footer link'
@@ -25,7 +25,7 @@ describe Notify do
       it 'includes a link for user to set password' do
         params = "reset_password_token=#{token}"
         is_expected.to have_body_text(
-          %r{http://#{Gitlab.config.gitlab.host}(:\d+)?/users/password/edit\?#{params}}
+          %r{http://#{Gitlab.config.doggohub.host}(:\d+)?/users/password/edit\?#{params}}
         )
       end
 
@@ -42,7 +42,7 @@ describe Notify do
 
       subject { Notify.new_user_email(new_user.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'a new user email'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like 'a user cannot unsubscribe through footer link'
@@ -57,7 +57,7 @@ describe Notify do
 
       subject { Notify.new_ssh_key_email(key.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like 'a user cannot unsubscribe through footer link'
 

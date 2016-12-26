@@ -173,7 +173,7 @@ class Issue < ActiveRecord::Base
 
   def can_be_worked_on?(current_user)
     !self.closed? &&
-      !self.project.forked? &&
+      !self.project.borked? &&
       self.related_branches(current_user).empty? &&
       self.closed_by_merge_requests(current_user).empty?
   end

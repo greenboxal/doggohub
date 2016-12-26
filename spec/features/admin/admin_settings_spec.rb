@@ -8,12 +8,12 @@ feature 'Admin updates settings', feature: true do
 
   scenario 'Change application settings' do
     uncheck 'Gravatar enabled'
-    fill_in 'Home page URL', with: 'https://about.gitlab.com/'
+    fill_in 'Home page URL', with: 'https://about.doggohub.com/'
     fill_in 'Help page text', with: 'Example text'
     click_button 'Save'
 
     expect(current_application_settings.gravatar_enabled).to be_falsey
-    expect(current_application_settings.home_page_url).to eq "https://about.gitlab.com/"
+    expect(current_application_settings.home_page_url).to eq "https://about.doggohub.com/"
     expect(page).to have_content "Application settings saved successfully"
   end
 

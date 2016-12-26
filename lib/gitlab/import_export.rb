@@ -27,7 +27,7 @@ module Gitlab
     end
 
     def config_file
-      Rails.root.join('lib/gitlab/import_export/import_export.yml')
+      Rails.root.join('lib/doggohub/import_export/import_export.yml')
     end
 
     def version_filename

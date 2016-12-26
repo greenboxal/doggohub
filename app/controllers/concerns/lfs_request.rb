@@ -22,7 +22,7 @@ module LfsRequest
 
     render(
       json: {
-        message: 'Git LFS is not enabled on this GitLab server, contact your admin.',
+        message: 'Git LFS is not enabled on this DoggoHub server, contact your admin.',
         documentation_url: help_url,
       },
       status: 501
@@ -95,8 +95,8 @@ module LfsRequest
       result = project
 
       loop do
-        break unless result.forked?
-        result = result.forked_from_project
+        break unless result.borked?
+        result = result.borked_from_project
       end
 
       result

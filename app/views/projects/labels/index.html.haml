@@ -30,7 +30,7 @@
       %ul.content-list.manage-labels-list.js-other-labels
         - if @labels.present?
           = render partial: 'shared/label', subject: @project, collection: @labels, as: :label
-        = paginate @labels, theme: 'gitlab'
+        = paginate @labels, theme: 'doggohub'
       - if @labels.blank?
         .nothing-here-block
           - if can?(current_user, :admin_label, @project)

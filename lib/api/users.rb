@@ -330,7 +330,7 @@ module API
       end
 
       desc 'Get the contribution events of a specified user' do
-        detail 'This feature was introduced in GitLab 8.13.'
+        detail 'This feature was introduced in DoggoHub 8.13.'
         success Entities::Event
       end
       params do

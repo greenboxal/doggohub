@@ -6,17 +6,17 @@ To enable Mattermost integration you must create an incoming webhook integration
 
 1. Sign in to your Mattermost instance
 1. Visit incoming webhooks, that will be something like: https://mattermost.example/your_team_name/integrations/incoming_webhooks/add
-1. Choose a display name, description and channel, those can be overridden on GitLab
-1. Save it, copy the **Webhook URL**, we'll need this later for GitLab.
+1. Choose a display name, description and channel, those can be overridden on DoggoHub
+1. Save it, copy the **Webhook URL**, we'll need this later for DoggoHub.
 
 There might be some cases that Incoming Webhooks are blocked by admin, ask your mattermost admin to enable
 it on https://mattermost.example/admin_console/integrations/custom.
 
 Display name override is not enabled by default, you need to ask your admin to enable it on that same section.
 
-## On GitLab
+## On DoggoHub
 
-After you set up Mattermost, it's time to set up GitLab.
+After you set up Mattermost, it's time to set up DoggoHub.
 
 Go to your project's **Settings > Services > Mattermost Notifications** and you will see a
 checkbox with the following events that can be triggered:

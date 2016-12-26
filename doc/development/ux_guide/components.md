@@ -39,7 +39,7 @@ Anchor links are used for navigational actions and lone, secondary commands (suc
 
 #### Rest
 
-Primary links are blue in their rest state. Secondary links (such as the time stamp on comments) are a neutral gray color in rest. Details on the main GitLab navigation links can be found on the [features](features.md#navigation) page.
+Primary links are blue in their rest state. Secondary links (such as the time stamp on comments) are a neutral gray color in rest. Details on the main DoggoHub navigation links can be found on the [features](features.md#navigation) page.
 
 #### Hover
 
@@ -124,7 +124,7 @@ A count element is used in navigation contexts where it is helpful to indicate t
 
 ## Lists
 
-Lists are used where ever there is a single column of information to display. Ths [issues list](https://gitlab.com/gitlab-org/gitlab-ce/issues) is an example of a important list in the GitLab UI.
+Lists are used where ever there is a single column of information to display. Ths [issues list](https://doggohub.com/doggohub-org/doggohub-ce/issues) is an example of a important list in the DoggoHub UI.
 
 ### Types
 
@@ -148,7 +148,7 @@ List inside panel
 
 ## Tables
 
-When the information is too complex for a list, with multiple columns of information, a table can be used. For example, the [pipelines page](https://gitlab.com/gitlab-org/gitlab-ce/pipelines) uses a table.
+When the information is too complex for a list, with multiple columns of information, a table can be used. For example, the [pipelines page](https://doggohub.com/doggohub-org/doggohub-ce/pipelines) uses a table.
 
 ![Table](img/components-table.png)
 
@@ -168,7 +168,7 @@ Content blocks (`.content-block`) are the basic grouping of content. They are co
 
 #### Row content blocks
 
-A background color can be added to this blocks. For example, items in the [issue list](https://gitlab.com/gitlab-org/gitlab-ce/issues) have a green background if they were created recently. Below is an example of a gray content block with side padding using `.row-content-block`.
+A background color can be added to this blocks. For example, items in the [issue list](https://doggohub.com/doggohub-org/doggohub-ce/issues) have a green background if they were created recently. Below is an example of a gray content block with side padding using `.row-content-block`.
 
 ![Row content block](img/components-rowcontentblock.png)
 
@@ -216,7 +216,7 @@ Horizontal form (`form.horizontal-form`) with label rendered inline with input.
 ---
 
 ## File holders
-A file holder (`.file-holder`) is used to show the contents of a file inline on a page of GitLab.
+A file holder (`.file-holder`) is used to show the contents of a file inline on a page of DoggoHub.
 
 ![File Holder component](img/components-fileholder.png)
 
@@ -240,7 +240,7 @@ This format relates how long since an action has occurred. The exact date can be
 
 ### References
 
-Referencing GitLab items depends on a symbol for each type of item. Typing that symbol will invoke a dropdown that allows you to search for and autocomplete the item you were looking for. References are shown as [links](#links) in context, and hovering on them shows the full title or name of the item.
+Referencing DoggoHub items depends on a symbol for each type of item. Typing that symbol will invoke a dropdown that allows you to search for and autocomplete the item you were looking for. References are shown as [links](#links) in context, and hovering on them shows the full title or name of the item.
 
 ![Hovering on a reference](img/components-referencehover.png)
 

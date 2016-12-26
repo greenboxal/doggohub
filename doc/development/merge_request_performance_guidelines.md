@@ -1,6 +1,6 @@
 # Merge Request Performance Guidelines
 
-To ensure a merge request does not negatively impact performance of GitLab
+To ensure a merge request does not negatively impact performance of DoggoHub
 _every_ merge request **must** adhere to the guidelines outlined in this
 document. There are no exceptions to this rule unless specifically discussed
 with and agreed upon by merge request endbosses and performance specialists.
@@ -15,7 +15,7 @@ the following guides:
 ## Impact Analysis
 
 **Summary:** think about the impact your merge request may have on performance
-and those maintaining a GitLab setup.
+and those maintaining a DoggoHub setup.
 
 Any change submitted can have an impact not only on the application itself but
 also those maintaining it and those keeping it up and running (e.g. production
@@ -25,7 +25,7 @@ and running.
 
 Can the queries used potentially take down any critical services and result in
 engineers being woken up in the night? Can a malicious user abuse the code to
-take down a GitLab instance? Will my changes simply make loading a certain page
+take down a DoggoHub instance? Will my changes simply make loading a certain page
 slower? Will execution time grow exponentially given enough load or data in the
 database?
 
@@ -41,7 +41,7 @@ about the impact.
 
 Sometimes it's hard to assess the impact of a merge request. In this case you
 should ask one of the merge request (mini) endbosses to review your changes. You
-can find a list of these endbosses at <https://about.gitlab.com/team/>. An
+can find a list of these endbosses at <https://about.doggohub.com/team/>. An
 endboss in turn can request a performance specialist to review the changes.
 
 ## Query Counts
@@ -122,7 +122,7 @@ end
 **Summary:** merge requests **must not** increase memory usage unless absolutely
 necessary.
 
-A merge request must not increase the memory usage of GitLab by more than the
+A merge request must not increase the memory usage of DoggoHub by more than the
 absolute bare minimum required by the code. This means that if you have to parse
 some large document (e.g. an HTML document) it's best to parse it as a stream
 whenever possible, instead of loading the entire input into memory. Sometimes

@@ -46,7 +46,7 @@ describe SearchController, "routing" do
   end
 end
 
-# gitlab_api /api         API::API
+# doggohub_api /api         API::API
 #            /:path       Grack
 describe "Mounted Apps", "routing" do
   it "to API" do
@@ -54,7 +54,7 @@ describe "Mounted Apps", "routing" do
   end
 
   it "to Grack" do
-    expect(get("/gitlab/gitlabhq.git")).to be_routable
+    expect(get("/doggohub/doggohubhq.git")).to be_routable
   end
 end
 

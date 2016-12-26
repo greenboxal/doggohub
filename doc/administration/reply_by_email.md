@@ -1,11 +1,11 @@
 # Reply by email
 
-GitLab can be set up to allow users to comment on issues and merge requests by
+DoggoHub can be set up to allow users to comment on issues and merge requests by
 replying to notification emails.
 
 ## Requirement
 
-Reply by email requires an IMAP-enabled email account. GitLab allows you to use
+Reply by email requires an IMAP-enabled email account. DoggoHub allows you to use
 three strategies for this feature:
 - using email sub-addressing
 - using a dedicated email address
@@ -24,7 +24,7 @@ mail server which you can run on-premises.
 ### Dedicated email address
 
 This solution is really simple to set up: you just have to create an email
-address dedicated to receive your users' replies to GitLab notifications.
+address dedicated to receive your users' replies to DoggoHub notifications.
 
 ### Catch-all mailbox
 
@@ -34,10 +34,10 @@ server.
 
 ## How it works?
 
-### 1. GitLab sends a notification email
+### 1. DoggoHub sends a notification email
 
-When GitLab sends a notification and Reply by email is enabled, the `Reply-To`
-header is set to the address defined in your GitLab configuration, with the
+When DoggoHub sends a notification and Reply by email is enabled, the `Reply-To`
+header is set to the address defined in your DoggoHub configuration, with the
 `%{key}` placeholder (if present) replaced by a specific "reply key". In
 addition, this "reply key" is also added to the `References` header.
 
@@ -51,9 +51,9 @@ When you reply to the notification email, your email client will:
 - set the `References` header to the value of the `Message-ID` plus the value of
   the notification email's `References` header.
 
-### 3. GitLab receives your reply to the notification email
+### 3. DoggoHub receives your reply to the notification email
 
-When GitLab receives your reply, it will look for the "reply key" in the
+When DoggoHub receives your reply, it will look for the "reply key" in the
 following headers, in this order:
 
 1. the `To` header
@@ -76,107 +76,107 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
 
 ### Omnibus package installations
 
-1. Find the `incoming_email` section in `/etc/gitlab/gitlab.rb`, enable the
+1. Find the `incoming_email` section in `/etc/doggohub/doggohub.rb`, enable the
   feature and fill in the details for your specific IMAP server and email account:
 
     ```ruby
-    # Configuration for Postfix mail server, assumes mailbox incoming@gitlab.example.com
-    gitlab_rails['incoming_email_enabled'] = true
+    # Configuration for Postfix mail server, assumes mailbox incoming@doggohub.example.com
+    doggohub_rails['incoming_email_enabled'] = true
 
     # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
     # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-    gitlab_rails['incoming_email_address'] = "incoming+%{key}@gitlab.example.com"
+    doggohub_rails['incoming_email_address'] = "incoming+%{key}@doggohub.example.com"
 
     # Email account username
     # With third party providers, this is usually the full email address.
     # With self-hosted email servers, this is usually the user part of the email address.
-    gitlab_rails['incoming_email_email'] = "incoming"
+    doggohub_rails['incoming_email_email'] = "incoming"
     # Email account password
-    gitlab_rails['incoming_email_password'] = "[REDACTED]"
+    doggohub_rails['incoming_email_password'] = "[REDACTED]"
 
     # IMAP server host
-    gitlab_rails['incoming_email_host'] = "gitlab.example.com"
+    doggohub_rails['incoming_email_host'] = "doggohub.example.com"
     # IMAP server port
-    gitlab_rails['incoming_email_port'] = 143
+    doggohub_rails['incoming_email_port'] = 143
     # Whether the IMAP server uses SSL
-    gitlab_rails['incoming_email_ssl'] = false
+    doggohub_rails['incoming_email_ssl'] = false
     # Whether the IMAP server uses StartTLS
-    gitlab_rails['incoming_email_start_tls'] = false
+    doggohub_rails['incoming_email_start_tls'] = false
 
     # The mailbox where incoming mail will end up. Usually "inbox".
-    gitlab_rails['incoming_email_mailbox_name'] = "inbox"
+    doggohub_rails['incoming_email_mailbox_name'] = "inbox"
     # The IDLE command timeout.
-    gitlab_rails['incoming_email_idle_timeout'] = 60
+    doggohub_rails['incoming_email_idle_timeout'] = 60
     ```
 
     ```ruby
-    # Configuration for Gmail / Google Apps, assumes mailbox gitlab-incoming@gmail.com
-    gitlab_rails['incoming_email_enabled'] = true
+    # Configuration for Gmail / Google Apps, assumes mailbox doggohub-incoming@gmail.com
+    doggohub_rails['incoming_email_enabled'] = true
 
     # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
     # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-    gitlab_rails['incoming_email_address'] = "gitlab-incoming+%{key}@gmail.com"
+    doggohub_rails['incoming_email_address'] = "doggohub-incoming+%{key}@gmail.com"
 
     # Email account username
     # With third party providers, this is usually the full email address.
     # With self-hosted email servers, this is usually the user part of the email address.
-    gitlab_rails['incoming_email_email'] = "gitlab-incoming@gmail.com"
+    doggohub_rails['incoming_email_email'] = "doggohub-incoming@gmail.com"
     # Email account password
-    gitlab_rails['incoming_email_password'] = "[REDACTED]"
+    doggohub_rails['incoming_email_password'] = "[REDACTED]"
 
     # IMAP server host
-    gitlab_rails['incoming_email_host'] = "imap.gmail.com"
+    doggohub_rails['incoming_email_host'] = "imap.gmail.com"
     # IMAP server port
-    gitlab_rails['incoming_email_port'] = 993
+    doggohub_rails['incoming_email_port'] = 993
     # Whether the IMAP server uses SSL
-    gitlab_rails['incoming_email_ssl'] = true
+    doggohub_rails['incoming_email_ssl'] = true
     # Whether the IMAP server uses StartTLS
-    gitlab_rails['incoming_email_start_tls'] = false
+    doggohub_rails['incoming_email_start_tls'] = false
 
     # The mailbox where incoming mail will end up. Usually "inbox".
-    gitlab_rails['incoming_email_mailbox_name'] = "inbox"
+    doggohub_rails['incoming_email_mailbox_name'] = "inbox"
     # The IDLE command timeout.
-    gitlab_rails['incoming_email_idle_timeout'] = 60
+    doggohub_rails['incoming_email_idle_timeout'] = 60
     ```
 
-1. Reconfigure GitLab and restart mailroom for the changes to take effect:
+1. Reconfigure DoggoHub and restart mailroom for the changes to take effect:
 
     ```sh
-    sudo gitlab-ctl reconfigure
-    sudo gitlab-ctl restart mailroom
+    sudo doggohub-ctl reconfigure
+    sudo doggohub-ctl restart mailroom
     ```
 
 1. Verify that everything is configured correctly:
 
     ```sh
-    sudo gitlab-rake gitlab:incoming_email:check
+    sudo doggohub-rake doggohub:incoming_email:check
     ```
 
 1. Reply by email should now be working.
 
 ### Installations from source
 
-1. Go to the GitLab installation directory:
+1. Go to the DoggoHub installation directory:
 
     ```sh
-    cd /home/git/gitlab
+    cd /home/git/doggohub
     ```
 
-1. Find the `incoming_email` section in `config/gitlab.yml`, enable the feature
+1. Find the `incoming_email` section in `config/doggohub.yml`, enable the feature
   and fill in the details for your specific IMAP server and email account:
 
     ```sh
-    sudo editor config/gitlab.yml
+    sudo editor config/doggohub.yml
     ```
 
     ```yaml
-    # Configuration for Postfix mail server, assumes mailbox incoming@gitlab.example.com
+    # Configuration for Postfix mail server, assumes mailbox incoming@doggohub.example.com
     incoming_email:
       enabled: true
 
       # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
       # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-      address: "incoming+%{key}@gitlab.example.com"
+      address: "incoming+%{key}@doggohub.example.com"
 
       # Email account username
       # With third party providers, this is usually the full email address.
@@ -186,7 +186,7 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
       password: "[REDACTED]"
 
       # IMAP server host
-      host: "gitlab.example.com"
+      host: "doggohub.example.com"
       # IMAP server port
       port: 143
       # Whether the IMAP server uses SSL
@@ -201,18 +201,18 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
     ```
 
     ```yaml
-    # Configuration for Gmail / Google Apps, assumes mailbox gitlab-incoming@gmail.com
+    # Configuration for Gmail / Google Apps, assumes mailbox doggohub-incoming@gmail.com
     incoming_email:
       enabled: true
 
       # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
       # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-      address: "gitlab-incoming+%{key}@gmail.com"
+      address: "doggohub-incoming+%{key}@gmail.com"
 
       # Email account username
       # With third party providers, this is usually the full email address.
       # With self-hosted email servers, this is usually the user part of the email address.
-      user: "gitlab-incoming@gmail.com"
+      user: "doggohub-incoming@gmail.com"
       # Email account password
       password: "[REDACTED]"
 
@@ -231,46 +231,46 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
       idle_timeout: 60
     ```
 
-1. Enable `mail_room` in the init script at `/etc/default/gitlab`:
+1. Enable `mail_room` in the init script at `/etc/default/doggohub`:
 
     ```sh
     sudo mkdir -p /etc/default
-    echo 'mail_room_enabled=true' | sudo tee -a /etc/default/gitlab
+    echo 'mail_room_enabled=true' | sudo tee -a /etc/default/doggohub
     ```
 
-1. Restart GitLab:
+1. Restart DoggoHub:
 
     ```sh
-    sudo service gitlab restart
+    sudo service doggohub restart
     ```
 
 1. Verify that everything is configured correctly:
 
     ```sh
-    sudo -u git -H bundle exec rake gitlab:incoming_email:check RAILS_ENV=production
+    sudo -u git -H bundle exec rake doggohub:incoming_email:check RAILS_ENV=production
     ```
 
 1. Reply by email should now be working.
 
 ### Development
 
-1. Go to the GitLab installation directory.
+1. Go to the DoggoHub installation directory.
 
-1. Find the `incoming_email` section in `config/gitlab.yml`, enable the feature and fill in the details for your specific IMAP server and email account:
+1. Find the `incoming_email` section in `config/doggohub.yml`, enable the feature and fill in the details for your specific IMAP server and email account:
 
     ```yaml
-    # Configuration for Gmail / Google Apps, assumes mailbox gitlab-incoming@gmail.com
+    # Configuration for Gmail / Google Apps, assumes mailbox doggohub-incoming@gmail.com
     incoming_email:
       enabled: true
 
       # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
       # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-      address: "gitlab-incoming+%{key}@gmail.com"
+      address: "doggohub-incoming+%{key}@gmail.com"
 
       # Email account username
       # With third party providers, this is usually the full email address.
       # With self-hosted email servers, this is usually the user part of the email address.
-      user: "gitlab-incoming@gmail.com"
+      user: "doggohub-incoming@gmail.com"
       # Email account password
       password: "[REDACTED]"
 
@@ -289,7 +289,7 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
       idle_timeout: 60
     ```
 
-    As mentioned, the part after `+` is ignored, and this will end up in the mailbox for `gitlab-incoming@gmail.com`.
+    As mentioned, the part after `+` is ignored, and this will end up in the mailbox for `doggohub-incoming@gmail.com`.
 
 1. Uncomment the `mail_room` line in your `Procfile`:
 
@@ -297,7 +297,7 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
     mail_room: bundle exec mail_room -q -c config/mail_room.yml
     ```
 
-1. Restart GitLab:
+1. Restart DoggoHub:
 
     ```sh
     bundle exec foreman start
@@ -306,7 +306,7 @@ To set up a basic Postfix mail server with IMAP access on Ubuntu, follow
 1. Verify that everything is configured correctly:
 
     ```sh
-    bundle exec rake gitlab:incoming_email:check RAILS_ENV=development
+    bundle exec rake doggohub:incoming_email:check RAILS_ENV=development
     ```
 
 1. Reply by email should now be working.

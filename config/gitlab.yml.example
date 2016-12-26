@@ -1,5 +1,5 @@
 # # # # # # # # # # # # # # # # # #
-# GitLab application config file  #
+# DoggoHub application config file  #
 # # # # # # # # # # # # # # # # # #
 #
 ###########################  NOTE  #####################################
@@ -7,27 +7,27 @@
 # * are being moved to ApplicationSetting model!                       #
 # If a setting requires an application restart say so in that screen.  #
 # If you change this file in a Merge Request, please also create       #
-# a MR on https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests  #
+# a MR on https://doggohub.com/doggohub-org/omnibus-doggohub/merge_requests  #
 ########################################################################
 #
 #
 # How to use:
-# 1. Copy file as gitlab.yml
-# 2. Update gitlab -> host with your fully qualified domain name
-# 3. Update gitlab -> email_from
+# 1. Copy file as doggohub.yml
+# 2. Update doggohub -> host with your fully qualified domain name
+# 3. Update doggohub -> email_from
 # 4. If you installed Git from source, change git -> bin_path to /usr/local/bin/git
 #    IMPORTANT: If Git was installed in a different location use that instead.
 #    You can check with `which git`. If a wrong path of Git is specified, it will
-#     result in various issues such as failures of GitLab CI builds.
+#     result in various issues such as failures of DoggoHub CI builds.
 # 5. Review this configuration file for other settings you may want to adjust
 
 production: &base
   #
-  # 1. GitLab app settings
+  # 1. DoggoHub app settings
   # ==========================
 
-  ## GitLab settings
-  gitlab:
+  ## DoggoHub settings
+  doggohub:
     ## Web server settings (note: host is the FQDN, do not include http://)
     host: localhost
     port: 80 # Set to 443 if using HTTPS, see installation.md#using-https for additional HTTPS configuration details
@@ -39,15 +39,15 @@ production: &base
     # ssh_host: ssh.host_example.com
 
     # Relative URL support
-    # WARNING: We recommend using an FQDN to host GitLab in a root path instead
+    # WARNING: We recommend using an FQDN to host DoggoHub in a root path instead
     # of using a relative URL.
-    # Documentation: http://doc.gitlab.com/ce/install/relative_url.html
+    # Documentation: http://doc.doggohub.com/ce/install/relative_url.html
     # Uncomment and customize the following line to run in a non-root path
     #
-    # relative_url_root: /gitlab
+    # relative_url_root: /doggohub
 
     # Trusted Proxies
-    # Customize if you have GitLab behind a reverse proxy which is running on a different machine.
+    # Customize if you have DoggoHub behind a reverse proxy which is running on a different machine.
     # Add the IP address for your reverse proxy to the list, otherwise users will appear signed in from that address.
     trusted_proxies:
       # Examples:
@@ -55,20 +55,20 @@ production: &base
       #- 192.168.2.1
       #- 2001:0db8::/32
 
-    # Uncomment and customize if you can't use the default user to run GitLab (default: 'git')
+    # Uncomment and customize if you can't use the default user to run DoggoHub (default: 'git')
     # user: git
 
     ## Date & Time settings
-    # Uncomment and customize if you want to change the default time zone of GitLab application.
+    # Uncomment and customize if you want to change the default time zone of DoggoHub application.
     # To see all available zones, run `bundle exec rake time:zones:all RAILS_ENV=production`
     # time_zone: 'UTC'
 
     ## Email settings
-    # Uncomment and set to false if you need to disable email sending from GitLab (default: true)
+    # Uncomment and set to false if you need to disable email sending from DoggoHub (default: true)
     # email_enabled: true
-    # Email address used in the "From" field in mails sent by GitLab
+    # Email address used in the "From" field in mails sent by DoggoHub
     email_from: example@example.com
-    email_display_name: GitLab
+    email_display_name: DoggoHub
     email_reply_to: noreply@example.com
     email_subject_suffix: ''
 
@@ -112,18 +112,18 @@ production: &base
 
   ## Reply by email
   # Allow users to comment on issues and merge requests by replying to notification emails.
-  # For documentation on how to set this up, see http://doc.gitlab.com/ce/administration/reply_by_email.html
+  # For documentation on how to set this up, see http://doc.doggohub.com/ce/administration/reply_by_email.html
   incoming_email:
     enabled: false
 
     # The email address including the `%{key}` placeholder that will be replaced to reference the item being replied to.
     # The placeholder can be omitted but if present, it must appear in the "user" part of the address (before the `@`).
-    address: "gitlab-incoming+%{key}@gmail.com"
+    address: "doggohub-incoming+%{key}@gmail.com"
 
     # Email account username
     # With third party providers, this is usually the full email address.
     # With self-hosted email servers, this is usually the user part of the email address.
-    user: "gitlab-incoming@gmail.com"
+    user: "doggohub-incoming@gmail.com"
     # Email account password
     password: "[REDACTED]"
 
@@ -160,7 +160,7 @@ production: &base
     host: 'https://mattermost.example.com'
 
   ## Gravatar
-  ## For Libravatar see: http://doc.gitlab.com/ce/customization/libravatar.html
+  ## For Libravatar see: http://doc.doggohub.com/ce/customization/libravatar.html
   gravatar:
     # gravatar urls: possible placeholders: %{hash} %{size} %{email}
     # plain_url: "http://..."     # default: http://www.gravatar.com/avatar/%{hash}?s=%{size}&d=identicon
@@ -192,16 +192,16 @@ production: &base
     # enabled: true
     # host: registry.example.com
     # port: 5005
-    # api_url: http://localhost:5000/ # internal address to the registry, will be used by GitLab to directly communicate with API
+    # api_url: http://localhost:5000/ # internal address to the registry, will be used by DoggoHub to directly communicate with API
     # key: config/registry.key
     # path: shared/registry
-    # issuer: gitlab-issuer
+    # issuer: doggohub-issuer
 
   #
-  # 2. GitLab CI settings
+  # 2. DoggoHub CI settings
   # ==========================
 
-  gitlab_ci:
+  doggohub_ci:
     # Default project notifications settings:
     #
     # Send emails only on broken builds (default: true)
@@ -219,20 +219,20 @@ production: &base
 
   ## LDAP settings
   # You can inspect a sample of the LDAP users with login access by running:
-  #   bundle exec rake gitlab:ldap:check RAILS_ENV=production
+  #   bundle exec rake doggohub:ldap:check RAILS_ENV=production
   ldap:
     enabled: false
     servers:
       ##########################################################################
       #
-      # Since GitLab 7.4, LDAP servers get ID's (below the ID is 'main'). GitLab
+      # Since DoggoHub 7.4, LDAP servers get ID's (below the ID is 'main'). DoggoHub
       # Enterprise Edition now supports connecting to multiple LDAP servers.
       #
       # If you are updating from the old (pre-7.4) syntax, you MUST give your
       # old server the ID 'main'.
       #
       ##########################################################################
-      main: # 'main' is the GitLab 'provider ID' of this LDAP server
+      main: # 'main' is the DoggoHub 'provider ID' of this LDAP server
         ## label
         #
         # A human-friendly name for your LDAP server. It is OK to change the label later,
@@ -258,25 +258,25 @@ production: &base
         # If your LDAP server is not AD, set this to false.
         active_directory: true
 
-        # If allow_username_or_email_login is enabled, GitLab will ignore everything
+        # If allow_username_or_email_login is enabled, DoggoHub will ignore everything
         # after the first '@' in the LDAP username submitted by the user on login.
         #
         # Example:
         # - the user enters 'jane.doe@example.com' and 'p@ssw0rd' as LDAP credentials;
-        # - GitLab queries the LDAP server with 'jane.doe' and 'p@ssw0rd'.
+        # - DoggoHub queries the LDAP server with 'jane.doe' and 'p@ssw0rd'.
         #
         # If you are using "uid: 'userPrincipalName'" on ActiveDirectory you need to
         # disable this setting, because the userPrincipalName contains an '@'.
         allow_username_or_email_login: false
 
-        # To maintain tight control over the number of active users on your GitLab installation,
+        # To maintain tight control over the number of active users on your DoggoHub installation,
         # enable this setting to keep new users blocked until they have been cleared by the admin
         # (default: false).
         block_auto_created_users: false
 
         # Base where we can search for users
         #
-        #   Ex. ou=People,dc=gitlab,dc=example
+        #   Ex. ou=People,dc=doggohub,dc=example
         #
         base: ''
 
@@ -285,20 +285,20 @@ production: &base
         #   Format: RFC 4515 http://tools.ietf.org/search/rfc4515
         #   Ex. (employeeType=developer)
         #
-        #   Note: GitLab does not support omniauth-ldap's custom filter syntax.
+        #   Note: DoggoHub does not support omniauth-ldap's custom filter syntax.
         #
         user_filter: ''
 
-        # LDAP attributes that GitLab will use to create an account for the LDAP user.
+        # LDAP attributes that DoggoHub will use to create an account for the LDAP user.
         # The specified attribute can either be the attribute name as a string (e.g. 'mail'),
         # or an array of attribute names to try in order (e.g. ['mail', 'email']).
         # Note that the user's LDAP login will always be the attribute specified as `uid` above.
         attributes:
           # The username will be used in paths for the user's own projects
-          # (like `gitlab.example.com/username/project`) and when mentioning
+          # (like `doggohub.example.com/username/project`) and when mentioning
           # them in issues, merge request and comments (like `@username`).
           # If the attribute specified for `username` contains an email address,
-          # the GitLab username will be the part of the email address before the '@'.
+          # the DoggoHub username will be the part of the email address before the '@'.
           username: ['uid', 'userid', 'sAMAccountName']
           email:    ['mail', 'email', 'userPrincipalName']
 
@@ -309,9 +309,9 @@ production: &base
           first_name: 'givenName'
           last_name:  'sn'
 
-      # GitLab EE only: add more LDAP servers
+      # DoggoHub EE only: add more LDAP servers
       # Choose an ID made of a-z and 0-9 . This ID will be stored in the database
-      # so that GitLab can remember which LDAP server a user belongs to.
+      # so that DoggoHub can remember which LDAP server a user belongs to.
       # uswest2:
       #   label:
       #   host:
@@ -324,7 +324,7 @@ production: &base
     enabled: false
 
     # Uncomment this to automatically sign in with a specific omniauth provider's without
-    # showing GitLab's sign-in page (default: show the GitLab sign-in page)
+    # showing DoggoHub's sign-in page (default: show the DoggoHub sign-in page)
     # auto_sign_in_with_provider: saml
 
     # CAUTION!
@@ -354,10 +354,10 @@ production: &base
     ## Auth providers
     # Uncomment the following lines and fill in the data of the auth provider you want to use
     # If your favorite auth provider is not listed you can use others:
-    # see https://github.com/gitlabhq/gitlab-public-wiki/wiki/Custom-omniauth-provider-configurations
+    # see https://github.com/doggohubhq/doggohub-public-wiki/wiki/Custom-omniauth-provider-configurations
     # The 'app_id' and 'app_secret' parameters are always passed as the first two
     # arguments, followed by optional 'args' which can be either a hash or an array.
-    # Documentation for this is available at http://doc.gitlab.com/ce/integration/omniauth.html
+    # Documentation for this is available at http://doc.doggohub.com/ce/integration/omniauth.html
     providers:
       # See omniauth-cas3 for more configuration details
       # - { name: 'cas3',
@@ -374,7 +374,7 @@ production: &base
       #     app_secret: 'YOUR_CLIENT_SECRET',
       #     args: {
       #             scope: 'aq:name email~rs address aq:push'
-      #             # redirect_uri parameter is optional except when 'gitlab.host' in this file is set to 'localhost'
+      #             # redirect_uri parameter is optional except when 'doggohub.host' in this file is set to 'localhost'
       #             # redirect_uri: 'YOUR_REDIRECT_URI'
       #           }
       #   }
@@ -387,7 +387,7 @@ production: &base
       # - { name: 'bitbucket',
       #     app_id: 'YOUR_APP_ID',
       #     app_secret: 'YOUR_APP_SECRET' }
-      # - { name: 'gitlab',
+      # - { name: 'doggohub',
       #     app_id: 'YOUR_APP_ID',
       #     app_secret: 'YOUR_APP_SECRET',
       #     args: { scope: 'api' } }
@@ -407,10 +407,10 @@ production: &base
       #     groups_attribute: 'Groups',
       #     external_groups: ['Contractors', 'Freelancers'],
       #     args: {
-      #             assertion_consumer_service_url: 'https://gitlab.example.com/users/auth/saml/callback',
+      #             assertion_consumer_service_url: 'https://doggohub.example.com/users/auth/saml/callback',
       #             idp_cert_fingerprint: '43:51:43:a1:b5:fc:8b:b7:0a:3a:a9:b1:0f:66:73:a8',
       #             idp_sso_target_url: 'https://login.example.com/idp',
-      #             issuer: 'https://gitlab.example.com',
+      #             issuer: 'https://doggohub.example.com',
       #             name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
       #           } }
       #
@@ -432,26 +432,26 @@ production: &base
 
   # Shared file storage settings
   shared:
-    # path: /mnt/gitlab # Default: shared
+    # path: /mnt/doggohub # Default: shared
 
 
   #
   # 4. Advanced settings
   # ==========================
 
-  # GitLab Satellites
+  # DoggoHub Satellites
   #
-  # Note for maintainers: keep the satellites.path setting until GitLab 9.0 at
+  # Note for maintainers: keep the satellites.path setting until DoggoHub 9.0 at
   # least. This setting is fed to 'rm -rf' in
   # db/migrate/20151023144219_remove_satellites.rb
   satellites:
-    path: /home/git/gitlab-satellites/
+    path: /home/git/doggohub-satellites/
 
   ## Repositories settings
   repositories:
     # Paths where repositories can be stored. Give the canonicalized absolute pathname.
     # IMPORTANT: None of the path components may be symlink, because
-    # gitlab-shell invokes Dir.pwd inside the repository path and that results
+    # doggohub-shell invokes Dir.pwd inside the repository path and that results
     # real path not the symlink.
     storages: # You must have at least a `default` storage path.
       default: /home/git/repositories/
@@ -477,14 +477,14 @@ production: &base
     #   # Turns on AWS Server-Side Encryption with Amazon S3-Managed Keys for backups, this is optional
     #   # encryption: 'AES256'
 
-  ## GitLab Shell settings
-  gitlab_shell:
-    path: /home/git/gitlab-shell/
-    hooks_path: /home/git/gitlab-shell/hooks/
+  ## DoggoHub Shell settings
+  doggohub_shell:
+    path: /home/git/doggohub-shell/
+    hooks_path: /home/git/doggohub-shell/hooks/
 
-    # File that contains the secret key for verifying access for gitlab-shell.
-    # Default is '.gitlab_shell_secret' relative to Rails.root (i.e. root of the GitLab app).
-    # secret_file: /home/git/gitlab/.gitlab_shell_secret
+    # File that contains the secret key for verifying access for doggohub-shell.
+    # Default is '.doggohub_shell_secret' relative to Rails.root (i.e. root of the DoggoHub app).
+    # secret_file: /home/git/doggohub/.doggohub_shell_secret
 
     # Git over HTTP
     upload_pack: true
@@ -543,24 +543,24 @@ test:
     enabled: true
   lfs:
     enabled: false
-  gitlab:
+  doggohub:
     host: localhost
     port: 80
 
-    # When you run tests we clone and setup gitlab-shell
+    # When you run tests we clone and setup doggohub-shell
     # In order to setup it correctly you need to specify
-    # your system username you use to run GitLab
+    # your system username you use to run DoggoHub
     # user: YOUR_USERNAME
   satellites:
-    path: tmp/tests/gitlab-satellites/
+    path: tmp/tests/doggohub-satellites/
   repositories:
     storages:
       default: tmp/tests/repositories/
   backup:
     path: tmp/tests/backups
-  gitlab_shell:
-    path: tmp/tests/gitlab-shell/
-    hooks_path: tmp/tests/gitlab-shell/hooks/
+  doggohub_shell:
+    path: tmp/tests/doggohub-shell/
+    hooks_path: tmp/tests/doggohub-shell/hooks/
   issues_tracker:
     redmine:
       title: "Redmine"

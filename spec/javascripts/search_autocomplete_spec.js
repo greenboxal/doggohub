@@ -24,15 +24,15 @@
 
   dashboardMRsPath = '/dashboard/merge_requests';
 
-  projectIssuesPath = '/gitlab-org/gitlab-ce/issues';
+  projectIssuesPath = '/doggohub-org/doggohub-ce/issues';
 
-  projectMRsPath = '/gitlab-org/gitlab-ce/merge_requests';
+  projectMRsPath = '/doggohub-org/doggohub-ce/merge_requests';
 
-  groupIssuesPath = '/groups/gitlab-org/issues';
+  groupIssuesPath = '/groups/doggohub-org/issues';
 
-  groupMRsPath = '/groups/gitlab-org/merge_requests';
+  groupMRsPath = '/groups/doggohub-org/merge_requests';
 
-  projectName = 'GitLab Community Edition';
+  projectName = 'DoggoHub Community Edition';
 
   groupName = 'Gitlab Org';
 
@@ -52,10 +52,10 @@
         return $body.data('page', 'root:index');
       case 'group':
         $body.data('page', 'groups:show');
-        return $body.data('group', 'gitlab-org');
+        return $body.data('group', 'doggohub-org');
       case 'project':
         $body.data('page', 'projects:show');
-        return $body.data('project', 'gitlab-ce');
+        return $body.data('project', 'doggohub-ce');
     }
   };
 
@@ -72,7 +72,7 @@
   mockProjectOptions = function() {
     window.gl || (window.gl = {});
     return window.gl.projectOptions = {
-      'gitlab-ce': {
+      'doggohub-ce': {
         issuesPath: projectIssuesPath,
         mrPath: projectMRsPath,
         projectName: projectName
@@ -83,7 +83,7 @@
   mockGroupOptions = function() {
     window.gl || (window.gl = {});
     return window.gl.groupOptions = {
-      'gitlab-org': {
+      'doggohub-org': {
         issuesPath: groupIssuesPath,
         mrPath: groupMRsPath,
         projectName: groupName

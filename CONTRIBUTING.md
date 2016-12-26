@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Contribute to GitLab](#contribute-to-gitlab)
+- [Contribute to DoggoHub](#contribute-to-doggohub)
     - [Contributor license agreement](#contributor-license-agreement)
     - [Security vulnerability disclosure](#security-vulnerability-disclosure)
     - [Closing policy for issues and merge requests](#closing-policy-for-issues-and-merge-requests)
@@ -25,20 +25,20 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Contribute to GitLab
+# Contribute to DoggoHub
 
-Thank you for your interest in contributing to GitLab. This guide details how
-to contribute to GitLab in a way that is efficient for everyone.
+Thank you for your interest in contributing to DoggoHub. This guide details how
+to contribute to DoggoHub in a way that is efficient for everyone.
 
-GitLab comes into two flavors, GitLab Community Edition (CE) our free and open
-source edition, and GitLab Enterprise Edition (EE) which is our commercial
+DoggoHub comes into two flavors, DoggoHub Community Edition (CE) our free and open
+source edition, and DoggoHub Enterprise Edition (EE) which is our commercial
 edition. Throughout this guide you will see references to CE and EE for
 abbreviation.
 
-If you have read this guide and want to know how the GitLab [core team]
-operates please see [the GitLab contributing process](PROCESS.md).
+If you have read this guide and want to know how the DoggoHub [core team]
+operates please see [the DoggoHub contributing process](PROCESS.md).
 
-- [GitLab Inc engineers should refer to the engineering workflow document](https://about.gitlab.com/handbook/engineering/workflow/)
+- [DoggoHub Inc engineers should refer to the engineering workflow document](https://about.doggohub.com/handbook/engineering/workflow/)
 
 ## Contributor license agreement
 
@@ -50,14 +50,14 @@ By submitting code as an entity you agree to the
 ## Security vulnerability disclosure
 
 Please report suspected security vulnerabilities in private to
-`support@gitlab.com`, also see the
-[disclosure section on the GitLab.com website](https://about.gitlab.com/disclosure/).
+`support@doggohub.com`, also see the
+[disclosure section on the DoggoHub.com website](https://about.doggohub.com/disclosure/).
 Please do **NOT** create publicly viewable issues for suspected security
 vulnerabilities.
 
 ## Closing policy for issues and merge requests
 
-GitLab is a popular open source project and the capacity to deal with issues
+DoggoHub is a popular open source project and the capacity to deal with issues
 and merge requests is limited. Out of respect for our volunteers, issues and
 merge requests not in line with the guidelines listed in this document may be
 closed without notice.
@@ -70,33 +70,33 @@ for audiences of all ages.
 
 ## Helping others
 
-Please help other GitLab users when you can. The channels people will reach out
+Please help other DoggoHub users when you can. The channels people will reach out
 on can be found on the [getting help page][getting-help].
 
-Sign up for the mailing list, answer GitLab questions on StackOverflow or
+Sign up for the mailing list, answer DoggoHub questions on StackOverflow or
 respond in the IRC channel. You can also sign up on [CodeTriage][codetriage] to help with
 the remaining issues on the GitHub issue tracker.
 
 ## I want to contribute!
 
-If you want to contribute to GitLab, but are not sure where to start,
+If you want to contribute to DoggoHub, but are not sure where to start,
 look for [issues with the label `up-for-grabs`][up-for-grabs]. These issues
 will be of reasonable size and challenge, for anyone to start contributing to
-GitLab.
+DoggoHub.
 
 This was inspired by [an article by Kent C. Dodds][medium-up-for-grabs].
 
 ## Implement design & UI elements
 
-Please see the [UX Guide for GitLab].
+Please see the [UX Guide for DoggoHub].
 
 ## Issue tracker
 
 To get support for your particular problem please use the
-[getting help channels](https://about.gitlab.com/getting-help/).
+[getting help channels](https://about.doggohub.com/getting-help/).
 
-The [GitLab CE issue tracker on GitLab.com][ce-tracker] is for bugs concerning
-the latest GitLab release and [feature proposals](#feature-proposals).
+The [DoggoHub CE issue tracker on DoggoHub.com][ce-tracker] is for bugs concerning
+the latest DoggoHub release and [feature proposals](#feature-proposals).
 
 When submitting an issue please conform to the issue submission guidelines
 listed below. Not all issues will be addressed and your issue is more likely to
@@ -104,7 +104,7 @@ be addressed if you submit a merge request which partially or fully solves
 the issue.
 
 If you're unsure where to post, post to the [mailing list][google-group] or
-[Stack Overflow][stackoverflow] first. There are a lot of helpful GitLab users
+[Stack Overflow][stackoverflow] first. There are a lot of helpful DoggoHub users
 there who may be able to help you quickly. If your particular issue turns out
 to be a bug, it will find its way from there.
 
@@ -129,11 +129,11 @@ code snippet right after your description in a new line: `~"feature proposal"`.
 Please keep feature proposals as small and simple as possible, complex ones
 might be edited to make them small and simple.
 
-Please submit Feature Proposals using the ['Feature Proposal' issue template](.gitlab/issue_templates/Feature Proposal.md) provided on the issue tracker.
+Please submit Feature Proposals using the ['Feature Proposal' issue template](.doggohub/issue_templates/Feature Proposal.md) provided on the issue tracker.
 
 For changes in the interface, it can be helpful to create a mockup first.
 If you want to create something yourself, consider opening an issue first to
-discuss whether it is interesting to include this in GitLab.
+discuss whether it is interesting to include this in DoggoHub.
 
 ### Issue tracker guidelines
 
@@ -142,7 +142,7 @@ submitting your own, there's a good chance somebody else had the same issue or
 feature proposal. Show your support with an award emoji and/or join the
 discussion.
 
-Please submit bugs using the ['Bug' issue template](.gitlab/issue_templates/Bug.md) provided on the issue tracker.
+Please submit bugs using the ['Bug' issue template](.doggohub/issue_templates/Bug.md) provided on the issue tracker.
 The text in the parenthesis is there to help you with what to include. Omit it
 when submitting the actual issue. You can copy-paste it and then edit as you
 see fit.
@@ -162,8 +162,8 @@ consensus is reached about the weight
 relate issue weight directly to time. This is called [anchoring](https://en.wikipedia.org/wiki/Anchoring)
 and something you want to avoid.
 1. Something that has a weight of 1 (or no weight) is really small and simple.
-Something that is 9 is rewriting a large fundamental part of GitLab,
-which might lead to many hard problems to solve. Changing some text in GitLab
+Something that is 9 is rewriting a large fundamental part of DoggoHub,
+which might lead to many hard problems to solve. Changing some text in DoggoHub
 is probably 1, adding a new Git Hook maybe 4 or 5, big features 7-9.
 1. If something is very large, it should probably be split up in multiple
 issues or chunks. You can simply not set the weight of a parent issue and set
@@ -186,13 +186,13 @@ and the merge request.
 The release manager will [update the notes] in the regression issue as fixes are
 addressed.
 
-[8.3 Regressions]: https://gitlab.com/gitlab-org/gitlab-ce/issues/4127
-[update the notes]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/pro-tips.md#update-the-regression-issue
+[8.3 Regressions]: https://doggohub.com/doggohub-org/doggohub-ce/issues/4127
+[update the notes]: https://doggohub.com/doggohub-org/release-tools/blob/master/doc/pro-tips.md#update-the-regression-issue
 
 ### Technical debt
 
-In order to track things that can be improved in GitLab's codebase, we created
-the ~"technical debt" label in [GitLab's issue tracker][ce-tracker].
+In order to track things that can be improved in DoggoHub's codebase, we created
+the ~"technical debt" label in [DoggoHub's issue tracker][ce-tracker].
 
 This label should be added to issues that describe things that can be improved,
 shortcuts that have been taken, code that needs refactoring, features that need
@@ -205,7 +205,7 @@ can be combined with the `technical debt` label, to make it easier to schedule
 the improvements for a release.
 
 Issues tagged with the `technical debt` label have the same priority like issues
-that describe a new feature to be introduced in GitLab, and should be scheduled
+that describe a new feature to be introduced in DoggoHub, and should be scheduled
 for a release by the appropriate person.
 
 Make sure to mention the merge request that the `technical debt` issue is
@@ -213,7 +213,7 @@ associated with in the description of the issue.
 
 ## Merge requests
 
-We welcome merge requests with fixes and improvements to GitLab code, tests,
+We welcome merge requests with fixes and improvements to DoggoHub code, tests,
 and/or documentation. The features we would really like a merge request for are
 listed with the label [`Accepting Merge Requests` on our issue tracker for CE][accepting-mrs-ce]
 and [EE][accepting-mrs-ee] but other improvements are also welcome. Please note
@@ -226,13 +226,13 @@ a feedback issue (if there isn't one already) and leave a comment asking for it
 to be marked as `Accepting merge requests`. Please include screenshots or
 wireframes if the feature will also change the UI.
 
-Merge requests should be opened at [GitLab.com][gitlab-mr-tracker].
+Merge requests should be opened at [DoggoHub.com][doggohub-mr-tracker].
 
-If you are new to GitLab development (or web development in general), see the
+If you are new to DoggoHub development (or web development in general), see the
 [I want to contribute!](#i-want-to-contribute) section to get you started with
 some potentially easy issues.
 
-To start with GitLab development download the [GitLab Development Kit][gdk] and
+To start with DoggoHub development download the [DoggoHub Development Kit][gdk] and
 see the [Development section](doc/development/README.md) for some guidelines.
 
 ### Merge request guidelines
@@ -244,15 +244,15 @@ include a regression test are merged quickly while new features without proper
 tests are least likely to receive timely feedback. The workflow to make a merge
 request is as follows:
 
-1. Fork the project into your personal space on GitLab.com
+1. Bork the project into your personal space on DoggoHub.com
 1. Create a feature branch, branch away from `master`
-1. Write [tests](https://gitlab.com/gitlab-org/gitlab-development-kit#running-the-tests) and code
+1. Write [tests](https://doggohub.com/doggohub-org/doggohub-development-kit#running-the-tests) and code
 1. [Generate a changelog entry with `bin/changelog`][changelog]
 1. If you are writing documentation, make sure to follow the
    [documentation styleguide][doc-styleguide]
 1. If you have multiple commits please combine them into one commit by
    [squashing them][git-squash]
-1. Push the commit(s) to your fork
+1. Push the commit(s) to your bork
 1. Submit a merge request (MR) to the `master` branch
 1. The MR title should describe the change you want to make
 1. The MR description should give a motive for your change and the method you
@@ -287,7 +287,7 @@ request is as follows:
 
 The **official merge window** is in the beginning of the month from the 1st to
 the 7th day of the month. This is the best time to submit an MR and get
-feedback fast. Before this time the GitLab Inc. team is still dealing with work
+feedback fast. Before this time the DoggoHub Inc. team is still dealing with work
 that is created by the monthly release such as regressions requiring patch
 releases. After the 7th it is already getting closer to the release date of the
 next version. This means there is less time to fix the issues created by
@@ -304,7 +304,7 @@ is it will be merged (quickly). After that you can send more MRs to enhance it.
 For examples of feedback on merge requests please look at already
 [closed merge requests][closed-merge-requests]. If you would like quick feedback
 on your merge request feel free to mention one of the Merge Marshalls in the
-[core team] or one of the [Merge request coaches](https://about.gitlab.com/team/).
+[core team] or one of the [Merge request coaches](https://about.doggohub.com/team/).
 Please ensure that your merge request meets the contribution acceptance criteria.
 
 When having your code reviewed and when reviewing merge requests please take the
@@ -328,7 +328,7 @@ When having your code reviewed and when reviewing merge requests please take the
    things, send separate merge requests if needed)
 1. Migrations should do only one thing (e.g., either create a table, move data
    to a new table or remove an old table) to aid retrying on failure
-1. Keeps the GitLab code base clean and well structured
+1. Keeps the DoggoHub code base clean and well structured
 1. Contains functionality we think other users will benefit from too
 1. Doesn't add configuration options or settings options since they complicate
    making and testing future changes
@@ -360,7 +360,7 @@ Like all merge requests the target should be master so all bugfixes are in maste
 
 ## Definition of done
 
-If you contribute to GitLab please know that changes involve more than just
+If you contribute to DoggoHub please know that changes involve more than just
 code. We have the following [definition of done][definition-of-done]. Please ensure you support
 the feature you contribute through all of these steps.
 
@@ -372,21 +372,21 @@ the feature you contribute through all of these steps.
 1. Reviewed and any concerns are addressed
 1. Merged by the project lead
 1. Added to the release blog article
-1. Added to [the website](https://gitlab.com/gitlab-com/www-gitlab-com/) if relevant
+1. Added to [the website](https://doggohub.com/doggohub-com/www-doggohub-com/) if relevant
 1. Community questions answered
 1. Answers to questions radiated (in docs/wiki/etc.)
 
-If you add a dependency in GitLab (such as an operating system package) please
+If you add a dependency in DoggoHub (such as an operating system package) please
 consider updating the following and note the applicability of each in your
 merge request:
 
-1. Note the addition in the release blog post (create one if it doesn't exist yet) https://gitlab.com/gitlab-com/www-gitlab-com/merge_requests/
-1. Upgrade guide, for example https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/7.5-to-7.6.md
-1. Upgrader https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/upgrader.md#2-run-gitlab-upgrade-tool
-1. Installation guide https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md#1-packages-dependencies
-1. GitLab Development Kit https://gitlab.com/gitlab-org/gitlab-development-kit
-1. Test suite https://gitlab.com/gitlab-org/gitlab-ce/blob/master/scripts/prepare_build.sh
-1. Omnibus package creator https://gitlab.com/gitlab-org/omnibus-gitlab
+1. Note the addition in the release blog post (create one if it doesn't exist yet) https://doggohub.com/doggohub-com/www-doggohub-com/merge_requests/
+1. Upgrade guide, for example https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/update/7.5-to-7.6.md
+1. Upgrader https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/update/upgrader.md#2-run-doggohub-upgrade-tool
+1. Installation guide https://doggohub.com/doggohub-org/doggohub-ce/blob/master/doc/install/installation.md#1-packages-dependencies
+1. DoggoHub Development Kit https://doggohub.com/doggohub-org/doggohub-development-kit
+1. Test suite https://doggohub.com/doggohub-org/doggohub-ce/blob/master/scripts/prepare_build.sh
+1. Omnibus package creator https://doggohub.com/doggohub-org/omnibus-doggohub
 
 ## Style guides
 
@@ -401,13 +401,13 @@ merge request:
 1.  [JavaScript (ES6)](https://github.com/airbnb/javascript)
 1.  [JavaScript (ES5)](https://github.com/airbnb/javascript/tree/master/es5)
 1.  [SCSS styleguide][scss-styleguide]
-1.  [Shell commands](doc/development/shell_commands.md) created by GitLab
+1.  [Shell commands](doc/development/shell_commands.md) created by DoggoHub
     contributors to enhance security
 1.  [Database Migrations](doc/development/migration_style_guide.md)
 1.  [Markdown](http://www.cirosantilli.com/markdown-styleguide)
 1.  [Documentation styleguide][doc-styleguide]
 1.  Interface text should be written subjectively instead of objectively. It
-    should be the GitLab core team addressing a person. It should be written in
+    should be the DoggoHub core team addressing a person. It should be written in
     present time and never use past tense (has been/was). For example instead
     of _prohibited this user from being saved due to the following errors:_ the
     text should be _sorry, we could not create your account because:_
@@ -441,27 +441,27 @@ This code of conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior can be
-reported by emailing `contact@gitlab.com`.
+reported by emailing `contact@doggohub.com`.
 
 This Code of Conduct is adapted from the [Contributor Covenant][contributor-covenant], version 1.1.0,
 available at [http://contributor-covenant.org/version/1/1/0/](http://contributor-covenant.org/version/1/1/0/).
 
-[core team]: https://about.gitlab.com/core-team/
-[getting-help]: https://about.gitlab.com/getting-help/
-[codetriage]: http://www.codetriage.com/gitlabhq/gitlabhq
-[up-for-grabs]: https://gitlab.com/gitlab-org/gitlab-ce/issues?label_name=up-for-grabs
+[core team]: https://about.doggohub.com/core-team/
+[getting-help]: https://about.doggohub.com/getting-help/
+[codetriage]: http://www.codetriage.com/doggohubhq/doggohubhq
+[up-for-grabs]: https://doggohub.com/doggohub-org/doggohub-ce/issues?label_name=up-for-grabs
 [medium-up-for-grabs]: https://medium.com/@kentcdodds/first-timers-only-78281ea47455
-[ce-tracker]: https://gitlab.com/gitlab-org/gitlab-ce/issues
-[ee-tracker]: https://gitlab.com/gitlab-org/gitlab-ee/issues
-[google-group]: https://groups.google.com/forum/#!forum/gitlabhq
-[stackoverflow]: https://stackoverflow.com/questions/tagged/gitlab
-[fpl]: https://gitlab.com/gitlab-org/gitlab-ce/issues?label_name=feature+proposal
-[accepting-mrs-ce]: https://gitlab.com/gitlab-org/gitlab-ce/issues?label_name=Accepting+Merge+Requests
-[accepting-mrs-ee]: https://gitlab.com/gitlab-org/gitlab-ee/issues?label_name=Accepting+Merge+Requests
-[gitlab-mr-tracker]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests
-[gdk]: https://gitlab.com/gitlab-org/gitlab-development-kit
+[ce-tracker]: https://doggohub.com/doggohub-org/doggohub-ce/issues
+[ee-tracker]: https://doggohub.com/doggohub-org/doggohub-ee/issues
+[google-group]: https://groups.google.com/forum/#!forum/doggohubhq
+[stackoverflow]: https://stackoverflow.com/questions/tagged/doggohub
+[fpl]: https://doggohub.com/doggohub-org/doggohub-ce/issues?label_name=feature+proposal
+[accepting-mrs-ce]: https://doggohub.com/doggohub-org/doggohub-ce/issues?label_name=Accepting+Merge+Requests
+[accepting-mrs-ee]: https://doggohub.com/doggohub-org/doggohub-ee/issues?label_name=Accepting+Merge+Requests
+[doggohub-mr-tracker]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests
+[gdk]: https://doggohub.com/doggohub-org/doggohub-development-kit
 [git-squash]: https://git-scm.com/book/en/Git-Tools-Rewriting-History#Squashing-Commits
-[closed-merge-requests]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests?assignee_id=&label_name=&milestone_id=&scope=&sort=&state=closed
+[closed-merge-requests]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests?assignee_id=&label_name=&milestone_id=&scope=&sort=&state=closed
 [definition-of-done]: http://guide.agilealliance.org/guide/definition-of-done.html
 [contributor-covenant]: http://contributor-covenant.org
 [rss-source]: https://github.com/bbatsov/ruby-style-guide/blob/master/README.md#source-code-layout
@@ -470,5 +470,5 @@ available at [http://contributor-covenant.org/version/1/1/0/](http://contributor
 [doc-styleguide]: doc/development/doc_styleguide.md "Documentation styleguide"
 [scss-styleguide]: doc/development/scss_styleguide.md "SCSS styleguide"
 [newlines-styleguide]: doc/development/newlines_styleguide.md "Newlines styleguide"
-[UX Guide for GitLab]: http://docs.gitlab.com/ce/development/ux_guide/
+[UX Guide for DoggoHub]: http://docs.doggohub.com/ce/development/ux_guide/
 [license-finder-doc]: doc/development/licensing.md

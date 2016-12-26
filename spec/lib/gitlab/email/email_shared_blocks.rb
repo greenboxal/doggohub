@@ -1,4 +1,4 @@
-require 'gitlab/email/receiver'
+require 'doggohub/email/receiver'
 
 shared_context :email_shared_context do
   let(:mail_key) { "59d8df8370b7e95c5a49fbf86aeb2c93" }

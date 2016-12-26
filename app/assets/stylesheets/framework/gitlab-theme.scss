@@ -1,12 +1,12 @@
 /**
- * Styles the GitLab application with a specific color theme
+ * Styles the DoggoHub application with a specific color theme
  *
  * $color-light  -
  * $color        -
  * $color-darker -
  * $color-dark   -
  */
-@mixin gitlab-theme($color-light, $color, $color-darker, $color-dark) {
+@mixin doggohub-theme($color-light, $color, $color-darker, $color-dark) {
   .page-with-sidebar {
     .toggle-nav-collapse,
     .pin-nav-btn {
@@ -116,26 +116,26 @@ $theme-violet-darker: #325;
 
 body {
   &.ui_blue {
-    @include gitlab-theme($theme-blue-light, $theme-blue, $theme-blue-dark, $theme-blue-darker);
+    @include doggohub-theme($theme-blue-light, $theme-blue, $theme-blue-dark, $theme-blue-darker);
   }
 
   &.ui_charcoal {
-    @include gitlab-theme($theme-charcoal-text, $theme-charcoal-light, $theme-charcoal, $theme-charcoal-dark);
+    @include doggohub-theme($theme-charcoal-text, $theme-charcoal-light, $theme-charcoal, $theme-charcoal-dark);
   }
 
   &.ui_graphite {
-    @include gitlab-theme($theme-graphite-lighter, $theme-graphite-light, $theme-graphite, $theme-graphite-dark);
+    @include doggohub-theme($theme-graphite-lighter, $theme-graphite-light, $theme-graphite, $theme-graphite-dark);
   }
 
   &.ui_gray {
-    @include gitlab-theme($theme-gray-light, $theme-gray, $theme-gray-dark, $theme-gray-darker);
+    @include doggohub-theme($theme-gray-light, $theme-gray, $theme-gray-dark, $theme-gray-darker);
   }
 
   &.ui_green {
-    @include gitlab-theme($theme-green-light, $theme-green, $theme-green-dark, $theme-green-darker);
+    @include doggohub-theme($theme-green-light, $theme-green, $theme-green-dark, $theme-green-darker);
   }
 
   &.ui_violet {
-    @include gitlab-theme($theme-violet-light, $theme-violet, $theme-violet-dark, $theme-violet-darker);
+    @include doggohub-theme($theme-violet-light, $theme-violet, $theme-violet-dark, $theme-violet-darker);
   }
 }

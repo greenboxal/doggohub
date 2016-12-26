@@ -3,7 +3,7 @@ module Gitlab
     WILDCARD_PLACEHOLDER = '%{key}'.freeze
 
     class << self
-      FALLBACK_MESSAGE_ID_REGEX = /\Areply\-(.+)@#{Gitlab.config.gitlab.host}\Z/.freeze
+      FALLBACK_MESSAGE_ID_REGEX = /\Areply\-(.+)@#{Gitlab.config.doggohub.host}\Z/.freeze
 
       def enabled?
         config.enabled && config.address

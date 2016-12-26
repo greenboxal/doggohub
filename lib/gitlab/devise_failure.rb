@@ -11,7 +11,7 @@ module Gitlab
     # `Content-Type: application/zip` and a response body in plaintext, and the
     # browser would freak out.
     #
-    # See https://gitlab.com/gitlab-org/gitlab-ce/issues/12944
+    # See https://doggohub.com/doggohub-org/doggohub-ce/issues/12944
     def request_format
       if request.format == :zip
         Mime::Type.lookup_by_extension(:html).ref

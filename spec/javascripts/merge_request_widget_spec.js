@@ -20,7 +20,7 @@
           preparing: "{{status}} build",
           normal: "Build {{status}}"
         },
-        gitlab_icon: "gitlab_logo.png",
+        doggohub_icon: "doggohub_logo.png",
         builds_path: "http://sampledomain.local/sampleBuildsPath"
       };
       this["class"] = new window.gl.MergeRequestWidget(this.opts);

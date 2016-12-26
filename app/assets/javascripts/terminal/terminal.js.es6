@@ -27,7 +27,7 @@
 
     createTerminal() {
       this.terminal = new Terminal(this.options);
-      this.socket = new WebSocket(this.socketUrl, ['terminal.gitlab.com']);
+      this.socket = new WebSocket(this.socketUrl, ['terminal.doggohub.com']);
       this.socket.binaryType = 'arraybuffer';
 
       this.terminal.open(this.container);

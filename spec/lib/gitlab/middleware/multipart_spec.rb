@@ -8,7 +8,7 @@ describe Gitlab::Middleware::Multipart do
 
   it 'opens top-level files' do
     Tempfile.open('top-level') do |tempfile|
-      env = post_env({ 'file' => tempfile.path }, { 'file.name' => 'filename' }, Gitlab::Workhorse.secret, 'gitlab-workhorse')
+      env = post_env({ 'file' => tempfile.path }, { 'file.name' => 'filename' }, Gitlab::Workhorse.secret, 'doggohub-workhorse')
 
       expect(app).to receive(:call) do |env|
         file = Rack::Request.new(env).params['file']
@@ -21,7 +21,7 @@ describe Gitlab::Middleware::Multipart do
   end
 
   it 'rejects headers signed with the wrong secret' do
-    env = post_env({ 'file' => '/var/empty/nonesuch' }, {}, 'x' * 32, 'gitlab-workhorse')
+    env = post_env({ 'file' => '/var/empty/nonesuch' }, {}, 'x' * 32, 'doggohub-workhorse')
 
     expect { middleware.call(env) }.to raise_error(JWT::VerificationError)
   end
@@ -35,7 +35,7 @@ describe Gitlab::Middleware::Multipart do
   it 'opens files one level deep' do
     Tempfile.open('one-level') do |tempfile|
       in_params = { 'user' => { 'avatar' => { '.name' => 'filename' } } }
-      env = post_env({ 'user[avatar]' => tempfile.path }, in_params, Gitlab::Workhorse.secret, 'gitlab-workhorse')
+      env = post_env({ 'user[avatar]' => tempfile.path }, in_params, Gitlab::Workhorse.secret, 'doggohub-workhorse')
 
       expect(app).to receive(:call) do |env|
         file = Rack::Request.new(env).params['user']['avatar']
@@ -50,7 +50,7 @@ describe Gitlab::Middleware::Multipart do
   it 'opens files two levels deep' do
     Tempfile.open('two-levels') do |tempfile|
       in_params = { 'project' => { 'milestone' => { 'themesong' => { '.name' => 'filename' } } } }
-      env = post_env({ 'project[milestone][themesong]' => tempfile.path }, in_params, Gitlab::Workhorse.secret, 'gitlab-workhorse')
+      env = post_env({ 'project[milestone][themesong]' => tempfile.path }, in_params, Gitlab::Workhorse.secret, 'doggohub-workhorse')
 
       expect(app).to receive(:call) do |env|
         file = Rack::Request.new(env).params['project']['milestone']['themesong']

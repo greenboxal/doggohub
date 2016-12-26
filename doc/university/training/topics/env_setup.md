@@ -49,7 +49,7 @@ The key fingerprint is:
 39:fc:ce:94:f4:09:13:95:64:9a:65:c1:de:05:4d:01 you@computer-name
 ```
 
-Copy your public key and add it to your GitLab profile
+Copy your public key and add it to your DoggoHub profile
 
 ```bash
 cat ~/.ssh/id_rsa.pub

@@ -1,5 +1,5 @@
 /* eslint-disable func-names, space-before-function-paren, no-var, space-before-blocks, prefer-rest-params, wrap-iife, no-use-before-define, no-useless-escape, no-new, quotes, object-shorthand, no-unused-vars, comma-dangle, radix, no-alert, consistent-return, no-else-return, prefer-template, one-var, one-var-declaration-per-line, curly, padded-blocks, max-len */
-/* global GitLab */
+/* global DoggoHub */
 /* global UsersSelect */
 /* global ZenMode */
 /* global Autosave */

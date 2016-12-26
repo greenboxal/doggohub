@@ -4,7 +4,7 @@ describe Projects::TemplatesController do
   let(:project) { create(:project) }
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
-  let(:file_path_1) { '.gitlab/issue_templates/bug.md' }
+  let(:file_path_1) { '.doggohub/issue_templates/bug.md' }
   let(:body) { JSON.parse(response.body) }
 
   before do

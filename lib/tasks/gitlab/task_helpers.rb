@@ -101,18 +101,18 @@ module Gitlab
       end
     end
 
-    def warn_user_is_not_gitlab
-      unless @warned_user_not_gitlab
-        gitlab_user = Gitlab.config.gitlab.user
+    def warn_user_is_not_doggohub
+      unless @warned_user_not_doggohub
+        doggohub_user = Gitlab.config.doggohub.user
         current_user = run_command(%W(whoami)).chomp
-        unless current_user == gitlab_user
+        unless current_user == doggohub_user
           puts " Warning ".color(:black).background(:yellow)
           puts "  You are running as user #{current_user.color(:magenta)}, we hope you know what you are doing."
           puts "  Things may work\/fail for the wrong reasons."
-          puts "  For correct results you should run this as user #{gitlab_user.color(:magenta)}."
+          puts "  For correct results you should run this as user #{doggohub_user.color(:magenta)}."
           puts ""
         end
-        @warned_user_not_gitlab = true
+        @warned_user_not_doggohub = true
       end
     end
 
@@ -121,7 +121,7 @@ module Gitlab
     # Returns true if all subcommands were successfull (according to their exit code)
     # Returns false if any or all subcommands failed.
     def auto_fix_git_config(options)
-      if !@warned_user_not_gitlab
+      if !@warned_user_not_doggohub
         command_success = options.map do |name, value|
           system(*%W(#{Gitlab.config.git.bin_path} config --global #{name} #{value}))
         end
@@ -147,7 +147,7 @@ module Gitlab
     end
 
     def user_home
-      Rails.env.test? ? Rails.root.join('tmp/tests') : Gitlab.config.gitlab.user_home
+      Rails.env.test? ? Rails.root.join('tmp/tests') : Gitlab.config.doggohub.user_home
     end
 
     def checkout_or_clone_tag(tag:, repo:, target_dir:)

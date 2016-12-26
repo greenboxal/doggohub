@@ -2,12 +2,12 @@
 
 >**Notes:**
 >
->  - [Introduced][ce-3050] in GitLab 8.9.
+>  - [Introduced][ce-3050] in DoggoHub 8.9.
 >  - Importing will not be possible if the import instance version differs from
 >    that of the exporter.
 >  - For existing installations, the project import option has to be enabled in
 >    application settings (`/admin/application_settings`) under 'Import sources'.
->    Ask your administrator if you don't see the **GitLab export** button when
+>    Ask your administrator if you don't see the **DoggoHub export** button when
 >    creating a new project.
 >  - You can find some useful raketasks if you are an administrator in the
 >    [import_export](../../../administration/raketasks/project_import_export.md)
@@ -15,12 +15,12 @@
 >  - The exports are stored in a temporary [shared directory][tmp] and are deleted
 >    every 24 hours by a specific worker.
 
-Existing projects running on any GitLab instance or GitLab.com can be exported
-with all their related data and be moved into a new GitLab instance.
+Existing projects running on any DoggoHub instance or DoggoHub.com can be exported
+with all their related data and be moved into a new DoggoHub instance.
 
 ## Version history
 
-| GitLab version | Import/Export version |
+| DoggoHub version | Import/Export version |
 | -------- | -------- |
 | 8.13.0 to current  | 0.1.5    |
 | 8.12.0   | 0.1.4    |
@@ -29,7 +29,7 @@ with all their related data and be moved into a new GitLab instance.
 | 8.9.5    | 0.1.1    |
 | 8.9.0    | 0.1.0    |
  
- > The table reflects what GitLab version we updated the Import/Export version at.
+ > The table reflects what DoggoHub version we updated the Import/Export version at.
  > For instance, 8.10.3 and 8.11 will have the same Import/Export version (0.1.3)
  > and the exports between them will be compatible.
 
@@ -71,9 +71,9 @@ The following items will NOT be exported:
 
 ## Importing the project
 
-1. The new GitLab project import feature is at the far right of the import
+1. The new DoggoHub project import feature is at the far right of the import
    options when creating a New Project. Make sure you are in the right namespace
-   and you have entered a project name. Click on **GitLab export**:
+   and you have entered a project name. Click on **DoggoHub export**:
 
     ![New project](img/import_export_new_project.png)
 
@@ -85,5 +85,5 @@ The following items will NOT be exported:
 1. Click on **Import project** to begin importing. Your newly imported project
    page will appear soon.
 
-[ce-3050]: https://gitlab.com/gitlab-org/gitlab-ce/issues/3050
+[ce-3050]: https://doggohub.com/doggohub-org/doggohub-ce/issues/3050
 [tmp]: ../../../development/shared_files.md

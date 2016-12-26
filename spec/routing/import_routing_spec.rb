@@ -77,14 +77,14 @@ describe Import::GiteaController, 'routing' do
   end
 end
 
-#   status_import_gitlab GET      /import/gitlab/status(.:format)                                                               import/gitlab#status
-# callback_import_gitlab GET      /import/gitlab/callback(.:format)                                                             import/gitlab#callback
-#     jobs_import_gitlab GET      /import/gitlab/jobs(.:format)                                                                 import/gitlab#jobs
-#          import_gitlab POST     /import/gitlab(.:format)                                                                      import/gitlab#create
+#   status_import_doggohub GET      /import/doggohub/status(.:format)                                                               import/doggohub#status
+# callback_import_doggohub GET      /import/doggohub/callback(.:format)                                                             import/doggohub#callback
+#     jobs_import_doggohub GET      /import/doggohub/jobs(.:format)                                                                 import/doggohub#jobs
+#          import_doggohub POST     /import/doggohub(.:format)                                                                      import/doggohub#create
 describe Import::GitlabController, 'routing' do
   it_behaves_like 'importer routing' do
     let(:except_actions) { [:new] }
-    let(:provider) { 'gitlab' }
+    let(:provider) { 'doggohub' }
   end
 end
 
@@ -151,15 +151,15 @@ describe Import::FogbugzController, 'routing' do
   end
 end
 
-#     import_gitlab_project POST     /import/gitlab_project(.:format)                                                              import/gitlab_projects#create
-#                           POST     /import/gitlab_project(.:format)                                                              import/gitlab_projects#create
-# new_import_gitlab_project GET      /import/gitlab_project/new(.:format)                                                          import/gitlab_projects#new
+#     import_doggohub_project POST     /import/doggohub_project(.:format)                                                              import/doggohub_projects#create
+#                           POST     /import/doggohub_project(.:format)                                                              import/doggohub_projects#create
+# new_import_doggohub_project GET      /import/doggohub_project/new(.:format)                                                          import/doggohub_projects#new
 describe Import::GitlabProjectsController, 'routing' do
   it 'to #create' do
-    expect(post('/import/gitlab_project')).to route_to('import/gitlab_projects#create')
+    expect(post('/import/doggohub_project')).to route_to('import/doggohub_projects#create')
   end
 
   it 'to #new' do
-    expect(get('/import/gitlab_project/new')).to route_to('import/gitlab_projects#new')
+    expect(get('/import/doggohub_project/new')).to route_to('import/doggohub_projects#new')
   end
 end

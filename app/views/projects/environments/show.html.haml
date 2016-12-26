@@ -22,7 +22,7 @@
           You don't have any deployments right now.
         %p.blank-state-text
           Define environments in the deploy stage(s) in
-          %code .gitlab-ci.yml
+          %code .doggohub-ci.yml
           to track deployments here.
         = link_to "Read more", help_page_path("ci/environments"), class: "btn btn-success"
     - else
@@ -38,4 +38,4 @@
 
           = render @deployments
 
-      = paginate @deployments, theme: 'gitlab'
+      = paginate @deployments, theme: 'doggohub'

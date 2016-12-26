@@ -163,7 +163,7 @@ describe MergeRequests::BuildService, services: true do
         end
       end
 
-      context 'branch starts with GitLab issue IID followed by a hyphen' do
+      context 'branch starts with DoggoHub issue IID followed by a hyphen' do
         let(:source_branch) { "#{issue.iid}-fix-issue" }
 
         it 'sets the title to: Resolves "$issue-title"' do

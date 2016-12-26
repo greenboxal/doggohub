@@ -6,7 +6,7 @@ module API
       requires :id, type: String, desc: 'The ID of a project'
     end
     resource :projects do
-      desc 'Trigger a GitLab project build' do
+      desc 'Trigger a DoggoHub project build' do
         success Entities::TriggerRequest
       end
       params do

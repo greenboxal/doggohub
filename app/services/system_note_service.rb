@@ -335,7 +335,7 @@ module SystemNoteService
   # This method is used to prevent multiple notes being created for a mention
   # when a issue is updated, for example. The method also calls notes_for_mentioner
   # to check if the mentioner is a commit, and return matches only on commit hash
-  # instead of project + commit, to avoid repeated mentions from forks.
+  # instead of project + commit, to avoid repeated mentions from borks.
   #
   # noteable  - Noteable object being referenced
   # mentioner - Mentionable object
@@ -443,7 +443,7 @@ module SystemNoteService
   #
   #   "* ea0f8418...2f4426b7 - 24 commits from branch `master`"
   #
-  #   "* ea0f8418..4188f0ea - 15 commits from branch `fork:master`"
+  #   "* ea0f8418..4188f0ea - 15 commits from branch `bork:master`"
   #
   #   "* ea0f8418 - 1 commit from branch `feature`"
   #
@@ -466,7 +466,7 @@ module SystemNoteService
     commits_text = "#{count} commit".pluralize(count)
 
     branch = noteable.target_branch
-    branch = "#{noteable.target_project_namespace}:#{branch}" if noteable.for_fork?
+    branch = "#{noteable.target_project_namespace}:#{branch}" if noteable.for_bork?
 
     "* #{commit_ids} - #{commits_text} from branch `#{branch}`\n"
   end

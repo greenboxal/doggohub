@@ -1,5 +1,5 @@
-namespace :gitlab do
-  desc 'GitLab | Tracks a deployment in GitLab Performance Monitoring'
+namespace :doggohub do
+  desc 'DoggoHub | Tracks a deployment in DoggoHub Performance Monitoring'
   task track_deployment: :environment do
     metric = Gitlab::Metrics::Metric.
       new('deployments', version: Gitlab::VERSION)

@@ -1,4 +1,4 @@
-class Projects::ForksController < Projects::ApplicationController
+class Projects::BorksController < Projects::ApplicationController
   include ContinueParams
 
   # Authorize
@@ -7,23 +7,23 @@ class Projects::ForksController < Projects::ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    base_query = project.forks.includes(:creator)
+    base_query = project.borks.includes(:creator)
 
-    @forks               = base_query.merge(ProjectsFinder.new.execute(current_user))
-    @total_forks_count   = base_query.size
-    @private_forks_count = @total_forks_count - @forks.size
-    @public_forks_count  = @total_forks_count - @private_forks_count
+    @borks               = base_query.merge(ProjectsFinder.new.execute(current_user))
+    @total_borks_count   = base_query.size
+    @private_borks_count = @total_borks_count - @borks.size
+    @public_borks_count  = @total_borks_count - @private_borks_count
 
     @sort  = params[:sort] || 'id_desc'
-    @forks = @forks.search(params[:filter_projects]) if params[:filter_projects].present?
-    @forks = @forks.order_by(@sort).page(params[:page])
+    @borks = @borks.search(params[:filter_projects]) if params[:filter_projects].present?
+    @borks = @borks.order_by(@sort).page(params[:page])
 
     respond_to do |format|
       format.html
 
       format.json do
         render json: {
-          html: view_to_html_string("projects/forks/_projects", projects: @forks)
+          html: view_to_html_string("projects/borks/_projects", projects: @borks)
         }
       end
     end
@@ -37,19 +37,19 @@ class Projects::ForksController < Projects::ApplicationController
   def create
     namespace = Namespace.find(params[:namespace_key])
 
-    @forked_project = namespace.projects.find_by(path: project.path)
-    @forked_project = nil unless @forked_project && @forked_project.forked_from_project == project
+    @borked_project = namespace.projects.find_by(path: project.path)
+    @borked_project = nil unless @borked_project && @borked_project.borked_from_project == project
 
-    @forked_project ||= ::Projects::ForkService.new(project, current_user, namespace: namespace).execute
+    @borked_project ||= ::Projects::BorkService.new(project, current_user, namespace: namespace).execute
 
-    if @forked_project.saved? && @forked_project.forked?
-      if @forked_project.import_in_progress?
-        redirect_to namespace_project_import_path(@forked_project.namespace, @forked_project, continue: continue_params)
+    if @borked_project.saved? && @borked_project.borked?
+      if @borked_project.import_in_progress?
+        redirect_to namespace_project_import_path(@borked_project.namespace, @borked_project, continue: continue_params)
       else
         if continue_params
           redirect_to continue_params[:to], notice: continue_params[:notice]
         else
-          redirect_to namespace_project_path(@forked_project.namespace, @forked_project), notice: "The project '#{@forked_project.name}' was successfully forked."
+          redirect_to namespace_project_path(@borked_project.namespace, @borked_project), notice: "The project '#{@borked_project.name}' was successfully borked."
         end
       end
     else

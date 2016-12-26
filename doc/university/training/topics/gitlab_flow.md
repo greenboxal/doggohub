@@ -1,4 +1,4 @@
-# GitLab Flow
+# DoggoHub Flow
 
 ----------
 
@@ -14,7 +14,7 @@
 - Create a feature/bugfix branch to do all work
 - Use merge requests to merge to master
 
-![inline](http://gitlab.com/gitlab-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/gitlab_flow/feature_branches.png)
+![inline](http://doggohub.com/doggohub-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/doggohub_flow/feature_branches.png)
 
 ----------
 
@@ -28,7 +28,7 @@
 
 ## Production branch
 
-![inline](http://gitlab.com/gitlab-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/gitlab_flow/production_branch.png)
+![inline](http://doggohub.com/doggohub-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/doggohub_flow/production_branch.png)
 
 ----------
 
@@ -43,11 +43,11 @@
 
 ----------
 
-![inline](http://gitlab.com/gitlab-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/gitlab_flow/release_branches.png)
+![inline](http://doggohub.com/doggohub-org/University/raw/5baea0fe222a915d0500e40747d35eb18681cdc3/training/doggohub_flow/release_branches.png)
 
 ----------
 
 ## More details
 
-Blog post on 'GitLab Flow' at
-[http://doc.gitlab.com/ee/workflow/gitlab_flow.html](http://doc.gitlab.com/ee/workflow/gitlab_flow.html)
+Blog post on 'DoggoHub Flow' at
+[http://doc.doggohub.com/ee/workflow/doggohub_flow.html](http://doc.doggohub.com/ee/workflow/doggohub_flow.html)

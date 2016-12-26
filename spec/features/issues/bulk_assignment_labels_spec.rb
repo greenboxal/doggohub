@@ -293,7 +293,7 @@ feature 'Issues > Labels bulk assignment', feature: true do
       end
     end
 
-    # Special case https://gitlab.com/gitlab-org/gitlab-ce/issues/24877
+    # Special case https://doggohub.com/doggohub-org/doggohub-ce/issues/24877
     context 'unmarking common label' do
       before do
         issue1.labels << bug

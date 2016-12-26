@@ -2,10 +2,10 @@
 
 ## Blacklist email domains
 
-> [Introduced][ce-5259] in GitLab 8.10.
+> [Introduced][ce-5259] in DoggoHub 8.10.
 
 With this feature enabled, you can block email addresses of a specific domain
-from creating an account on your GitLab server. This is particularly useful to
+from creating an account on your DoggoHub server. This is particularly useful to
 prevent spam. Disposable email addresses are usually used by malicious users to
 create dummy accounts and spam issues.
 
@@ -19,4 +19,4 @@ should be separated by a whitespace, semicolon, comma, or a new line.
 
 ![Domain Blacklist](img/domain_blacklist.png)
 
-[ce-5259]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5259
+[ce-5259]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5259

@@ -6,7 +6,7 @@ describe DestroyGroupService, services: true do
   let!(:user) { create(:user) }
   let!(:group) { create(:group) }
   let!(:project) { create(:project, namespace: group) }
-  let!(:gitlab_shell) { Gitlab::Shell.new }
+  let!(:doggohub_shell) { Gitlab::Shell.new }
   let!(:remove_path) { group.path + "+#{group.id}+deleted" }
 
   shared_examples 'group destruction' do |async|
@@ -26,8 +26,8 @@ describe DestroyGroupService, services: true do
           Sidekiq::Testing.inline! { destroy_group(group, user, async) }
         end
 
-        it { expect(gitlab_shell.exists?(project.repository_storage_path, group.path)).to be_falsey }
-        it { expect(gitlab_shell.exists?(project.repository_storage_path, remove_path)).to be_falsey }
+        it { expect(doggohub_shell.exists?(project.repository_storage_path, group.path)).to be_falsey }
+        it { expect(doggohub_shell.exists?(project.repository_storage_path, remove_path)).to be_falsey }
       end
 
       context 'Sidekiq fake' do
@@ -36,8 +36,8 @@ describe DestroyGroupService, services: true do
           Sidekiq::Testing.fake! { destroy_group(group, user, async) }
         end
 
-        it { expect(gitlab_shell.exists?(project.repository_storage_path, group.path)).to be_falsey }
-        it { expect(gitlab_shell.exists?(project.repository_storage_path, remove_path)).to be_truthy }
+        it { expect(doggohub_shell.exists?(project.repository_storage_path, group.path)).to be_falsey }
+        it { expect(doggohub_shell.exists?(project.repository_storage_path, remove_path)).to be_truthy }
       end
     end
 

@@ -48,10 +48,10 @@ describe DroneCiService, models: true do
     include_context :drone_ci_service
 
     # URL's
-    let(:commit_page) { "#{drone_url}/gitlab/#{path}/redirect/commits/#{sha}?branch=#{branch}" }
-    let(:merge_request_page) { "#{drone_url}/gitlab/#{path}/redirect/pulls/#{iid}" }
-    let(:commit_status_path) { "#{drone_url}/gitlab/#{path}/commits/#{sha}?branch=#{branch}&access_token=#{token}" }
-    let(:merge_request_status_path) { "#{drone_url}/gitlab/#{path}/pulls/#{iid}?access_token=#{token}" }
+    let(:commit_page) { "#{drone_url}/doggohub/#{path}/redirect/commits/#{sha}?branch=#{branch}" }
+    let(:merge_request_page) { "#{drone_url}/doggohub/#{path}/redirect/pulls/#{iid}" }
+    let(:commit_status_path) { "#{drone_url}/doggohub/#{path}/commits/#{sha}?branch=#{branch}&access_token=#{token}" }
+    let(:merge_request_status_path) { "#{drone_url}/doggohub/#{path}/pulls/#{iid}?access_token=#{token}" }
 
     it { expect(drone.build_page(sha, branch)).to eq(commit_page) }
     it { expect(drone.commit_page(sha, branch)).to eq(commit_page) }

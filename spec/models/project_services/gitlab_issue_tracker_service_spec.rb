@@ -26,8 +26,8 @@ describe GitlabIssueTrackerService, models: true do
 
     context 'with absolute urls' do
       before do
-        GitlabIssueTrackerService.default_url_options[:script_name] = "/gitlab/root"
-        @service = project.create_gitlab_issue_tracker_service(active: true)
+        GitlabIssueTrackerService.default_url_options[:script_name] = "/doggohub/root"
+        @service = project.create_doggohub_issue_tracker_service(active: true)
       end
 
       after do
@@ -35,16 +35,16 @@ describe GitlabIssueTrackerService, models: true do
       end
 
       it 'gives the correct path' do
-        expect(@service.project_url).to eq("http://#{Gitlab.config.gitlab.host}/gitlab/root/#{project.path_with_namespace}/issues")
-        expect(@service.new_issue_url).to eq("http://#{Gitlab.config.gitlab.host}/gitlab/root/#{project.path_with_namespace}/issues/new")
-        expect(@service.issue_url(432)).to eq("http://#{Gitlab.config.gitlab.host}/gitlab/root/#{project.path_with_namespace}/issues/432")
+        expect(@service.project_url).to eq("http://#{Gitlab.config.doggohub.host}/doggohub/root/#{project.path_with_namespace}/issues")
+        expect(@service.new_issue_url).to eq("http://#{Gitlab.config.doggohub.host}/doggohub/root/#{project.path_with_namespace}/issues/new")
+        expect(@service.issue_url(432)).to eq("http://#{Gitlab.config.doggohub.host}/doggohub/root/#{project.path_with_namespace}/issues/432")
       end
     end
 
     context 'with relative urls' do
       before do
-        GitlabIssueTrackerService.default_url_options[:script_name] = "/gitlab/root"
-        @service = project.create_gitlab_issue_tracker_service(active: true)
+        GitlabIssueTrackerService.default_url_options[:script_name] = "/doggohub/root"
+        @service = project.create_doggohub_issue_tracker_service(active: true)
       end
 
       after do
@@ -52,9 +52,9 @@ describe GitlabIssueTrackerService, models: true do
       end
 
       it 'gives the correct path' do
-        expect(@service.project_path).to eq("/gitlab/root/#{project.path_with_namespace}/issues")
-        expect(@service.new_issue_path).to eq("/gitlab/root/#{project.path_with_namespace}/issues/new")
-        expect(@service.issue_path(432)).to eq("/gitlab/root/#{project.path_with_namespace}/issues/432")
+        expect(@service.project_path).to eq("/doggohub/root/#{project.path_with_namespace}/issues")
+        expect(@service.new_issue_path).to eq("/doggohub/root/#{project.path_with_namespace}/issues/new")
+        expect(@service.issue_path(432)).to eq("/doggohub/root/#{project.path_with_namespace}/issues/432")
       end
     end
   end

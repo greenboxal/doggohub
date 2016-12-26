@@ -1,6 +1,6 @@
 # SAML extension for User model
 #
-# * Find GitLab user based on SAML uid and provider
+# * Find DoggoHub user based on SAML uid and provider
 # * Create new user from SAML data
 #
 module Gitlab

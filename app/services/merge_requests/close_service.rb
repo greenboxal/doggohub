@@ -4,7 +4,7 @@ module MergeRequests
       return merge_request unless can?(current_user, :update_merge_request, merge_request)
 
       # If we close MergeRequest we want to ignore validation
-      # so we can close broken one (Ex. fork project removed)
+      # so we can close broken one (Ex. bork project removed)
       merge_request.allow_broken = true
 
       if merge_request.close

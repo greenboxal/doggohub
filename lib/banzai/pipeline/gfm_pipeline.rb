@@ -38,7 +38,7 @@ module Banzai
 
           # EmojiFilter
           asset_host: Gitlab::Application.config.asset_host,
-          asset_root: Gitlab.config.gitlab.base_url
+          asset_root: Gitlab.config.doggohub.base_url
         )
       end
     end

@@ -20,7 +20,7 @@ describe ProjectPolicy, models: true do
 
   let(:reporter_permissions) do
     [
-      :download_code, :fork_project, :create_project_snippet, :update_issue,
+      :download_code, :bork_project, :create_project_snippet, :update_issue,
       :admin_issue, :admin_label, :admin_list, :read_commit_status, :read_build,
       :read_container_image, :read_pipeline, :read_environment, :read_deployment,
       :read_merge_request, :download_wiki_code
@@ -55,7 +55,7 @@ describe ProjectPolicy, models: true do
 
   let(:public_permissions) do
     [
-      :download_code, :fork_project, :read_commit_status, :read_pipeline,
+      :download_code, :bork_project, :read_commit_status, :read_pipeline,
       :read_container_image, :build_download_code, :build_read_container_image,
       :download_wiki_code
     ]
@@ -64,7 +64,7 @@ describe ProjectPolicy, models: true do
   let(:owner_permissions) do
     [
       :change_namespace, :change_visibility_level, :rename_project, :remove_project,
-      :archive_project, :remove_fork_project, :destroy_merge_request, :destroy_issue
+      :archive_project, :remove_bork_project, :destroy_merge_request, :destroy_issue
     ]
   end
 

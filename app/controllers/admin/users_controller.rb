@@ -59,7 +59,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def unblock
     if user.ldap_blocked?
-      redirect_back_or_admin_user(alert: "This user cannot be unlocked manually from GitLab")
+      redirect_back_or_admin_user(alert: "This user cannot be unlocked manually from DoggoHub")
     elsif user.activate
       redirect_back_or_admin_user(notice: "Successfully unblocked")
     else

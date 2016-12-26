@@ -4,10 +4,10 @@ require 'active_support/core_ext/hash/keys'
 
 module Gitlab
   class Redis
-    CACHE_NAMESPACE = 'cache:gitlab'
-    SESSION_NAMESPACE = 'session:gitlab'
-    SIDEKIQ_NAMESPACE = 'resque:gitlab'
-    MAILROOM_NAMESPACE = 'mail_room:gitlab'
+    CACHE_NAMESPACE = 'cache:doggohub'
+    SESSION_NAMESPACE = 'session:doggohub'
+    SIDEKIQ_NAMESPACE = 'resque:doggohub'
+    MAILROOM_NAMESPACE = 'mail_room:doggohub'
     DEFAULT_REDIS_URL = 'redis://localhost:6379'
     CONFIG_FILE = File.expand_path('../../config/resque.yml', __dir__)
 

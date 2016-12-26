@@ -1,4 +1,4 @@
-# The GitLab Book Club
+# The DoggoHub Book Club
 
 The Book Club is a casual meet-up to read and discuss books we like.
 We'll find a time that suits most, if not all.

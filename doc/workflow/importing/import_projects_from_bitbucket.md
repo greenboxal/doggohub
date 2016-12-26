@@ -1,35 +1,35 @@
-# Import your project from Bitbucket to GitLab
+# Import your project from Bitbucket to DoggoHub
 
-Import your projects from Bitbucket to GitLab with minimal effort.
+Import your projects from Bitbucket to DoggoHub with minimal effort.
 
 ## Overview
 
 >**Note:**
 The [Bitbucket integration][bb-import] must be first enabled in order to be
-able to import your projects from Bitbucket. Ask your GitLab administrator
+able to import your projects from Bitbucket. Ask your DoggoHub administrator
 to enable this if not already.
 
 - At its current state, the Bitbucket importer can import:
-  - the repository description (GitLab 7.7+)
-  - the Git repository data (GitLab 7.7+)
-  - the issues (GitLab 7.7+)
-  - the issue comments (GitLab 8.15+)
-  - the pull requests (GitLab 8.4+)
-  - the pull request comments (GitLab 8.15+)
-  - the milestones (GitLab 8.15+)
-  - the wiki (GitLab 8.15+)
-- References to pull requests and issues are preserved (GitLab 8.7+)
+  - the repository description (DoggoHub 7.7+)
+  - the Git repository data (DoggoHub 7.7+)
+  - the issues (DoggoHub 7.7+)
+  - the issue comments (DoggoHub 8.15+)
+  - the pull requests (DoggoHub 8.4+)
+  - the pull request comments (DoggoHub 8.15+)
+  - the milestones (DoggoHub 8.15+)
+  - the wiki (DoggoHub 8.15+)
+- References to pull requests and issues are preserved (DoggoHub 8.7+)
 - Repository public access is retained. If a repository is private in Bitbucket
-  it will be created as private in GitLab as well.
+  it will be created as private in DoggoHub as well.
 
 
 ## How it works
 
 When issues/pull requests are being imported, the Bitbucket importer tries to find
-the Bitbucket author/assignee in GitLab's database using the Bitbucket ID. For this
-to work, the Bitbucket author/assignee should have signed in beforehand in GitLab
+the Bitbucket author/assignee in DoggoHub's database using the Bitbucket ID. For this
+to work, the Bitbucket author/assignee should have signed in beforehand in DoggoHub
 and [**associated their Bitbucket account**][social sign-in]. If the user is not
-found in GitLab's database, the project creator (most of the times the current
+found in DoggoHub's database, the project creator (most of the times the current
 user that started the import process) is set as the author, but a reference on
 the issue about the original Bitbucket author is kept.
 
@@ -39,16 +39,16 @@ namespace that started the import process.
 
 ## Importing your Bitbucket repositories
 
-1. Sign in to GitLab and go to your dashboard.
+1. Sign in to DoggoHub and go to your dashboard.
 1. Click on **New project**.
 
-    ![New project in GitLab](img/bitbucket_import_new_project.png)
+    ![New project in DoggoHub](img/bitbucket_import_new_project.png)
 
 1. Click on the "Bitbucket" button
 
     ![Bitbucket](img/import_projects_from_new_project_page.png)
 
-1. Grant GitLab access to your Bitbucket account
+1. Grant DoggoHub access to your Bitbucket account
 
     ![Grant access](img/bitbucket_import_grant_access.png)
 

@@ -8,7 +8,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
         url = described_class.build(commit)
 
-        expect(url).to eq "#{Settings.gitlab['url']}/#{commit.project.path_with_namespace}/commit/#{commit.id}"
+        expect(url).to eq "#{Settings.doggohub['url']}/#{commit.project.path_with_namespace}/commit/#{commit.id}"
       end
     end
 
@@ -18,7 +18,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
         url = described_class.build(issue)
 
-        expect(url).to eq "#{Settings.gitlab['url']}/#{issue.project.path_with_namespace}/issues/#{issue.iid}"
+        expect(url).to eq "#{Settings.doggohub['url']}/#{issue.project.path_with_namespace}/issues/#{issue.iid}"
       end
     end
 
@@ -28,7 +28,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
         url = described_class.build(merge_request)
 
-        expect(url).to eq "#{Settings.gitlab['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}"
+        expect(url).to eq "#{Settings.doggohub['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}"
       end
     end
 
@@ -39,7 +39,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{note.project.path_with_namespace}/commit/#{note.commit_id}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{note.project.path_with_namespace}/commit/#{note.commit_id}#note_#{note.id}"
         end
       end
 
@@ -49,7 +49,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{note.project.path_with_namespace}/commit/#{note.commit_id}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{note.project.path_with_namespace}/commit/#{note.commit_id}#note_#{note.id}"
         end
       end
 
@@ -60,7 +60,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{issue.project.path_with_namespace}/issues/#{issue.iid}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{issue.project.path_with_namespace}/issues/#{issue.iid}#note_#{note.id}"
         end
       end
 
@@ -71,7 +71,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}#note_#{note.id}"
         end
       end
 
@@ -82,7 +82,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{merge_request.project.path_with_namespace}/merge_requests/#{merge_request.iid}#note_#{note.id}"
         end
       end
 
@@ -93,7 +93,7 @@ describe Gitlab::UrlBuilder, lib: true do
 
           url = described_class.build(note)
 
-          expect(url).to eq "#{Settings.gitlab['url']}/#{project_snippet.project.path_with_namespace}/snippets/#{note.noteable_id}#note_#{note.id}"
+          expect(url).to eq "#{Settings.doggohub['url']}/#{project_snippet.project.path_with_namespace}/snippets/#{note.noteable_id}#note_#{note.id}"
         end
       end
 
@@ -112,7 +112,7 @@ describe Gitlab::UrlBuilder, lib: true do
         wiki_page = build(:wiki_page)
         url = described_class.build(wiki_page)
 
-        expect(url).to eq "#{Gitlab.config.gitlab.url}#{wiki_page.wiki.wiki_base_path}/#{wiki_page.slug}"
+        expect(url).to eq "#{Gitlab.config.doggohub.url}#{wiki_page.wiki.wiki_base_path}/#{wiki_page.slug}"
       end
     end
   end

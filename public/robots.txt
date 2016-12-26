@@ -10,7 +10,7 @@ User-Agent: *
 # Only some crawlers respect this setting, e.g. Googlebot does not
 # Crawl-delay: 1
 
-# Based on details in https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/routes.rb, https://gitlab.com/gitlab-org/gitlab-ce/blob/master/spec/routing, and using application
+# Based on details in https://doggohub.com/doggohub-org/doggohub-ce/blob/master/config/routes.rb, https://doggohub.com/doggohub-org/doggohub-ce/blob/master/spec/routing, and using application
 Disallow: /autocomplete/users
 Disallow: /search
 Disallow: /api
@@ -30,7 +30,7 @@ Disallow: /snippets/*/raw
 
 # Project details
 Disallow: /*/*.git
-Disallow: /*/*/fork/new
+Disallow: /*/*/bork/new
 Disallow: /*/*/repository/archive*
 Disallow: /*/*/activity
 Disallow: /*/*/new

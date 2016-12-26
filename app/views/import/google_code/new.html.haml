@@ -48,7 +48,7 @@
         %input{type: "file", name: "dump_file", id: "dump_file"}
     %li
       %p
-        Do you want to customize how Google Code email addresses and usernames are imported into GitLab?
+        Do you want to customize how Google Code email addresses and usernames are imported into DoggoHub?
       %p
         = label_tag :create_user_map_0 do
           = radio_button_tag :create_user_map, 0, true
@@ -56,7 +56,7 @@
       %p
         = label_tag :create_user_map_1 do
           = radio_button_tag :create_user_map, 1, false
-          Yes, let me map Google Code users to full names or GitLab users.
+          Yes, let me map Google Code users to full names or DoggoHub users.
     %li
       %p
         = submit_tag 'Continue to the next step', class: "btn btn-create"

@@ -3,7 +3,7 @@ module MergeRequests
   #
   # Do git merge and in case of success
   # mark merge request as merged and execute all hooks and notifications
-  # Executed when you do merge via GitLab UI
+  # Executed when you do merge via DoggoHub UI
   #
   class MergeService < MergeRequests::BaseService
     attr_reader :merge_request

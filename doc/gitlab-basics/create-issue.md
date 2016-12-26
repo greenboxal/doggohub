@@ -1,4 +1,4 @@
-# How to create an Issue in GitLab
+# How to create an Issue in DoggoHub
 
 The issue tracker is a good place to add things that need to be improved or
 solved in a project.

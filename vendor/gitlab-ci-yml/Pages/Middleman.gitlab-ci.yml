@@ -1,4 +1,4 @@
-# Full project: https://gitlab.com/pages/middleman
+# Full project: https://doggohub.com/pages/middleman
 image: ruby:2.3
 
 cache:

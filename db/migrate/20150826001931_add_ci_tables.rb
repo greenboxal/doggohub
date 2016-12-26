@@ -94,7 +94,7 @@ class AddCiTables < ActiveRecord::Migration
       t.integer  "polling_interval"
       t.boolean  "public",                   default: false, null: false
       t.string   "ssh_url_to_repo"
-      t.integer  "gitlab_id"
+      t.integer  "doggohub_id"
       t.boolean  "allow_git_fetch",          default: true,  null: false
       t.string   "email_recipients",         default: "",    null: false
       t.boolean  "email_add_pusher",         default: true,  null: false

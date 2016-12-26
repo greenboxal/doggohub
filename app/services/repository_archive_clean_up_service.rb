@@ -5,7 +5,7 @@ class RepositoryArchiveCleanUpService
 
   def initialize(mmin = LAST_MODIFIED_TIME_IN_MINUTES)
     @mmin = mmin
-    @path = Gitlab.config.gitlab.repository_downloads_path
+    @path = Gitlab.config.doggohub.repository_downloads_path
   end
 
   def execute

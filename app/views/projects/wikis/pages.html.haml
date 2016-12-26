@@ -20,4 +20,4 @@
         %small (#{wiki_page.format})
         .pull-right
           %small Last edited #{time_ago_with_tooltip(wiki_page.commit.authored_date)}
-  = paginate @wiki_pages, theme: 'gitlab'
+  = paginate @wiki_pages, theme: 'doggohub'

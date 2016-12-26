@@ -21,7 +21,7 @@ SKIP_POST_DEPLOYMENT_MIGRATIONS=true bundle exec rake db:migrate
 
 ## Deployment Integration
 
-Say you're using Chef for deploying new versions of GitLab and you'd like to run
+Say you're using Chef for deploying new versions of DoggoHub and you'd like to run
 post deployment migrations after deploying a new version. Let's assume you
 normally use the command `chef-client` to do so. To make use of this feature
 you'd have to run this command as follows:
@@ -51,18 +51,18 @@ behave exactly like regular Rails migrations.
 ## Use Cases
 
 Post deployment migrations can be used to perform migrations that mutate state
-that an existing version of GitLab depends on. For example, say you want to
-remove a column from a table. This requires downtime as a GitLab instance
+that an existing version of DoggoHub depends on. For example, say you want to
+remove a column from a table. This requires downtime as a DoggoHub instance
 depends on this column being present while it's running. Normally you'd follow
 these steps in such a case:
 
-1. Stop the GitLab instance
+1. Stop the DoggoHub instance
 2. Run the migration removing the column
-3. Start the GitLab instance again
+3. Start the DoggoHub instance again
 
 Using post deployment migrations we can instead follow these steps:
 
-1. Deploy a new version of GitLab while ignoring post deployment migrations
+1. Deploy a new version of DoggoHub while ignoring post deployment migrations
 2. Re-run `rake db:migrate` but without the environment variable set
 
 Here we don't need any downtime as the migration takes place _after_ a new
@@ -70,6 +70,6 @@ version (which doesn't depend on the column anymore) has been deployed.
 
 Some other examples where these migrations are useful:
 
-* Cleaning up data generated due to a bug in GitLab
+* Cleaning up data generated due to a bug in DoggoHub
 * Removing tables
 * Migrating jobs from one Sidekiq queue to another

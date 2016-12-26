@@ -1,6 +1,6 @@
 # ProjectPathValidator
 #
-# Custom validator for GitLab project path values.
+# Custom validator for DoggoHub project path values.
 #
 # Values are checked for formatting and exclusion from a list of reserved path
 # names.

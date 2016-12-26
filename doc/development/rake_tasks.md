@@ -8,7 +8,7 @@ Note that if your db user does not have advanced privileges you must create the 
 bundle exec rake setup
 ```
 
-The `setup` task is a alias for `gitlab:setup`.
+The `setup` task is a alias for `doggohub:setup`.
 This tasks calls `db:reset` to create the database, calls `add_limits_mysql` that adds limits to the database schema in case of a MySQL database and finally it calls `db:seed_fu` to seed the database.
 Note: `db:setup` calls `db:seed` but this does nothing.
 
@@ -18,7 +18,7 @@ In order to run the test you can use the following commands:
 - `rake spinach` to run the spinach suite
 - `rake spec` to run the rspec suite
 - `rake teaspoon` to run the teaspoon test suite
-- `rake gitlab:test` to run all the tests
+- `rake doggohub:test` to run all the tests
 
 Note: Both `rake spinach` and `rake spec` takes significant time to pass. 
 Instead of running full test suite locally you can save a lot of time by running

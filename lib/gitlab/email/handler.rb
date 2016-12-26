@@ -1,5 +1,5 @@
-require 'gitlab/email/handler/create_note_handler'
-require 'gitlab/email/handler/create_issue_handler'
+require 'doggohub/email/handler/create_note_handler'
+require 'doggohub/email/handler/create_issue_handler'
 
 module Gitlab
   module Email

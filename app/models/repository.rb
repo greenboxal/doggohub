@@ -17,7 +17,7 @@ class Repository
   # stores its data in the `readme` cache key.
   CACHED_METHODS = %i(size commit_count readme version contribution_guide
                       changelog license_blob license_key gitignore koding_yml
-                      gitlab_ci_yml branch_names tag_names branch_count
+                      doggohub_ci_yml branch_names tag_names branch_count
                       tag_count avatar exists? empty? root_ref)
 
   # Certain method caches should be refreshed when certain types of files are
@@ -31,7 +31,7 @@ class Repository
     version: :version,
     gitignore: :gitignore,
     koding: :koding_yml,
-    gitlab_ci: :gitlab_ci_yml,
+    doggohub_ci: :doggohub_ci_yml,
     avatar: :avatar
   }
 
@@ -114,7 +114,7 @@ class Repository
       after: after,
       before: before,
       # --follow doesn't play well with --skip. See:
-      # https://gitlab.com/gitlab-org/gitlab-ce/issues/3574#note_3040520
+      # https://doggohub.com/doggohub-org/doggohub-ce/issues/3574#note_3040520
       follow: false,
       skip_merges: skip_merges
     }
@@ -153,7 +153,7 @@ class Repository
     # a new repo here to ensure a consistent state to avoid a libgit2 bug where concurrent access (e.g. via git gc)
     # may cause the branch to "disappear" erroneously or have the wrong SHA.
     #
-    # See: https://github.com/libgit2/libgit2/issues/1534 and https://gitlab.com/gitlab-org/gitlab-ce/issues/15392
+    # See: https://github.com/libgit2/libgit2/issues/1534 and https://doggohub.com/doggohub-org/doggohub-ce/issues/15392
     raw_repo =
       if fresh_repo
         Gitlab::Git::Repository.new(path_to_repo)
@@ -439,7 +439,7 @@ class Repository
     expire_content_cache
   end
 
-  # Runs code after a repository has been forked/imported.
+  # Runs code after a repository has been borked/imported.
   def after_import
     expire_content_cache
     expire_tags_cache
@@ -598,10 +598,10 @@ class Repository
   end
   cache_method :koding_yml
 
-  def gitlab_ci_yml
-    file_on_head(:gitlab_ci)
+  def doggohub_ci_yml
+    file_on_head(:doggohub_ci)
   end
-  cache_method :gitlab_ci_yml
+  cache_method :doggohub_ci_yml
 
   def head_commit
     @head_commit ||= commit(self.root_ref)

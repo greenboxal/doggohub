@@ -1,5 +1,5 @@
-# See http://doc.gitlab.com/ce/development/migration_style_guide.html
-# for more information on how to write migrations for GitLab.
+# See http://doc.doggohub.com/ce/development/migration_style_guide.html
+# for more information on how to write migrations for DoggoHub.
 
 class RemoveRedundantIndexes < ActiveRecord::Migration
   include Gitlab::Database::MigrationHelpers
@@ -26,7 +26,7 @@ class RemoveRedundantIndexes < ActiveRecord::Migration
       [:ci_events, 'index_ci_events_on_project_id'],
       [:ci_jobs, 'index_ci_jobs_on_deleted_at'],
       [:ci_jobs, 'index_ci_jobs_on_project_id'],
-      [:ci_projects, 'index_ci_projects_on_gitlab_id'],
+      [:ci_projects, 'index_ci_projects_on_doggohub_id'],
       [:ci_projects, 'index_ci_projects_on_shared_runners_enabled'],
       [:ci_services, 'index_ci_services_on_project_id'],
       [:ci_sessions, 'index_ci_sessions_on_session_id'],

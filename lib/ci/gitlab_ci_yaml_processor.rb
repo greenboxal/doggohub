@@ -75,7 +75,7 @@ module Ci
     end
 
     def self.validation_message(content)
-      return 'Please provide content of .gitlab-ci.yml' if content.blank?
+      return 'Please provide content of .doggohub-ci.yml' if content.blank?
 
       begin
         Ci::GitlabCiYamlProcessor.new(content)

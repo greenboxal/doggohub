@@ -16,5 +16,5 @@ Old path: `git@example.org:myrepo.git`
 New path: `git@example.org:username/myrepo.git` or `git@example.org:groupname/myrepo.git`
 
 ```
-bundle exec rake gitlab:enable_namespaces RAILS_ENV=production
+bundle exec rake doggohub:enable_namespaces RAILS_ENV=production
 ```

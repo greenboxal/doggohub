@@ -7,8 +7,8 @@
   .alert.alert-danger
     %p
       We cannot render this merge request properly because
-      - if @merge_request.for_fork? && !@merge_request.source_project
-        fork project was removed
+      - if @merge_request.for_bork? && !@merge_request.source_project
+        bork project was removed
       - elsif !@merge_request.source_branch_exists?
         %span.label.label-inverse= @merge_request.source_branch
         does not exist in

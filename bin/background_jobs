@@ -5,7 +5,7 @@ app_root=$(pwd)
 sidekiq_pidfile="$app_root/tmp/pids/sidekiq.pid"
 sidekiq_logfile="$app_root/log/sidekiq.log"
 sidekiq_config="$app_root/config/sidekiq_queues.yml"
-gitlab_user=$(ls -l config.ru | awk '{print $3}')
+doggohub_user=$(ls -l config.ru | awk '{print $3}')
 
 warn()
 {
@@ -19,7 +19,7 @@ stop()
 
 killall()
 {
-  pkill -u $gitlab_user -f 'sidekiq [0-9]'
+  pkill -u $doggohub_user -f 'sidekiq [0-9]'
 }
 
 restart()

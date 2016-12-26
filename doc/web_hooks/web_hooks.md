@@ -1,14 +1,14 @@
 # Webhooks
 
 >**Note:**
-Starting from GitLab 8.5:
+Starting from DoggoHub 8.5:
 - the `repository` key is deprecated in favor of the `project` key
 - the `project.ssh_url` key is deprecated in favor of the `project.git_ssh_url` key
 - the `project.http_url` key is deprecated in favor of the `project.git_http_url` key
 
 Project webhooks allow you to trigger a URL if for example new code is pushed or
 a new issue is created. You can configure webhooks to listen for specific events
-like pushes, issues or merge requests. GitLab will send a POST request with data
+like pushes, issues or merge requests. DoggoHub will send a POST request with data
 to the webhook URL.
 
 Webhooks can be used to update an external issue tracker, trigger CI builds,
@@ -20,15 +20,15 @@ settings which can be found under the wheel icon in the upper right corner.
 ## Webhook endpoint tips
 
 If you are writing your own endpoint (web server) that will receive
-GitLab webhooks keep in mind the following things:
+DoggoHub webhooks keep in mind the following things:
 
 -   Your endpoint should send its HTTP response as fast as possible. If
-    you wait too long, GitLab may decide the hook failed and retry it.
+    you wait too long, DoggoHub may decide the hook failed and retry it.
 -   Your endpoint should ALWAYS return a valid HTTP response. If you do
-    not do this then GitLab will think the hook failed and retry it.
+    not do this then DoggoHub will think the hook failed and retry it.
     Most HTTP libraries take care of this for you automatically but if
     you are writing a low-level hook this is important to remember.
--   GitLab ignores the HTTP status code returned by your endpoint.
+-   DoggoHub ignores the HTTP status code returned by your endpoint.
 
 ## Secret token
 
@@ -42,7 +42,7 @@ By default, the SSL certificate of the webhook endpoint is verified based on
 an internal list of Certificate Authorities, which means the certificate cannot
 be self-signed.
 
-You can turn this off in the webhook settings in your GitLab projects.
+You can turn this off in the webhook settings in your DoggoHub projects.
 
 ![SSL Verification](ssl.png)
 
@@ -119,8 +119,8 @@ X-Gitlab-Event: Push Hook
       "timestamp": "2012-01-03T23:36:29+02:00",
       "url": "http://example.com/mike/diaspora/commit/da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
       "author": {
-        "name": "GitLab dev user",
-        "email": "gitlabdev@dv6700.(none)"
+        "name": "DoggoHub dev user",
+        "email": "doggohubdev@dv6700.(none)"
       },
       "added": ["CHANGELOG"],
       "modified": ["app/controller/application.rb"],
@@ -207,24 +207,24 @@ X-Gitlab-Event: Issue Hook
   "project":{
     "name":"Gitlab Test",
     "description":"Aut reprehenderit ut est.",
-    "web_url":"http://example.com/gitlabhq/gitlab-test",
+    "web_url":"http://example.com/doggohubhq/doggohub-test",
     "avatar_url":null,
-    "git_ssh_url":"git@example.com:gitlabhq/gitlab-test.git",
-    "git_http_url":"http://example.com/gitlabhq/gitlab-test.git",
+    "git_ssh_url":"git@example.com:doggohubhq/doggohub-test.git",
+    "git_http_url":"http://example.com/doggohubhq/doggohub-test.git",
     "namespace":"GitlabHQ",
     "visibility_level":20,
-    "path_with_namespace":"gitlabhq/gitlab-test",
+    "path_with_namespace":"doggohubhq/doggohub-test",
     "default_branch":"master",
-    "homepage":"http://example.com/gitlabhq/gitlab-test",
-    "url":"http://example.com/gitlabhq/gitlab-test.git",
-    "ssh_url":"git@example.com:gitlabhq/gitlab-test.git",
-    "http_url":"http://example.com/gitlabhq/gitlab-test.git"
+    "homepage":"http://example.com/doggohubhq/doggohub-test",
+    "url":"http://example.com/doggohubhq/doggohub-test.git",
+    "ssh_url":"git@example.com:doggohubhq/doggohub-test.git",
+    "http_url":"http://example.com/doggohubhq/doggohub-test.git"
   },
   "repository":{
     "name": "Gitlab Test",
-    "url": "http://example.com/gitlabhq/gitlab-test.git",
+    "url": "http://example.com/doggohubhq/doggohub-test.git",
     "description": "Aut reprehenderit ut est.",
-    "homepage": "http://example.com/gitlabhq/gitlab-test"
+    "homepage": "http://example.com/doggohubhq/doggohub-test"
   },
   "object_attributes": {
     "id": 301,
@@ -285,24 +285,24 @@ X-Gitlab-Event: Note Hook
   "project":{
     "name":"Gitlab Test",
     "description":"Aut reprehenderit ut est.",
-    "web_url":"http://example.com/gitlabhq/gitlab-test",
+    "web_url":"http://example.com/doggohubhq/doggohub-test",
     "avatar_url":null,
-    "git_ssh_url":"git@example.com:gitlabhq/gitlab-test.git",
-    "git_http_url":"http://example.com/gitlabhq/gitlab-test.git",
+    "git_ssh_url":"git@example.com:doggohubhq/doggohub-test.git",
+    "git_http_url":"http://example.com/doggohubhq/doggohub-test.git",
     "namespace":"GitlabHQ",
     "visibility_level":20,
-    "path_with_namespace":"gitlabhq/gitlab-test",
+    "path_with_namespace":"doggohubhq/doggohub-test",
     "default_branch":"master",
-    "homepage":"http://example.com/gitlabhq/gitlab-test",
-    "url":"http://example.com/gitlabhq/gitlab-test.git",
-    "ssh_url":"git@example.com:gitlabhq/gitlab-test.git",
-    "http_url":"http://example.com/gitlabhq/gitlab-test.git"
+    "homepage":"http://example.com/doggohubhq/doggohub-test",
+    "url":"http://example.com/doggohubhq/doggohub-test.git",
+    "ssh_url":"git@example.com:doggohubhq/doggohub-test.git",
+    "http_url":"http://example.com/doggohubhq/doggohub-test.git"
   },
   "repository":{
     "name": "Gitlab Test",
-    "url": "http://example.com/gitlab-org/gitlab-test.git",
+    "url": "http://example.com/doggohub-org/doggohub-test.git",
     "description": "Aut reprehenderit ut est.",
-    "homepage": "http://example.com/gitlab-org/gitlab-test"
+    "homepage": "http://example.com/doggohub-org/doggohub-test"
   },
   "object_attributes": {
     "id": 1243,
@@ -327,13 +327,13 @@ X-Gitlab-Event: Note Hook
       "renamed_file": false,
       "deleted_file": false
     },
-    "url": "http://example.com/gitlab-org/gitlab-test/commit/cfe32cf61b73a0d5e9f13e774abde7ff789b1660#note_1243"
+    "url": "http://example.com/doggohub-org/doggohub-test/commit/cfe32cf61b73a0d5e9f13e774abde7ff789b1660#note_1243"
   },
   "commit": {
     "id": "cfe32cf61b73a0d5e9f13e774abde7ff789b1660",
     "message": "Add submodule\n\nSigned-off-by: Dmitriy Zaporozhets \u003cdmitriy.zaporozhets@gmail.com\u003e\n",
     "timestamp": "2014-02-27T10:06:20+02:00",
-    "url": "http://example.com/gitlab-org/gitlab-test/commit/cfe32cf61b73a0d5e9f13e774abde7ff789b1660",
+    "url": "http://example.com/doggohub-org/doggohub-test/commit/cfe32cf61b73a0d5e9f13e774abde7ff789b1660",
     "author": {
       "name": "Dmitriy Zaporozhets",
       "email": "dmitriy.zaporozhets@gmail.com"
@@ -364,24 +364,24 @@ X-Gitlab-Event: Note Hook
   "project":{
     "name":"Gitlab Test",
     "description":"Aut reprehenderit ut est.",
-    "web_url":"http://example.com/gitlab-org/gitlab-test",
+    "web_url":"http://example.com/doggohub-org/doggohub-test",
     "avatar_url":null,
-    "git_ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "git_http_url":"http://example.com/gitlab-org/gitlab-test.git",
+    "git_ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "git_http_url":"http://example.com/doggohub-org/doggohub-test.git",
     "namespace":"Gitlab Org",
     "visibility_level":10,
-    "path_with_namespace":"gitlab-org/gitlab-test",
+    "path_with_namespace":"doggohub-org/doggohub-test",
     "default_branch":"master",
-    "homepage":"http://example.com/gitlab-org/gitlab-test",
-    "url":"http://example.com/gitlab-org/gitlab-test.git",
-    "ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "http_url":"http://example.com/gitlab-org/gitlab-test.git"
+    "homepage":"http://example.com/doggohub-org/doggohub-test",
+    "url":"http://example.com/doggohub-org/doggohub-test.git",
+    "ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "http_url":"http://example.com/doggohub-org/doggohub-test.git"
   },
   "repository":{
     "name": "Gitlab Test",
-    "url": "http://localhost/gitlab-org/gitlab-test.git",
+    "url": "http://localhost/doggohub-org/doggohub-test.git",
     "description": "Aut reprehenderit ut est.",
-    "homepage": "http://example.com/gitlab-org/gitlab-test"
+    "homepage": "http://example.com/doggohub-org/doggohub-test"
   },
   "object_attributes": {
     "id": 1244,
@@ -397,7 +397,7 @@ X-Gitlab-Event: Note Hook
     "noteable_id": 7,
     "system": false,
     "st_diff": null,
-    "url": "http://example.com/gitlab-org/gitlab-test/merge_requests/1#note_1244"
+    "url": "http://example.com/doggohub-org/doggohub-test/merge_requests/1#note_1244"
   },
   "merge_request": {
     "id": 7,
@@ -420,40 +420,40 @@ X-Gitlab-Event: Note Hook
     "source":{
       "name":"Gitlab Test",
       "description":"Aut reprehenderit ut est.",
-      "web_url":"http://example.com/gitlab-org/gitlab-test",
+      "web_url":"http://example.com/doggohub-org/doggohub-test",
       "avatar_url":null,
-      "git_ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-      "git_http_url":"http://example.com/gitlab-org/gitlab-test.git",
+      "git_ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+      "git_http_url":"http://example.com/doggohub-org/doggohub-test.git",
       "namespace":"Gitlab Org",
       "visibility_level":10,
-      "path_with_namespace":"gitlab-org/gitlab-test",
+      "path_with_namespace":"doggohub-org/doggohub-test",
       "default_branch":"master",
-      "homepage":"http://example.com/gitlab-org/gitlab-test",
-      "url":"http://example.com/gitlab-org/gitlab-test.git",
-      "ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-      "http_url":"http://example.com/gitlab-org/gitlab-test.git"
+      "homepage":"http://example.com/doggohub-org/doggohub-test",
+      "url":"http://example.com/doggohub-org/doggohub-test.git",
+      "ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+      "http_url":"http://example.com/doggohub-org/doggohub-test.git"
     },
     "target": {
       "name":"Gitlab Test",
       "description":"Aut reprehenderit ut est.",
-      "web_url":"http://example.com/gitlab-org/gitlab-test",
+      "web_url":"http://example.com/doggohub-org/doggohub-test",
       "avatar_url":null,
-      "git_ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-      "git_http_url":"http://example.com/gitlab-org/gitlab-test.git",
+      "git_ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+      "git_http_url":"http://example.com/doggohub-org/doggohub-test.git",
       "namespace":"Gitlab Org",
       "visibility_level":10,
-      "path_with_namespace":"gitlab-org/gitlab-test",
+      "path_with_namespace":"doggohub-org/doggohub-test",
       "default_branch":"master",
-      "homepage":"http://example.com/gitlab-org/gitlab-test",
-      "url":"http://example.com/gitlab-org/gitlab-test.git",
-      "ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-      "http_url":"http://example.com/gitlab-org/gitlab-test.git"
+      "homepage":"http://example.com/doggohub-org/doggohub-test",
+      "url":"http://example.com/doggohub-org/doggohub-test.git",
+      "ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+      "http_url":"http://example.com/doggohub-org/doggohub-test.git"
     },
     "last_commit": {
       "id": "562e173be03b8ff2efb05345d12df18815438a4b",
       "message": "Merge branch 'another-branch' into 'master'\n\nCheck in this test\n",
       "timestamp": "2015-04-08T21: 00:25-07:00",
-      "url": "http://example.com/gitlab-org/gitlab-test/commit/562e173be03b8ff2efb05345d12df18815438a4b",
+      "url": "http://example.com/doggohub-org/doggohub-test/commit/562e173be03b8ff2efb05345d12df18815438a4b",
       "author": {
         "name": "John Smith",
         "email": "john@example.com"
@@ -491,18 +491,18 @@ X-Gitlab-Event: Note Hook
   "project":{
     "name":"Gitlab Test",
     "description":"Aut reprehenderit ut est.",
-    "web_url":"http://example.com/gitlab-org/gitlab-test",
+    "web_url":"http://example.com/doggohub-org/doggohub-test",
     "avatar_url":null,
-    "git_ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "git_http_url":"http://example.com/gitlab-org/gitlab-test.git",
+    "git_ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "git_http_url":"http://example.com/doggohub-org/doggohub-test.git",
     "namespace":"Gitlab Org",
     "visibility_level":10,
-    "path_with_namespace":"gitlab-org/gitlab-test",
+    "path_with_namespace":"doggohub-org/doggohub-test",
     "default_branch":"master",
-    "homepage":"http://example.com/gitlab-org/gitlab-test",
-    "url":"http://example.com/gitlab-org/gitlab-test.git",
-    "ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "http_url":"http://example.com/gitlab-org/gitlab-test.git"
+    "homepage":"http://example.com/doggohub-org/doggohub-test",
+    "url":"http://example.com/doggohub-org/doggohub-test.git",
+    "ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "http_url":"http://example.com/doggohub-org/doggohub-test.git"
   },
   "repository":{
     "name":"diaspora",
@@ -524,7 +524,7 @@ X-Gitlab-Event: Note Hook
     "noteable_id": 92,
     "system": false,
     "st_diff": null,
-    "url": "http://example.com/gitlab-org/gitlab-test/issues/17#note_1241"
+    "url": "http://example.com/doggohub-org/doggohub-test/issues/17#note_1241"
   },
   "issue": {
     "id": 92,
@@ -566,24 +566,24 @@ X-Gitlab-Event: Note Hook
   "project":{
     "name":"Gitlab Test",
     "description":"Aut reprehenderit ut est.",
-    "web_url":"http://example.com/gitlab-org/gitlab-test",
+    "web_url":"http://example.com/doggohub-org/doggohub-test",
     "avatar_url":null,
-    "git_ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "git_http_url":"http://example.com/gitlab-org/gitlab-test.git",
+    "git_ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "git_http_url":"http://example.com/doggohub-org/doggohub-test.git",
     "namespace":"Gitlab Org",
     "visibility_level":10,
-    "path_with_namespace":"gitlab-org/gitlab-test",
+    "path_with_namespace":"doggohub-org/doggohub-test",
     "default_branch":"master",
-    "homepage":"http://example.com/gitlab-org/gitlab-test",
-    "url":"http://example.com/gitlab-org/gitlab-test.git",
-    "ssh_url":"git@example.com:gitlab-org/gitlab-test.git",
-    "http_url":"http://example.com/gitlab-org/gitlab-test.git"
+    "homepage":"http://example.com/doggohub-org/doggohub-test",
+    "url":"http://example.com/doggohub-org/doggohub-test.git",
+    "ssh_url":"git@example.com:doggohub-org/doggohub-test.git",
+    "http_url":"http://example.com/doggohub-org/doggohub-test.git"
   },
   "repository":{
     "name":"Gitlab Test",
-    "url":"http://example.com/gitlab-org/gitlab-test.git",
+    "url":"http://example.com/doggohub-org/doggohub-test.git",
     "description":"Aut reprehenderit ut est.",
-    "homepage":"http://example.com/gitlab-org/gitlab-test"
+    "homepage":"http://example.com/doggohub-org/doggohub-test"
   },
   "object_attributes": {
     "id": 1245,
@@ -599,7 +599,7 @@ X-Gitlab-Event: Note Hook
     "noteable_id": 53,
     "system": false,
     "st_diff": null,
-    "url": "http://example.com/gitlab-org/gitlab-test/snippets/53#note_1245"
+    "url": "http://example.com/doggohub-org/doggohub-test/snippets/53#note_1245"
   },
   "snippet": {
     "id": 53,
@@ -693,8 +693,8 @@ X-Gitlab-Event: Merge Request Hook
       "timestamp": "2012-01-03T23:36:29+02:00",
       "url": "http://example.com/awesome_space/awesome_project/commits/da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
       "author": {
-        "name": "GitLab dev user",
-        "email": "gitlabdev@dv6700.(none)"
+        "name": "DoggoHub dev user",
+        "email": "doggohubdev@dv6700.(none)"
       }
     },
     "work_in_progress": false,
@@ -803,23 +803,23 @@ X-Gitlab-Event: Pipeline Hook
    "project":{
       "name": "Gitlab Test",
       "description": "Atque in sunt eos similique dolores voluptatem.",
-      "web_url": "http://192.168.64.1:3005/gitlab-org/gitlab-test",
+      "web_url": "http://192.168.64.1:3005/doggohub-org/doggohub-test",
       "avatar_url": null,
-      "git_ssh_url": "git@192.168.64.1:gitlab-org/gitlab-test.git",
-      "git_http_url": "http://192.168.64.1:3005/gitlab-org/gitlab-test.git",
+      "git_ssh_url": "git@192.168.64.1:doggohub-org/doggohub-test.git",
+      "git_http_url": "http://192.168.64.1:3005/doggohub-org/doggohub-test.git",
       "namespace": "Gitlab Org",
       "visibility_level": 20,
-      "path_with_namespace": "gitlab-org/gitlab-test",
+      "path_with_namespace": "doggohub-org/doggohub-test",
       "default_branch": "master"
    },
    "commit":{
       "id": "bcbb5ec396a2c0f828686f14fac9b80b780504f2",
       "message": "test\n",
       "timestamp": "2016-08-12T17:23:21+02:00",
-      "url": "http://example.com/gitlab-org/gitlab-test/commit/bcbb5ec396a2c0f828686f14fac9b80b780504f2",
+      "url": "http://example.com/doggohub-org/doggohub-test/commit/bcbb5ec396a2c0f828686f14fac9b80b780504f2",
       "author":{
          "name": "User",
-         "email": "user@gitlab.com"
+         "email": "user@doggohub.com"
       }
    },
    "builds":[
@@ -947,7 +947,7 @@ X-Gitlab-Event: Build Hook
 ```json
 {
   "object_kind": "build",
-  "ref": "gitlab-script-trigger",
+  "ref": "doggohub-script-trigger",
   "tag": false,
   "before_sha": "2293ada6b400935a1378653304eaf6221e0fdb8f",
   "sha": "2293ada6b400935a1378653304eaf6221e0fdb8f",
@@ -960,30 +960,30 @@ X-Gitlab-Event: Build Hook
   "build_duration": null,
   "build_allow_failure": false,
   "project_id": 380,
-  "project_name": "gitlab-org/gitlab-test",
+  "project_name": "doggohub-org/doggohub-test",
   "user": {
     "id": 3,
     "name": "User",
-    "email": "user@gitlab.com"
+    "email": "user@doggohub.com"
   },
   "commit": {
     "id": 2366,
     "sha": "2293ada6b400935a1378653304eaf6221e0fdb8f",
     "message": "test\n",
     "author_name": "User",
-    "author_email": "user@gitlab.com",
+    "author_email": "user@doggohub.com",
     "status": "created",
     "duration": null,
     "started_at": null,
     "finished_at": null
   },
   "repository": {
-    "name": "gitlab_test",
-    "git_ssh_url": "git@192.168.64.1:gitlab-org/gitlab-test.git",
+    "name": "doggohub_test",
+    "git_ssh_url": "git@192.168.64.1:doggohub-org/doggohub-test.git",
     "description": "Atque in sunt eos similique dolores voluptatem.",
-    "homepage": "http://192.168.64.1:3005/gitlab-org/gitlab-test",
-    "git_ssh_url": "git@192.168.64.1:gitlab-org/gitlab-test.git",
-    "git_http_url": "http://192.168.64.1:3005/gitlab-org/gitlab-test.git",
+    "homepage": "http://192.168.64.1:3005/doggohub-org/doggohub-test",
+    "git_ssh_url": "git@192.168.64.1:doggohub-org/doggohub-test.git",
+    "git_http_url": "http://192.168.64.1:3005/doggohub-org/doggohub-test.git",
     "visibility_level": 20
   }
 }
@@ -991,7 +991,7 @@ X-Gitlab-Event: Build Hook
 
 ## Example webhook receiver
 
-If you want to see GitLab's webhooks in action for testing purposes you can use
+If you want to see DoggoHub's webhooks in action for testing purposes you can use
 a simple echo script running in a console session. For the following script to
 work you need to have Ruby installed.
 
@@ -1012,10 +1012,10 @@ server.start
 ```
 
 Pick an unused port (e.g. 8000) and start the script: `ruby print_http_body.rb
-8000`.  Then add your server as a webhook receiver in GitLab as
+8000`.  Then add your server as a webhook receiver in DoggoHub as
 `http://my.host:8000/`.
 
-When you press 'Test Hook' in GitLab, you should see something like this in the
+When you press 'Test Hook' in DoggoHub, you should see something like this in the
 console:
 
 ```

@@ -68,7 +68,7 @@ verify:jdk8:
 
 # For `master` branch run `mvn deploy` automatically.
 # Here you need to decide whether you want to use JDK7 or 8.
-# To get this working you need to define a volume while configuring your gitlab-ci-multi-runner.
+# To get this working you need to define a volume while configuring your doggohub-ci-multi-runner.
 # Mount your `settings.xml` as `/root/.m2/settings.xml` which holds your secrets.
 # See https://maven.apache.org/settings.html
 deploy:jdk8:

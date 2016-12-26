@@ -35,39 +35,39 @@
                 = link_to '#modal-create-new-dir', { 'data-target' => '#modal-create-new-dir', 'data-toggle' => 'modal'} do
                   = icon('folder fw')
                   New directory
-            - elsif can?(current_user, :fork_project, @project)
+            - elsif can?(current_user, :bork_project, @project)
               %li
                 - continue_params = { to:         namespace_project_new_blob_path(@project.namespace, @project, @id),
-                                      notice:     edit_in_new_fork_notice,
-                                      notice_now: edit_in_new_fork_notice_now }
-                - fork_path = namespace_project_forks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
+                                      notice:     edit_in_new_bork_notice,
+                                      notice_now: edit_in_new_bork_notice_now }
+                - bork_path = namespace_project_borks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
                                                                                         continue:       continue_params)
-                = link_to fork_path, method: :post do
+                = link_to bork_path, method: :post do
                   = icon('pencil fw')
                   New file
               %li
                 - continue_params = { to:         request.fullpath,
-                                      notice:     edit_in_new_fork_notice + " Try to upload a file again.",
-                                      notice_now: edit_in_new_fork_notice_now }
-                - fork_path = namespace_project_forks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
+                                      notice:     edit_in_new_bork_notice + " Try to upload a file again.",
+                                      notice_now: edit_in_new_bork_notice_now }
+                - bork_path = namespace_project_borks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
                                                                                         continue:       continue_params)
-                = link_to fork_path, method: :post do
+                = link_to bork_path, method: :post do
                   = icon('file fw')
                   Upload file
               %li
                 - continue_params = { to:         request.fullpath,
-                                      notice:     edit_in_new_fork_notice + " Try to create a new directory again.",
-                                      notice_now: edit_in_new_fork_notice_now }
-                - fork_path = namespace_project_forks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
+                                      notice:     edit_in_new_bork_notice + " Try to create a new directory again.",
+                                      notice_now: edit_in_new_bork_notice_now }
+                - bork_path = namespace_project_borks_path(@project.namespace, @project, namespace_key:  current_user.namespace.id,
                                                                                         continue:       continue_params)
-                = link_to fork_path, method: :post do
+                = link_to bork_path, method: :post do
                   = icon('folder fw')
                   New directory
 
             %li.divider
             %li
               = link_to new_namespace_project_branch_path(@project.namespace, @project) do
-                = icon('code-fork fw')
+                = icon('code-bork fw')
                 New branch
             %li
               = link_to new_namespace_project_tag_path(@project.namespace, @project) do

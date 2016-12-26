@@ -264,12 +264,12 @@ describe ProjectsController do
       expect(response).to redirect_to(dashboard_projects_path)
     end
 
-    context "when the project is forked" do
+    context "when the project is borked" do
       let(:project)      { create(:project) }
-      let(:fork_project) { create(:project, forked_from_project: project) }
+      let(:bork_project) { create(:project, borked_from_project: project) }
       let(:merge_request) do
         create(:merge_request,
-          source_project: fork_project,
+          source_project: bork_project,
           target_project: project)
       end
 
@@ -277,7 +277,7 @@ describe ProjectsController do
         project.merge_requests << merge_request
         sign_in(admin)
 
-        delete :destroy, namespace_id: fork_project.namespace.path, id: fork_project.path
+        delete :destroy, namespace_id: bork_project.namespace.path, id: bork_project.path
 
         expect(merge_request.reload.state).to eq('closed')
       end
@@ -337,46 +337,46 @@ describe ProjectsController do
     end
   end
 
-  describe "DELETE remove_fork" do
+  describe "DELETE remove_bork" do
     context 'when signed in' do
       before do
         sign_in(user)
       end
 
-      context 'with forked project' do
-        let(:project_fork) { create(:project, namespace: user.namespace) }
+      context 'with borked project' do
+        let(:project_bork) { create(:project, namespace: user.namespace) }
 
         before do
-          create(:forked_project_link, forked_to_project: project_fork)
+          create(:borked_project_link, borked_to_project: project_bork)
         end
 
-        it 'removes fork from project' do
-          delete(:remove_fork,
-              namespace_id: project_fork.namespace.to_param,
-              id: project_fork.to_param, format: :js)
+        it 'removes bork from project' do
+          delete(:remove_bork,
+              namespace_id: project_bork.namespace.to_param,
+              id: project_bork.to_param, format: :js)
 
-          expect(project_fork.forked?).to be_falsey
-          expect(flash[:notice]).to eq('The fork relationship has been removed.')
-          expect(response).to render_template(:remove_fork)
+          expect(project_bork.borked?).to be_falsey
+          expect(flash[:notice]).to eq('The bork relationship has been removed.')
+          expect(response).to render_template(:remove_bork)
         end
       end
 
-      context 'when project not forked' do
-        let(:unforked_project) { create(:project, namespace: user.namespace) }
+      context 'when project not borked' do
+        let(:unborked_project) { create(:project, namespace: user.namespace) }
 
-        it 'does nothing if project was not forked' do
-          delete(:remove_fork,
-              namespace_id: unforked_project.namespace.to_param,
-              id: unforked_project.to_param, format: :js)
+        it 'does nothing if project was not borked' do
+          delete(:remove_bork,
+              namespace_id: unborked_project.namespace.to_param,
+              id: unborked_project.to_param, format: :js)
 
           expect(flash[:notice]).to be_nil
-          expect(response).to render_template(:remove_fork)
+          expect(response).to render_template(:remove_bork)
         end
       end
     end
 
     it "does nothing if user is not signed in" do
-      delete(:remove_fork,
+      delete(:remove_bork,
           namespace_id: project.namespace.to_param,
           id: project.to_param, format: :js)
       expect(response).to have_http_status(401)

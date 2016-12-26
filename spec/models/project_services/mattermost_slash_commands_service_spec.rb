@@ -18,7 +18,7 @@ describe MattermostSlashCommandsService, :models do
     describe '#configure' do
       subject do
         service.configure(user, team_id: 'abc',
-                                trigger: 'gitlab', url: 'http://trigger.url',
+                                trigger: 'doggohub', url: 'http://trigger.url',
                                 icon_url: 'http://icon.url/icon.png')
       end
 
@@ -27,16 +27,16 @@ describe MattermostSlashCommandsService, :models do
           stub_request(:post, 'http://mattermost.example.com/api/v3/teams/abc/commands/create').
             with(body: {
               team_id: 'abc',
-              trigger: 'gitlab',
+              trigger: 'doggohub',
               url: 'http://trigger.url',
               icon_url: 'http://icon.url/icon.png',
               auto_complete: true,
               auto_complete_desc: "Perform common operations on: #{project.name_with_namespace}",
               auto_complete_hint: '[help]',
               description: "Perform common operations on: #{project.name_with_namespace}",
-              display_name: "GitLab / #{project.name_with_namespace}",
+              display_name: "DoggoHub / #{project.name_with_namespace}",
               method: 'P',
-              username: 'GitLab' }.to_json).
+              username: 'DoggoHub' }.to_json).
             to_return(
               status: 200,
               headers: { 'Content-Type' => 'application/json' },

@@ -235,35 +235,35 @@ module API
         present paginate(user_project.events.recent), with: Entities::Event
       end
 
-      desc 'Fork new project for the current user or provided namespace.' do
+      desc 'Bork new project for the current user or provided namespace.' do
         success Entities::Project
       end
       params do
-        optional :namespace, type: String, desc: 'The ID or name of the namespace that the project will be forked into'
+        optional :namespace, type: String, desc: 'The ID or name of the namespace that the project will be borked into'
       end
-      post 'fork/:id' do
-        fork_params = declared_params(include_missing: false)
-        namespace_id = fork_params[:namespace]
+      post 'bork/:id' do
+        bork_params = declared_params(include_missing: false)
+        namespace_id = bork_params[:namespace]
 
         if namespace_id.present?
-          fork_params[:namespace] = if namespace_id =~ /^\d+$/
+          bork_params[:namespace] = if namespace_id =~ /^\d+$/
                                       Namespace.find_by(id: namespace_id)
                                     else
                                       Namespace.find_by_path_or_name(namespace_id)
                                     end
 
-          unless fork_params[:namespace] && can?(current_user, :create_projects, fork_params[:namespace])
+          unless bork_params[:namespace] && can?(current_user, :create_projects, bork_params[:namespace])
             not_found!('Target Namespace')
           end
         end
 
-        forked_project = ::Projects::ForkService.new(user_project, current_user, fork_params).execute
+        borked_project = ::Projects::BorkService.new(user_project, current_user, bork_params).execute
 
-        if forked_project.errors.any?
-          conflict!(forked_project.errors.messages)
+        if borked_project.errors.any?
+          conflict!(borked_project.errors.messages)
         else
-          present forked_project, with: Entities::Project,
-                                  user_can_admin_project: can?(current_user, :admin_project, forked_project)
+          present borked_project, with: Entities::Project,
+                                  user_can_admin_project: can?(current_user, :admin_project, borked_project)
         end
       end
 
@@ -355,29 +355,29 @@ module API
         ::Projects::DestroyService.new(user_project, current_user, {}).async_execute
       end
 
-      desc 'Mark this project as forked from another'
+      desc 'Mark this project as borked from another'
       params do
-        requires :forked_from_id, type: String, desc: 'The ID of the project it was forked from'
+        requires :borked_from_id, type: String, desc: 'The ID of the project it was borked from'
       end
-      post ":id/fork/:forked_from_id" do
+      post ":id/bork/:borked_from_id" do
         authenticated_as_admin!
 
-        forked_from_project = find_project!(params[:forked_from_id])
-        not_found!("Source Project") unless forked_from_project
+        borked_from_project = find_project!(params[:borked_from_id])
+        not_found!("Source Project") unless borked_from_project
 
-        if user_project.forked_from_project.nil?
-          user_project.create_forked_project_link(forked_to_project_id: user_project.id, forked_from_project_id: forked_from_project.id)
+        if user_project.borked_from_project.nil?
+          user_project.create_borked_project_link(borked_to_project_id: user_project.id, borked_from_project_id: borked_from_project.id)
         else
-          render_api_error!("Project already forked", 409)
+          render_api_error!("Project already borked", 409)
         end
       end
 
-      desc 'Remove a forked_from relationship'
-      delete ":id/fork" do
-        authorize! :remove_fork_project, user_project
+      desc 'Remove a borked_from relationship'
+      delete ":id/bork" do
+        authorize! :remove_bork_project, user_project
 
-        if user_project.forked?
-          user_project.forked_project_link.destroy
+        if user_project.borked?
+          user_project.borked_project_link.destroy
         else
           not_modified!
         end

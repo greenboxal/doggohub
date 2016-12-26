@@ -3,7 +3,7 @@ require 'backup/files'
 module Backup
   class Builds < Files
     def initialize
-      super('builds', Settings.gitlab_ci.builds_path)
+      super('builds', Settings.doggohub_ci.builds_path)
     end
 
     def create_files_dir

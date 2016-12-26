@@ -1,6 +1,6 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :ldap do
-    desc 'GitLab | LDAP | Rename provider'
+    desc 'DoggoHub | LDAP | Rename provider'
     task :rename_provider, [:old_provider, :new_provider] => :environment  do |_, args|
       old_provider = args[:old_provider] ||
         prompt('What is the old provider? Ex. \'ldapmain\': '.color(:blue))

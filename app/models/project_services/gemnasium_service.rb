@@ -1,4 +1,4 @@
-require "gemnasium/gitlab_service"
+require "gemnasium/doggohub_service"
 
 class GemnasiumService < Service
   prop_accessor :token, :api_key

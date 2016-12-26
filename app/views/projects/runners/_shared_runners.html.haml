@@ -4,9 +4,9 @@
   - if current_application_settings.shared_runners_text.present?
     = markdown_field(current_application_settings, :shared_runners_text)
   - else
-    GitLab Shared Runners execute code of different projects on the same Runner
-    unless you configure GitLab Runner Autoscale with MaxBuilds 1 (which it is
-    on GitLab.com).
+    DoggoHub Shared Runners execute code of different projects on the same Runner
+    unless you configure DoggoHub Runner Autoscale with MaxBuilds 1 (which it is
+    on DoggoHub.com).
   %hr
   - if @project.shared_runners_enabled?
     = link_to toggle_shared_runners_namespace_project_runners_path(@project.namespace, @project), class: 'btn btn-warning', method: :post do
@@ -17,7 +17,7 @@
   &nbsp; for this project
 
 - if @shared_runners_count.zero?
-  This GitLab server does not provide any shared Runners yet.
+  This DoggoHub server does not provide any shared Runners yet.
   Please use the specific Runners or ask your administrator to create one.
 - else
   %h4.underlined-title Available shared Runners : #{@shared_runners_count}

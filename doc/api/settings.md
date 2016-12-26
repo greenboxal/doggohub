@@ -1,19 +1,19 @@
 # Application settings
 
-These API calls allow you to read and modify GitLab instance application
+These API calls allow you to read and modify DoggoHub instance application
 settings as appear in `/admin/application_settings`. You have to be an
 administrator in order to perform this action.
 
 ## Get current application settings
 
-List the current application settings of the GitLab instance.
+List the current application settings of the DoggoHub instance.
 
 ```
 GET /application/settings
 ```
 
 ```bash
-curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/application/settings
+curl --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/application/settings
 ```
 
 Example response:
@@ -58,30 +58,30 @@ PUT /application/settings
 | --------- | ---- | :------: | ----------- |
 | `default_projects_limit` | integer  | no | Project limit per user. Default is `10` |
 | `signup_enabled`    | boolean | no  | Enable registration. Default is `true`. |
-| `signin_enabled`    | boolean | no  | Enable login via a GitLab account. Default is `true`. |
+| `signin_enabled`    | boolean | no  | Enable login via a DoggoHub account. Default is `true`. |
 | `gravatar_enabled`  | boolean | no  | Enable Gravatar |
 | `sign_in_text`      | string  | no  | Text on login page |
 | `home_page_url`     | string  | no  | Redirect to this URL when not logged in |
 | `default_branch_protection` | integer | no | Determine if developers can push to master. Can take `0` _(not protected, both developers and masters can push new commits, force push or delete the branch)_, `1` _(partially protected, developers can push new commits, but cannot force push or delete the branch, masters can do anything)_ or `2` _(fully protected, developers cannot push new commits, force push or delete the branch, masters can do anything)_ as a parameter. Default is `2`. |
 | `restricted_visibility_levels` | array of integers | no | Selected levels cannot be used by non-admin users for projects or snippets. Can take `0` _(Private)_, `1` _(Internal)_ and `2` _(Public)_ as a parameter. Default is null which means there is no restriction. |
 | `max_attachment_size` | integer | no | Limit attachment size in MB |
-| `session_expire_delay` | integer | no | Session duration in minutes. GitLab restart is required to apply changes |
+| `session_expire_delay` | integer | no | Session duration in minutes. DoggoHub restart is required to apply changes |
 | `default_project_visibility` | integer | no | What visibility level new projects receive. Can take `0` _(Private)_, `1` _(Internal)_ and `2` _(Public)_ as a parameter. Default is `0`.|
 | `default_snippet_visibility` | integer | no | What visibility level new snippets receive. Can take `0` _(Private)_, `1` _(Internal)_ and `2` _(Public)_ as a parameter. Default is `0`.|
 | `domain_whitelist` | array of strings | no | Force people to use only corporate emails for sign-up. Default is null, meaning there is no restriction. |
 | `domain_blacklist_enabled` | boolean | no | Enable/disable the `domain_blacklist` |
 | `domain_blacklist` | array of strings | yes (if `domain_blacklist_enabled` is `true`) | People trying to sign-up with emails from this domain will not be allowed to do so. |
-| `user_oauth_applications` | boolean | no | Allow users to register any application to use GitLab as an OAuth provider |
+| `user_oauth_applications` | boolean | no | Allow users to register any application to use DoggoHub as an OAuth provider |
 | `after_sign_out_path` | string | no | Where to redirect users after logout |
 | `container_registry_token_expire_delay` | integer | no | Container Registry token duration in minutes |
-| `repository_storages` | array of strings | no | A list of names of enabled storage paths, taken from `gitlab.yml`. New projects will be created in one of these stores, chosen at random. |
+| `repository_storages` | array of strings | no | A list of names of enabled storage paths, taken from `doggohub.yml`. New projects will be created in one of these stores, chosen at random. |
 | `repository_storage` | string | no | The first entry in `repository_storages`. Deprecated, but retained for compatibility reasons |
 | `enabled_git_access_protocol` | string | no | Enabled protocols for Git access. Allowed values are: `ssh`, `http`, and `nil` to allow both protocols. |
 | `koding_enabled` | boolean | no | Enable Koding integration. Default is `false`. |
 | `koding_url` | string | yes (if `koding_enabled` is `true`) |  The Koding instance URL for integration. |
 
 ```bash
-curl --request PUT --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/application/settings?signup_enabled=false&default_project_visibility=1
+curl --request PUT --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/application/settings?signup_enabled=false&default_project_visibility=1
 ```
 
 Example response:

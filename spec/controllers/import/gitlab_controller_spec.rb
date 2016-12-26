@@ -5,27 +5,27 @@ describe Import::GitlabController do
 
   let(:user) { create(:user) }
   let(:token) { "asdasd12345" }
-  let(:access_params) { { gitlab_access_token: token } }
+  let(:access_params) { { doggohub_access_token: token } }
 
   def assign_session_token
-    session[:gitlab_access_token] = token
+    session[:doggohub_access_token] = token
   end
 
   before do
     sign_in(user)
-    allow(controller).to receive(:gitlab_import_enabled?).and_return(true)
+    allow(controller).to receive(:doggohub_import_enabled?).and_return(true)
   end
 
   describe "GET callback" do
     it "updates access token" do
       allow_any_instance_of(Gitlab::GitlabImport::Client).
         to receive(:get_token).and_return(token)
-      stub_omniauth_provider('gitlab')
+      stub_omniauth_provider('doggohub')
 
       get :callback
 
-      expect(session[:gitlab_access_token]).to eq(token)
-      expect(controller).to redirect_to(status_import_gitlab_url)
+      expect(session[:doggohub_access_token]).to eq(token)
+      expect(controller).to redirect_to(status_import_doggohub_url)
     end
   end
 
@@ -36,7 +36,7 @@ describe Import::GitlabController do
     end
 
     it "assigns variables" do
-      @project = create(:project, import_type: 'gitlab', creator_id: user.id)
+      @project = create(:project, import_type: 'doggohub', creator_id: user.id)
       stub_client(projects: [@repo])
 
       get :status
@@ -46,7 +46,7 @@ describe Import::GitlabController do
     end
 
     it "does not show already added project" do
-      @project = create(:project, import_type: 'gitlab', creator_id: user.id, import_source: 'asd/vim')
+      @project = create(:project, import_type: 'doggohub', creator_id: user.id, import_source: 'asd/vim')
       stub_client(projects: [@repo])
 
       get :status
@@ -57,41 +57,41 @@ describe Import::GitlabController do
   end
 
   describe "POST create" do
-    let(:gitlab_username) { user.username }
-    let(:gitlab_user) do
-      { username: gitlab_username }.with_indifferent_access
+    let(:doggohub_username) { user.username }
+    let(:doggohub_user) do
+      { username: doggohub_username }.with_indifferent_access
     end
-    let(:gitlab_repo) do
+    let(:doggohub_repo) do
       {
         path: 'vim',
-        path_with_namespace: "#{gitlab_username}/vim",
-        owner: { name: gitlab_username },
-        namespace: { path: gitlab_username }
+        path_with_namespace: "#{doggohub_username}/vim",
+        owner: { name: doggohub_username },
+        namespace: { path: doggohub_username }
       }.with_indifferent_access
     end
 
     before do
-      stub_client(user: gitlab_user, project: gitlab_repo)
+      stub_client(user: doggohub_user, project: doggohub_repo)
       assign_session_token
     end
 
-    context "when the repository owner is the GitLab.com user" do
-      context "when the GitLab.com user and GitLab server user's usernames match" do
+    context "when the repository owner is the DoggoHub.com user" do
+      context "when the DoggoHub.com user and DoggoHub server user's usernames match" do
         it "takes the current user's namespace" do
           expect(Gitlab::GitlabImport::ProjectCreator).
-            to receive(:new).with(gitlab_repo, user.namespace, user, access_params).
+            to receive(:new).with(doggohub_repo, user.namespace, user, access_params).
             and_return(double(execute: true))
 
           post :create, format: :js
         end
       end
 
-      context "when the GitLab.com user and GitLab server user's usernames don't match" do
-        let(:gitlab_username) { "someone_else" }
+      context "when the DoggoHub.com user and DoggoHub server user's usernames don't match" do
+        let(:doggohub_username) { "someone_else" }
 
         it "takes the current user's namespace" do
           expect(Gitlab::GitlabImport::ProjectCreator).
-            to receive(:new).with(gitlab_repo, user.namespace, user, access_params).
+            to receive(:new).with(doggohub_repo, user.namespace, user, access_params).
             and_return(double(execute: true))
 
           post :create, format: :js
@@ -99,28 +99,28 @@ describe Import::GitlabController do
       end
     end
 
-    context "when the repository owner is not the GitLab.com user" do
+    context "when the repository owner is not the DoggoHub.com user" do
       let(:other_username) { "someone_else" }
 
       before do
-        gitlab_repo["namespace"]["path"] = other_username
+        doggohub_repo["namespace"]["path"] = other_username
         assign_session_token
       end
 
-      context "when a namespace with the GitLab.com user's username already exists" do
+      context "when a namespace with the DoggoHub.com user's username already exists" do
         let!(:existing_namespace) { create(:namespace, name: other_username, owner: user) }
 
-        context "when the namespace is owned by the GitLab server user" do
+        context "when the namespace is owned by the DoggoHub server user" do
           it "takes the existing namespace" do
             expect(Gitlab::GitlabImport::ProjectCreator).
-              to receive(:new).with(gitlab_repo, existing_namespace, user, access_params).
+              to receive(:new).with(doggohub_repo, existing_namespace, user, access_params).
               and_return(double(execute: true))
 
             post :create, format: :js
           end
         end
 
-        context "when the namespace is not owned by the GitLab server user" do
+        context "when the namespace is not owned by the DoggoHub server user" do
           before do
             existing_namespace.owner = create(:user)
             existing_namespace.save
@@ -135,7 +135,7 @@ describe Import::GitlabController do
         end
       end
 
-      context "when a namespace with the GitLab.com user's username doesn't exist" do
+      context "when a namespace with the DoggoHub.com user's username doesn't exist" do
         context "when current user can create namespaces" do
           it "creates the namespace" do
             expect(Gitlab::GitlabImport::ProjectCreator).
@@ -146,7 +146,7 @@ describe Import::GitlabController do
 
           it "takes the new namespace" do
             expect(Gitlab::GitlabImport::ProjectCreator).
-              to receive(:new).with(gitlab_repo, an_instance_of(Group), user, access_params).
+              to receive(:new).with(doggohub_repo, an_instance_of(Group), user, access_params).
               and_return(double(execute: true))
 
             post :create, format: :js
@@ -167,7 +167,7 @@ describe Import::GitlabController do
 
           it "takes the current user's namespace" do
             expect(Gitlab::GitlabImport::ProjectCreator).
-              to receive(:new).with(gitlab_repo, user.namespace, user, access_params).
+              to receive(:new).with(doggohub_repo, user.namespace, user, access_params).
               and_return(double(execute: true))
 
             post :create, format: :js

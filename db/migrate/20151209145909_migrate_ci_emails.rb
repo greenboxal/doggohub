@@ -16,7 +16,7 @@ class MigrateCiEmails < ActiveRecord::Migration
       "'\"}') " \
       'FROM ci_services ' \
       'JOIN ci_projects ON ci_services.project_id = ci_projects.id ' \
-      'JOIN projects ON ci_projects.gitlab_id = projects.id ' \
+      'JOIN projects ON ci_projects.doggohub_id = projects.id ' \
       "WHERE ci_services.type = 'Ci::MailService' AND ci_services.active"
     )
   end

@@ -1,3 +1,3 @@
-require_relative "../lib/gitlab/upgrader"
+require_relative "../lib/doggohub/upgrader"
 
 Gitlab::Upgrader.new.execute

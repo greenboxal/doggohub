@@ -23,7 +23,7 @@ We do not recommend using MySQL due to various issues. For example, case [(in)se
 
     # Type the MySQL root password
 
-    # Create a user for GitLab
+    # Create a user for DoggoHub
     # do not type the 'mysql>', this is part of the prompt
     # change $password in the command below to a real password you pick
     mysql> CREATE USER 'git'@'localhost' IDENTIFIED BY '$password';
@@ -32,17 +32,17 @@ We do not recommend using MySQL due to various issues. For example, case [(in)se
     # If this fails, check your MySQL config files (e.g. `/etc/mysql/*.cnf`, `/etc/mysql/conf.d/*`) for the setting "innodb = off"
     mysql> SET storage_engine=INNODB;
 
-    # Create the GitLab production database
-    mysql> CREATE DATABASE IF NOT EXISTS `gitlabhq_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+    # Create the DoggoHub production database
+    mysql> CREATE DATABASE IF NOT EXISTS `doggohubhq_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
 
-    # Grant the GitLab user necessary permissions on the database
-    mysql> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, CREATE TEMPORARY TABLES, DROP, INDEX, ALTER, LOCK TABLES, REFERENCES ON `gitlabhq_production`.* TO 'git'@'localhost';
+    # Grant the DoggoHub user necessary permissions on the database
+    mysql> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, CREATE TEMPORARY TABLES, DROP, INDEX, ALTER, LOCK TABLES, REFERENCES ON `doggohubhq_production`.* TO 'git'@'localhost';
 
     # Quit the database session
     mysql> \q
 
     # Try connecting to the new database with the new user
-    sudo -u git -H mysql -u git -p -D gitlabhq_production
+    sudo -u git -H mysql -u git -p -D doggohubhq_production
 
     # Type the password you replaced $password with earlier
 
@@ -57,9 +57,9 @@ We do not recommend using MySQL due to various issues. For example, case [(in)se
 
 After installation or upgrade, remember to run the `add_limits_mysql` Rake task:
 
-**Omnibus GitLab installations**
+**Omnibus DoggoHub installations**
 ```
-sudo gitlab-rake add_limits_mysql
+sudo doggohub-rake add_limits_mysql
 ```
 
 **Installations from source**
@@ -73,7 +73,7 @@ PostgreSQL. In MySQL `text` columns are limited to ~65kB, whereas in PostgreSQL
 `text` columns are limited up to ~1GB!
 
 The `add_limits_mysql` Rake task converts some important `text` columns in the
-GitLab database to `longtext` columns, which can persist values of up to 4GB
+DoggoHub database to `longtext` columns, which can persist values of up to 4GB
 (sometimes less if the value contains multibyte characters).
 
 Details can be found in the [PostgreSQL][postgres-text-type] and

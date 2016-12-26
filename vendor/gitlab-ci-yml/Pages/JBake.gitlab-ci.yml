@@ -6,7 +6,7 @@
 # This yml works with jBake 2.4.0
 # Feel free to change JBAKE_VERSION version 
 #
-# HowTo at: https://jorge.aguilera.gitlab.io/howtojbake/
+# HowTo at: https://jorge.aguilera.doggohub.io/howtojbake/
 
 image: java:8
 

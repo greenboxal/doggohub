@@ -1,6 +1,6 @@
 # Install Redis on old distributions
 
-GitLab requires at least Redis 2.8. The following guide is for Debian 7 and
+DoggoHub requires at least Redis 2.8. The following guide is for Debian 7 and
 Ubuntu 12.04. If you are using Debian 8 or Ubuntu 14.04 and up, follow the
 [installation guide](installation.md).
 

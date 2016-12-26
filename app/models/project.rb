@@ -30,15 +30,15 @@ class Project < ActiveRecord::Base
                                                        allow_nil: true
 
   default_value_for :archived, false
-  default_value_for :visibility_level, gitlab_config_features.visibility_level
-  default_value_for :container_registry_enabled, gitlab_config_features.container_registry
+  default_value_for :visibility_level, doggohub_config_features.visibility_level
+  default_value_for :container_registry_enabled, doggohub_config_features.container_registry
   default_value_for(:repository_storage) { current_application_settings.pick_repository_storage }
   default_value_for(:shared_runners_enabled) { current_application_settings.shared_runners_enabled }
-  default_value_for :issues_enabled, gitlab_config_features.issues
-  default_value_for :merge_requests_enabled, gitlab_config_features.merge_requests
-  default_value_for :builds_enabled, gitlab_config_features.builds
-  default_value_for :wiki_enabled, gitlab_config_features.wiki
-  default_value_for :snippets_enabled, gitlab_config_features.snippets
+  default_value_for :issues_enabled, doggohub_config_features.issues
+  default_value_for :merge_requests_enabled, doggohub_config_features.merge_requests
+  default_value_for :builds_enabled, doggohub_config_features.builds
+  default_value_for :wiki_enabled, doggohub_config_features.wiki
+  default_value_for :snippets_enabled, doggohub_config_features.snippets
   default_value_for :only_allow_merge_if_all_discussions_are_resolved, false
 
   after_create :ensure_dir_exist
@@ -51,15 +51,15 @@ class Project < ActiveRecord::Base
     update_column(:last_activity_at, self.created_at)
   end
 
-  # update visibility_level of forks
-  after_update :update_forks_visibility_level
-  def update_forks_visibility_level
+  # update visibility_level of borks
+  after_update :update_borks_visibility_level
+  def update_borks_visibility_level
     return unless visibility_level < visibility_level_was
 
-    forks.each do |forked_project|
-      if forked_project.visibility_level > visibility_level
-        forked_project.visibility_level = visibility_level
-        forked_project.save!
+    borks.each do |borked_project|
+      if borked_project.visibility_level > visibility_level
+        borked_project.visibility_level = visibility_level
+        borked_project.save!
       end
     end
   end
@@ -105,20 +105,20 @@ class Project < ActiveRecord::Base
   has_one :redmine_service, dependent: :destroy
   has_one :custom_issue_tracker_service, dependent: :destroy
   has_one :bugzilla_service, dependent: :destroy
-  has_one :gitlab_issue_tracker_service, dependent: :destroy, inverse_of: :project
+  has_one :doggohub_issue_tracker_service, dependent: :destroy, inverse_of: :project
   has_one :external_wiki_service, dependent: :destroy
   has_one :kubernetes_service, dependent: :destroy, inverse_of: :project
 
-  has_one  :forked_project_link,  dependent: :destroy, foreign_key: "forked_to_project_id"
-  has_one  :forked_from_project,  through:   :forked_project_link
+  has_one  :borked_project_link,  dependent: :destroy, foreign_key: "borked_to_project_id"
+  has_one  :borked_from_project,  through:   :borked_project_link
 
-  has_many :forked_project_links, foreign_key: "forked_from_project_id"
-  has_many :forks,                through:     :forked_project_links, source: :forked_to_project
+  has_many :borked_project_links, foreign_key: "borked_from_project_id"
+  has_many :borks,                through:     :borked_project_links, source: :borked_to_project
 
   # Merge Requests for target project should be removed with it
   has_many :merge_requests,     dependent: :destroy, foreign_key: 'target_project_id'
   # Merge requests from source project should be kept when source project was removed
-  has_many :fork_merge_requests, foreign_key: 'source_project_id', class_name: MergeRequest
+  has_many :bork_merge_requests, foreign_key: 'source_project_id', class_name: MergeRequest
   has_many :issues,             dependent: :destroy
   has_many :labels,             dependent: :destroy, class_name: 'ProjectLabel'
   has_many :services,           dependent: :destroy
@@ -194,7 +194,7 @@ class Project < ActiveRecord::Base
     if: ->(project) { project.avatar.present? && project.avatar_changed? }
   validates :avatar, file_size: { maximum: 200.kilobytes.to_i }
   validate :visibility_level_allowed_by_group
-  validate :visibility_level_allowed_as_fork
+  validate :visibility_level_allowed_as_bork
   validate :check_wiki_path_conflict
   validates :repository_storage,
     presence: true,
@@ -439,9 +439,9 @@ class Project < ActiveRecord::Base
   end
 
   def add_import_job
-    if forked?
-      job_id = RepositoryForkWorker.perform_async(id, forked_from_project.repository_storage_path,
-                                                  forked_from_project.path_with_namespace,
+    if borked?
+      job_id = RepositoryBorkWorker.perform_async(id, borked_from_project.repository_storage_path,
+                                                  borked_from_project.path_with_namespace,
                                                   self.namespace.path)
     else
       job_id = RepositoryImportWorker.perform_async(self.id)
@@ -498,7 +498,7 @@ class Project < ActiveRecord::Base
   end
 
   def import?
-    external_import? || forked? || gitlab_project_import?
+    external_import? || borked? || doggohub_project_import?
   end
 
   def no_import?
@@ -529,8 +529,8 @@ class Project < ActiveRecord::Base
     Gitlab::UrlSanitizer.new(import_url).masked_url
   end
 
-  def gitlab_project_import?
-    import_type == 'gitlab_project'
+  def doggohub_project_import?
+    import_type == 'doggohub_project'
   end
 
   def gitea_import?
@@ -559,11 +559,11 @@ class Project < ActiveRecord::Base
     self.errors.add(:visibility_level, "#{level_name} is not allowed in a #{group_level_name} group.")
   end
 
-  def visibility_level_allowed_as_fork
-    return if visibility_level_allowed_as_fork?
+  def visibility_level_allowed_as_bork
+    return if visibility_level_allowed_as_bork?
 
     level_name = Gitlab::VisibilityLevel.level_name(self.visibility_level).downcase
-    self.errors.add(:visibility_level, "#{level_name} is not allowed since the fork source project has lower visibility.")
+    self.errors.add(:visibility_level, "#{level_name} is not allowed since the bork source project has lower visibility.")
   end
 
   def check_wiki_path_conflict
@@ -646,7 +646,7 @@ class Project < ActiveRecord::Base
   end
 
   def default_issue_tracker
-    gitlab_issue_tracker_service || create_gitlab_issue_tracker_service
+    doggohub_issue_tracker_service || create_doggohub_issue_tracker_service
   end
 
   def issues_tracker
@@ -716,7 +716,7 @@ class Project < ActiveRecord::Base
         template = find_service(services_templates, service_name)
 
         if template.nil?
-          # If no template, we should create an instance. Ex `build_gitlab_ci_service`
+          # If no template, we should create an instance. Ex `build_doggohub_ci_service`
           public_send("build_#{service_name}_service")
         else
           Service.build_from_template(id, template)
@@ -772,7 +772,7 @@ class Project < ActiveRecord::Base
 
   def avatar_url
     if self[:avatar].present?
-      [gitlab_config.url, avatar.url].join
+      [doggohub_config.url, avatar.url].join
     elsif avatar_in_git
       Gitlab::Routing.url_helpers.namespace_project_avatar_url(namespace, self)
     end
@@ -855,7 +855,7 @@ class Project < ActiveRecord::Base
   end
 
   def url_to_repo
-    gitlab_shell.url_to_repo(path_with_namespace)
+    doggohub_shell.url_to_repo(path_with_namespace)
   end
 
   def namespace_dir
@@ -900,8 +900,8 @@ class Project < ActiveRecord::Base
     !default_branch_protected? || team.max_member_access(user.id) > Gitlab::Access::DEVELOPER
   end
 
-  def forked?
-    !(forked_project_link.nil? || forked_project_link.forked_from_project.nil?)
+  def borked?
+    !(borked_project_link.nil? || borked_project_link.borked_from_project.nil?)
   end
 
   def personal?
@@ -924,12 +924,12 @@ class Project < ActiveRecord::Base
       raise Exception.new('Project cannot be renamed, because tags are present in its container registry')
     end
 
-    if gitlab_shell.mv_repository(repository_storage_path, old_path_with_namespace, new_path_with_namespace)
+    if doggohub_shell.mv_repository(repository_storage_path, old_path_with_namespace, new_path_with_namespace)
       # If repository moved successfully we need to send update instructions to users.
       # However we cannot allow rollback since we moved repository
       # So we basically we mute exceptions in next actions
       begin
-        gitlab_shell.mv_repository(repository_storage_path, "#{old_path_with_namespace}.wiki", "#{new_path_with_namespace}.wiki")
+        doggohub_shell.mv_repository(repository_storage_path, "#{old_path_with_namespace}.wiki", "#{new_path_with_namespace}.wiki")
         send_move_instructions(old_path_with_namespace)
 
         @old_path_with_namespace = old_path_with_namespace
@@ -1032,8 +1032,8 @@ class Project < ActiveRecord::Base
     reload_default_branch
   end
 
-  def forked_from?(project)
-    forked? && project == forked_from_project
+  def borked_from?(project)
+    borked? && project == borked_from_project
   end
 
   def update_repository_size
@@ -1044,8 +1044,8 @@ class Project < ActiveRecord::Base
     update_attribute(:commit_count, repository.commit_count)
   end
 
-  def forks_count
-    forks.count
+  def borks_count
+    borks.count
   end
 
   def origin_merge_requests
@@ -1053,13 +1053,13 @@ class Project < ActiveRecord::Base
   end
 
   def create_repository
-    # Forked import is handled asynchronously
-    unless forked?
-      if gitlab_shell.add_repository(repository_storage_path, path_with_namespace)
+    # Borked import is handled asynchronously
+    unless borked?
+      if doggohub_shell.add_repository(repository_storage_path, path_with_namespace)
         repository.after_create
         true
       else
-        errors.add(:base, 'Failed to create repository via gitlab-shell')
+        errors.add(:base, 'Failed to create repository via doggohub-shell')
         false
       end
     end
@@ -1130,12 +1130,12 @@ class Project < ActiveRecord::Base
     issues.opened.count
   end
 
-  def visibility_level_allowed_as_fork?(level = self.visibility_level)
-    return true unless forked?
+  def visibility_level_allowed_as_bork?(level = self.visibility_level)
+    return true unless borked?
 
-    # self.forked_from_project will be nil before the project is saved, so
+    # self.borked_from_project will be nil before the project is saved, so
     # we need to go through the relation
-    original_project = forked_project_link.forked_from_project
+    original_project = borked_project_link.borked_from_project
     return true unless original_project
 
     level <= original_project.visibility_level
@@ -1148,7 +1148,7 @@ class Project < ActiveRecord::Base
   end
 
   def visibility_level_allowed?(level = self.visibility_level)
-    visibility_level_allowed_as_fork?(level) && visibility_level_allowed_by_group?(level)
+    visibility_level_allowed_as_bork?(level) && visibility_level_allowed_by_group?(level)
   end
 
   def runners_token
@@ -1201,7 +1201,7 @@ class Project < ActiveRecord::Base
   end
 
   def ensure_dir_exist
-    gitlab_shell.add_namespace(repository_storage_path, namespace.path)
+    doggohub_shell.add_namespace(repository_storage_path, namespace.path)
   end
 
   def predefined_variables

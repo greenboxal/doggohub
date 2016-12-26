@@ -1,46 +1,46 @@
-# GitLab
+# DoggoHub
 
-[![Build status](https://gitlab.com/gitlab-org/gitlab-ce/badges/master/build.svg)](https://gitlab.com/gitlab-org/gitlab-ce/commits/master)
-[![CE coverage report](https://gitlab.com/gitlab-org/gitlab-ce/badges/master/coverage.svg?job=coverage)](https://gitlab-org.gitlab.io/gitlab-ce/coverage-ruby)
-[![Code Climate](https://codeclimate.com/github/gitlabhq/gitlabhq.svg)](https://codeclimate.com/github/gitlabhq/gitlabhq)
+[![Build status](https://doggohub.com/doggohub-org/doggohub-ce/badges/master/build.svg)](https://doggohub.com/doggohub-org/doggohub-ce/commits/master)
+[![CE coverage report](https://doggohub.com/doggohub-org/doggohub-ce/badges/master/coverage.svg?job=coverage)](https://doggohub-org.doggohub.io/doggohub-ce/coverage-ruby)
+[![Code Climate](https://codeclimate.com/github/doggohubhq/doggohubhq.svg)](https://codeclimate.com/github/doggohubhq/doggohubhq)
 [![Core Infrastructure Initiative Best Practices](https://bestpractices.coreinfrastructure.org/projects/42/badge)](https://bestpractices.coreinfrastructure.org/projects/42)
 
 ## Canonical source
 
-The canonical source of GitLab Community Edition is [hosted on GitLab.com](https://gitlab.com/gitlab-org/gitlab-ce/).
+The canonical source of DoggoHub Community Edition is [hosted on DoggoHub.com](https://doggohub.com/doggohub-org/doggohub-ce/).
 
 ## Open source software to collaborate on code
 
-To see how GitLab looks please see the [features page on our website](https://about.gitlab.com/features/).
+To see how DoggoHub looks please see the [features page on our website](https://about.doggohub.com/features/).
 
 - Manage Git repositories with fine grained access controls that keep your code secure
 - Perform code reviews and enhance collaboration with merge requests
 - Each project can also have an issue tracker and a wiki
-- Used by more than 100,000 organizations, GitLab is the most popular solution to manage Git repositories on-premises
+- Used by more than 100,000 organizations, DoggoHub is the most popular solution to manage Git repositories on-premises
 - Completely free and open source (MIT Expat license)
 - Powered by [Ruby on Rails](https://github.com/rails/rails)
 
 ## Hiring
 
-We're hiring developers, support people, and production engineers all the time, please see our [jobs page](https://about.gitlab.com/jobs/).
+We're hiring developers, support people, and production engineers all the time, please see our [jobs page](https://about.doggohub.com/jobs/).
 
 ## Editions
 
-There are two editions of GitLab:
+There are two editions of DoggoHub:
 
-- GitLab Community Edition (CE) is available freely under the MIT Expat license.
-- GitLab Enterprise Edition (EE) includes [extra features](https://about.gitlab.com/features/#compare) that are more useful for organizations with more than 100 users. To use EE and get official support please [become a subscriber](https://about.gitlab.com/pricing/).
+- DoggoHub Community Edition (CE) is available freely under the MIT Expat license.
+- DoggoHub Enterprise Edition (EE) includes [extra features](https://about.doggohub.com/features/#compare) that are more useful for organizations with more than 100 users. To use EE and get official support please [become a subscriber](https://about.doggohub.com/pricing/).
 
 ## Website
 
-On [about.gitlab.com](https://about.gitlab.com/) you can find more information about:
+On [about.doggohub.com](https://about.doggohub.com/) you can find more information about:
 
-- [Subscriptions](https://about.gitlab.com/pricing/)
-- [Consultancy](https://about.gitlab.com/consultancy/)
-- [Community](https://about.gitlab.com/community/)
-- [Hosted GitLab.com](https://about.gitlab.com/gitlab-com/) use GitLab as a free service
-- [GitLab Enterprise Edition](https://about.gitlab.com/features/#enterprise) with additional features aimed at larger organizations.
-- [GitLab CI](https://about.gitlab.com/gitlab-ci/) a continuous integration (CI) server that is easy to integrate with GitLab.
+- [Subscriptions](https://about.doggohub.com/pricing/)
+- [Consultancy](https://about.doggohub.com/consultancy/)
+- [Community](https://about.doggohub.com/community/)
+- [Hosted DoggoHub.com](https://about.doggohub.com/doggohub-com/) use DoggoHub as a free service
+- [DoggoHub Enterprise Edition](https://about.doggohub.com/features/#enterprise) with additional features aimed at larger organizations.
+- [DoggoHub CI](https://about.doggohub.com/doggohub-ci/) a continuous integration (CI) server that is easy to integrate with DoggoHub.
 
 ## Requirements
 
@@ -48,31 +48,31 @@ Please see the [requirements documentation](doc/install/requirements.md) for sys
 
 ## Installation
 
-The recommended way to install GitLab is with the [Omnibus packages](https://about.gitlab.com/downloads/) on our package server.
+The recommended way to install DoggoHub is with the [Omnibus packages](https://about.doggohub.com/downloads/) on our package server.
 Compared to an installation from source, this is faster and less error prone.
 Just select your operating system, download the respective package (Debian or RPM) and install it using the system's package manager.
 
-There are various other options to install GitLab, please refer to the [installation page on the GitLab website](https://about.gitlab.com/installation/) for more information.
+There are various other options to install DoggoHub, please refer to the [installation page on the DoggoHub website](https://about.doggohub.com/installation/) for more information.
 
 You can access a new installation with the login **`root`** and password **`5iveL!fe`**, after login you are required to set a unique password.
 
 ## Contributing
 
-GitLab is an open source project and we are very happy to accept community contributions. Please refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for details.
+DoggoHub is an open source project and we are very happy to accept community contributions. Please refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for details.
 
 ## Install a development environment
 
-To work on GitLab itself, we recommend setting up your development environment with [the GitLab Development Kit](https://gitlab.com/gitlab-org/gitlab-development-kit).
-If you do not use the GitLab Development Kit you need to install and setup all the dependencies yourself, this is a lot of work and error prone.
+To work on DoggoHub itself, we recommend setting up your development environment with [the DoggoHub Development Kit](https://doggohub.com/doggohub-org/doggohub-development-kit).
+If you do not use the DoggoHub Development Kit you need to install and setup all the dependencies yourself, this is a lot of work and error prone.
 One small thing you also have to do when installing it yourself is to copy the example development unicorn configuration file:
 
     cp config/unicorn.rb.example.development config/unicorn.rb
 
-Instructions on how to start GitLab and how to run the tests can be found in the [development section of the GitLab Development Kit](https://gitlab.com/gitlab-org/gitlab-development-kit#development).
+Instructions on how to start DoggoHub and how to run the tests can be found in the [development section of the DoggoHub Development Kit](https://doggohub.com/doggohub-org/doggohub-development-kit#development).
 
 ## Software stack
 
-GitLab is a Ruby on Rails application that runs on the following software:
+DoggoHub is a Ruby on Rails application that runs on the following software:
 
 - Ubuntu/Debian/CentOS/RHEL
 - Ruby (MRI) 2.3
@@ -80,7 +80,7 @@ GitLab is a Ruby on Rails application that runs on the following software:
 - Redis 2.8+
 - MySQL or PostgreSQL
 
-For more information please see the [architecture documentation](https://docs.gitlab.com/ce/development/architecture.html).
+For more information please see the [architecture documentation](https://docs.doggohub.com/ce/development/architecture.html).
 
 ## UX design
 
@@ -88,23 +88,23 @@ Please adhere to the [UX Guide](doc/development/ux_guide/index.md) when creating
 
 ## Third-party applications
 
-There are a lot of [third-party applications integrating with GitLab](https://about.gitlab.com/applications/). These include GUI Git clients, mobile applications and API wrappers for various languages.
+There are a lot of [third-party applications integrating with DoggoHub](https://about.doggohub.com/applications/). These include GUI Git clients, mobile applications and API wrappers for various languages.
 
-## GitLab release cycle
+## DoggoHub release cycle
 
-For more information about the release process see the [release documentation](https://gitlab.com/gitlab-org/release-tools/blob/master/README.md).
+For more information about the release process see the [release documentation](https://doggohub.com/doggohub-org/release-tools/blob/master/README.md).
 
 ## Upgrading
 
-For upgrading information please see our [update page](https://about.gitlab.com/update/).
+For upgrading information please see our [update page](https://about.doggohub.com/update/).
 
 ## Documentation
 
-All documentation can be found on [docs.gitlab.com/ce/](https://docs.gitlab.com/ce/).
+All documentation can be found on [docs.doggohub.com/ce/](https://docs.doggohub.com/ce/).
 
 ## Getting help
 
-Please see [Getting help for GitLab](https://about.gitlab.com/getting-help/) on our website for the many options to get help.
+Please see [Getting help for DoggoHub](https://about.doggohub.com/getting-help/) on our website for the many options to get help.
 
 ## Is it any good?
 
@@ -113,4 +113,4 @@ Please see [Getting help for GitLab](https://about.gitlab.com/getting-help/) on 
 ## Is it awesome?
 
 Thanks for [asking this question](https://twitter.com/supersloth/status/489462789384056832) Joshua.
-[These people](https://twitter.com/gitlab/favorites) seem to like it.
+[These people](https://twitter.com/doggohub/favorites) seem to like it.

@@ -38,7 +38,7 @@ module Gitlab
             return true
           end
 
-          # Block user in GitLab if he/she was blocked in AD
+          # Block user in DoggoHub if he/she was blocked in AD
           if Gitlab::LDAP::Person.disabled_via_active_directory?(user.ldap_identity.extern_uid, adapter)
             user.ldap_block
             false

@@ -1,12 +1,12 @@
-## Migrate GitLab CI to GitLab CE or EE
+## Migrate DoggoHub CI to DoggoHub CE or EE
 
-Beginning with version 8.0 of GitLab Community Edition (CE) and Enterprise
-Edition (EE), GitLab CI is no longer its own application, but is instead built
+Beginning with version 8.0 of DoggoHub Community Edition (CE) and Enterprise
+Edition (EE), DoggoHub CI is no longer its own application, but is instead built
 into the CE and EE applications.
 
 This guide will detail the process of migrating your CI installation and data
-into your GitLab CE or EE installation. **You can only migrate CI data from
-GitLab CI 8.0 to GitLab 8.0; migrating between other versions (e.g.7.14 to 8.1)
+into your DoggoHub CE or EE installation. **You can only migrate CI data from
+DoggoHub CI 8.0 to DoggoHub 8.0; migrating between other versions (e.g.7.14 to 8.1)
 is not possible.**
 
 We recommend that you read through the entire migration process in this
@@ -14,27 +14,27 @@ document before beginning.
 
 ### Overview
 
-In this document we assume you have a GitLab server and a GitLab CI server. It
+In this document we assume you have a DoggoHub server and a DoggoHub CI server. It
 does not matter if these are the same machine.
 
-The migration consists of three parts: updating GitLab and GitLab CI, moving
+The migration consists of three parts: updating DoggoHub and DoggoHub CI, moving
 data, and redirecting traffic.
 
-Please note that CI builds triggered on your GitLab server in the time between
-updating to 8.0 and finishing the migration will be lost. Your GitLab server
-can be online for most of the procedure; the only GitLab downtime (if any) is
+Please note that CI builds triggered on your DoggoHub server in the time between
+updating to 8.0 and finishing the migration will be lost. Your DoggoHub server
+can be online for most of the procedure; the only DoggoHub downtime (if any) is
 during the upgrade to 8.0. Your CI service will be offline from the moment you
 upgrade to 8.0 until you finish the migration procedure.
 
 ### Before upgrading
 
-If you have GitLab CI installed using omnibus-gitlab packages but **you don't want to migrate your existing data**:
+If you have DoggoHub CI installed using omnibus-doggohub packages but **you don't want to migrate your existing data**:
 
 ```bash
-mv /var/opt/gitlab/gitlab-ci/builds /var/opt/gitlab/gitlab-ci/builds.$(date +%s)
+mv /var/opt/doggohub/doggohub-ci/builds /var/opt/doggohub/doggohub-ci/builds.$(date +%s)
 ```
 
-run `sudo gitlab-ctl reconfigure` and you can reach CI at `gitlab.example.com/ci`.
+run `sudo doggohub-ctl reconfigure` and you can reach CI at `doggohub.example.com/ci`.
 
 If you want to migrate your existing data, continue reading.
 
@@ -50,128 +50,128 @@ Make sure that the backup script on both servers can connect to the database.
 ```
 # On your CI server:
 # Omnibus
-sudo chown gitlab-ci:gitlab-ci /var/opt/gitlab/gitlab-ci/builds
-sudo gitlab-ci-rake backup:create
+sudo chown doggohub-ci:doggohub-ci /var/opt/doggohub/doggohub-ci/builds
+sudo doggohub-ci-rake backup:create
 
 # Source
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec rake backup:create RAILS_ENV=production
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec rake backup:create RAILS_ENV=production
 ```
 
-Also check on your GitLab server.
+Also check on your DoggoHub server.
 
 ```
-# On your GitLab server:
+# On your DoggoHub server:
 # Omnibus
-sudo gitlab-rake gitlab:backup:create SKIP=repositories,uploads
+sudo doggohub-rake doggohub:backup:create SKIP=repositories,uploads
 
 # Source
-cd /home/git/gitlab
-sudo -u git -H bundle exec rake gitlab:backup:create RAILS_ENV=production SKIP=repositories,uploads
+cd /home/git/doggohub
+sudo -u git -H bundle exec rake doggohub:backup:create RAILS_ENV=production SKIP=repositories,uploads
 ```
 
 If this fails you need to fix it before upgrading to 8.0. Also see
-https://about.gitlab.com/getting-help/
+https://about.doggohub.com/getting-help/
 
 #### 2. Check source and target database types
 
-Check what databases you use on your GitLab server and your CI server.
-  Look for the 'adapter:' line. If your CI server and your GitLab server use
+Check what databases you use on your DoggoHub server and your CI server.
+  Look for the 'adapter:' line. If your CI server and your DoggoHub server use
 the same database adapter no special care is needed. If your CI server uses
-MySQL and your GitLab server uses PostgreSQL you need to pass a special option
+MySQL and your DoggoHub server uses PostgreSQL you need to pass a special option
 during the 'Moving data' part. **If your CI server uses PostgreSQL and your
-GitLab server uses MySQL you cannot migrate your CI data to GitLab 8.0.**
+DoggoHub server uses MySQL you cannot migrate your CI data to DoggoHub 8.0.**
 
 ```
 # On your CI server:
 # Omnibus
-sudo gitlab-ci-rake env:info
+sudo doggohub-ci-rake env:info
 
 # Source
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec rake env:info RAILS_ENV=production
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec rake env:info RAILS_ENV=production
 ```
 
 ```
-# On your GitLab server:
+# On your DoggoHub server:
 # Omnibus
-sudo gitlab-rake gitlab:env:info
+sudo doggohub-rake doggohub:env:info
 
 # Source
-cd /home/git/gitlab
-sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+cd /home/git/doggohub
+sudo -u git -H bundle exec rake doggohub:env:info RAILS_ENV=production
 ```
 
 #### 3. Storage planning
 
-Decide where to store CI build traces on GitLab server. GitLab CI uses
+Decide where to store CI build traces on DoggoHub server. DoggoHub CI uses
   files on disk to store CI build traces. The default path for these build
-traces is `/var/opt/gitlab/gitlab-ci/builds` (Omnibus) or
-`/home/git/gitlab/builds` (Source). If you are storing your repository data in
+traces is `/var/opt/doggohub/doggohub-ci/builds` (Omnibus) or
+`/home/git/doggohub/builds` (Source). If you are storing your repository data in
 a special location, or if you are using NFS, you should make sure that you
 store build traces on the same storage as your Git repositories.
 
 ### I. Upgrading
 
-From this point on, GitLab CI will be unavailable for your end users.
+From this point on, DoggoHub CI will be unavailable for your end users.
 
-#### 1. Upgrade GitLab to 8.0
+#### 1. Upgrade DoggoHub to 8.0
 
-First upgrade your GitLab server to version 8.0:
-https://about.gitlab.com/update/
+First upgrade your DoggoHub server to version 8.0:
+https://about.doggohub.com/update/
 
-#### 2. Disable CI on the GitLab server during the migration
+#### 2. Disable CI on the DoggoHub server during the migration
 
 After you update, go to the admin panel and temporarily disable CI.  As
   an administrator, go to **Admin Area** -> **Settings**, and under
 **Continuous Integration** uncheck **Disable to prevent CI usage until rake
 ci:migrate is run (8.0 only)**.
 
-#### 3. CI settings are now in GitLab
+#### 3. CI settings are now in DoggoHub
 
 If you want to use custom CI settings (e.g. change where builds are
-  stored), please update `/etc/gitlab/gitlab.rb` (Omnibus) or
-`/home/git/gitlab/config/gitlab.yml` (Source).
+  stored), please update `/etc/doggohub/doggohub.rb` (Omnibus) or
+`/home/git/doggohub/config/doggohub.yml` (Source).
 
-#### 4. Upgrade GitLab CI to 8.0
+#### 4. Upgrade DoggoHub CI to 8.0
 
-Now upgrade GitLab CI to version 8.0. If you are using Omnibus packages,
-  this may have already happened when you upgraded GitLab to 8.0.
+Now upgrade DoggoHub CI to version 8.0. If you are using Omnibus packages,
+  this may have already happened when you upgraded DoggoHub to 8.0.
 
-#### 5. Disable GitLab CI on the CI server
+#### 5. Disable DoggoHub CI on the CI server
 
-Disable GitLab CI after upgrading to 8.0.
+Disable DoggoHub CI after upgrading to 8.0.
 
 ```
 # On your CI server:
 # Omnibus
-sudo gitlab-ctl stop ci-unicorn
-sudo gitlab-ctl stop ci-sidekiq
+sudo doggohub-ctl stop ci-unicorn
+sudo doggohub-ctl stop ci-sidekiq
 
 # Source
-sudo service gitlab_ci stop
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec whenever --clear-crontab RAILS_ENV=production
+sudo service doggohub_ci stop
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec whenever --clear-crontab RAILS_ENV=production
 ```
 
 ### II. Moving data
 
 #### 1. Database encryption key
 
-Move the database encryption key from your CI server to your GitLab
+Move the database encryption key from your CI server to your DoggoHub
   server. The command below will show you what you need to copy-paste to your
-GitLab server. On Omnibus GitLab servers you will have to add a line to
-`/etc/gitlab/gitlab.rb`. On GitLab servers installed from source you will have
-to replace the contents of `/home/git/gitlab/config/secrets.yml`.
+DoggoHub server. On Omnibus DoggoHub servers you will have to add a line to
+`/etc/doggohub/doggohub.rb`. On DoggoHub servers installed from source you will have
+to replace the contents of `/home/git/doggohub/config/secrets.yml`.
 
 ```
 # On your CI server:
 # Omnibus
-sudo gitlab-ci-rake backup:show_secrets
+sudo doggohub-ci-rake backup:show_secrets
 
 # Source
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec rake backup:show_secrets RAILS_ENV=production
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec rake backup:show_secrets RAILS_ENV=production
 ```
 
 #### 2. SQL data and build traces
@@ -184,80 +184,80 @@ will need this file later.
 ```
 # On your CI server:
 # Omnibus
-sudo chown gitlab-ci:gitlab-ci /var/opt/gitlab/gitlab-ci/builds
-sudo gitlab-ci-rake backup:create
+sudo chown doggohub-ci:doggohub-ci /var/opt/doggohub/doggohub-ci/builds
+sudo doggohub-ci-rake backup:create
 
 # Source
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec rake backup:create RAILS_ENV=production
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec rake backup:create RAILS_ENV=production
 ```
 
-#### 3. Copy data to the GitLab server
+#### 3. Copy data to the DoggoHub server
 
-If you were running GitLab and GitLab CI on the same server you can skip this
+If you were running DoggoHub and DoggoHub CI on the same server you can skip this
 step.
 
-Copy your CI data archive to your GitLab server. There are many ways to do
+Copy your CI data archive to your DoggoHub server. There are many ways to do
 this, below we use SSH agent forwarding and 'scp', which will be easy and fast
 for most setups. You can also copy the data archive first from the CI server to
-your laptop and then from your laptop to the GitLab server.
+your laptop and then from your laptop to the DoggoHub server.
 
 ```
 # Start from your laptop
 ssh -A ci_admin@ci_server.example
 # Now on the CI server
-scp /path/to/12345_gitlab_ci_backup.tar gitlab_admin@gitlab_server.example:~
+scp /path/to/12345_doggohub_ci_backup.tar doggohub_admin@doggohub_server.example:~
 ```
 
-#### 4. Move data to the GitLab backups folder
+#### 4. Move data to the DoggoHub backups folder
 
-Make the CI data archive discoverable for GitLab. We assume below that you
+Make the CI data archive discoverable for DoggoHub. We assume below that you
 store backups in the default path, adjust the command if necessary.
 
 ```
-# On your GitLab server:
+# On your DoggoHub server:
 # Omnibus
-sudo mv /path/to/12345_gitlab_ci_backup.tar /var/opt/gitlab/backups/
+sudo mv /path/to/12345_doggohub_ci_backup.tar /var/opt/doggohub/backups/
 
 # Source
-sudo mv /path/to/12345_gitlab_ci_backup.tar /home/git/gitlab/tmp/backups/
+sudo mv /path/to/12345_doggohub_ci_backup.tar /home/git/doggohub/tmp/backups/
 ```
 
-#### 5. Import the CI data into GitLab.
+#### 5. Import the CI data into DoggoHub.
 
-This step will delete any existing CI data on your GitLab server. There should
-be no CI data yet because you turned CI on the GitLab server off earlier.
+This step will delete any existing CI data on your DoggoHub server. There should
+be no CI data yet because you turned CI on the DoggoHub server off earlier.
 
 ```
-# On your GitLab server:
+# On your DoggoHub server:
 # Omnibus
-sudo chown git:git /var/opt/gitlab/gitlab-ci/builds
-sudo gitlab-rake ci:migrate
+sudo chown git:git /var/opt/doggohub/doggohub-ci/builds
+sudo doggohub-rake ci:migrate
 
 # Source
-cd /home/git/gitlab
+cd /home/git/doggohub
 sudo -u git -H bundle exec rake ci:migrate RAILS_ENV=production
 ```
 
-#### 6. Restart GitLab
+#### 6. Restart DoggoHub
 
 ```
-# On your GitLab server:
+# On your DoggoHub server:
 # Omnibus
-sudo gitlab-ctl hup unicorn
-sudo gitlab-ctl restart sidekiq
+sudo doggohub-ctl hup unicorn
+sudo doggohub-ctl restart sidekiq
 
 # Source
-sudo service gitlab reload
+sudo service doggohub reload
 ```
 
 ### III. Redirecting traffic
 
-If you were running GitLab CI with Omnibus packages and you were using the
+If you were running DoggoHub CI with Omnibus packages and you were using the
 internal NGINX configuration your CI service should now be available both at
-`ci.example.com` (the old address) and `gitlab.example.com/ci`. **You are done!**
+`ci.example.com` (the old address) and `doggohub.example.com/ci`. **You are done!**
 
-If you installed GitLab CI from source we now need to configure a redirect in
+If you installed DoggoHub CI from source we now need to configure a redirect in
 NGINX so that existing CI runners can keep using the old CI server address, and
 so that existing links to your CI server keep working.
 
@@ -268,16 +268,16 @@ migrated installation, and that existing build triggers still work, you'll need
 to update your Nginx configuration to redirect requests for the old locations to
 the new ones.
 
-Edit `/etc/nginx/sites-available/gitlab_ci` and paste:
+Edit `/etc/nginx/sites-available/doggohub_ci` and paste:
 
 ```nginx
-# GITLAB CI
+# DOGGOHUB CI
 server {
   listen 80 default_server;         # e.g., listen 192.168.1.1:80;
   server_name YOUR_CI_SERVER_FQDN;  # e.g., server_name source.example.com;
 
-  access_log  /var/log/nginx/gitlab_ci_access.log;
-  error_log   /var/log/nginx/gitlab_ci_error.log;
+  access_log  /var/log/nginx/doggohub_ci_access.log;
+  error_log   /var/log/nginx/doggohub_ci_error.log;
 
   # expose API to fix runners
   location /api {
@@ -286,14 +286,14 @@ server {
     proxy_redirect        off;
     proxy_set_header      X-Real-IP $remote_addr;
 
-    # You need to specify your DNS servers that are able to resolve YOUR_GITLAB_SERVER_FQDN
+    # You need to specify your DNS servers that are able to resolve YOUR_DOGGOHUB_SERVER_FQDN
     resolver 8.8.8.8 8.8.4.4;
-    proxy_pass $scheme://YOUR_GITLAB_SERVER_FQDN/ci$request_uri;
+    proxy_pass $scheme://YOUR_DOGGOHUB_SERVER_FQDN/ci$request_uri;
   }
 
   # redirect all other CI requests
   location / {
-    return 301 $scheme://YOUR_GITLAB_SERVER_FQDN/ci$request_uri;
+    return 301 $scheme://YOUR_DOGGOHUB_SERVER_FQDN/ci$request_uri;
   }
 
   # adjust this to match the largest build log your runners might submit,
@@ -304,18 +304,18 @@ server {
 
 Make sure you substitute these placeholder values with your real ones:
 
-1. `YOUR_CI_SERVER_FQDN`: The existing public-facing address of your GitLab CI
-   install (e.g., `ci.gitlab.com`).
-1. `YOUR_GITLAB_SERVER_FQDN`: The current public-facing address of your GitLab
-   CE (or EE) install (e.g., `gitlab.com`).
+1. `YOUR_CI_SERVER_FQDN`: The existing public-facing address of your DoggoHub CI
+   install (e.g., `ci.doggohub.com`).
+1. `YOUR_DOGGOHUB_SERVER_FQDN`: The current public-facing address of your DoggoHub
+   CE (or EE) install (e.g., `doggohub.com`).
 
 **Make sure not to remove the `/ci$request_uri` part. This is required to
 properly forward the requests.**
 
 You should also make sure that you can:
 
-1. `curl https://YOUR_GITLAB_SERVER_FQDN/` from your previous GitLab CI server.
-1. `curl https://YOUR_CI_SERVER_FQDN/` from your GitLab CE (or EE) server.
+1. `curl https://YOUR_DOGGOHUB_SERVER_FQDN/` from your previous DoggoHub CI server.
+1. `curl https://YOUR_CI_SERVER_FQDN/` from your DoggoHub CE (or EE) server.
 
 #### 2. Check Nginx configuration
 
@@ -343,18 +343,18 @@ Errno::EACCES: Permission denied @ rb_sysopen - config/secrets.yml
 This can happen if you are updating from versions prior to 7.13 straight to 8.0.
 The fix for this is to update to Omnibus 7.14 first and then update it to 8.0.
 
-#### Permission denied when accessing /var/opt/gitlab/gitlab-ci/builds
+#### Permission denied when accessing /var/opt/doggohub/doggohub-ci/builds
 To fix that issue you have to change builds/ folder permission before doing final backup:
 ```
-sudo chown -R gitlab-ci:gitlab-ci /var/opt/gitlab/gitlab-ci/builds
+sudo chown -R doggohub-ci:doggohub-ci /var/opt/doggohub/doggohub-ci/builds
 ```
 
 Then before executing `ci:migrate` you need to fix builds folder permission:
 ```
-sudo chown git:git /var/opt/gitlab/gitlab-ci/builds
+sudo chown git:git /var/opt/doggohub/doggohub-ci/builds
 ```
 
-#### Problems when importing CI database to GitLab
+#### Problems when importing CI database to DoggoHub
 If you were migrating CI database from MySQL to PostgreSQL manually you can see errors during import about missing sequences:
 ```
 ALTER SEQUENCE
@@ -374,7 +374,7 @@ CREATE TABLE
 To fix that you need to apply this SQL statement before doing final backup:
 ```
 # Omnibus
-gitlab-ci-rails dbconsole <<EOF
+doggohub-ci-rails dbconsole <<EOF
 -- ALTER TABLES - DROP DEFAULTS
 ALTER TABLE ONLY ci_application_settings ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE ONLY ci_builds ALTER COLUMN id DROP DEFAULT;
@@ -428,8 +428,8 @@ ALTER TABLE ONLY ci_web_hooks ALTER COLUMN id SET DEFAULT nextval('ci_web_hooks_
 EOF
 
 # Source
-cd /home/gitlab_ci/gitlab-ci
-sudo -u gitlab_ci -H bundle exec rails dbconsole production <<EOF
+cd /home/doggohub_ci/doggohub-ci
+sudo -u doggohub_ci -H bundle exec rails dbconsole production <<EOF
 ... COPY SQL STATEMENTS FROM ABOVE ...
 EOF
 ```

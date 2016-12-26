@@ -1,15 +1,15 @@
 # Quick Start
 
->**Note:** Starting from version 8.0, GitLab [Continuous Integration][ci] (CI)
-is fully integrated into GitLab itself and is [enabled] by default on all
+>**Note:** Starting from version 8.0, DoggoHub [Continuous Integration][ci] (CI)
+is fully integrated into DoggoHub itself and is [enabled] by default on all
 projects.
 
-GitLab offers a [continuous integration][ci] service. If you
-[add a `.gitlab-ci.yml` file][yaml] to the root directory of your repository,
-and configure your GitLab project to use a [Runner], then each merge request or
+DoggoHub offers a [continuous integration][ci] service. If you
+[add a `.doggohub-ci.yml` file][yaml] to the root directory of your repository,
+and configure your DoggoHub project to use a [Runner], then each merge request or
 push triggers your CI [pipeline].
 
-The `.gitlab-ci.yml` file tells the GitLab runner what to do. By default it runs
+The `.doggohub-ci.yml` file tells the DoggoHub runner what to do. By default it runs
 a pipeline with three [stages]: `build`, `test`, and `deploy`. You don't need to
 use all three stages; stages with no jobs are simply ignored.
 
@@ -18,7 +18,7 @@ checkmark associated with the pushed commit or merge request. This makes it
 easy to see whether a merge request caused any of the tests to fail before
 you even look at the code.
 
-Most projects use GitLab's CI service to run the test suite so that
+Most projects use DoggoHub's CI service to run the test suite so that
 developers get immediate feedback if they broke something.
 
 There's a growing trend to use continuous delivery and continuous deployment to
@@ -26,7 +26,7 @@ automatically deploy tested code to staging and production environments.
 
 So in brief, the steps needed to have a working CI can be summed up to:
 
-1. Add `.gitlab-ci.yml` to the root directory of your repository
+1. Add `.doggohub-ci.yml` to the root directory of your repository
 1. Configure a Runner
 
 From there on, on every push to your Git repository, the Runner will
@@ -37,38 +37,38 @@ project's `/pipelines` page.
 
 This guide assumes that you:
 
-- have a working GitLab instance of version 8.0 or higher or are using
-  [GitLab.com](https://gitlab.com)
-- have a project in GitLab that you would like to use CI for
+- have a working DoggoHub instance of version 8.0 or higher or are using
+  [DoggoHub.com](https://doggohub.com)
+- have a project in DoggoHub that you would like to use CI for
 
-Let's break it down to pieces and work on solving the GitLab CI puzzle.
+Let's break it down to pieces and work on solving the DoggoHub CI puzzle.
 
-## Creating a `.gitlab-ci.yml` file
+## Creating a `.doggohub-ci.yml` file
 
-Before you create `.gitlab-ci.yml` let's first explain in brief what this is
+Before you create `.doggohub-ci.yml` let's first explain in brief what this is
 all about.
 
-### What is `.gitlab-ci.yml`
+### What is `.doggohub-ci.yml`
 
-The `.gitlab-ci.yml` file is where you configure what CI does with your project.
+The `.doggohub-ci.yml` file is where you configure what CI does with your project.
 It lives in the root of your repository.
 
-On any push to your repository, GitLab will look for the `.gitlab-ci.yml`
+On any push to your repository, DoggoHub will look for the `.doggohub-ci.yml`
 file and start builds on _Runners_ according to the contents of the file,
 for that commit.
 
-Because `.gitlab-ci.yml` is in the repository and is version controlled, old
-versions still build successfully, forks can easily make use of CI, branches can
+Because `.doggohub-ci.yml` is in the repository and is version controlled, old
+versions still build successfully, borks can easily make use of CI, branches can
 have different pipelines and jobs, and you have a single source of truth for CI.
-You can read more about the reasons why we are using `.gitlab-ci.yml` [in our
+You can read more about the reasons why we are using `.doggohub-ci.yml` [in our
 blog about it][blog-ci].
 
-**Note:** `.gitlab-ci.yml` is a [YAML](https://en.wikipedia.org/wiki/YAML) file
+**Note:** `.doggohub-ci.yml` is a [YAML](https://en.wikipedia.org/wiki/YAML) file
 so you have to pay extra attention to indentation. Always use spaces, not tabs.
 
-### Creating a simple `.gitlab-ci.yml` file
+### Creating a simple `.doggohub-ci.yml` file
 
-You need to create a file named `.gitlab-ci.yml` in the root directory of your
+You need to create a file named `.doggohub-ci.yml` in the root directory of your
 repository. Below is an example for a Ruby on Rails project.
 
 ```yaml
@@ -95,7 +95,7 @@ applications:
    different commands to be executed.
 1. Before every job, the commands defined by `before_script` are executed.
 
-The `.gitlab-ci.yml` file defines sets of jobs with constraints of how and when
+The `.doggohub-ci.yml` file defines sets of jobs with constraints of how and when
 they should be run. The jobs are defined as top-level elements with a name (in
 our case `rspec` and `rubocop`) and always have to contain the `script` keyword.
 Jobs are used to create builds, which are then picked by
@@ -103,22 +103,22 @@ Jobs are used to create builds, which are then picked by
 
 What is important is that each job is run independently from each other.
 
-If you want to check whether your `.gitlab-ci.yml` file is valid, there is a
-Lint tool under the page `/ci/lint` of your GitLab instance. You can also find
+If you want to check whether your `.doggohub-ci.yml` file is valid, there is a
+Lint tool under the page `/ci/lint` of your DoggoHub instance. You can also find
 a "CI Lint" button to go to this page under **Pipelines > Pipelines** and
 **Pipelines > Builds** in your project.
 
-For more information and a complete `.gitlab-ci.yml` syntax, please read
-[the documentation on .gitlab-ci.yml](../yaml/README.md).
+For more information and a complete `.doggohub-ci.yml` syntax, please read
+[the documentation on .doggohub-ci.yml](../yaml/README.md).
 
-### Push `.gitlab-ci.yml` to GitLab
+### Push `.doggohub-ci.yml` to DoggoHub
 
-Once you've created `.gitlab-ci.yml`, you should add it to your git repository
-and push it to GitLab.
+Once you've created `.doggohub-ci.yml`, you should add it to your git repository
+and push it to DoggoHub.
 
 ```bash
-git add .gitlab-ci.yml
-git commit -m "Add .gitlab-ci.yml"
+git add .doggohub-ci.yml
+git commit -m "Add .doggohub-ci.yml"
 git push origin master
 ```
 
@@ -136,28 +136,28 @@ specific commit.
 ![Single commit builds page](img/single_commit_status_pending.png)
 
 Notice that there are two jobs pending which are named after what we wrote in
-`.gitlab-ci.yml`. The red triangle indicates that there is no Runner configured
+`.doggohub-ci.yml`. The red triangle indicates that there is no Runner configured
 yet for these builds.
 
 The next step is to configure a Runner so that it picks the pending builds.
 
 ## Configuring a Runner
 
-In GitLab, Runners run the builds that you define in `.gitlab-ci.yml`. A Runner
+In DoggoHub, Runners run the builds that you define in `.doggohub-ci.yml`. A Runner
 can be a virtual machine, a VPS, a bare-metal machine, a docker container or
-even a cluster of containers. GitLab and the Runners communicate through an API,
+even a cluster of containers. DoggoHub and the Runners communicate through an API,
 so the only requirement is that the Runner's machine has Internet access.
 
 A Runner can be specific to a certain project or serve multiple projects in
-GitLab. If it serves all projects it's called a _Shared Runner_.
+DoggoHub. If it serves all projects it's called a _Shared Runner_.
 
 Find more information about different Runners in the
 [Runners](../runners/README.md) documentation.
 
 You can find whether any Runners are assigned to your project by going to
 **Settings > Runners**. Setting up a Runner is easy and straightforward. The
-official Runner supported by GitLab is written in Go and can be found at
-<https://gitlab.com/gitlab-org/gitlab-ci-multi-runner>.
+official Runner supported by DoggoHub is written in Go and can be found at
+<https://doggohub.com/doggohub-org/doggohub-ci-multi-runner>.
 
 In order to have a functional Runner you need to follow two steps:
 
@@ -168,7 +168,7 @@ Follow the links above to set up your own Runner or use a Shared Runner as
 described in the next section.
 
 For other types of unofficial Runners written in other languages, see the
-[instructions for the various GitLab Runners](https://about.gitlab.com/gitlab-ci/#gitlab-runner).
+[instructions for the various DoggoHub Runners](https://about.doggohub.com/doggohub-ci/#doggohub-runner).
 
 Once the Runner has been set up, you should see it on the Runners page of your
 project, following **Settings > Runners**.
@@ -177,10 +177,10 @@ project, following **Settings > Runners**.
 
 ### Shared Runners
 
-If you use [GitLab.com](https://gitlab.com/) you can use **Shared Runners**
-provided by GitLab Inc.
+If you use [DoggoHub.com](https://doggohub.com/) you can use **Shared Runners**
+provided by DoggoHub Inc.
 
-These are special virtual machines that run on GitLab's infrastructure and can
+These are special virtual machines that run on DoggoHub's infrastructure and can
 build any project.
 
 To enable **Shared Runners** you have to go to your project's
@@ -208,7 +208,7 @@ you expected.
 ![Build log](img/build_log.png)
 
 You are also able to view the status of any commit in the various pages in
-GitLab, such as **Commits** and **Merge Requests**.
+DoggoHub, such as **Commits** and **Merge Requests**.
 
 ## Enabling build emails
 
@@ -221,15 +221,15 @@ For more information read the
 
 ## Examples
 
-Visit the [examples README][examples] to see a list of examples using GitLab
+Visit the [examples README][examples] to see a list of examples using DoggoHub
 CI with various languages.
 
-Awesome! You started using CI in GitLab!
+Awesome! You started using CI in DoggoHub!
 
-[runner-install]: https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/tree/master#install-gitlab-runner
-[blog-ci]: https://about.gitlab.com/2015/05/06/why-were-replacing-gitlab-ci-jobs-with-gitlab-ci-dot-yml/
+[runner-install]: https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/tree/master#install-doggohub-runner
+[blog-ci]: https://about.doggohub.com/2015/05/06/why-were-replacing-doggohub-ci-jobs-with-doggohub-ci-dot-yml/
 [examples]: ../examples/README.md
-[ci]: https://about.gitlab.com/gitlab-ci/
+[ci]: https://about.doggohub.com/doggohub-ci/
 [yaml]: ../yaml/README.md
 [runner]: ../runners/README.md
 [enabled]: ../enable_or_disable_ci.md

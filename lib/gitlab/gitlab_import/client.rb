@@ -9,7 +9,7 @@ module Gitlab
         @client = ::OAuth2::Client.new(
           config.app_id,
           config.app_secret,
-          gitlab_options
+          doggohub_options
         )
 
         if access_token
@@ -71,11 +71,11 @@ module Gitlab
       end
 
       def config
-        Gitlab.config.omniauth.providers.find{|provider| provider.name == "gitlab"}
+        Gitlab.config.omniauth.providers.find{|provider| provider.name == "doggohub"}
       end
 
-      def gitlab_options
-        OmniAuth::Strategies::GitLab.default_options[:client_options].to_h.symbolize_keys
+      def doggohub_options
+        OmniAuth::Strategies::DoggoHub.default_options[:client_options].to_h.symbolize_keys
       end
     end
   end

@@ -14,7 +14,7 @@ describe Gitlab::LDAP::Access, lib: true do
 
       it { is_expected.to be_falsey }
 
-      it 'should block user in GitLab' do
+      it 'should block user in DoggoHub' do
         access.allowed?
         expect(user).to be_blocked
         expect(user).to be_ldap_blocked
@@ -33,7 +33,7 @@ describe Gitlab::LDAP::Access, lib: true do
 
         it { is_expected.to be_falsey }
 
-        it 'blocks user in GitLab' do
+        it 'blocks user in DoggoHub' do
           access.allowed?
           expect(user).to be_blocked
           expect(user).to be_ldap_blocked
@@ -52,7 +52,7 @@ describe Gitlab::LDAP::Access, lib: true do
             user.block
           end
 
-          it 'does not unblock user in GitLab' do
+          it 'does not unblock user in DoggoHub' do
             access.allowed?
             expect(user).to be_blocked
             expect(user).not_to be_ldap_blocked # this block is handled by omniauth not by our internal logic
@@ -64,7 +64,7 @@ describe Gitlab::LDAP::Access, lib: true do
             user.ldap_block
           end
 
-          it 'unblocks user in GitLab' do
+          it 'unblocks user in DoggoHub' do
             access.allowed?
             expect(user).not_to be_blocked
           end
@@ -86,7 +86,7 @@ describe Gitlab::LDAP::Access, lib: true do
 
           it { is_expected.to be_falsey }
 
-          it 'blocks user in GitLab' do
+          it 'blocks user in DoggoHub' do
             access.allowed?
             expect(user).to be_blocked
             expect(user).to be_ldap_blocked

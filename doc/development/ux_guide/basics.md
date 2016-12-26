@@ -10,19 +10,19 @@
 ---
 
 ## Responsive
-GitLab is a responsive experience that works well across all screen sizes, from mobile devices to large monitors. In order to provide a great user experience, the core functionality (browsing files, creating issues, writing comments, etc.) must be available at all resolutions. However, due to size limitations, some secondary functionality may be hidden on smaller screens. Please keep this functionality limited to rare actions that aren't expected to be needed on small devices.
+DoggoHub is a responsive experience that works well across all screen sizes, from mobile devices to large monitors. In order to provide a great user experience, the core functionality (browsing files, creating issues, writing comments, etc.) must be available at all resolutions. However, due to size limitations, some secondary functionality may be hidden on smaller screens. Please keep this functionality limited to rare actions that aren't expected to be needed on small devices.
 
 ---
 
 ## Typography
 ### Primary typeface
-GitLab's main typeface used throughout the UI is **Source Sans Pro**. We support both the bold and regular weight.
+DoggoHub's main typeface used throughout the UI is **Source Sans Pro**. We support both the bold and regular weight.
 
 ![Source Sans Pro sample](img/sourcesanspro-sample.png)
 
 
 ### Monospace typeface
-This is the typeface used for code blocks. GitLab uses the OS default font.
+This is the typeface used for code blocks. DoggoHub uses the OS default font.
 - **Menlo** (Mac)
 - **Consolas** (Windows)
 - **Liberation Mono** (Linux)
@@ -32,7 +32,7 @@ This is the typeface used for code blocks. GitLab uses the OS default font.
 ---
 
 ## Icons
-GitLab uses Font Awesome icons throughout our interface.
+DoggoHub uses Font Awesome icons throughout our interface.
 
 | | |
 | :-----------: | :---- |

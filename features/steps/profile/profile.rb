@@ -12,8 +12,8 @@ class Spinach::Features::Profile < Spinach::FeatureSteps
     fill_in 'user_twitter', with: 'testtwitter'
     fill_in 'user_website_url', with: 'testurl'
     fill_in 'user_location', with: 'Ukraine'
-    fill_in 'user_bio', with: 'I <3 GitLab'
-    fill_in 'user_organization', with: 'GitLab'
+    fill_in 'user_bio', with: 'I <3 DoggoHub'
+    fill_in 'user_organization', with: 'DoggoHub'
     click_button 'Update profile settings'
     @user.reload
   end
@@ -23,8 +23,8 @@ class Spinach::Features::Profile < Spinach::FeatureSteps
     expect(@user.linkedin).to eq 'testlinkedin'
     expect(@user.twitter).to eq 'testtwitter'
     expect(@user.website_url).to eq 'testurl'
-    expect(@user.bio).to eq 'I <3 GitLab'
-    expect(@user.organization).to eq 'GitLab'
+    expect(@user.bio).to eq 'I <3 DoggoHub'
+    expect(@user.organization).to eq 'DoggoHub'
     expect(find('#user_location').value).to eq 'Ukraine'
   end
 

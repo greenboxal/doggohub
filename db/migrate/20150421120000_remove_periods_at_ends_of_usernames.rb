@@ -63,13 +63,13 @@ class RemovePeriodsAtEndsOfUsernames < ActiveRecord::Migration
       # Don't attempt to move if original path only contains periods.
       next if path_was =~ /\A\.+\z/
 
-      if gitlab_shell.mv_namespace(path_was, path)
+      if doggohub_shell.mv_namespace(path_was, path)
         # If repositories moved successfully we need to remove old satellites
         # and send update instructions to users.
         # However we cannot allow rollback since we moved namespace dir
         # So we basically we mute exceptions in next actions
         begin
-          gitlab_shell.rm_satellites(path_was)
+          doggohub_shell.rm_satellites(path_was)
           # We cannot send update instructions since models and mailers
           # can't safely be used from migrations as they may be written for 
           # later versions of the database.

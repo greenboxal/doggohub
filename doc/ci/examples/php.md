@@ -15,14 +15,14 @@ This will allow us to test PHP projects against different versions of PHP.
 However, not everything is plug 'n' play, you still need to configure some
 things manually.
 
-As with every build, you need to create a valid `.gitlab-ci.yml` describing the
+As with every build, you need to create a valid `.doggohub-ci.yml` describing the
 build environment.
 
 Let's first specify the PHP image that will be used for the build process
 (you can read more about what an image means in the Runner's lingo reading
 about [Using Docker images](../docker/using_docker_images.md#what-is-image)).
 
-Start by adding the image to your `.gitlab-ci.yml`:
+Start by adding the image to your `.doggohub-ci.yml`:
 
 ```yaml
 image: php:5.6
@@ -63,7 +63,7 @@ extensions. For more information read the the documentation at
 <https://hub.docker.com/r/_/php/>.
 
 Now that we created the script that contains all prerequisites for our build
-environment, let's add it in `.gitlab-ci.yml`:
+environment, let's add it in `.doggohub-ci.yml`:
 
 ```yaml
 ...
@@ -86,10 +86,10 @@ test:app:
 ...
 ```
 
-Finally, commit your files and push them to GitLab to see your build succeeding
+Finally, commit your files and push them to DoggoHub to see your build succeeding
 (or failing).
 
-The final `.gitlab-ci.yml` should look similar to this:
+The final `.doggohub-ci.yml` should look similar to this:
 
 ```yaml
 # Select image from https://hub.docker.com/r/_/php/
@@ -154,7 +154,7 @@ sudo apt-get update -y
 sudo apt-get install -y phpunit php5-mysql
 ```
 
-Next, add the following snippet to your `.gitlab-ci.yml`:
+Next, add the following snippet to your `.doggohub-ci.yml`:
 
 ```yaml
 test:app:
@@ -162,7 +162,7 @@ test:app:
   - phpunit --configuration phpunit_myapp.xml
 ```
 
-Finally, push to GitLab and let the tests begin!
+Finally, push to DoggoHub and let the tests begin!
 
 ### Test against different PHP versions in Shell builds
 
@@ -170,7 +170,7 @@ The [phpenv][] project allows you to easily manage different versions of PHP
 each with its own config. This is specially usefull when testing PHP projects
 with the Shell executor.
 
-You will have to install it on your build machine under the `gitlab-runner`
+You will have to install it on your build machine under the `doggohub-runner`
 user following [the upstream installation guide][phpenv-installation].
 
 Using phpenv also allows to easily configure the PHP environment with:
@@ -180,7 +180,7 @@ phpenv config-add my_config.ini
 ```
 
 *__Important note:__ It seems `phpenv/phpenv`
- [is abandoned](https://github.com/phpenv/phpenv/issues/57). There is a fork
+ [is abandoned](https://github.com/phpenv/phpenv/issues/57). There is a bork
  at [madumlao/phpenv](https://github.com/madumlao/phpenv) that tries to bring
  the project back to life. [CHH/phpenv](https://github.com/CHH/phpenv) also
  seems like a good alternative. Picking any of the mentioned tools will work
@@ -198,7 +198,7 @@ To install additional extensions simply execute:
 pecl install <extension>
 ```
 
-It's not advised to add this to `.gitlab-ci.yml`. You should execute this
+It's not advised to add this to `.doggohub-ci.yml`. You should execute this
 command once, only to setup the build environment.
 
 ## Extend your tests
@@ -221,7 +221,7 @@ test:atoum:
 
 The majority of the PHP projects use Composer for managing their PHP packages.
 In order to execute Composer before running your tests, simply add the
-following in your `.gitlab-ci.yml`:
+following in your `.doggohub-ci.yml`:
 
 ```yaml
 ...
@@ -250,7 +250,7 @@ If your test suite needs to access a private repository, you need to configure
 
 Most of the time you will need a running database in order for your tests to
 run. If you are using the Docker executor you can leverage Docker's ability to
-link to other containers. In GitLab Runner lingo, this can be achieved by
+link to other containers. In DoggoHub Runner lingo, this can be achieved by
 defining a `service`.
 
 This functionality is covered in [the CI services](../services/README.md)
@@ -258,27 +258,27 @@ documentation.
 
 ## Testing things locally
 
-With GitLab Runner 1.0 you can also test any changes locally. From your
+With DoggoHub Runner 1.0 you can also test any changes locally. From your
 terminal execute:
 
 ```bash
 # Check using docker executor
-gitlab-ci-multi-runner exec docker test:app
+doggohub-ci-multi-runner exec docker test:app
 
 # Check using shell executor
-gitlab-ci-multi-runner exec shell test:app
+doggohub-ci-multi-runner exec shell test:app
 ```
 
 ## Example project
 
 We have set up an [Example PHP Project][php-example-repo] for your convenience
-that runs on [GitLab.com](https://gitlab.com) using our publicly available
+that runs on [DoggoHub.com](https://doggohub.com) using our publicly available
 [shared runners](../runners/README.md).
 
-Want to hack on it? Simply fork it, commit and push  your changes. Within a few
+Want to hack on it? Simply bork it, commit and push  your changes. Within a few
 moments the changes will be picked by a public runner and the build will begin.
 
 [php-hub]: https://hub.docker.com/r/_/php/
 [phpenv]: https://github.com/phpenv/phpenv
 [phpenv-installation]: https://github.com/phpenv/phpenv#installation
-[php-example-repo]: https://gitlab.com/gitlab-examples/php
+[php-example-repo]: https://doggohub.com/doggohub-examples/php

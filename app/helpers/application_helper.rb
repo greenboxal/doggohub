@@ -136,12 +136,12 @@ module ApplicationHelper
     [namespace, controller.controller_name, controller.action_name].compact.join(':')
   end
 
-  # shortcut for gitlab config
-  def gitlab_config
-    Gitlab.config.gitlab
+  # shortcut for doggohub config
+  def doggohub_config
+    Gitlab.config.doggohub
   end
 
-  # shortcut for gitlab extra config
+  # shortcut for doggohub extra config
   def extra_config
     Gitlab.config.extra
   end
@@ -196,7 +196,7 @@ module ApplicationHelper
   end
 
   def render_markup(file_name, file_content)
-    if gitlab_markdown?(file_name)
+    if doggohub_markdown?(file_name)
       Hamlit::RailsHelpers.preserve(markdown(file_content))
     elsif asciidoc?(file_name)
       asciidoc(file_content)
@@ -219,8 +219,8 @@ module ApplicationHelper
     Gitlab::MarkupHelper.markup?(filename)
   end
 
-  def gitlab_markdown?(filename)
-    Gitlab::MarkupHelper.gitlab_markdown?(filename)
+  def doggohub_markdown?(filename)
+    Gitlab::MarkupHelper.doggohub_markdown?(filename)
   end
 
   def asciidoc?(filename)
@@ -228,7 +228,7 @@ module ApplicationHelper
   end
 
   def promo_host
-    'about.gitlab.com'
+    'about.doggohub.com'
   end
 
   def promo_url

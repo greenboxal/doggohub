@@ -1,6 +1,6 @@
-# How to create a project in GitLab
+# How to create a project in DoggoHub
 
-There are two ways to create a new project in GitLab.
+There are two ways to create a new project in DoggoHub.
 
 1. While in your dashboard, you can create a new project using the **New project**
    green button or you can use the cross icon in the upper right corner next to

@@ -6,7 +6,7 @@ production:
   encoding: utf8mb4
   collation: utf8mb4_general_ci
   reconnect: false
-  database: gitlabhq_production
+  database: doggohubhq_production
   pool: 10
   username: git
   password: "secure password"
@@ -21,7 +21,7 @@ development:
   encoding: utf8mb4
   collation: utf8mb4_general_ci
   reconnect: false
-  database: gitlabhq_development
+  database: doggohubhq_development
   pool: 5
   username: root
   password: "secure password"
@@ -35,7 +35,7 @@ test: &test
   encoding: utf8mb4
   collation: utf8mb4_general_ci
   reconnect: false
-  database: gitlabhq_test
+  database: doggohubhq_test
   pool: 5
   username: root
   password:

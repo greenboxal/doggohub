@@ -216,16 +216,16 @@ describe 'Pipelines', :feature, :js do
     context 'for valid commit' do
       before { fill_in('pipeline[ref]', with: 'master') }
 
-      context 'with gitlab-ci.yml' do
+      context 'with doggohub-ci.yml' do
         before { stub_ci_pipeline_to_return_yaml_file }
 
         it { expect{ click_on 'Create pipeline' }.to change{ Ci::Pipeline.count }.by(1) }
       end
 
-      context 'without gitlab-ci.yml' do
+      context 'without doggohub-ci.yml' do
         before { click_on 'Create pipeline' }
 
-        it { expect(page).to have_content('Missing .gitlab-ci.yml file') }
+        it { expect(page).to have_content('Missing .doggohub-ci.yml file') }
       end
     end
 

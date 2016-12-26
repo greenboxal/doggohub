@@ -78,7 +78,7 @@ module CommitsHelper
         namespace_project_tree_path(project.namespace, project, branch)
       ) do
         content_tag :span, class: 'label label-gray' do
-          icon('code-fork') + ' ' + branch
+          icon('code-bork') + ' ' + branch
         end
       end
     end.join(" ").html_safe
@@ -180,17 +180,17 @@ module CommitsHelper
 
     if can_collaborate_with_project?
       link_to action.capitalize, "#modal-#{action}-commit", 'data-toggle' => 'modal', 'data-container' => 'body', title: (tooltip if has_tooltip), class: "#{btn_class} #{'has-tooltip' if has_tooltip}"
-    elsif can?(current_user, :fork_project, @project)
+    elsif can?(current_user, :bork_project, @project)
       continue_params = {
         to: continue_to_path,
-        notice: "#{edit_in_new_fork_notice} Try to #{action} this commit again.",
-        notice_now: edit_in_new_fork_notice_now
+        notice: "#{edit_in_new_bork_notice} Try to #{action} this commit again.",
+        notice_now: edit_in_new_bork_notice_now
       }
-      fork_path = namespace_project_forks_path(@project.namespace, @project,
+      bork_path = namespace_project_borks_path(@project.namespace, @project,
         namespace_key: current_user.namespace.id,
         continue: continue_params)
 
-      link_to action.capitalize, fork_path, class: btn_class, method: :post, 'data-toggle' => 'tooltip', 'data-container' => 'body', title: (tooltip if has_tooltip)
+      link_to action.capitalize, bork_path, class: btn_class, method: :post, 'data-toggle' => 'tooltip', 'data-container' => 'body', title: (tooltip if has_tooltip)
     end
   end
 

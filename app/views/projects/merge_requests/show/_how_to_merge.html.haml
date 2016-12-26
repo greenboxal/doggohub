@@ -10,7 +10,7 @@
           Fetch and check out the branch for this merge request
         = clipboard_button(clipboard_target: "pre#merge-info-1")
         %pre.dark#merge-info-1
-          - if @merge_request.for_fork?
+          - if @merge_request.for_bork?
             :preserve
               git fetch #{h default_url_to_repo(@merge_request.source_project)} #{h @merge_request.source_branch}
               git checkout -b #{h @merge_request.source_project_path}-#{h @merge_request.source_branch} FETCH_HEAD
@@ -27,7 +27,7 @@
           Merge the branch and fix any conflicts that come up
         = clipboard_button(clipboard_target: "pre#merge-info-3")
         %pre.dark#merge-info-3
-          - if @merge_request.for_fork?
+          - if @merge_request.for_bork?
             :preserve
               git checkout #{h @merge_request.target_branch}
               git merge --no-ff #{h @merge_request.source_project_path}-#{h @merge_request.source_branch}
@@ -37,14 +37,14 @@
               git merge --no-ff #{h @merge_request.source_branch}
         %p
           %strong Step 4.
-          Push the result of the merge to GitLab
+          Push the result of the merge to DoggoHub
         = clipboard_button(clipboard_target: "pre#merge-info-4")
         %pre.dark#merge-info-4
           :preserve
             git push origin #{h @merge_request.target_branch}
         - unless @merge_request.can_be_merged_by?(current_user)
           %p
-            Note that pushing to GitLab requires write access to this repository.
+            Note that pushing to DoggoHub requires write access to this repository.
         %p
           %strong Tip:
           = succeed '.' do

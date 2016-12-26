@@ -2,7 +2,7 @@
 
 ### Snippet visibility level
 
-Snippets in GitLab can be either private, internal or public.
+Snippets in DoggoHub can be either private, internal or public.
 You can set it with the `visibility_level` field in the snippet.
 
 Constants for snippet visibility levels are:

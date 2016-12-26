@@ -41,8 +41,8 @@ describe PageLayoutHelper do
   end
 
   describe 'page_image' do
-    it 'defaults to the GitLab logo' do
-      expect(helper.page_image).to end_with 'assets/gitlab_logo.png'
+    it 'defaults to the DoggoHub logo' do
+      expect(helper.page_image).to end_with 'assets/doggohub_logo.png'
     end
 
     %w(project user group).each do |type|
@@ -58,13 +58,13 @@ describe PageLayoutHelper do
           object = double(avatar_url: nil)
           assign(type, object)
 
-          expect(helper.page_image).to end_with 'assets/gitlab_logo.png'
+          expect(helper.page_image).to end_with 'assets/doggohub_logo.png'
         end
       end
 
       context "with no assignments" do
         it 'falls back to the default' do
-          expect(helper.page_image).to end_with 'assets/gitlab_logo.png'
+          expect(helper.page_image).to end_with 'assets/doggohub_logo.png'
         end
       end
     end

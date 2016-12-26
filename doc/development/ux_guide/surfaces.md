@@ -12,7 +12,7 @@
 
 ## Global menu
 
-This menu is to navigate to pages that contain content global to GitLab.
+This menu is to navigate to pages that contain content global to DoggoHub.
 
 ---
 

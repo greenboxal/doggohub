@@ -46,10 +46,10 @@ module MergeRequests
       origin_merge_requests = @project.origin_merge_requests
         .opened.where(source_branch: branch).to_a
 
-      fork_merge_requests = @project.fork_merge_requests
+      bork_merge_requests = @project.bork_merge_requests
         .opened.where(source_branch: branch).to_a
 
-      (origin_merge_requests + fork_merge_requests)
+      (origin_merge_requests + bork_merge_requests)
         .uniq.select(&:source_project)
     end
 

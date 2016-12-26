@@ -1,5 +1,5 @@
-namespace :gitlab do
-  desc "GitLab | Update templates"
+namespace :doggohub do
+  desc "DoggoHub | Update templates"
   task :update_templates do
     TEMPLATE_DATA.each { |template| update(template) }
   end
@@ -43,8 +43,8 @@ namespace :gitlab do
       /(\.{1,2}|LICENSE|Global|\.gitignore)\z/
     ),
     Template.new(
-      "https://gitlab.com/gitlab-org/gitlab-ci-yml.git",
-      /(\.{1,2}|LICENSE|Pages|\.gitlab-ci.yml)\z/
+      "https://doggohub.com/doggohub-org/doggohub-ci-yml.git",
+      /(\.{1,2}|LICENSE|Pages|\.doggohub-ci.yml)\z/
     )
   ]
 

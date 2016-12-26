@@ -41,7 +41,7 @@ module API
 
       desc 'Commit multiple file changes as one commit' do
         success Entities::RepoCommitDetail
-        detail 'This feature was introduced in GitLab 8.13'
+        detail 'This feature was introduced in DoggoHub 8.13'
       end
       params do
         requires :id, type: Integer, desc: 'The project ID'
@@ -121,7 +121,7 @@ module API
       end
 
       desc 'Cherry pick commit into a branch' do
-        detail 'This feature was introduced in GitLab 8.15'
+        detail 'This feature was introduced in DoggoHub 8.15'
         success Entities::RepoCommit
       end
       params do

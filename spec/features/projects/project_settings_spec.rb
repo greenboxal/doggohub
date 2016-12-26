@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Edit Project Settings', feature: true do
   let(:user) { create(:user) }
-  let(:project) { create(:empty_project, path: 'gitlab', name: 'sample') }
+  let(:project) { create(:empty_project, path: 'doggohub', name: 'sample') }
 
   before do
     login_as(user)

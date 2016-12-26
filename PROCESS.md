@@ -1,14 +1,14 @@
-# GitLab Contributing Process
+# DoggoHub Contributing Process
 
 ## Purpose of describing the contributing process
 
-Below we describe the contributing process to GitLab for two reasons. So that
+Below we describe the contributing process to DoggoHub for two reasons. So that
 contributors know what to expect from maintainers (possible responses, friendly
 treatment, etc.). And so that maintainers know what to expect from contributors
 (use the latest version, ensure that the issue is addressed, friendly treatment,
 etc.).
 
-- [GitLab Inc engineers should refer to the engineering workflow document](https://about.gitlab.com/handbook/engineering/workflow/)
+- [DoggoHub Inc engineers should refer to the engineering workflow document](https://about.doggohub.com/handbook/engineering/workflow/)
 
 ## Common actions
 
@@ -19,7 +19,7 @@ etc.).
 - Closes invalid issues with a comment (duplicates,
   [fixed in newer version](#issue-fixed-in-newer-version),
   [issue report for old version](#issue-report-for-old-version), not a problem
-  in GitLab, etc.)
+  in DoggoHub, etc.)
 - Asks for feedback from issue reporter
   ([invalid issue reports](#improperly-formatted-issue),
   [format code](#code-format), etc.)
@@ -51,7 +51,7 @@ etc.).
 The most important thing is making sure valid issues receive feedback from the
 development team. Therefore the priority is mentioning developers that can help
 on those issues. Please select someone with relevant experience from
-[GitLab core team][core-team]. If there is nobody mentioned with that expertise
+[DoggoHub core team][core-team]. If there is nobody mentioned with that expertise
 look in the commit history for the affected files to find someone. Avoid
 mentioning the lead developer, this is the person that is least likely to give a
 timely response. If the involvement of the lead developer is needed the other
@@ -70,7 +70,7 @@ to add details to the issue.
 - ~Frontend needs help from a Front-end engineer. Please follow the
   ["Implement design & UI elements" guidelines].
 - ~up-for-grabs is an issue suitable for first-time contributors, of reasonable difficulty and size. Not exclusive with other labels.
-- ~"feature proposal" is a proposal for a new feature for GitLab. People are encouraged to vote
+- ~"feature proposal" is a proposal for a new feature for DoggoHub. People are encouraged to vote
 in support or comment for further detail. Do not use `feature request`.
 - ~bug is an issue reporting undesirable or incorrect behavior.
 - ~customer is an issue reported by enterprise subscribers. This label should
@@ -131,18 +131,18 @@ not be merged into any stable branches.
 
 ### Improperly formatted issue
 
-Thanks for the issue report. Please reformat your issue to conform to the \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
+Thanks for the issue report. Please reformat your issue to conform to the \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
 
 ### Issue report for old version
 
-Thanks for the issue report but we only support issues for the latest stable version of GitLab. I'm closing this issue but if you still experience this problem in the latest stable version, please open a new issue (but also reference the old issue(s)). Make sure to also include the necessary debugging information conforming to the issue tracker guidelines found in our \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
+Thanks for the issue report but we only support issues for the latest stable version of DoggoHub. I'm closing this issue but if you still experience this problem in the latest stable version, please open a new issue (but also reference the old issue(s)). Make sure to also include the necessary debugging information conforming to the issue tracker guidelines found in our \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
 
 ### Support requests and configuration questions
 
-Thanks for your interest in GitLab. We don't use the issue tracker for support
+Thanks for your interest in DoggoHub. We don't use the issue tracker for support
 requests and configuration questions. Please check our
-\[getting help\]\(https://about.gitlab.com/getting-help/) page to see all of the available
-support options. Also, have a look at the \[contribution guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md)
+\[getting help\]\(https://about.doggohub.com/getting-help/) page to see all of the available
+support options. Also, have a look at the \[contribution guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md)
 for more information.
 
 ### Code format
@@ -151,28 +151,28 @@ Please use ``` to format console output, logs, and code as it's very hard to rea
 
 ### Issue fixed in newer version
 
-Thanks for the issue report. This issue has already been fixed in newer versions of GitLab. Due to the size of this project and our limited resources we are only able to support the latest stable release as outlined in our \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#issue-tracker). In order to get this bug fix and enjoy many new features please \[upgrade\]\(https://gitlab.com/gitlab-org/gitlab-ce/tree/master/doc/update). If you still experience issues at that time please open a new issue following our issue tracker guidelines found in the \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
+Thanks for the issue report. This issue has already been fixed in newer versions of DoggoHub. Due to the size of this project and our limited resources we are only able to support the latest stable release as outlined in our \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#issue-tracker). In order to get this bug fix and enjoy many new features please \[upgrade\]\(https://doggohub.com/doggohub-org/doggohub-ce/tree/master/doc/update). If you still experience issues at that time please open a new issue following our issue tracker guidelines found in the \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
 
 ### Improperly formatted merge request
 
-Thanks for your interest in improving the GitLab codebase! Please update your merge request according to the \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#pull-request-guidelines).
+Thanks for your interest in improving the DoggoHub codebase! Please update your merge request according to the \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#pull-request-guidelines).
 
 ### Inactivity close of an issue
 
-It's been at least 2 weeks (and a new release) since we heard from you. I'm closing this issue but if you still experience this problem, please open a new issue (but also reference the old issue(s)). Make sure to also include the necessary debugging information conforming to the issue tracker guidelines found in our \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
+It's been at least 2 weeks (and a new release) since we heard from you. I'm closing this issue but if you still experience this problem, please open a new issue (but also reference the old issue(s)). Make sure to also include the necessary debugging information conforming to the issue tracker guidelines found in our \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#issue-tracker-guidelines).
 
 ### Inactivity close of a merge request
 
-This merge request has been closed because a request for more information has not been reacted to for more than 2 weeks. If you respond and conform to the merge request guidelines in our \[contributing guidelines\]\(https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#pull-requests) we will reopen this merge request.
+This merge request has been closed because a request for more information has not been reacted to for more than 2 weeks. If you respond and conform to the merge request guidelines in our \[contributing guidelines\]\(https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#pull-requests) we will reopen this merge request.
 
 ### Accepting merge requests
 
 Is there an issue on the
-\[issue tracker\]\(https://gitlab.com/gitlab-org/gitlab-ce/issues) that is
+\[issue tracker\]\(https://doggohub.com/doggohub-org/doggohub-ce/issues) that is
 similar to this? Could you please link it here?
 Please be aware that new functionality that is not marked
-\[accepting merge requests\]\(https://gitlab.com/gitlab-org/gitlab-ce/issues?milestone_id=&scope=all&sort=created_desc&state=opened&utf8=%E2%9C%93&assignee_id=&author_id=&milestone_title=&label_name=Accepting+Merge+Requests)
-might not make it into GitLab.
+\[accepting merge requests\]\(https://doggohub.com/doggohub-org/doggohub-ce/issues?milestone_id=&scope=all&sort=created_desc&state=opened&utf8=%E2%9C%93&assignee_id=&author_id=&milestone_title=&label_name=Accepting+Merge+Requests)
+might not make it into DoggoHub.
 
 ### Only accepting merge requests with green tests
 
@@ -184,12 +184,12 @@ rebase with master to see if that solves the issue.
 ### Closing down the issue tracker on GitHub
 
 We are currently in the process of closing down the issue tracker on GitHub, to
-prevent duplication with the GitLab.com issue tracker.
+prevent duplication with the DoggoHub.com issue tracker.
 Since this is an older issue I'll be closing this for now. If you think this is
-still an issue I encourage you to open it on the \[GitLab.com issue tracker\]\(https://gitlab.com/gitlab-org/gitlab-ce/issues).
+still an issue I encourage you to open it on the \[DoggoHub.com issue tracker\]\(https://doggohub.com/doggohub-org/doggohub-ce/issues).
 
-[core-team]: https://about.gitlab.com/core-team/
-[team]: https://about.gitlab.com/team/
-[contribution acceptance criteria]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#contribution-acceptance-criteria
-["Implement design & UI elements" guidelines]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md#implement-design-ui-elements
+[core-team]: https://about.doggohub.com/core-team/
+[team]: https://about.doggohub.com/team/
+[contribution acceptance criteria]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#contribution-acceptance-criteria
+["Implement design & UI elements" guidelines]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CONTRIBUTING.md#implement-design-ui-elements
 [Thoughtbot code review guide]: https://github.com/thoughtbot/guides/tree/master/code-review

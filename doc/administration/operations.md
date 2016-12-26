@@ -1,4 +1,4 @@
-# GitLab operations
+# DoggoHub operations
 
 - [Sidekiq MemoryKiller](operations/sidekiq_memory_killer.md)
 - [Sidekiq Job throttling](operations/sidekiq_job_throttling.md)

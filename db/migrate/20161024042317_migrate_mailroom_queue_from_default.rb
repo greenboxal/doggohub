@@ -1,7 +1,7 @@
 require 'json'
 
-# See http://doc.gitlab.com/ce/development/migration_style_guide.html
-# for more information on how to write migrations for GitLab.
+# See http://doc.doggohub.com/ce/development/migration_style_guide.html
+# for more information on how to write migrations for DoggoHub.
 
 class MigrateMailroomQueueFromDefault < ActiveRecord::Migration
   include Gitlab::Database::MigrationHelpers

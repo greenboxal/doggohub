@@ -1172,7 +1172,7 @@ describe NotificationService, services: true do
 
     describe '#project_was_moved' do
       it do
-        notification.project_was_moved(project, "gitlab/gitlab")
+        notification.project_was_moved(project, "doggohub/doggohub")
 
         should_email(@u_watcher)
         should_email(@u_participating)

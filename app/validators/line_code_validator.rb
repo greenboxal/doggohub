@@ -1,6 +1,6 @@
 # LineCodeValidator
 #
-# Custom validator for GitLab line codes.
+# Custom validator for DoggoHub line codes.
 class LineCodeValidator < ActiveModel::EachValidator
   PATTERN = /\A[a-z0-9]+_\d+_\d+\z/.freeze
 

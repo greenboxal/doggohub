@@ -384,7 +384,7 @@ a.deploy-project-label {
   margin-top: -1px;
 }
 
-.fork-namespaces {
+.bork-namespaces {
   .row {
     -webkit-flex-wrap: wrap;
     display: -webkit-flex;
@@ -392,7 +392,7 @@ a.deploy-project-label {
     flex-wrap: wrap;
     justify-content: flex-start;
 
-    .fork-thumbnail {
+    .bork-thumbnail {
       border-radius: $border-radius-base;
       background-color: $white-light;
       border: 1px solid $border-white-light;
@@ -402,7 +402,7 @@ a.deploy-project-label {
       width: 169px;
 
       &:hover,
-      &.forked {
+      &.borked {
         background-color: $row-hover;
         border-color: $row-hover-border;
       }
@@ -726,9 +726,9 @@ pre.light-well {
   margin-top: 2px;
 }
 
-.private-forks-notice .private-fork-icon {
+.private-borks-notice .private-bork-icon {
   i:nth-child(1) {
-    color: $project-private-forks-notice-odd;
+    color: $project-private-borks-notice-odd;
   }
 
   i:nth-child(2) {

@@ -3,14 +3,14 @@
 This guide contains advice and best practices for performing code review, and
 having your code reviewed.
 
-All merge requests for GitLab CE and EE, whether written by a GitLab team member
+All merge requests for DoggoHub CE and EE, whether written by a DoggoHub team member
 or a volunteer contributor, must go through a code review process to ensure the
 code is effective, understandable, and maintainable.
 
 Any developer can, and is encouraged to, perform code review on merge requests
 of colleagues and contributors. However, the final decision to accept a merge
 request is up to one of our merge request "endbosses", denoted on the
-[team page](https://about.gitlab.com/team).
+[team page](https://about.doggohub.com/team).
 
 ## Everyone
 

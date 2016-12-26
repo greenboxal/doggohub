@@ -22,4 +22,4 @@
           = render partial: "search/results/#{@scope.singularize}", collection: @search_objects
 
     - if @scope != 'projects'
-      = paginate(@search_objects, theme: 'gitlab')
+      = paginate(@search_objects, theme: 'doggohub')

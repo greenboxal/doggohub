@@ -8,7 +8,7 @@ describe('External URL Component', () => {
   });
 
   it('should link to the provided externalUrl prop', () => {
-    const externalURL = 'https://gitlab.com';
+    const externalURL = 'https://doggohub.com';
     const component = new window.gl.environmentsList.ExternalUrlComponent({
       el: document.querySelector('.test-dom-element'),
       propsData: {

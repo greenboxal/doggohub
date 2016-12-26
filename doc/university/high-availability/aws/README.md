@@ -1,7 +1,7 @@
 
 # High Availability on AWS
 
-GitLab on AWS can leverage many of the services that are already
+DoggoHub on AWS can leverage many of the services that are already
 configurable with High Availability. These services have a lot of
 flexibility and are able to adopt to most companies, best of all is the
 ability to automate both vertical and horizontal scaling.
@@ -26,7 +26,7 @@ we'll be using to configure our cloud infrastructure.
 
 ## Network
 
-We'll start by creating a VPC for our GitLab cloud infrastructure, then
+We'll start by creating a VPC for our DoggoHub cloud infrastructure, then
 we can create subnets to have public and private instances in at least
 two AZs. Public subnets will require a Route Table keep an associated
 Internet Gateway.
@@ -56,10 +56,10 @@ RDS instances as well.
 
 The subnets are listed with their name, AZ and CIDR block:
 
-* gitlab-public-10.0.0.0  - us-west-2a - 10.0.0.0
-* gitlab-private-10.0.1.0 - us-west-2a - 10.0.1.0
-* gitlab-public-10.0.2.0  - us-west-2b - 10.0.2.0
-* gitlab-private-10.0.3.0 - us-west-2b - 10.0.3.0
+* doggohub-public-10.0.0.0  - us-west-2a - 10.0.0.0
+* doggohub-private-10.0.1.0 - us-west-2a - 10.0.1.0
+* doggohub-public-10.0.2.0  - us-west-2b - 10.0.2.0
+* doggohub-private-10.0.3.0 - us-west-2b - 10.0.3.0
 
 ### Route Table
 
@@ -124,15 +124,15 @@ IOPS (SSD) is best suited for HA. Read more about it at
 ![RDS Instance Specs](img/instance_specs.png)
 
 The rest of the setting on this page request a DB identifier, username
-and a master password. We've chosen to use `gitlab-ha`, `gitlab` and a
+and a master password. We've chosen to use `doggohub-ha`, `doggohub` and a
 very secure password respectively. Keep these in hand for later.
 
 ![Network and Security](img/rds-net-opt.png)
 
-Make sure to choose our gitlab VPC, our subnet group, not have it public,
+Make sure to choose our doggohub VPC, our subnet group, not have it public,
 and to leave it to create a new security group. The only additional
 change which will be helpful is the database name for which we can use
-`gitlabhq_production`.
+`doggohubhq_production`.
 
 ***
 
@@ -185,13 +185,13 @@ extension to our RDS through this temporary EC2 instance.
 
 Look for the EC2 option and choose to create an instance. We'll need at
 least a t2.medium type and for this article we'll choose an Ubuntu 14.04
-HVM 64-bit. In the Configure Instance section choose our GitLab VPC and
+HVM 64-bit. In the Configure Instance section choose our DoggoHub VPC and
 a public subnet. I'd choose at least 10GB of storage.
 
 In the security group we'll create a new one considering that we need to
 SSH into the instance and also try it out through http. So let's add the
 http traffic from anywhere and name it something such as
-`gitlab-ec2-security-group`.
+`doggohub-ec2-security-group`.
 
 While we wait for it to launch we can allocate an Elastic IP and
 associate it with our new EC2 instance.  
@@ -201,16 +201,16 @@ associate it with our new EC2 instance.
 After the instance is being created we will navigate to our EC2 security
 groups and add a small change for our EC2 instances to be able to
 connect to RDS. First copy the security group name we just defined,
-namely `gitlab-ec2-security-group`, and edit select the RDS security
+namely `doggohub-ec2-security-group`, and edit select the RDS security
 group and edit the inbound rules. Choose the rule type to be PostgreSQL
 and paste the name under source.
 
 ![RDS security group](img/rds-sec-group.png)
 
-Similar to the above we'll jump to the `gitlab-ec2-security-group` group
+Similar to the above we'll jump to the `doggohub-ec2-security-group` group
 and add a custom TCP rule for port 6379 accessible within itself.
 
-### Install GitLab
+### Install DoggoHub
 
 To connect through SSH you will need to have the `pem` file which you
 chose available and with the correct permissions such as `400`.
@@ -221,9 +221,9 @@ packages.
     sudo apt-get update && sudo apt-get upgrade -y
 
 Then follow installation instructions from
-[GitLab](https://about.gitlab.com/downloads-ee/#ubuntu1404), but before
+[DoggoHub](https://about.doggohub.com/downloads-ee/#ubuntu1404), but before
 running reconfigure we need to make sure all our services are tied down
-so just leave the reconfigure command until after we edit our gitlab.rb
+so just leave the reconfigure command until after we edit our doggohub.rb
 file.
 
 
@@ -235,50 +235,50 @@ instance and  we just created and after the details drop down we'll find
 it labeled as 'Endpoint'; do remember not to include the colon and port
 number.
 
-    sudo /opt/gitlab/embedded/bin/psql -U gitlab -h <rds-endpoint> -d gitlabhq_production
+    sudo /opt/doggohub/embedded/bin/psql -U doggohub -h <rds-endpoint> -d doggohubhq_production
     psql (9.4.7)
     Type "help" for help.
 
-    gitlab=# CREATE EXTENSION pg_trgm;
-    gitlab=# \q
+    doggohub=# CREATE EXTENSION pg_trgm;
+    doggohub=# \q
 
-### Configure GitLab
+### Configure DoggoHub
 
-While connected to your server edit the `gitlab.rb` file at `/etc/gitlab/gitlab.rb`
-find the `external_url 'http://gitlab.example.com'` option and change it
+While connected to your server edit the `doggohub.rb` file at `/etc/doggohub/doggohub.rb`
+find the `external_url 'http://doggohub.example.com'` option and change it
 to the domain you will be using or the public IP address of the current
 instance to test the configuration.
 
-For a more detailed description about configuring GitLab read [Configuring GitLab for HA](http://docs.gitlab.com/ee/administration/high_availability/gitlab.html)
+For a more detailed description about configuring DoggoHub read [Configuring DoggoHub for HA](http://docs.doggohub.com/ee/administration/high_availability/doggohub.html)
 
-Now look for the GitLab database settings and uncomment as necessary. In
+Now look for the DoggoHub database settings and uncomment as necessary. In
 our current case we'll specify the adapter, encoding, host, db name,
 username, and password.
 
-    gitlab_rails['db_adapter'] = "postgresql"
-    gitlab_rails['db_encoding'] = "unicode"    
-    gitlab_rails['db_database'] = "gitlabhq_production"   
-    gitlab_rails['db_username'] = "gitlab"
-    gitlab_rails['db_password'] = "mypassword"
-    gitlab_rails['db_host'] = "<rds-endpoint>"
+    doggohub_rails['db_adapter'] = "postgresql"
+    doggohub_rails['db_encoding'] = "unicode"    
+    doggohub_rails['db_database'] = "doggohubhq_production"   
+    doggohub_rails['db_username'] = "doggohub"
+    doggohub_rails['db_password'] = "mypassword"
+    doggohub_rails['db_host'] = "<rds-endpoint>"
 
 Next we only need to configure the Redis section by adding the host and
 uncommenting the port.
 
 
 
-The last configuration step is to [change the default file locations ](http://docs.gitlab.com/ee/administration/high_availability/nfs.html)
+The last configuration step is to [change the default file locations ](http://docs.doggohub.com/ee/administration/high_availability/nfs.html)
 to make the EFS integration easier to manage.
 
-    gitlab_rails['redis_host'] = "<redis-endpoint>"
-    gitlab_rails['redis_port'] = 6379
+    doggohub_rails['redis_host'] = "<redis-endpoint>"
+    doggohub_rails['redis_port'] = 6379
 
 Finally run reconfigure, you might find it useful to run a check and
 a service status to make sure everything has been setup correctly.
 
-    sudo gitlab-ctl reconfigure  
-    sudo gitlab-rake gitlab:check  
-    sudo gitlab-ctl status  
+    sudo doggohub-ctl reconfigure  
+    sudo doggohub-rake doggohub:check  
+    sudo doggohub-ctl status  
 
 If everything looks good copy the Elastic IP over to your browser and
 test the instance manually.
@@ -294,7 +294,7 @@ Image -> Create an Image. Give it a name and description and confirm.
 ## Load Balancer
 
 On the same dashboard look for Load Balancer on the left column and press
-the Create button. Choose a classic Load Balancer, our gitlab VPC, not
+the Create button. Choose a classic Load Balancer, our doggohub VPC, not
 internal and make sure its listening for HTTP and HTTPS on port 80.
 
 Here is a tricky part though, when adding subnets we need to associate
@@ -302,7 +302,7 @@ public subnets instead of the private ones where our instances will
 actually live.
 
 On the secruity group section let's create a new one named
-`gitlab-loadbalancer-sec-group` and allow both HTTP ad HTTPS traffic
+`doggohub-loadbalancer-sec-group` and allow both HTTP ad HTTPS traffic
 from anywhere.
 
 The Load Balancer Health will allow us to indicate where to ping and what
@@ -338,14 +338,14 @@ add the following script to the User Data section:
     packages:
     - nfs-common
     runcmd:
-    - mkdir -p /gitlab-data
-    - chown ec2-user:ec2-user /gitlab-data
-    - echo "$(curl --silent http://169.254.169.254/latest/meta-data/placement/availability-zone).file-system-id.aws-region.amazonaws.com:/ /gitlab-data nfs defaults,vers=4.1 0 0" >> /etc/fstab
+    - mkdir -p /doggohub-data
+    - chown ec2-user:ec2-user /doggohub-data
+    - echo "$(curl --silent http://169.254.169.254/latest/meta-data/placement/availability-zone).file-system-id.aws-region.amazonaws.com:/ /doggohub-data nfs defaults,vers=4.1 0 0" >> /etc/fstab
     - mount -a -t nfs
-    - sudo gitlab-ctl reconfigure
+    - sudo doggohub-ctl reconfigure
 
 On the security group section we can chosse our existing
-`gitlab-ec2-security-group` group which has already been tested.
+`doggohub-ec2-security-group` group which has already been tested.
 
 After this is launched we are able to start creating our Auto Scaling
 Group. Start by giving it a name and assinging it our VPC and private
@@ -383,5 +383,5 @@ some redundancy options but it might also imply Geographic replication.
 There is a lot of ground yet to cover so have a read through these other
 resources and feel free to open an issue to request additional material.
 
- * [GitLab High Availability](http://docs.gitlab.com/ce/administration/high_availability/README.html#sts=High Availability)
- * [GitLab Geo](http://docs.gitlab.com/ee/gitlab-geo/README.html)  
+ * [DoggoHub High Availability](http://docs.doggohub.com/ce/administration/high_availability/README.html#sts=High Availability)
+ * [DoggoHub Geo](http://docs.doggohub.com/ee/doggohub-geo/README.html)  

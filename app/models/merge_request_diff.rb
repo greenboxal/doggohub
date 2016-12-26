@@ -178,9 +178,9 @@ class MergeRequestDiff < ActiveRecord::Base
 
   private
 
-  # Old GitLab implementations may have generated diffs as ["--broken-diff"].
+  # Old DoggoHub implementations may have generated diffs as ["--broken-diff"].
   # Avoid an error 500 by ignoring bad elements. See:
-  # https://gitlab.com/gitlab-org/gitlab-ce/issues/20776
+  # https://doggohub.com/doggohub-org/doggohub-ce/issues/20776
   def valid_raw_diff?(raw)
     return false unless raw.respond_to?(:each)
 

@@ -1,6 +1,6 @@
 # Using Docker Build
 
-GitLab CI allows you to use Docker Engine to build and test docker-based projects.
+DoggoHub CI allows you to use Docker Engine to build and test docker-based projects.
 
 **This also allows to you to use `docker-compose` and other docker-enabled tools.**
 
@@ -19,7 +19,7 @@ $ docker tag my-image my-registry:5000/my-image
 $ docker push my-registry:5000/my-image
 ```
 
-This requires special configuration of GitLab Runner to enable `docker` support during builds.
+This requires special configuration of DoggoHub Runner to enable `docker` support during builds.
 
 ## Runner Configuration
 
@@ -27,16 +27,16 @@ There are three methods to enable the use of `docker build` and `docker run` dur
 
 ### Use shell executor
 
-The simplest approach is to install GitLab Runner in `shell` execution mode.
-GitLab Runner then executes build scripts as the `gitlab-runner` user.
+The simplest approach is to install DoggoHub Runner in `shell` execution mode.
+DoggoHub Runner then executes build scripts as the `doggohub-runner` user.
 
-1. Install [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/#installation).
+1. Install [DoggoHub Runner](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/#installation).
 
-1. During GitLab Runner installation select `shell` as method of executing build scripts or use command:
+1. During DoggoHub Runner installation select `shell` as method of executing build scripts or use command:
 
     ```bash
-    $ sudo gitlab-ci-multi-runner register -n \
-      --url https://gitlab.com/ci \
+    $ sudo doggohub-ci-multi-runner register -n \
+      --url https://doggohub.com/ci \
       --registration-token REGISTRATION_TOKEN \
       --executor shell \
       --description "My Runner"
@@ -47,19 +47,19 @@ GitLab Runner then executes build scripts as the `gitlab-runner` user.
     For more information how to install Docker Engine on different systems
     checkout the [Supported installations](https://docs.docker.com/engine/installation/).
 
-3. Add `gitlab-runner` user to `docker` group:
+3. Add `doggohub-runner` user to `docker` group:
 
     ```bash
-    $ sudo usermod -aG docker gitlab-runner
+    $ sudo usermod -aG docker doggohub-runner
     ```
 
-4. Verify that `gitlab-runner` has access to Docker:
+4. Verify that `doggohub-runner` has access to Docker:
 
     ```bash
-    $ sudo -u gitlab-runner -H docker info
+    $ sudo -u doggohub-runner -H docker info
     ```
 
-    You can now verify that everything works by adding `docker info` to `.gitlab-ci.yml`:
+    You can now verify that everything works by adding `docker info` to `.doggohub-ci.yml`:
     ```yaml
     before_script:
       - docker info
@@ -73,7 +73,7 @@ GitLab Runner then executes build scripts as the `gitlab-runner` user.
 5. You can now use `docker` command and install `docker-compose` if needed.
 
 > **Note:**
-* By adding `gitlab-runner` to the `docker` group you are effectively granting `gitlab-runner` full root permissions.
+* By adding `doggohub-runner` to the `docker` group you are effectively granting `doggohub-runner` full root permissions.
 For more information please read [On Docker security: `docker` group considered harmful](https://www.andreas-jung.com/contents/on-docker-security-docker-group-considered-harmful).
 
 ### Use docker-in-docker executor
@@ -85,14 +85,14 @@ image in privileged mode.
 
 In order to do that, follow the steps:
 
-1. Install [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/#installation).
+1. Install [DoggoHub Runner](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/#installation).
 
-1. Register GitLab Runner from the command line to use `docker` and `privileged`
+1. Register DoggoHub Runner from the command line to use `docker` and `privileged`
    mode:
 
     ```bash
-    sudo gitlab-ci-multi-runner register -n \
-      --url https://gitlab.com/ci \
+    sudo doggohub-ci-multi-runner register -n \
+      --url https://doggohub.com/ci \
       --registration-token REGISTRATION_TOKEN \
       --executor docker \
       --description "My Docker Runner" \
@@ -110,7 +110,7 @@ In order to do that, follow the steps:
 
     ```
     [[runners]]
-      url = "https://gitlab.com/ci"
+      url = "https://doggohub.com/ci"
       token = TOKEN
       executor = "docker"
       [runners.docker]
@@ -163,7 +163,7 @@ not without its own challenges:
   form offered. To use a different driver, see
   [Using the overlayfs driver](#using-the-overlayfs-driver).
 
-An example project using this approach can be found here: https://gitlab.com/gitlab-examples/docker.
+An example project using this approach can be found here: https://doggohub.com/doggohub-examples/docker.
 
 ### Use Docker socket binding
 
@@ -171,13 +171,13 @@ The third approach is to bind-mount `/var/run/docker.sock` into the container so
 
 In order to do that, follow the steps:
 
-1. Install [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/#installation).
+1. Install [DoggoHub Runner](https://doggohub.com/doggohub-org/doggohub-ci-multi-runner/#installation).
 
-1. Register GitLab Runner from the command line to use `docker` and share `/var/run/docker.sock`:
+1. Register DoggoHub Runner from the command line to use `docker` and share `/var/run/docker.sock`:
 
     ```bash
-    sudo gitlab-ci-multi-runner register -n \
-      --url https://gitlab.com/ci \
+    sudo doggohub-ci-multi-runner register -n \
+      --url https://doggohub.com/ci \
       --registration-token REGISTRATION_TOKEN \
       --executor docker \
       --description "My Docker Runner" \
@@ -193,7 +193,7 @@ In order to do that, follow the steps:
 
     ```
     [[runners]]
-      url = "https://gitlab.com/ci"
+      url = "https://doggohub.com/ci"
       token = REGISTRATION_TOKEN
       executor = "docker"
       [runners.docker]
@@ -225,7 +225,7 @@ While the above method avoids using Docker in privileged mode, you should be awa
 * By sharing the docker daemon, you are effectively disabling all
 the security mechanisms of containers and exposing your host to privilege
 escalation which can lead to container breakout. For example, if a project
-ran `docker rm -f $(docker ps -a -q)` it would remove the GitLab Runner
+ran `docker rm -f $(docker ps -a -q)` it would remove the DoggoHub Runner
 containers.
 * Concurrent builds may not work; if your tests
 create containers with specific names, they may conflict with each other.
@@ -261,24 +261,24 @@ which can be avoided if a different driver is used, for example `overlay`.
     overlay
     ```
 
-1. Use the driver by defining a variable at the top of your `.gitlab-ci.yml`:
+1. Use the driver by defining a variable at the top of your `.doggohub-ci.yml`:
 
     ```
     variables:
       DOCKER_DRIVER: overlay
     ```
 
-## Using the GitLab Container Registry
+## Using the DoggoHub Container Registry
 
 > **Notes:**
-- This feature requires GitLab 8.8 and GitLab Runner 1.2.
-- Starting from GitLab 8.12, if you have 2FA enabled in your account, you need
+- This feature requires DoggoHub 8.8 and DoggoHub Runner 1.2.
+- Starting from DoggoHub 8.12, if you have 2FA enabled in your account, you need
   to pass a personal access token instead of your password in order to login to
-  GitLab's Container Registry.
+  DoggoHub's Container Registry.
 
 Once you've built a Docker image, you can push it up to the built-in
-[GitLab Container Registry](../../user/project/container_registry.md). For example,
-if you're using docker-in-docker on your runners, this is how your `.gitlab-ci.yml`
+[DoggoHub Container Registry](../../user/project/container_registry.md). For example,
+if you're using docker-in-docker on your runners, this is how your `.doggohub-ci.yml`
 could look like:
 
 ```yaml
@@ -288,12 +288,12 @@ could look like:
    - docker:dind
    stage: build
    script:
-     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.example.com
+     - docker login -u doggohub-ci-token -p $CI_BUILD_TOKEN registry.example.com
      - docker build -t registry.example.com/group/project:latest .
      - docker push registry.example.com/group/project:latest
 ```
 
-You have to use the special `gitlab-ci-token` user created for you in order to
+You have to use the special `doggohub-ci-token` user created for you in order to
 push to the Registry connected to your project. Its password is provided in the
 `$CI_BUILD_TOKEN` variable. This allows you to automate building and deployment
 of your Docker images.
@@ -320,7 +320,7 @@ variables:
   CONTAINER_RELEASE_IMAGE: registry.example.com/my-group/my-project:latest
 
 before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.example.com
+  - docker login -u doggohub-ci-token -p $CI_BUILD_TOKEN registry.example.com
 
 build:
   stage: build

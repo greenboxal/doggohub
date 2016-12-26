@@ -1,5 +1,5 @@
 module Gitlab
-  # Module containing GitLab's syntax color scheme definitions and helper
+  # Module containing DoggoHub's syntax color scheme definitions and helper
   # methods for accessing them.
   module ColorSchemes
     # Struct class representing a single Scheme

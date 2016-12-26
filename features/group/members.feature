@@ -13,14 +13,14 @@ Feature: Group Members
 
   @javascript
   Scenario: Add user to group
-    Given gitlab user "Mike"
+    Given doggohub user "Mike"
     When I visit group "Owned" members page
     When I select "Mike" as "Reporter"
     Then I should see "Mike" in team list as "Reporter"
 
   @javascript
   Scenario: Ignore add user to group when is already Owner
-    Given gitlab user "Mike"
+    Given doggohub user "Mike"
     When I visit group "Owned" members page
     When I select "Mike" as "Reporter"
     Then I should see "Mike" in team list as "Owner"

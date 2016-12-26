@@ -18,7 +18,7 @@
     git commit -am "My feature is ready"
     ```
 
-1.  Push your branch to GitLab:
+1.  Push your branch to DoggoHub:
 
     ```bash
     git push origin $feature_name

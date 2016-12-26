@@ -34,11 +34,11 @@ module Gitlab
         config[:idle_timeout] = 60 if config[:idle_timeout].nil?
 
         if config[:enabled] && config[:address]
-          gitlab_redis = Gitlab::Redis.new(rails_env)
-          config[:redis_url] = gitlab_redis.url
+          doggohub_redis = Gitlab::Redis.new(rails_env)
+          config[:redis_url] = doggohub_redis.url
 
-          if gitlab_redis.sentinels?
-            config[:sentinels] = gitlab_redis.sentinels
+          if doggohub_redis.sentinels?
+            config[:sentinels] = doggohub_redis.sentinels
           end
         end
 
@@ -46,7 +46,7 @@ module Gitlab
       end
 
       def config_file
-        ENV['MAIL_ROOM_GITLAB_CONFIG_FILE'] || File.expand_path('../../../config/gitlab.yml', __FILE__)
+        ENV['MAIL_ROOM_DOGGOHUB_CONFIG_FILE'] || File.expand_path('../../../config/doggohub.yml', __FILE__)
       end
     end
   end

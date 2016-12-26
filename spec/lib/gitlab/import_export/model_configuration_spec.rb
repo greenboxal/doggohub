@@ -17,7 +17,7 @@ describe 'Import/Export model configuration', lib: true do
     names.flatten.uniq - ['milestones', 'labels', 'user', 'author'] + ['project']
   end
 
-  let(:all_models_yml) { 'spec/lib/gitlab/import_export/all_models.yml' }
+  let(:all_models_yml) { 'spec/lib/doggohub/import_export/all_models.yml' }
   let(:all_models) { YAML.load_file(all_models_yml) }
   let(:current_models) { setup_models }
 

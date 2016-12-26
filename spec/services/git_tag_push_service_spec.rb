@@ -8,7 +8,7 @@ describe GitTagPushService, services: true do
   let(:service) { GitTagPushService.new(project, user, oldrev: oldrev, newrev: newrev, ref: ref) }
 
   let(:oldrev) { Gitlab::Git::BLANK_SHA }
-  let(:newrev) { "8a2a6eb295bb170b34c24c76c49ed0e9b2eaf34b" } # gitlab-test: git rev-parse refs/tags/v1.1.0
+  let(:newrev) { "8a2a6eb295bb170b34c24c76c49ed0e9b2eaf34b" } # doggohub-test: git rev-parse refs/tags/v1.1.0
   let(:ref) { 'refs/tags/v1.1.0' }
 
   describe "Push tags" do
@@ -78,7 +78,7 @@ describe GitTagPushService, services: true do
           it do
             is_expected.to include(
               url: [
-               Gitlab.config.gitlab.url,
+               Gitlab.config.doggohub.url,
                project.namespace.to_param,
                project.to_param,
                'commit',
@@ -148,7 +148,7 @@ describe GitTagPushService, services: true do
           it do
             is_expected.to include(
               url: [
-               Gitlab.config.gitlab.url,
+               Gitlab.config.doggohub.url,
                project.namespace.to_param,
                project.to_param,
                'commit',

@@ -4,7 +4,7 @@ module RakeHelpers
     Rake.application.invoke_task("#{task_name}[#{args.join(',')}]")
   end
 
-  def stub_warn_user_is_not_gitlab
-    allow_any_instance_of(Object).to receive(:warn_user_is_not_gitlab)
+  def stub_warn_user_is_not_doggohub
+    allow_any_instance_of(Object).to receive(:warn_user_is_not_doggohub)
   end
 end

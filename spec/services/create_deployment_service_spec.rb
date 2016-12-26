@@ -107,7 +107,7 @@ describe CreateDeploymentService, services: true do
           sha: '97de212e80737a608d939f648d959671fb0a0142',
           options: {
             name: 'review-apps/$CI_BUILD_REF_NAME',
-            url: 'http://$CI_BUILD_REF_NAME.review-apps.gitlab.com'
+            url: 'http://$CI_BUILD_REF_NAME.review-apps.doggohub.com'
           },
           variables: [
             { key: 'CI_BUILD_REF_NAME', value: 'feature-review-apps' }
@@ -119,7 +119,7 @@ describe CreateDeploymentService, services: true do
         expect { subject }.to change { Environment.count }.by(1)
 
         expect(subject.environment.name).to eq('review-apps/feature-review-apps')
-        expect(subject.environment.external_url).to eq('http://feature-review-apps.review-apps.gitlab.com')
+        expect(subject.environment.external_url).to eq('http://feature-review-apps.review-apps.doggohub.com')
       end
 
       it 'does create a new deployment' do
@@ -137,7 +137,7 @@ describe CreateDeploymentService, services: true do
           subject
 
           expect(subject.environment.name).to eq('review-apps/feature-review-apps')
-          expect(subject.environment.external_url).to eq('http://feature-review-apps.review-apps.gitlab.com')
+          expect(subject.environment.external_url).to eq('http://feature-review-apps.review-apps.doggohub.com')
         end
 
         it 'does create a new deployment' do
@@ -215,7 +215,7 @@ describe CreateDeploymentService, services: true do
       let(:pipeline) { create(:ci_pipeline, project: project) }
       let(:build) { create(:ci_build, pipeline: pipeline, environment: 'production', options: options) }
       let(:options) do
-        { environment: { name: 'production', url: 'http://gitlab.com' } }
+        { environment: { name: 'production', url: 'http://doggohub.com' } }
       end
 
       context 'when build succeeds' do

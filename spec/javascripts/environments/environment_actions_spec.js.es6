@@ -12,7 +12,7 @@ describe('Actions Component', () => {
     const actionsMock = [
       {
         name: 'bar',
-        play_path: 'https://gitlab.com/play',
+        play_path: 'https://doggohub.com/play',
       },
       {
         name: 'foo',
@@ -40,7 +40,7 @@ describe('Actions Component', () => {
     const actionsMock = [
       {
         name: 'bar',
-        play_path: 'https://gitlab.com/play',
+        play_path: 'https://doggohub.com/play',
       },
       {
         name: 'foo',

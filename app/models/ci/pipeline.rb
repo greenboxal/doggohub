@@ -275,7 +275,7 @@ module Ci
       return @ci_yaml_file if defined?(@ci_yaml_file)
 
       @ci_yaml_file ||= begin
-        blob = project.repository.blob_at(sha, '.gitlab-ci.yml')
+        blob = project.repository.blob_at(sha, '.doggohub-ci.yml')
         blob.load_all_data!(project.repository)
         blob.data
       rescue

@@ -1,7 +1,7 @@
 # Getting started with Review Apps
 
 >
-- [Introduced][ce-21971] in GitLab 8.12. Further additions were made in GitLab
+- [Introduced][ce-21971] in DoggoHub 8.12. Further additions were made in DoggoHub
   8.13 and 8.14.
 - Inspired by [Heroku's Review Apps][heroku-apps] which itself was inspired by
   [Fourchette].
@@ -50,7 +50,7 @@ knowledge:
 1. First, learn about [environments][] and their role in the development workflow.
 1. Then make a small stop to learn about [CI variables][variables] and how they
    can be used in your CI jobs.
-1. Next, explore the [`environment` syntax][yaml-env] as defined in `.gitlab-ci.yml`.
+1. Next, explore the [`environment` syntax][yaml-env] as defined in `.doggohub-ci.yml`.
    This will be your primary reference when you are finally comfortable with
    how environments work.
 1. Additionally, find out about [manual actions][] and how you can use them to
@@ -67,7 +67,7 @@ how to define and create them.
 
 ## Creating and destroying Review Apps
 
-The creation and destruction of a Review App is defined in `.gitlab-ci.yml`
+The creation and destruction of a Review App is defined in `.doggohub-ci.yml`
 at a job level under the `environment` keyword.
 
 Check the [environments] documentation how to do so.
@@ -79,7 +79,7 @@ The process of adding Review Apps in your workflow would look like:
 1. Set up the infrastructure to host and deploy the Review Apps.
 1. [Install][install-runner] and [configure][conf-runner] a Runner that does
    the deployment.
-1. Set up a job in `.gitlab-ci.yml` that uses the predefined
+1. Set up a job in `.doggohub-ci.yml` that uses the predefined
    [predefined CI environment variable][variables] `${CI_BUILD_REF_NAME}` to
    create dynamic environments and restrict it to run only on branches.
 1. Optionally set a job that [manually stops][manual-env] the Review Apps.
@@ -100,7 +100,7 @@ Check the [environments limitations](../environments.md#limitations).
 
 A list of examples used with Review Apps can be found below:
 
-- [Use with NGINX][app-nginx] - Use NGINX and the shell executor of GitLab Runner
+- [Use with NGINX][app-nginx] - Use NGINX and the shell executor of DoggoHub Runner
   to deploy a simple HTML website.
 
 And below is a soon to be added examples list:
@@ -109,8 +109,8 @@ And below is a soon to be added examples list:
 - Use on Heroku with dpl
 - Use with OpenShift/kubernetes
 
-[app-nginx]: https://gitlab.com/gitlab-examples/review-apps-nginx
-[ce-21971]: https://gitlab.com/gitlab-org/gitlab-ce/issues/21971
+[app-nginx]: https://doggohub.com/doggohub-examples/review-apps-nginx
+[ce-21971]: https://doggohub.com/doggohub-org/doggohub-ce/issues/21971
 [dynamic environments]: ../environments.md#dynamic-environments
 [environments]: ../environments.md
 [fourchette]: https://github.com/rainforestapp/fourchette
@@ -119,6 +119,6 @@ And below is a soon to be added examples list:
 [merge request]: ../../user/project/merge_requests.md
 [variables]: ../variables/README.md
 [yaml-env]: ../yaml/README.md#environment
-[install-runner]: https://docs.gitlab.com/runner/install/
-[conf-runner]: https://docs.gitlab.com/runner/commands/
+[install-runner]: https://docs.doggohub.com/runner/install/
+[conf-runner]: https://docs.doggohub.com/runner/commands/
 [manual-env]: ../environments.md#stopping-an-environment

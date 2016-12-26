@@ -4,7 +4,7 @@ describe('Commit component', () => {
   let props;
   let component;
 
-  it('should render a code-fork icon if it does not represent a tag', () => {
+  it('should render a code-bork icon if it does not represent a tag', () => {
     fixture.set('<div class="test-commit-container"></div>');
     component = new window.gl.CommitComponent({
       el: document.querySelector('.test-commit-container'),
@@ -12,20 +12,20 @@ describe('Commit component', () => {
         tag: false,
         commitRef: {
           name: 'master',
-          ref_url: 'http://localhost/namespace2/gitlabhq/tree/master',
+          ref_url: 'http://localhost/namespace2/doggohubhq/tree/master',
         },
-        commitUrl: 'https://gitlab.com/gitlab-org/gitlab-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
+        commitUrl: 'https://doggohub.com/doggohub-org/doggohub-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
         shortSha: 'b7836edd',
         title: 'Commit message',
         author: {
-          avatar_url: 'https://gitlab.com/uploads/user/avatar/300478/avatar.png',
-          web_url: 'https://gitlab.com/jschatz1',
+          avatar_url: 'https://doggohub.com/uploads/user/avatar/300478/avatar.png',
+          web_url: 'https://doggohub.com/jschatz1',
           username: 'jschatz1',
         },
       },
     });
 
-    expect(component.$el.querySelector('.icon-container i').classList).toContain('fa-code-fork');
+    expect(component.$el.querySelector('.icon-container i').classList).toContain('fa-code-bork');
   });
 
   describe('Given all the props', () => {
@@ -36,14 +36,14 @@ describe('Commit component', () => {
         tag: true,
         commitRef: {
           name: 'master',
-          ref_url: 'http://localhost/namespace2/gitlabhq/tree/master',
+          ref_url: 'http://localhost/namespace2/doggohubhq/tree/master',
         },
-        commitUrl: 'https://gitlab.com/gitlab-org/gitlab-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
+        commitUrl: 'https://doggohub.com/doggohub-org/doggohub-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
         shortSha: 'b7836edd',
         title: 'Commit message',
         author: {
-          avatar_url: 'https://gitlab.com/uploads/user/avatar/300478/avatar.png',
-          web_url: 'https://gitlab.com/jschatz1',
+          avatar_url: 'https://doggohub.com/uploads/user/avatar/300478/avatar.png',
+          web_url: 'https://doggohub.com/jschatz1',
           username: 'jschatz1',
         },
         commitIconSvg: '<svg></svg>',
@@ -110,9 +110,9 @@ describe('Commit component', () => {
         tag: false,
         commitRef: {
           name: 'master',
-          ref_url: 'http://localhost/namespace2/gitlabhq/tree/master',
+          ref_url: 'http://localhost/namespace2/doggohubhq/tree/master',
         },
-        commitUrl: 'https://gitlab.com/gitlab-org/gitlab-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
+        commitUrl: 'https://doggohub.com/doggohub-org/doggohub-ce/commit/b7836eddf62d663c665769e1b0960197fd215067',
         shortSha: 'b7836edd',
         title: null,
         author: {},

@@ -1,3 +1,3 @@
-Thank you for taking the time to contribute back to GitLab!
+Thank you for taking the time to contribute back to DoggoHub!
 
-Please open a merge request [on GitLab.com](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests), we look forward to reviewing your contribution! You can log into GitLab.com using your GitHub account.
+Please open a merge request [on DoggoHub.com](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests), we look forward to reviewing your contribution! You can log into DoggoHub.com using your GitHub account.

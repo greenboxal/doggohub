@@ -1,11 +1,11 @@
 # InfluxDB Configuration
 
 The default settings provided by [InfluxDB] are not sufficient for a high traffic
-GitLab environment. The settings discussed in this document are based on the
-settings GitLab uses for GitLab.com, depending on your own needs you may need to
+DoggoHub environment. The settings discussed in this document are based on the
+settings DoggoHub uses for DoggoHub.com, depending on your own needs you may need to
 further adjust them.
 
-If you are intending to run InfluxDB on the same server as GitLab, make sure
+If you are intending to run InfluxDB on the same server as DoggoHub, make sure
 you have plenty of RAM since InfluxDB can use quite a bit depending on traffic.
 
 Unless you are going with a budget setup, it's advised to run it separately.
@@ -78,14 +78,14 @@ admin user](#create-a-new-admin-user)._
 
 ### UDP
 
-GitLab writes data to InfluxDB via UDP and thus this must be enabled. Enabling
+DoggoHub writes data to InfluxDB via UDP and thus this must be enabled. Enabling
 UDP can be done using the following settings:
 
 ```
 [[udp]]
   enabled = true
   bind-address = ":8089"
-  database = "gitlab"
+  database = "doggohub"
   batch-size = 1000
   batch-pending = 5
   batch-timeout = "1s"
@@ -95,7 +95,7 @@ UDP can be done using the following settings:
 This does the following:
 
 1. Enable UDP and bind it to port 8089 for all addresses.
-2. Store any data received in the "gitlab" database.
+2. Store any data received in the "doggohub" database.
 3. Define a batch of points to be 1000 points in size and allow a maximum of
    5 batches _or_ flush them automatically after 1 second.
 4. Define a UDP read buffer size of 200 MB.
@@ -119,7 +119,7 @@ net.core.rmem_max=209715200
 
 It is **very important** to make sure the buffer sizes are large enough to
 handle all data sent to InfluxDB as otherwise you _will_ lose data. The above
-buffer sizes are based on the traffic for GitLab.com. Depending on the amount of
+buffer sizes are based on the traffic for DoggoHub.com. Depending on the amount of
 traffic, users may be able to use a smaller buffer size, but we highly recommend
 using _at least_ 100 MB.
 
@@ -138,9 +138,9 @@ admin user][influx-admin]:
 influx -execute "CREATE USER jeff WITH PASSWORD '1234' WITH ALL PRIVILEGES"
 ```
 
-## Create the `gitlab` database
+## Create the `doggohub` database
 
-Once you get InfluxDB up and running, you need to create a database for GitLab.
+Once you get InfluxDB up and running, you need to create a database for DoggoHub.
 Make sure you have changed the [storage engine](#storage-engine) to `tsm1`
 before creating a database.
 
@@ -148,13 +148,13 @@ _**Note:** If you [created an admin user](#create-a-new-admin-user) and enabled
 [HTTP authentication](#http), remember to append the username (`-username <username>`)
 and password (`-password <password>`)  you set earlier to the commands below._
 
-Run the following command to create a database named `gitlab`:
+Run the following command to create a database named `doggohub`:
 
 ```bash
-influx -execute 'CREATE DATABASE gitlab'
+influx -execute 'CREATE DATABASE doggohub'
 ```
 
-The name **must** be `gitlab`, do not use any other name.
+The name **must** be `doggohub`, do not use any other name.
 
 Next, make sure that the database was successfully created:
 
@@ -169,17 +169,17 @@ name: databases
 ---------------
 name
 _internal
-gitlab
+doggohub
 ```
 
-That's it! Now your GitLab instance should send data to InfluxDB.
+That's it! Now your DoggoHub instance should send data to InfluxDB.
 
 ---
 
 Read more on:
 
-- [Introduction to GitLab Performance Monitoring](introduction.md)
-- [GitLab Configuration](gitlab_configuration.md)
+- [Introduction to DoggoHub Performance Monitoring](introduction.md)
+- [DoggoHub Configuration](doggohub_configuration.md)
 - [InfluxDB Schema](influxdb_schema.md)
 - [Grafana Install/Configuration](grafana_configuration.md)
 

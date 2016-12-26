@@ -1,7 +1,7 @@
 .file-holder.file.append-bottom-default
   .file-title.clearfix
     .editor-ref
-      = icon('code-fork')
+      = icon('code-bork')
       = ref
     %span.editor-file-name
       - if current_action?(:edit) || current_action?(:update)
@@ -19,8 +19,8 @@
         = dropdown_tag("Choose a License template", options: { toggle_class: 'btn js-license-selector', title: "Choose a license", filter: true, placeholder: "Filter", data: { data: licenses_for_select, project: @project.name, fullname: @project.namespace.human_name } } )
       .gitignore-selector.js-gitignore-selector-wrap.hidden
         = dropdown_tag("Choose a .gitignore template", options: { toggle_class: 'btn js-gitignore-selector', title: "Choose a template", filter: true, placeholder: "Filter", data: { data: gitignore_names } } )
-      .gitlab-ci-yml-selector.js-gitlab-ci-yml-selector-wrap.hidden
-        = dropdown_tag("Choose a GitLab CI Yaml template", options: { toggle_class: 'btn js-gitlab-ci-yml-selector', title: "Choose a template", filter: true, placeholder: "Filter", data: { data: gitlab_ci_ymls } } )
+      .doggohub-ci-yml-selector.js-doggohub-ci-yml-selector-wrap.hidden
+        = dropdown_tag("Choose a DoggoHub CI Yaml template", options: { toggle_class: 'btn js-doggohub-ci-yml-selector', title: "Choose a template", filter: true, placeholder: "Filter", data: { data: doggohub_ci_ymls } } )
       .dockerfile-selector.js-dockerfile-selector-wrap.hidden
         = dropdown_tag("Choose a Dockerfile template", options: { toggle_class: 'btn js-dockerfile-selector', title: "Choose a template", filter: true, placeholder: "Filter", data: { data: dockerfile_names } } )
       = button_tag class: 'soft-wrap-toggle btn', type: 'button' do

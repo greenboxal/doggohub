@@ -71,7 +71,7 @@ describe Gitlab::Ci::Build::Artifacts::Metadata do
 
     describe '#full_version' do
       subject { metadata('').full_version }
-      it { is_expected.to eq 'GitLab Build Artifacts Metadata 0.0.1' }
+      it { is_expected.to eq 'DoggoHub Build Artifacts Metadata 0.0.1' }
     end
 
     describe '#version' do

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Banzai::Filter::AutolinkFilter, lib: true do
   include FilterSpecHelper
 
-  let(:link) { 'http://about.gitlab.com/' }
+  let(:link) { 'http://about.doggohub.com/' }
 
   it 'does nothing when :autolink is false' do
     exp = act = link

@@ -13,7 +13,7 @@ describe Gitlab::Ci::Build::Credentials::Registry do
   it 'contains valid DockerRegistry credentials' do
     expect(subject).to be_kind_of(Gitlab::Ci::Build::Credentials::Registry)
 
-    expect(subject.username).to eq 'gitlab-ci-token'
+    expect(subject.username).to eq 'doggohub-ci-token'
     expect(subject.password).to eq build.token
     expect(subject.url).to eq registry_url
     expect(subject.type).to eq 'registry'

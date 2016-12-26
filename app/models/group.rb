@@ -103,7 +103,7 @@ class Group < Namespace
 
   def avatar_url(size = nil)
     if self[:avatar].present?
-      [gitlab_config.url, avatar.url].join
+      [doggohub_config.url, avatar.url].join
     end
   end
 

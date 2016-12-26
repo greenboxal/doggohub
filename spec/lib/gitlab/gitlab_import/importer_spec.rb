@@ -5,7 +5,7 @@ describe Gitlab::GitlabImport::Importer, lib: true do
 
   describe '#execute' do
     before do
-      stub_omniauth_provider('gitlab')
+      stub_omniauth_provider('doggohub')
       stub_request('issues', [
         {
           'id' => 2579857,
@@ -43,7 +43,7 @@ describe Gitlab::GitlabImport::Importer, lib: true do
     end
 
     def stub_request(path, body)
-      url = "https://gitlab.com/api/v3/projects/asd%2Fvim/#{path}?page=1&per_page=100"
+      url = "https://doggohub.com/api/v3/projects/asd%2Fvim/#{path}?page=1&per_page=100"
 
       WebMock.stub_request(:get, url).
         to_return(

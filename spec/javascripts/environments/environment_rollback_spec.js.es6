@@ -3,7 +3,7 @@
 describe('Rollback Component', () => {
   fixture.preload('environments/element.html');
 
-  const retryURL = 'https://gitlab.com/retry';
+  const retryURL = 'https://doggohub.com/retry';
 
   beforeEach(() => {
     fixture.load('environments/element.html');

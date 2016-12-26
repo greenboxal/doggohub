@@ -1,1 +1,1 @@
-Time.zone = Gitlab.config.gitlab.time_zone || Time.zone
+Time.zone = Gitlab.config.doggohub.time_zone || Time.zone

@@ -255,7 +255,7 @@ module Ci
     end
 
     def repo_url
-      auth = "gitlab-ci-token:#{ensure_token!}@"
+      auth = "doggohub-ci-token:#{ensure_token!}@"
       project.http_url_to_repo.sub(/^https?:\/\//) do |prefix|
         prefix + auth
       end
@@ -368,7 +368,7 @@ module Ci
 
     def dir_to_trace
       File.join(
-        Settings.gitlab_ci.builds_path,
+        Settings.doggohub_ci.builds_path,
         created_at.utc.strftime("%Y_%m"),
         project.id.to_s
       )
@@ -386,7 +386,7 @@ module Ci
     #
     def old_dir_to_trace
       File.join(
-        Settings.gitlab_ci.builds_path,
+        Settings.doggohub_ci.builds_path,
         created_at.utc.strftime("%Y_%m"),
         project.ci_id.to_s
       )
@@ -521,8 +521,8 @@ module Ci
       return [] if user.blank?
 
       [
-        { key: 'GITLAB_USER_ID', value: user.id.to_s, public: true },
-        { key: 'GITLAB_USER_EMAIL', value: user.email, public: true }
+        { key: 'DOGGOHUB_USER_ID', value: user.id.to_s, public: true },
+        { key: 'DOGGOHUB_USER_EMAIL', value: user.email, public: true }
       ]
     end
 
@@ -551,7 +551,7 @@ module Ci
     def predefined_variables
       variables = [
         { key: 'CI', value: 'true', public: true },
-        { key: 'GITLAB_CI', value: 'true', public: true },
+        { key: 'DOGGOHUB_CI', value: 'true', public: true },
         { key: 'CI_BUILD_ID', value: id.to_s, public: true },
         { key: 'CI_BUILD_TOKEN', value: token, public: false },
         { key: 'CI_BUILD_REF', value: sha, public: true },
@@ -560,7 +560,7 @@ module Ci
         { key: 'CI_BUILD_REF_SLUG', value: ref_slug, public: true },
         { key: 'CI_BUILD_NAME', value: name, public: true },
         { key: 'CI_BUILD_STAGE', value: stage, public: true },
-        { key: 'CI_SERVER_NAME', value: 'GitLab', public: true },
+        { key: 'CI_SERVER_NAME', value: 'DoggoHub', public: true },
         { key: 'CI_SERVER_VERSION', value: Gitlab::VERSION, public: true },
         { key: 'CI_SERVER_REVISION', value: Gitlab::REVISION, public: true }
       ]

@@ -1,7 +1,7 @@
 module API
   # Internal access API
   class Internal < Grape::API
-    before { authenticate_by_gitlab_shell_token! }
+    before { authenticate_by_doggohub_shell_token! }
 
     helpers ::API::Helpers::InternalHelpers
 
@@ -44,7 +44,7 @@ module API
         response = { status: access_status.status, message: access_status.message }
 
         if access_status.status
-          # Return the repository full path so that gitlab-shell has it when
+          # Return the repository full path so that doggohub-shell has it when
           # handling ssh commands
           response[:repository_path] =
             if wiki?
@@ -85,8 +85,8 @@ module API
       get "/check" do
         {
           api_version: API.version,
-          gitlab_version: Gitlab::VERSION,
-          gitlab_rev: Gitlab::REVISION,
+          doggohub_version: Gitlab::VERSION,
+          doggohub_rev: Gitlab::REVISION,
         }
       end
 

@@ -14,12 +14,12 @@ Always use an [Entity] to present the endpoint's payload.
 ## Methods and parameters description
 
 Every method must be described using the [Grape DSL](https://github.com/ruby-grape/grape#describing-methods)
-(see https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/api/environments.rb
+(see https://doggohub.com/doggohub-org/doggohub-ce/blob/master/lib/api/environments.rb
 for a good example):
 
 - `desc` for the method summary. You should pass it a block for additional
   details such as:
-  - The GitLab version when the endpoint was added
+  - The DoggoHub version when the endpoint was added
   - If the endpoint is deprecated, and if so, when will it be removed
 
 - `params` for the method params. This acts as description,
@@ -29,7 +29,7 @@ A good example is as follows:
 
 ```ruby
 desc 'Get all broadcast messages' do
-  detail 'This feature was introduced in GitLab 8.12.'
+  detail 'This feature was introduced in DoggoHub 8.12.'
   success Entities::BroadcastMessage
 end
 params do
@@ -92,5 +92,5 @@ For instance:
 Model.create(foo: params[:foo])
 ```
 
-[Entity]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/api/entities.rb
+[Entity]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/lib/api/entities.rb
 [validation, and coercion of the parameters]: https://github.com/ruby-grape/grape#parameter-validation-and-coercion

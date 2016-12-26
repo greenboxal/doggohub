@@ -4,23 +4,23 @@ To enable the Microsoft Azure OAuth2 OmniAuth provider you must register your ap
 
 1.  Sign in to the [Azure Management Portal](https://manage.windowsazure.com>).
 
-1.  Select "Active Directory" on the left and choose the directory you want to use to register GitLab.
+1.  Select "Active Directory" on the left and choose the directory you want to use to register DoggoHub.
 
 1.  Select "Applications" at the top bar and click the "Add" button the bottom.
 
 1.  Select "Add an application my organization is developing".
 
 1.  Provide the project information and click the "Next" button.
-    - Name: 'GitLab' works just fine here.
+    - Name: 'DoggoHub' works just fine here.
     - Type: 'WEB APPLICATION AND/OR WEB API'
 
 1.  On the "App properties" page enter the needed URI's and click the "Complete" button.
-    - SIGN-IN URL: Enter the URL of your GitLab installation (e.g 'https://gitlab.mycompany.com/')
-    - APP ID URI: Enter the endpoint URL for Microsoft to use, just has to be unique (e.g 'https://mycompany.onmicrosoft.com/gitlab')
+    - SIGN-IN URL: Enter the URL of your DoggoHub installation (e.g 'https://doggohub.mycompany.com/')
+    - APP ID URI: Enter the endpoint URL for Microsoft to use, just has to be unique (e.g 'https://mycompany.onmicrosoft.com/doggohub')
 
 1. Select "Configure" in the top menu.
 
-1. Add a "Reply URL" pointing to the Azure OAuth callback of your GitLab installation (e.g. https://gitlab.mycompany.com/users/auth/azure_oauth2/callback).
+1. Add a "Reply URL" pointing to the Azure OAuth callback of your DoggoHub installation (e.g. https://doggohub.mycompany.com/users/auth/azure_oauth2/callback).
 
 1. Create a "Client secret" by selecting a duration, the secret will be generated as soon as you click the "Save" button in the bottom menu..
 
@@ -30,20 +30,20 @@ To enable the Microsoft Azure OAuth2 OmniAuth provider you must register your ap
 
 1. You will see lots of endpoint URLs in the form 'https://login.microsoftonline.com/TENANT ID/...', note down the TENANT ID part of one of those endpoints.
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
+      cd /home/git/doggohub
 
-      sudo -u git -H editor config/gitlab.yml
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration) for initial settings.
@@ -53,7 +53,7 @@ To enable the Microsoft Azure OAuth2 OmniAuth provider you must register your ap
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "azure_oauth2",
           "args" => {
@@ -78,6 +78,6 @@ To enable the Microsoft Azure OAuth2 OmniAuth provider you must register your ap
 
 1.  Save the configuration file.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
-On the sign in page there should now be a Microsoft icon below the regular sign in form. Click the icon to begin the authentication process. Microsoft will ask the user to sign in and authorize the GitLab application. If everything goes well the user will be returned to GitLab and will be signed in.
+On the sign in page there should now be a Microsoft icon below the regular sign in form. Click the icon to begin the authentication process. Microsoft will ask the user to sign in and authorize the DoggoHub application. If everything goes well the user will be returned to DoggoHub and will be signed in.

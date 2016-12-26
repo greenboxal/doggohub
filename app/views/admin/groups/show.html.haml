@@ -60,7 +60,7 @@
             %span.pull-right.light
               %span.monospace= project.path_with_namespace + ".git"
       .panel-footer
-        = paginate @projects, param_name: 'projects_page', theme: 'gitlab'
+        = paginate @projects, param_name: 'projects_page', theme: 'doggohub'
 
     - if @group.shared_projects.any?
       .panel.panel-default
@@ -108,4 +108,4 @@
       %ul.well-list.group-users-list.content-list
         = render partial: 'shared/members/member', collection: @members, as: :member, locals: { show_controls: false }
       .panel-footer
-        = paginate @members, param_name: 'members_page', theme: 'gitlab'
+        = paginate @members, param_name: 'members_page', theme: 'doggohub'

@@ -5,12 +5,12 @@ class MigrateCiSlackService < ActiveRecord::Migration
   def up
     properties_query = 'SELECT properties FROM ci_services ' \
       'JOIN ci_projects ON ci_services.project_id=ci_projects.id ' \
-      "WHERE ci_projects.gitlab_id=services.project_id AND ci_services.type='Ci::SlackService' AND ci_services.active " \
+      "WHERE ci_projects.doggohub_id=services.project_id AND ci_services.type='Ci::SlackService' AND ci_services.active " \
       'LIMIT 1'
 
     active_query = 'SELECT 1 FROM ci_services ' \
       'JOIN ci_projects ON ci_services.project_id=ci_projects.id ' \
-      "WHERE ci_projects.gitlab_id=services.project_id AND ci_services.type='Ci::SlackService' AND ci_services.active " \
+      "WHERE ci_projects.doggohub_id=services.project_id AND ci_services.type='Ci::SlackService' AND ci_services.active " \
       'LIMIT 1'
 
     # We update the service since services are always generated for project, even if they are inactive

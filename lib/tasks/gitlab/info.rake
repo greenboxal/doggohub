@@ -1,6 +1,6 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :env do
-    desc "GitLab | Show information about GitLab and its environment"
+    desc "DoggoHub | Show information about DoggoHub and its environment"
     task info: :environment  do
 
       # check if there is an RVM environment
@@ -39,12 +39,12 @@ namespace :gitlab do
       omniauth_providers.map! { |provider| provider['name'] }
 
       puts ""
-      puts "GitLab information".color(:yellow)
+      puts "DoggoHub information".color(:yellow)
       puts "Version:\t#{Gitlab::VERSION}"
       puts "Revision:\t#{Gitlab::REVISION}"
       puts "Directory:\t#{Rails.root}"
       puts "DB Adapter:\t#{database_adapter}"
-      puts "URL:\t\t#{Gitlab.config.gitlab.url}"
+      puts "URL:\t\t#{Gitlab.config.doggohub.url}"
       puts "HTTP Clone URL:\t#{http_clone_url}"
       puts "SSH Clone URL:\t#{ssh_clone_url}"
       puts "Using LDAP:\t#{Gitlab.config.ldap.enabled ? "yes".color(:green) : "no"}"
@@ -54,19 +54,19 @@ namespace :gitlab do
 
 
       # check Gitolite version
-      gitlab_shell_version_file = "#{Gitlab.config.gitlab_shell.hooks_path}/../VERSION"
-      if File.readable?(gitlab_shell_version_file)
-        gitlab_shell_version = File.read(gitlab_shell_version_file)
+      doggohub_shell_version_file = "#{Gitlab.config.doggohub_shell.hooks_path}/../VERSION"
+      if File.readable?(doggohub_shell_version_file)
+        doggohub_shell_version = File.read(doggohub_shell_version_file)
       end
 
       puts ""
-      puts "GitLab Shell".color(:yellow)
-      puts "Version:\t#{gitlab_shell_version || "unknown".color(:red)}"
+      puts "DoggoHub Shell".color(:yellow)
+      puts "Version:\t#{doggohub_shell_version || "unknown".color(:red)}"
       puts "Repository storage paths:"
       Gitlab.config.repositories.storages.each do |name, path|
         puts "- #{name}: \t#{path}"
       end
-      puts "Hooks:\t\t#{Gitlab.config.gitlab_shell.hooks_path}"
+      puts "Hooks:\t\t#{Gitlab.config.doggohub_shell.hooks_path}"
       puts "Git:\t\t#{Gitlab.config.git.bin_path}"
 
     end

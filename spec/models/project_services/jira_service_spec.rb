@@ -81,9 +81,9 @@ describe JiraService, models: true do
         project: project,
         service_hook: true,
         url: 'http://jira.example.com',
-        username: 'gitlab_jira_username',
-        password: 'gitlab_jira_password',
-        project_key: 'GitLabProject',
+        username: 'doggohub_jira_username',
+        password: 'doggohub_jira_password',
+        project_key: 'DoggoHubProject',
         jira_issue_transition_id: "custom-id"
       )
 
@@ -100,10 +100,10 @@ describe JiraService, models: true do
 
       @jira_service.save
 
-      project_issues_url = 'http://gitlab_jira_username:gitlab_jira_password@jira.example.com/rest/api/2/issue/JIRA-123'
-      @transitions_url   = 'http://gitlab_jira_username:gitlab_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/transitions'
-      @comment_url       = 'http://gitlab_jira_username:gitlab_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/comment'
-      @remote_link_url   = 'http://gitlab_jira_username:gitlab_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/remotelink'
+      project_issues_url = 'http://doggohub_jira_username:doggohub_jira_password@jira.example.com/rest/api/2/issue/JIRA-123'
+      @transitions_url   = 'http://doggohub_jira_username:doggohub_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/transitions'
+      @comment_url       = 'http://doggohub_jira_username:doggohub_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/comment'
+      @remote_link_url   = 'http://doggohub_jira_username:doggohub_jira_password@jira.example.com/rest/api/2/issue/JIRA-123/remotelink'
 
       WebMock.stub_request(:get, project_issues_url)
       WebMock.stub_request(:post, @transitions_url)
@@ -130,11 +130,11 @@ describe JiraService, models: true do
       # Creates Remote Link in JIRA issue fields
       expect(WebMock).to have_requested(:post, @remote_link_url).with(
         body: hash_including(
-          GlobalID: "GitLab",
+          GlobalID: "DoggoHub",
           object: {
-            url: "#{Gitlab.config.gitlab.url}/#{project.path_with_namespace}/commit/#{merge_request.diff_head_sha}",
-            title: "GitLab: Solved by commit #{merge_request.diff_head_sha}.",
-            icon: { title: "GitLab", url16x16: "https://gitlab.com/favicon.ico" },
+            url: "#{Gitlab.config.doggohub.url}/#{project.path_with_namespace}/commit/#{merge_request.diff_head_sha}",
+            title: "DoggoHub: Solved by commit #{merge_request.diff_head_sha}.",
+            icon: { title: "DoggoHub", url16x16: "https://doggohub.com/favicon.ico" },
             status: { resolved: true, icon: { url16x16: "http://www.openwebgraphics.com/resources/data/1768/16x16_apply.png", title: "Closed" } }
           }
         )
@@ -150,7 +150,7 @@ describe JiraService, models: true do
       expect(WebMock).not_to have_requested(:post, @remote_link_url)
     end
 
-    it "references the GitLab commit/merge request" do
+    it "references the DoggoHub commit/merge request" do
       stub_config_setting(base_url: custom_base_url)
 
       @jira_service.close_issue(merge_request, ExternalIssue.new("JIRA-123", project))
@@ -160,18 +160,18 @@ describe JiraService, models: true do
       ).once
     end
 
-    it "references the GitLab commit/merge request (relative URL)" do
-      stub_config_setting(relative_url_root: '/gitlab')
-      stub_config_setting(url: Settings.send(:build_gitlab_url))
+    it "references the DoggoHub commit/merge request (relative URL)" do
+      stub_config_setting(relative_url_root: '/doggohub')
+      stub_config_setting(url: Settings.send(:build_doggohub_url))
 
       allow(JiraService).to receive(:default_url_options) do
-        { script_name: '/gitlab' }
+        { script_name: '/doggohub' }
       end
 
       @jira_service.close_issue(merge_request, ExternalIssue.new("JIRA-123", project))
 
       expect(WebMock).to have_requested(:post, @comment_url).with(
-        body: /#{Gitlab.config.gitlab.url}\/#{project.path_with_namespace}\/commit\/#{merge_request.diff_head_sha}/
+        body: /#{Gitlab.config.doggohub.url}\/#{project.path_with_namespace}\/commit\/#{merge_request.diff_head_sha}/
       ).once
     end
 
@@ -188,12 +188,12 @@ describe JiraService, models: true do
     let(:jira_service) do
       described_class.new(
         url: 'http://jira.example.com',
-        username: 'gitlab_jira_username',
-        password: 'gitlab_jira_password',
-        project_key: 'GitLabProject'
+        username: 'doggohub_jira_username',
+        password: 'doggohub_jira_password',
+        project_key: 'DoggoHubProject'
       )
     end
-    let(:project_url) { 'http://gitlab_jira_username:gitlab_jira_password@jira.example.com/rest/api/2/project/GitLabProject' }
+    let(:project_url) { 'http://doggohub_jira_username:doggohub_jira_password@jira.example.com/rest/api/2/project/DoggoHubProject' }
 
     before do
       WebMock.stub_request(:get, project_url)
@@ -318,7 +318,7 @@ describe JiraService, models: true do
   describe 'project and issue urls' do
     let(:project) { create(:project) }
 
-    context 'when gitlab.yml was initialized' do
+    context 'when doggohub.yml was initialized' do
       before do
         settings = {
           "jira" => {

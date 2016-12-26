@@ -25,7 +25,7 @@ module Projects
       lease_uuid = try_obtain_lease
       raise LeaseTaken unless lease_uuid.present?
 
-      execute_gitlab_shell_gc(lease_uuid)
+      execute_doggohub_shell_gc(lease_uuid)
     end
 
     def needed?
@@ -40,7 +40,7 @@ module Projects
 
     private
 
-    def execute_gitlab_shell_gc(lease_uuid)
+    def execute_doggohub_shell_gc(lease_uuid)
       GitGarbageCollectWorker.perform_async(@project.id, task, lease_key, lease_uuid)
     ensure
       if pushes_since_gc >= gc_period

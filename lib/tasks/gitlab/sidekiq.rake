@@ -1,11 +1,11 @@
-namespace :gitlab do
+namespace :doggohub do
   namespace :sidekiq do
     QUEUE = 'queue:post_receive'
 
     desc 'Drop all Sidekiq PostReceive jobs for a given project'
     task :drop_post_receive , [:project] => :environment do |t, args|
       unless args.project.present?
-        abort "Please specify the project you want to drop PostReceive jobs for:\n  rake gitlab:sidekiq:drop_post_receive[group/project]"
+        abort "Please specify the project you want to drop PostReceive jobs for:\n  rake doggohub:sidekiq:drop_post_receive[group/project]"
       end
       project_path = Project.find_with_namespace(args.project).repository.path_to_repo
 

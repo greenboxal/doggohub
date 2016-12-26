@@ -1,11 +1,11 @@
 # Housekeeping
 
-> [Introduced][ce-2371] in GitLab 8.4.
+> [Introduced][ce-2371] in DoggoHub 8.4.
 
 ---
 ## Automatic housekeeping
 
-GitLab automatically runs `git gc` and `git repack` on repositories
+DoggoHub automatically runs `git gc` and `git repack` on repositories
 after Git pushes. If needed you can change how often this happens, or
 to turn it off, go to **Admin area > Settings**
 (`/admin/application_settings`).
@@ -26,5 +26,5 @@ You can find this option under your **[Project] > Edit Project**.
 
 ![Housekeeping settings](img/housekeeping_settings.png)
 
-[ce-2371]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/2371 "Housekeeping merge request"
+[ce-2371]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/2371 "Housekeeping merge request"
 [man]: https://www.kernel.org/pub/software/scm/git/docs/git-gc.html "git gc man page"

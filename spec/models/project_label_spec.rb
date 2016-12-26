@@ -9,7 +9,7 @@ describe ProjectLabel, models: true do
     it { is_expected.to validate_presence_of(:project) }
 
     context 'validates if title must not exist at group level' do
-      let(:group) { create(:group, name: 'gitlab-org') }
+      let(:group) { create(:group, name: 'doggohub-org') }
       let(:project) { create(:empty_project, group: group) }
 
       before do
@@ -21,7 +21,7 @@ describe ProjectLabel, models: true do
 
         label.valid?
 
-        expect(label.errors[:title]).to include 'already exists at group level for gitlab-org. Please choose another one.'
+        expect(label.errors[:title]).to include 'already exists at group level for doggohub-org. Please choose another one.'
       end
 
       it 'does not returns error if title does not exist at group level' do

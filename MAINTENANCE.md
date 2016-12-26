@@ -1,6 +1,6 @@
-# GitLab Maintenance Policy
+# DoggoHub Maintenance Policy
 
-GitLab follows the [Semantic Versioning](http://semver.org/) for its releases:
+DoggoHub follows the [Semantic Versioning](http://semver.org/) for its releases:
 `(Major).(Minor).(Patch)` in a [pragmatic way].
 
 - **Major version**: Whenever there is something significant or any backwards
@@ -21,7 +21,7 @@ medium-level security issues, we may consider [backporting to the previous two
 monthly releases][rel-sec].
 
 We encourage everyone to run the latest stable release to ensure that you can
-easily upgrade to the most secure and feature-rich GitLab experience. In order
+easily upgrade to the most secure and feature-rich DoggoHub experience. In order
 to make sure you can easily run the most recent stable release, we are working
 hard to keep the update process simple and reliable.
 
@@ -29,7 +29,7 @@ More information about the release procedures can be found in our
 [release-tools documentation][rel]. You may also want to read our
 [Responsible Disclosure Policy][disclosure].
 
-[rel-sec]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/security.md#backporting
-[rel]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/
-[disclosure]: https://about.gitlab.com/disclosure/
+[rel-sec]: https://doggohub.com/doggohub-org/release-tools/blob/master/doc/security.md#backporting
+[rel]: https://doggohub.com/doggohub-org/release-tools/blob/master/doc/
+[disclosure]: https://about.doggohub.com/disclosure/
 [pragmatic way]: https://gist.github.com/jashkenas/cbd2b088e20279ae2c8e

@@ -66,8 +66,8 @@ describe Admin::ProjectsController, "routing" do
   end
 
   it "to #show" do
-    expect(get("/admin/projects/gitlab/gitlab-ce")).to route_to('admin/projects#show', namespace_id: 'gitlab', id: 'gitlab-ce')
-    expect(get("/admin/projects/gitlab/subgroup/gitlab-ce")).to route_to('admin/projects#show', namespace_id: 'gitlab/subgroup', id: 'gitlab-ce')
+    expect(get("/admin/projects/doggohub/doggohub-ce")).to route_to('admin/projects#show', namespace_id: 'doggohub', id: 'doggohub-ce')
+    expect(get("/admin/projects/doggohub/subgroup/doggohub-ce")).to route_to('admin/projects#show', namespace_id: 'doggohub/subgroup', id: 'doggohub-ce')
   end
 end
 
@@ -127,7 +127,7 @@ describe Admin::GroupsController, "routing" do
   end
 
   it "to #show" do
-    expect(get("/admin/groups/gitlab")).to route_to('admin/groups#show', id: 'gitlab')
-    expect(get("/admin/groups/gitlab/subgroup")).to route_to('admin/groups#show', id: 'gitlab/subgroup')
+    expect(get("/admin/groups/doggohub")).to route_to('admin/groups#show', id: 'doggohub')
+    expect(get("/admin/groups/doggohub/subgroup")).to route_to('admin/groups#show', id: 'doggohub/subgroup')
   end
 end

@@ -156,7 +156,7 @@
         %ul.well-list.content-list
           = render partial: 'shared/members/member', collection: @group_members, as: :member, locals: { show_controls: false }
         .panel-footer
-          = paginate @group_members, param_name: 'group_members_page', theme: 'gitlab'
+          = paginate @group_members, param_name: 'group_members_page', theme: 'doggohub'
 
     = render 'shared/members/requests', membership_source: @project, requesters: @requesters
 
@@ -170,4 +170,4 @@
       %ul.well-list.project_members.content-list
         = render partial: 'shared/members/member', collection: @project_members, as: :member, locals: { show_controls: false }
       .panel-footer
-        = paginate @project_members, param_name: 'project_members_page', theme: 'gitlab'
+        = paginate @project_members, param_name: 'project_members_page', theme: 'doggohub'

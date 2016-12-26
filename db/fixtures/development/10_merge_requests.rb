@@ -24,7 +24,7 @@ Gitlab::Seeder.quiet do
     end
   end
 
-  project = Project.find_with_namespace('gitlab-org/gitlab-test')
+  project = Project.find_with_namespace('doggohub-org/doggohub-test')
 
   params = {
     source_branch: 'feature',

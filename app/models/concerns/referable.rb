@@ -56,7 +56,7 @@ module Referable
     def link_reference_pattern(route, pattern)
       %r{
         (?<url>
-          #{Regexp.escape(Gitlab.config.gitlab.url)}
+          #{Regexp.escape(Gitlab.config.doggohub.url)}
           \/#{Project.reference_pattern}
           \/#{Regexp.escape(route)}
           \/#{pattern}

@@ -1,10 +1,10 @@
-- page_title @project.forked? ? "Forking in progress" : "Import in progress"
+- page_title @project.borked? ? "Borking in progress" : "Import in progress"
 .save-project-loader
   .center
     %h2
       %i.fa.fa-spinner.fa-spin
-      - if @project.forked?
-        Forking in progress.
+      - if @project.borked?
+        Borking in progress.
       - else
         Import in progress.
     - if @project.external_import?

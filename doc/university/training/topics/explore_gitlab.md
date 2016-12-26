@@ -1,4 +1,4 @@
-# Explore GitLab projects
+# Explore DoggoHub projects
 
 ----------
 

@@ -9,7 +9,7 @@
       /**
        * Indicates the existance of a tag.
        * Used to render the correct icon, if true will render `fa-tag` icon,
-       * if false will render `fa-code-fork` icon.
+       * if false will render `fa-code-bork` icon.
        */
       tag: {
         type: Boolean,
@@ -120,7 +120,7 @@
 
         <div v-if="hasCommitRef" class="icon-container">
           <i v-if="tag" class="fa fa-tag"></i>
-          <i v-if="!tag" class="fa fa-code-fork"></i>
+          <i v-if="!tag" class="fa fa-code-bork"></i>
         </div>
 
         <a v-if="hasCommitRef"

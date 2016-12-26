@@ -1,22 +1,22 @@
 # See https://github.com/jnicklas/carrierwave#using-amazon-s3
 # for more options
 # If you change this file in a Merge Request, please also create
-# a Merge Request on https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests
+# a Merge Request on https://doggohub.com/doggohub-org/omnibus-doggohub/merge_requests
 #
 production:
   access_key_id: AKIA1111111111111UA
   secret_access_key: secret
-  bucket: mygitlab.production.us
+  bucket: mydoggohub.production.us
   region: us-east-1
 
 development:
   access_key_id: AKIA1111111111111UA
   secret_access_key: secret
-  bucket: mygitlab.development.us
+  bucket: mydoggohub.development.us
   region: us-east-1
 
 test:
   access_key_id: AKIA1111111111111UA
   secret_access_key: secret
-  bucket: mygitlab.test.us
+  bucket: mydoggohub.test.us
   region: us-east-1

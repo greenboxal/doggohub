@@ -1,6 +1,6 @@
 # System hooks
 
-Your GitLab instance can perform HTTP POST requests on the following events: `project_create`, `project_destroy`, `project_rename`, `project_transfer`, `user_add_to_team`, `user_remove_from_team`, `user_create`, `user_destroy`, `key_create`, `key_destroy`, `group_create`, `group_destroy`, `user_add_to_group` and `user_remove_from_group`.
+Your DoggoHub instance can perform HTTP POST requests on the following events: `project_create`, `project_destroy`, `project_rename`, `project_transfer`, `user_add_to_team`, `user_remove_from_team`, `user_create`, `user_destroy`, `key_create`, `key_destroy`, `group_create`, `group_destroy`, `user_add_to_group` and `user_remove_from_group`.
 
 System hooks can be used, e.g. for logging or changing information in a LDAP server.
 
@@ -134,7 +134,7 @@ X-Gitlab-Event: System Hook
 {
    "created_at": "2012-07-21T07:44:07Z",
    "updated_at": "2012-07-21T07:38:22Z",
-        "email": "js@gitlabhq.com",
+        "email": "js@doggohubhq.com",
    "event_name": "user_create",
          "name": "John Smith",
      "username": "js",
@@ -148,7 +148,7 @@ X-Gitlab-Event: System Hook
 {
    "created_at": "2012-07-21T07:44:07Z",
    "updated_at": "2012-07-21T07:38:22Z",
-        "email": "js@gitlabhq.com",
+        "email": "js@doggohubhq.com",
    "event_name": "user_destroy",
          "name": "John Smith",
      "username": "js",

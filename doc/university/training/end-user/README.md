@@ -2,8 +2,8 @@
 # Training
 
 This training material is the markdown used to generate training slides
-which can be found at [End User Slides](https://gitlab-org.gitlab.io/end-user-training-slides/#/)
-through it's [RevealJS](https://gitlab.com/gitlab-org/end-user-training-slides)
+which can be found at [End User Slides](https://doggohub-org.doggohub.io/end-user-training-slides/#/)
+through it's [RevealJS](https://doggohub.com/doggohub-org/end-user-training-slides)
 project.
 
 ---
@@ -84,7 +84,7 @@ git config --global user.email you@example.com
 git config --global --list
 ```
 - You might want or be required to use an SSH key.
-    - Instructions: [SSH](http://doc.gitlab.com/ce/ssh/README.html)
+    - Instructions: [SSH](http://doc.doggohub.com/ce/ssh/README.html)
 
 ---
 
@@ -125,25 +125,25 @@ cd ~/workspace
 
 ---
 
-### GitLab
+### DoggoHub
 
-- GitLab is an application to code, test and deploy.
+- DoggoHub is an application to code, test and deploy.
 - Provides repository management with access controls, code reviews,
   issue tracking, Merge Requests, and other features.
-- The hosted version of GitLab is gitlab.com
+- The hosted version of DoggoHub is doggohub.com
 
 ---  
 
 ### New Project
 
-- Sign in into your gitlab.com account
+- Sign in into your doggohub.com account
 - Create a project
-- Choose to import from 'Any Repo by URL' and use https://gitlab.com/gitlab-org/training-examples.git
+- Choose to import from 'Any Repo by URL' and use https://doggohub.com/doggohub-org/training-examples.git
 - On your machine clone the `training-examples` project
 
 ---
 
-### Git and GitLab basics
+### Git and DoggoHub basics
 
 1. Edit `edit_this_file.rb` in `training-examples`
 2. See it listed as a changed file (working area)
@@ -229,7 +229,7 @@ git push origin squash_some_bugs
 ### Feedback and Collaboration
 
 - Review the Thoughtbot code-review guide for suggestions to follow when reviewing merge requests:[Thoughtbot](https://github.com/thoughtbot/guides/tree/master/code-review)
-- See GitLab merge requests for examples: [Merge Requests](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests)
+- See DoggoHub merge requests for examples: [Merge Requests](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests)
 
 ---
 
@@ -280,7 +280,7 @@ git push origin squash_some_bugs
 
 ### Example 2/2
 
-Create a merge request on the GitLab web UI. You'll see a conflict warning.
+Create a merge request on the DoggoHub web UI. You'll see a conflict warning.
 
     git checkout conflicts_branch
     git fetch

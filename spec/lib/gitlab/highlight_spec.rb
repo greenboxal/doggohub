@@ -42,14 +42,14 @@ describe Gitlab::Highlight, lib: true do
     before { project.change_head('gitattributes') }
 
     describe 'basic language selection' do
-      let(:path) { 'custom-highlighting/test.gitlab-custom' }
+      let(:path) { 'custom-highlighting/test.doggohub-custom' }
       it 'highlights as ruby' do
         expect(highlighter.lexer.tag).to eq 'ruby'
       end
     end
 
     describe 'cgi options' do
-      let(:path) { 'custom-highlighting/test.gitlab-cgi' }
+      let(:path) { 'custom-highlighting/test.doggohub-cgi' }
 
       it 'highlights as json with erb' do
         expect(highlighter.lexer.tag).to eq 'erb'

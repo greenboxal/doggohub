@@ -36,7 +36,7 @@ class DroneCiService < CiService
 
   def merge_request_status_path(iid, sha = nil, ref = nil)
     url = [drone_url,
-           "gitlab/#{project.namespace.path}/#{project.path}/pulls/#{iid}",
+           "doggohub/#{project.namespace.path}/#{project.path}/pulls/#{iid}",
            "?access_token=#{token}"]
 
     URI.join(*url).to_s
@@ -44,7 +44,7 @@ class DroneCiService < CiService
 
   def commit_status_path(sha, ref)
     url = [drone_url,
-           "gitlab/#{project.namespace.path}/#{project.path}/commits/#{sha}",
+           "doggohub/#{project.namespace.path}/#{project.path}/commits/#{sha}",
            "?branch=#{URI::encode(ref.to_s)}&access_token=#{token}"]
 
     URI.join(*url).to_s
@@ -92,14 +92,14 @@ class DroneCiService < CiService
 
   def merge_request_page(iid, sha, ref)
     url = [drone_url,
-           "gitlab/#{project.namespace.path}/#{project.path}/redirect/pulls/#{iid}"]
+           "doggohub/#{project.namespace.path}/#{project.path}/redirect/pulls/#{iid}"]
 
     URI.join(*url).to_s
   end
 
   def commit_page(sha, ref)
     url = [drone_url,
-           "gitlab/#{project.namespace.path}/#{project.path}/redirect/commits/#{sha}",
+           "doggohub/#{project.namespace.path}/#{project.path}/redirect/commits/#{sha}",
            "?branch=#{URI::encode(ref.to_s)}"]
 
     URI.join(*url).to_s

@@ -74,8 +74,8 @@ describe Gitlab::Sanitizers::SVG do
     end
 
     describe '#data_attribute?' do
-      let(:data_attr) { double(Nokogiri::XML::Attr, name: 'data-gitlab', namespace: nil, value: 'gitlab is awesome') }
-      let(:namespaced_attr) { double(Nokogiri::XML::Attr, name: 'data-gitlab', namespace: namespace, value: 'gitlab is awesome') }
+      let(:data_attr) { double(Nokogiri::XML::Attr, name: 'data-doggohub', namespace: nil, value: 'doggohub is awesome') }
+      let(:namespaced_attr) { double(Nokogiri::XML::Attr, name: 'data-doggohub', namespace: namespace, value: 'doggohub is awesome') }
       let(:other_attr) { double(Nokogiri::XML::Attr, name: 'something', namespace: nil, value: 'content') }
 
       it 'returns true if is a valid data attribute' do

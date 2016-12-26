@@ -11,7 +11,7 @@
       %ul.content-list.mr-list
         - group[1].each do |merge_request|
           = render 'projects/merge_requests/merge_request', merge_request: merge_request
-  = paginate @merge_requests, theme: "gitlab"
+  = paginate @merge_requests, theme: "doggohub"
 
 - else
   .nothing-here-block No merge requests to show

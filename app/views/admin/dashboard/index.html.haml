@@ -8,9 +8,9 @@
         %h4 Statistics
         %hr
         %p
-          Forks
+          Borks
           %span.light.pull-right
-            = number_with_delimiter(ForkedProjectLink.count)
+            = number_with_delimiter(BorkedProjectLink.count)
         %p
           Issues
           %span.light.pull-right
@@ -77,19 +77,19 @@
 
         %hr
         %p
-          GitLab
+          DoggoHub
           %span.pull-right
             = Gitlab::VERSION
         %p
-          GitLab Shell
+          DoggoHub Shell
           %span.pull-right
             = Gitlab::Shell.new.version
         %p
-          GitLab Workhorse
+          DoggoHub Workhorse
           %span.pull-right
-            = gitlab_workhorse_version
+            = doggohub_workhorse_version
         %p
-          GitLab API
+          DoggoHub API
           %span.pull-right
             = API::API::version
         %p

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Projects::ForkService, services: true do
-  describe :fork_by_user do
+describe Projects::BorkService, services: true do
+  describe :bork_by_user do
     before do
       @from_namespace = create(:namespace)
       @from_user = create(:user, namespace: @from_namespace )
@@ -15,20 +15,20 @@ describe Projects::ForkService, services: true do
       @from_project.add_user(@to_user, :developer)
     end
 
-    context 'fork project' do
-      context 'when forker is a guest' do
+    context 'bork project' do
+      context 'when borker is a guest' do
         before do
           @guest = create(:user)
           @from_project.add_user(@guest, :guest)
         end
-        subject { fork_project(@from_project, @guest) }
+        subject { bork_project(@from_project, @guest) }
 
         it { is_expected.not_to be_persisted }
-        it { expect(subject.errors[:forked_from_project_id]).to eq(['is forbidden']) }
+        it { expect(subject.errors[:borked_from_project_id]).to eq(['is forbidden']) }
       end
 
       describe "successfully creates project in the user namespace" do
-        let(:to_project) { fork_project(@from_project, @to_user) }
+        let(:to_project) { bork_project(@from_project, @to_user) }
 
         it { expect(to_project).to be_persisted }
         it { expect(to_project.errors).to be_empty }
@@ -42,7 +42,7 @@ describe Projects::ForkService, services: true do
     context 'project already exists' do
       it "fails due to validation, not transaction failure" do
         @existing_project = create(:project, creator_id: @to_user.id, name: @from_project.name, namespace: @to_namespace)
-        @to_project = fork_project(@from_project, @to_user)
+        @to_project = bork_project(@from_project, @to_user)
         expect(@existing_project).to be_persisted
 
         expect(@to_project).not_to be_persisted
@@ -51,10 +51,10 @@ describe Projects::ForkService, services: true do
       end
     end
 
-    context 'GitLab CI is enabled' do
-      it "forks and enables CI for fork" do
+    context 'DoggoHub CI is enabled' do
+      it "borks and enables CI for bork" do
         @from_project.enable_ci
-        @to_project = fork_project(@from_project, @to_user)
+        @to_project = bork_project(@from_project, @to_user)
         expect(@to_project.builds_enabled?).to be_truthy
       end
     end
@@ -66,10 +66,10 @@ describe Projects::ForkService, services: true do
           stub_application_setting(restricted_visibility_levels: [Gitlab::VisibilityLevel::INTERNAL])
         end
 
-        it "creates fork with highest allowed level" do
-          forked_project = fork_project(@from_project, @to_user)
+        it "creates bork with highest allowed level" do
+          borked_project = bork_project(@from_project, @to_user)
 
-          expect(forked_project.visibility_level).to eq(Gitlab::VisibilityLevel::PUBLIC)
+          expect(borked_project.visibility_level).to eq(Gitlab::VisibilityLevel::PUBLIC)
         end
       end
 
@@ -78,16 +78,16 @@ describe Projects::ForkService, services: true do
           stub_application_setting(restricted_visibility_levels: [Gitlab::VisibilityLevel::PUBLIC, Gitlab::VisibilityLevel::INTERNAL, Gitlab::VisibilityLevel::PRIVATE])
         end
 
-        it "creates fork with private visibility levels" do
-          forked_project = fork_project(@from_project, @to_user)
+        it "creates bork with private visibility levels" do
+          borked_project = bork_project(@from_project, @to_user)
 
-          expect(forked_project.visibility_level).to eq(Gitlab::VisibilityLevel::PRIVATE)
+          expect(borked_project.visibility_level).to eq(Gitlab::VisibilityLevel::PRIVATE)
         end
       end
     end
   end
 
-  describe :fork_to_namespace do
+  describe :bork_to_namespace do
     before do
       @group_owner = create(:user)
       @developer   = create(:user)
@@ -102,9 +102,9 @@ describe Projects::ForkService, services: true do
       @opts = { namespace: @group }
     end
 
-    context 'fork project for group' do
-      it 'group owner successfully forks project into the group' do
-        to_project = fork_project(@project, @group_owner, @opts)
+    context 'bork project for group' do
+      it 'group owner successfully borks project into the group' do
+        to_project = bork_project(@project, @group_owner, @opts)
 
         expect(to_project).to             be_persisted
         expect(to_project.errors).to      be_empty
@@ -117,9 +117,9 @@ describe Projects::ForkService, services: true do
       end
     end
 
-    context 'fork project for group when user not owner' do
-      it 'group developer fails to fork project into the group' do
-        to_project = fork_project(@project, @developer, @opts)
+    context 'bork project for group when user not owner' do
+      it 'group developer fails to bork project into the group' do
+        to_project = bork_project(@project, @developer, @opts)
         expect(to_project.errors[:namespace]).to eq(['is not valid'])
       end
     end
@@ -128,7 +128,7 @@ describe Projects::ForkService, services: true do
       it 'fails due to validation, not transaction failure' do
         existing_project = create(:project, name: @project.name,
                                             namespace: @group)
-        to_project = fork_project(@project, @group_owner, @opts)
+        to_project = bork_project(@project, @group_owner, @opts)
         expect(existing_project.persisted?).to be_truthy
         expect(to_project.errors[:name]).to eq(['has already been taken'])
         expect(to_project.errors[:path]).to eq(['has already been taken'])
@@ -136,8 +136,8 @@ describe Projects::ForkService, services: true do
     end
   end
 
-  def fork_project(from_project, user, params = {})
-    allow(RepositoryForkWorker).to receive(:perform_async).and_return(true)
-    Projects::ForkService.new(from_project, user, params).execute
+  def bork_project(from_project, user, params = {})
+    allow(RepositoryBorkWorker).to receive(:perform_async).and_return(true)
+    Projects::BorkService.new(from_project, user, params).execute
   end
 end

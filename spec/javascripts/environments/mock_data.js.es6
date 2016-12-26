@@ -4,7 +4,7 @@ const environmentsList = [
     id: 31,
     name: 'production',
     state: 'available',
-    external_url: 'https://www.gitlab.com',
+    external_url: 'https://www.doggohub.com',
     environment_type: null,
     last_deployment: {
       id: 64,
@@ -27,11 +27,11 @@ const environmentsList = [
       commit: {
         id: '500aabcb17c97bdcf2d0c410b70cb8556f0362dd',
         short_id: '500aabcb',
-        title: 'Update .gitlab-ci.yml',
+        title: 'Update .doggohub-ci.yml',
         author_name: 'Administrator',
         author_email: 'admin@example.com',
         created_at: '2016-11-07T18:28:13.000+00:00',
-        message: 'Update .gitlab-ci.yml',
+        message: 'Update .doggohub-ci.yml',
         author: {
           name: 'Administrator',
           username: 'root',
@@ -59,7 +59,7 @@ const environmentsList = [
     id: 32,
     name: 'review_app',
     state: 'stopped',
-    external_url: 'https://www.gitlab.com',
+    external_url: 'https://www.doggohub.com',
     environment_type: null,
     last_deployment: {
       id: 64,
@@ -82,11 +82,11 @@ const environmentsList = [
       commit: {
         id: '500aabcb17c97bdcf2d0c410b70cb8556f0362dd',
         short_id: '500aabcb',
-        title: 'Update .gitlab-ci.yml',
+        title: 'Update .doggohub-ci.yml',
         author_name: 'Administrator',
         author_email: 'admin@example.com',
         created_at: '2016-11-07T18:28:13.000+00:00',
-        message: 'Update .gitlab-ci.yml',
+        message: 'Update .doggohub-ci.yml',
         author: {
           name: 'Administrator',
           username: 'root',

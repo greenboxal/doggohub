@@ -11,7 +11,7 @@ module Gitlab
         attachments = []
 
         message.attachments.each do |attachment|
-          tmp = Tempfile.new("gitlab-email-attachment")
+          tmp = Tempfile.new("doggohub-email-attachment")
           begin
             File.open(tmp.path, "w+b") { |f| f.write attachment.body.decoded }
 

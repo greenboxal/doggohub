@@ -1,6 +1,6 @@
 # Migration Style Guide
 
-When writing migrations for GitLab, you have to take into account that
+When writing migrations for DoggoHub, you have to take into account that
 these will be ran by hundreds of thousands of organizations of all sizes, some with
 many years of data in their database.
 
@@ -8,7 +8,7 @@ In addition, having to take a server offline for a an upgrade small or big is
 a big burden for most organizations. For this reason it is important that your
 migrations are written carefully, can be applied online and adhere to the style guide below.
 
-Migrations should not require GitLab installations to be taken offline unless
+Migrations should not require DoggoHub installations to be taken offline unless
 _absolutely_ necessary - see the ["What Requires Downtime?"](what_requires_downtime.md)
 page. If a migration requires downtime, this should be clearly mentioned during
 the review process, as well as being documented in the monthly release post. For
@@ -18,8 +18,8 @@ When writing your migrations, also consider that databases might have stale data
 or inconsistencies and guard for that. Try to make as little assumptions as possible
 about the state of the database.
 
-Please don't depend on GitLab specific code since it can change in future versions.
-If needed copy-paste GitLab code into the migration to make it forward compatible.
+Please don't depend on DoggoHub specific code since it can change in future versions.
+If needed copy-paste DoggoHub code into the migration to make it forward compatible.
 
 ## Downtime Tagging
 

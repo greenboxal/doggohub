@@ -53,7 +53,7 @@ class ProjectPolicy < BasePolicy
   def reporter_access!
     can! :download_code
     can! :download_wiki_code
-    can! :fork_project
+    can! :bork_project
     can! :create_project_snippet
     can! :update_issue
     can! :admin_issue
@@ -114,7 +114,7 @@ class ProjectPolicy < BasePolicy
 
   def public_access!
     can! :download_code
-    can! :fork_project
+    can! :bork_project
     can! :read_commit_status
     can! :read_pipeline
     can! :read_container_image
@@ -133,7 +133,7 @@ class ProjectPolicy < BasePolicy
     can! :rename_project
     can! :remove_project
     can! :archive_project
-    can! :remove_fork_project
+    can! :remove_bork_project
     can! :destroy_merge_request
     can! :destroy_issue
   end
@@ -204,7 +204,7 @@ class ProjectPolicy < BasePolicy
       cannot! :push_code
       cannot! :push_code_to_protected_branches
       cannot! :download_code
-      cannot! :fork_project
+      cannot! :bork_project
       cannot! :read_commit_status
     end
 

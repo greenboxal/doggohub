@@ -1,6 +1,6 @@
 module MergeRequestsHelper
   def new_mr_path_from_push_event(event)
-    target_project = event.project.forked_from_project || event.project
+    target_project = event.project.borked_from_project || event.project
     new_namespace_project_merge_request_path(
       event.project.namespace,
       event.project,
@@ -40,7 +40,7 @@ module MergeRequestsHelper
   end
 
   def merge_path_description(merge_request, separator)
-    if merge_request.for_fork?
+    if merge_request.for_bork?
       "Project:Branches: #{@merge_request.source_project_path}:#{@merge_request.source_branch} #{separator} #{@merge_request.target_project.path_with_namespace}:#{@merge_request.target_branch}"
     else
       "Branches: #{@merge_request.source_branch} #{separator} #{@merge_request.target_branch}"
@@ -98,7 +98,7 @@ module MergeRequestsHelper
       branch = link_to(branch, namespace_project_commits_path(merge_request.source_project.namespace, merge_request.source_project, merge_request.source_branch))
     end
 
-    if merge_request.for_fork?
+    if merge_request.for_bork?
       namespace + ":" + branch
     else
       branch
@@ -119,7 +119,7 @@ module MergeRequestsHelper
   end
 
   def merge_request_button_visibility(merge_request, closed)
-    return 'hidden' if merge_request.closed? == closed || (merge_request.merged? == closed && !merge_request.closed?) || merge_request.closed_without_fork?
+    return 'hidden' if merge_request.closed? == closed || (merge_request.merged? == closed && !merge_request.closed?) || merge_request.closed_without_bork?
   end
 
   def merge_request_version_path(project, merge_request, merge_request_diff, start_sha = nil)

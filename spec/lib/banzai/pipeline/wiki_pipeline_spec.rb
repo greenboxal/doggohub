@@ -57,11 +57,11 @@ describe Banzai::Pipeline::WikiPipeline do
     let(:project_wiki) { ProjectWiki.new(project, double(:user)) }
     let(:page) { build(:wiki_page, wiki: project_wiki, page: OpenStruct.new(url_path: 'nested/twice/start-page')) }
 
-    { "when GitLab is hosted at a root URL" => '/',
-      "when GitLab is hosted at a relative URL" => '/nested/relative/gitlab' }.each do |test_name, relative_url_root|
+    { "when DoggoHub is hosted at a root URL" => '/',
+      "when DoggoHub is hosted at a relative URL" => '/nested/relative/doggohub' }.each do |test_name, relative_url_root|
       context test_name do
         before do
-          allow(Gitlab.config.gitlab).to receive(:relative_url_root).and_return(relative_url_root)
+          allow(Gitlab.config.doggohub).to receive(:relative_url_root).and_return(relative_url_root)
         end
 
         describe "linking to pages within the wiki" do

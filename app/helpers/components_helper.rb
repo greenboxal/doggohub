@@ -1,5 +1,5 @@
 module ComponentsHelper
-  def gitlab_workhorse_version
+  def doggohub_workhorse_version
     if request.headers['Gitlab-Workhorse'].present?
       request.headers['Gitlab-Workhorse'].split('-').first
     else

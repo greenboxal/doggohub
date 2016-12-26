@@ -29,18 +29,18 @@ class Spinach::Features::ProjectServices < Spinach::FeatureSteps
 
   step 'I fill hipchat settings' do
     check 'Active'
-    fill_in 'Room', with: 'gitlab'
+    fill_in 'Room', with: 'doggohub'
     fill_in 'Token', with: 'verySecret'
     click_button 'Save'
   end
 
   step 'I should see hipchat service settings saved' do
-    expect(find_field('Room').value).to eq 'gitlab'
+    expect(find_field('Room').value).to eq 'doggohub'
   end
 
   step 'I fill hipchat settings with custom server' do
     check 'Active'
-    fill_in 'Room', with: 'gitlab_custom'
+    fill_in 'Room', with: 'doggohub_custom'
     fill_in 'Token', with: 'secretCustom'
     fill_in 'Server', with: 'https://chat.example.com'
     click_button 'Save'
@@ -179,16 +179,16 @@ class Spinach::Features::ProjectServices < Spinach::FeatureSteps
 
   step 'I fill jira settings' do
     fill_in 'URL', with: 'http://jira.example'
-    fill_in 'Username', with: 'gitlab'
-    fill_in 'Password', with: 'gitlab'
-    fill_in 'Project Key', with: 'GITLAB'
+    fill_in 'Username', with: 'doggohub'
+    fill_in 'Password', with: 'doggohub'
+    fill_in 'Project Key', with: 'DOGGOHUB'
     click_button 'Save'
   end
 
   step 'I should see jira service settings saved' do
     expect(find_field('URL').value).to eq 'http://jira.example'
-    expect(find_field('Username').value).to eq 'gitlab'
-    expect(find_field('Project Key').value).to eq 'GITLAB'
+    expect(find_field('Username').value).to eq 'doggohub'
+    expect(find_field('Project Key').value).to eq 'DOGGOHUB'
   end
 
   step 'I click Atlassian Bamboo CI service link' do

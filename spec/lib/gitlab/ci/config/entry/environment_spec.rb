@@ -47,7 +47,7 @@ describe Gitlab::Ci::Config::Entry::Environment do
 
   context 'when configuration is a hash' do
     let(:config) do
-      { name: 'development', url: 'https://example.gitlab.com' }
+      { name: 'development', url: 'https://example.doggohub.com' }
     end
 
     describe '#string?' do
@@ -82,7 +82,7 @@ describe Gitlab::Ci::Config::Entry::Environment do
 
     describe '#url' do
       it 'returns environment url' do
-        expect(entry.url).to eq 'https://example.gitlab.com'
+        expect(entry.url).to eq 'https://example.doggohub.com'
       end
     end
   end
@@ -152,7 +152,7 @@ describe Gitlab::Ci::Config::Entry::Environment do
   context 'when variables are used for environment' do
     let(:config) do
       { name: 'review/$CI_BUILD_REF_NAME',
-        url: 'https://$CI_BUILD_REF_NAME.review.gitlab.com' }
+        url: 'https://$CI_BUILD_REF_NAME.review.doggohub.com' }
     end
 
     describe '#valid?' do
@@ -181,7 +181,7 @@ describe Gitlab::Ci::Config::Entry::Environment do
     end
 
     context 'when environment name is not present' do
-      let(:config) { { url: 'https://example.gitlab.com' } }
+      let(:config) { { url: 'https://example.doggohub.com' } }
 
       describe '#valid?' do
         it 'is not valid' do
@@ -198,7 +198,7 @@ describe Gitlab::Ci::Config::Entry::Environment do
     end
 
     context 'when invalid URL is used' do
-      let(:config) { { name: 'test', url: 'invalid-example.gitlab.com' } }
+      let(:config) { { name: 'test', url: 'invalid-example.doggohub.com' } }
 
       describe '#valid?' do
         it 'is not valid' do

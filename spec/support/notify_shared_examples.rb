@@ -1,7 +1,7 @@
-shared_context 'gitlab email notification' do
-  let(:gitlab_sender_display_name) { Gitlab.config.gitlab.email_display_name }
-  let(:gitlab_sender) { Gitlab.config.gitlab.email_from }
-  let(:gitlab_sender_reply_to) { Gitlab.config.gitlab.email_reply_to }
+shared_context 'doggohub email notification' do
+  let(:doggohub_sender_display_name) { Gitlab.config.doggohub.email_display_name }
+  let(:doggohub_sender) { Gitlab.config.doggohub.email_from }
+  let(:doggohub_sender_reply_to) { Gitlab.config.doggohub.email_reply_to }
   let(:recipient) { create(:user, email: 'recipient@example.com') }
   let(:project) { create(:project) }
   let(:new_user_address) { 'newguy@example.com' }
@@ -10,13 +10,13 @@ shared_context 'gitlab email notification' do
     reset_delivered_emails!
     email = recipient.emails.create(email: "notifications@example.com")
     recipient.update_attribute(:notification_email, email.email)
-    stub_incoming_email_setting(enabled: true, address: "reply+%{key}@#{Gitlab.config.gitlab.host}")
+    stub_incoming_email_setting(enabled: true, address: "reply+%{key}@#{Gitlab.config.doggohub.host}")
   end
 end
 
 shared_context 'reply-by-email is enabled with incoming address without %{key}' do
   before do
-    stub_incoming_email_setting(enabled: true, address: "reply@#{Gitlab.config.gitlab.host}")
+    stub_incoming_email_setting(enabled: true, address: "reply@#{Gitlab.config.doggohub.host}")
   end
 end
 
@@ -26,16 +26,16 @@ shared_examples 'a multiple recipients email' do
   end
 end
 
-shared_examples 'an email sent from GitLab' do
-  it 'is sent from GitLab' do
+shared_examples 'an email sent from DoggoHub' do
+  it 'is sent from DoggoHub' do
     sender = subject.header[:from].addrs[0]
-    expect(sender.display_name).to eq(gitlab_sender_display_name)
-    expect(sender.address).to eq(gitlab_sender)
+    expect(sender.display_name).to eq(doggohub_sender_display_name)
+    expect(sender.address).to eq(doggohub_sender)
   end
 
   it 'has a Reply-To address' do
     reply_to = subject.header[:reply_to].addresses
-    expect(reply_to).to eq([gitlab_sender_reply_to])
+    expect(reply_to).to eq([doggohub_sender_reply_to])
   end
 
   context 'when custom suffix for email subject is set' do
@@ -50,24 +50,24 @@ shared_examples 'an email sent from GitLab' do
 end
 
 shared_examples 'an email that contains a header with author username' do
-  it 'has X-GitLab-Author header containing author\'s username' do
-    is_expected.to have_header 'X-GitLab-Author', user.username
+  it 'has X-DoggoHub-Author header containing author\'s username' do
+    is_expected.to have_header 'X-DoggoHub-Author', user.username
   end
 end
 
-shared_examples 'an email with X-GitLab headers containing project details' do
-  it 'has X-GitLab-Project* headers' do
-    is_expected.to have_header 'X-GitLab-Project', /#{project.name}/
-    is_expected.to have_header 'X-GitLab-Project-Id', /#{project.id}/
-    is_expected.to have_header 'X-GitLab-Project-Path', /#{project.path_with_namespace}/
+shared_examples 'an email with X-DoggoHub headers containing project details' do
+  it 'has X-DoggoHub-Project* headers' do
+    is_expected.to have_header 'X-DoggoHub-Project', /#{project.name}/
+    is_expected.to have_header 'X-DoggoHub-Project-Id', /#{project.id}/
+    is_expected.to have_header 'X-DoggoHub-Project-Path', /#{project.path_with_namespace}/
   end
 end
 
 shared_examples 'a new thread email with reply-by-email enabled' do
-  let(:regex) { /\A<reply\-(.*)@#{Gitlab.config.gitlab.host}>\Z/ }
+  let(:regex) { /\A<reply\-(.*)@#{Gitlab.config.doggohub.host}>\Z/ }
 
   it 'has a Message-ID header' do
-    is_expected.to have_header 'Message-ID', "<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.gitlab.host}>"
+    is_expected.to have_header 'Message-ID', "<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.doggohub.host}>"
   end
 
   it 'has a References header' do
@@ -76,15 +76,15 @@ shared_examples 'a new thread email with reply-by-email enabled' do
 end
 
 shared_examples 'a thread answer email with reply-by-email enabled' do
-  include_examples 'an email with X-GitLab headers containing project details'
-  let(:regex) { /\A<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.gitlab.host}> <reply\-(.*)@#{Gitlab.config.gitlab.host}>\Z/ }
+  include_examples 'an email with X-DoggoHub headers containing project details'
+  let(:regex) { /\A<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.doggohub.host}> <reply\-(.*)@#{Gitlab.config.doggohub.host}>\Z/ }
 
   it 'has a Message-ID header' do
-    is_expected.to have_header 'Message-ID', /\A<(.*)@#{Gitlab.config.gitlab.host}>\Z/
+    is_expected.to have_header 'Message-ID', /\A<(.*)@#{Gitlab.config.doggohub.host}>\Z/
   end
 
   it 'has a In-Reply-To header' do
-    is_expected.to have_header 'In-Reply-To', "<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.gitlab.host}>"
+    is_expected.to have_header 'In-Reply-To', "<#{model.class.model_name.singular_route_key}_#{model.id}@#{Gitlab.config.doggohub.host}>"
   end
 
   it 'has a References header' do
@@ -97,12 +97,12 @@ shared_examples 'a thread answer email with reply-by-email enabled' do
 end
 
 shared_examples 'an email starting a new thread with reply-by-email enabled' do
-  include_examples 'an email with X-GitLab headers containing project details'
+  include_examples 'an email with X-DoggoHub headers containing project details'
   include_examples 'a new thread email with reply-by-email enabled'
 
   context 'when reply-by-email is enabled with incoming address with %{key}' do
     it 'has a Reply-To header' do
-      is_expected.to have_header 'Reply-To', /<reply+(.*)@#{Gitlab.config.gitlab.host}>\Z/
+      is_expected.to have_header 'Reply-To', /<reply+(.*)@#{Gitlab.config.doggohub.host}>\Z/
     end
   end
 
@@ -111,18 +111,18 @@ shared_examples 'an email starting a new thread with reply-by-email enabled' do
     include_examples 'a new thread email with reply-by-email enabled'
 
     it 'has a Reply-To header' do
-      is_expected.to have_header 'Reply-To', /<reply@#{Gitlab.config.gitlab.host}>\Z/
+      is_expected.to have_header 'Reply-To', /<reply@#{Gitlab.config.doggohub.host}>\Z/
     end
   end
 end
 
 shared_examples 'an answer to an existing thread with reply-by-email enabled' do
-  include_examples 'an email with X-GitLab headers containing project details'
+  include_examples 'an email with X-DoggoHub headers containing project details'
   include_examples 'a thread answer email with reply-by-email enabled'
 
   context 'when reply-by-email is enabled with incoming address with %{key}' do
     it 'has a Reply-To header' do
-      is_expected.to have_header 'Reply-To', /<reply+(.*)@#{Gitlab.config.gitlab.host}>\Z/
+      is_expected.to have_header 'Reply-To', /<reply+(.*)@#{Gitlab.config.doggohub.host}>\Z/
     end
   end
 
@@ -131,7 +131,7 @@ shared_examples 'an answer to an existing thread with reply-by-email enabled' do
     include_examples 'a thread answer email with reply-by-email enabled'
 
     it 'has a Reply-To header' do
-      is_expected.to have_header 'Reply-To', /<reply@#{Gitlab.config.gitlab.host}>\Z/
+      is_expected.to have_header 'Reply-To', /<reply@#{Gitlab.config.doggohub.host}>\Z/
     end
   end
 end

@@ -77,7 +77,7 @@ class SessionsController < Devise::SessionsController
     redirect_path =
       if request.referer.present? && (params['redirect_to_referer'] == 'yes')
         referer_uri = URI(request.referer)
-        if referer_uri.host == Gitlab.config.gitlab.host
+        if referer_uri.host == Gitlab.config.doggohub.host
           referer_uri.path
         else
           request.fullpath

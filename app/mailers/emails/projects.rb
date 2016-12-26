@@ -32,7 +32,7 @@ module Emails
       @diff_notes_disabled = true
 
       add_project_headers
-      headers['X-GitLab-Author'] = @message.author_username
+      headers['X-DoggoHub-Author'] = @message.author_username
 
       mail(from:      sender(@message.author_id, @message.send_from_committer_email?),
            reply_to:  @message.reply_to,

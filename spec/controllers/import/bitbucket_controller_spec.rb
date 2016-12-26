@@ -91,7 +91,7 @@ describe Import::BitbucketController do
     end
 
     context "when the repository owner is the Bitbucket user" do
-      context "when the Bitbucket user and GitLab user's usernames match" do
+      context "when the Bitbucket user and DoggoHub user's usernames match" do
         it "takes the current user's namespace" do
           expect(Gitlab::BitbucketImport::ProjectCreator).
             to receive(:new).with(bitbucket_repo, bitbucket_repo.name, user.namespace, user, access_params).
@@ -101,7 +101,7 @@ describe Import::BitbucketController do
         end
       end
 
-      context "when the Bitbucket user and GitLab user's usernames don't match" do
+      context "when the Bitbucket user and DoggoHub user's usernames don't match" do
         let(:bitbucket_username) { "someone_else" }
 
         it "takes the current user's namespace" do
@@ -124,7 +124,7 @@ describe Import::BitbucketController do
       context "when a namespace with the Bitbucket user's username already exists" do
         let!(:existing_namespace) { create(:namespace, name: other_username, owner: user) }
 
-        context "when the namespace is owned by the GitLab user" do
+        context "when the namespace is owned by the DoggoHub user" do
           it "takes the existing namespace" do
             expect(Gitlab::BitbucketImport::ProjectCreator).
               to receive(:new).with(bitbucket_repo, bitbucket_repo.name, existing_namespace, user, access_params).
@@ -134,7 +134,7 @@ describe Import::BitbucketController do
           end
         end
 
-        context "when the namespace is not owned by the GitLab user" do
+        context "when the namespace is not owned by the DoggoHub user" do
           before do
             existing_namespace.owner = create(:user)
             existing_namespace.save

@@ -42,8 +42,8 @@ describe Gitlab::FileDetector do
       expect(described_class.type_of('.koding.yml')).to eq(:koding)
     end
 
-    it 'returns the type of a GitLab CI config file' do
-      expect(described_class.type_of('.gitlab-ci.yml')).to eq(:gitlab_ci)
+    it 'returns the type of a DoggoHub CI config file' do
+      expect(described_class.type_of('.doggohub-ci.yml')).to eq(:doggohub_ci)
     end
 
     it 'returns the type of an avatar' do

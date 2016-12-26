@@ -1,4 +1,4 @@
-# This file should be identical in GitLab Community Edition and Enterprise Edition
+# This file should be identical in DoggoHub Community Edition and Enterprise Edition
 
 class Projects::GitHttpClientController < Projects::ApplicationController
   include ActionController::HttpAuthentication::Basic
@@ -63,7 +63,7 @@ class Projects::GitHttpClientController < Projects::ApplicationController
 
   def send_challenges
     challenges = []
-    challenges << 'Basic realm="GitLab"' if allow_basic_auth?
+    challenges << 'Basic realm="DoggoHub"' if allow_basic_auth?
     challenges << spnego_challenge if allow_kerberos_spnego_auth?
     headers['Www-Authenticate'] = challenges.join("\n") if challenges.any?
   end

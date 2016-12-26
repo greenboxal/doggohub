@@ -41,7 +41,7 @@ module Banzai
       end
 
       def internal_url
-        @internal_url ||= Gitlab.config.gitlab.url
+        @internal_url ||= Gitlab.config.doggohub.url
       end
     end
   end

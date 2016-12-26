@@ -43,7 +43,7 @@ describe Admin::UsersController do
         put :unblock, id: user.username
         user.reload
         expect(user.blocked?).to be_truthy
-        expect(flash[:alert]).to eq 'This user cannot be unlocked manually from GitLab'
+        expect(flash[:alert]).to eq 'This user cannot be unlocked manually from DoggoHub'
       end
     end
 

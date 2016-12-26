@@ -1,9 +1,9 @@
 # Merge conflict resolution
 
-> [Introduced][ce-5479] in GitLab 8.11.
+> [Introduced][ce-5479] in DoggoHub 8.11.
 
-When a merge request has conflicts, GitLab may provide the option to resolve
-those conflicts in the GitLab UI. (See
+When a merge request has conflicts, DoggoHub may provide the option to resolve
+those conflicts in the DoggoHub UI. (See
 [conflicts available for resolution](#conflicts-available-for-resolution) for
 more information on when this is available.) If this is an option, you will see
 a **resolve these conflicts** link in the merge request widget:
@@ -23,7 +23,7 @@ this is similar to performing `git checkout feature; git merge master` locally.
 
 ## Conflicts available for resolution
 
-GitLab allows resolving conflicts in a file where all of the below are true:
+DoggoHub allows resolving conflicts in a file where all of the below are true:
 
 - The file is text, not binary
 - The file is in a UTF-8 compatible encoding
@@ -34,9 +34,9 @@ GitLab allows resolving conflicts in a file where all of the below are true:
 If any file with conflicts in that merge request does not meet all of these
 criteria, the conflicts for that merge request cannot be resolved in the UI.
 
-Additionally, GitLab does not detect conflicts in renames away from a path. For
+Additionally, DoggoHub does not detect conflicts in renames away from a path. For
 example, this will not create a conflict: on branch `a`, doing `git mv file1
 file2`; on branch `b`, doing `git mv file1 file3`. Instead, both files will be
 present in the branch after the merge request is merged.
 
-[ce-5479]: https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/5479
+[ce-5479]: https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/5479

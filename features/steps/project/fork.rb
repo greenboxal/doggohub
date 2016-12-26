@@ -1,11 +1,11 @@
-class Spinach::Features::ProjectFork < Spinach::FeatureSteps
+class Spinach::Features::ProjectBork < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedPaths
   include SharedProject
 
-  step 'I click link "Fork"' do
+  step 'I click link "Bork"' do
     expect(page).to have_content "Shop"
-    click_link "Fork project"
+    click_link "Bork project"
   end
 
   step 'I am a member of project "Shop"' do
@@ -13,8 +13,8 @@ class Spinach::Features::ProjectFork < Spinach::FeatureSteps
     @project.team << [@user, :reporter]
   end
 
-  step 'I should see the forked project page' do
-    expect(page).to have_content "Forked from"
+  step 'I should see the borked project page' do
+    expect(page).to have_content "Borked from"
   end
 
   step 'I already have a project named "Shop" in my namespace' do
@@ -25,8 +25,8 @@ class Spinach::Features::ProjectFork < Spinach::FeatureSteps
     expect(page).to have_content "Name has already been taken"
   end
 
-  step 'I fork to my namespace' do
-    page.within '.fork-namespaces' do
+  step 'I bork to my namespace' do
+    page.within '.bork-namespaces' do
       click_link current_user.name
     end
   end
@@ -50,35 +50,35 @@ class Spinach::Features::ProjectFork < Spinach::FeatureSteps
     current_path.should have_content(/#{current_user.namespace.name}/i)
   end
 
-  step 'I visit the forks page of the "Shop" project' do
+  step 'I visit the borks page of the "Shop" project' do
     @project = Project.where(name: 'Shop').last
-    visit namespace_project_forks_path(@project.namespace, @project)
+    visit namespace_project_borks_path(@project.namespace, @project)
   end
 
-  step 'I should see my fork on the list' do
+  step 'I should see my bork on the list' do
     page.within('.projects-list-holder') do
-      project = @user.fork_of(@project)
+      project = @user.bork_of(@project)
       expect(page).to have_content("#{project.namespace.human_name} / #{project.name}")
     end
   end
 
-  step 'I make forked repo invalid' do
-    project = @user.fork_of(@project)
+  step 'I make borked repo invalid' do
+    project = @user.bork_of(@project)
     project.path = 'test-crappy-path'
     project.save!
   end
 
-  step 'There is an existent fork of the "Shop" project' do
+  step 'There is an existent bork of the "Shop" project' do
     user = create(:user, name: 'Mike')
     @project.team << [user, :reporter]
-    @forked_project = Projects::ForkService.new(@project, user).execute
+    @borked_project = Projects::BorkService.new(@project, user).execute
   end
 
-  step 'I should not see the other fork listed' do
-    expect(page).not_to have_content("#{@forked_project.namespace.human_name} / #{@forked_project.name}")
+  step 'I should not see the other bork listed' do
+    expect(page).not_to have_content("#{@borked_project.namespace.human_name} / #{@borked_project.name}")
   end
 
-  step 'I should see a private fork notice' do
-    expect(page).to have_content("1 private fork")
+  step 'I should see a private bork notice' do
+    expect(page).to have_content("1 private bork")
   end
 end

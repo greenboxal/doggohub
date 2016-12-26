@@ -7,11 +7,11 @@ To enable the Twitter OmniAuth provider you must register your application with 
 1.  Select "Create new app"
 
 1.  Fill in the application details.
-    - Name: This can be anything. Consider something like `<Organization>'s GitLab` or `<Your Name>'s GitLab` or
+    - Name: This can be anything. Consider something like `<Organization>'s DoggoHub` or `<Your Name>'s DoggoHub` or
     something else descriptive.
     - Description: Create a description.
-    - Website: The URL to your GitLab installation. 'https://gitlab.example.com'
-    - Callback URL: 'https://gitlab.example.com/users/auth/twitter/callback'
+    - Website: The URL to your DoggoHub installation. 'https://doggohub.example.com'
+    - Callback URL: 'https://doggohub.example.com/users/auth/twitter/callback'
     - Agree to the "Developer Agreement".
 
     ![Twitter App Details](img/twitter_app_details.png)
@@ -29,20 +29,20 @@ To enable the Twitter OmniAuth provider you must register your application with 
 
     ![Twitter app](img/twitter_app_api_keys.png)
 
-1.  On your GitLab server, open the configuration file.
+1.  On your DoggoHub server, open the configuration file.
 
     For omnibus package:
 
     ```sh
-      sudo editor /etc/gitlab/gitlab.rb
+      sudo editor /etc/doggohub/doggohub.rb
     ```
 
     For installations from source:
 
     ```sh
-      cd /home/git/gitlab
+      cd /home/git/doggohub
 
-      sudo -u git -H editor config/gitlab.yml
+      sudo -u git -H editor config/doggohub.yml
     ```
 
 1.  See [Initial OmniAuth Configuration](omniauth.md#initial-omniauth-configuration) for initial settings.
@@ -52,7 +52,7 @@ To enable the Twitter OmniAuth provider you must register your application with 
     For omnibus package:
 
     ```ruby
-      gitlab_rails['omniauth_providers'] = [
+      doggohub_rails['omniauth_providers'] = [
         {
           "name" => "twitter",
           "app_id" => "YOUR_APP_ID",
@@ -74,6 +74,6 @@ To enable the Twitter OmniAuth provider you must register your application with 
 
 1.  Save the configuration file.
 
-1.  Restart GitLab for the changes to take effect.
+1.  Restart DoggoHub for the changes to take effect.
 
-On the sign in page there should now be a Twitter icon below the regular sign in form. Click the icon to begin the authentication process. Twitter will ask the user to sign in and authorize the GitLab application. If everything goes well the user will be returned to GitLab and will be signed in.
+On the sign in page there should now be a Twitter icon below the regular sign in form. Click the icon to begin the authentication process. Twitter will ask the user to sign in and authorize the DoggoHub application. If everything goes well the user will be returned to DoggoHub and will be signed in.

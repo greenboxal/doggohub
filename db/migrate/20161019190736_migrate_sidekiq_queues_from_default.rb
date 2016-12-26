@@ -1,7 +1,7 @@
 require 'json'
 
-# See http://doc.gitlab.com/ce/development/migration_style_guide.html
-# for more information on how to write migrations for GitLab.
+# See http://doc.doggohub.com/ce/development/migration_style_guide.html
+# for more information on how to write migrations for DoggoHub.
 
 class MigrateSidekiqQueuesFromDefault < ActiveRecord::Migration
   include Gitlab::Database::MigrationHelpers
@@ -22,10 +22,10 @@ class MigrateSidekiqQueuesFromDefault < ActiveRecord::Migration
   # The keys are the old queue names, the values the jobs to move and their new
   # queue names.
   RENAMED_QUEUES = {
-    gitlab_shell: {
+    doggohub_shell: {
       'GitGarbageCollectorWorker' => :git_garbage_collector,
       'ProjectExportWorker'       => :project_export,
-      'RepositoryForkWorker'      => :repository_fork,
+      'RepositoryBorkWorker'      => :repository_bork,
       'RepositoryImportWorker'    => :repository_import
     },
     project_web_hook: {

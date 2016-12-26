@@ -33,7 +33,7 @@
       });
       authenticatedMessage = this.container.find("p");
       deviceResponse = this.container.find('#js-device-response');
-      expect(authenticatedMessage.text()).toContain("Click this button to authenticate with the GitLab server");
+      expect(authenticatedMessage.text()).toContain("Click this button to authenticate with the DoggoHub server");
       return expect(deviceResponse.val()).toBe('{"deviceData":"this is data from the device"}');
     });
     return describe("errors", function() {
@@ -62,7 +62,7 @@
           deviceData: "this is data from the device"
         });
         authenticatedMessage = this.container.find("p");
-        return expect(authenticatedMessage.text()).toContain("Click this button to authenticate with the GitLab server");
+        return expect(authenticatedMessage.text()).toContain("Click this button to authenticate with the DoggoHub server");
       });
     });
   });

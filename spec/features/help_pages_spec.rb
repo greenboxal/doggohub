@@ -26,11 +26,11 @@ describe 'Help Pages', feature: true do
 
     context 'with a relative installation' do
       before do
-        stub_config_setting(relative_url_root: '/gitlab')
+        stub_config_setting(relative_url_root: '/doggohub')
         visit help_path
       end
 
-      it_behaves_like 'help page', prefix: '/gitlab'
+      it_behaves_like 'help page', prefix: '/doggohub'
     end
   end
 end

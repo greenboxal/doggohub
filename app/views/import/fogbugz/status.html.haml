@@ -10,7 +10,7 @@
   %p.light
     Optionally, you can
     = link_to 'customize', new_user_map_import_fogbugz_path
-    how FogBugz email addresses and usernames are imported into GitLab.
+    how FogBugz email addresses and usernames are imported into DoggoHub.
   %hr
   %p
   = button_tag class: 'btn btn-import btn-success js-import-all' do
@@ -25,7 +25,7 @@
     %thead
       %tr
         %th From FogBugz
-        %th To GitLab
+        %th To DoggoHub
         %th Status
     %tbody
       - @already_added_projects.each do |project|

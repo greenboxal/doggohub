@@ -32,7 +32,7 @@ class ProjectWiki
   end
 
   def url_to_repo
-    gitlab_shell.url_to_repo(path_with_namespace)
+    doggohub_shell.url_to_repo(path_with_namespace)
   end
 
   def ssh_url_to_repo
@@ -40,11 +40,11 @@ class ProjectWiki
   end
 
   def http_url_to_repo
-    [Gitlab.config.gitlab.url, "/", path_with_namespace, ".git"].join('')
+    [Gitlab.config.doggohub.url, "/", path_with_namespace, ".git"].join('')
   end
 
   def wiki_base_path
-    [Gitlab.config.gitlab.relative_url_root, "/", @project.path_with_namespace, "/wikis"].join('')
+    [Gitlab.config.doggohub.relative_url_root, "/", @project.path_with_namespace, "/wikis"].join('')
   end
 
   # Returns the Gollum::Wiki object.
@@ -163,7 +163,7 @@ class ProjectWiki
   private
 
   def init_repo(path_with_namespace)
-    gitlab_shell.add_repository(project.repository_storage_path, path_with_namespace)
+    doggohub_shell.add_repository(project.repository_storage_path, path_with_namespace)
   end
 
   def commit_details(action, message = nil, title = nil)

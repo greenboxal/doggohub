@@ -104,9 +104,9 @@ class Namespace < ActiveRecord::Base
     # Move the namespace directory in all storages paths used by member projects
     repository_storage_paths.each do |repository_storage_path|
       # Ensure old directory exists before moving it
-      gitlab_shell.add_namespace(repository_storage_path, path_was)
+      doggohub_shell.add_namespace(repository_storage_path, path_was)
 
-      unless gitlab_shell.mv_namespace(repository_storage_path, path_was, path)
+      unless doggohub_shell.mv_namespace(repository_storage_path, path_was, path)
         Rails.logger.error "Exception moving path #{repository_storage_path} from #{path_was} to #{path}"
 
         # if we cannot move namespace directory we should rollback
@@ -144,8 +144,8 @@ class Namespace < ActiveRecord::Base
     type == 'Group' ? 'group' : 'user'
   end
 
-  def find_fork_of(project)
-    projects.joins(:forked_project_link).find_by('forked_project_links.forked_from_project_id = ?', project.id)
+  def find_bork_of(project)
+    projects.joins(:borked_project_link).find_by('borked_project_links.borked_from_project_id = ?', project.id)
   end
 
   def lfs_enabled?
@@ -192,12 +192,12 @@ class Namespace < ActiveRecord::Base
       # We will remove it later async
       new_path = "#{path}+#{id}+deleted"
 
-      if gitlab_shell.mv_namespace(repository_storage_path, path, new_path)
+      if doggohub_shell.mv_namespace(repository_storage_path, path, new_path)
         message = "Namespace directory \"#{path}\" moved to \"#{new_path}\""
         Gitlab::AppLogger.info message
 
         # Remove namespace directroy async with delay so
-        # GitLab has time to remove all projects first
+        # DoggoHub has time to remove all projects first
         GitlabShellWorker.perform_in(5.minutes, :rm_namespace, repository_storage_path, new_path)
       end
     end

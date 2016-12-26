@@ -4,7 +4,7 @@ module Gitlab
   module Identifier
     def identify(identifier, project, newrev)
       if identifier.blank?
-        # Local push from gitlab
+        # Local push from doggohub
         identify_using_commit(project, newrev)
       elsif identifier =~ /\Auser-\d+\Z/
         # git push over http

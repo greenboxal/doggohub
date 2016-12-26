@@ -17,7 +17,7 @@ module API
       end
 
       desc 'Get a snippets list for authenticated user' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -28,7 +28,7 @@ module API
       end
 
       desc 'List all public snippets current_user has access to' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -39,7 +39,7 @@ module API
       end
 
       desc 'Get a single snippet' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -51,7 +51,7 @@ module API
       end
 
       desc 'Create new snippet' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -75,7 +75,7 @@ module API
       end
 
       desc 'Update an existing snippet' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -104,7 +104,7 @@ module API
       end
 
       desc 'Remove snippet' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
         success Entities::PersonalSnippet
       end
       params do
@@ -119,7 +119,7 @@ module API
       end
 
       desc 'Get a raw snippet' do
-        detail 'This feature was introduced in GitLab 8.15.'
+        detail 'This feature was introduced in DoggoHub 8.15.'
       end
       params do
         requires :id, type: Integer, desc: 'The ID of a snippet'

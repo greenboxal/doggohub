@@ -28,7 +28,7 @@ FactoryGirl.define do
           if evaluator.config
             YAML.dump(evaluator.config)
           else
-            File.read(Rails.root.join('spec/support/gitlab_stubs/gitlab_ci.yml'))
+            File.read(Rails.root.join('spec/support/doggohub_stubs/doggohub_ci.yml'))
           end
         end
       end

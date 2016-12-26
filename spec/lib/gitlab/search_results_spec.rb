@@ -42,10 +42,10 @@ describe Gitlab::SearchResults do
     end
 
     it 'includes merge requests from source and target projects' do
-      forked_project = create(:empty_project, forked_from_project: project)
-      merge_request_2 = create(:merge_request, target_project: project, source_project: forked_project, title: 'foo')
+      borked_project = create(:empty_project, borked_from_project: project)
+      merge_request_2 = create(:merge_request, target_project: project, source_project: borked_project, title: 'foo')
 
-      results = described_class.new(user, Project.where(id: forked_project.id), 'foo')
+      results = described_class.new(user, Project.where(id: borked_project.id), 'foo')
 
       expect(results.objects('merge_requests')).to include merge_request_2
     end

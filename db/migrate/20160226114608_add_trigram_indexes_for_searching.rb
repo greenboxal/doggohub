@@ -10,7 +10,7 @@ class AddTrigramIndexesForSearching < ActiveRecord::Migration
     unless trigrams_enabled?
       raise 'You must enable the pg_trgm extension. You can do so by running ' \
         '"CREATE EXTENSION pg_trgm;" as a PostgreSQL super user, this must be ' \
-        'done for every GitLab database. For more information see ' \
+        'done for every DoggoHub database. For more information see ' \
         'http://www.postgresql.org/docs/current/static/sql-createextension.html'
     end
 

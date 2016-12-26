@@ -7,7 +7,7 @@ class InfluxdbSettings < ActiveRecord::Migration
       default: 'localhost'
 
     add_column :application_settings, :metrics_database, :string,
-      default: 'gitlab'
+      default: 'doggohub'
 
     add_column :application_settings, :metrics_username, :string
     add_column :application_settings, :metrics_password, :string

@@ -1,26 +1,26 @@
-- page_title "Fork project"
+- page_title "Bork project"
 
 .row.prepend-top-default
   .col-lg-3
     %h4.prepend-top-0
-      Fork project
+      Bork project
     %p
-      A fork is a copy of a project.
+      A bork is a copy of a project.
       %br
-      Forking a repository allows you to make changes without affecting the original project.
+      Borking a repository allows you to make changes without affecting the original project.
   .col-lg-9
-    .fork-namespaces
+    .bork-namespaces
       - if @namespaces.present?
         %label.label-light
           %span
-            Click to fork the project to a user or group
+            Click to bork the project to a user or group
           - @namespaces.in_groups_of(6, false) do |group|
             .row
               - group.each do |namespace|
                 - avatar = namespace_icon(namespace, 100)
-                - if fork = namespace.find_fork_of(@project)
-                  .fork-thumbnail.forked
-                    = link_to project_path(fork) do
+                - if bork = namespace.find_bork_of(@project)
+                  .bork-thumbnail.borked
+                    = link_to project_path(bork) do
                       - if /no_((\w*)_)*avatar/.match(avatar)
                         .no-avatar
                           = icon 'question'
@@ -29,8 +29,8 @@
                       .caption
                         = namespace.human_name
                 - else
-                  .fork-thumbnail
-                    = link_to namespace_project_forks_path(@project.namespace, @project, namespace_key: namespace.id), method: "POST" do
+                  .bork-thumbnail
+                    = link_to namespace_project_borks_path(@project.namespace, @project, namespace_key: namespace.id), method: "POST" do
                       - if /no_((\w*)_)*avatar/.match(avatar)
                         .no-avatar
                           = icon 'question'
@@ -41,14 +41,14 @@
       - else
         %label.label-light
           %span
-            No available namespaces to fork the project.
+            No available namespaces to bork the project.
             %br
             %small
-              You must have permission to create a project in a namespace before forking.
+              You must have permission to create a project in a namespace before borking.
 
     .save-project-loader.hide
       .center
         %h2
           %i.fa.fa-spinner.fa-spin
-          Forking repository
+          Borking repository
         %p Please wait a moment, this page will automatically refresh when ready.

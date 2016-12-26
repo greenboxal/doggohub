@@ -1,4 +1,4 @@
-namespace :gitlab do
+namespace :doggohub do
   task list_repos: :environment do
     scope = Project
     if ENV['SINCE']

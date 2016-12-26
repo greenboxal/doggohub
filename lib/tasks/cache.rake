@@ -3,7 +3,7 @@ namespace :cache do
     REDIS_CLEAR_BATCH_SIZE = 1000 # There seems to be no speedup when pushing beyond 1,000
     REDIS_SCAN_START_STOP = '0' # Magic value, see http://redis.io/commands/scan
 
-    desc "GitLab | Clear redis cache"
+    desc "DoggoHub | Clear redis cache"
     task redis: :environment do
       Gitlab::Redis.with do |redis|
         cursor = REDIS_SCAN_START_STOP
@@ -21,7 +21,7 @@ namespace :cache do
       end
     end
 
-    desc "GitLab | Clear database cache (in the background)"
+    desc "DoggoHub | Clear database cache (in the background)"
     task db: :environment do
       ClearDatabaseCacheWorker.perform_async
     end

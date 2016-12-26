@@ -10,7 +10,7 @@
     labelsPath: "/:namespace_path/:project_path/labels",
     licensePath: "/api/:version/templates/licenses/:key",
     gitignorePath: "/api/:version/templates/gitignores/:key",
-    gitlabCiYmlPath: "/api/:version/templates/gitlab_ci_ymls/:key",
+    doggohubCiYmlPath: "/api/:version/templates/doggohub_ci_ymls/:key",
     dockerfilePath: "/api/:version/dockerfiles/:key",
     issuableTemplatePath: "/:namespace_path/:project_path/templates/:type/:key",
     group: function(group_id, callback) {
@@ -114,8 +114,8 @@
         return callback(gitignore);
       });
     },
-    gitlabCiYml: function(key, callback) {
-      var url = Api.buildUrl(Api.gitlabCiYmlPath)
+    doggohubCiYml: function(key, callback) {
+      var url = Api.buildUrl(Api.doggohubCiYmlPath)
         .replace(':key', key);
       return $.get(url, function(file) {
         return callback(file);

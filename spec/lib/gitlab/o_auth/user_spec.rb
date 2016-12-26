@@ -8,7 +8,7 @@ describe Gitlab::OAuth::User, lib: true do
   let(:auth_hash) { OmniAuth::AuthHash.new(uid: uid, provider: provider, info: info_hash) }
   let(:info_hash) do
     {
-      nickname: '-john+gitlab-ETC%.git@gmail.com',
+      nickname: '-john+doggohub-ETC%.git@gmail.com',
       name: 'John',
       email: 'john@mail.com'
     }

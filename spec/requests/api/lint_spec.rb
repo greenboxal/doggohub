@@ -4,9 +4,9 @@ describe API::Lint, api: true do
   include ApiHelpers
 
   describe 'POST /ci/lint' do
-    context 'with valid .gitlab-ci.yaml content' do
+    context 'with valid .doggohub-ci.yaml content' do
       let(:yaml_content) do
-        File.read(Rails.root.join('spec/support/gitlab_stubs/gitlab_ci.yml'))
+        File.read(Rails.root.join('spec/support/doggohub_stubs/doggohub_ci.yml'))
       end
 
       it 'passes validation' do
@@ -19,7 +19,7 @@ describe API::Lint, api: true do
       end
     end
 
-    context 'with an invalid .gitlab_ci.yml' do
+    context 'with an invalid .doggohub_ci.yml' do
       it 'responds with errors about invalid syntax' do
         post api('/ci/lint'), { content: 'invalid content' }
 

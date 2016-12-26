@@ -7,11 +7,11 @@ describe Gitlab::ImportSources do
         {
           'GitHub'        => 'github',
           'Bitbucket'     => 'bitbucket',
-          'GitLab.com'    => 'gitlab',
+          'DoggoHub.com'    => 'doggohub',
           'Google Code'   => 'google_code',
           'FogBugz'       => 'fogbugz',
           'Repo by URL'   => 'git',
-          'GitLab export' => 'gitlab_project',
+          'DoggoHub export' => 'doggohub_project',
           'Gitea'         => 'gitea'
         }
 
@@ -25,11 +25,11 @@ describe Gitlab::ImportSources do
         [
           'github',
           'bitbucket',
-          'gitlab',
+          'doggohub',
           'google_code',
           'fogbugz',
           'git',
-          'gitlab_project',
+          'doggohub_project',
           'gitea'
         ]
 
@@ -43,10 +43,10 @@ describe Gitlab::ImportSources do
         [
           'github',
           'bitbucket',
-          'gitlab',
+          'doggohub',
           'google_code',
           'fogbugz',
-          'gitlab_project',
+          'doggohub_project',
           'gitea'
         ]
 
@@ -58,11 +58,11 @@ describe Gitlab::ImportSources do
     import_sources = {
       'github' => Gitlab::GithubImport::Importer,
       'bitbucket' => Gitlab::BitbucketImport::Importer,
-      'gitlab' => Gitlab::GitlabImport::Importer,
+      'doggohub' => Gitlab::GitlabImport::Importer,
       'google_code' => Gitlab::GoogleCodeImport::Importer,
       'fogbugz' => Gitlab::FogbugzImport::Importer,
       'git' => nil,
-      'gitlab_project' => Gitlab::ImportExport::Importer,
+      'doggohub_project' => Gitlab::ImportExport::Importer,
       'gitea' => Gitlab::GithubImport::Importer
     }
 
@@ -77,11 +77,11 @@ describe Gitlab::ImportSources do
     import_sources = {
       'github' => 'GitHub',
       'bitbucket' => 'Bitbucket',
-      'gitlab' => 'GitLab.com',
+      'doggohub' => 'DoggoHub.com',
       'google_code' => 'Google Code',
       'fogbugz' => 'FogBugz',
       'git' => 'Repo by URL',
-      'gitlab_project' => 'GitLab export',
+      'doggohub_project' => 'DoggoHub export',
       'gitea' => 'Gitea'
     }
 

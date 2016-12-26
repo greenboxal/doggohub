@@ -1,6 +1,6 @@
-# GitLab UX Guide
+# DoggoHub UX Guide
 
-The goal of this guide is to provide standards, principles and in-depth information to design beautiful and effective GitLab features. This will be a living document, and we welcome contributions, feedback and suggestions.
+The goal of this guide is to provide standards, principles and in-depth information to design beautiful and effective DoggoHub features. This will be a living document, and we welcome contributions, feedback and suggestions.
 
 ## Design
 
@@ -17,7 +17,7 @@ The basic ingredients of our experience establish our personality and feel. This
 ---
 
 ### [Animation](animation.md)
-Guidance on the timing, curving and motion for GitLab.
+Guidance on the timing, curving and motion for DoggoHub.
 
 ---
 
@@ -27,17 +27,17 @@ Conventions on text and messaging within labels, buttons, and other components.
 ---
 
 ### [Components](components.md)
-Components are the controls that make up the GitLab experience, including guidance around buttons, links, dropdowns, etc.
+Components are the controls that make up the DoggoHub experience, including guidance around buttons, links, dropdowns, etc.
 
 ---
 
 ### [Surfaces](surfaces.md)
-The GitLab experience is broken apart into several surfaces. Each of these surfaces is designated for a specific scope or type of content. Examples include the header, global menu, side pane, etc.
+The DoggoHub experience is broken apart into several surfaces. Each of these surfaces is designated for a specific scope or type of content. Examples include the header, global menu, side pane, etc.
 
 ---
 
 ### [Features](features.md)
-The previous building blocks are combined into complete features in the GitLab UX. Examples include our navigation, filters, search results, and empty states.
+The previous building blocks are combined into complete features in the DoggoHub UX. Examples include our navigation, filters, search results, and empty states.
 
 ---
 
@@ -46,7 +46,7 @@ The previous building blocks are combined into complete features in the GitLab U
 ---
 
 ### [Users](users.md)
-How we think about the variety of users of GitLab, from small to large teams, comparing opensource usage to enterprise, etc.
+How we think about the variety of users of DoggoHub, from small to large teams, comparing opensource usage to enterprise, etc.
 
 ---
 
@@ -60,4 +60,4 @@ Tips for exporting assets, and other guidance.
 ---
 
 ### [Resources](resources.md)
-Resources for GitLab UX
+Resources for DoggoHub UX

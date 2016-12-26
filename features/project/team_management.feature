@@ -2,8 +2,8 @@ Feature: Project Team Management
   Background:
     Given I sign in as a user
     And I own project "Shop"
-    And gitlab user "Mike"
-    And gitlab user "Dmitriy"
+    And doggohub user "Mike"
+    And doggohub user "Dmitriy"
     And "Dmitriy" is "Shop" developer
     And I visit project "Shop" team page
 

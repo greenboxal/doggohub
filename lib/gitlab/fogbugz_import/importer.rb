@@ -82,17 +82,17 @@ module Gitlab
         user_hash = user_map[person_id.to_s]
 
         user_name = ''
-        gitlab_id = nil
+        doggohub_id = nil
 
         unless user_hash.nil?
           user_name = user_hash['name']
-          if user = User.find_by(id: user_hash['gitlab_user'])
+          if user = User.find_by(id: user_hash['doggohub_user'])
             user_name = "@#{user.username}"
-            gitlab_id = user.id
+            doggohub_id = user.id
           end
         end
 
-        { name: user_name, gitlab_id: gitlab_id }
+        { name: user_name, doggohub_id: doggohub_id }
       end
 
       def import_cases
@@ -118,8 +118,8 @@ module Gitlab
             end
           end
 
-          assignee_id = user_info(bug['ixPersonAssignedTo'])[:gitlab_id]
-          author_id = user_info(bug['ixPersonOpenedBy'])[:gitlab_id] || project.creator_id
+          assignee_id = user_info(bug['ixPersonAssignedTo'])[:doggohub_id]
+          author_id = user_info(bug['ixPersonOpenedBy'])[:doggohub_id] || project.creator_id
 
           issue = Issue.create!(
             iid:         bug['ixBug'],
@@ -163,7 +163,7 @@ module Gitlab
             next if content.blank? && attachments.empty? && updates.empty?
 
             author = user_info(comment['ixPerson'])[:name]
-            author_id = user_info(comment['ixPerson'])[:gitlab_id] || project.creator_id
+            author_id = user_info(comment['ixPerson'])[:doggohub_id] || project.creator_id
             date = DateTime.parse(comment['dt'])
 
             body = format_issue_comment_body(

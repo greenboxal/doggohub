@@ -30,7 +30,7 @@ git init --bare project-name.git
 
 1. Create a project in your user namespace
   - Choose to import from 'Any Repo by URL' and use
-    https://gitlab.com/gitlab-org/training-examples.git
+    https://doggohub.com/doggohub-org/training-examples.git
 2. Create a '`Workspace`' directory in your home directory.
 3. Clone the '`training-examples`' project
 
@@ -42,7 +42,7 @@ git init --bare project-name.git
 mkdir ~/workspace
 cd ~/workspace
 
-git clone git@gitlab.example.com:<username>/training-examples.git
+git clone git@doggohub.example.com:<username>/training-examples.git
 cd training-examples
 ```
 ----------

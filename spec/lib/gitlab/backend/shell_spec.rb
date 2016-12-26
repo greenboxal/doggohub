@@ -3,7 +3,7 @@ require 'stringio'
 
 describe Gitlab::Shell, lib: true do
   let(:project) { double('Project', id: 7, path: 'diaspora') }
-  let(:gitlab_shell) { Gitlab::Shell.new }
+  let(:doggohub_shell) { Gitlab::Shell.new }
 
   before do
     allow(Project).to receive(:find).and_return(project)
@@ -13,21 +13,21 @@ describe Gitlab::Shell, lib: true do
   it { is_expected.to respond_to :remove_key }
   it { is_expected.to respond_to :add_repository }
   it { is_expected.to respond_to :remove_repository }
-  it { is_expected.to respond_to :fork_repository }
+  it { is_expected.to respond_to :bork_repository }
   it { is_expected.to respond_to :add_namespace }
   it { is_expected.to respond_to :rm_namespace }
   it { is_expected.to respond_to :mv_namespace }
   it { is_expected.to respond_to :exists? }
 
-  it { expect(gitlab_shell.url_to_repo('diaspora')).to eq(Gitlab.config.gitlab_shell.ssh_path_prefix + "diaspora.git") }
+  it { expect(doggohub_shell.url_to_repo('diaspora')).to eq(Gitlab.config.doggohub_shell.ssh_path_prefix + "diaspora.git") }
 
   describe 'memoized secret_token' do
     let(:secret_file) { 'tmp/tests/.secret_shell_test' }
-    let(:link_file) { 'tmp/tests/shell-secret-test/.gitlab_shell_secret' }
+    let(:link_file) { 'tmp/tests/shell-secret-test/.doggohub_shell_secret' }
 
     before do
-      allow(Gitlab.config.gitlab_shell).to receive(:secret_file).and_return(secret_file)
-      allow(Gitlab.config.gitlab_shell).to receive(:path).and_return('tmp/tests/shell-secret-test')
+      allow(Gitlab.config.doggohub_shell).to receive(:secret_file).and_return(secret_file)
+      allow(Gitlab.config.doggohub_shell).to receive(:path).and_return('tmp/tests/shell-secret-test')
       FileUtils.mkdir('tmp/tests/shell-secret-test')
       Gitlab::Shell.ensure_secret_token!
     end
@@ -49,12 +49,12 @@ describe Gitlab::Shell, lib: true do
 
   describe '#add_key' do
     it 'removes trailing garbage' do
-      allow(gitlab_shell).to receive(:gitlab_shell_keys_path).and_return(:gitlab_shell_keys_path)
+      allow(doggohub_shell).to receive(:doggohub_shell_keys_path).and_return(:doggohub_shell_keys_path)
       expect(Gitlab::Utils).to receive(:system_silent).with(
-        [:gitlab_shell_keys_path, 'add-key', 'key-123', 'ssh-rsa foobar']
+        [:doggohub_shell_keys_path, 'add-key', 'key-123', 'ssh-rsa foobar']
       )
 
-      gitlab_shell.add_key('key-123', 'ssh-rsa foobar trailing garbage')
+      doggohub_shell.add_key('key-123', 'ssh-rsa foobar trailing garbage')
     end
   end
 

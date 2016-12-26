@@ -53,10 +53,10 @@ describe MergeRequestsHelper do
 
     describe 'within different projects' do
       let(:project) { create(:project) }
-      let(:fork_project) { create(:project, forked_from_project: project) }
-      let(:merge_request) { create(:merge_request, source_project: fork_project, target_project: project) }
+      let(:bork_project) { create(:project, borked_from_project: project) }
+      let(:merge_request) { create(:merge_request, source_project: bork_project, target_project: project) }
       subject { format_mr_branch_names(merge_request) }
-      let(:source_title) { "#{fork_project.path_with_namespace}:#{merge_request.source_branch}" }
+      let(:source_title) { "#{bork_project.path_with_namespace}:#{merge_request.source_branch}" }
       let(:target_title) { "#{project.path_with_namespace}:#{merge_request.target_branch}" }
 
       it { is_expected.to eq([source_title, target_title]) }

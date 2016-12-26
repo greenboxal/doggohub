@@ -4,14 +4,14 @@ require_relative "version_info"
 module Gitlab
   class Upgrader
     def execute
-      puts "GitLab #{current_version.major} upgrade tool"
+      puts "DoggoHub #{current_version.major} upgrade tool"
       puts "Your version is #{current_version}"
-      puts "Latest available version for GitLab #{current_version.major} is #{latest_version}"
+      puts "Latest available version for DoggoHub #{current_version.major} is #{latest_version}"
 
       if latest_version?
-        puts "You are using the latest GitLab version"
+        puts "You are using the latest DoggoHub version"
       else
-        puts "Newer GitLab version is available"
+        puts "Newer DoggoHub version is available"
         answer = if ARGV.first == "-y"
                    "yes"
                  else
@@ -39,7 +39,7 @@ module Gitlab
     end
 
     def current_version_raw
-      File.read(File.join(gitlab_path, "VERSION")).strip
+      File.read(File.join(doggohub_path, "VERSION")).strip
     end
 
     def latest_version_raw
@@ -50,7 +50,7 @@ module Gitlab
     end
 
     def fetch_git_tags
-      remote_tags, _ = Gitlab::Popen.popen(%W(#{Gitlab.config.git.bin_path} ls-remote --tags https://gitlab.com/gitlab-org/gitlab-ce.git))
+      remote_tags, _ = Gitlab::Popen.popen(%W(#{Gitlab.config.git.bin_path} ls-remote --tags https://doggohub.com/doggohub-org/doggohub-ce.git))
       remote_tags.split("\n").grep(/tags\/v#{current_version.major}/)
     end
 
@@ -86,7 +86,7 @@ module Gitlab
       puts "Done"
     end
 
-    def gitlab_path
+    def doggohub_path
       File.expand_path(File.join(File.dirname(__FILE__), '../..'))
     end
 

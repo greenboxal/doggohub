@@ -4,7 +4,7 @@ module Gitlab
       module Entry
         ##
         # This class represents a global entry - root Entry for entire
-        # GitLab CI Configuration file.
+        # DoggoHub CI Configuration file.
         #
         class Global < Node
           include Configurable

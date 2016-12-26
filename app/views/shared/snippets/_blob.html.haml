@@ -3,7 +3,7 @@
     %textarea.markdown-snippet-copy.blob-content{data: {blob_id: @snippet.id}}
       = @snippet.content
     .file-content.wiki
-      - if gitlab_markdown?(@snippet.file_name)
+      - if doggohub_markdown?(@snippet.file_name)
         = preserve(markdown_field(@snippet, :content))
       - else
         = render_markup(@snippet.file_name, @snippet.content)

@@ -152,7 +152,7 @@ describe Banzai::Filter::EmojiFilter, lib: true do
   end
 
   it 'uses a custom asset_root context' do
-    root = Gitlab.config.gitlab.url + 'gitlab/root'
+    root = Gitlab.config.doggohub.url + 'doggohub/root'
 
     doc = filter(':smile:', asset_root: root)
     expect(doc.css('img').first.attr('src')).to start_with(root)
@@ -166,7 +166,7 @@ describe Banzai::Filter::EmojiFilter, lib: true do
   end
 
   it 'uses a custom asset_root context' do
-    root = Gitlab.config.gitlab.url + 'gitlab/root'
+    root = Gitlab.config.doggohub.url + 'doggohub/root'
 
     doc = filter("'🎱'", asset_root: root)
     expect(doc.css('img').first.attr('src')).to start_with(root)

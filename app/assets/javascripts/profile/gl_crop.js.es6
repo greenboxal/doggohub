@@ -5,7 +5,7 @@
   // Matches everything but the file name
   const FILENAMEREGEX = /^.*[\\\/]/;
 
-  class GitLabCrop {
+  class DoggoHubCrop {
     constructor(input, { filename, previewImage, modalCrop, pickImageEl, uploadImageBtn, modalCropImg,
         exportWidth = 200, exportHeight = 200, cropBoxWidth = 200, cropBoxHeight = 200 } = {}) {
 
@@ -167,7 +167,7 @@
 
   $.fn.glCrop = function(opts) {
     return this.each(function() {
-      return $(this).data('glcrop', new GitLabCrop(this, opts));
+      return $(this).data('glcrop', new DoggoHubCrop(this, opts));
     });
   }
 

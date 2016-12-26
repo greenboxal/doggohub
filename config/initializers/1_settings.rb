@@ -1,39 +1,39 @@
-require_dependency Rails.root.join('lib/gitlab') # Load Gitlab as soon as possible
+require_dependency Rails.root.join('lib/doggohub') # Load Gitlab as soon as possible
 
 class Settings < Settingslogic
-  source ENV.fetch('GITLAB_CONFIG') { "#{Rails.root}/config/gitlab.yml" }
+  source ENV.fetch('DOGGOHUB_CONFIG') { "#{Rails.root}/config/doggohub.yml" }
   namespace Rails.env
 
   class << self
-    def gitlab_on_standard_port?
-      gitlab.port.to_i == (gitlab.https ? 443 : 80)
+    def doggohub_on_standard_port?
+      doggohub.port.to_i == (doggohub.https ? 443 : 80)
     end
 
     def host_without_www(url)
       host(url).sub('www.', '')
     end
 
-    def build_gitlab_ci_url
-      if gitlab_on_standard_port?
+    def build_doggohub_ci_url
+      if doggohub_on_standard_port?
         custom_port = nil
       else
-        custom_port = ":#{gitlab.port}"
+        custom_port = ":#{doggohub.port}"
       end
-      [ gitlab.protocol,
+      [ doggohub.protocol,
         "://",
-        gitlab.host,
+        doggohub.host,
         custom_port,
-        gitlab.relative_url_root
+        doggohub.relative_url_root
       ].join('')
     end
 
-    def build_gitlab_shell_ssh_path_prefix
-      user_host = "#{gitlab_shell.ssh_user}@#{gitlab_shell.ssh_host}"
+    def build_doggohub_shell_ssh_path_prefix
+      user_host = "#{doggohub_shell.ssh_user}@#{doggohub_shell.ssh_host}"
 
-      if gitlab_shell.ssh_port != 22
-        "ssh://#{user_host}:#{gitlab_shell.ssh_port}/"
+      if doggohub_shell.ssh_port != 22
+        "ssh://#{user_host}:#{doggohub_shell.ssh_port}/"
       else
-        if gitlab_shell.ssh_host.include? ':'
+        if doggohub_shell.ssh_host.include? ':'
           "[#{user_host}]:"
         else
           "#{user_host}:"
@@ -41,12 +41,12 @@ class Settings < Settingslogic
       end
     end
 
-    def build_base_gitlab_url
-      base_gitlab_url.join('')
+    def build_base_doggohub_url
+      base_doggohub_url.join('')
     end
 
-    def build_gitlab_url
-      (base_gitlab_url + [gitlab.relative_url_root]).join('')
+    def build_doggohub_url
+      (base_doggohub_url + [doggohub.relative_url_root]).join('')
     end
 
     # check that values in `current` (string or integer) is a contant in `modul`.
@@ -74,11 +74,11 @@ class Settings < Settingslogic
 
     private
 
-    def base_gitlab_url
-      custom_port = gitlab_on_standard_port? ? nil : ":#{gitlab.port}"
-      [ gitlab.protocol,
+    def base_doggohub_url
+      custom_port = doggohub_on_standard_port? ? nil : ":#{doggohub.port}"
+      [ doggohub.protocol,
         "://",
-        gitlab.host,
+        doggohub.host,
         custom_port
       ]
     end
@@ -138,7 +138,7 @@ Settings.omniauth.cas3['session_duration'] ||= 8.hours
 Settings.omniauth['session_tickets'] ||= Settingslogic.new({})
 Settings.omniauth.session_tickets['cas3'] = 'ticket'
 
-# Fill out omniauth-gitlab settings. It is needed for easy set up GHE or GH by just specifying url.
+# Fill out omniauth-doggohub settings. It is needed for easy set up GHE or GH by just specifying url.
 
 github_default_url = "https://github.com"
 github_settings = Settings.omniauth['providers'].find { |provider| provider["name"] == "github" }
@@ -169,63 +169,63 @@ Settings.shared['path'] = File.expand_path(Settings.shared['path'] || "shared", 
 Settings['issues_tracker'] ||= {}
 
 #
-# GitLab
+# DoggoHub
 #
-Settings['gitlab'] ||= Settingslogic.new({})
-Settings.gitlab['default_projects_limit'] ||= 10
-Settings.gitlab['default_branch_protection'] ||= 2
-Settings.gitlab['default_can_create_group'] = true if Settings.gitlab['default_can_create_group'].nil?
-Settings.gitlab['default_theme'] = Gitlab::Themes::APPLICATION_DEFAULT if Settings.gitlab['default_theme'].nil?
-Settings.gitlab['host']       ||= ENV['GITLAB_HOST'] || 'localhost'
-Settings.gitlab['ssh_host']   ||= Settings.gitlab.host
-Settings.gitlab['https']        = false if Settings.gitlab['https'].nil?
-Settings.gitlab['port']       ||= Settings.gitlab.https ? 443 : 80
-Settings.gitlab['relative_url_root'] ||= ENV['RAILS_RELATIVE_URL_ROOT'] || ''
-Settings.gitlab['protocol'] ||= Settings.gitlab.https ? "https" : "http"
-Settings.gitlab['email_enabled'] ||= true if Settings.gitlab['email_enabled'].nil?
-Settings.gitlab['email_from'] ||= ENV['GITLAB_EMAIL_FROM'] || "gitlab@#{Settings.gitlab.host}"
-Settings.gitlab['email_display_name'] ||= ENV['GITLAB_EMAIL_DISPLAY_NAME'] || 'GitLab'
-Settings.gitlab['email_reply_to'] ||= ENV['GITLAB_EMAIL_REPLY_TO'] || "noreply@#{Settings.gitlab.host}"
-Settings.gitlab['email_subject_suffix'] ||= ENV['GITLAB_EMAIL_SUBJECT_SUFFIX'] || ""
-Settings.gitlab['base_url']   ||= Settings.send(:build_base_gitlab_url)
-Settings.gitlab['url']        ||= Settings.send(:build_gitlab_url)
-Settings.gitlab['user']       ||= 'git'
-Settings.gitlab['user_home']  ||= begin
-  Etc.getpwnam(Settings.gitlab['user']).dir
+Settings['doggohub'] ||= Settingslogic.new({})
+Settings.doggohub['default_projects_limit'] ||= 10
+Settings.doggohub['default_branch_protection'] ||= 2
+Settings.doggohub['default_can_create_group'] = true if Settings.doggohub['default_can_create_group'].nil?
+Settings.doggohub['default_theme'] = Gitlab::Themes::APPLICATION_DEFAULT if Settings.doggohub['default_theme'].nil?
+Settings.doggohub['host']       ||= ENV['DOGGOHUB_HOST'] || 'localhost'
+Settings.doggohub['ssh_host']   ||= Settings.doggohub.host
+Settings.doggohub['https']        = false if Settings.doggohub['https'].nil?
+Settings.doggohub['port']       ||= Settings.doggohub.https ? 443 : 80
+Settings.doggohub['relative_url_root'] ||= ENV['RAILS_RELATIVE_URL_ROOT'] || ''
+Settings.doggohub['protocol'] ||= Settings.doggohub.https ? "https" : "http"
+Settings.doggohub['email_enabled'] ||= true if Settings.doggohub['email_enabled'].nil?
+Settings.doggohub['email_from'] ||= ENV['DOGGOHUB_EMAIL_FROM'] || "doggohub@#{Settings.doggohub.host}"
+Settings.doggohub['email_display_name'] ||= ENV['DOGGOHUB_EMAIL_DISPLAY_NAME'] || 'DoggoHub'
+Settings.doggohub['email_reply_to'] ||= ENV['DOGGOHUB_EMAIL_REPLY_TO'] || "noreply@#{Settings.doggohub.host}"
+Settings.doggohub['email_subject_suffix'] ||= ENV['DOGGOHUB_EMAIL_SUBJECT_SUFFIX'] || ""
+Settings.doggohub['base_url']   ||= Settings.send(:build_base_doggohub_url)
+Settings.doggohub['url']        ||= Settings.send(:build_doggohub_url)
+Settings.doggohub['user']       ||= 'git'
+Settings.doggohub['user_home']  ||= begin
+  Etc.getpwnam(Settings.doggohub['user']).dir
 rescue ArgumentError # no user configured
-  '/home/' + Settings.gitlab['user']
+  '/home/' + Settings.doggohub['user']
 end
-Settings.gitlab['time_zone'] ||= nil
-Settings.gitlab['signup_enabled'] ||= true if Settings.gitlab['signup_enabled'].nil?
-Settings.gitlab['signin_enabled'] ||= true if Settings.gitlab['signin_enabled'].nil?
-Settings.gitlab['restricted_visibility_levels'] = Settings.send(:verify_constant_array, Gitlab::VisibilityLevel, Settings.gitlab['restricted_visibility_levels'], [])
-Settings.gitlab['username_changing_enabled'] = true if Settings.gitlab['username_changing_enabled'].nil?
-Settings.gitlab['issue_closing_pattern'] = '((?:[Cc]los(?:e[sd]?|ing)|[Ff]ix(?:e[sd]|ing)?|[Rr]esolv(?:e[sd]?|ing))(:?) +(?:(?:issues? +)?%{issue_ref}(?:(?:, *| +and +)?)|([A-Z][A-Z0-9_]+-\d+))+)' if Settings.gitlab['issue_closing_pattern'].nil?
-Settings.gitlab['default_projects_features'] ||= {}
-Settings.gitlab['webhook_timeout'] ||= 10
-Settings.gitlab['max_attachment_size'] ||= 10
-Settings.gitlab['session_expire_delay'] ||= 10080
-Settings.gitlab.default_projects_features['issues']             = true if Settings.gitlab.default_projects_features['issues'].nil?
-Settings.gitlab.default_projects_features['merge_requests']     = true if Settings.gitlab.default_projects_features['merge_requests'].nil?
-Settings.gitlab.default_projects_features['wiki']               = true if Settings.gitlab.default_projects_features['wiki'].nil?
-Settings.gitlab.default_projects_features['snippets']           = false if Settings.gitlab.default_projects_features['snippets'].nil?
-Settings.gitlab.default_projects_features['builds']             = true if Settings.gitlab.default_projects_features['builds'].nil?
-Settings.gitlab.default_projects_features['container_registry'] = true if Settings.gitlab.default_projects_features['container_registry'].nil?
-Settings.gitlab.default_projects_features['visibility_level']   = Settings.send(:verify_constant, Gitlab::VisibilityLevel, Settings.gitlab.default_projects_features['visibility_level'], Gitlab::VisibilityLevel::PRIVATE)
-Settings.gitlab['domain_whitelist'] ||= []
-Settings.gitlab['import_sources'] ||= %w[github bitbucket gitlab google_code fogbugz git gitlab_project gitea]
-Settings.gitlab['trusted_proxies'] ||= []
-Settings.gitlab['no_todos_messages'] ||= YAML.load_file(Rails.root.join('config', 'no_todos_messages.yml'))
+Settings.doggohub['time_zone'] ||= nil
+Settings.doggohub['signup_enabled'] ||= true if Settings.doggohub['signup_enabled'].nil?
+Settings.doggohub['signin_enabled'] ||= true if Settings.doggohub['signin_enabled'].nil?
+Settings.doggohub['restricted_visibility_levels'] = Settings.send(:verify_constant_array, Gitlab::VisibilityLevel, Settings.doggohub['restricted_visibility_levels'], [])
+Settings.doggohub['username_changing_enabled'] = true if Settings.doggohub['username_changing_enabled'].nil?
+Settings.doggohub['issue_closing_pattern'] = '((?:[Cc]los(?:e[sd]?|ing)|[Ff]ix(?:e[sd]|ing)?|[Rr]esolv(?:e[sd]?|ing))(:?) +(?:(?:issues? +)?%{issue_ref}(?:(?:, *| +and +)?)|([A-Z][A-Z0-9_]+-\d+))+)' if Settings.doggohub['issue_closing_pattern'].nil?
+Settings.doggohub['default_projects_features'] ||= {}
+Settings.doggohub['webhook_timeout'] ||= 10
+Settings.doggohub['max_attachment_size'] ||= 10
+Settings.doggohub['session_expire_delay'] ||= 10080
+Settings.doggohub.default_projects_features['issues']             = true if Settings.doggohub.default_projects_features['issues'].nil?
+Settings.doggohub.default_projects_features['merge_requests']     = true if Settings.doggohub.default_projects_features['merge_requests'].nil?
+Settings.doggohub.default_projects_features['wiki']               = true if Settings.doggohub.default_projects_features['wiki'].nil?
+Settings.doggohub.default_projects_features['snippets']           = false if Settings.doggohub.default_projects_features['snippets'].nil?
+Settings.doggohub.default_projects_features['builds']             = true if Settings.doggohub.default_projects_features['builds'].nil?
+Settings.doggohub.default_projects_features['container_registry'] = true if Settings.doggohub.default_projects_features['container_registry'].nil?
+Settings.doggohub.default_projects_features['visibility_level']   = Settings.send(:verify_constant, Gitlab::VisibilityLevel, Settings.doggohub.default_projects_features['visibility_level'], Gitlab::VisibilityLevel::PRIVATE)
+Settings.doggohub['domain_whitelist'] ||= []
+Settings.doggohub['import_sources'] ||= %w[github bitbucket doggohub google_code fogbugz git doggohub_project gitea]
+Settings.doggohub['trusted_proxies'] ||= []
+Settings.doggohub['no_todos_messages'] ||= YAML.load_file(Rails.root.join('config', 'no_todos_messages.yml'))
 
 #
 # CI
 #
-Settings['gitlab_ci'] ||= Settingslogic.new({})
-Settings.gitlab_ci['shared_runners_enabled'] = true if Settings.gitlab_ci['shared_runners_enabled'].nil?
-Settings.gitlab_ci['all_broken_builds']     = true if Settings.gitlab_ci['all_broken_builds'].nil?
-Settings.gitlab_ci['add_pusher']            = false if Settings.gitlab_ci['add_pusher'].nil?
-Settings.gitlab_ci['builds_path']           = File.expand_path(Settings.gitlab_ci['builds_path'] || "builds/", Rails.root)
-Settings.gitlab_ci['url']                 ||= Settings.send(:build_gitlab_ci_url)
+Settings['doggohub_ci'] ||= Settingslogic.new({})
+Settings.doggohub_ci['shared_runners_enabled'] = true if Settings.doggohub_ci['shared_runners_enabled'].nil?
+Settings.doggohub_ci['all_broken_builds']     = true if Settings.doggohub_ci['all_broken_builds'].nil?
+Settings.doggohub_ci['add_pusher']            = false if Settings.doggohub_ci['add_pusher'].nil?
+Settings.doggohub_ci['builds_path']           = File.expand_path(Settings.doggohub_ci['builds_path'] || "builds/", Rails.root)
+Settings.doggohub_ci['url']                 ||= Settings.send(:build_doggohub_ci_url)
 
 #
 # Reply by email
@@ -320,27 +320,27 @@ Settings.cron_jobs['remove_unreferenced_lfs_objects_worker']['cron'] ||= '20 0 *
 Settings.cron_jobs['remove_unreferenced_lfs_objects_worker']['job_class'] = 'RemoveUnreferencedLfsObjectsWorker'
 
 #
-# GitLab Shell
+# DoggoHub Shell
 #
-Settings['gitlab_shell'] ||= Settingslogic.new({})
-Settings.gitlab_shell['path']         ||= Settings.gitlab['user_home'] + '/gitlab-shell/'
-Settings.gitlab_shell['hooks_path']   ||= Settings.gitlab['user_home'] + '/gitlab-shell/hooks/'
-Settings.gitlab_shell['secret_file'] ||= Rails.root.join('.gitlab_shell_secret')
-Settings.gitlab_shell['receive_pack']   = true if Settings.gitlab_shell['receive_pack'].nil?
-Settings.gitlab_shell['upload_pack']    = true if Settings.gitlab_shell['upload_pack'].nil?
-Settings.gitlab_shell['ssh_host']     ||= Settings.gitlab.ssh_host
-Settings.gitlab_shell['ssh_port']     ||= 22
-Settings.gitlab_shell['ssh_user']     ||= Settings.gitlab.user
-Settings.gitlab_shell['owner_group']  ||= Settings.gitlab.user
-Settings.gitlab_shell['ssh_path_prefix'] ||= Settings.send(:build_gitlab_shell_ssh_path_prefix)
+Settings['doggohub_shell'] ||= Settingslogic.new({})
+Settings.doggohub_shell['path']         ||= Settings.doggohub['user_home'] + '/doggohub-shell/'
+Settings.doggohub_shell['hooks_path']   ||= Settings.doggohub['user_home'] + '/doggohub-shell/hooks/'
+Settings.doggohub_shell['secret_file'] ||= Rails.root.join('.doggohub_shell_secret')
+Settings.doggohub_shell['receive_pack']   = true if Settings.doggohub_shell['receive_pack'].nil?
+Settings.doggohub_shell['upload_pack']    = true if Settings.doggohub_shell['upload_pack'].nil?
+Settings.doggohub_shell['ssh_host']     ||= Settings.doggohub.ssh_host
+Settings.doggohub_shell['ssh_port']     ||= 22
+Settings.doggohub_shell['ssh_user']     ||= Settings.doggohub.user
+Settings.doggohub_shell['owner_group']  ||= Settings.doggohub.user
+Settings.doggohub_shell['ssh_path_prefix'] ||= Settings.send(:build_doggohub_shell_ssh_path_prefix)
 
 #
 # Repositories
 #
 Settings['repositories'] ||= Settingslogic.new({})
 Settings.repositories['storages'] ||= {}
-# Setting gitlab_shell.repos_path is DEPRECATED and WILL BE REMOVED in version 9.0
-Settings.repositories.storages['default'] ||= Settings.gitlab_shell['repos_path'] || Settings.gitlab['user_home'] + '/repositories/'
+# Setting doggohub_shell.repos_path is DEPRECATED and WILL BE REMOVED in version 9.0
+Settings.repositories.storages['default'] ||= Settings.doggohub_shell['repos_path'] || Settings.doggohub['user_home'] + '/repositories/'
 
 #
 # The repository_downloads_path is used to remove outdated repository
@@ -350,11 +350,11 @@ Settings.repositories.storages['default'] ||= Settings.gitlab_shell['repos_path'
 # repository_downloads_path value.
 #
 repositories_storages_path     = Settings.repositories.storages.values
-repository_downloads_path      = Settings.gitlab['repository_downloads_path'].to_s.gsub(/\/$/, '')
-repository_downloads_full_path = File.expand_path(repository_downloads_path, Settings.gitlab['user_home'])
+repository_downloads_path      = Settings.doggohub['repository_downloads_path'].to_s.gsub(/\/$/, '')
+repository_downloads_full_path = File.expand_path(repository_downloads_path, Settings.doggohub['user_home'])
 
 if repository_downloads_path.blank? || repositories_storages_path.any? { |path| [repository_downloads_path, repository_downloads_full_path].include?(path.gsub(/\/$/, '')) }
-  Settings.gitlab['repository_downloads_path'] = File.join(Settings.shared['path'], 'cache/archive')
+  Settings.doggohub['repository_downloads_path'] = File.join(Settings.shared['path'], 'cache/archive')
 end
 
 #
@@ -381,7 +381,7 @@ Settings.git['max_size']  ||= 20971520 # 20.megabytes
 Settings.git['bin_path']  ||= '/usr/bin/git'
 Settings.git['timeout']   ||= 10
 
-# Important: keep the satellites.path setting until GitLab 9.0 at
+# Important: keep the satellites.path setting until DoggoHub 9.0 at
 # least. This setting is fed to 'rm -rf' in
 # db/migrate/20151023144219_remove_satellites.rb
 Settings['satellites'] ||= Settingslogic.new({})
@@ -407,9 +407,9 @@ Settings.rack_attack.git_basic_auth['bantime'] ||= 1.hour
 # Testing settings
 #
 if Rails.env.test?
-  Settings.gitlab['default_projects_limit']   = 42
-  Settings.gitlab['default_can_create_group'] = true
-  Settings.gitlab['default_can_create_team']  = false
+  Settings.doggohub['default_projects_limit']   = 42
+  Settings.doggohub['default_can_create_group'] = true
+  Settings.doggohub['default_can_create_team']  = false
 end
 
 # Force a refresh of application settings at startup

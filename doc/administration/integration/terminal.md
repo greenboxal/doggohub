@@ -1,10 +1,10 @@
 # Web terminals
 
-> [Introduced](https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/7690)
-in GitLab 8.15. Only project masters and owners can access web terminals.
+> [Introduced](https://doggohub.com/doggohub-org/doggohub-ce/merge_requests/7690)
+in DoggoHub 8.15. Only project masters and owners can access web terminals.
 
 With the introduction of the [Kubernetes](../../project_services/kubernetes.md)
-project service, GitLab gained the ability to store and use credentials for a
+project service, DoggoHub gained the ability to store and use credentials for a
 Kubernetes cluster. One of the things it uses these credentials for is providing
 access to [web terminals](../../ci/environments.html#web-terminals)
 for environments.
@@ -12,14 +12,14 @@ for environments.
 ## How it works
 
 A detailed overview of the architecture of web terminals and how they work
-can be found in [this document](https://gitlab.com/gitlab-org/gitlab-workhorse/blob/master/doc/terminal.md).
+can be found in [this document](https://doggohub.com/doggohub-org/doggohub-workhorse/blob/master/doc/terminal.md).
 In brief:
 
-* GitLab relies on the user to provide their own Kubernetes credentials, and to
+* DoggoHub relies on the user to provide their own Kubernetes credentials, and to
   appropriately label the pods they create when deploying.
 * When a user navigates to the terminal page for an environment, they are served
-  a JavaScript application that opens a WebSocket connection back to GitLab.
-* The WebSocket is handled in [Workhorse](https://gitlab.com/gitlab-org/gitlab-workhorse),
+  a JavaScript application that opens a WebSocket connection back to DoggoHub.
+* The WebSocket is handled in [Workhorse](https://doggohub.com/doggohub-org/doggohub-workhorse),
    rather than the Rails application server.
 * Workhorse queries Rails for connection details and user permissions; Rails
   queries Kubernetes for them in the background, using [Sidekiq](../troubleshooting/sidekiq.md)
@@ -34,11 +34,11 @@ In brief:
 As web terminals use WebSockets, every HTTP/HTTPS reverse proxy in front of
 Workhorse needs to be configured to pass the `Connection` and `Upgrade` headers
 through to the next one in the chain. If you installed Gitlab using Omnibus, or
-from source, starting with GitLab 8.15, this should be done by the default
+from source, starting with DoggoHub 8.15, this should be done by the default
 configuration, so there's no need for you to do anything.
 
 However, if you run a [load balancer](../high_availability/load_balancer.md) in
-front of GitLab, you may need to make some changes to your configuration. These
+front of DoggoHub, you may need to make some changes to your configuration. These
 guides document the necessary steps for a selection of popular reverse proxies:
 
 * [Apache](https://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html)
@@ -56,12 +56,12 @@ Omnibus installation before upgrading to 8.15, you may need to make some
 changes to your configuration. See the  [8.14 to 8.15 upgrade](../../update/8.14-to-8.15.md#nginx-configuration)
 document for more details.
 
-If you'd like to disable web terminal support in GitLab, just stop passing
+If you'd like to disable web terminal support in DoggoHub, just stop passing
 the `Connection` and `Upgrade` hop-by-hop headers in the *first* HTTP reverse
 proxy in the chain. For most users, this will be the NGINX server bundled with
 Omnibus Gitlab, in which case, you need to:
 
-* Find the `nginx['proxy_set_headers']` section of your `gitlab.rb` file
+* Find the `nginx['proxy_set_headers']` section of your `doggohub.rb` file
 * Ensure the whole block is uncommented, and then comment out or remove the
   `Connection` and `Upgrade` lines.
 

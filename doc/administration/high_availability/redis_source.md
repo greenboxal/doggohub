@@ -1,4 +1,4 @@
-# Configuring non-Omnibus Redis for GitLab HA
+# Configuring non-Omnibus Redis for DoggoHub HA
 
 This is the documentation for configuring a Highly Available Redis setup when
 you have installed Redis all by yourself and not using the bundled one that
@@ -9,8 +9,8 @@ We cannot stress enough the importance of reading the
 some invaluable information to the configuration of Redis. Please proceed to
 read it before going forward with this guide.
 
-We also highly recommend that you use the Omnibus GitLab packages, as we
-optimize them specifically for GitLab, and we will take care of upgrading Redis
+We also highly recommend that you use the Omnibus DoggoHub packages, as we
+optimize them specifically for DoggoHub, and we will take care of upgrading Redis
 to the latest supported version.
 
 If you're not sure whether this guide is for you, please refer to
@@ -123,15 +123,15 @@ master with IP `10.0.0.1` (some settings might overlap with the master):
 
     ## Define with `sentinel auth-pass` the same shared password you have
     ## defined for both Redis master and slaves instances.
-    sentinel auth-pass gitlab-redis redis-password-goes-here
+    sentinel auth-pass doggohub-redis redis-password-goes-here
 
     ## Define with `sentinel monitor` the IP and port of the Redis
     ## master node, and the quorum required to start a failover.
-    sentinel monitor gitlab-redis 10.0.0.1 6379 2
+    sentinel monitor doggohub-redis 10.0.0.1 6379 2
 
     ## Define with `sentinel down-after-milliseconds` the time in `ms`
     ## that an unresponsive server will be considered down.
-    sentinel down-after-milliseconds gitlab-redis 10000
+    sentinel down-after-milliseconds doggohub-redis 10000
 
     ## Define a value for `sentinel failover_timeout` in `ms`. This has multiple
     ## meanings:
@@ -158,27 +158,27 @@ master with IP `10.0.0.1` (some settings might overlap with the master):
 1. Restart the Redis service for the changes to take effect.
 1. Go through the steps again for all the other Sentinel nodes.
 
-### Step 4. Configuring the GitLab application
+### Step 4. Configuring the DoggoHub application
 
 You can enable or disable Sentinel support at any time in new or existing
-installations. From the GitLab application perspective, all it requires is
+installations. From the DoggoHub application perspective, all it requires is
 the correct credentials for the Sentinel nodes.
 
 While it doesn't require a list of all Sentinel nodes, in case of a failure,
 it needs to access at least one of listed ones.
 
-The following steps should be performed in the [GitLab application server](gitlab.md)
+The following steps should be performed in the [DoggoHub application server](doggohub.md)
 which ideally should not have Redis or Sentinels in the same machine for a HA
 setup:
 
-1. Edit `/home/git/gitlab/config/resque.yml` following the example in
+1. Edit `/home/git/doggohub/config/resque.yml` following the example in
    [resque.yml.example][resque], and uncomment the Sentinel lines, pointing to
    the correct server credentials:
 
     ```yaml
     # resque.yaml
     production:
-      url: redis://:redi-password-goes-here@gitlab-redis/
+      url: redis://:redi-password-goes-here@doggohub-redis/
       sentinels:
         -
           host: 10.0.0.1
@@ -191,7 +191,7 @@ setup:
           port: 26379 # point to sentinel, not to redis port
     ```
 
-1. [Restart GitLab][restart] for the changes to take effect.
+1. [Restart DoggoHub][restart] for the changes to take effect.
 
 ## Example of minimal configuration with 1 master, 2 slaves and 3 Sentinels
 
@@ -212,7 +212,7 @@ Here is a list and description of each **machine** and the assigned **IP**:
 * `10.0.0.1`: Redis Master + Sentinel 1
 * `10.0.0.2`: Redis Slave 1 + Sentinel 2
 * `10.0.0.3`: Redis Slave 2 + Sentinel 3
-* `10.0.0.4`: GitLab application
+* `10.0.0.4`: DoggoHub application
 
 Please note that after the initial configuration, if a failover is initiated
 by the Sentinel nodes, the Redis nodes will be reconfigured and the **Master**
@@ -239,9 +239,9 @@ or a failover promotes a different **Master** node.
     ```conf
     bind 10.0.0.1
     port 26379
-    sentinel auth-pass gitlab-redis redis-password-goes-here
-    sentinel monitor gitlab-redis 10.0.0.1 6379 2
-    sentinel down-after-milliseconds gitlab-redis 10000
+    sentinel auth-pass doggohub-redis redis-password-goes-here
+    sentinel monitor doggohub-redis 10.0.0.1 6379 2
+    sentinel down-after-milliseconds doggohub-redis 10000
     sentinel failover_timeout 30000
     ```
 
@@ -264,9 +264,9 @@ or a failover promotes a different **Master** node.
     ```conf
     bind 10.0.0.2
     port 26379
-    sentinel auth-pass gitlab-redis redis-password-goes-here
-    sentinel monitor gitlab-redis 10.0.0.1 6379 2
-    sentinel down-after-milliseconds gitlab-redis 10000
+    sentinel auth-pass doggohub-redis redis-password-goes-here
+    sentinel monitor doggohub-redis 10.0.0.1 6379 2
+    sentinel down-after-milliseconds doggohub-redis 10000
     sentinel failover_timeout 30000
     ```
 
@@ -289,21 +289,21 @@ or a failover promotes a different **Master** node.
     ```conf
     bind 10.0.0.3
     port 26379
-    sentinel auth-pass gitlab-redis redis-password-goes-here
-    sentinel monitor gitlab-redis 10.0.0.1 6379 2
-    sentinel down-after-milliseconds gitlab-redis 10000
+    sentinel auth-pass doggohub-redis redis-password-goes-here
+    sentinel monitor doggohub-redis 10.0.0.1 6379 2
+    sentinel down-after-milliseconds doggohub-redis 10000
     sentinel failover_timeout 30000
     ```
 
 1. Restart the Redis service for the changes to take effect.
 
-### Example configuration of the GitLab application
+### Example configuration of the DoggoHub application
 
-1. Edit `/home/git/gitlab/config/resque.yml`:
+1. Edit `/home/git/doggohub/config/resque.yml`:
 
     ```yaml
     production:
-      url: redis://:redi-password-goes-here@gitlab-redis/
+      url: redis://:redi-password-goes-here@doggohub-redis/
       sentinels:
         -
           host: 10.0.0.1
@@ -316,36 +316,36 @@ or a failover promotes a different **Master** node.
           port: 26379 # point to sentinel, not to redis port
     ```
 
-1. [Restart GitLab][restart] for the changes to take effect.
+1. [Restart DoggoHub][restart] for the changes to take effect.
 
 ## Troubleshooting
 
 We have a more detailed [Troubleshooting](redis.md#troubleshooting) explained
-in the documentation for Omnibus GitLab installations. Here we will list only
+in the documentation for Omnibus DoggoHub installations. Here we will list only
 the things that are specific to a source installation.
 
-If you get an error in GitLab like `Redis::CannotConnectError: No sentinels available.`,
+If you get an error in DoggoHub like `Redis::CannotConnectError: No sentinels available.`,
 there may be something wrong with your configuration files or it can be related
 to [this upstream issue][gh-531].
 
 You must make sure that `resque.yml` and `sentinel.conf` are configured correctly,
 otherwise `redis-rb` will not work properly.
 
-The `master-group-name` ('gitlab-redis') defined in (`sentinel.conf`)
-**must** be used as the hostname in GitLab (`resque.yml`):
+The `master-group-name` ('doggohub-redis') defined in (`sentinel.conf`)
+**must** be used as the hostname in DoggoHub (`resque.yml`):
 
 ```conf
 # sentinel.conf:
-sentinel monitor gitlab-redis 10.0.0.1 6379 2
-sentinel down-after-milliseconds gitlab-redis 10000
-sentinel config-epoch gitlab-redis 0
-sentinel leader-epoch gitlab-redis 0
+sentinel monitor doggohub-redis 10.0.0.1 6379 2
+sentinel down-after-milliseconds doggohub-redis 10000
+sentinel config-epoch doggohub-redis 0
+sentinel leader-epoch doggohub-redis 0
 ```
 
 ```yaml
 # resque.yaml
 production:
-  url: redis://:myredispassword@gitlab-redis/
+  url: redis://:myredispassword@doggohub-redis/
   sentinels:
     -
       host: 10.0.0.1
@@ -361,6 +361,6 @@ production:
 When in doubt, please read [Redis Sentinel documentation](http://redis.io/topics/sentinel).
 
 [gh-531]: https://github.com/redis/redis-rb/issues/531
-[downloads]: https://about.gitlab.com/downloads
-[restart]: ../restart_gitlab.md#installations-from-source
-[it]: https://gitlab.com/gitlab-org/gitlab-ce/uploads/c4cc8cd353604bd80315f9384035ff9e/The_Internet_IT_Crowd.png
+[downloads]: https://about.doggohub.com/downloads
+[restart]: ../restart_doggohub.md#installations-from-source
+[it]: https://doggohub.com/doggohub-org/doggohub-ce/uploads/c4cc8cd353604bd80315f9384035ff9e/The_Internet_IT_Crowd.png

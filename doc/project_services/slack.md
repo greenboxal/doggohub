@@ -9,11 +9,11 @@ Slack:
 1. Visit [Incoming WebHooks](https://my.slack.com/services/new/incoming-webhook/)
 1. Choose the channel name you want to send notifications to.
 1. Click **Add Incoming WebHooks Integration**
-1. Copy the **Webhook URL**, we'll need this later for GitLab.
+1. Copy the **Webhook URL**, we'll need this later for DoggoHub.
 
-## On GitLab
+## On DoggoHub
 
-After you set up Slack, it's time to set up GitLab.
+After you set up Slack, it's time to set up DoggoHub.
 
 Go to your project's **Settings > Services > Slack Notifications** and you will see a
 checkbox with the following events that can be triggered:

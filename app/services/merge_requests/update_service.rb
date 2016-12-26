@@ -7,7 +7,7 @@ module MergeRequests
       params.except!(:target_project_id)
       params.except!(:source_branch)
 
-      if merge_request.closed_without_fork?
+      if merge_request.closed_without_bork?
         params.except!(:target_branch, :force_remove_source_branch)
       end
 

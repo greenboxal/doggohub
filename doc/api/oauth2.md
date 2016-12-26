@@ -1,8 +1,8 @@
-# GitLab as an OAuth2 provider
+# DoggoHub as an OAuth2 provider
 
-This document covers using the OAuth2 protocol to access GitLab.
+This document covers using the OAuth2 protocol to access DoggoHub.
 
-If you want GitLab to be an OAuth authentication service provider to sign into other services please see the [Oauth2 provider documentation](../integration/oauth_provider.md).
+If you want DoggoHub to be an OAuth authentication service provider to sign into other services please see the [Oauth2 provider documentation](../integration/oauth_provider.md).
 
 OAuth2 is a protocol that enables us to authenticate a user without requiring them to give their password to a third-party.
 
@@ -10,7 +10,7 @@ This functionality is based on [doorkeeper gem](https://github.com/doorkeeper-ge
 
 ## Web Application Flow
 
-This is the most common type of flow and is used by server-side clients that wish to access GitLab on a user's behalf.
+This is the most common type of flow and is used by server-side clients that wish to access DoggoHub on a user's behalf.
 
 >**Note:**
 This flow **should not** be used for client-side clients as you would leak your `client_secret`. Client-side clients should use the Implicit Grant (which is currently unsupported).
@@ -32,7 +32,7 @@ Each application gets a unique App ID and App Secret parameters.
 To request the authorization code, you should redirect the user to the `/oauth/authorize` endpoint:
 
 ```
-https://gitlab.example.com/oauth/authorize?client_id=APP_ID&redirect_uri=REDIRECT_URI&response_type=code&state=your_unique_state_hash
+https://doggohub.example.com/oauth/authorize?client_id=APP_ID&redirect_uri=REDIRECT_URI&response_type=code&state=your_unique_state_hash
 ```
 
 This will ask the user to approve the applications access to their account and then redirect back to the `REDIRECT_URI` you provided.
@@ -90,7 +90,7 @@ curl --header "Authorization: Bearer OAUTH-TOKEN" https://localhost:3000/api/v3/
 
 ## Deprecation Notice
 
-1. Starting in GitLab 8.11, the Resource Owner Password Credentials has been *disabled* for users with two-factor authentication turned on.
+1. Starting in DoggoHub 8.11, the Resource Owner Password Credentials has been *disabled* for users with two-factor authentication turned on.
 2. These users can access the API using [personal access tokens] instead.
 
 ---

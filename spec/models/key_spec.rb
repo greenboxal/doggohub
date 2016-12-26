@@ -23,7 +23,7 @@ describe Key, models: true do
 
     describe "#publishable_keys" do
       it 'replaces SSH key comment with simple identifier of username + hostname' do
-        expect(build(:key, user: user).publishable_key).to include("#{user.name} (#{Gitlab.config.gitlab.host})")
+        expect(build(:key, user: user).publishable_key).to include("#{user.name} (#{Gitlab.config.doggohub.host})")
       end
     end
   end
@@ -89,7 +89,7 @@ describe Key, models: true do
 
   describe '#key=' do
     let(:valid_key) do
-      "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0= dummy@gitlab.com"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0= dummy@doggohub.com"
     end
 
     it 'strips white spaces' do

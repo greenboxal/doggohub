@@ -1,6 +1,6 @@
-# Use Libravatar service with GitLab
+# Use Libravatar service with DoggoHub
 
-GitLab by default supports [Gravatar](https://gravatar.com) avatar service.
+DoggoHub by default supports [Gravatar](https://gravatar.com) avatar service.
 Libravatar is a service which delivers your avatar (profile picture) to other websites and their API is
 [heavily based on gravatar](https://wiki.libravatar.org/api/).
 
@@ -8,7 +8,7 @@ This means that it is not complicated to switch to Libravatar avatar service or 
 
 # Configuration
 
-In [gitlab.yml gravatar section](https://gitlab.com/gitlab-org/gitlab-ce/blob/672bd3902d86b78d730cea809fce312ec49d39d7/config/gitlab.yml.example#L122) set
+In [doggohub.yml gravatar section](https://doggohub.com/doggohub-org/doggohub-ce/blob/672bd3902d86b78d730cea809fce312ec49d39d7/config/doggohub.yml.example#L122) set
 the configuration options as follows:
 
 ## For HTTP
@@ -32,33 +32,33 @@ the configuration options as follows:
 ## Self-hosted
 
 If you are [running your own libravatar service](https://wiki.libravatar.org/running_your_own/) the URL will be different in the configuration
-but the important part is to provide the same placeholders so GitLab can parse the URL correctly.
+but the important part is to provide the same placeholders so DoggoHub can parse the URL correctly.
 
-For example, you host a service on `http://libravatar.example.com` the `plain_url` you need to supply in `gitlab.yml` is
+For example, you host a service on `http://libravatar.example.com` the `plain_url` you need to supply in `doggohub.yml` is
 
 `http://libravatar.example.com/avatar/%{hash}?s=%{size}&d=identicon`
 
 
-## Omnibus-gitlab example
+## Omnibus-doggohub example
 
-In `/etc/gitlab/gitlab.rb`:
+In `/etc/doggohub/doggohub.rb`:
 
 #### For http
 
 ```ruby
-gitlab_rails['gravatar_enabled'] = true
-gitlab_rails['gravatar_plain_url'] = "http://cdn.libravatar.org/avatar/%{hash}?s=%{size}&d=identicon"
+doggohub_rails['gravatar_enabled'] = true
+doggohub_rails['gravatar_plain_url'] = "http://cdn.libravatar.org/avatar/%{hash}?s=%{size}&d=identicon"
 ```
 
 #### For https
 
 ```ruby
-gitlab_rails['gravatar_enabled'] = true
-gitlab_rails['gravatar_ssl_url'] = "https://seccdn.libravatar.org/avatar/%{hash}?s=%{size}&d=identicon"
+doggohub_rails['gravatar_enabled'] = true
+doggohub_rails['gravatar_ssl_url'] = "https://seccdn.libravatar.org/avatar/%{hash}?s=%{size}&d=identicon"
 ```
 
 
-Run `sudo gitlab-ctl reconfigure` for changes to take effect.
+Run `sudo doggohub-ctl reconfigure` for changes to take effect.
 
 
 ## Default URL for missing images
@@ -77,6 +77,6 @@ If your users are Office 365-users, the "GetPersonaPhoto" service can be used. N
 most useful in a corporate installation, where all users have access to Office 365.
 
 ```ruby
-gitlab_rails['gravatar_plain_url'] = 'http://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=%{email}&size=HR120x120'
-gitlab_rails['gravatar_ssl_url'] = 'https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=%{email}&size=HR120x120'
+doggohub_rails['gravatar_plain_url'] = 'http://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=%{email}&size=HR120x120'
+doggohub_rails['gravatar_ssl_url'] = 'https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=%{email}&size=HR120x120'
 ```

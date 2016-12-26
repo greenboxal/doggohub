@@ -118,7 +118,7 @@ module Banzai
       end
 
       def relative_url_root
-        Gitlab.config.gitlab.relative_url_root.presence || '/'
+        Gitlab.config.doggohub.relative_url_root.presence || '/'
       end
 
       def ref

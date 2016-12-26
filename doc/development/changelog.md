@@ -22,13 +22,13 @@ entry, and the `author` key is used to give attribution to community
 contributors. Both are optional.
 
 Community contributors and core team members are encouraged to add their name to
-the `author` field. GitLab team members should not.
+the `author` field. DoggoHub team members should not.
 
-If you're working on the GitLab EE repository, the entry will be added to
+If you're working on the DoggoHub EE repository, the entry will be added to
 `changelogs/unreleased-ee/` instead.
 
-[changelog.md]: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CHANGELOG.md
-[unreleased]: https://gitlab.com/gitlab-org/gitlab-ce/tree/master/changelogs/
+[changelog.md]: https://doggohub.com/doggohub-org/doggohub-ce/blob/master/CHANGELOG.md
+[unreleased]: https://doggohub.com/doggohub-org/doggohub-ce/tree/master/changelogs/
 [YAML]: https://en.wikipedia.org/wiki/YAML
 
 ## Instructions
@@ -39,10 +39,10 @@ automatically.
 Its simplest usage is to provide the value for `title`:
 
 ```text
-$ bin/changelog 'Hey DZ, I added a feature to GitLab!'
+$ bin/changelog 'Hey DZ, I added a feature to DoggoHub!'
 create changelogs/unreleased/my-feature.yml
 ---
-title: Hey DZ, I added a feature to GitLab!
+title: Hey DZ, I added a feature to DoggoHub!
 merge_request:
 author:
 ```
@@ -73,12 +73,12 @@ message:
 
 ```text
 $ git show --oneline
-ab88683 Added an awesome new feature to GitLab
+ab88683 Added an awesome new feature to DoggoHub
 
 $ bin/changelog --amend
 create changelogs/unreleased/feature-hey-dz.yml
 ---
-title: Added an awesome new feature to GitLab
+title: Added an awesome new feature to DoggoHub
 merge_request:
 author:
 ```
@@ -89,13 +89,13 @@ Use **`--force`** or **`-f`** to overwrite an existing changelog entry if it
 already exists.
 
 ```text
-$ bin/changelog 'Hey DZ, I added a feature to GitLab!'
+$ bin/changelog 'Hey DZ, I added a feature to DoggoHub!'
 error changelogs/unreleased/feature-hey-dz.yml already exists! Use `--force` to overwrite.
 
-$ bin/changelog 'Hey DZ, I added a feature to GitLab!' --force
+$ bin/changelog 'Hey DZ, I added a feature to DoggoHub!' --force
 create changelogs/unreleased/feature-hey-dz.yml
 ---
-title: Hey DZ, I added a feature to GitLab!
+title: Hey DZ, I added a feature to DoggoHub!
 merge_request: 1983
 author:
 ```
@@ -106,10 +106,10 @@ Use the **`--merge-request`** or **`-m`** argument to provide the
 `merge_request` value:
 
 ```text
-$ bin/changelog 'Hey DZ, I added a feature to GitLab!' -m 1983
+$ bin/changelog 'Hey DZ, I added a feature to DoggoHub!' -m 1983
 create changelogs/unreleased/feature-hey-dz.yml
 ---
-title: Hey DZ, I added a feature to GitLab!
+title: Hey DZ, I added a feature to DoggoHub!
 merge_request: 1983
 author:
 ```
@@ -123,7 +123,7 @@ committing anything:
 $ bin/changelog --amend --dry-run
 create changelogs/unreleased/feature-hey-dz.yml
 ---
-title: Added an awesome new feature to GitLab
+title: Added an awesome new feature to DoggoHub
 merge_request:
 author:
 
@@ -139,10 +139,10 @@ Use the **`--git-username`** or **`-u`** argument to automatically fill in the
 $ git config user.name
 Jane Doe
 
-$ bin/changelog --u 'Hey DZ, I added a feature to GitLab!'
+$ bin/changelog --u 'Hey DZ, I added a feature to DoggoHub!'
 create changelogs/unreleased/feature-hey-dz.yml
 ---
-title: Hey DZ, I added a feature to GitLab!
+title: Hey DZ, I added a feature to DoggoHub!
 merge_request:
 author: Jane Doe
 ```
@@ -175,10 +175,10 @@ After much discussion we settled on the current solution of one file per entry,
 and then compiling the entries into the overall `CHANGELOG.md` file during the
 [release process].
 
-[boring solution]: https://about.gitlab.com/handbook/#boring-solutions
-[release managers]: https://gitlab.com/gitlab-org/release-tools/blob/master/doc/release-manager.md
-[started brainstorming]: https://gitlab.com/gitlab-org/gitlab-ce/issues/17826
-[release process]: https://gitlab.com/gitlab-org/release-tools
+[boring solution]: https://about.doggohub.com/handbook/#boring-solutions
+[release managers]: https://doggohub.com/doggohub-org/release-tools/blob/master/doc/release-manager.md
+[started brainstorming]: https://doggohub.com/doggohub-org/doggohub-ce/issues/17826
+[release process]: https://doggohub.com/doggohub-org/release-tools
 
 ---
 

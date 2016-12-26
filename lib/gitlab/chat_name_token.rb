@@ -39,7 +39,7 @@ module Gitlab
     end
 
     def redis_key
-      "gitlab:chat_names:#{token}"
+      "doggohub:chat_names:#{token}"
     end
   end
 end

@@ -8,7 +8,7 @@ module Gitlab
 
       class << self
         def extension
-          '.gitlab-ci.yml'
+          '.doggohub-ci.yml'
         end
 
         def categories
@@ -20,7 +20,7 @@ module Gitlab
         end
 
         def base_dir
-          Rails.root.join('vendor/gitlab-ci-yml')
+          Rails.root.join('vendor/doggohub-ci-yml')
         end
 
         def finder(project = nil)

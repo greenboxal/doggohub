@@ -6,7 +6,7 @@ describe Notify do
   include EmailSpec::Matchers
   include RepoHelpers
 
-  include_context 'gitlab email notification'
+  include_context 'doggohub email notification'
 
   context 'for a project' do
     describe 'items that are assignable, the email' do
@@ -18,7 +18,7 @@ describe Notify do
         it 'is sent as the author' do
           sender = subject.header[:from].addrs[0]
           expect(sender.display_name).to eq(current_user.name)
-          expect(sender.address).to eq(gitlab_sender)
+          expect(sender.address).to eq(doggohub_sender)
         end
 
         it 'is sent to the assignee' do
@@ -83,7 +83,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -117,7 +117,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -146,7 +146,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -263,7 +263,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -297,7 +297,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -326,7 +326,7 @@ describe Notify do
           it 'is sent as the author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(current_user.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -359,7 +359,7 @@ describe Notify do
           it 'is sent as the merge author' do
             sender = subject.header[:from].addrs[0]
             expect(sender.display_name).to eq(merge_author.name)
-            expect(sender.address).to eq(gitlab_sender)
+            expect(sender.address).to eq(doggohub_sender)
           end
 
           it 'has the correct subject' do
@@ -380,9 +380,9 @@ describe Notify do
     describe 'project was moved' do
       let(:project) { create(:project) }
       let(:user) { create(:user) }
-      subject { Notify.project_was_moved_email(project.id, user.id, "gitlab/gitlab") }
+      subject { Notify.project_was_moved_email(project.id, user.id, "doggohub/doggohub") }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -414,7 +414,7 @@ describe Notify do
         end
         subject { Notify.member_access_requested_email('project', project_member.id) }
 
-        it_behaves_like 'an email sent from GitLab'
+        it_behaves_like 'an email sent from DoggoHub'
         it_behaves_like 'it should not have Gmail Actions links'
         it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -441,7 +441,7 @@ describe Notify do
         end
         subject { Notify.member_access_requested_email('project', project_member.id) }
 
-        it_behaves_like 'an email sent from GitLab'
+        it_behaves_like 'an email sent from DoggoHub'
         it_behaves_like 'it should not have Gmail Actions links'
         it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -467,7 +467,7 @@ describe Notify do
       end
       subject { Notify.member_access_denied_email('project', project.id, user.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -484,7 +484,7 @@ describe Notify do
       let(:project_member) { create(:project_member, project: project, user: user) }
       subject { Notify.member_access_granted_email('project', project_member.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -515,7 +515,7 @@ describe Notify do
 
       subject { Notify.member_invited_email('project', project_member.id, project_member.invite_token) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -540,7 +540,7 @@ describe Notify do
 
       subject { Notify.member_invite_accepted_email('project', project_member.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -564,7 +564,7 @@ describe Notify do
 
       subject { Notify.member_invite_declined_email('project', project.id, project_member.invite_email, master.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -590,7 +590,7 @@ describe Notify do
         it 'is sent as the author' do
           sender = subject.header[:from].addrs[0]
           expect(sender.display_name).to eq(note_author.name)
-          expect(sender.address).to eq(gitlab_sender)
+          expect(sender.address).to eq(doggohub_sender)
         end
 
         it 'is sent to the given recipient' do
@@ -710,7 +710,7 @@ describe Notify do
         it 'is sent as the author' do
           sender = subject.header[:from].addrs[0]
           expect(sender.display_name).to eq(note_author.name)
-          expect(sender.address).to eq(gitlab_sender)
+          expect(sender.address).to eq(doggohub_sender)
         end
 
         it 'is sent to the given recipient' do
@@ -771,7 +771,7 @@ describe Notify do
       end
       subject { Notify.member_access_requested_email('group', group_member.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -792,7 +792,7 @@ describe Notify do
       end
       subject { Notify.member_access_denied_email('group', group.id, user.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -810,7 +810,7 @@ describe Notify do
 
       subject { Notify.member_access_granted_email('group', group_member.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -841,7 +841,7 @@ describe Notify do
 
       subject { Notify.member_invited_email('group', group_member.id, group_member.invite_token) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -866,7 +866,7 @@ describe Notify do
 
       subject { Notify.member_invite_accepted_email('group', group_member.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -890,7 +890,7 @@ describe Notify do
 
       subject { Notify.member_invite_declined_email('group', group.id, group_member.invite_email, owner.id) }
 
-      it_behaves_like 'an email sent from GitLab'
+      it_behaves_like 'an email sent from DoggoHub'
       it_behaves_like 'it should not have Gmail Actions links'
       it_behaves_like "a user cannot unsubscribe through footer link"
 
@@ -917,7 +917,7 @@ describe Notify do
 
     subject { ActionMailer::Base.deliveries.last }
 
-    it_behaves_like 'an email sent from GitLab'
+    it_behaves_like 'an email sent from DoggoHub'
     it_behaves_like "a user cannot unsubscribe through footer link"
 
     it 'is sent to the new user' do
@@ -942,13 +942,13 @@ describe Notify do
 
     it_behaves_like 'it should not have Gmail Actions links'
     it_behaves_like 'a user cannot unsubscribe through footer link'
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -969,13 +969,13 @@ describe Notify do
 
     it_behaves_like 'it should not have Gmail Actions links'
     it_behaves_like "a user cannot unsubscribe through footer link"
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -995,13 +995,13 @@ describe Notify do
 
     it_behaves_like 'it should not have Gmail Actions links'
     it_behaves_like 'a user cannot unsubscribe through footer link'
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -1017,13 +1017,13 @@ describe Notify do
 
     it_behaves_like 'it should not have Gmail Actions links'
     it_behaves_like 'a user cannot unsubscribe through footer link'
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -1045,13 +1045,13 @@ describe Notify do
 
     it_behaves_like 'it should not have Gmail Actions links'
     it_behaves_like 'a user cannot unsubscribe through footer link'
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -1078,10 +1078,10 @@ describe Notify do
       let(:send_from_committer_email) { true }
 
       before do
-        allow(Gitlab.config.gitlab).to receive(:host).and_return("gitlab.corp.company.com")
+        allow(Gitlab.config.doggohub).to receive(:host).and_return("doggohub.corp.company.com")
       end
 
-      context "when the committer email domain is within the GitLab domain" do
+      context "when the committer email domain is within the DoggoHub domain" do
         before do
           user.update_attribute(:email, "user@company.com")
           user.confirm
@@ -1098,7 +1098,7 @@ describe Notify do
         end
       end
 
-      context "when the committer email domain is not completely within the GitLab domain" do
+      context "when the committer email domain is not completely within the DoggoHub domain" do
         before do
           user.update_attribute(:email, "user@something.company.com")
           user.confirm
@@ -1106,16 +1106,16 @@ describe Notify do
 
         it "is sent from the default email" do
           sender = subject.header[:from].addrs[0]
-          expect(sender.address).to eq(gitlab_sender)
+          expect(sender.address).to eq(doggohub_sender)
         end
 
         it "is set to reply to the default email" do
           sender = subject.header[:reply_to].addrs[0]
-          expect(sender.address).to eq(gitlab_sender_reply_to)
+          expect(sender.address).to eq(doggohub_sender_reply_to)
         end
       end
 
-      context "when the committer email domain is outside the GitLab domain" do
+      context "when the committer email domain is outside the DoggoHub domain" do
         before do
           user.update_attribute(:email, "user@mpany.com")
           user.confirm
@@ -1123,12 +1123,12 @@ describe Notify do
 
         it "is sent from the default email" do
           sender = subject.header[:from].addrs[0]
-          expect(sender.address).to eq(gitlab_sender)
+          expect(sender.address).to eq(doggohub_sender)
         end
 
         it "is set to reply to the default email" do
           sender = subject.header[:reply_to].addrs[0]
-          expect(sender.address).to eq(gitlab_sender_reply_to)
+          expect(sender.address).to eq(doggohub_sender_reply_to)
         end
       end
     end
@@ -1147,13 +1147,13 @@ describe Notify do
 
     it_behaves_like 'it should show Gmail Actions View Commit link'
     it_behaves_like 'a user cannot unsubscribe through footer link'
-    it_behaves_like 'an email with X-GitLab headers containing project details'
+    it_behaves_like 'an email with X-DoggoHub headers containing project details'
     it_behaves_like 'an email that contains a header with author username'
 
     it 'is sent as the author' do
       sender = subject.header[:from].addrs[0]
       expect(sender.display_name).to eq(user.name)
-      expect(sender.address).to eq(gitlab_sender)
+      expect(sender.address).to eq(doggohub_sender)
     end
 
     it 'has the correct subject' do
@@ -1176,7 +1176,7 @@ describe Notify do
   describe 'HTML emails setting' do
     let(:project) { create(:project) }
     let(:user) { create(:user) }
-    let(:multipart_mail) { Notify.project_was_moved_email(project.id, user.id, "gitlab/gitlab") }
+    let(:multipart_mail) { Notify.project_was_moved_email(project.id, user.id, "doggohub/doggohub") }
 
     context 'when disabled' do
       it 'only sends the text template' do

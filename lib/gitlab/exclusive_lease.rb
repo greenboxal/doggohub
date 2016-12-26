@@ -4,7 +4,7 @@ module Gitlab
   # This class implements an 'exclusive lease'. We call it a 'lease'
   # because it has a set expiry time. We call it 'exclusive' because only
   # one caller may obtain a lease for a given key at a time. The
-  # implementation is intended to work across GitLab processes and across
+  # implementation is intended to work across DoggoHub processes and across
   # servers. It is a cheap alternative to using SQL queries and updates:
   # you do not need to change the SQL schema to start using
   # ExclusiveLease.
@@ -24,7 +24,7 @@ module Gitlab
     end
 
     def self.redis_key(key)
-      "gitlab:exclusive_lease:#{key}"
+      "doggohub:exclusive_lease:#{key}"
     end
 
     def initialize(key, timeout:)

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'lib/gitlab/badge/shared/metadata'
+require 'lib/doggohub/badge/shared/metadata'
 
 describe Gitlab::Badge::Build::Metadata do
   let(:badge) { double(project: create(:project), ref: 'feature') }

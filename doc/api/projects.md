@@ -3,7 +3,7 @@
 
 ### Project visibility level
 
-Project in GitLab has be either private, internal or public.
+Project in DoggoHub has be either private, internal or public.
 You can determine it by `visibility_level` field in project.
 
 Constants for project visibility levels are next:
@@ -83,7 +83,7 @@ Parameters:
     "archived": false,
     "avatar_url": "http://example.com/uploads/project/avatar/4/uploads/avatar.png",
     "shared_runners_enabled": true,
-    "forks_count": 0,
+    "borks_count": 0,
     "star_count": 0,
     "runners_token": "b8547b1dc37721d05889db52fa2f02",
     "public_builds": true,
@@ -146,7 +146,7 @@ Parameters:
     "archived": false,
     "avatar_url": null,
     "shared_runners_enabled": true,
-    "forks_count": 0,
+    "borks_count": 0,
     "star_count": 0,
     "runners_token": "b8547b1dc37721d05889db52fa2f02",
     "public_builds": true,
@@ -221,7 +221,7 @@ Parameters:
     "archived": false,
     "avatar_url": "http://example.com/uploads/project/avatar/4/uploads/avatar.png",
     "shared_runners_enabled": true,
-    "forks_count": 0,
+    "borks_count": 0,
     "star_count": 0,
     "runners_token": "b8547b1dc37721d05889db52fa2f02",
     "public_builds": true,
@@ -281,7 +281,7 @@ Parameters:
     "archived": false,
     "avatar_url": null,
     "shared_runners_enabled": true,
-    "forks_count": 0,
+    "borks_count": 0,
     "star_count": 0,
     "runners_token": "b8547b1dc37721d05889db52fa2f02",
     "public_builds": true,
@@ -328,7 +328,7 @@ Parameters:
 
 ### List ALL projects
 
-Get a list of all GitLab projects (admin only).
+Get a list of all DoggoHub projects (admin only).
 
 ```
 GET /projects/all
@@ -415,7 +415,7 @@ Parameters:
   "archived": false,
   "avatar_url": "http://example.com/uploads/project/avatar/3/uploads/avatar.png",
   "shared_runners_enabled": true,
-  "forks_count": 0,
+  "borks_count": 0,
   "star_count": 0,
   "runners_token": "b8bc4a7a29eb76ea83cf79e4908c2b",
   "public_builds": true,
@@ -533,17 +533,17 @@ Parameters:
       "user_id": 1,
       "user_name": "Dmitriy Zaporozhets",
       "repository": {
-        "name": "gitlabhq",
-        "url": "git@dev.gitlab.org:gitlab/gitlabhq.git",
-        "description": "GitLab: self hosted Git management software. \r\nDistributed under the MIT License.",
-        "homepage": "https://dev.gitlab.org/gitlab/gitlabhq"
+        "name": "doggohubhq",
+        "url": "git@dev.doggohub.org:doggohub/doggohubhq.git",
+        "description": "DoggoHub: self hosted Git management software. \r\nDistributed under the MIT License.",
+        "homepage": "https://dev.doggohub.org/doggohub/doggohubhq"
       },
       "commits": [
         {
           "id": "c5feabde2d8cd023215af4d2ceeb7a64839fc428",
           "message": "Add simple search to projects in public area",
           "timestamp": "2013-05-13T18:18:08+00:00",
-          "url": "https://dev.gitlab.org/gitlab/gitlabhq/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
+          "url": "https://dev.doggohub.org/doggohub/doggohubhq/commit/c5feabde2d8cd023215af4d2ceeb7a64839fc428",
           "author": {
             "name": "Dmitriy Zaporozhets",
             "email": "dmitriy.zaporozhets@gmail.com"
@@ -714,12 +714,12 @@ Parameters:
 | `lfs_enabled` | boolean | no | Enable LFS |
 | `request_access_enabled` | boolean | no | Allow users to request member access |
 
-### Fork project
+### Bork project
 
-Forks a project into the user namespace of the authenticated user or the one provided.
+Borks a project into the user namespace of the authenticated user or the one provided.
 
 ```
-POST /projects/fork/:id
+POST /projects/bork/:id
 ```
 
 Parameters:
@@ -727,7 +727,7 @@ Parameters:
 | Attribute | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
 | `id` | integer/string | yes | The ID or NAMESPACE/PROJECT_NAME of the project |
-| `namespace` | integer/string | yes | The ID or path of the namespace that the project will be forked to |
+| `namespace` | integer/string | yes | The ID or path of the namespace that the project will be borked to |
 
 ### Star a project
 
@@ -744,7 +744,7 @@ Parameters:
 | `id` | integer/string | yes | The ID or NAMESPACE/PROJECT_NAME of the project |
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/star"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/star"
 ```
 
 Example response:
@@ -789,7 +789,7 @@ Example response:
   "archived": true,
   "avatar_url": "http://example.com/uploads/project/avatar/3/uploads/avatar.png",
   "shared_runners_enabled": true,
-  "forks_count": 0,
+  "borks_count": 0,
   "star_count": 1,
   "public_builds": true,
   "shared_with_groups": [],
@@ -812,7 +812,7 @@ DELETE /projects/:id/star
 | `id` | integer/string | yes | The ID of the project or NAMESPACE/PROJECT_NAME |
 
 ```bash
-curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/star"
+curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/star"
 ```
 
 Example response:
@@ -857,7 +857,7 @@ Example response:
   "archived": true,
   "avatar_url": "http://example.com/uploads/project/avatar/3/uploads/avatar.png",
   "shared_runners_enabled": true,
-  "forks_count": 0,
+  "borks_count": 0,
   "star_count": 0,
   "public_builds": true,
   "shared_with_groups": [],
@@ -881,7 +881,7 @@ POST /projects/:id/archive
 | `id` | integer/string | yes | The ID of the project or NAMESPACE/PROJECT_NAME |
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/archive"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/archive"
 ```
 
 Example response:
@@ -941,7 +941,7 @@ Example response:
   "archived": true,
   "avatar_url": "http://example.com/uploads/project/avatar/3/uploads/avatar.png",
   "shared_runners_enabled": true,
-  "forks_count": 0,
+  "borks_count": 0,
   "star_count": 0,
   "runners_token": "b8bc4a7a29eb76ea83cf79e4908c2b",
   "public_builds": true,
@@ -966,7 +966,7 @@ POST /projects/:id/unarchive
 | `id` | integer/string | yes | The ID of the project or NAMESPACE/PROJECT_NAME |
 
 ```bash
-curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://gitlab.example.com/api/v3/projects/5/unarchive"
+curl --request POST --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" "https://doggohub.example.com/api/v3/projects/5/unarchive"
 ```
 
 Example response:
@@ -1026,7 +1026,7 @@ Example response:
   "archived": false,
   "avatar_url": "http://example.com/uploads/project/avatar/3/uploads/avatar.png",
   "shared_runners_enabled": true,
-  "forks_count": 0,
+  "borks_count": 0,
   "star_count": 0,
   "runners_token": "b8bc4a7a29eb76ea83cf79e4908c2b",
   "public_builds": true,
@@ -1117,7 +1117,7 @@ Parameters:
 | `group_id` | integer | yes | The ID of the group |
 
 ```bash
-curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://gitlab.example.com/api/v3/projects/5/share/17
+curl --request DELETE --header "PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK" https://doggohub.example.com/api/v3/projects/5/share/17
 ```
 
 ## Hooks
@@ -1350,14 +1350,14 @@ Parameters:
 | `id` | integer/string | yes | The ID of the project or NAMESPACE/PROJECT_NAME |
 | `branch` | string | yes | The name of the branch |
 
-## Admin fork relation
+## Admin bork relation
 
-Allows modification of the forked relationship between existing projects. Available only for admins.
+Allows modification of the borked relationship between existing projects. Available only for admins.
 
-### Create a forked from/to relation between existing projects.
+### Create a borked from/to relation between existing projects.
 
 ```
-POST /projects/:id/fork/:forked_from_id
+POST /projects/:id/bork/:borked_from_id
 ```
 
 Parameters:
@@ -1365,12 +1365,12 @@ Parameters:
 | Attribute | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
 | `id` | integer/string | yes | The ID of the project or NAMESPACE/PROJECT_NAME |
-| `forked_from_id` | ID | yes | The ID of the project that was forked from |
+| `borked_from_id` | ID | yes | The ID of the project that was borked from |
 
-### Delete an existing forked from relationship
+### Delete an existing borked from relationship
 
 ```
-DELETE /projects/:id/fork
+DELETE /projects/:id/bork
 ```
 
 Parameter:
